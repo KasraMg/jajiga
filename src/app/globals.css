@@ -71,3 +71,8 @@ html {
 .swiper:hover .swiper-button-prev {
   opacity: 1;
 }
+
+.becomeHostBg {
+  background: url('/images/pattern.png') repeat-x, linear-gradient(0deg, transparent 38.49%, rgb(255, 230, 101) 63.95%, rgb(254, 212, 8) 98.9%) rgb(255, 230, 102);
+
+}
