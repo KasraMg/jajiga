@@ -1,9 +1,13 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+
+// swiper styles
 import 'swiper/css';
 import 'swiper/css/grid';
 import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
