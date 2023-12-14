@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  direction: rtl;
+}
+
 @layer base {
   @font-face {
     font-family: Vazir-bold;
@@ -35,27 +39,35 @@
   width: 100% !important;
 }
 
-.swiper-rtl .swiper-button-prev:after, .swiper-rtl .swiper-button-next:after {
-font-size: 20px;
-color: black;
+.swiper-rtl .swiper-button-prev:after,
+.swiper-rtl .swiper-button-next:after {
+  font-size: 20px;
+  color: black;
 }
-.swiper-rtl .swiper-button-prev, .swiper-rtl .swiper-button-next {
+
+.swiper-rtl .swiper-button-prev,
+.swiper-rtl .swiper-button-next {
   background: rgb(245, 245, 245);
   border-radius: 100%;
   top: 40%;
   padding: 4px 20px;
 }
-.swiper-button-prev{
-  right: 0px !important; 
+
+.swiper-button-prev {
+  right: 0px !important;
 }
-.swiper-button-next{
-  left:0px !important;
+
+.swiper-button-next {
+  left: 0px !important;
 }
-.swiper-button-next, .swiper-button-prev {
+
+.swiper-button-next,
+.swiper-button-prev {
   opacity: 0;
   transition: 0.1s ease-in-out;
 }
-    
-.swiper:hover  .swiper-button-next, .swiper:hover .swiper-button-prev {
-   opacity: 1;
+
+.swiper:hover .swiper-button-next,
+.swiper:hover .swiper-button-prev {
+  opacity: 1;
 }
