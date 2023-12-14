@@ -15,6 +15,9 @@ export default function Home() {
                 <Offers />
                 <Offers />
                 <BecomeHost />
+            </Layout>
+            {/* super offers section */}
+            <Layout bg='white'>
                 <Offers />
                 <Offers />
                 {/* comment component */}

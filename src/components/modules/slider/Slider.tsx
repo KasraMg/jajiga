@@ -15,7 +15,7 @@ export default function Slider() {
                     pagination={{
                         enabled: false,
                     }}
-                    className='mySwiper w-full mx-auto !pr-6'
+                    className='mySwiper w-full mx-auto'
                     modules={[Navigation]}
                     breakpoints={{
                         640: {
@@ -23,15 +23,15 @@ export default function Slider() {
                             spaceBetween: 20,
                         },
                         768: {
-                            slidesPerView: 1,
+                            slidesPerView: 1.5,
                             spaceBetween: 15,
                         },
                         1024: {
-                            slidesPerView: 3,
+                            slidesPerView: 2.25,
                             spaceBetween: 15,
                         },
                         1280: {
-                            slidesPerView: 4,
+                            slidesPerView: 3.25,
                             spaceBetween: 15,
                         },
                     }}
