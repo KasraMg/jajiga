@@ -1,6 +1,6 @@
 import React from 'react';
-import Card from '../SpecialAccommodations/components/Card';
 import Slider from '@/src/components/modules/slider/Slider';
+import Card from './components/card/Card';
 const Offers = () => {
     return (
         <div className='mt-8'>

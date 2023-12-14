@@ -1,7 +1,7 @@
 import React from 'react';
 import CitiesSelector from './components/CitiesSelector';
 import Slider from '@/src/components/modules/slider/Slider';
-import Card from '../SpecialAccommodations/components/Card';
+import Card from '../Offers/components/card/Card';
 const SuperOffers = () => {
     return (
         <div className='superOfferBg rounded-t-xl py-6'>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const VillaCard = () => {
+const Card = () => {
     return (
         <section className=''>
             <img
@@ -19,4 +19,4 @@ const VillaCard = () => {
     );
 };
 
-export default VillaCard;
+export default Card;
