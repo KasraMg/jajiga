@@ -48,6 +48,9 @@ color: black;
 .swiper-button-prev{
   right: 0px !important; 
 }
+.swiper-button-next{
+  left:0px !important;
+}
 .swiper-button-next, .swiper-button-prev {
   opacity: 0;
   transition: 0.1s ease-in-out;
