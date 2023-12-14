@@ -23,7 +23,8 @@ const config: Config = {
     },
     fontFamily:{
       "vazir-bold" : 'Vazir-bold', 
-      "vazir-light":"Vazir-light"
+      "vazir-light":"Vazir-light",
+      "vazir-medium":"Vazir-medium"
     },
   },
   plugins: [
