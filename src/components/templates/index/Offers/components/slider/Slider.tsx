@@ -1,7 +1,6 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 
-
 import VillaCard from '../card/VillaCard';
 
 export default function Slider() {

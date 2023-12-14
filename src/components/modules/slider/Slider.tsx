@@ -1,21 +1,19 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Grid, Navigation } from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
 import { FC, ReactNode } from 'react';
 
-
-
+ 
 type Breakpoints = {
     [key: number]: {
         slidesPerView: number,
         spaceBetween: number
     }
 }
-
 interface SliderProps {
     className?: string,
     breakPoints: Breakpoints,
     navigation:boolean,
-    Card: React.JSX.ElementType,
+    Card: any,
     datas?: any
 }
 

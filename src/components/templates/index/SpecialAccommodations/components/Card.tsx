@@ -1,9 +1,13 @@
 import Button from '@/src/components/modules/button'
-import React from 'react'
+import React, { FC } from 'react'
 import { SlEnergy } from "react-icons/sl";
 import { CiStar } from "react-icons/ci";
 import { IoIosStar } from "react-icons/io";
-const Card = () => {
+
+interface CardProps{
+     
+}
+const Card: FC<CardProps> = () => {
   return (
     <section>
     <div style={{ backgroundPosition:' -51px -46px'}} className='bg-[url(https://storage.jajiga.com/public/pictures/medium/3181811230115103439.jpg)] relative rounded-xl h-52'>
