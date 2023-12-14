@@ -1,4 +1,4 @@
-import Slider from '@/src/components/modules/slider/Slider';
+import Slider from '@/src/components/templates/index/Offers/components/slider/Slider';
 import React from 'react';
 
 const Offers = () => {

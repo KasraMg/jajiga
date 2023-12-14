@@ -49,10 +49,12 @@ html {
 .swiper-rtl .swiper-button-next {
   background: rgb(245, 245, 245);
   border-radius: 100%;
-  top: 40%;
   padding: 4px 20px;
 }
+.PopularSwiper .swiper-button-prev ,.PopularSwiper .swiper-button-next{
+  top: 43.5% !important;
 
+}
 .swiper-button-prev {
   right: 0px !important;
 }
@@ -62,14 +64,15 @@ html {
 }
 
 .swiper-button-next,
-.swiper-button-prev {
-  opacity: 0;
+.swiper-button-prev,
+.swiper-button-disabled {
+  opacity: 0 !important;
   transition: 0.1s ease-in-out;
 }
 
 .swiper:hover .swiper-button-next,
 .swiper:hover .swiper-button-prev {
-  opacity: 1;
+  opacity: 1 !important;
 }
 
 .becomeHostBg {

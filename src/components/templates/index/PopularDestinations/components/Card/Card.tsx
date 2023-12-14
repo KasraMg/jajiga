@@ -1,5 +1,4 @@
-import React from 'react'
-
+ 
 const Card = () => {
   return (
     <section className='flex items-center gap-2 justify-center cursor-pointer'>

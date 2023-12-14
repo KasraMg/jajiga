@@ -1,73 +1,75 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper/modules';
+import { Grid, Navigation } from 'swiper/modules';
+import { FC, ReactNode } from 'react';
 
 
-import VillaCard from './VillaCard';
 
-export default function Slider() {
-    return (
-        <>
-            <div className='text-right py-5'>
-                <Swiper
-                    dir='rtl'
-                    navigation={true}
-                    spaceBetween={0}
-                    pagination={{
-                        enabled: false,
-                    }}
-                    className='mySwiper w-full mx-auto !pr-6'
-                    modules={[Navigation]}
-                    breakpoints={{
-                        640: {
-                            slidesPerView: 1,
-                            spaceBetween: 20,
-                        },
-                        768: {
-                            slidesPerView: 1,
-                            spaceBetween: 15,
-                        },
-                        1024: {
-                            slidesPerView: 3,
-                            spaceBetween: 15,
-                        },
-                        1280: {
-                            slidesPerView: 4,
-                            spaceBetween: 15,
-                        },
-                    }}
-                >
-                    <SwiperSlide>
-                        <VillaCard />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <VillaCard />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <VillaCard />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <VillaCard />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <VillaCard />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <VillaCard />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <VillaCard />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <VillaCard />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <VillaCard />
-                    </SwiperSlide>
-                    <SwiperSlide>
-                        <VillaCard />
-                    </SwiperSlide>
-                </Swiper>
-            </div>
-        </>
-    );
+type Breakpoints = {
+    [key: number]: {
+        slidesPerView: number,
+        spaceBetween: number
+    }
 }
+
+interface SliderProps {
+    className?: string,
+    breakPoints: Breakpoints,
+    navigation:boolean,
+    Card: React.JSX.ElementType,
+    datas?: any
+}
+
+
+const Slider: FC<SliderProps> = ({
+    Card,
+    breakPoints,
+    navigation,
+    className,
+    datas
+}) => {
+    return (
+        <Swiper
+            dir='rtl'
+            navigation={navigation}
+            spaceBetween={0}
+            pagination={{
+                enabled: false,
+            }}
+            rewind={true}
+            className={`${className} mySwiper w-full mx-auto !px-6`}
+            modules={[Navigation]}
+            breakpoints={breakPoints}
+        >
+            {datas ? datas.map((data:any) => (
+                <SwiperSlide key={crypto.randomUUID()}>
+                    <Card {...data}/>
+                </SwiperSlide>
+            )) : (
+                <>
+                    <SwiperSlide>
+                        <Card />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <Card />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <Card />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <Card />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <Card />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <Card />
+                    </SwiperSlide>
+                    </>
+            )}
+
+
+        </Swiper>
+    )
+}
+
+export default Slider

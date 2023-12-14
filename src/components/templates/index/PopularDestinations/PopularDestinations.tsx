@@ -5,7 +5,7 @@ import Card from './components/Card/Card';
 const PopularDestinations = () => {
     return (
         <section className=' text-right py-5'>
-            <p className='text-black text-[18px] mb-5'>مقاصد پر طرفدار</p>
+            <p className='text-black text-xl mb-5'>مقاصد پر طرفدار</p>
             <Swiper
                 dir='rtl'
                 slidesPerView={4}
@@ -16,7 +16,7 @@ const PopularDestinations = () => {
                 spaceBetween={0}
                 navigation={true}
                 modules={[Grid, Navigation]}
-                className='mySwiper w-full h-[400px] mx-auto  !pr-6 '
+                className='PopularSwiper w-full h-[365px] mx-auto   !pl-8'
             >
                 <SwiperSlide className='!h-[178px] !mx-auto'>
                     <Card />

@@ -3,7 +3,7 @@ import React from 'react'
 import { CiSearch } from "react-icons/ci";
 const Intro = () => {
   return (
-    <div style={{ backgroundPositionX: '-204px' }} className='h-[89vh] w-full bg-no-repeat bg-fixed relative z-[10] bg-[url(https://www.jajiga.com/static/img/home/home-header-bg-3@1920.jpg?v=1)]'>
+    <div dir='ltr' style={{ backgroundPositionX: '-204px' }} className='h-[89vh] w-full bg-no-repeat bg-fixed relative z-[10] bg-[url(https://www.jajiga.com/static/img/home/home-header-bg-3@1920.jpg?v=1)]'>
       <Navbar />
       <div className='z-30 relative text-center text-white pr-4 pt-48'>
         <p className='text-[1.7rem]'>اجاره ویلا در شمال و سراسر ایران زیبا</p>
