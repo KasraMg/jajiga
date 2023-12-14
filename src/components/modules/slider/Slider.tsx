@@ -13,7 +13,7 @@ interface SliderProps {
     className?: string,
     breakPoints: Breakpoints,
     navigation:boolean,
-    Card: any,
+    Card: React.ElementType,
     datas?: any
 }
 
