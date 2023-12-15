@@ -1,6 +1,6 @@
 import { VariantProps } from "class-variance-authority";
 import { ButtonHTMLAttributes, FC } from "react";
-import { buttonVariants } from "./buttonVariants";
+import { buttonVariants } from "@/src/utils/buttonVariants";  
 import { cn } from "@/src/utils/cn";
 export interface buttonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
@@ -25,9 +25,4 @@ const Button: FC<buttonProps> = ({
 export default Button;
 
 
-
-// example
-
-// <Button variant={"danger"} size={"sm"}>
-//     Hi
-// </Button>
+ 

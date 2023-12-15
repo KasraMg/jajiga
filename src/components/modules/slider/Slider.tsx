@@ -1,22 +1,11 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
-import { FC, ReactNode } from 'react';
-
- 
-type Breakpoints = {
-    [key: number]: {
-        slidesPerView: number,
-        spaceBetween: number
-    }
-}
-interface SliderProps {
-    className?: string,
-    breakPoints: Breakpoints,
-    navigation:boolean,
-    Card: React.ElementType,
-    datas?: any
-}
-
+import { FC } from 'react';
+import { SliderProps } from '@/src/types/Slider.types';
+import 'swiper/css';
+import 'swiper/css/grid';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 const Slider: FC<SliderProps> = ({
     Card,

@@ -1,6 +1,7 @@
 'use client';
 
 import Layout from '../components/modules/Layout/Layout';
+import Navbar from '../components/modules/navbar/Navbar';
 import Ads from '../components/templates/index/Ads/Ads';
 import BecomeHost from '../components/templates/index/BecomeHost/BecomeHost';
 import FastSearch from '../components/templates/index/FastSearch/FastSearch';
@@ -12,20 +13,23 @@ import SpecialAccommodations from '../components/templates/index/SpecialAccommod
 import SupperOffers from '../components/templates/index/SuperOffers/SuperOffers';
 
 import Intro from '../components/templates/index/intro/Intro';
+import ScrollObserver from '../utils/scrollObserver';
+
+
 
 export default function Home() {
     return (
-        <main>
+        <ScrollObserver >
+            <Navbar />
             <Intro />
-            <Layout bg='white'>
+            <Layout className='z-20' bg='white'>
                 <PopularDestinations />
                 <FastSearch />
                 <Ads />
-                <SpecialAccommodations /> 
+                <SpecialAccommodations />
             </Layout>
             <SupperOffers />
-            <Layout bg='white'>
-
+            <Layout className='z-20' bg='white'>
                 <Offers />
                 <Offers />
                 <BecomeHost />
@@ -35,6 +39,6 @@ export default function Home() {
                 <Offers />
                 {/* footer */}
             </Layout>
-        </main>
+        </ScrollObserver>
     );
 }
