@@ -94,3 +94,13 @@ html {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+ 
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+ 
