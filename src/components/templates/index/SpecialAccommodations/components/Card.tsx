@@ -9,7 +9,7 @@ interface CardProps{
 }
 const Card: FC<CardProps> = () => {
   return (
-    <section>
+    <section className='xl:!w-full w-full lg:!w-[90%]  sm:!w-80'>
     <div style={{ backgroundPosition:' -51px -46px'}} className='bg-[url(https://storage.jajiga.com/public/pictures/medium/3181811230115103439.jpg)] relative rounded-xl h-52'>
       <div className='flex flex-col p-2'>
         <Button size={'sm'} variant={"white"} className='font-vazir-light w-[78px]'>
@@ -21,7 +21,7 @@ const Card: FC<CardProps> = () => {
           رزرو فوری 
         </Button>
       </div>
-      <div style={{background: 'linear-gradient(360deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%) 0% 0% / cover'}} className='text-white w-full absolute bottom-0 text-sm right-0 pb-3 pr-3'> 
+      <div style={{background: 'linear-gradient(360deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%) 0% 0% / cover'}} className='text-white w-full absolute bottom-0 text-sm right-0 pb-3 rounded-xl pr-3'> 
       <p>از 1,111,111 تومان</p>
       </div>
     </div>

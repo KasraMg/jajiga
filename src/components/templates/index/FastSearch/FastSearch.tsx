@@ -11,6 +11,14 @@ const FastSearch = () => {
                 Card={Card}
                 navigation={true}
                 breakPoints={{
+                    320:{
+                        slidesPerView:2,
+                        spaceBetween:15
+                    },
+                    768: {
+                        slidesPerView: 3,
+                        spaceBetween: 15
+                    },
                     1024: {
                         slidesPerView: 5,
                         spaceBetween: 15

@@ -5,7 +5,7 @@ import Card from '../Offers/components/card/Card';
 const SuperOffers = () => {
     return (
         <div className='superOfferBg rounded-t-xl py-6 z-20 relative'>
-            <div className='container mx-auto'>
+            <div className='Container mx-auto'>
                 <div className='flex items-center lg:justify-between mb-4 flex-col lg:flex-row justify-center'>
                     <p className='text-2xl font-thin text-white'>
                         تخفیف های سفر انگیز
