@@ -12,7 +12,15 @@ const SpecialAccommodations = () => {
                 navigation={true}
                 className='mt-4 mb-12'
                 breakPoints={{
-                    1024: {
+                    320:{
+                        slidesPerView:1,
+                        spaceBetween:0
+                    },
+                    768: {
+                        slidesPerView:2,
+                        spaceBetween:0
+                    },  
+                    1200: {
                         slidesPerView: 3,
                         spaceBetween: 15
                     }

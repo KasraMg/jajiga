@@ -28,6 +28,14 @@ const Ads = () => {
             navigation={false}
             className='mt-10 mb-10 !pl-0'
             breakPoints={{
+                320:{
+                    slidesPerView:1,
+                    spaceBetween:0
+                },
+                768: {
+                    slidesPerView:2,
+                    spaceBetween:25
+                }, 
                 1024: {
                     slidesPerView: 3,
                     spaceBetween: 25

@@ -29,14 +29,14 @@ html {
 }
 
 @media (min-width:1100px) {
-  .container {
+  .Container {
     max-width: 1074px !important;
-    margin: 0 auto;
   }
 }
 
-.container {
+.Container {
   width: 100% !important;
+  margin: 0 auto;
 }
 
 .swiper-rtl .swiper-button-prev:after,
@@ -51,10 +51,22 @@ html {
   border-radius: 100%;
   padding: 4px 20px;
 }
-.PopularSwiper .swiper-button-prev ,.PopularSwiper .swiper-button-next{
+
+.PopularSwiper .swiper-button-prev,
+.PopularSwiper .swiper-button-next {
   top: 43.5% !important;
 
 }
+
+@media (max-width:1023px) {
+
+  .PopularSwiper .swiper-button-prev,
+  .PopularSwiper .swiper-button-next {
+    top: 39.5% !important;
+
+  }
+}
+
 .swiper-button-prev {
   right: 0px !important;
 }
@@ -94,13 +106,31 @@ html {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
- 
+
 @keyframes slideDown {
   from {
     transform: translateY(-100%);
   }
+
   to {
     transform: translateY(0);
+  }
+}
+
+@keyframes arrowMove{
+  0% {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(50%);
   }
 }
  

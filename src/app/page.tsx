@@ -28,17 +28,17 @@ export default function Home() {
                 <Ads />
                 <SpecialAccommodations />
             </Layout>
-            <SupperOffers />
+               <SupperOffers />
             <Layout className='z-20' bg='white'>
                 <Offers />
                 <Offers />
                 <BecomeHost />
                 <Offers />
                 <Offers />
-                {/* comment component */}
+                 
                 <Offers />
-                {/* footer */}
-            </Layout>
+                
+            </Layout>  
         </ScrollObserver>
     );
 }
