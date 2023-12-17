@@ -17,20 +17,8 @@ const SuperOffers = () => {
                     navigation={true}
                     className='mySwiper w-full mx-auto !pr-6'
                     breakPoints={{
-                        640: {
-                            slidesPerView: 1,
-                            spaceBetween: 20,
-                        },
-                        768: {
-                            slidesPerView: 1,
-                            spaceBetween: 15,
-                        },
                         1024: {
                             slidesPerView: 3,
-                            spaceBetween: 15,
-                        },
-                        1280: {
-                            slidesPerView: 4,
                             spaceBetween: 15,
                         },
                     }}
