@@ -12,7 +12,7 @@ import SpecialAccommodations from '../components/templates/index/SpecialAccommod
 import SupperOffers from '../components/templates/index/SuperOffers/SuperOffers';
 
 import Intro from '../components/templates/index/intro/Intro';
-
+import Footer from '../components/modules/Footer/Footer';
 export default function Home() {
     return (
         <main>
@@ -21,11 +21,10 @@ export default function Home() {
                 <PopularDestinations />
                 <FastSearch />
                 <Ads />
-                <SpecialAccommodations /> 
+                <SpecialAccommodations />
             </Layout>
             <SupperOffers />
             <Layout bg='white'>
-
                 <Offers />
                 <Offers />
                 <BecomeHost />
@@ -33,8 +32,8 @@ export default function Home() {
                 <Offers />
                 {/* comment component */}
                 <Offers />
-                {/* footer */}
             </Layout>
+            <Footer />
         </main>
     );
 }
