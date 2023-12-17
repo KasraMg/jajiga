@@ -1,7 +1,7 @@
 import React from 'react';
 import CitiesSelector from './components/CitiesSelector';
 import Slider from '@/src/components/modules/slider/Slider';
-import Card from '../Offers/components/card/Card';
+import Card from '../SpecialAccommodations/components/Card';
 const SuperOffers = () => {
     return (
         <div className='superOfferBg rounded-t-xl py-6 z-20 relative'>
@@ -17,20 +17,8 @@ const SuperOffers = () => {
                     navigation={true}
                     className='mySwiper w-full mx-auto !pr-6'
                     breakPoints={{
-                        640: {
-                            slidesPerView: 1,
-                            spaceBetween: 20,
-                        },
-                        768: {
-                            slidesPerView: 1,
-                            spaceBetween: 15,
-                        },
                         1024: {
                             slidesPerView: 3,
-                            spaceBetween: 15,
-                        },
-                        1280: {
-                            slidesPerView: 4,
                             spaceBetween: 15,
                         },
                     }}

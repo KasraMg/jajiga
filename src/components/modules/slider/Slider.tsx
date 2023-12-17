@@ -18,7 +18,7 @@ const Slider: FC<SliderProps> = ({
         <Swiper
             dir='rtl'
             navigation={navigation}
-            spaceBetween={0}
+            spaceBetween={10}
             pagination={{
                 enabled: false,
             }}

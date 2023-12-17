@@ -21,7 +21,7 @@ const Card: FC<CardProps> = () => {
           رزرو فوری 
         </Button>
       </div>
-      <div style={{background: 'linear-gradient(360deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%) 0% 0% / cover'}} className='text-white w-full absolute bottom-0 text-sm right-0 pb-3 rounded-xl pr-3'> 
+      <div style={{background: 'linear-gradient(360deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%) 0% 0% / cover'}} className='text-white w-full absolute bottom-0 text-sm right-0 pb-3 pr-3 rounded-xl'> 
       <p>از 1,111,111 تومان</p>
       </div>
     </div>
