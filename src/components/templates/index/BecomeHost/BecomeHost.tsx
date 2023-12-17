@@ -13,7 +13,7 @@ const BecomeHost = () => {
                     خود را با شرایطی منصفانه به گردشگران اجاره میدهند و درآمدی
                     شرافتمندانه کسب میکنند
                 </p>
-                <Button className='text-black'>توضیحات بیشتر</Button>
+                <Button variant="outlineMain" className=''>توضیحات بیشتر</Button>
             </div>
 
             <div className='w-full md:w-1/2'>

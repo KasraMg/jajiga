@@ -24,7 +24,7 @@ const Intro = () => {
   }
   return (
 
-    <div style={{ transform: `translateY(-${progress * 20}vh)`, backgroundPositionX: '-204px' }} ref={refContainer} dir='ltr' className={` ${window.pageYOffset > 800 && 'invisible'} h-[60vh] bg-cover lg:!h-[90vh] bg-fixed w-full sticky top-0 left-0  bg-no-repeat z-0 bg-[url(/images/home-header-bg-3@1920.jpg)]`}>
+    <div style={{ transform: `translateY(-${progress * 20}vh)` }} ref={refContainer} dir='ltr' className={` ${window.pageYOffset > 800 && 'invisible'} h-[60vh] bg-cover lg:!h-[90vh] bg-fixed w-full sticky top-0 left-0  bg-no-repeat z-0 bg-[url(/images/home-header-bg-3@1920.jpg)]`}>
       <div className='z-30 relative text-center text-white lg:!pr-4 pt-36 lg:!pt-64'>
         <p className='lg:!text-[1.7rem] text-[1.125rem]'>اجاره ویلا در شمال و سراسر ایران زیبا</p>
         <div className='relative mt-5 w-max mx-auto'>
