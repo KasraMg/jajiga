@@ -15,7 +15,7 @@ export const buttonVariants = cva(
         green: "text-white rounded-md bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800",
         lightGreen: "text-dark rounded-md bg-gradient-to-r from-green-100 via-green-200 to-green-400 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-100 dark:focus:ring-green-600",
         orange: "bg-orange-400 text-white",
-        outlineMain: "bg-transparent border-1 border-main text-main hover:text-dark hover:bg-main focus:bg-transparent",
+        outlineMain: "bg-gray-100 border-1 border-main text-main hover:text-dark hover:bg-gray-200 transition-color focus:bg-transparent",
         gray: "dark:bg-[#161D26] rounded-md bg-[#e7e6e6] dark:text-white ",
         secondray: " rounded-md bg-[#e7e6e6] dark:text-dark",
         yellow:"bg-yellow-300 text-black",

@@ -1,3 +1,4 @@
+import Button from '@/src/components/modules/button';
 import React from 'react';
 
 const BecomeHost = () => {
@@ -12,7 +13,7 @@ const BecomeHost = () => {
                     خود را با شرایطی منصفانه به گردشگران اجاره میدهند و درآمدی
                     شرافتمندانه کسب میکنند
                 </p>
-                <button className=''>توضیحات بیشتر</button>
+                <Button className='text-black'>توضیحات بیشتر</Button>
             </div>
 
             <div className='w-full md:w-1/2'>
