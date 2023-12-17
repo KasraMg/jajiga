@@ -1,8 +1,7 @@
 import React from 'react'
 import { FC } from 'react'
 import Button from '../button'
-import { BiSupport } from "react-icons/bi";
-import { RxQuestionMarkCircled } from "react-icons/rx";
+import { BiSupport } from "react-icons/bi"; 
 import { FaRegHeart } from "react-icons/fa";
 import { TbHomePlus, TbHome, TbInfoCircle, TbMessage2Question } from "react-icons/tb";
 import { IoShieldCheckmarkOutline } from "react-icons/io5"
@@ -52,11 +51,7 @@ const Menu: FC<LayoutProps> = ({
                         <li className='flex gap-2 pl-6 hover:bg-[#f5f5f5]  pr-2 rounded-r-3xl py-2 pb-3 items-center text-[#666666] font-vazir-light flex-row-reverse'>
                             <TbMessage2Question className='text-xl' />
                             <span className='mt-1 text-sm'>سوالات متداول</span>
-                        </li>
-                        <li className='flex gap-2 pl-6 hover:bg-[#f5f5f5]  pr-2 rounded-r-3xl py-2 pb-3 items-center text-[#666666] font-vazir-light flex-row-reverse'>
-                            <RxQuestionMarkCircled className='text-xl' />
-                            <span className='mt-1 text-sm'>راهنما</span>
-                        </li>
+                        </li> 
                         <li className='flex gap-2 pl-6 hover:bg-[#f5f5f5]  pr-2 rounded-r-3xl py-2 pb-3 items-center text-[#666666] font-vazir-light flex-row-reverse'>
                             <IoShieldCheckmarkOutline className='text-xl' />
                             <span className='mt-1 text-sm'>ضمانت تحویل</span>
