@@ -13,30 +13,34 @@ import SpecialAccommodations from '../components/templates/index/SpecialAccommod
 import SupperOffers from '../components/templates/index/SuperOffers/SuperOffers';
 
 import Intro from '../components/templates/index/intro/Intro';
+import Footer from '../components/modules/Footer/Footer';
 import ScrollObserver from '../utils/scrollObserver';
-
-
 
 export default function Home() {
     return (
-        <ScrollObserver >
-            <Navbar />
-            <Intro />
-            <Layout className='!z-10' bg='white'>
-                <PopularDestinations />
-                <FastSearch />
-                <Ads />
-                <SpecialAccommodations />
-            </Layout>
-               <SupperOffers />
-            <Layout className='!z-10' bg='white'>
-                <Offers />
-                <Offers />
-                <BecomeHost />
-                <Offers />
-                <Offers /> 
-                <Offers /> 
-            </Layout>  
-        </ScrollObserver>
+        <main>
+            <ScrollObserver>
+                <Navbar />
+                <Intro />
+                <Layout className='!z-10' bg='white'>
+                    <PopularDestinations />
+                    <FastSearch />
+                    <Ads />
+                    <SpecialAccommodations />
+                </Layout>
+                <SupperOffers />
+                <Layout bg='white'>
+                    <Offers />
+                    <Offers />
+                    <BecomeHost />
+                    <Offers />
+                    <Offers />
+                    {/* comment component */}
+                    <Offers />
+                    {/* footer */}
+                </Layout>
+                <Footer />
+            </ScrollObserver>
+        </main>
     );
 }

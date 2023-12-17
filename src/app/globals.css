@@ -88,13 +88,13 @@ html {
 }
 
 .becomeHostBg {
-  background: url('/images/pattern.png') repeat-x, linear-gradient(0deg, transparent 38.49%, rgb(255, 230, 101) 63.95%, rgb(254, 212, 8) 98.9%) rgb(255, 230, 102);
+  background: url('/images/patterns/pattern.png') repeat-x, linear-gradient(0deg, transparent 38.49%, rgb(255, 230, 101) 63.95%, rgb(254, 212, 8) 98.9%) rgb(255, 230, 102);
 
 }
 
 .superOfferBg {
   background-color: rgb(204, 0, 1);
-  background-image: linear-gradient(rgba(204, 0, 1, 0.75), rgb(204, 0, 1)), url('/images/pattern2.png');
+  background-image: linear-gradient(rgba(204, 0, 1, 0.75), rgb(204, 0, 1)), url('/images/patterns/pattern2.png');
   background-size: 11%;
 }
 
