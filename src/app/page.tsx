@@ -22,22 +22,20 @@ export default function Home() {
         <ScrollObserver >
             <Navbar />
             <Intro />
-            <Layout className='z-20' bg='white'>
+            <Layout className='!z-10' bg='white'>
                 <PopularDestinations />
                 <FastSearch />
                 <Ads />
                 <SpecialAccommodations />
             </Layout>
                <SupperOffers />
-            <Layout className='z-20' bg='white'>
+            <Layout className='!z-10' bg='white'>
                 <Offers />
                 <Offers />
                 <BecomeHost />
                 <Offers />
-                <Offers />
-                 
-                <Offers />
-                
+                <Offers /> 
+                <Offers /> 
             </Layout>  
         </ScrollObserver>
     );
