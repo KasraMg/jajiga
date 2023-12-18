@@ -14,8 +14,8 @@ const Breadcrumb: FC<BreadcrumbProps> = ({
 }) => {
     return (
         <section id='breadcrumb' className={`${className} relative mt-[58px] bg-[#f0c807] pb-9 pt-7 bg-cover bg-center  `}>
-            <div className='top-0 opacity-50 absolute w-full h-full' style={{ background: 'url(https://www.jajiga.com/static/img/backdrop-pattern.svg) 0% 0% / 200px repeat rgb(240, 200, 7)' }}></div>
-            <div className='Container'>
+            <div className='top-0 opacity-50 absolute w-full h-full ' style={{ background: 'url(https://www.jajiga.com/static/img/backdrop-pattern.svg) 0% 0% / 200px repeat rgb(240, 200, 7)' }}></div>
+            <div className='max-w-[815px] mx-auto  pr-4 xl:!px-0'>
                 <div className='flex items-center gap-1'>
                     <p className='font-vazir-light'>جاجیگا</p>
                     <FaAngleLeft />
