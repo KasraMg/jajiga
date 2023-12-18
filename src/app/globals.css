@@ -98,6 +98,14 @@ html {
   background-size: 11%;
 }
 
+.instagramGradiant {
+  background: linear-gradient(125deg, rgb(131, 58, 180) 0%, rgb(253, 29, 29) 55%, rgb(252, 176, 69) 100%);
+}
+
+.telegramGradiant {
+  background: linear-gradient(125deg, rgb(53, 185, 252) 0%, rgb(5, 131, 193) 100%);
+}
+
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -106,7 +114,7 @@ html {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
- 
+
 
 @keyframes slideDown {
   from {
@@ -118,7 +126,7 @@ html {
   }
 }
 
-@keyframes arrowMove{
+@keyframes arrowMove {
   0% {
     opacity: 0;
     transform: translateY(-50%);
@@ -134,5 +142,21 @@ html {
     transform: translateY(50%);
   }
 }
- 
- 
+
+
+.trust {
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
+    rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 40% / 10%;
+
+
+}
