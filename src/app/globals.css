@@ -47,6 +47,7 @@ input[data-autocompleted] {
   margin: 0 auto;
 }
 
+/* swiper  */
 .swiper-rtl .swiper-button-prev:after,
 .swiper-rtl .swiper-button-next:after {
   font-size: 20px;
@@ -94,6 +95,7 @@ input[data-autocompleted] {
 .swiper:hover .swiper-button-prev {
   opacity: 1 !important;
 }
+/* swiper  */
 
 .becomeHostBg {
   background: url('/images/patterns/pattern.png') repeat-x, linear-gradient(0deg, transparent 38.49%, rgb(255, 230, 101) 63.95%, rgb(254, 212, 8) 98.9%) rgb(255, 230, 102);
@@ -114,8 +116,36 @@ input[data-autocompleted] {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
- 
 
+/* modal  */
+.h-modal div button svg{
+  width: 2rem !important;
+  height: 2rem !important;
+  color: white;
+}
+.h-modal div button:hover{
+  background: transparent !important;
+  color: white !important;
+}
+.h-modal div button{
+  position: absolute;
+  left: -4px;
+  outline: 0 !important;
+  top: -42px;
+} 
+[data-testid="modal-overlay"] .max-w-2xl{
+ width: 540px !important;
+}
+@media (max-width:767px) {
+  [data-testid="modal-overlay"] .max-w-2xl { 
+    padding-top: 13rem !important;
+}
+}
+ /* modal  */
+
+
+
+ /* animations */
 @keyframes slideDown {
   from {
     transform: translateY(-100%);

@@ -2,8 +2,8 @@ import type { Config } from 'tailwindcss';
 
 const config: Config = {
     content: [
-        "./node_modules/flowbite-react/**/*.js",
-        './src/**/*.{js,ts,jsx,tsx,mdx}'   
+        './node_modules/flowbite-react/lib/**/*.js',
+        './src/**/*.{js,ts,jsx,tsx,mdx}' , 
     ], 
       plugins: [
         require('flowbite/plugin')
