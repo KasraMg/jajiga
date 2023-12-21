@@ -46,7 +46,7 @@ const Menu: FC<LayoutProps> = ({
                         </li>
                         <li className='flex gap-2 pl-6 hover:bg-[#f5f5f5]  pr-2 rounded-r-3xl py-2 pb-3 items-center text-[#666666] font-vazir-light flex-row-reverse'>
                             <BiSupport className='text-xl' />
-                            <span className='mt-1 text-sm'>پتشیبانی</span>
+                            <span className='mt-1 text-sm'>پشتیبانی</span>
                         </li>
                         <li className='flex gap-2 pl-6 hover:bg-[#f5f5f5]  pr-2 rounded-r-3xl py-2 pb-3 items-center text-[#666666] font-vazir-light flex-row-reverse'>
                             <TbMessage2Question className='text-xl' />
