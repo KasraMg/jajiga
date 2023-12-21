@@ -9,7 +9,7 @@ interface CardProps{
 }
 const Card: FC<CardProps> = () => {
   return (
-    <section className='xl:!w-full w-full lg:!w-[90%]  sm:!w-80'>
+    <section className='xl:!w-full w-full lg:!w-[90%]'>
     <div style={{ backgroundPosition:' -51px -46px'}} className='bg-[url(https://storage.jajiga.com/public/pictures/medium/3181811230115103439.jpg)] relative rounded-xl h-52'>
       <div className='flex flex-col p-2'>
         <Button size={'sm'} variant={"white"} className='font-vazir-light w-[78px]'>
