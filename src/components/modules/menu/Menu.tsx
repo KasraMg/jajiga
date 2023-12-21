@@ -30,6 +30,7 @@ const Menu: FC<LayoutProps> = ({
                     <svg width={56} className="sc-679cb2a8-0 iBzAsR sc-2fa8747d-1 eAKzKD" fill="#d6d6d6" viewBox="0 0 32 32" preserveAspectRatio="xMidYMid meet"><defs><clipPath id="clip-path"><polygon points="0 0 32 0 32 1.23 32 32 0 32 0 0" style={{ fill: "none" }}></polygon></clipPath></defs><g style={{ clipPath: "url(&quot;#clip-path&quot)" }}><path d="M16,32A16,16,0,1,1,32,16,16,16,0,0,1,16,32ZM16,1.52A14.48,14.48,0,0,0,1.52,16a14.82,14.82,0,0,0,.28,2.82,14.48,14.48,0,0,0,28.4,0A15,15,0,0,0,30.48,16,14.5,14.5,0,0,0,16,1.52Z"></path><path d="M20.5,13.5A4.5,4.5,0,1,1,16,9,4.49,4.49,0,0,1,20.5,13.5ZM19,18.71a6,6,0,1,0-5.94,0A9.76,9.76,0,0,0,6.25,28a.75.75,0,0,0,1.5,0,8.25,8.25,0,0,1,15.87-3.16h0A8.18,8.18,0,0,1,24.25,28a.75.75,0,0,0,1.5,0A9.76,9.76,0,0,0,19,18.71Z" style={{ fillRule: "evenodd" }}></path></g></svg>
                 </div>
                 <hr className='mt-5' />
+                
                 <div className='mt-4 mr-4'>
                     <ul>
                         <li className='flex gap-2 pl-6 hover:bg-[#f5f5f5]  pr-2 rounded-r-3xl py-2 pb-3 bg-[#f5f5f5] items-center text-[#666666] font-vazir-light flex-row-reverse'>
@@ -46,7 +47,7 @@ const Menu: FC<LayoutProps> = ({
                         </li>
                         <li className='flex gap-2 pl-6 hover:bg-[#f5f5f5]  pr-2 rounded-r-3xl py-2 pb-3 items-center text-[#666666] font-vazir-light flex-row-reverse'>
                             <BiSupport className='text-xl' />
-                            <span className='mt-1 text-sm'>پشتیبانی</span>
+                             <span className='mt-1 text-sm'>پشتیبانی</span>
                         </li>
                         <li className='flex gap-2 pl-6 hover:bg-[#f5f5f5]  pr-2 rounded-r-3xl py-2 pb-3 items-center text-[#666666] font-vazir-light flex-row-reverse'>
                             <TbMessage2Question className='text-xl' />
