@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "aos": "^3.0.0-beta.6",
     "class-variance-authority": "^0.7.0",
     "flowbite": "^2.2.0",
     "flowbite-react": "^0.7.2",
@@ -22,6 +23,7 @@
     "yup": "^1.1.1"
   },
   "devDependencies": {
+    "@types/aos": "^3.0.7",
     "@types/node": "latest",
     "@types/react": "latest",
     "@types/react-dom": "latest",
