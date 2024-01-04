@@ -12,7 +12,7 @@ const page = () => {
             <Navbar />
             <Breadcrumb route='علاقه‌مندی‌ها' />
             <Layout className='!z-10' bg='white'>
-                {/* <div className='mx-auto flex items-center justify-center flex-col pt-8  space-y-4'>
+                <div className='mx-auto flex items-center justify-center flex-col pt-8  space-y-4'>
                     <svg
                         className='w-36 h-36 mt-8'
                         fill='none'
@@ -65,7 +65,7 @@ const page = () => {
                         <CiSearch className='text-xl ml-2' />
                         <p className='font-vazir-light text-base'>جستجو</p>
                     </Button>
-                </div> */}
+                </div>
                 <div className='max-w-[1120px] mx-auto pt-2'>
                     <div className='grid grid-cols-2 lg:grid-cols-3 gap-4 mt-4'>
                         <Card />
