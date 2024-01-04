@@ -247,8 +247,3 @@ input[data-autocompleted] {
 }
 
 /** rules section end */
-
-
-.testBg {
-  background: linear-gradient(0deg, rgb(255, 200, 4) 0%, rgb(255, 200, 4) 50%, rgb(255, 255, 255) 50%, rgb(255, 255, 255) 100%);
-}
