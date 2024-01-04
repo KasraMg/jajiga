@@ -96,6 +96,7 @@ input[data-autocompleted] {
 .swiper:hover .swiper-button-prev {
   opacity: 1 !important;
 }
+
 /* swiper  */
 
 .becomeHostBg {
@@ -125,36 +126,41 @@ input[data-autocompleted] {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
- 
+
 /* modal  */
-.h-modal div button svg{
+.h-modal div button svg {
   width: 2rem !important;
   height: 2rem !important;
   color: white;
 }
-.h-modal div button:hover{
+
+.h-modal div button:hover {
   background: transparent !important;
   color: white !important;
 }
-.h-modal div button{
+
+.h-modal div button {
   position: absolute;
   left: -4px;
   outline: 0 !important;
   top: -42px;
-} 
-[data-testid="modal-overlay"] .max-w-2xl{
- width: 540px !important;
 }
+
+[data-testid="modal-overlay"] .max-w-2xl {
+  width: 540px !important;
+}
+
 @media (max-width:767px) {
-  [data-testid="modal-overlay"] .max-w-2xl { 
+  [data-testid="modal-overlay"] .max-w-2xl {
     padding-top: 13rem !important;
+  }
 }
-}
- /* modal  */
+
+/* modal  */
 
 
 
- /* animations */
+/* animations */
 @keyframes slideDown {
   from {
     transform: translateY(-100%);
@@ -197,6 +203,7 @@ input[data-autocompleted] {
   width: 100%;
   border-radius: 40% / 10%;
 }
+
 /** rules section start */
 .rules-article {
   color: #484848;
@@ -232,6 +239,7 @@ input[data-autocompleted] {
   margin-inline-end: 0px;
   font-family: 'Vazir-light';
 }
+
 .rules-article a {
   color: #072ff0;
   font-size: 14px;
@@ -239,3 +247,8 @@ input[data-autocompleted] {
 }
 
 /** rules section end */
+
+
+.testBg {
+  background: linear-gradient(0deg, rgb(255, 200, 4) 0%, rgb(255, 200, 4) 50%, rgb(255, 255, 255) 50%, rgb(255, 255, 255) 100%);
+}
