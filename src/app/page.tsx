@@ -19,7 +19,7 @@ import ScrollObserver from '../utils/scrollObserver';
 export default function Home() {
     return (
         <main>
-            {/* <ScrollObserver> */}
+            <ScrollObserver>
             <Navbar />
             <Intro />
             <Layout className='!z-10' bg='white'>
@@ -40,7 +40,7 @@ export default function Home() {
                 {/* footer */}
             </Layout>
             <Footer />
-            {/* </ScrollObserver> */}
+            </ScrollObserver>
         </main>
     );
 }

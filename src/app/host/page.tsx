@@ -3,6 +3,8 @@ import Navbar from '@/src/components/modules/navbar/Navbar';
 import React from 'react';
 import HostCart from '@/src/components/modules/host/HostCart';
 import HostCartData from '@/src/constants/HostCartData';
+import Footer from '@/src/components/modules/Footer/Footer';
+import Button from '@/src/components/modules/button';
 const page = () => {
     return (
         <>
@@ -30,6 +32,15 @@ const page = () => {
                     </div>
                 </div>
             ))}
+            <div className='mx-auto w-80 max-w-[320px] sticky bottom-2 bg-[#00000099] h-16 rounded-lg flex items-center justify-center px-4 mb-4'>
+                <Button
+                    className='w-full p-2 rounded-full text-center text-black flex items-center justify-center hover:bg-[#d2b43d] duration-300'
+                    variant='yellow'
+                >
+                    ثبت اقامتگاه
+                </Button>
+            </div>
+            <Footer />
         </>
     );
 };
