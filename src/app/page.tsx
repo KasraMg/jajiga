@@ -19,28 +19,28 @@ import ScrollObserver from '../utils/scrollObserver';
 export default function Home() {
     return (
         <main>
-            <ScrollObserver>
-                <Navbar />
-                <Intro />
-                <Layout className='!z-10' bg='white'>
-                    <PopularDestinations />
-                    <FastSearch />
-                    <Ads />
-                    <SpecialAccommodations />
-                </Layout>
-                <SupperOffers />
-                <Layout bg='white'>
-                    <Offers />
-                    <Offers />
-                    <BecomeHost />
-                    <Offers />
-                    <Offers />
-                    {/* comment component */}
-                    <Offers />
-                    {/* footer */}
-                </Layout>
-                <Footer />
-            </ScrollObserver>
+            {/* <ScrollObserver> */}
+            <Navbar />
+            <Intro />
+            <Layout className='!z-10' bg='white'>
+                <PopularDestinations />
+                <FastSearch />
+                <Ads />
+                <SpecialAccommodations />
+            </Layout>
+            <SupperOffers />
+            <Layout bg='white'>
+                <Offers />
+                <Offers />
+                <BecomeHost />
+                <Offers />
+                <Offers />
+                {/* comment component */}
+                <Offers />
+                {/* footer */}
+            </Layout>
+            <Footer />
+            {/* </ScrollObserver> */}
         </main>
     );
 }
