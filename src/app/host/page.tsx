@@ -12,8 +12,9 @@ const page = () => {
         <>
             <Navbar />
             <Breadcrumb
-                route='چگونه میزبان شوم'
+                routes={['چگونه میزبان شوم']}
                 description='نکات زیر را مطالعه کنید تا با اطلاعات کافی در جاجیگا میزبان شوید و با خیال آسوده کسب درآمد کنید'
+                variant='full'
             />
 
             {HostData.map((cartData) => (
@@ -33,7 +34,10 @@ const page = () => {
                     </div>
                     <div className='flex flex-col md:flex-row items-start Container md:gap-x-4 gap-y-10 px-4 py-10'>
                         {cartData.carts.map((cart) => (
-                            <HostCart {...cart} borderColor={cartData.bgColor} />
+                            <HostCart
+                                {...cart}
+                                borderColor={cartData.bgColor}
+                            />
                         ))}
                     </div>
                 </div>

@@ -10,7 +10,7 @@ const page = () => {
     return (
         <>
             <Navbar />
-            <Breadcrumb route='علاقه‌مندی‌ها' />
+            <Breadcrumb routes={['علاقه‌مندی‌ها']} variant='full'/>
             <Layout className='!z-10' bg='white'>
                 <div className='mx-auto flex items-center justify-center flex-col pt-8  space-y-4'>
                     <svg
