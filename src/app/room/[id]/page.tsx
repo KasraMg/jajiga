@@ -1,5 +1,6 @@
 import Navbar from '@/src/components/modules/navbar/Navbar';
 import Footer from '@/src/components/modules/Footer/Footer';
+import Badge from '@/src/components/modules/badge/Badge';
 const Room = () => {
     return (
         <>
@@ -48,9 +49,9 @@ const Room = () => {
                     <div className='flex flex-col'>
                         {/* accordion */}
                         <p>اجاره ویلا استخردار در رامسر</p>
-                        <div className='flex mt-5'>
-                            <p className='font-liht text-xs'>کد:303030</p>
-                            <p className='font-liht text-xs'>+300 رزرو موفق</p>
+                        <div className='flex mt-5 gap-x-1'>
+                            <Badge bgColor='bg-yellow-300'>کد:303030</Badge>
+                            <Badge bgColor='bg-[#f1f1f1]'>+300 رزرو موفق</Badge>
                             {/* stars component */}
                         </div>
                     </div>
