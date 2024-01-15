@@ -1,6 +1,7 @@
 import Navbar from '@/src/components/modules/navbar/Navbar';
 import Footer from '@/src/components/modules/Footer/Footer';
 import Badge from '@/src/components/modules/badge/Badge';
+import Breadcrumb from '@/src/components/modules/breadcrumb/Breadcrumb';
 const Room = () => {
     return (
         <>
@@ -47,7 +48,7 @@ const Room = () => {
                 </div>
                 <div className='flex justify-between items-start'>
                     <div className='flex flex-col'>
-                        {/* accordion */}
+                        <Breadcrumb routes={['مازندران','رامسر']} />
                         <p>اجاره ویلا استخردار در رامسر</p>
                         <div className='flex mt-5 gap-x-1'>
                             <Badge bgColor='bg-yellow-300'>کد:303030</Badge>

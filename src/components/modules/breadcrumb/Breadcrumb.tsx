@@ -46,6 +46,19 @@ const Breadcrumb: FC<BreadcrumbProps> = ({
             </section>
         );
     }
+    return (
+        <div className='flex mb-4'>
+            <span className='flex items-center text-[#505050] text-xs gap-[2px] mx-[2px]'>
+                جاجیگا <FaAngleLeft />
+            </span>
+            {routes.map((route, index) => (
+                <span className='flex items-center text-[#505050] text-xs mx-[2px] gap-[2px]' key={index} >
+                    {route}
+                    {index !== routes.length - 1 ? <FaAngleLeft /> : ''}
+                </span>
+            ))}
+        </div>
+    );
 };
 
 export default Breadcrumb;
