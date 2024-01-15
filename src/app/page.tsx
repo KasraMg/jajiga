@@ -20,26 +20,25 @@ export default function Home() {
     return (
         <main>
             <ScrollObserver>
-            <Navbar />
-            <Intro />
-            <Layout className='!z-10' bg='white'>
-                <PopularDestinations />
-                <FastSearch />
-                <Ads />
-                <SpecialAccommodations />
-            </Layout>
-            <SupperOffers />
-            <Layout bg='white'>
-                <Offers />
-                <Offers />
-                <BecomeHost />
-                <Offers />
-                <Offers />
-                {/* comment component */}
-                <Offers />
-                {/* footer */}
-            </Layout>
-            <Footer />
+                <Navbar />
+                <Intro />
+                <Layout className='!z-10' bg='white'>
+                    <PopularDestinations />
+                    <FastSearch />
+                    <Ads />
+                    <SpecialAccommodations />
+                </Layout>
+                <SupperOffers />
+                <Layout bg='white'>
+                    <Offers />
+                    <Offers />
+                    <BecomeHost />
+                    <Offers />
+                    <Offers />
+                    {/* comment component */}
+                    <Offers />
+                </Layout>
+                <Footer />
             </ScrollObserver>
         </main>
     );
