@@ -4,12 +4,16 @@ const config: Config = {
     content: [
         './node_modules/flowbite-react/lib/**/*.js',
         './src/**/*.{js,ts,jsx,tsx,mdx}',
-    ],
+    ], 
     plugins: [
         require('flowbite/plugin')
     ],
+ 
     theme: {
         extend: {
+            colors: {
+                textGray: '#333333',
+            },
             screens: {
                 sm: { min: '500px' },
                 md: { min: '768px' },
@@ -28,6 +32,6 @@ const config: Config = {
             'vazir-medium': 'Vazir-medium',
         },
     },
-
+ 
 };
 export default config;

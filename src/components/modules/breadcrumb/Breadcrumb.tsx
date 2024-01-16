@@ -1,16 +1,19 @@
 import Link from 'next/link';
-import React, { FC } from 'react'
-import { FaAngleLeft } from "react-icons/fa6";
+import React, { FC } from 'react';
+import { FaAngleLeft } from 'react-icons/fa6';
 
 interface BreadcrumbProps {
+ 
     className?: string,
     route?: string,
     description?: string,
-    title?: string
+    title?: string  
+ 
 }
 
 const Breadcrumb: FC<BreadcrumbProps> = ({
     className,
+ 
     route,
     description,
     title
@@ -31,10 +34,10 @@ const Breadcrumb: FC<BreadcrumbProps> = ({
                 )}
 
                 <p className='pl-8 sm:!pl-0 mt-3  '>{description}</p>
-            </div>
+            </div> 
+            </section>
+    );
+};
+ 
 
-        </section>
-    )
-}
-
-export default Breadcrumb 
+export default Breadcrumb;

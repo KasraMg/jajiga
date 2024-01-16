@@ -9,6 +9,7 @@ const page = () => {
             <Breadcrumb
                 route='قوانین و مقررات'
                 description='توصیه می‌شود متن زیر را جهت اطلاع از حقوق و تعهدات قانونی خود مطالعه نمایید'
+                variant='full'
             />
             <Layout>
                 <div className='max-w-[1120px] mx-auto pt-2'>

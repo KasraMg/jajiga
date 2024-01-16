@@ -37,7 +37,6 @@ export default function Home() {
                     <Offers />
                     {/* comment component */}
                     <Offers />
-                    {/* footer */}
                 </Layout>
                 <Footer />
             </ScrollObserver>
