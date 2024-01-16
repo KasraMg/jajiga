@@ -4,8 +4,11 @@ const config: Config = {
     content: [
         './node_modules/flowbite-react/lib/**/*.js',
         './src/**/*.{js,ts,jsx,tsx,mdx}',
+    ], 
+    plugins: [
+        require('flowbite/plugin')
     ],
-    plugins: [require('flowbite/plugin')],
+ 
     theme: {
         extend: {
             colors: {
@@ -29,5 +32,6 @@ const config: Config = {
             'vazir-medium': 'Vazir-medium',
         },
     },
+ 
 };
 export default config;

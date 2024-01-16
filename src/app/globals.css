@@ -247,3 +247,12 @@ input[data-autocompleted] {
 }
 
 /** rules section end */
+
+.breadcrumb_bg::after{
+  content: "";
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: .5;
+  background: url(https://www.jajiga.com/static/img/backdrop-pattern.svg) 0% 0% / 200px repeat rgb(240, 200, 7);
+}

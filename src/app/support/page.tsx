@@ -18,9 +18,11 @@ const page = () => {
     const hideCommunicationModal = () => setCommunicationModal(false);
     return (
         <>
-            <Navbar />
-            <Breadcrumb routes={['پشتیبانی']} variant='full' />
-            <Layout className='!z-10' bg='white'>
+            <Navbar /> 
+            <Breadcrumb route='پشتیبانی' />
+            <Layout>
+  
+  
                 <div className='lg:!max-w-[815px] lg:!flex-row flex-col w-full pt-10 mx-auto gap-4 flex'>
                     <div className='lg:!w-1/2 w-full'>
                         <Form />

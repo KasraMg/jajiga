@@ -8,15 +8,16 @@ import Navbar from '@/src/components/modules/navbar/Navbar';
 import React from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-const page = () => {
+const page = () => {   
+ 
     useEffect(() => {
         AOS.init();
     }, []);
     return (
         <>
             <Navbar />
-            <Breadcrumb routes={['درباره ما']} variant='full' />
-            <Layout className='!z-10' bg='white'>
+            <Breadcrumb  />
+            <Layout  >
                 <section className='flex items-center px-24 mt-20 flex-row-reverse gap-16 leading-7'>
                     <img
                         style={{
@@ -161,6 +162,6 @@ const page = () => {
             <Footer />
         </>
     );
-};
+}; 
 
 export default page;
