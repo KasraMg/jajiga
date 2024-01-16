@@ -32,7 +32,9 @@ const Breadcrumb: FC<BreadcrumbProps> = ({
                     </div>
                 )}
 
-                <p className='pl-8 sm:!pl-0 mt-3  '>{description}</p>
+              {description &&(
+                <p className='pl-8 sm:!pl-0 mt-3 text-sm sm:!text-base '>{description}</p>
+              ) }  
             </div> 
             </section>
     );
