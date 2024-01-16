@@ -12,8 +12,7 @@ interface BreadcrumbProps {
 }
 
 const Breadcrumb: FC<BreadcrumbProps> = ({
-    className,
- 
+    className, 
     route,
     description,
     title
