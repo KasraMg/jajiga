@@ -5,6 +5,7 @@ import Badge from '@/src/components/modules/badge/Badge';
 import Breadcrumb from '@/src/components/modules/breadcrumb/Breadcrumb';
 import Button from '@/src/components/modules/button';
 import { useState } from 'react';
+import RoomSummery from '@/src/components/templates/room/components/RoomSummery';
 const Room = () => {
     const [isShow, setIsShow] = useState<boolean>(false);
     const handleShow = () => {
@@ -54,25 +55,30 @@ const Room = () => {
                     </div>
                 </div>
                 <div className='flex items-start gap-4'>
-                    <div className='flex justify-between items-start w-[66.66%]'>
-                        <div className='flex flex-col'>
-                            <Breadcrumb routes={['مازندران', 'رامسر']} />
-                            <p>اجاره ویلا استخردار در رامسر</p>
-                            <div className='flex mt-5 gap-x-1'>
-                                <Badge bgColor='bg-yellow-300'>کد:303030</Badge>
-                                <Badge bgColor='bg-[#f1f1f1]'>
-                                    +300 رزرو موفق
-                                </Badge>
-                                {/* stars component */}
+                    <div className='flex flex-col justify-between items-start w-[66.66%]'>
+                        <div className='flex justify-between items-center w-full mb-4'>
+                            <div className='flex flex-col'>
+                                <Breadcrumb routes={['مازندران', 'رامسر']} />
+                                <p>اجاره ویلا استخردار در رامسر</p>
+                                <div className='flex mt-5 gap-x-1'>
+                                    <Badge bgColor='bg-yellow-300'>
+                                        کد:303030
+                                    </Badge>
+                                    <Badge bgColor='bg-[#f1f1f1]'>
+                                        +300 رزرو موفق
+                                    </Badge>
+                                    {/* stars component */}
+                                </div>
+                            </div>
+                            <div className='w-[72px] h-[72px]'>
+                                <img
+                                    src='https://storage.jajiga.com/public/avatar/small/1910012115521179193.jpg'
+                                    alt=''
+                                    className='w-full h-full rounded-full'
+                                />
                             </div>
                         </div>
-                        <div className='w-[72px] h-[72px]'>
-                            <img
-                                src='https://storage.jajiga.com/public/avatar/small/1910012115521179193.jpg'
-                                alt=''
-                                className='w-full h-full rounded-full'
-                            />
-                        </div>
+                        <RoomSummery />
                     </div>
                     <div className='w-[33.33%]'>
                         <div className='rounded-t-2xl py-[14px] px-4 bg-[#404040] flex items-center justify-between text-white'>
