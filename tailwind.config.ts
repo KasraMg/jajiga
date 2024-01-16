@@ -3,11 +3,11 @@ import type { Config } from 'tailwindcss';
 const config: Config = {
     content: [
         './node_modules/flowbite-react/lib/**/*.js',
-        './src/**/*.{js,ts,jsx,tsx,mdx}' , 
-    ], 
-      plugins: [
+        './src/**/*.{js,ts,jsx,tsx,mdx}',
+    ],
+    plugins: [
         require('flowbite/plugin')
-      ],
+    ],
     theme: {
         extend: {
             screens: {
@@ -28,6 +28,6 @@ const config: Config = {
             'vazir-medium': 'Vazir-medium',
         },
     },
- 
+
 };
 export default config;

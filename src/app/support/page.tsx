@@ -20,7 +20,7 @@ const page = () => {
         <>
             <Navbar />
             <Breadcrumb route='پشتیبانی' />
-            <Layout className='!z-10' bg='white'>
+            <Layout>
                 <div className='lg:!max-w-[815px] lg:!flex-row flex-col w-full pt-10 mx-auto gap-4 flex'>
                     <div className='lg:!w-1/2 w-full'>
                         <Form />

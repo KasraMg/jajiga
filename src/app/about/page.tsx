@@ -16,7 +16,7 @@ const page = () => {
     <>
       <Navbar />
       <Breadcrumb route='درباره ما' />
-      <Layout className='!z-10' bg='white'>
+      <Layout>
         <section className='flex items-center px-24 mt-20 flex-row-reverse gap-16 leading-7'>
           <img style={{ boxShadow: 'rgba(0, 0, 0, 0.25) 0px 8px 16px 0px' }} className='w-[439px] h-[351px] rounded-xl' src="https://www.jajiga.com/static/img/about/about_img1.jpg" alt="" />
           <div className=' space-y-6'>

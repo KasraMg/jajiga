@@ -11,7 +11,7 @@ const page = () => {
         <>
             <Navbar />
             <Breadcrumb route='علاقه‌مندی‌ها' />
-            <Layout className='!z-10' bg='white'>
+            <Layout>
                 {/* <div className='mx-auto flex items-center justify-center flex-col pt-8  space-y-4'>
                     <svg
                         className='w-36 h-36 mt-8'

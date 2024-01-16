@@ -10,7 +10,7 @@ const page = () => {
                 route='قوانین و مقررات'
                 description='توصیه می‌شود متن زیر را جهت اطلاع از حقوق و تعهدات قانونی خود مطالعه نمایید'
             />
-            <Layout className='!z-10' bg='white'>
+            <Layout>
                 <div className='max-w-[1120px] mx-auto pt-2'>
                     <article className='rules-article !font-vazir-light'>
                         <h2>قوانین عمومی</h2>
