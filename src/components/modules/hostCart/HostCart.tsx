@@ -29,7 +29,8 @@ const HostCart: FC<HostCartProps> = ({
                     style={{ borderColor: `${borderColor}` }}
                 >
                     {icon}
-                </p>
+                </p>  
+                
             </div>
             <div className='py-4'>
                 <h3 className='my-4 font-medium text-center'>{title}</h3>
