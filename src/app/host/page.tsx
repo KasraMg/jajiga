@@ -1,4 +1,3 @@
- 
 // import Layout from '@/src/components/modules/Layout/Layout'
 // import Breadcrumb from '@/src/components/modules/breadcrumb/Breadcrumb'
 // import Navbar from '@/src/components/modules/navbar/Navbar'
@@ -47,7 +46,7 @@
 //                     </div>
 //                 </div>
 //             </Layout>
-//             <Layout className='pb-5'>
+//             <Layout className='pb-10'>
 //                 <div className='max-w-[1120px] mx-auto pt-2'>
 //                     <div className='text-center'>
 //                         <h2 className='border-b-4 mt-4 mb-3 pb-2 mx-auto border-solie text-xl border-[#ffc804] w-max'>3- برای ورود مهمانان آماده شوید!</h2>
@@ -60,7 +59,7 @@
 //                     </div>
 //                 </div>
 //             </Layout>
-//             <Layout className='pb-5 !bg-[#f2f5f8]'>
+//             <Layout className='pb-10 !bg-[#f2f5f8]'>
 //                 <div className='max-w-[1120px] mx-auto pt-2'>
 //                     <div className='text-center'>
 //                         <h2 className='border-b-4 mt-4 mb-3 pb-2 mx-auto border-solie text-xl border-[#ffc804] w-max'>4- میهمان نواز باشید</h2>
@@ -87,6 +86,9 @@
 // }
 
 // export default page
+
+
+ 
  
 import Breadcrumb from '@/src/components/modules/breadcrumb/Breadcrumb';
 import Navbar from '@/src/components/modules/navbar/Navbar';
@@ -102,7 +104,7 @@ const page = () => {
         <>
             <Navbar />
             <Breadcrumb
-                route={'چگونه میزبان شوم'}
+                title={'چگونه میزبان شوم'}
                 description='نکات زیر را مطالعه کنید تا با اطلاعات کافی در جاجیگا میزبان شوید و با خیال آسوده کسب درآمد کنید'
                 
             />
@@ -114,7 +116,7 @@ const page = () => {
                     style={{ background: cartData.bgColor }}
                 >
                     <div className='flex flex-col text-center items-center justify-center space-y-2 rounded-t-xl'>
-                        <h2 className='text-lg font-medium'>
+                        <h2 className='text-lg font-medium mt-2'>
                             {cartData.mainTitle}
                         </h2>
                         <div className='bg-yellow-300 h-1 rounded-lg w-36'></div>
@@ -122,7 +124,7 @@ const page = () => {
                             {cartData.secondaryTitle}
                         </p>
                     </div>
-                    <div className='flex flex-col md:flex-row items-start Container md:gap-x-4 gap-y-10 px-4 py-10'>
+                    <div className='grid grid-cols-[auto,auto,auto] justify-center md:flex-row items-start Container md:gap-x-4 gap-y-10 px-4 pt-0 py-10'>
                         {cartData.carts.map((cart) => (
                             <HostCart
                                 {...cart}
