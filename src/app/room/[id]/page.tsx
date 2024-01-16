@@ -6,6 +6,7 @@ import Breadcrumb from '@/src/components/modules/breadcrumb/Breadcrumb';
 import Button from '@/src/components/modules/button';
 import { useState } from 'react';
 import RoomSummery from '@/src/components/templates/room/components/RoomSummery';
+import RoomAbout from '@/src/components/templates/room/components/RoomAbout';
 const Room = () => {
     const [isShow, setIsShow] = useState<boolean>(false);
     const handleShow = () => {
@@ -79,6 +80,7 @@ const Room = () => {
                             </div>
                         </div>
                         <RoomSummery />
+                        <RoomAbout />
                     </div>
                     <div className='w-[33.33%]'>
                         <div className='rounded-t-2xl py-[14px] px-4 bg-[#404040] flex items-center justify-between text-white'>
