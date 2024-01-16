@@ -46,7 +46,7 @@ const page = () => {
                     </div>
                 </div>
             ))}
-            <div className=' mx-auto w-[90%]  sm:!w-80 max-w-[320px] sticky bottom-2 bg-[#00000099] h-16 rounded-lg flex items-center justify-center px-4 my-4'>
+            <div className=' mx-auto  w-[90%]  sm:!w-80 max-w-[320px] sticky bottom-2 bg-[#00000099] h-16 rounded-lg flex items-center justify-center px-4 my-4'>
                 <Button
                     className='w-full p-2 rounded-full text-center text-black flex items-center justify-center hover:bg-[#d2b43d] duration-300'
                     variant='yellow'
