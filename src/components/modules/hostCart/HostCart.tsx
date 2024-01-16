@@ -30,11 +30,11 @@ const HostCart: FC<HostCartProps> = ({
                 >
                     {icon}
                 </p>  
-                
+
             </div>
             <div className='py-4'>
                 <h3 className='my-4 font-medium text-center'>{title}</h3>
-                <p className='text-sm text-textGray font-vazir-light text-justify'>
+                <p className='text-sm text-textGray font-vazir-light text-justify '>
                     {description}
                 </p>
             </div>
