@@ -248,11 +248,42 @@ input[data-autocompleted] {
 
 /** rules section end */
 
-.breadcrumb_bg::after{
+.breadcrumb_bg::after {
   content: "";
   width: 100%;
   height: 100%;
   display: block;
   opacity: .5;
   background: url(https://www.jajiga.com/static/img/backdrop-pattern.svg) 0% 0% / 200px repeat rgb(240, 200, 7);
+}
+
+
+#stepper::-webkit-scrollbar {
+  display: none;
+}
+
+#stepper_item::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  border-radius: 10px;
+  background-image: linear-gradient(90deg, rgb(51, 51, 51) 75%, transparent 75%, transparent 100%);
+  background-size: 12px 1px;
+  height: 48px;
+  width: 2px;
+  right: 4px;
+  top: auto;
+  bottom: -7px;
+  transform: translate(calc(-0.75em), 50%);
+}
+
+.dropdown-content svg{
+ right: 290px !important;
+ position: absolute;
+ bottom:7px;
+}
+.dropdown-content input[type="checkbox"]{
+  position: relative;
+  top: 3px;
+  margin-left: 7px !important;
 }
