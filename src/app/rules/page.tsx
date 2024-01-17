@@ -1,15 +1,14 @@
-import Navbar from '@/src/components/modules/navbar/Navbar';
-import Layout from '@/src/components/modules/Layout/Layout';
-import Footer from '@/src/components/modules/Footer/Footer';
+ 
+import Layout from '@/src/components/modules/Layout/Layout'; 
 import Breadcrumb from '@/src/components/modules/breadcrumb/Breadcrumb';
+import Container from '@/src/components/modules/container/Container';
 const page = () => {
     return (
-        <>
-            <Navbar />
+        <Container> 
             <Breadcrumb
                 route='قوانین و مقررات'
                 description='توصیه می‌شود متن زیر را جهت اطلاع از حقوق و تعهدات قانونی خود مطالعه نمایید'
-                variant='full'
+                
             />
             <Layout>
                 <div className='max-w-[1120px] mx-auto pt-2'>
@@ -1310,9 +1309,8 @@ const page = () => {
                         <h3>پایان</h3>
                     </article>
                 </div>
-            </Layout>
-            <Footer />
-        </>
+            </Layout> 
+        </Container>
     );
 };
 

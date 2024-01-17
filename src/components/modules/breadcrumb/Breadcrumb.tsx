@@ -3,17 +3,19 @@ import React, { FC } from 'react';
 import { FaAngleLeft } from 'react-icons/fa6';
 
 interface BreadcrumbProps {
- 
+
     className?: string,
     route?: string,
+    routes?: string[];
     description?: string,
-    title?: string  
- 
+    title?: string,
+
 }
 
 const Breadcrumb: FC<BreadcrumbProps> = ({
-    className, 
+    className,
     route,
+    routes,
     description,
     title
 }) => {
@@ -28,17 +30,23 @@ const Breadcrumb: FC<BreadcrumbProps> = ({
                     <div className='flex items-center gap-1'>
                         <Link href={'/'} className='font-vazir-light z-50 relative text-black'>جاجیگا</Link>
                         <FaAngleLeft />
-                        <span className='text-xl font-vazir-bold text-black z-50'>{route}</span>
+                        {route && <span className='text-xl font-vazir-bold text-black z-50'>{route}</span>}
+                        {routes && routes.map((route, index) => (
+                            <Link href={`/category/${route}`} className='flex z-50 items-center text-[#505050] text-xs mx-[2px] gap-[2px]' key={index} >
+                                {route}
+                                {index !== routes.length - 1 ? <FaAngleLeft /> : ''}
+                            </Link>
+                        ))}
                     </div>
                 )}
 
-              {description &&(
-                <p className='pl-8 sm:!pl-0 mt-3 text-sm sm:!text-base '>{description}</p>
-              ) }  
-            </div> 
-            </section>
+                {description && (
+                    <p className='pl-8 sm:!pl-0 mt-3 text-sm sm:!text-base '>{description}</p>
+                )}
+            </div>
+        </section>
     );
 };
- 
+
 
 export default Breadcrumb;
