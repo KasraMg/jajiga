@@ -1,20 +1,18 @@
-'use client';
-import Navbar from '@/src/components/modules/navbar/Navbar';
-import Footer from '@/src/components/modules/Footer/Footer';
+'use client'; 
 import Badge from '@/src/components/modules/badge/Badge';
 import Breadcrumb from '@/src/components/modules/breadcrumb/Breadcrumb';
 import Button from '@/src/components/modules/button';
 import { useState } from 'react';
 import RoomSummery from '@/src/components/templates/room/components/RoomSummery';
 import RoomAbout from '@/src/components/templates/room/components/RoomAbout';
+import Container from '@/src/components/modules/container/Container';
 const Room = () => {
     const [isShow, setIsShow] = useState<boolean>(false);
     const handleShow = () => {
         setIsShow((prev) => !prev);
     };
     return (
-        <>
-            <Navbar />
+        <Container> 
             <div className='Container !mt-20'>
                 <div className='flex gap-x-3 mb-4'>
                     <div className='w-1/2'>
@@ -151,9 +149,8 @@ const Room = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-            <Footer />
-        </>
+            </div> 
+        </Container>
     );
 };
 

@@ -1,23 +1,21 @@
 'use client';
 
-import { useEffect } from 'react';
-import Footer from '@/src/components/modules/Footer/Footer';
+import { useEffect } from 'react'; 
 import Layout from '@/src/components/modules/Layout/Layout';
-import Breadcrumb from '@/src/components/modules/breadcrumb/Breadcrumb';
-import Navbar from '@/src/components/modules/navbar/Navbar';
+import Breadcrumb from '@/src/components/modules/breadcrumb/Breadcrumb'; 
 import React from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Container from '@/src/components/modules/container/Container';
 const page = () => {   
  
     useEffect(() => {
         AOS.init();
     }, []);
     return (
-        <>
-            <Navbar />
+        <Container> 
             <Breadcrumb  />
-            <Layout  >
+            <Layout>
                 <section className='flex items-center px-24 mt-20 flex-row-reverse gap-16 leading-7'>
                     <img
                         style={{
@@ -159,8 +157,8 @@ const page = () => {
                     </div>
                 </section>
             </Layout>
-            <Footer />
-        </>
+            
+        </Container>
     );
 }; 
 

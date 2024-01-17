@@ -2,13 +2,13 @@
 import Layout from '@/src/components/modules/Layout/Layout';
 import Accordion from '@/src/components/modules/accordion/Accordion';
 import Breadcrumb from '@/src/components/modules/breadcrumb/Breadcrumb';
-import Modal from '@/src/components/modules/modal/Modal';
-import Navbar from '@/src/components/modules/navbar/Navbar';
+import Modal from '@/src/components/modules/modal/Modal'; 
 import Form from '@/src/components/templates/support/Form/Form';
 import React, { useState } from 'react';
 import { MdOutlineEmail } from 'react-icons/md';
 import { FaTelegram } from 'react-icons/fa6';
 import { FaInstagram } from 'react-icons/fa';
+import Container from '@/src/components/modules/container/Container';
 const page = () => {
     const [callModal, setCallModal] = useState<boolean>(false);
     const [communicationModal, setCommunicationModal] =
@@ -17,8 +17,7 @@ const page = () => {
     const hideCallModal = () => setCallModal(false);
     const hideCommunicationModal = () => setCommunicationModal(false);
     return (
-        <>
-            <Navbar /> 
+        <Container> 
             <Breadcrumb route='پشتیبانی' />
             <Layout>
   
@@ -244,7 +243,7 @@ const page = () => {
                     </>
                 </Modal>
             </Layout>
-        </>
+        </Container>
     );
 };
 

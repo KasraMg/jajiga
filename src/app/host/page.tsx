@@ -2,19 +2,17 @@
 
  
  
-import Breadcrumb from '@/src/components/modules/breadcrumb/Breadcrumb';
-import Navbar from '@/src/components/modules/navbar/Navbar';
+import Breadcrumb from '@/src/components/modules/breadcrumb/Breadcrumb'; 
 import React from 'react';
-import HostCart from '@/src/components/modules/hostCart/HostCart';
-import Footer from '@/src/components/modules/Footer/Footer';
+import HostCart from '@/src/components/modules/hostCart/HostCart'; 
 import Button from '@/src/components/modules/button';
 import useHostCartData from '@/src/hooks/useHostCartData';
+import Container from '@/src/components/modules/container/Container';
 
 const page = () => {
     const HostData = useHostCartData();
     return (
-        <>
-            <Navbar />
+        <Container> 
             <Breadcrumb
                 title={'چگونه میزبان شوم؟'}
                 description='نکات زیر را مطالعه کنید تا با اطلاعات کافی در جاجیگا میزبان شوید و با خیال آسوده کسب درآمد کنید'
@@ -53,9 +51,8 @@ const page = () => {
                 >
                     ثبت اقامتگاه
                 </Button>
-            </div>
-            <Footer />
-        </>
+            </div> 
+        </Container>
     );
 };
 

@@ -1,15 +1,13 @@
-
-import Footer from '@/src/components/modules/Footer/Footer';
+ 
 import Layout from '@/src/components/modules/Layout/Layout';
 import Breadcrumb from '@/src/components/modules/breadcrumb/Breadcrumb';
-import HostCart from '@/src/components/modules/hostCart/HostCart';
-import Navbar from '@/src/components/modules/navbar/Navbar';
+import HostCart from '@/src/components/modules/hostCart/HostCart'; 
 import { IoMdCheckmark } from "react-icons/io";
 import { TbHomePlus } from "react-icons/tb";
+import Container from '@/src/components/modules/container/Container'; 
 const page = () => {
     return (
-        <>
-            <Navbar/>
+        <Container> 
             <Breadcrumb route={'ثبت اقامتگاه'} />
             <Layout>
                 <div className='gap-10 max-w-[860px] mx-auto grid grid-cols-[auto] lg:!grid-cols-[auto,auto] lf:!gap-5 justify-center mb-6 mt-20'>
@@ -17,10 +15,8 @@ const page = () => {
                     <HostCart readMore={true} borderColor='white' icon={<TbHomePlus />} title='لغو مراحل ثبت' description='در صورتی که قادر به اتمام مراحل ثبت اقامتگاه نباشید, می توانید با کلیک بر گزینه "لغو و خروج" در بالای صفحه, مراحل ثبت را نیمه کاره بگذارید. اطلاعات وارد شده تا همان مرحله ذخیره می شود و می توانید در فرصت بعدی مراحل ثبت اقامتگاه را به پایان برسانید. پس با خیال راحت, ثبت اقامتگاه خود را شروع کنید.' />
                 </div>
                 <button className='outline-0 border-0 max-w-[860px] mx-auto block my-8 mb-12 w-full rounded-full bg-[#f0c807] py-2'>شروع ثبت اقامتگاه</button>
-            </Layout>
-            <Footer/>
-
-        </>
+            </Layout> 
+        </Container>
     )
 }
 
