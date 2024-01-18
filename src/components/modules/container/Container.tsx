@@ -7,7 +7,6 @@ interface ContainerProps{
     disableFooter?:boolean
 }
 const Container:FC<ContainerProps> = ({ children,disableFooter }) => {
-    console.log(disableFooter);
     
     return (
         <>
