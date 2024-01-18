@@ -287,3 +287,14 @@ input[data-autocompleted] {
   top: 3px;
   margin-left: 7px !important;
 }
+[type='text']:focus, [type='email']:focus, [type='url']:focus, [type='password']:focus, [type='number']:focus, [type='date']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='week']:focus, [multiple]:focus, textarea:focus, select:focus {
+  outline: 0 !important;
+ 
+  box-shadow:none !important;
+  border-color: 0;
+}
+ 
+.css-t3ipsp-control:hover,.css-t3ipsp-control {
+box-shadow:none !important ;
+  border-color:#f0c807 !important;
+}

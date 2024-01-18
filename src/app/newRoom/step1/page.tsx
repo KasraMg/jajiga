@@ -4,49 +4,42 @@ import Breadcrumb from '@/src/components/modules/breadcrumb/Breadcrumb';
 import Container from '@/src/components/modules/container/Container';
 import Stepper from '@/src/components/modules/stepper/Stepper';
 import StepperInfo from '@/src/components/modules/stepperInfo/StepperInfo';
-import { useState } from 'react';
+import useStateData from '@/src/hooks/useStateData';
+import { useEffect, useState } from 'react';
 import { SlLocationPin } from "react-icons/sl";
-import { MultiSelect } from "react-multi-select-component";
+import Select from 'react-select';
 
-const options = [
-    { label: "آذربایجان شرقی", value: "آذربایجان شرقی" },
-    { label: "آذربایجان غربی", value: "آذربایجان غربی" },
-    { label: "اردبیل", value: "اردبیل", },
-    { label: "اصفهان", value: "اصفهان", },
-    { label: "البرز", value: "البرز", },
-    { label: "ایلام", value: "ایلام", },
-    { label: "بوشهر", value: "بوشهر", },
-    { label: "تهران", value: "تهران", },
-    { label: "چهارمحال و بختیاری", value: "چهارمحال و بختیاری", },
-    { label: "خراسان جنوبی", value: "خراسان جنوبی", },
-    { label: "خراسان رضوی", value: "خراسان رضوی", },
-    { label: "خراسان شمالی", value: "خراسان شمالی", },
-    { label: "خوزستان", value: "خوزستان", },
-    { label: "زنجان ", value: "زنجان ", },
-    { label: "سمنان ", value: "سمنان ", },
-    { label: "سیستان و بلوچستان", value: "سیستان و بلوچستان", },
-    { label: "فارس ", value: "فارس ", },
-    { label: "قزوین ", value: "قزوین ", },
-    { label: "قم ", value: "قم ", },
-    { label: "کردستان ", value: "کردستان ", },
-    { label: "کرمان ", value: "کرمان ", },
-    { label: "کرمانشاه ", value: "کرمانشاه ", },
-    { label: "کهگیلویه وبویراحمد", value: "کهگیلویه وبویراحمد", },
-    { label: "گلستان ", value: "گلستان ", },
-    { label: "گیلان ", value: "گیلان ", },
-    { label: "لرستان ", value: "لرستان ", },
-    { label: "مازندران ", value: "مازندران ", },
-    { label: "مرکزی ", value: "مرکزی ", },
-    { label: "هرمزگان ", value: "هرمزگان ", },
-    { label: "همدان ", value: "همدان ", },
-    { label: "یزد ", value: "یزد ", },
-];
+const stateOptions = useStateData()
 
 
 const page = () => {
-    const [selectState, setSelectState] = useState([]);
-    const [selectCity, setSelectCity] = useState([]);
-    const ArrowRenderer = ({ expanded }: any) => <>{expanded ? <SlLocationPin /> : <SlLocationPin />}</>;
+    const [textAreaValue,settextAreaValue]=useState<string>()
+    const [stateSelectedOption, setStateSelectedOption] = useState<{ label: string; value: string[]; } | null>(null);
+    const [citySelectedOption, setCitySelectedOption] = useState<{ label: string; value: string[]; } | null>(null);
+    const [cityOption, setCityOption] = useState<{
+        label: string,
+        value: string[]
+    }[]>([]);
+    const [isDisabled, setIsDisabled] = useState(true);
+    const [isLodaing, setIsLodaing] = useState(false)
+    useEffect(() => {
+        setCitySelectedOption(null)
+        setIsLodaing(true)
+        if (stateSelectedOption?.value) {
+            const city: any =
+                stateSelectedOption?.value.map(data => {
+                    return {
+                        value: data,
+                        label: data
+                    }
+                })
+            setCityOption(city)
+            setIsDisabled(false)
+            setIsLodaing(false)
+        }
+
+    }, [stateSelectedOption])
+
     return (
         <Container>
             <Breadcrumb route={'ثبت اقامتگاه'} />
@@ -56,41 +49,45 @@ const page = () => {
                     <div className='flex flex-col gap-8'>
                         <div className='flex gap-20 items-center justify-between'>
                             <p className='text-[#252a31] whitespace-nowrap text-sm'>انتخاب استان:</p>
-                            <MultiSelect
-                                options={options}
-                                value={selectState}
-                                hasSelectAll={false}
-                                onChange={setSelectState}
-                                labelledBy="Select"
+                            <Select
+                                defaultValue={stateSelectedOption}
+                                onChange={setStateSelectedOption as any}
+                                isClearable={true}
                                 className='w-80'
-                                ArrowRenderer={ArrowRenderer}
-                                overrideStrings={{ "selectSomeItems": "استان خود را انتخاب کنید" }}
-
+                                isRtl={true}
+                                isSearchable={true}
+                                options={stateOptions}
+                                placeholder={'استان خود را انتخاب کنید'}
                             />
                         </div>
 
                         <div className='flex gap-20 mt-2 items-center justify-between'>
                             <p className='text-[#252a31] whitespace-nowrap text-sm'>انتخاب شهر:</p>
-                            <MultiSelect
-                                options={options}
-                                value={selectCity}
-                                hasSelectAll={false}
-                                onChange={setSelectCity}
-                                labelledBy="Select"
+                            <Select
+                                defaultValue={citySelectedOption}
+                                onChange={setCitySelectedOption as any}
+                                isDisabled={isDisabled}
+                                isClearable={true}
                                 className='w-80'
-                                disabled={true}
-                                ArrowRenderer={ArrowRenderer}
-                                overrideStrings={{ "selectSomeItems": "شهر خود را انتخاب کنید" }}
-
+                                isLoading={isLodaing}
+                                isRtl={true}
+                                isSearchable={true}
+                                value={citySelectedOption}
+                                options={cityOption}
+                                placeholder={'شهر خود را انتخاب کنید'}
                             />
                         </div>
 
                         <div className='flex gap-20 justify-between '>
                             <p className='text-[#252a31] whitespace-nowrap text-sm'> آدرس دقیق:</p>
-                            <textarea style={{ boxShadow: 'none !important' }} className='w-80 rounded-md focus:border-1 focus:border-solid focus:!border-[#f0c807]' cols={30} rows={5}></textarea>
+                            <div className='relative w-80 '>
+                                <textarea value={textAreaValue} onChange={(event)=>settextAreaValue(event.target.value)} maxLength={250} className='w-full rounded-md focus:border-1 focus:border-solid focus:!border-[#f0c807]' cols={30} rows={5}></textarea>
+                                <span className='absolute bottom-2 left-2 text-[#404040] text-sm'>{textAreaValue?.length ? 250 - textAreaValue?.length : '250'}</span>
+                            </div>
+
                         </div>
                     </div>
-                    <StepperInfo />
+                    <StepperInfo title="آدرس اقامتگاه" text="آدرس دقیق اقامتگاه, تنها پس ازقطعی شدن رزروبرای میهمان ارسال می گردد." />
                 </div>
             </Layout>
 
