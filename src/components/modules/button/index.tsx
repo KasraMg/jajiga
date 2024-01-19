@@ -4,8 +4,7 @@ import { buttonVariants } from "@/src/utils/buttonVariants";
 import { cn } from "@/src/utils/cn";
 export interface buttonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
-  VariantProps<typeof buttonVariants> {
-
+  VariantProps<typeof buttonVariants> { 
 }
 
 const Button: FC<buttonProps> = ({
