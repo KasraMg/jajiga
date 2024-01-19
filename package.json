@@ -9,15 +9,18 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/leaflet": "^1.9.8",
     "aos": "^3.0.0-beta.6",
     "class-variance-authority": "^0.7.0",
     "flowbite": "^2.2.0",
     "flowbite-react": "^0.7.2",
     "formik": "^2.2.9",
+    "leaflet": "^1.9.4",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
     "react-icons": "^4.12.0",
+    "react-leaflet": "^4.2.1",
     "react-multi-select-component": "^4.3.4",
     "react-parallax": "^3.5.1",
     "react-select": "^5.8.0",

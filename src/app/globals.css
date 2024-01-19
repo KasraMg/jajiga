@@ -276,25 +276,73 @@ input[data-autocompleted] {
   bottom: -7px;
   transform: translate(calc(-0.75em), 50%);
 }
-
-.dropdown-content svg{
- right: 290px !important;
- position: absolute;
- bottom:7px;
+#stepper_item:last-child:after {
+ width: 0px !important;
 }
-.dropdown-content input[type="checkbox"]{
+
+.dropdown-content svg {
+  right: 290px !important;
+  position: absolute;
+  bottom: 7px;
+}
+
+.dropdown-content input[type="checkbox"] {
   position: relative;
   top: 3px;
   margin-left: 7px !important;
 }
-[type='text']:focus, [type='email']:focus, [type='url']:focus, [type='password']:focus, [type='number']:focus, [type='date']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='week']:focus, [multiple]:focus, textarea:focus, select:focus {
+
+[type='text']:focus,
+[type='email']:focus,
+[type='url']:focus,
+[type='password']:focus,
+[type='number']:focus,
+[type='date']:focus,
+[type='datetime-local']:focus,
+[type='month']:focus,
+[type='search']:focus,
+[type='tel']:focus,
+[type='time']:focus,
+[type='week']:focus,
+[multiple]:focus,
+textarea:focus,
+select:focus {
   outline: 0 !important;
- 
-  box-shadow:none !important;
+  box-shadow: none !important;
   border-color: 0;
 }
- 
-.css-t3ipsp-control:hover,.css-t3ipsp-control {
-box-shadow:none !important ;
-  border-color:#f0c807 !important;
+
+.css-t3ipsp-control:hover,
+.css-t3ipsp-control {
+  box-shadow: none !important;
+  border-color: #f0c807 !important;
+}
+
+.leaflet-control-attribution {
+  display: none !important;
+}
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  background-color: #f0c807 !important;
+  color: white !important;
+  border: 0;
+  outline: 0;
+  border-radius: 10px;
+}
+
+.leaflet-default-icon-path {
+  background-image: url(https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png) !important;
+}
+
+.leaflet-touch .leaflet-bar a {
+  border-radius: 21px !important;;
+    display: flex !important;;
+    align-items: center;
+    justify-content: center !important;; 
+    padding-top: 3px !important;;
+}
+.leaflet-bar {
+  
+  border: 0 !important;
 }
