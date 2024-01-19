@@ -1,7 +1,7 @@
 import { cva } from "class-variance-authority";
 
 export const buttonVariants = cva(
-  "active:scale-95 whitespace-nowrap w-fit inline-flex items-center justify-right rounded-xl text-sm font-medium transition-color focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
+  "active:scale-95 whitespace-nowrap w-fit inline-flex items-center justify-right rounded-xl text-sm font-medium transition-color focus:outline-none   disabled:opacity-50 disabled:pointer-events-none",
   {
     variants: {
       variant: {
@@ -18,7 +18,7 @@ export const buttonVariants = cva(
         outlineMain: "bg-gray-100 border-1 border-main text-main hover:text-dark hover:bg-gray-200 transition-color focus:bg-transparent",
         gray: "dark:bg-[#161D26] rounded-md bg-[#e7e6e6] dark:text-white ",
         secondray: " rounded-md bg-[#e7e6e6] dark:text-dark",
-        yellow:"bg-yellow-300 text-black",
+        yellow:"bg-[#f0c807] text-black",
         white:"bg-white text-black",
         outlinePurple: "text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900",
         purple: "text-white rounded-md bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800  dark:shadow-purple-800/80",
