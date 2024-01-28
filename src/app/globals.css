@@ -276,8 +276,9 @@ input[data-autocompleted] {
   bottom: -7px;
   transform: translate(calc(-0.75em), 50%);
 }
+
 #stepper_item:last-child:after {
- width: 0px !important;
+  width: 0px !important;
 }
 
 .dropdown-content svg {
@@ -336,13 +337,18 @@ select:focus {
 }
 
 .leaflet-touch .leaflet-bar a {
-  border-radius: 21px !important;;
-    display: flex !important;;
-    align-items: center;
-    justify-content: center !important;; 
-    padding-top: 3px !important;;
+  border-radius: 21px !important;
+  ;
+  display: flex !important;
+  ;
+  align-items: center;
+  justify-content: center !important;
+  ;
+  padding-top: 3px !important;
+  ;
 }
+
 .leaflet-bar {
-  
+
   border: 0 !important;
 }
