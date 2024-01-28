@@ -16,10 +16,16 @@ const stateOptions = useStateData()
 const page = () => {
    
     const [disabelNextButton, setDisabelNextButton] = useState(true)
-
+    const [change,setChange]=useState(false)
  
-    const clickHandler = () => {
-    }
+    useEffect(() => {
+        if (change) {
+               setDisabelNextButton(false)
+        }
+    }, [change])
+    
+    const mapChangeHandler=()=>setChange(true)
+     
     return (
         <Container disableFooter={true}>
             <Breadcrumb route={'ثبت اقامتگاه'} />
@@ -30,8 +36,8 @@ const page = () => {
                         <p>انتخاب موقعیت در نقشه</p>
                         <p className='font-vazir-light text-sm leading-6'>مکان نما در وسط صفحه ثابت است. نقشه را به گونه ای حرکت دهیه تا مکان نما بر روی مکان اقامتگاه شما قرار گیرد. با استفاده از کلید + بر روی نقشه زوم کنید.</p>
                         <Alert variant={"danger"} />
-                        <Map position={[35.551066,51.297588]}/>
-                        <ContentNavigator clickHandler={clickHandler} disablelPrevButton={true} disabelNextButton={disabelNextButton} prevLink={'/'} nextLink={'newRoom/step2'} />
+                        <Map mapChangeHandler={mapChangeHandler} position={[35.551066,51.297588]}/>
+                        <ContentNavigator  disablelPrevButton={false} disabelNextButton={disabelNextButton} prevLink={'newRoom/step1'} nextLink={'newRoom/step3'} />
                     </div>
                     <div className='max-w-[243px]'>
                     <StepperInfo title="مکان اقامتگاه" text="با حرکت مکان نما و جابجا شدن بر روی نقشه, مکان نما را بر روی محل اقامتگاه خود, قرار دهید.

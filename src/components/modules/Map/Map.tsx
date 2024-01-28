@@ -1,22 +1,41 @@
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
 import { FC } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface MapProps {
     className?: string,
-    position: number[]
+    position: number[],
+    mapChangeHandler?: (() => void)
 }
-export const Map: FC<MapProps> = ({ className, position }) => {
-    return ( 
+export const Map: FC<MapProps> = ({ className, position, mapChangeHandler }) => {
+    const markerRef = useRef<any>()
+    function MarkerInCenter() {
+        const map = useMap();
+        useEffect(() => {
+            map.on('move', () => {
+                if (mapChangeHandler) {
+                    mapChangeHandler()
+                } 
+                const center = map.getSize().divideBy(2);
+                const targetPoint = map.containerPointToLayerPoint(center);
+                const targetLatLng = map.layerPointToLatLng(targetPoint);
+                markerRef.current.setLatLng(targetLatLng);
+                markerRef.current.getElement().style.pointerEvents = 'none';
+            });
+        }, [map]);
+
+        return null;
+    }
+    return (
         <MapContainer preferCanvas={true} className={`${className && className} relative  lg:w-full rounded-md h-[250px]`} center={position as any} zoom={10} scrollWheelZoom={true}>
             <TileLayer
                 attribution={'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={position as any} draggable={true}>
-              </Marker>
+            <Marker ref={markerRef} position={position as any}></Marker>
+            <MarkerInCenter />
         </MapContainer>
     )
 }
-
-
