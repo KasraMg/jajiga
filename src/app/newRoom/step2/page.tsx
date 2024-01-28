@@ -6,15 +6,11 @@ import Breadcrumb from '@/src/components/modules/breadcrumb/Breadcrumb';
 import Container from '@/src/components/modules/container/Container';
 import ContentNavigator from '@/src/components/modules/contentNavigator/ContentNavigator';
 import Stepper from '@/src/components/modules/stepper/Stepper';
-import StepperInfo from '@/src/components/modules/stepperInfo/StepperInfo';
-import useStateData from '@/src/hooks/useStateData';
+import StepperInfo from '@/src/components/modules/stepperInfo/StepperInfo'; 
 import { useEffect, useState } from 'react'; 
+ 
 
-const stateOptions = useStateData()
-
-
-const page = () => {
-   
+const page = () => { 
     const [disabelNextButton, setDisabelNextButton] = useState(true)
     const [change,setChange]=useState(false)
  

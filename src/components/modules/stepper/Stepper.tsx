@@ -30,7 +30,7 @@ const Stepper: FC<StepperProps> = ({ active }) => {
     ])
 
     return (
-        <ul id='stepper' style={{ boxShadow: 'grey 0px 1px 3px 0px' }} className='flex flex-col gap-6 rounded-xl p-4 min-w-[268px] h-[480px] overflow-y-auto'>
+        <ul id='stepper' style={{ boxShadow: 'grey 0px 1px 3px 0px' }} className=' sticky top-[68px]   flex flex-col gap-6 rounded-xl p-4 min-w-[268px] h-[480px] overflow-y-auto'>
             {data && data.map(stepper => (
                 <li id='stepper_item' className='flex gap-3 items-center relative cursor-pointer'>
                     <div className={`${active == stepper.id ? 'bg-[#333333] text-white' : 'text-[#33333] bg-white'} flex justify-center z-[9999] items-center w-9 h-9  px-3 py-1 rounded-[50%]  border-2 border-solid border-black`}>
