@@ -6,12 +6,13 @@ import Container from '@/src/components/modules/container/Container';
 import ContentNavigator from '@/src/components/modules/contentNavigator/ContentNavigator';
 import Stepper from '@/src/components/modules/stepper/Stepper';
 import StepperInfo from '@/src/components/modules/stepperInfo/StepperInfo';
+import Textarea from '@/src/components/modules/textarea/Textarea';
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
 
 
 const page = () => {
-    const [description, setDescription] = useState<string>()
+    const [description, setDescription] = useState<string>("")
     const [spaceSelectedOption, setSpaceSelectedOption] = useState<{ label: string; value: string; } | null>(null);
     const [typeSelectedOption, setTypeSelectedOption] = useState<{ label: string; value: string; } | null>(null);
     const [areaSelectedOption, setAreaSelectedOption] = useState<{ label: string; value: string; } | null>(null);
@@ -189,11 +190,7 @@ const page = () => {
                         </div>
                         <div className='border-t border-solid border-gray-300 pt-5 !mt-8'>
                             <p className='text-gray-500 text-sm mb-3'>درباره اقامتگاه</p>
-                            <div className='relative'>
-                                <textarea value={description} onChange={(event) => setDescription(event.target.value)} className='w-full rounded-lg border-1 border-solid border-gray-300 ouline-none' maxLength={994} cols={30} rows={5}></textarea>
-                                <span className='absolute bottom-2 left-3 text-[#404040] text-sm'>{description?.length ? 994 - description?.length : '994'}</span>
-                            </div>
-
+                            <Textarea maxLength={994} setValue={setDescription} value={description} />
                             <p className='text-gray-500 leading-5 text-xs'>در اینجا نکاتی را که میهمان شما باید بداند بنویسید، از نقاط قوت و ضعف اقامتگاه، بعنوان مثال از تعداد زیاد پله ها که برای سالمندان مناسب نیست و ورودی تنگ پارکینگ، از چشم انداز زیبای منزل یا از جاذبه های گردشگری ‏اطراف همچون ساحل دریا/رودخانه/کوهستان/ اماکن تاریخی/بازار محلی بگویید و فاصله اقامتگاه از هر یک را بنویسید. وجود فروشگاههای مواد غذایی و نانوایی در مجاورت منزل خود را مشخص ‏کنید.‏‎ از حال و هوای محله و رفتار احتمالی همسایه ها بنویسید. هر آنچه میهمان شما لازم ااست بداند را اینجا بنویسید.‏‎</p>
                         </div>
                         <ContentNavigator disablelPrevButton={false} disabelNextButton={disabelNextButton} prevLink={'newRoom/step3'} nextLink={'newRoom/step5'} />

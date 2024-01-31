@@ -1,25 +1,26 @@
 "use client"
-import Layout from '@/src/components/modules/Layout/Layout'; 
+import Layout from '@/src/components/modules/Layout/Layout';
 import Breadcrumb from '@/src/components/modules/breadcrumb/Breadcrumb';
 import Container from '@/src/components/modules/container/Container';
 import ContentNavigator from '@/src/components/modules/contentNavigator/ContentNavigator';
 import Stepper from '@/src/components/modules/stepper/Stepper';
 import StepperInfo from '@/src/components/modules/stepperInfo/StepperInfo';
+import Textarea from '@/src/components/modules/textarea/Textarea';
 import useStateData from '@/src/hooks/useStateData';
-import { useEffect, useState } from 'react'; 
+import { useEffect, useState } from 'react';
 import Select from 'react-select';
 
 const stateOptions = useStateData()
 
 
 const page = () => {
-    const [textAreaValue,settextAreaValue]=useState<string>()
+    const [address, setAddress] = useState<string>("")
     const [stateSelectedOption, setStateSelectedOption] = useState<{ label: string; value: string[]; } | null>(null);
     const [citySelectedOption, setCitySelectedOption] = useState<{ label: string; value: string[]; } | null>(null);
-    const [cityOption, setCityOption] = useState<{ label: string, value: string[]}[]>([]);
+    const [cityOption, setCityOption] = useState<{ label: string, value: string[] }[]>([]);
     const [citySelectorDisabel, setcitySelectorDisabel] = useState(true);
     const [isLodaing, setIsLodaing] = useState(false)
-    const [disabelNextButton,setDisabelNextButton]=useState(true)
+    const [disabelNextButton, setDisabelNextButton] = useState(true)
 
     useEffect(() => {
         setCitySelectedOption(null)
@@ -40,14 +41,14 @@ const page = () => {
     }, [stateSelectedOption])
 
     useEffect(() => {
-      if (stateSelectedOption&&textAreaValue&&citySelectedOption) {
-        setDisabelNextButton(false)
-      }else(
-        setDisabelNextButton(true)
-      )
-    }, [stateSelectedOption,textAreaValue,citySelectedOption])
-    
-    const clickHandler=()=>{ 
+        if (stateSelectedOption && address && citySelectedOption) {
+            setDisabelNextButton(false)
+        } else (
+            setDisabelNextButton(true)
+        )
+    }, [stateSelectedOption, address, citySelectedOption])
+
+    const clickHandler = () => {
     }
     return (
         <Container disableFooter={true}>
@@ -89,12 +90,12 @@ const page = () => {
 
                         <div className='flex gap-20 justify-between '>
                             <p className='text-[#252a31] whitespace-nowrap text-sm'> آدرس دقیق:</p>
-                            <div className='relative w-80 '>
-                                <textarea value={textAreaValue} onChange={(event)=>settextAreaValue(event.target.value)} maxLength={250} className='w-full rounded-md focus:border-1 focus:border-solid focus:!border-[#f0c807]' cols={30} rows={5}></textarea>
-                                <span className='absolute bottom-2 left-2 text-[#404040] text-sm'>{textAreaValue?.length ? 250 - textAreaValue?.length : '250'}</span>
-                            </div> 
+                            <div className='w-80 '>
+                                <Textarea className='h-[104px]' maxLength={250} setValue={setAddress} value={address} />
+                                <span className='text-xs text-[#5f738c] mt-3'>آدرس اقامتگاه را با جزییات کامل وارد کنید تا میهمان پس از رزرو به راحتی بتوانند اقامتگاه را پیدا کنند.</span>
+                            </div>
                         </div>
-                       <ContentNavigator clickHandler={clickHandler} disablelPrevButton={true} disabelNextButton={disabelNextButton} prevLink={'/'} nextLink={'newRoom/step2'}/>
+                        <ContentNavigator clickHandler={clickHandler} disablelPrevButton={true} disabelNextButton={disabelNextButton} prevLink={'/'} nextLink={'newRoom/step2'} />
                     </div>
                     <StepperInfo title="آدرس اقامتگاه" text="آدرس دقیق اقامتگاه, تنها پس ازقطعی شدن رزروبرای میهمان ارسال می گردد." />
                 </div>
