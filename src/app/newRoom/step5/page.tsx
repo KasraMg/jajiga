@@ -103,7 +103,7 @@ const page = () => {
                             </div>
                         </div>
                         <div className='flex justify-between pb-20'>
-                        <p className='  text-sm mb-3'>توضیحات فضای خواب</p>
+                        <p className=' mb-3'>توضیحات فضای خواب</p>
                             <div className='w-[340px]'>
                             <Textarea maxLength={250} setValue={setDescription} value={description} />
                             <span className='text-xs text-[#5f738c] mt-3'>در این قسمت می توانید توضیحات تکمیلی درباره امکانات و شرایط مهیا شده برای خواب میهمانان را ارائه کنید</span>
