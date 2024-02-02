@@ -99,7 +99,7 @@ const page = () => {
                             <div className='flex justify-between w-1/2 items-center'>
                                 <p onClick={() => setRoomCount(prev => prev + 1)} className='text-2xl cursor-pointer hover:text-gray-500'>+</p>
                                 <p>{roomCount == 0 ? 'فاقد اتاق خواب' : roomCount + '   اتاق  '}</p>
-                                <p onClick={() => setRoomCount(prev => prev !== 0 && prev - 1 as any)} className={`${roomCount == 0 && 'text-gray-300 !cursor-not-allowed'} text-2xl cursor-pointer mb-4 hover:text-gray-500`}>_</p>
+                                <p onClick={() => setRoomCount(prev => prev  == -1 && prev - 1 as any)} className={`${roomCount == 0 && 'text-gray-300 !cursor-not-allowed'} text-2xl cursor-pointer mb-4 hover:text-gray-500`}>_</p>
                             </div>
                         </div>
                         <div className='flex justify-between pb-20'>

@@ -9,7 +9,7 @@ import StepperInfo from '@/src/components/modules/stepperInfo/StepperInfo';
 import Textarea from '@/src/components/modules/textarea/Textarea';
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
-
+import { spaceOptions, typeOptions, areaOptions } from '@/src/utils/selectOptions'
 
 const page = () => {
     const [description, setDescription] = useState<string>("")
@@ -18,121 +18,6 @@ const page = () => {
     const [areaSelectedOption, setAreaSelectedOption] = useState<{ label: string; value: string; } | null>(null);
     const [disabelNextButton, setDisabelNextButton] = useState<boolean>(true)
 
-    const spaceOptions: {
-        label: string,
-        value: string
-    }[] = [
-            {
-                label: "دربست",
-                value: "دربست"
-            },
-            {
-                label: "نیمه دربست",
-                value: "نیمه دربست"
-            },
-            {
-                label: "اتاق خصوصی",
-                value: "اتاق خصوصی"
-            },
-            {
-                label: "اتاق مشترک",
-                value: "اتاق مشترک"
-            }
-        ]
-    const typeOptions: {
-        label: string,
-        value: string
-    }[] = [
-            {
-                label: "ویلایی",
-                value: "ویلایی"
-            },
-            {
-                label: "آپارتمان",
-                value: "آپارتمان"
-            },
-            {
-                label: "سوئیت",
-                value: "سوئیت"
-            },
-            {
-                label: "خانه روستایی",
-                value: "خانه روستایی"
-            },
-            {
-                label: "کلبه",
-                value: "کلبه"
-            },
-            {
-                label: "اقامتگاه بوم گردی",
-                value: "اقامتگاه بوم گردی"
-            },
-            {
-                label: "هتل آپارتمان",
-                value: "هتل آپارتمان"
-            },
-            {
-                label: "مهمان خانه",
-                value: "مهمان خانه"
-            },
-            {
-                label: "چادر / خیمه",
-                value: "چادر / خیمه"
-            },
-            {
-                label: "کاروانسرا",
-                value: "کاروانسرا"
-            },
-            {
-                label: "قایق",
-                value: "قایق"
-            },
-            {
-                label: "پانسیون",
-                value: "پانسیون"
-            },
-            {
-                label: "هاستل",
-                value: "هاستل"
-            },
-            {
-                label: "بوتیک هتل",
-                value: "بوتیک هتل"
-            }
-        ]
-    const areaOptions: {
-        label: string,
-        value: string
-    }[] = [
-            {
-                label: "ساحلی",
-                value: "ساحلی"
-            },
-            {
-                label: "جنگلی",
-                value: "جنگلی"
-            },
-            {
-                label: "ییلاقی",
-                value: "ییلاقی"
-            },
-            {
-                label: "بیابانی",
-                value: "بیابانی"
-            },
-            {
-                label: "شهری",
-                value: "شهری"
-            },
-            {
-                label: "حومه شهر",
-                value: "حومه شهر"
-            },
-            {
-                label: "روستایی",
-                value: "روستایی"
-            }
-        ]
 
     useEffect(() => {
         if (spaceSelectedOption && typeSelectedOption && areaSelectedOption && description) {
