@@ -32,7 +32,7 @@ const page = () => {
                 <div className='max-w-[1120px] py-8 flex gap-5'>
                     <Stepper active={7} />
                     <div className='w-full space-y-4'>
-                        <div className='flex justify-between items-center pl-1 !mt-6'>
+                        <div className='flex justify-between items-center pl-1 '>
                             <p>حداقل مدت اقامت</p>
                             <div className='flex justify-between w-1/2 items-center'>
                                 <p onClick={() => setDayCount(prev => prev + 1)} className='text-2xl cursor-pointer hover:text-gray-500'>+</p>

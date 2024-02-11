@@ -20,19 +20,14 @@ const Stepper: FC<StepperProps> = ({ active }) => {
         { title: 'ظرفیت اقامتگاه', id: 5 },
         { title: 'امکانات', id: 6 }, 
         { title: 'ساعات تحویل و تخلیه', id: 7 },
-        { title: 'اجاره بها', id: 8 },
-        { title: 'تخفیف مدت رزرو', id: 9 },
-        { title: 'ایمنی', id: 10 },
-        { title: 'مقررات اقامتگاه', id: 11 },
-        { title: 'مقررات لغو رزرو', id: 12 },
-        { title: 'مدارک مالکیت', id: 13 },
-        { title: 'قوانین و مقررات جاجیگا', id: 14 },
+        { title: 'اجاره بها', id: 8 }, 
+        { title: 'مقررات اقامتگاه', id: 9 }, 
     ])
 
     return (
         <ul id='stepper' style={{ boxShadow: 'grey 0px 1px 3px 0px' }} className=' sticky top-[68px]   flex flex-col gap-6 rounded-xl p-4 min-w-[268px] h-[480px] overflow-y-auto'>
             {data && data.map(stepper => (
-                <Link href={`${active > stepper.id && `/newRoom/step` + stepper.id}`} id='stepper_item' className={`${active < stepper.id && "pointer-events-none"} flex gap-3 items-center relative cursor-pointer`}>
+                <Link href={`${active >= stepper.id && `/newRoom/step` + stepper.id}`} id='stepper_item' className={`${active < stepper.id && "pointer-events-none"} flex gap-3 items-center relative cursor-pointer`}>
                     <div className={`${active == stepper.id ? 'bg-[#333333] text-white' : 'text-[#33333] bg-white'} flex justify-center z-[9999] items-center w-9 h-9  px-3 py-1 rounded-[50%]  border-2 border-solid border-black`}>
                         {active == stepper.id ? <GiSandsOfTime className="text-2xl absolute" /> : (
                             <>
