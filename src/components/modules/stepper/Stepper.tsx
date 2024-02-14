@@ -46,7 +46,7 @@ const Stepper: FC<StepperProps> = ({ active, className }) => {
                 ))}
             </ul>
 
-            <Accordion placeholder={null} open={open === 1} className='md:!hidden block' id={1 as any}>
+            <Accordion placeholder={null} open={open === 1} className=' z-10 md:!hidden block' id={1 as any}>
                 <AccordionHeader className='border-0' placeholder={null} onClick={() => handleOpen(1)}>
                     <ul id='stepper2' className={`${open !== 1 ? '!h-[420px] !overflow-y-scroll' : 'h-16'} w-full flex flex-col gap-6 overflow-hidden  pr-0 p-4`}>
                         {data && data.map(stepper => (
