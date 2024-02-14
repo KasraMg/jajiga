@@ -7,7 +7,7 @@ import Stepper from '@/src/components/modules/stepper/Stepper';
 
 interface StepLayoutProps {
     stepperId: number,
-    children: any
+    children: React.ReactElement
 }
 const StepLayout: FC<StepLayoutProps> = ({ stepperId, children }) => {
 

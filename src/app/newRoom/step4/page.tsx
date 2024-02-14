@@ -1,8 +1,4 @@
-
-"use client"
-import Layout from '@/src/components/modules/Layout/Layout';
-import Breadcrumb from '@/src/components/modules/breadcrumb/Breadcrumb';
-import Container from '@/src/components/modules/container/Container';
+"use client" 
 import ContentNavigator from '@/src/components/modules/contentNavigator/ContentNavigator';
 import Stepper from '@/src/components/modules/stepper/Stepper';
 import StepperInfo from '@/src/components/modules/stepperInfo/StepperInfo';
@@ -82,10 +78,9 @@ const page = () => {
                         </div>
                         <ContentNavigator disablelPrevButton={false} disabelNextButton={disabelNextButton} prevLink={'newRoom/step3'} nextLink={'newRoom/step5'} />
                     </div>
-                    <div className='max-w-[243px] sticky top-[68px] h-max '>
+                    <div className='max-w-[243px] sticky top-[68px] h-max md:!block hidden'>
                         <StepperInfo className=' !relative !top-0' title="توضیحات   درباره اقامتگاه" text="بهتر است در توضیحات خود, به فراهم بودن امکانات ‏تفریحی همچون دوچرخه سواری, اسب سواری یا ماهی گیری و قایقرانی در مجاورت اقامتگاه خود اشاره کنید. همچنین نحوه و ‏فاصله دسترسی گردشگران به ‏تاکسی/اتوبوس/فرودگاه/قطار را در این قسمت مشخص نمایید تا میهمانان شما با اطلاع از شرایط زندگی در ‏محله شما و با خیالی آسوده, سفر خود را آغاز کنند.‏‎" />
-                    </div>
-
+                    </div> 
                 </div>
         </StepLayout>
     )
