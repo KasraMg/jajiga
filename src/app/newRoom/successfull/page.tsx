@@ -14,7 +14,7 @@ const page = () => {
             <Layout>
                 <div className='max-w-[1120px] py-8 flex flex-col justify-center gap-5'>
                 <img width="110" height="110" className='mx-auto mt-20' src="https://img.icons8.com/3d-fluency/94/verified-account.png" alt="verified-account"/>
-                    <p className='text-2xl mt-3 text-center'>اقامتگاه شما با موفقیت ثبت شد</p>
+                    <p className='sm:!text-2xl text-xl mt-3 text-center'>اقامتگاه شما با موفقیت ثبت شد</p>
                     <Link className='text-blue-600 text-sx text-center' href={'/'}>مشاهده اقامتگاه</Link>
                 </div>
             </Layout>

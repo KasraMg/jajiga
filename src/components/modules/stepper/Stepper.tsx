@@ -50,7 +50,7 @@ const Stepper: FC<StepperProps> = ({ active, className }) => {
                 <AccordionHeader className='border-0' placeholder={null} onClick={() => handleOpen(1)}>
                     <ul id='stepper2' className={`${open !== 1 ? '!h-[420px] !overflow-y-scroll' : 'h-16'} w-full flex flex-col gap-6 overflow-hidden  pr-0 p-4`}>
                         {data && data.map(stepper => (
-                            <Link href={`${active >= stepper.id && `/newRoom/step` + stepper.id}`} id='stepper_item' className={`${active < stepper.id && "pointer-events-none"} flex gap-3 items-center relative cursor-pointer`}>
+                            <Link href={`${active >= stepper.id && `/newRoom/step` + stepper.id}`} id='stepper_item' className={`${active < stepper.id && "pointer-events-none"} flex gap-3 items-center relative cursor-pointer w-max`}>
                                 <div className={`${active == stepper.id ? 'bg-[#333333] text-white' : 'text-[#33333] bg-white'} flex justify-center z-[9999] items-center w-9 h-9  px-3 py-1 rounded-[50%]  border-2 border-solid border-black`}>
                                     {active == stepper.id ? <GiSandsOfTime className="text-2xl absolute" /> : (
                                         <>
