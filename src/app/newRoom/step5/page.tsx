@@ -51,7 +51,7 @@ const page = () => {
         setAreaSize(event.target.value)
     }
     return (
-        <StepLayout stepperId={5}>
+        <StepLayout stepperActive={5}>
                 <div className='max-w-[1120px] py-8 flex gap-0 sm:!gap-5'>
                 <div className='hidden md:!flex lg:!min-w-[21%] min-w-[23%] '>
                         <Stepper active={5} />
@@ -112,8 +112,7 @@ const page = () => {
                         <StepperInfo className=' !relative !top-0  ' title="وسعت اقامتگاه" text="متراژ تقریبی زیربنا و همچنین متراژ کل اقامتگاه شامل محوطه و حیاط را در این قسمت وارد کنید." />
                         <StepperInfo className=' !relative !top-0 mt-5' title="ظرفیت استاندارد/ حداکثر ظرفیت" text="حداکثر ظرفیت حداکثر گنجایش اقامتگاه می‌باشد که بر اساس فضا, امکانات موجود و امکانات خواب تعیین می گردد" />
                         <StepperInfo className=' !relative !top-0 mt-5' title="امکانات خواب" text="  این قسمت, امکانات خواب اقامتگاه, همچون تعداد و نوع تخت خواب های موجود در هر اتاق خواب را مشخص کنید. تعداد و شرح   انواع رخت خواب, همچون رخت خواب سنتی (زمین خواب), مبل تخت خواب شو و غیرو ... را نیز در این قسمت وارد کنید" />
-                    </div>
-
+                    </div> 
                 </div>
         </StepLayout>
     )

@@ -6,17 +6,17 @@ import Container from '@/src/components/modules/container/Container';
 import Stepper from '@/src/components/modules/stepper/Stepper';
 
 interface StepLayoutProps {
-    stepperId: number,
+    stepperActive: number,
     children: React.ReactElement
 }
-const StepLayout: FC<StepLayoutProps> = ({ stepperId, children }) => {
+const StepLayout: FC<StepLayoutProps> = ({ stepperActive, children }) => {
 
 
     return (
         <Container disableFooter={true}>
             <Breadcrumb className='hidden md:block' route={'ثبت اقامتگاه'} />
             <Breadcrumb template={true} className='md:hidden block !py-0'>
-                <Stepper active={stepperId} />
+                <Stepper active={stepperActive} />
             </Breadcrumb>
             <Layout>
                 {children}

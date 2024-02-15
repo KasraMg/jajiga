@@ -45,7 +45,7 @@ const page = () => {
     const clickHandler = () => {
     }
     return (
-        <StepLayout stepperId={1}>
+        <StepLayout stepperActive={1}>
             <div className='max-w-[1120px] py-8 flex gap-0 sm:!gap-5'>
                 <div className='hidden md:!flex lg:!min-w-[21%] min-w-[23%] '>
                     <Stepper active={1} />

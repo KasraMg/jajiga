@@ -21,7 +21,7 @@ const page = () => {
     const mapChangeHandler=()=>setChange(true)
      
     return (
-        <StepLayout stepperId={2}>
+        <StepLayout stepperActive={2}>
                 <div className='max-w-[1120px] py-8 flex gap-0 sm:!gap-5'>
                 <div className='hidden md:!flex lg:!min-w-[21%] min-w-[23%] '>
                         <Stepper active={2} />
