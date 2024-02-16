@@ -203,6 +203,7 @@ input[type=number] {
     rgba(0, 0, 0, 0) 0px 0px 0px 0px,
     rgba(0, 0, 0, 0.1) 0px 1px 3px 0px,
     rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+    padding: 8px 0;
   background-color: white;
   display: flex;
   align-items: center;
@@ -327,6 +328,9 @@ select:focus {
 .css-1jqq78o-placeholder{
   white-space: nowrap;
   font-size: 14px;
+}
+.css-qbdosj-Input{
+  cursor: pointer;
 }
 .css-t3ipsp-control:hover,
 .css-t3ipsp-control {
