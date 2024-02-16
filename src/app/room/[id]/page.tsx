@@ -1,63 +1,26 @@
-'use client'; 
+'use client';
 import Badge from '@/src/components/modules/badge/Badge';
-import Breadcrumb from '@/src/components/modules/breadcrumb/Breadcrumb';
 import Button from '@/src/components/modules/button';
 import { useState } from 'react';
-import RoomSummery from '@/src/components/templates/room/components/RoomSummery';
-import RoomAbout from '@/src/components/templates/room/components/RoomAbout';
+import Summery from '@/src/components/templates/room/summery/Summery';
+import About from '@/src/components/templates/room/about/About';
 import Container from '@/src/components/modules/container/Container';
+import Gallery from '@/src/components/templates/room/gallery/Gallery';
+import Breadcrumb from '@/src/components/templates/room/breadcrumb/Breadcrumb';
+import Select from 'react-select';
+import { userCountOptions } from '@/src/utils/selectOptions'
 const Room = () => {
-    const [isShow, setIsShow] = useState<boolean>(false);
-    const handleShow = () => {
-        setIsShow((prev) => !prev);
-    };
+    const [countSelectedOption, setCountSelectedOption] = useState<{ label: string; value: string[]; } | null>(null);
+
     return (
-        <Container> 
+        <Container>
             <div className='Container !mt-20'>
-                <div className='flex gap-x-3 mb-4'>
-                    <div className='w-1/2'>
-                        <img
-                            src='https://storage.jajiga.com/public/pictures/large/3148120230111161402.jpg'
-                            alt=''
-                            className='w-full rounded-lg !object-contain'
-                        />
-                    </div>
-                    <div className='grid gap-3 grid-cols-2 w-1/2'>
-                        <div>
-                            <img
-                                src='https://storage.jajiga.com/public/pictures/large/3148120230111161402.jpg'
-                                alt=''
-                                className='w-full rounded-lg'
-                            />
-                        </div>
-                        <div>
-                            <img
-                                src='https://storage.jajiga.com/public/pictures/large/3148120230111161402.jpg'
-                                alt=''
-                                className='w-full rounded-lg'
-                            />
-                        </div>
-                        <div>
-                            <img
-                                src='https://storage.jajiga.com/public/pictures/large/3148120230111161402.jpg'
-                                alt=''
-                                className='w-full rounded-lg'
-                            />
-                        </div>
-                        <div>
-                            <img
-                                src='https://storage.jajiga.com/public/pictures/large/3148120230111161402.jpg'
-                                alt=''
-                                className='w-full rounded-lg'
-                            />
-                        </div>
-                    </div>
-                </div>
-                <div className='flex items-start gap-4'>
+                <Gallery />
+                <div className='flex items-start gap-8 mt-9'>
                     <div className='flex flex-col justify-between items-start w-[66.66%]'>
-                        <div className='flex justify-between items-center w-full mb-4'>
-                            <div className='flex flex-col'>
-                                <Breadcrumb routes={['مازندران', 'رامسر']} />
+                        <div className='flex justify-between w-full mb-4'>
+                            <div className='flex flex-col relative bottom-2'>
+                                <Breadcrumb className='py-2 text-sm' city='شهریار' state='تهران' />
                                 <p>اجاره ویلا استخردار در رامسر</p>
                                 <div className='flex mt-5 gap-x-1'>
                                     <Badge bgColor='bg-yellow-300'>
@@ -77,8 +40,8 @@ const Room = () => {
                                 />
                             </div>
                         </div>
-                        <RoomSummery />
-                        <RoomAbout />
+                        <Summery />
+                        <About />
                     </div>
                     <div className='w-[33.33%]'>
                         <div className='rounded-t-2xl py-[14px] px-4 bg-[#404040] flex items-center justify-between text-white'>
@@ -104,37 +67,16 @@ const Room = () => {
                             <p className='text-sm text-[#252a31] mt-8 mb-2 font-vazir-light'>
                                 تعداد نفرات
                             </p>
-                            <div className='relative'>
-                                <input
-                                    // tabindex='-1'
-                                    // unselectable=''
-                                    readOnly
-                                    // focusable='false'
-                                    onClick={handleShow}
-                                    type='text'
-                                    placeholder='تعداد نفرات را مشخص کنید'
-                                    className='rounded-lg border-[#d6d6d6] border justify-between p-2 w-full placeholder:text-[#bac7d5] placeholder:text-sm cursor-pointer'
-                                />
-                                <span className='text-[#484848] text-xs'>
-                                    تا 1 کودک زیر 5 سال در صورتحساب لحاظ نمی
-                                    گردد
-                                </span>
-                                <div
-                                    className={`flex-col absolute top-0 shadow-lg w-full bg-white divide-y divide-[#eff2f5] px-1 py-2 rounded-md ${
-                                        isShow ? 'flex' : 'hidden'
-                                    }`}
-                                >
-                                    <p className='p-3 hover:bg-[#F4F7F9] duration-300 cursor-pointer'>
-                                        1 نفر
-                                    </p>
-                                    <p className='p-3 hover:bg-[#F4F7F9] duration-300 cursor-pointer'>
-                                        2 نفر
-                                    </p>
-                                    <p className='p-3 hover:bg-[#F4F7F9] duration-300 cursor-pointer'>
-                                        3 نفر
-                                    </p>
-                                </div>
-                            </div>
+                            <Select
+                                defaultValue={countSelectedOption}
+                                onChange={setCountSelectedOption as any}
+                                isClearable={true}
+                                className='lg:!w-full md:w-[200px] w-full'
+                                isRtl={true}
+                                isSearchable={true}
+                                options={userCountOptions as any}
+                                placeholder={'تعداد نفرات را مشخص کنید'}
+                            />
                             <Button
                                 variant='yellow'
                                 className='rounded-full w-full text-center mt-5'
@@ -149,7 +91,7 @@ const Room = () => {
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
         </Container>
     );
 };

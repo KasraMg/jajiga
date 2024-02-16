@@ -1,6 +1,6 @@
 import React from 'react';
 
-const RoomAbout = () => {
+const About = () => {
     return (
         <div>
             <h2 className='text-lg text-[#252a31] my-6 mb-3'>درباره اقامتگاه</h2>
@@ -32,4 +32,4 @@ const RoomAbout = () => {
     );
 };
 
-export default RoomAbout;
+export default About;

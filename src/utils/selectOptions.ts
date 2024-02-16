@@ -317,7 +317,29 @@ const areaOptions: {
             value: "روستایی"
         }
     ]
+const userCountOptions:{
+    label: string,
+    value: string
+}[]=[
+    {
+        label: "1 نفر",
+        value: "1 نفر"
+    },
+    {
+        label: "2 نفر",
+        value: "2 نفر"
+    },
+    {
+        label: "3 نفر",
+        value: "3 نفر"
+    },
+    {
+        label: "4 نفر",
+        value: "4 نفر"
+    },
+]
 
 
 
-export { firstTimeOptions, secondTimeOptions,areaOptions,typeOptions,spaceOptions }
+
+export { firstTimeOptions, secondTimeOptions, areaOptions, typeOptions, spaceOptions, userCountOptions }

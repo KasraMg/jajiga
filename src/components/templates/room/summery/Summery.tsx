@@ -2,7 +2,7 @@ import React from 'react';
 import { IoHomeOutline, IoPeopleOutline } from 'react-icons/io5';
 import { MdOutlineBedroomParent } from 'react-icons/md';
 import { TbArrowAutofitHeight } from 'react-icons/tb';
-const RoomSummery = () => {
+const Summery = () => {
     return (
         <div className='w-full flex rounded-lg py-[14px] px-4 bg-[#f3f3f3] items-center justify-between'>
             <div className='flex items-center justify-center flex-col w-1/4'>
@@ -25,4 +25,4 @@ const RoomSummery = () => {
     );
 };
 
-export default RoomSummery;
+export default Summery;
