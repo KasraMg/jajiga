@@ -10,6 +10,7 @@ const FastSearch = () => {
             <Slider
                 Card={Card}
                 navigation={true}
+                className='sm:!pl-6'
                 breakPoints={{
                     320:{
                         slidesPerView:2,

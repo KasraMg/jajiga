@@ -23,7 +23,7 @@ const Slider: FC<SliderProps> = ({
                 enabled: false,
             }}
             rewind={true}
-            className={`${className} mySwiper w-full mx-auto lg:!px-6 sm:!pl-6`}
+            className={`${className} mySwiper w-full mx-auto`}
             modules={[Navigation]}
             breakpoints={breakPoints}
         >
