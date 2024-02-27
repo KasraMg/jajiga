@@ -370,3 +370,51 @@ select:focus {
 .leaflet-bar { 
   border: 0 !important;
 }
+
+#tooltip:hover div{
+  visibility: visible;
+}
+
+/* calender */
+
+.rmdp-day.rmdp-today span {
+   background-color: transparent !important;  
+  color: #000 !important;
+  border: 2px solid #f0c807;
+}
+ 
+.rmdp-day span {
+  border: 1px solid #0000001a;
+  border-radius: 5px !important;
+}
+.rmdp-day:not(.rmdp-deactive) .highlight-red {
+  color: unset !important;
+}
+.rmdp-day:not(.rmdp-disabled):not(.rmdp-day-hidden) .highlight-red:hover {
+  background-color: unset;
+}
+.rmdp-range { 
+  border-radius: 5px;
+}
+.rmdp-day-picker {
+  gap: 20px;
+}
+.rmdp-day:not(.rmdp-disabled,.rmdp-day-hidden) span:hover {
+    background-color: unset !important;
+    color: unset !important;
+}
+.rmdp-range span{
+    border: 0 !important;
+}
+ .rmdp-rtl {
+    width: 100%;
+}
+.rmdp-day, .rmdp-week-day { 
+    width: 100% !important;
+}
+ .rmdp-day-picker div{
+    width: 100%;
+ }
+ .rmdp-border {
+    border: 0 !important;
+ }
