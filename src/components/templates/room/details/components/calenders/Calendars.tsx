@@ -11,7 +11,7 @@ import useDateHandler from '@/src/hooks/useDateHandler';
 
 
 const Calendars = () => {
-    const [value, setValue] = useState<Value>()
+    const [value, setValue] = useState<any>()
     const [open, setOpen] = useState(0);
     const [openAlert, setOpenAlert] = useState(true);
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -36,7 +36,7 @@ const Calendars = () => {
 
     return (
         <div className='w-full'>
-            <h2 className='text-lg text-[#252a31] my-6 mb-4'>امکانات</h2>
+            <h2 className='text-lg text-[#252a31] my-6 mb-4'>تقویم / نرخ</h2>
             <Calendar
                 value={value}
                 calendar={persian}

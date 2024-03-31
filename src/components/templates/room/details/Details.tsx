@@ -4,6 +4,9 @@ import Summery from './components/summery/Summery'
 import Infoes from './components/infoes/Infoes'
 import Breadcrumb from '@/src/components/templates/room/details/components/breadcrumb/Breadcrumb';
 import Calendars from './components/calenders/Calendars';
+import Rules from './components/rules/Rules';
+import { Map } from '@/src/components/modules/Map/Map';
+import Comments from './components/comments/Comments';
 
 const Details = () => {
     return (
@@ -40,6 +43,12 @@ const Details = () => {
                 </div>
             </div>
             <Calendars />
+            <Rules />
+            <div className='border-gray-300 border-solid border-b w-full pb-8'>
+                <p className='text-lg text-[#252a31] my-6 mb-4'>نقشه</p>
+                <Map className='rounded-lg' position={[35.37469588708887, -105.45046566470816]} />
+            </div>
+            <Comments />
         </div>
     )
 }
