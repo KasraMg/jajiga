@@ -11,6 +11,7 @@ interface MapProps {
 }
 export const Map: FC<MapProps> = ({ className, position, mapChangeHandler }) => {
     const markerRef = useRef<any>()
+    
     function MarkerInCenter() {
         const map = useMap();
         useEffect(() => {
@@ -35,7 +36,10 @@ export const Map: FC<MapProps> = ({ className, position, mapChangeHandler }) => 
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <Marker ref={markerRef} position={position as any}></Marker>
-            <MarkerInCenter />
+            {mapChangeHandler &&(
+                <MarkerInCenter />
+                )}
+
         </MapContainer>
     )
 }

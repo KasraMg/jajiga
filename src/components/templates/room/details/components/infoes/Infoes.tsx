@@ -43,7 +43,7 @@ const Infoes = () => {
                 </div>
             </div>
             <hr className='mt-8' /> 
-            <div>
+            <div className='border-gray-300  pb-4'>
                 <h2 className='text-lg text-[#252a31] my-6 mb-4'>امکانات</h2>
                 <div className='grid-cols-[auto,auto] text-sm grid gap-3 text-gray-800'>
                      <div className='flex gap-2 items-center'>

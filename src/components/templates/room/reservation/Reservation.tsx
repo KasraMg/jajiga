@@ -3,6 +3,8 @@ import Button from '@/src/components/modules/button';
 import { useState } from 'react';
 import Select from 'react-select';
 import { userCountOptions } from '@/src/utils/selectOptions'
+import { SlInfo } from "react-icons/sl";
+import Link from 'next/link';
 const Reservation = () => {
     const [countSelectedOption, setCountSelectedOption] = useState<{ label: string; value: string[]; } | null>(null);
 
@@ -52,6 +54,12 @@ const Reservation = () => {
                         </span>
                     </div>
                 </Button>
+                <Link href={'/faq'}>
+                    <Button className='w-full justify-center mt-5 border-[#00000028]' variant={"white"}>
+                        <SlInfo />
+                        راهنمای رزرو
+                    </Button>
+                </Link>
             </div>
         </div>
     )
