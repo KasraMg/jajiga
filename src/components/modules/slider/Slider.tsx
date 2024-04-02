@@ -6,7 +6,7 @@ import 'swiper/css';
 import 'swiper/css/grid';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-
+  
 const Slider: FC<SliderProps> = ({
     Card,
     breakPoints,

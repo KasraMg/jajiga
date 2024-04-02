@@ -12,7 +12,7 @@ const Navbar = () => {
         route.length > 2 ? true : false
     );
     const [showMenu, setShowMenu] = useState<boolean>(false);
-
+ 
     const hideMenuHandler = () => setShowMenu(false);
     useEffect(() => {
         window?.addEventListener('scroll', () => {

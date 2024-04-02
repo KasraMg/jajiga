@@ -169,7 +169,7 @@ const Footer = () => {
                     <CitiesList />
                 </div>
             </div>
-            <div className='p-3 text-[#6e6e6e] mt-8 bg-[#cbcbcb] leading-6 text-[10px] text-center rounded-t-[16px]  '>
+            <div className='text-[#6e6e6e] mt-8 bg-[#cbcbcb] leading-6 text-[10px] text-center rounded-t-[16px]  '>
                 <p>کلیه حقوق این وبسایت متعلق به شرکت تجارت الکترونیک لوتوس آرمانی (سهامی خاص) می‌باشد.</p>
             </div>
         </div>
