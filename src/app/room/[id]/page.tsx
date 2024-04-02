@@ -6,13 +6,14 @@ import Reservation from '@/src/components/templates/room/reservation/Reservation
 const Room = () => {
     return (
         <Container>
-            <div className='Container !mt-20'>
+            <div className='Container  mt-[3.8rem] md:!mt-20'>
                 <Gallery />
-                <div className='flex items-start gap-8 mt-9'>
+                <div className='flex items-start gap-8 md:!mt-9  xl:!px-0 px-0 md:!px-4'>
                     <Details />
                     <Reservation />
                 </div>
             </div>
+            
         </Container>
     );
 };

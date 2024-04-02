@@ -9,11 +9,11 @@ const Reservation = () => {
     const [countSelectedOption, setCountSelectedOption] = useState<{ label: string; value: string[]; } | null>(null);
 
     return (
-        <div className='w-[33.33%]'>
+        <div className='w-[33.33%] sticky top-[68px] hidden md:!block'>
             <div className='rounded-t-2xl py-[14px] px-4 bg-[#404040] flex items-center justify-between text-white'>
-                <p>نرخ هر شب از:</p>
+                <p className='text-sm lg:!text-base'>نرخ هر شب از:</p>
                 <div className='flex'>
-                    <p>1,450,000</p>
+                    <p className='text-sm lg:!text-base'>1,450,000</p>
                     <p className='text-sm mr-1'>تومان</p>
                 </div>
             </div>
@@ -37,7 +37,7 @@ const Reservation = () => {
                     defaultValue={countSelectedOption}
                     onChange={setCountSelectedOption as any}
                     isClearable={true}
-                    className='lg:!w-full md:w-[200px] w-full'
+                    className='lg:!w-full md:w-[200px] w-full  '
                     isRtl={true}
                     isSearchable={true}
                     options={userCountOptions as any}

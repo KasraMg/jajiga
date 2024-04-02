@@ -42,7 +42,7 @@ const Calendars = () => {
                 calendar={persian}
                 locale={persian_fa}
                 className="!w-full"
-                numberOfMonths={2}
+                numberOfMonths={window.innerWidth >= 500 ? 2 : 1}
                 shadow={false}
                 minDate={new Date()}
                 onChange={handleChange}
@@ -70,7 +70,7 @@ const Calendars = () => {
             {showMenu && (
                 <div onClick={() => setShowMenu(false)} className='fixed z-[999] top-0 w-full h-screen left-0 bg-[#00000094]'></div>
             )}
-            <section dir='ltr' className={`${!showMenu ? 'translate-x-full ' : null} px-4 rounded-l-2xl py-4 right-0 fixed z-[9999] top-0 border-r  h-screen overflow-y-auto transition-transform  bg-white w-96 dark:bg-gray-800`}>
+            <section dir='ltr' className={`${!showMenu ? 'translate-x-full ' : null} px-4 rounded-l-2xl py-4 right-0 fixed z-[9999] top-0 border-r  h-screen overflow-y-auto transition-transform  bg-white w-[90%] sm:!w-96 dark:bg-gray-800`}>
                 <p className='border-b border-solid border-[#0000000f] text-lg pb-4 text-right'>راهنمای تقویم</p>
                 <div className='flex gap-3 flex-row-reverse mt-8'>
                     <div className='border-2 border-solid rounded-lg text-center p-[3px] px-2 border-[#f0c807]'>
@@ -79,7 +79,7 @@ const Calendars = () => {
                     </div>
                     <div className='text-right'>
                         <p className=''>امروز</p>
-                        <p className='font-vazir-light text-sm'>نشان دهنده تاریخ امروز در تقویم</p>
+                        <p className='font-vazir-light text-xs sm:!text-sm'>نشان دهنده تاریخ امروز در تقویم</p>
                     </div>
                 </div>
                 <div className='flex gap-3 flex-row-reverse mt-8'>
@@ -89,7 +89,7 @@ const Calendars = () => {
                     </div>
                     <div className='text-right'>
                         <p className=''>تاریخ های رزرو</p>
-                        <p className='font-vazir-light text-sm'>نشان دهنده تاریخ شروع و خاتمه رزرو</p>
+                        <p className='font-vazir-light text-xs sm:!text-sm'>نشان دهنده تاریخ شروع و خاتمه رزرو</p>
                     </div>
                 </div>
                 <div className='flex gap-3 flex-row-reverse mt-8'>
@@ -100,7 +100,7 @@ const Calendars = () => {
 
                     <div className='text-right'>
                         <p className=''>تعطیلات</p>
-                        <p className='font-vazir-light text-sm'> روزهای آخر هفته و تعطیلات</p>
+                        <p className='font-vazir-light text-xs sm:!text-sm'> روزهای آخر هفته و تعطیلات</p>
                     </div>
                 </div>
                 <div className='flex gap-3 flex-row-reverse mt-8'>
@@ -111,7 +111,7 @@ const Calendars = () => {
 
                     <div className='text-right'>
                         <p className=''>روزهای پر شده</p>
-                        <p className='font-vazir-light text-sm'>روزهایی که قبلا رزرو شده اند</p>
+                        <p className='font-vazir-light text-xs sm:!text-sm'>روزهایی که قبلا رزرو شده اند</p>
                     </div>
                 </div>
                 <div className='flex gap-3 flex-row-reverse mt-8'>
@@ -122,7 +122,7 @@ const Calendars = () => {
 
                     <div className='text-right'>
                         <p className=''>   روزهای گذشته</p>
-                        <p className='font-vazir-light text-sm'>روزهایی سپری شده در تقویم</p>
+                        <p className='font-vazir-light text-xs sm:!text-sm'>روزهایی سپری شده در تقویم</p>
                     </div>
                 </div>
                 <p className=' mt-48 text-center text-sm'>همه قیمت ها به تومان هستند</p>

@@ -178,6 +178,15 @@ input[type=number] {
   to {
     transform: translateY(0);
   }
+} 
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
 }
 
 @keyframes arrowMove {
@@ -350,7 +359,9 @@ select:focus {
   outline: 0;
   border-radius: 10px;
 }
-
+.leaflet-top, .leaflet-bottom {
+  z-index: 400 !important;
+}
 .leaflet-default-icon-path {
   background-image: url(https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png) !important;
 }
@@ -418,3 +429,13 @@ select:focus {
  .rmdp-border {
     border: 0 !important;
  }
+
+ .room-gallery-slider .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-horizontal > .swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal {
+bottom: 20px !important;
+ }
+
+ .room-gallery-slider .swiper-pagination-bullet {
+  background-color: white !important;
+ }
+
+ 

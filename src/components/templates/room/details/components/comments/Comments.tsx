@@ -6,7 +6,7 @@ const Comments = () => {
             <p className='text-lg text-[#252a31] my-6 mb-4'>نظر مهمانان <span className='text-sm'>(15 نظر)</span></p>
             <div className='mt-6'>
 
-                <section className='mb-6'>
+                <section className='mb-6 border-b border-solid border-gray-200 pb-4'>
                     <div className='flex justify-between'>
                         <div className='flex gap-3 items-center'>
                             <Image className='rounded-full object-cover w-14 h-14' alt='author' width={1000} height={1000} src={'/images/about/about_img6.jpg'} />
@@ -35,7 +35,7 @@ const Comments = () => {
                         <p className='text-sm font-vazir-light mt-5'>عالی بود، از همه چیز راضی بودیم</p>
                     </section>
                 </section>
-                <section className='mb-6'>
+                <section className='mb-6 border-b border-solid border-gray-200 pb-4'>
                     <div className='flex justify-between'>
                         <div className='flex gap-3 items-center'>
                             <Image className='rounded-full object-cover w-14 h-14' alt='author' width={1000} height={1000} src={'/images/about/about_img6.jpg'} />
