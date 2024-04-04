@@ -4,8 +4,8 @@ import { Modal as ModalComponent } from 'flowbite-react'
 interface ModalProps {
     show: boolean,
     hideHandler: () => void,
-    title:string,
-    children:React.ReactElement
+    title?: string,
+    children: React.ReactElement
 }
 
 const Modal: FC<ModalProps> = ({
@@ -16,11 +16,11 @@ const Modal: FC<ModalProps> = ({
 }) => {
     return (
         <>
-            <ModalComponent className='z-[999]' show={show} onClose={hideHandler}>
-                <ModalComponent.Header className='text-center justify-center'>{title}</ModalComponent.Header>
-                <ModalComponent.Body className='!pt-2'>
-                 {children}
-                </ModalComponent.Body> 
+            <ModalComponent dismissible={true} className='z-[999] !overflow-x-hidden' show={show} onClose={hideHandler}>
+                {title && <ModalComponent.Header className='text-center justify-center'>{title}</ModalComponent.Header>}
+                <ModalComponent.Body>
+                    {children}
+                </ModalComponent.Body>
             </ModalComponent>
         </>
     )

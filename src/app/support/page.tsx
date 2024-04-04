@@ -10,9 +10,8 @@ import { FaTelegram } from 'react-icons/fa6';
 import { FaInstagram } from 'react-icons/fa';
 import Container from '@/src/components/modules/container/Container';
 const page = () => {
-    const [callModal, setCallModal] = useState<boolean>(false);
-    const [communicationModal, setCommunicationModal] =
-        useState<boolean>(false);
+    const [callModal, setCallModal] = useState(false);
+    const [communicationModal, setCommunicationModal] = useState(false);
 
     const hideCallModal = () => setCallModal(false);
     const hideCommunicationModal = () => setCommunicationModal(false);
