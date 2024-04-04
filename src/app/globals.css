@@ -138,8 +138,8 @@ input[type=number] {
 
 /* modal  */
 .h-modal div button svg {
-  width: 2rem !important;
-  height: 2rem !important;
+  width: 2rem ;
+  height: 2rem ;
   color: white;
 }
 
@@ -161,10 +161,17 @@ input[type=number] {
 
 @media (max-width:767px) {
   [data-testid="modal-overlay"] .max-w-2xl {
-    padding-top: 13rem !important;
-  }
+    padding-top: 13rem !important; 
+    position: absolute;
+    bottom: 0px;
+    width: 100% !important;
+    left: 0;
+    max-width: 100% !important; 
+    height: max-content;
+    padding: 0;
+  } 
 }
-
+ 
 /* modal  */
 
 
