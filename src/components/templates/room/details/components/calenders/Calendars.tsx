@@ -79,7 +79,7 @@ const Calendars = () => {
                     </div>
                     <div className='text-right'>
                         <p className=''>امروز</p>
-                        <p className='font-vazir-light text-xs sm:!text-sm'>نشان دهنده تاریخ امروز در تقویم</p>
+                        <p className='font-vazir font-light  text-xs sm:!text-sm'>نشان دهنده تاریخ امروز در تقویم</p>
                     </div>
                 </div>
                 <div className='flex gap-3 flex-row-reverse mt-8'>
@@ -89,7 +89,7 @@ const Calendars = () => {
                     </div>
                     <div className='text-right'>
                         <p className=''>تاریخ های رزرو</p>
-                        <p className='font-vazir-light text-xs sm:!text-sm'>نشان دهنده تاریخ شروع و خاتمه رزرو</p>
+                        <p className='font-vazir font-light  text-xs sm:!text-sm'>نشان دهنده تاریخ شروع و خاتمه رزرو</p>
                     </div>
                 </div>
                 <div className='flex gap-3 flex-row-reverse mt-8'>
@@ -100,7 +100,7 @@ const Calendars = () => {
 
                     <div className='text-right'>
                         <p className=''>تعطیلات</p>
-                        <p className='font-vazir-light text-xs sm:!text-sm'> روزهای آخر هفته و تعطیلات</p>
+                        <p className='font-vazir font-light  text-xs sm:!text-sm'> روزهای آخر هفته و تعطیلات</p>
                     </div>
                 </div>
                 <div className='flex gap-3 flex-row-reverse mt-8'>
@@ -111,7 +111,7 @@ const Calendars = () => {
 
                     <div className='text-right'>
                         <p className=''>روزهای پر شده</p>
-                        <p className='font-vazir-light text-xs sm:!text-sm'>روزهایی که قبلا رزرو شده اند</p>
+                        <p className='font-vazir font-light  text-xs sm:!text-sm'>روزهایی که قبلا رزرو شده اند</p>
                     </div>
                 </div>
                 <div className='flex gap-3 flex-row-reverse mt-8'>
@@ -122,7 +122,7 @@ const Calendars = () => {
 
                     <div className='text-right'>
                         <p className=''>   روزهای گذشته</p>
-                        <p className='font-vazir-light text-xs sm:!text-sm'>روزهایی سپری شده در تقویم</p>
+                        <p className='font-vazir font-light  text-xs sm:!text-sm'>روزهایی سپری شده در تقویم</p>
                     </div>
                 </div>
                 <p className=' mt-48 text-center text-sm'>همه قیمت ها به تومان هستند</p>

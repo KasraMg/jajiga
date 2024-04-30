@@ -23,7 +23,7 @@ const Comments = () => {
                             <FaStar className='text-orange-500' />
                         </div>
                     </div>
-                    <p className='text-sm font-vazir-light mt-5'>عالی بود، از همه چیز راضی بودیم</p>
+                    <p className='text-sm font-vazir font-light  mt-5'>عالی بود، از همه چیز راضی بودیم</p>
                     <section className='bg-[#f3f3f3] p-2 mt-3 rounded-md mx-3'>
                         <div className='flex gap-3 items-center'>
                             <Image className='rounded-full object-cover w-10 h-10' alt='author' width={1000} height={1000} src={'/images/about/about_img6.jpg'} />
@@ -32,7 +32,7 @@ const Comments = () => {
                                 <span className='text-sm text-gray-500'>07 دی 1402</span>
                             </div>
                         </div>
-                        <p className='text-sm font-vazir-light mt-5'>عالی بود، از همه چیز راضی بودیم</p>
+                        <p className='text-sm font-vazir font-light  mt-5'>عالی بود، از همه چیز راضی بودیم</p>
                     </section>
                 </section>
                 <section className='mb-6 border-b border-solid border-gray-200 pb-4'>
@@ -52,7 +52,7 @@ const Comments = () => {
                             <FaStar className='text-orange-500' />
                         </div>
                     </div>
-                    <p className='text-sm font-vazir-light mt-5'>عالی بود، از همه چیز راضی بودیم</p>
+                    <p className='text-sm font-vazir font-light  mt-5'>عالی بود، از همه چیز راضی بودیم</p>
                 </section>
                 <section className='mb-6'>
                     <div className='flex justify-between'>
@@ -71,7 +71,7 @@ const Comments = () => {
                             <FaStar className='text-orange-500' />
                         </div>
                     </div>
-                    <p className='text-sm font-vazir-light mt-5'>عالی بود، از همه چیز راضی بودیم</p>
+                    <p className='text-sm font-vazir font-light  mt-5'>عالی بود، از همه چیز راضی بودیم</p>
                 </section>
 
 

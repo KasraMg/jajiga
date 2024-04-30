@@ -20,10 +20,10 @@ const page = () => {
                     </div> 
                     <div className='w-full'>
                         <p>تصاویر اقامتگاه را آپلود کنید</p>
-                        <p className='text-sm font-vazir-light mt-3'>ارائه تصاویر زیبا و واقعی از اقامتگاه شما می تواند نقش بسیار مهمی در جلب نظر میهمانان ایفا نماید.‏‎‏ لذا:</p>
+                        <p className='text-sm font-vazir font-light  mt-3'>ارائه تصاویر زیبا و واقعی از اقامتگاه شما می تواند نقش بسیار مهمی در جلب نظر میهمانان ایفا نماید.‏‎‏ لذا:</p>
                         <ul className='text-sm mt-4 list-disc mr-4'>
-                            <li className='font-vazir-light'>حداقل 10 عکسِ باکیفیت، از پذیرایی، اتاق خواب ها، آشپزخانه، سرویس بهداشتی، حیاط و نمای ساختمان آپلود کنید.</li>
-                            <li className='font-vazir-light mt-2'>ترجیحاً از تصاویر افقی (Landscape) استفاده کنید.</li>
+                            <li className='font-vazir font-light '>حداقل 10 عکسِ باکیفیت، از پذیرایی، اتاق خواب ها، آشپزخانه، سرویس بهداشتی، حیاط و نمای ساختمان آپلود کنید.</li>
+                            <li className='font-vazir font-light  mt-2'>ترجیحاً از تصاویر افقی (Landscape) استفاده کنید.</li>
                         </ul>
 
                         <div className='border border-dashed border-gray-700  rounded-xl w-full p-4 text-center mt-3 relative'>
@@ -31,7 +31,7 @@ const page = () => {
                             <div className='bg-gray-200 text-gray-700 p-[10px] rounded-full w-max block mx-auto text-3xl'>
                                 <BsCamera />
                             </div>
-                            <p className='text-sm font-vazir-light mt-3'>انتخاب تصویر +</p>
+                            <p className='text-sm font-vazir font-light  mt-3'>انتخاب تصویر +</p>
                         </div>
 
                         <div className='rounded-lg mt-5 pb-3 mb-20' style={{ boxShadow: 'rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px' }}>

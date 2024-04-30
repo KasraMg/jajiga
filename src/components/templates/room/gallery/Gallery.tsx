@@ -9,12 +9,12 @@ const Gallery = () => {
    
     return (
         <section> 
-            <div className='gap-x-3 mb-4 items-center md:!flex hidden'>
+            <div className='gap-x-3 mb-4  md:!flex hidden'>
                 <div className='w-1/2'>
                     <img
                         src='https://storage.jajiga.com/public/pictures/large/3148120230111161402.jpg'
                         alt=''
-                        className='w-full rounded-lg !object-contain'
+                        className='w-full rounded-xl !object-contain h-full'
                     />
                 </div>
                 <div className='grid gap-3 grid-cols-2 w-1/2'>

@@ -33,12 +33,12 @@ const page = () => {
                     </div> 
                     <div className='w-full space-y-4'>
                         <div className='flex justify-between flex-col md:!items-center md:flex-row md:!gap-0 gap-2 items-start'>
-                            <p className='min-w-[120px] text-sm font-vazir-light'>فضای اقامتگاه</p>
+                            <p className='min-w-[120px] text-sm font-vazir font-light '>فضای اقامتگاه</p>
                             <Select
                                 defaultValue={spaceSelectedOption}
                                 onChange={setSpaceSelectedOption as any}
                                 isClearable={true}
-                                className='lg:!w-full md:w-[200px] w-full  font-vazir-light'
+                                className='lg:!w-full md:w-[200px] w-full  font-vazir font-light '
                                 isRtl={true}
                                 isSearchable={true}
                                 options={spaceOptions}
@@ -46,12 +46,12 @@ const page = () => {
                             />
                         </div>
                         <div className='flex justify-between flex-col md:!items-center md:flex-row md:!gap-0 gap-2 items-start'>
-                            <p className='min-w-[120px] text-sm font-vazir-light'>نوع اقامتگاه</p>
+                            <p className='min-w-[120px] text-sm font-vazir font-light '>نوع اقامتگاه</p>
                             <Select
                                 defaultValue={typeSelectedOption}
                                 onChange={setTypeSelectedOption as any}
                                 isClearable={true}
-                                className='lg:!w-full md:w-[200px] w-full  font-vazir-light'
+                                className='lg:!w-full md:w-[200px] w-full  font-vazir font-light '
                                 isRtl={true}
                                 isSearchable={true}
                                 options={typeOptions}
@@ -59,12 +59,12 @@ const page = () => {
                             />
                         </div>
                         <div className='flex justify-between flex-col md:!items-center md:flex-row md:!gap-0 gap-2 items-start'>
-                            <p className='min-w-[120px] text-sm font-vazir-light'>منطقه اقامتگاه</p>
+                            <p className='min-w-[120px] text-sm font-vazir font-light '>منطقه اقامتگاه</p>
                             <Select
                                 defaultValue={areaSelectedOption}
                                 onChange={setAreaSelectedOption as any}
                                 isClearable={true}
-                                className='lg:!w-full md:w-[200px] w-full  font-vazir-light'
+                                className='lg:!w-full md:w-[200px] w-full  font-vazir font-light '
                                 isRtl={true}
                                 isSearchable={true}
                                 options={areaOptions}

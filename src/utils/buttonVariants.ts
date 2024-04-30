@@ -9,7 +9,7 @@ export const buttonVariants = cva(
         outlineBlue:  "text-blue-700 rounded-md hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800 dark:ring-blue-800",
         default: "dark:bg-slate-900 rounded-md text-white ",
         ghost: "bg-transparent rounded-md hover:text-slate-900 hover:bg-slate-200",
-        main: "bg-yellow-400 rounded-md text-dark",
+        main: "bg-[#f0c807] rounded-md text-dark",
         danger: "text-white rounded-md bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800",
         lightDanger: "text-dark rounded-md bg-gradient-to-r from-red-100 via-red-200 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800",
         green: "text-white rounded-md bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800",

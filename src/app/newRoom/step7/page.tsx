@@ -39,14 +39,14 @@ const page = () => {
 
                         </div>
                     </div>
-                    <span className='mt-3 font-vazir-light text-xs'>بعنوان مثال درصورت تعیین حداقل 2 شب اقامت، درخواست رزرو برای 1 شب اقامت قابل ثبت نخواهد بود.</span>
+                    <span className='mt-3 font-vazir font-light  text-xs'>بعنوان مثال درصورت تعیین حداقل 2 شب اقامت، درخواست رزرو برای 1 شب اقامت قابل ثبت نخواهد بود.</span>
                     <div className='flex gap-3 items-start lg:!items-center lg:!flex-row flex-col'>
                         <p className=' whitespace-nowrap'>زمان تحویل از</p>
                         <Select
                             defaultValue={[{ label: "12 ظهر", value: "12 ظهر" }]}
                             onChange={setFirstTimeSelectedOption as any}
                             isClearable={true}
-                            className='w-full  text-sm font-vazir-light'
+                            className='w-full  text-sm font-vazir font-light '
                             isRtl={true}
                             isSearchable={true}
                             options={firstTimeOptions}
@@ -56,7 +56,7 @@ const page = () => {
                             defaultValue={[{ label: "نامحدود", value: "نامحدود" }]}
                             onChange={setSecondTimeSelectedOption as any}
                             isClearable={true}
-                            className='w-full text-sm font-vazir-light'
+                            className='w-full text-sm font-vazir font-light '
                             isRtl={true}
                             isSearchable={true}
                             options={secondTimeOptions}
@@ -68,7 +68,7 @@ const page = () => {
                             defaultValue={[{ label: "11 صبح", value: "11 صبح" }]}
                             onChange={setFirstTimeSelectedOption as any}
                             isClearable={true}
-                            className='w-[60%]  text-sm font-vazir-light'
+                            className='w-[60%]  text-sm font-vazir font-light '
                             isRtl={true}
                             isSearchable={true}
                             options={firstTimeOptions}

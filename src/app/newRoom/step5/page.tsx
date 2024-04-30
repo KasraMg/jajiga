@@ -74,7 +74,7 @@ const page = () => {
                             </div>
                         </div>
                         <div className='flex justify-between lg:!items-center flex-col lg:!flex-row items-start gap-2 lg:!gap-0'>
-                            <p className='text-sm font-vazir-light'>متراژ زمین و محوطه اقامتگاه</p>
+                            <p className='text-sm font-vazir font-light '>متراژ زمین و محوطه اقامتگاه</p>
                             <div className='flex justify-between lg:!w-1/2 w-full  lg:!items-center relative'>
                                 <input value={landSize} onChange={(event) => landSizeChangeHandler(event)} type="number" dir='ltr' className='outline-none py-2 pr-8 pl-9 rounded-lg w-full' />
                                 <span className='text-sm text-gray-500 absolute top-[10px] left-2'>متر</span>
@@ -83,7 +83,7 @@ const page = () => {
 
                         </div>
                         <div className='flex justify-between lg:!items-center !mt-10 flex-col lg:!flex-row items-start gap-2 lg:!gap-0 !pb-4'>
-                            <p className='text-sm font-vazir-light'>متراژ زیربنای اقامتگاه</p>
+                            <p className='text-sm font-vazir font-light '>متراژ زیربنای اقامتگاه</p>
                             <div className='flex justify-between lg:!w-1/2 w-full  items-center relative'>
                                 <input value={areaSize} onChange={(event) => areaSizeChangeHandler(event)} type="number" dir='ltr' className='outline-none py-2 pr-8 pl-9 rounded-lg w-full' />
                                 <span className='text-sm text-gray-500 absolute top-[10px] left-2'>متر</span>

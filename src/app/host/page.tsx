@@ -30,7 +30,7 @@ const page = () => {
                             {cartData.mainTitle}
                         </h2>
                         <div className='bg-yellow-300 h-1 rounded-lg w-36'></div>
-                        <p className='text-sm text-textGray font-vazir-light px-3 sm:!px-0 leading-6'>
+                        <p className='text-sm text-textGray font-vazir font-light  px-3 sm:!px-0 leading-6'>
                             {cartData.secondaryTitle}
                         </p>
                     </div>

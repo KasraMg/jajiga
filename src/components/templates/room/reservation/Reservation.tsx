@@ -23,7 +23,7 @@ const Reservation = () => {
                     </div>
                 </div>
                 <div className='rounded-b-2xl py-[14px] px-4 shadow-lg'>
-                    <p className='text-sm text-[#252a31] mb-2 font-vazir-light'>
+                    <p className='text-sm text-[#252a31] mb-2 font-vazir font-light '>
                         تاریخ سفر
                     </p>
                     <div className='flex items-center rounded-lg border-[#d6d6d6] border justify-between py-2 px-5'>
@@ -35,7 +35,7 @@ const Reservation = () => {
                             <p>تاریخ خروج</p>
                         </div>
                     </div>
-                    <p className='text-sm text-[#252a31] mt-8 mb-2 font-vazir-light'>
+                    <p className='text-sm text-[#252a31] mt-8 mb-2 font-vazir font-light '>
                         تعداد نفرات
                     </p>
                     <Select
@@ -84,7 +84,7 @@ const Reservation = () => {
                 show={reservationModal}
             >
                   <div className='rounded-b-2xl py-[14px] px-4'>
-                    <p className='text-sm text-[#252a31] mb-2 font-vazir-light'>
+                    <p className='text-sm text-[#252a31] mb-2 font-vazir font-light '>
                         تاریخ سفر
                     </p>
                     <div className='flex items-center rounded-lg border-[#d6d6d6] border justify-between py-2 px-5'>
@@ -96,7 +96,7 @@ const Reservation = () => {
                             <p>تاریخ خروج</p>
                         </div>
                     </div>
-                    <p className='text-sm text-[#252a31] mt-8 mb-2 font-vazir-light'>
+                    <p className='text-sm text-[#252a31] mt-8 mb-2 font-vazir font-light '>
                         تعداد نفرات
                     </p>
                     <Select

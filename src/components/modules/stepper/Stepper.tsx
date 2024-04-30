@@ -41,7 +41,7 @@ const Stepper: FC<StepperProps> = ({ active, className }) => {
                                 </>
                             )}
                         </div>
-                        <p className='text-[#444444] text-sm font-vazir-light'>{stepper.title}</p>
+                        <p className='text-[#444444] text-sm font-vazir font-light '>{stepper.title}</p>
                     </Link>
                 ))}
             </ul>
@@ -58,7 +58,7 @@ const Stepper: FC<StepperProps> = ({ active, className }) => {
                                         </>
                                     )}
                                 </div>
-                                <p className='text-[#444444] text-sm font-vazir-light'>{stepper.title}</p>
+                                <p className='text-[#444444] text-sm font-vazir font-light '>{stepper.title}</p>
                             </Link>
                         ))}
                     </ul>

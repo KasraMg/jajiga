@@ -12,7 +12,7 @@ const page = () => {
             />
             <Layout>
                 <div className='max-w-[1120px] mx-auto pt-2'>
-                    <article className='rules-article !font-vazir-light'>
+                    <article className='rules-article !font-vazir font-light '>
                         <h2>قوانین عمومی</h2>
                         <p>
                             1- کلیه اصول و رویه‌های جاجیگا منطبق با قوانین

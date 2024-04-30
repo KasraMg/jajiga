@@ -9,7 +9,7 @@ const Card: FC<CardProps> = () => {
             <div style={{background:'linear-gradient(rgba(0, 0, 0, 0) 0%, rgb(0, 0, 0) 100%)'}} className='text-center w-full absolute bottom-0 pb-4 rounded-xl'>
                 <p className='mb-2'>کلبه چوبی</p>
                 <div className='flex gap-2 items-center justify-center'>
-                    <span className='text-[12px] font-vazir-light'>558 اقامتگاه</span>
+                    <span className='text-[12px] font-vazir font-light '>558 اقامتگاه</span>
                   
                 </div>
             </div>

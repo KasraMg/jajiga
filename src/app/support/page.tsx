@@ -211,7 +211,7 @@ const page = () => {
                     show={callModal}
                 >
                     <>
-                        <p className='text-sm text-center leading-7 text-[#404040] font-vazir-light'>
+                        <p className='text-sm text-center leading-7 text-[#404040] font-vazir font-light '>
                             ساعات کار پشتیبانی تلفنی از<strong> 8 صبح</strong>{' '}
                             الی <strong>12 شب</strong> می‌باشد. شماره تماس:{' '}
                         </p>
@@ -227,7 +227,7 @@ const page = () => {
                     show={communicationModal}
                 >
                     <>
-                        <p className='text-sm text-center leading-7 text-[#404040] font-vazir-light'>
+                        <p className='text-sm text-center leading-7 text-[#404040] font-vazir font-light '>
                             ساعات کار پشتیبانی تلفنی از<strong> 8 صبح</strong>{' '}
                             الی <strong>12 شب</strong> می‌باشد. شماره تماس:{' '}
                         </p>
