@@ -17,7 +17,7 @@ const Posts = () => {
 
       <div className="mt-12">
         <div className='flex sm:!flex-row flex-col items-center justify-between'>
-          <p className="text-sm"><strong>1466 اقامتگاه </strong> از 300٬000 <span className="text-xs">تومان</span></p>
+          <p className="text-sm"><strong>1466 اقامتگاه </strong> از <strong>300٬000</strong> <span className="text-xs">تومان</span></p>
           <Select
             defaultValue={spaceSelectedOption}
             onChange={setSpaceSelectedOption as any}
