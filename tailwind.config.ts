@@ -31,6 +31,9 @@ const config: Config =  withMT({
         fontFamily: {
             'vazir': ['var(--font-vazir)'] , 
         },
+        colors: {
+            customYellow: '#f0c807', // مثال از رنگ سبز تیره
+          }
     },
  
 });

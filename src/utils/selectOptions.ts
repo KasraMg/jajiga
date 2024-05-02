@@ -338,8 +338,29 @@ const userCountOptions:{
         value: "4 نفر"
     },
 ]
+const categoryFilterOptions:{
+    label: string,
+    value: string
+}[]=[
+    {
+        label: "ارزانترین",
+        value: "ارزانترین"
+    },
+    {
+        label: "گرانترین",
+        value: "گرانترین"
+    },
+    {
+        label: "جدید ترین",
+        value: "جدید ترین"
+    },
+    {
+        label: "قدیمی ترین",
+        value: "قدیمی ترین"
+    },
+]
 
 
 
 
-export { firstTimeOptions, secondTimeOptions, areaOptions, typeOptions, spaceOptions, userCountOptions }
+export { firstTimeOptions, secondTimeOptions, areaOptions, typeOptions, spaceOptions, userCountOptions, categoryFilterOptions }

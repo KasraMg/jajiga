@@ -24,7 +24,7 @@ const Breadcrumb: FC<BreadcrumbProps> = ({
     children
 }) => {
     return (
-        <section id='breadcrumb' className={`${className} relative mt-[58px] bg-[#f0c807] pb-9 pt-7 bg-cover bg-center`}>
+        <section id='breadcrumb' className={`${className} relative mt-[58px] bg-customYellow pb-9 pt-7 bg-cover bg-center`}>
             <div className='top-0   absolute w-full h-full breadcrumb_bg'></div>
             <div className=' max-w-[1074px] mx-auto pr-4 xl:!px-0'>
                 {template ? children : (

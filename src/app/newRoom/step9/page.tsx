@@ -25,12 +25,12 @@ const page = () => {
                                 <div className="grid grid-cols-2 w-full lg:!max-w-[8rem] lg:!mb-0 mb-4 gap-2  bg-gray-200 p-1 rounded-[32px]">
                                 <div>
                                         <input type="radio" name="animall" id="7" value="7" className="peer hidden" />
-                                        <label htmlFor={"7"} className="block cursor-pointer select-none  py-[6px] px-2 text-center peer-checked:bg-[#f0c807] rounded-[50px] peer-checked:text-black">مجاز</label>
+                                        <label htmlFor={"7"} className="block cursor-pointer select-none  py-[6px] px-2 text-center peer-checked:bg-customYellow rounded-[50px] peer-checked:text-black">مجاز</label>
                                     </div>
 
                                     <div>
                                         <input type="radio" name="animall" id="8" value="8" className="peer hidden" />
-                                        <label htmlFor={"8"} className="block cursor-pointer select-none  py-[6px] px-2 text-center peer-checked:bg-[#f0c807] rounded-[50px] peer-checked:text-black">ممنوع</label>
+                                        <label htmlFor={"8"} className="block cursor-pointer select-none  py-[6px] px-2 text-center peer-checked:bg-customYellow rounded-[50px] peer-checked:text-black">ممنوع</label>
                                     </div>
 
                                 </div>
@@ -45,12 +45,12 @@ const page = () => {
                                 <div className="grid grid-cols-2 w-full lg:!max-w-[8rem] lg:!mb-0 mb-4 gap-2  bg-gray-200 p-1 rounded-[32px]">
                                     <div>
                                         <input type="radio" name="music" id="3" value="1" className="peer hidden" />
-                                        <label htmlFor={"3"} className="block cursor-pointer select-none  py-[6px] px-2 text-center peer-checked:bg-[#f0c807] rounded-[50px] peer-checked:text-black">مجاز</label>
+                                        <label htmlFor={"3"} className="block cursor-pointer select-none  py-[6px] px-2 text-center peer-checked:bg-customYellow rounded-[50px] peer-checked:text-black">مجاز</label>
                                     </div>
 
                                     <div>
                                         <input type="radio" name="music" id="4" value="2" className="peer hidden" />
-                                        <label htmlFor={"4"} className="block cursor-pointer select-none  py-[6px] px-2 text-center peer-checked:bg-[#f0c807] rounded-[50px] peer-checked:text-black">ممنوع</label>
+                                        <label htmlFor={"4"} className="block cursor-pointer select-none  py-[6px] px-2 text-center peer-checked:bg-customYellow rounded-[50px] peer-checked:text-black">ممنوع</label>
                                     </div>
 
                                 </div>
@@ -65,12 +65,12 @@ const page = () => {
                                 <div className="grid grid-cols-2 w-full lg:!max-w-[8rem] lg:!mb-0 mb-4 gap-2  bg-gray-200 p-1 rounded-[32px]">
                                     <div>
                                         <input type="radio" name="smoke" id="5" value="1" className="peer hidden" />
-                                        <label htmlFor={"5"} className="block cursor-pointer select-none  py-[6px] px-2 text-center peer-checked:bg-[#f0c807] rounded-[50px] peer-checked:text-black">مجاز</label>
+                                        <label htmlFor={"5"} className="block cursor-pointer select-none  py-[6px] px-2 text-center peer-checked:bg-customYellow rounded-[50px] peer-checked:text-black">مجاز</label>
                                     </div>
 
                                     <div>
                                         <input type="radio" name="smoke" id="6" value="2" className="peer hidden" />
-                                        <label htmlFor={"6"} className="block cursor-pointer select-none  py-[6px] px-2 text-center peer-checked:bg-[#f0c807] rounded-[50px] peer-checked:text-black">ممنوع</label>
+                                        <label htmlFor={"6"} className="block cursor-pointer select-none  py-[6px] px-2 text-center peer-checked:bg-customYellow rounded-[50px] peer-checked:text-black">ممنوع</label>
                                     </div>
 
                                 </div>
