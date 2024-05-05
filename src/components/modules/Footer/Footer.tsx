@@ -17,30 +17,30 @@ const Footer = () => {
                                 </p>
                                 <div className='flex items-center justify-around lg:w-max gap-8 w-full '>
                                     <div className='flex flex-col space-y-2'>
-                                        <Link className='font-vazir-light text-sm font-bold text-blue-700 ' href={'/'}>
+                                        <Link className='font-vazir font-light  text-sm font-bold text-blue-700 ' href={'/'}>
                                             چگونه مهمان شویم
                                         </Link>
-                                        <Link className='font-vazir-light text-sm font-bold text-blue-700 ' href={'/'}>
+                                        <Link className='font-vazir font-light  text-sm font-bold text-blue-700 ' href={'/'}>
                                             چگونه مهمان شویم
                                         </Link>
-                                        <Link className='font-vazir-light text-sm font-bold text-blue-700 ' href={'/'}>
+                                        <Link className='font-vazir font-light  text-sm font-bold text-blue-700 ' href={'/'}>
                                             چگونه مهمان شویم
                                         </Link>
-                                        <Link className='font-vazir-light text-sm font-bold text-blue-700 ' href={'/'}>
+                                        <Link className='font-vazir font-light  text-sm font-bold text-blue-700 ' href={'/'}>
                                             چگونه مهمان شویم
                                         </Link>
                                     </div>
                                     <div className='flex flex-col space-y-2'>
-                                        <Link className='font-vazir-light text-sm font-bold text-blue-700 ' href={'/'}>
+                                        <Link className='font-vazir font-light  text-sm font-bold text-blue-700 ' href={'/'}>
                                             چگونه مهمان شویم
                                         </Link>
-                                        <Link className='font-vazir-light text-sm font-bold text-blue-700 ' href={'/'}>
+                                        <Link className='font-vazir font-light  text-sm font-bold text-blue-700 ' href={'/'}>
                                             چگونه مهمان شویم
                                         </Link>
-                                        <Link className='font-vazir-light text-sm font-bold text-blue-700 ' href={'/'}>
+                                        <Link className='font-vazir font-light  text-sm font-bold text-blue-700 ' href={'/'}>
                                             چگونه مهمان شویم
                                         </Link>
-                                        <Link className='font-vazir-light text-sm font-bold text-blue-700 ' href={'/'}>
+                                        <Link className='font-vazir font-light  text-sm font-bold text-blue-700 ' href={'/'}>
                                             چگونه مهمان شویم
                                         </Link>
 

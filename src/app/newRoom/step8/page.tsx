@@ -184,7 +184,7 @@ const page = () => {
                                         <div>
                                             <div className='flex gap-3 items-center'>
                                                 <img className='h-8 rounded-full w-8' src={data.avatar} alt="" />
-                                                <p className=' font-vazir-bold '>{data.title}</p>
+                                                <p className=' font-vazir font-extrabold  '>{data.title}</p>
                                             </div>
                                             <p className='mt-2 text-sm mb-3'>تکمیل قیمت‌های این فصل اجباری است</p>
                                         </div>

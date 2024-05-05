@@ -27,8 +27,8 @@ const Accordion: FC<AccordionProps> = ({
     const handleOpen = (value: number) => setOpen(open === value ? 0 : value);
     return (
         <AccordionComponent className={className} placeholder={null} open={open === id}>
-            <AccordionHeader placeholder={null} className='font-vazir-medium text-sm !font-normal' onClick={() => handleOpen(id)}>{title}</AccordionHeader>
-            <AccordionBody className="text-[#404040] font-vazir-light text-sm  leading-6">
+            <AccordionHeader placeholder={null} className='font-vazir font-medium text-sm !font-normal' onClick={() => handleOpen(id)}>{title}</AccordionHeader>
+            <AccordionBody className="text-[#404040] font-vazir font-light  text-sm  leading-6">
                 {text}
             </AccordionBody>
         </AccordionComponent>

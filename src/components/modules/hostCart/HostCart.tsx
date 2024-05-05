@@ -38,7 +38,7 @@ const HostCart: FC<HostCartProps> = ({
             </div>
             <div className='py-4 flex flex-col items-center h-[-webkit-fill-available]'>
                 <h3 className='my-4 font-medium text-center'>{title}</h3>
-                <p className='text-sm text-textGray font-vazir-light text-justify leading-6'>
+                <p className='text-sm text-textGray font-vazir font-light  text-justify leading-6'>
                     {readMore && !readMoreStatus ? (
                         <>
                             <> {description.slice(0, 175) + '...'} <span style={{ background: 'linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 75%, rgba(252, 176, 69, 0) 100%)' }} onClick={() => setReadMoreStatus(true)} className='relative -right-6 pr-4 text-blue-600 cursor-pointer'>بیشتر</span></>

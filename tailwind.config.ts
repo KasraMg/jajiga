@@ -29,10 +29,11 @@ const config: Config =  withMT({
             },
         },
         fontFamily: {
-            'vazir-bold': 'Vazir-bold',
-            'vazir-light': 'Vazir-light',
-            'vazir-medium': 'Vazir-medium',
+            'vazir': ['var(--font-vazir)'] , 
         },
+        colors: {
+            customYellow: '#f0c807', // مثال از رنگ سبز تیره
+          }
     },
  
 });

@@ -1,10 +1,31 @@
 'use client';
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google'
-const inter = Inter({ subsets: ['latin'] });
 import { ThemeProvider } from "@material-tailwind/react";
+import localFont from 'next/font/local'
  
+const fonts = localFont({
+    src: [
+        {
+            path: '../../public/fonts/vazir/Vazir-Bold.woff2',
+            weight: '800',
+            style: 'normal',
+        },
+        {
+            path: '../../public/fonts/vazir/Vazir-Medium.woff2',
+            weight: '500',
+            style: 'normal',
+        },
+        {
+            path: '../../public/fonts/vazir/Vazir-Light.woff2',
+            weight: '300',
+            style: 'normal',
+        }
+    ],
+    variable: '--font-vazir'
+})
+
+
 export default function RootLayout({
     children,
 }: {
@@ -12,9 +33,9 @@ export default function RootLayout({
 }) {
     return (
         <html lang='en'>
-            <body className={`|${inter.className}`}>
+            <body className={`${fonts.variable}`}>
                 <ThemeProvider>
-                    {children}
+                    {children} 
                 </ThemeProvider>
             </body>
         </html >

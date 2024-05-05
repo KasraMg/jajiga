@@ -7,7 +7,7 @@ const Infoes = () => {
         <div>
             <h2 className='text-lg text-[#252a31] my-6 mb-4'>درباره اقامتگاه</h2>
             <p className='text-[#404040]'>اجاره اقامتگاه در رامسر</p>
-            <div className='text-[#404040] text-sm leading-6 font-light font-vazir-light'>
+            <div className='text-[#404040] text-sm leading-6 font-light font-vazir font-light '>
                 این ویلا دو خوابه دارای استخر آبگرم با سیستم تصفیه اتوماتیک در
                 منطقه شهری و در عین حال در جای دنج و خلوتی قرار دارد.
                 <br />

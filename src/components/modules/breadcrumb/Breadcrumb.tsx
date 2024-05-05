@@ -24,19 +24,19 @@ const Breadcrumb: FC<BreadcrumbProps> = ({
     children
 }) => {
     return (
-        <section id='breadcrumb' className={`${className} relative mt-[58px] bg-[#f0c807] pb-9 pt-7 bg-cover bg-center`}>
+        <section id='breadcrumb' className={`${className} relative mt-[58px] bg-customYellow pb-9 pt-7 bg-cover bg-center`}>
             <div className='top-0   absolute w-full h-full breadcrumb_bg'></div>
             <div className=' max-w-[1074px] mx-auto pr-4 xl:!px-0'>
                 {template ? children : (
                     <>
                         {title ? (
-                            <p className='z-50 relative text-2xl font-vazir-bold text-black'>{title}</p>
+                            <p className='z-50 relative text-2xl font-vazir font-extrabold  text-black'>{title}</p>
                         ) : (
 
                             <div className='flex items-center gap-1'>
-                                <Link href={'/'} className='font-vazir-light z-50 relative text-black'>جاجیگا</Link>
+                                <Link href={'/'} className='font-vazir font-light  z-50 relative text-black'>جاجیگا</Link>
                                 <FaAngleLeft />
-                                {route && <span className='text-xl font-vazir-bold text-black z-50'>{route}</span>}
+                                {route && <span className='text-xl font-vazir font-extrabold  text-black z-50'>{route}</span>}
                                 {routes && routes.map((route, index) => (
                                     <Link href={`/category/${route}`} className='flex z-50 items-center text-[#505050] text-xs mx-[2px] gap-[2px]' key={index} >
                                         {route}

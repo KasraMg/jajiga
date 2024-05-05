@@ -5,13 +5,14 @@ import MobileMenu from '../mobileMenu/MobileMenu'
 
 interface ContainerProps {
     children: React.ReactNode,
-    disableFooter?: boolean
+    disableFooter?: boolean,
+    navbarContainer?:boolean
 }
-const Container: FC<ContainerProps> = ({ children, disableFooter }) => {
+const Container: FC<ContainerProps> = ({ children, disableFooter,navbarContainer }) => {
 
     return (
         <>
-            <Navbar />
+            <Navbar navbarContainer={navbarContainer}/>
             {children}
             <MobileMenu />
             {!disableFooter && <Footer />}

@@ -33,35 +33,35 @@ const Menu: FC<LayoutProps> = ({
                 
                 <div className='mt-4 mr-4'>
                     <ul>
-                        <li className='flex gap-2 pl-6 hover:bg-[#f5f5f5]  pr-2 rounded-r-3xl py-2 pb-3 bg-[#f5f5f5] items-center text-[#666666] font-vazir-light flex-row-reverse'>
+                        <li className='flex gap-2 pl-6 hover:bg-[#f5f5f5]  pr-2 rounded-r-3xl py-2 pb-3 bg-[#f5f5f5] items-center text-[#666666] font-vazir font-light  flex-row-reverse'>
                             <TbHome className='text-xl' />
                             <span className='mt-1 text-sm'>صفحه اصلی</span>
                         </li>
-                        <li className='flex gap-2 pl-6 hover:bg-[#f5f5f5]  pr-2 rounded-r-3xl py-2 pb-3 items-center text-[#666666] font-vazir-light flex-row-reverse'>
+                        <li className='flex gap-2 pl-6 hover:bg-[#f5f5f5]  pr-2 rounded-r-3xl py-2 pb-3 items-center text-[#666666] font-vazir font-light  flex-row-reverse'>
                             <FaRegHeart className='text-xl' />
                             <span className='mt-1 text-sm'>علاقه مندی ها</span>
                         </li>
-                        <li className='flex gap-2 pl-6 hover:bg-[#f5f5f5]  pr-2 rounded-r-3xl py-2 pb-3 items-center text-[#666666] font-vazir-light flex-row-reverse'>
+                        <li className='flex gap-2 pl-6 hover:bg-[#f5f5f5]  pr-2 rounded-r-3xl py-2 pb-3 items-center text-[#666666] font-vazir font-light  flex-row-reverse'>
                             <TbHomePlus className='text-xl' />
                             <span className='mt-1 text-sm'> میزبان شو</span>
                         </li>
-                        <li className='flex gap-2 pl-6 hover:bg-[#f5f5f5]  pr-2 rounded-r-3xl py-2 pb-3 items-center text-[#666666] font-vazir-light flex-row-reverse'>
+                        <li className='flex gap-2 pl-6 hover:bg-[#f5f5f5]  pr-2 rounded-r-3xl py-2 pb-3 items-center text-[#666666] font-vazir font-light  flex-row-reverse'>
                             <BiSupport className='text-xl' />
                              <span className='mt-1 text-sm'>پشتیبانی</span>
                         </li>
-                        <li className='flex gap-2 pl-6 hover:bg-[#f5f5f5]  pr-2 rounded-r-3xl py-2 pb-3 items-center text-[#666666] font-vazir-light flex-row-reverse'>
+                        <li className='flex gap-2 pl-6 hover:bg-[#f5f5f5]  pr-2 rounded-r-3xl py-2 pb-3 items-center text-[#666666] font-vazir font-light  flex-row-reverse'>
                             <TbMessage2Question className='text-xl' />
                             <span className='mt-1 text-sm'>سوالات متداول</span>
                         </li> 
-                        <li className='flex gap-2 pl-6 hover:bg-[#f5f5f5]  pr-2 rounded-r-3xl py-2 pb-3 items-center text-[#666666] font-vazir-light flex-row-reverse'>
+                        <li className='flex gap-2 pl-6 hover:bg-[#f5f5f5]  pr-2 rounded-r-3xl py-2 pb-3 items-center text-[#666666] font-vazir font-light  flex-row-reverse'>
                             <IoShieldCheckmarkOutline className='text-xl' />
                             <span className='mt-1 text-sm'>ضمانت تحویل</span>
                         </li>
-                        <li className='flex gap-2 pl-6 hover:bg-[#f5f5f5]  pr-2 rounded-r-3xl py-2 pb-3 items-center text-[#666666] font-vazir-light flex-row-reverse'>
+                        <li className='flex gap-2 pl-6 hover:bg-[#f5f5f5]  pr-2 rounded-r-3xl py-2 pb-3 items-center text-[#666666] font-vazir font-light  flex-row-reverse'>
                             <GrNotes className='text-xl' />
                             <span className='mt-1 text-sm'>قوانین وبسایت</span>
                         </li>
-                        <li className='flex gap-2 pl-6 hover:bg-[#f5f5f5]  pr-2 rounded-r-3xl py-2 pb-3 items-center text-[#666666] font-vazir-light flex-row-reverse'>
+                        <li className='flex gap-2 pl-6 hover:bg-[#f5f5f5]  pr-2 rounded-r-3xl py-2 pb-3 items-center text-[#666666] font-vazir font-light  flex-row-reverse'>
                             <TbInfoCircle className='text-xl' />
                             <span className='mt-1 text-sm'>درباره ما</span>
                         </li>

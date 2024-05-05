@@ -28,7 +28,7 @@ const page = () => {
                     </div> 
                     <div className='flex flex-col gap-3 w-full'>
                         <p>انتخاب موقعیت در نقشه</p>
-                        <p className='font-vazir-light text-sm leading-6'>مکان نما در وسط صفحه ثابت است. نقشه را به گونه ای حرکت دهیه تا مکان نما بر روی مکان اقامتگاه شما قرار گیرد. با استفاده از کلید + بر روی نقشه زوم کنید.</p>
+                        <p className='font-vazir font-light text-sm leading-6'>مکان نما در وسط صفحه ثابت است. نقشه را به گونه ای حرکت دهیه تا مکان نما بر روی مکان اقامتگاه شما قرار گیرد. با استفاده از کلید + بر روی نقشه زوم کنید.</p>
                         <Alert variant={"danger"} />
                         <Map className='mb-20 z-10' mapChangeHandler={mapChangeHandler} position={[35.551066,51.297588]}/>
                         <ContentNavigator  disablelPrevButton={false} disabelNextButton={disabelNextButton} prevLink={'newRoom/step1'} nextLink={'newRoom/step3'} />

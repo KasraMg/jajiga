@@ -51,15 +51,15 @@ const page = () => {
                                     fill='#9B9B9B'
                                 ></path>
                             </svg>
-                            <p className='text-[#404040] !font-vazir-bold'>
+                            <p className='text-[#404040] !font-vazir font-extrabold '>
                                 هنوز اقامتگاهی رو اضافه نکردی
                             </p>
                             <div className='flex items-center justify-center text-[#404040]'>
-                                <span className='!font-vazir-light text-sm'>
+                                <span className='!font-vazir font-light  text-sm'>
                                     هر اقامتگاهی که ازش خوشت میاد رو با کلیک بر
                                 </span>
                                 <FaRegHeart className='text-[#cc0001] mx-1' />
-                                <span className='!font-vazir-light text-sm'>
+                                <span className='!font-vazir font-light  text-sm'>
                                     به این لیست اضافه کن، تا وقتی تخفیف میخوره خبرت کنیم
                                 </span>
                             </div>
@@ -68,7 +68,7 @@ const page = () => {
                                 className='cursor-pointer hover:bg-[#d2b43d] duration-300 !rounded-lg px-3'
                             >
                                 <CiSearch className='text-xl ml-2' />
-                                <p className='font-vazir-light text-base'>جستجو</p>
+                                <p className='font-vazir font-light  text-base'>جستجو</p>
                             </Button>
                         </div>
                         <div className='max-w-[1120px] mx-auto pt-2'>
