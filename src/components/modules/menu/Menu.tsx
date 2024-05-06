@@ -7,6 +7,7 @@ import { TbHomePlus, TbHome, TbInfoCircle, TbMessage2Question } from "react-icon
 import { IoShieldCheckmarkOutline } from "react-icons/io5"
 import { GrNotes } from "react-icons/gr";
 import { PiGithubLogo, PiInstagramLogo, PiTelegramLogoLight } from "react-icons/pi";
+import { GoHome } from 'react-icons/go';
 interface LayoutProps {
     show: boolean,
     hideHandler: () => void
@@ -34,7 +35,7 @@ const Menu: FC<LayoutProps> = ({
                 <div className='mt-4 mr-4'>
                     <ul>
                         <li className='flex gap-2 pl-6 hover:bg-[#f5f5f5]  pr-2 rounded-r-3xl py-2 pb-3 bg-[#f5f5f5] items-center text-[#666666] font-vazir font-light  flex-row-reverse'>
-                            <TbHome className='text-xl' />
+                            <GoHome className='text-xl' />
                             <span className='mt-1 text-sm'>صفحه اصلی</span>
                         </li>
                         <li className='flex gap-2 pl-6 hover:bg-[#f5f5f5]  pr-2 rounded-r-3xl py-2 pb-3 items-center text-[#666666] font-vazir font-light  flex-row-reverse'>
