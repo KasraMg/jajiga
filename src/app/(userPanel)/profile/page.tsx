@@ -3,8 +3,7 @@ import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import Button from "@/src/components/modules/button";
 import Container from "@/src/components/modules/container/Container";
 import Image from "next/image";
-import Box from "@/src/components/templates/userPanel/profile/Box";
-import Modal from '@/src/components/modules/modal/Modal';
+import Box from "@/src/components/templates/userPanel/profile/Box"; 
 const Profile = () => {
   return (
     <Container disableFooter={true}>
@@ -24,6 +23,7 @@ const Profile = () => {
             />
             <span className=" absolute bottom-1 right-0 bg-customYellow rounded-full px-[10px] pt-[.2rem] pb-[.1rem]">
               +
+              <input type="file" className=" opacity-0 w-full h-full"  />
             </span>
           </div>
           <div className="border-t border-solid border-[#00000031] pt-4 grid grid-cols-[auto,auto] gap-5">
