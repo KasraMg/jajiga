@@ -13,8 +13,8 @@ const Modal: FC<ModalProps> = ({ show, hideHandler, title, children }) => {
       <ModalComponent
         dismissible={true}
         className={`${
-          !show ? "opacity-0 -translate-y-full" : "!opacity-100 !translate-y-full"
-        } z-[999] transition-transform  !overflow-y-hidden`} 
+          !show ? "invisible scale-105" : "visible scale-100"
+        } z-[999] transition-transform !overflow-x-hidden`}
         onClose={hideHandler}
         show={true}
       >
