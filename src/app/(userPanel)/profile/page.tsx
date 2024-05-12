@@ -8,12 +8,12 @@ const Profile = () => {
   return (
     <Container disableFooter={true}>
       <Breadcrumb
-        className="hidden md:block !pb-[70px]"
+        className="!pb-[70px]"
         route={"حساب کاربری"}
       />
       <Layout className="flex gap-4 w-full !min-w-full">
-        <main className="Container">
-          <div className="relative mx-auto block bottom-4 w-max">
+        <main>
+          <div className="relative mx-auto block bottom-4 w-max ">
             <Image
               className="w-20 h-20 rounded-full"
               height={1000}
@@ -21,15 +21,19 @@ const Profile = () => {
               alt="profile"
               src="/images/profile.jpg"
             />
-            <span className=" absolute bottom-1 right-0 bg-customYellow rounded-full px-[10px] pt-[.2rem] pb-[.1rem]">
+            <span className="h-7 w-7 absolute bottom-1 right-0 bg-customYellow rounded-full px-[10px] pt-[.2rem] pb-[.1rem]">
               +
               <input type="file" className=" opacity-0 w-full h-full"  />
             </span>
           </div>
-          <div className="border-t border-solid border-[#00000031] pt-4 grid grid-cols-[auto,auto] gap-5">
+          <div className="border-t border-solid border-[#00000031] md:!px-0 px-2 pt-4 grid grid-cols-[auto] lg:!grid-cols-[auto,auto] gap-5">
             <Box />
             <Box />
             <Box />
+            <Box />
+            <Box />
+            <Box />
+            
           </div>
           <Button size={"sm"} className="bg-gray-100 text-black block my-5">
             ﺗﻐﯿﯿﺮ رمزعبور

@@ -127,7 +127,7 @@ const Dashboard = () => {
               <FaChevronLeft className="cursor-pointer text-sm absolute left-2 top-7" />
             </div>
           </div>
-          <div className="mt-5">
+          {/* <div className="mt-5">
             <p>اقامتگاه های خود را تکمیل کنید</p>
             <span className="text-xs font-thin">
               توجه: اقامتگاه تنها بعد از تکمیل، قابل بررسی و انتشار می‌باشد.
@@ -171,10 +171,10 @@ const Dashboard = () => {
                 </div>
               </div>
             </section>
-          </div>
-          {/* <div className="bg-red-200 p-4 rounded-lg text-center mx-auto mt-16">
-            <p>آگهی ای موجود نیست</p>
           </div> */}
+          <div className="bg-red-200 p-4 rounded-lg text-center mx-auto mt-16">
+            <p>آگهی ای موجود نیست</p>
+          </div>
         </div>
       </main>
     </Container>
