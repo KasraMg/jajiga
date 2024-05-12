@@ -6,6 +6,11 @@ html {
   direction: rtl;
 }
 
+body{
+  overflow-y: auto !important;
+  padding: 0 !important;
+}
+
 * {
   font-family: var(--font-vazir);
   font-weight: 500;
