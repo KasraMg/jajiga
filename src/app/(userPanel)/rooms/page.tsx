@@ -1,14 +1,14 @@
+"use client";
 import Layout from "@/src/components/modules/Layout/Layout";
-import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb"; 
-import Container from "@/src/components/modules/container/Container"; 
-import Card from "@/src/components/templates/index/SpecialAccommodations/components/Card";
+import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
+import Container from "@/src/components/modules/container/Container";
+import Card from "@/src/components/templates/userPanel/rooms/Card"; 
+import { useState } from "react"; 
 const Reserve = () => {
-  
+  const [showUnComplatePosts, setShowUnComplatePosts] = useState(false);
   return (
     <Container disableFooter={true}>
-      <Breadcrumb 
-        route={"رزرو ها"}
-      />
+      <Breadcrumb className="!pb-[80px]" route={"اقامتگاه ها"} />
       <Layout className="flex gap-4 w-full !min-w-full">
         <main>
           {/* <div className="flex flex-col justify-center mt-16 text-center">
@@ -16,16 +16,42 @@ const Reserve = () => {
             <p className="mt-4">در حال حاضر رزروی ندارید</p>
           </div> */}
 
-          <div className="grid md:!grid-cols-[auto,auto] lg:!grid-cols-[auto,auto,auto] mt-5 gap-4 mb-5">
-              <Card className="w-full" />
-              <Card className="w-full" />
-              <Card className="w-full" />
-              <Card className="w-full" />
-              <Card className="w-full" />
-              <Card className="w-full" />
-              <Card className="w-full" />
-              <Card className="w-full" />
+          <div className="relative bottom-[29px] flex gap-3 text-sm">
+            <p
+              onClick={() => setShowUnComplatePosts(false)}
+              className={`${
+                !showUnComplatePosts &&
+                "!text-black font-bold border-b-2 border-black border-solid"
+              } pb-2 text-gray-700 cursor-pointer`}
+            >
+              همه (1){" "}
+            </p>
+            <p
+              onClick={() => setShowUnComplatePosts(true)}
+              className={`${
+                showUnComplatePosts &&
+                "!text-black font-bold border-b-2 border-black border-solid"
+              } pb-2 text-gray-700  cursor-pointer`}
+            >
+              در حال تکمیل (1){" "}
+            </p>
           </div>
+
+          {showUnComplatePosts ? (
+            <div className="grid xl:!grid-cols-[auto,auto,auto] md:!grid-cols-[auto,auto] !grid-cols-[auto] gap-4"> 
+              <Card /> 
+            </div>
+          ) : (
+            <div className="grid xl:!grid-cols-[auto,auto,auto] md:!grid-cols-[auto,auto] !grid-cols-[auto] gap-4">
+              <Card />
+              <Card />
+              <Card />
+              <Card />
+              <Card />
+              <Card />
+             
+            </div>
+          )}
         </main>
       </Layout>
     </Container>
