@@ -5,7 +5,7 @@ import { RiUpload2Line } from "react-icons/ri";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { AiOutlineLogout } from "react-icons/ai";
 import { GoHome } from "react-icons/go";
-import { FaChevronLeft, FaRegTrashCan } from "react-icons/fa6";
+import { FaChevronLeft } from "react-icons/fa6";
 import Image from "next/image";
 import Button from "@/src/components/modules/button";
 import { IoNotificationsOutline } from "react-icons/io5";
@@ -41,19 +41,15 @@ const Dashboard = () => {
               <RiUpload2Line className="text-2xl" />
               <p>انتخاب تصویر</p>
             </Link>
-            <Link className="flex gap-2 mt-5 justify-start" href={"/profile"}>
+            <Link className="flex gap-2 mt-5 justify-start" href={"/"}>
               <GoHome className="text-2xl" />
               <p>صفحه اصلی</p>
             </Link>
-            <Link className="flex gap-2 mt-5 justify-start" href={"/profile"}>
+            <Link className="flex gap-2 mt-5 justify-start" href={"/reservs"}>
               <RiUpload2Line className="text-2xl" />
               <p>رزرو ها</p>
-            </Link>
-            <Link className="flex gap-2 mt-5 justify-start" href={"/profile"}>
-              <RiUpload2Line className="text-2xl" />
-              <p>نظر ها</p>
-            </Link>
-            <Link className="flex gap-2 mt-5 justify-start" href={"/profile"}>
+            </Link> 
+            <Link className="flex gap-2 mt-5 justify-start" href={"/rooms"}>
               <RiUpload2Line className="text-2xl" />
               <p>اقامتگاه ها</p>
             </Link>
