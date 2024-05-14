@@ -7,7 +7,7 @@ import React from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Container from '@/src/components/modules/container/Container';
-const page = () => {   
+const About = () => {   
  
     useEffect(() => {
         AOS.init();
@@ -162,4 +162,4 @@ const page = () => {
     );
 }; 
 
-export default page;
+export default About;
