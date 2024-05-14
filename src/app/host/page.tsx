@@ -9,7 +9,7 @@ import Button from '@/src/components/modules/button';
 import useHostCartData from '@/src/hooks/useHostCartData';
 import Container from '@/src/components/modules/container/Container';
 
-const page = () => {
+const Host = () => {
     const HostData = useHostCartData();
     return (
         <Container> 
@@ -56,4 +56,4 @@ const page = () => {
     );
 };
 
-export default page; 
+export default Host; 

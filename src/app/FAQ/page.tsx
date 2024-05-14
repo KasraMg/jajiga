@@ -6,7 +6,7 @@ import Container from '@/src/components/modules/container/Container'
  
 
 
-const page = () => {
+const Faq = () => {
   return (
     <Container> 
       <Breadcrumb route='سوالات متداول' />
@@ -26,4 +26,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Faq
