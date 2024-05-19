@@ -10,9 +10,9 @@ const Login = () => {
   return (
     <Container>
       <Breadcrumb route="ورود" />
-      <div className="!z-10 relative bottom-2 rounded-xl gap-20 bg-white flex   justify-center px-3 sm:!px-5`">
-        <div className="mt-20">
-          <div className="w-[350px] hidden">
+      <div className="!z-10 relative bottom-2 rounded-xl gap-8 lg:!gap-20 pt-10 bg-white flex flex-col-reverse md:!flex-row pb-20 justify-center px-3 sm:!px-5`">
+        <div className="mt-20 relative z-[9999]">
+          <div className="w-full md:!w-[350px] hidden pb-20">
             <p className="text-lg font-bold">ورود / ثبت‌نام</p>
             <span className="text-sm font-thin mt-3">
               برای ورود یا ثبت‌نام، شماره همراه خود را وارد کنید
@@ -43,7 +43,7 @@ const Login = () => {
               قوانین و مقررات
             </Link>
           </div>
-          <div className="w-[350px] hidden ">
+          <div className="w-full md:!w-[350px] pb-7 hidden">
             <div className="flex justify-between items-center">
               <p dir="ltr">+989046417084</p>
               <Button className="!px-4 !rounded-sm" variant={"outlineMain"}>
@@ -72,7 +72,7 @@ const Login = () => {
               ورود با کد یکبار مصرف
             </Button>
           </div>
-          <div className="w-[350px] hidden">
+          <div className="w-full md:!w-[350px] hidden">
             <div className="flex justify-between items-center">
               <p dir="ltr">+989046417084</p>
               <Button className="!px-4 !rounded-sm" variant={"outlineMain"}>
@@ -111,9 +111,8 @@ const Login = () => {
             >
               ورود با رمز عبور
             </Button>
-          </div>
-          
-          <div className="w-[350px]  ">
+          </div> 
+          <div className="w-full md:!w-[350px] ">
             <div className="flex justify-between items-center">
               <p dir="ltr">+989046417084</p>
               <Button className="!px-4 !rounded-sm" variant={"outlineMain"}>

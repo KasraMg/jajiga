@@ -20,18 +20,20 @@ function MeshComponent() {
 
 export function Shape() {
     return (
-        <div className='flex justify-center items-center'>
+       <div className=' relative md:!h-auto h-[220px] lg:!w-[430px] md:!w-[300px] w-full'>
+         <div className='flex justify-center items-center absolute'>
             <Canvas
                 flat
+                
                 camera={{
                     fov: 30,
                     near: 0.1,
-                    far: 500,
-                    position: [95, 10, 95],
+                    far: 500, 
+                    position: [95, 5, 95],
                 }}
-                className='!h-[670px] !w-[430px]'
+                className='md:!h-[670px] !h-[400px] !w-full md:!w-[300px] lg:!w-[430px]'
             >
-                <OrbitControls />
+                <OrbitControls enableZoom={false}/>
                 <ambientLight intensity={1.5} />
                 <pointLight position={[10, 10, 10]} intensity={220.5} color={'#f0c807'} />
                 <pointLight position={[-90, -90, -90]} intensity={220.5} color={'#f0c807'} />
@@ -44,6 +46,7 @@ export function Shape() {
                 <MeshComponent />
             </Canvas>
         </div>
+       </div>
     );
 }
 
