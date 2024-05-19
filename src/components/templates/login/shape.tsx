@@ -20,14 +20,14 @@ function MeshComponent() {
 
 export function Shape() {
     return (
-        <div className='flex justify-center items-center h-screen'>
+        <div className='flex justify-center items-center'>
             <Canvas
                 flat
                 camera={{
-                    fov: 45,
+                    fov: 30,
                     near: 0.1,
                     far: 500,
-                    position: [90, 30, 35],
+                    position: [95, 10, 95],
                 }}
                 className='!h-[670px] !w-[430px]'
             >
@@ -46,3 +46,5 @@ export function Shape() {
         </div>
     );
 }
+
+ 

@@ -10,7 +10,7 @@ import React, { FC, ReactNode } from 'react'
     children, 
   }) => { 
   return (
-    <main className={`${className} relative bottom-2 rounded-xl z-10 bg-white flex items-center justify-center px-3 sm:!px-5`}> 
+    <main className={`${className} relative bottom-2 rounded-xl z-10 bg-white px-3 sm:!px-5`}> 
       <div className='Container'>
           {children}
       </div>
