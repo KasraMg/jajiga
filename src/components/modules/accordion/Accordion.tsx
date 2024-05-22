@@ -1,40 +1,35 @@
-
-
-
-import React, { FC, useState } from 'react'
 import {
-    Accordion as AccordionComponent,
-    AccordionHeader,
-    AccordionBody,
-} from "@material-tailwind/react";
-
+  Accordion as AccordionParent,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/src/components/shadcn/ui/accordion";
+import { FC } from "react";
 
 interface AccordionProps {
-    className?: string,
-    title: string,
-    text: string,
-    id: number
+  className?: string;
+  title: string;
+  text: string;
+  id: number;
 }
 
-const Accordion: FC<AccordionProps> = ({
-    className,
-    title,
-    text,
-    id
-}) => {
-    const [open, setOpen] = useState(1);
+const Accordion: FC<AccordionProps> = ({ className, title, text, id }) => {
+  return (
+    <AccordionParent
+      className={`${className ? className : ""}`}
+      type="single"
+      collapsible
+    >
+      <AccordionItem value={`item-${id}`}>
+        <AccordionTrigger className="font-vazir text-sm !font-normal hover:no-underline">
+          {title}
+        </AccordionTrigger>
+        <AccordionContent className="text-[#404040] font-vazir font-light  text-sm  leading-6">
+          {text}
+        </AccordionContent>
+      </AccordionItem>
+    </AccordionParent>
+  );
+};
 
-    const handleOpen = (value: number) => setOpen(open === value ? 0 : value);
-    return (
-        <AccordionComponent className={className} placeholder={null} open={open === id}>
-            <AccordionHeader placeholder={null} className='font-vazir font-medium text-sm !font-normal' onClick={() => handleOpen(id)}>{title}</AccordionHeader>
-            <AccordionBody className="text-[#404040] font-vazir font-light  text-sm  leading-6">
-                {text}
-            </AccordionBody>
-        </AccordionComponent>
-
-    )
-}
-
-export default Accordion
-
+export default Accordion;

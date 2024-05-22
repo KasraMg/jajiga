@@ -10,9 +10,9 @@ const Login = () => {
   return (
     <Container>
       <Breadcrumb route="ورود" />
-      <div className="!z-10 relative bottom-2 rounded-xl gap-8 lg:!gap-20 pt-10 bg-white flex flex-col-reverse md:!flex-row pb-20 justify-center px-3 sm:!px-5`">
-        <div className="mt-20 relative z-[9999]">
-          <div className="w-full md:!w-[350px] hidden pb-20">
+      <div className="!z-10 relative bottom-2 rounded-xl gap-8 lg:!gap-20 pt-5 sm:!pt-10 bg-white flex flex-col-reverse md:!flex-row pb-20 justify-center px-3 sm:!px-5`">
+        <div className="mt-20 relative z-[9999] px-3 sm:!px-0">
+          <div className="w-full md:!w-[350px] sm:!pb-20">
             <p className="text-lg font-bold">ورود / ثبت‌نام</p>
             <span className="text-sm font-thin mt-3">
               برای ورود یا ثبت‌نام، شماره همراه خود را وارد کنید
@@ -43,7 +43,7 @@ const Login = () => {
               قوانین و مقررات
             </Link>
           </div>
-          <div className="w-full md:!w-[350px] pb-7 hidden">
+          <div className="w-full md:!w-[350px] sm:!pb-7 hidden">
             <div className="flex justify-between items-center">
               <p dir="ltr">+989046417084</p>
               <Button className="!px-4 !rounded-sm" variant={"outlineMain"}>
@@ -79,14 +79,14 @@ const Login = () => {
                 ویرایش
               </Button>
             </div>
-            <p className="mt-2 text-sm">
+            <p className="sm:!mt-2 mt-4 text-sm">
               کد فعالسازی به شماره موبایل شما پیامک شد
             </p>
-            <div className="my-6 relative flex justify-between items-center">
+            <div className="my-6 relative flex flex-col sm:!gap-0 gap-2 sm:!flex-row justify-between items-start sm:!items-center">
               <p className="text-sm">کد فعالسازی را وارد کنید</p>
               <input
                 type="number"
-                className="px-6 !py-1 rounded-md  placeholder:text-center text-center w-[150px]"
+                className="px-6 !py-1 rounded-md  placeholder:text-center text-center w-full sm:!w-[150px]"
                 placeholder="11111"
               />
             </div>
@@ -112,7 +112,7 @@ const Login = () => {
               ورود با رمز عبور
             </Button>
           </div> 
-          <div className="w-full md:!w-[350px] ">
+          <div className="w-full md:!w-[350px] hidden">
             <div className="flex justify-between items-center">
               <p dir="ltr">+989046417084</p>
               <Button className="!px-4 !rounded-sm" variant={"outlineMain"}>
