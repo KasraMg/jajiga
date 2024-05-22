@@ -1,15 +1,11 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { CiSearch } from 'react-icons/ci';
-import { FaRegCircleUser } from 'react-icons/fa6';
-import { RxHamburgerMenu } from 'react-icons/rx';
+import { CiSearch } from 'react-icons/ci'; 
 import Menu from '../menu/Menu';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
-const Navbar = ({ navbarContainer }: any) => {
-
-
+const Navbar = ({ navbarContainer }: any) => { 
     const route = usePathname();
     const [isSticky, setIsSticky] = useState<boolean>(
         route.length > 2 ? true : false
@@ -51,7 +47,7 @@ const Navbar = ({ navbarContainer }: any) => {
                 >
                     <Link
                         href={'/'}
-                        className='relative w-[50px] xl:!w-[120px] right-2 flex items-center'
+                        className='relative w-[50px] xl:!w-[120px] sm:!right-2 flex items-center'
                     >
                         <svg
                             width={120}
@@ -102,7 +98,7 @@ const Navbar = ({ navbarContainer }: any) => {
                         </svg>
                     </Link>
 
-                    <div className='flex items-center gap-6'>
+                    <div className='flex items-center sm:!gap-6 gap-0 justify-center sm:!justify-normal'>
                         {isSticky && (
                             <div className='flex gap-3 md:!w-max w-[55%]'>
                                 <div className='relative mx-auto  md:!w-max w-full'>
@@ -113,7 +109,7 @@ const Navbar = ({ navbarContainer }: any) => {
                                         style={{ boxShadow: 'none' }}
                                         dir='rtl'
                                         type='text'
-                                        className='h-full pr-3 border border-[#0000005c] rounded-full placeholder:text-gray-300 pl-8 sm:!text-base sm:placeholder:!text-base placeholder:text-sm text-sm focus:!border-[#6B7280] sm:!w-full w-full md:!w-[170px] lg:!w-[363px]'
+                                        className='h-full md:!py-0 py-2 pr-3 border border-[#0000005c] rounded-full placeholder:text-gray-300 pl-8 sm:!text-base sm:placeholder:!text-base placeholder:text-sm text-sm focus:!border-[#6B7280] sm:!w-full w-full md:!w-[170px] lg:!w-[363px]'
                                         placeholder='میخوای کجا بری؟'
                                     />
                                 </div>
