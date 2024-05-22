@@ -14,12 +14,12 @@ const Modal: FC<ModalProps> = ({ show, hideHandler, title, children }) => {
         dismissible={true}
         className={`${
           !show ? "invisible scale-105" : "visible scale-100"
-        } z-[999] transition-transform !overflow-x-hidden`}
+        } z-[999] transition-transform !overflow-x-hidden !bg-[#00000061]`}
         onClose={hideHandler}
         show={true}
       >
         {title && (
-          <ModalComponent.Header className="text-center justify-center">
+          <ModalComponent.Header className="text-center justify-center py-3">
             {title}
           </ModalComponent.Header>
         )}
@@ -30,3 +30,4 @@ const Modal: FC<ModalProps> = ({ show, hideHandler, title, children }) => {
 };
 
 export default Modal;
+

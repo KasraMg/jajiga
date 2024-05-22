@@ -32,8 +32,7 @@ const Profile = () => {
             <Box />
             <Box />
             <Box />
-            <Box />
-            
+            <Box /> 
           </div>
           <Button size={"sm"} className="bg-gray-100 text-black block my-5">
             ﺗﻐﯿﯿﺮ رمزعبور

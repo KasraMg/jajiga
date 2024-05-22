@@ -1,4 +1,4 @@
-import Button from '@/src/components/modules/button'
+"use client"
 import { registerSchema } from '@/src/validations/rules';
 import { useFormik } from 'formik';
 import React, { useState } from 'react'
