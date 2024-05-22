@@ -17,6 +17,7 @@ const Button: FC<buttonProps> = ({
   return (
     <button
       type={type && type}
+      style={{transition:'all ease-in .1s'}}
       className={cn(buttonVariants({ variant, size, className }))}>
       {children}
     </button>

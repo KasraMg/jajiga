@@ -13,10 +13,8 @@ const Navbar = ({ navbarContainer }: any) => {
     const route = usePathname();
     const [isSticky, setIsSticky] = useState<boolean>(
         route.length > 2 ? true : false
-    );
-    const [showMenu, setShowMenu] = useState<boolean>(false);
-
-    const hideMenuHandler = () => setShowMenu(false);
+    ); 
+ 
     useEffect(() => {
         window?.addEventListener('scroll', () => {
             if (route.length == 1) {
@@ -48,12 +46,12 @@ const Navbar = ({ navbarContainer }: any) => {
                     } `}
             >
                 <div
-                    className={`${!isSticky ? 'py-4' : 'py-2'
+                    className={`${!isSticky ? 'py-3' : 'py-0'
                         } ${navbarContainer ? 'xl:!px-8' : 'Container xl:!px-0'} flex justify-between px-3 lg:!px-6 gap-2 sm:!gap-2 lg:!gap-5`}
                 >
                     <Link
                         href={'/'}
-                        className='relative w-[50px] xl:!w-[120px]'
+                        className='relative w-[50px] xl:!w-[120px] right-2 flex items-center'
                     >
                         <svg
                             width={120}
@@ -115,7 +113,7 @@ const Navbar = ({ navbarContainer }: any) => {
                                         style={{ boxShadow: 'none' }}
                                         dir='rtl'
                                         type='text'
-                                        className=' border-[#0000005c] rounded-full placeholder:text-gray-300 pl-8 sm:!text-base sm:placeholder:!text-base placeholder:text-sm text-sm focus:!border-[#6B7280] sm:!w-full w-full md:!w-[170px] lg:!w-[363px]'
+                                        className='h-full pr-3 border border-[#0000005c] rounded-full placeholder:text-gray-300 pl-8 sm:!text-base sm:placeholder:!text-base placeholder:text-sm text-sm focus:!border-[#6B7280] sm:!w-full w-full md:!w-[170px] lg:!w-[363px]'
                                         placeholder='میخوای کجا بری؟'
                                     />
                                 </div>
@@ -192,23 +190,12 @@ const Navbar = ({ navbarContainer }: any) => {
                                 <li>میزبان شوید</li>
                                 <li>علاقه مندی ها</li>
                             </ul>
-                            <div
-                                className={` ${isSticky && 'border border-solid'
-                                    } border-[#0000005c] flex gap-2 bg-[#ffffff54] items-center pr-3 pl-2 p-1 rounded-full text-3xl`}
-                            >
-                                <FaRegCircleUser className='text-gray-500' />
-                                <RxHamburgerMenu
-                                    className=' text-xl cursor-pointer'
-                                    onClick={() => setShowMenu(true)}
-                                />
-                            </div>
+                            <Menu isSticky={isSticky}/>
                         </section>
                     </div>
 
                 </div>
-            </nav>
-
-            <Menu hideHandler={hideMenuHandler} show={showMenu} />
+            </nav> 
         </>
     );
 };

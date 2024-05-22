@@ -9,7 +9,7 @@ className?:string
 }
 const Card: FC<CardProps> = ({className}) => {
   return (
-    <section className={`xl:!w-full mx-auto ${className}`}>
+    <section className={`xl:!w-full mx-auto ${className} `}>
       <div className='relative w-full'>
         <img className='rounded-xl w-full object-cover  h-52' src="https://storage.jajiga.com/public/pictures/medium/3181811230115103439.jpg" alt="" />
         <div className='flex flex-col p-2 absolute top-[2px] right-[2px]'>
