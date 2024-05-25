@@ -98,9 +98,9 @@ const Navbar = ({ navbarContainer }: any) => {
                         </svg>
                     </Link>
 
-                    <div className='flex items-center sm:!gap-6 gap-0 justify-center sm:!justify-normal'>
+                    <div className='flex items-center sm:!gap-6 gap-0 justify-end sm:!justify-normal'>
                         {isSticky && (
-                            <div className='flex gap-3 md:!w-max w-[55%]'>
+                            <div className='flex gap-3 md:!w-max w-[60%] sm:!w-[55%]'>
                                 <div className='relative mx-auto  md:!w-max w-full'>
                                     <i className=' absolute cursor-pointer top-[1.5px] sm:!top-[4.3px] left-[2px] sm:!left-1 py-2 rounded-full px-2 text-[1.2rem] text-black'>
                                         <CiSearch />

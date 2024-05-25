@@ -5,7 +5,7 @@
 import Breadcrumb from '@/src/components/modules/breadcrumb/Breadcrumb'; 
 import React from 'react';
 import HostCart from '@/src/components/modules/hostCart/HostCart'; 
-import Button from '@/src/components/modules/button';
+import {Button} from '@/src/components/shadcn/ui/button';
 import useHostCartData from '@/src/hooks/useHostCartData';
 import Container from '@/src/components/modules/container/Container';
 

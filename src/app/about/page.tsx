@@ -14,7 +14,7 @@ const About = () => {
     }, []);
     return (
         <Container> 
-            <Breadcrumb  />
+            <Breadcrumb route='درباره ما' />
             <Layout>
                 <section className='flex items-center px-24 mt-20 flex-row-reverse gap-16 leading-7'>
                     <img
@@ -26,7 +26,7 @@ const About = () => {
                         alt=''
                     />
                     <div className=' space-y-6'>
-                        <p className='text-2xl'>سلام ایسا خانوم</p>
+                        <p className='text-2xl'>رویکرد جدید گردشگران</p>
                         <p>
                             امروزه بسیاری از گردشگران داخلی و خارجی ترجیح میدهند
                             تا با اقامت در منازل شخصی مردم و در کنار ایشان فضای
@@ -97,7 +97,7 @@ const About = () => {
                         alt=''
                     />
                     <div className=' space-y-6 mt-6'>
-                        <p className='text-2xl'>سلام ایسا خانوم</p>
+                        <p className='text-2xl'>لمس زندگی روزمره مردم محلی</p>
                         <p>
                             امروزه بسیاری از گردشگران داخلی و خارجی ترجیح میدهند
                             تا با اقامت در منازل شخصی مردم و در کنار ایشان فضای

@@ -89,7 +89,7 @@ const page = () => {
                     ))}
                     <div className='flex justify-between items-center'>
                         <label className='text-sm'>سایر امکانات</label>
-                        <input placeholder={'سایر امکانات'} className=' text-sm placeholder:text-gray-500 w-[65%] p-2 rounded-md' type="text" />
+                        <input placeholder={'سایر امکانات'} className=' text-sm placeholder:text-gray-500 w-[65%] p-2 rounded-md border border-gray-400 border-solid' type="text" />
                     </div>
                     <p className='border-t border-solid border-gray-200 pt-5 !mt-8'>اقلام بهداشتی</p>
                     {sanitaryItems.map(data => (
@@ -100,7 +100,7 @@ const page = () => {
                     ))}
                     <div className='flex justify-between items-center !mb-16'>
                         <label className='text-sm'>سایر موارد</label>
-                        <input placeholder={'سایر موارد'} className=' text-sm placeholder:text-gray-500 w-[65%] p-2 rounded-md' type="text" />
+                        <input placeholder={'سایر موارد'} className=' text-sm placeholder:text-gray-500 w-[65%] p-2 rounded-md border border-gray-400 border-solid' type="text" />
                     </div>
                     <ContentNavigator disablelPrevButton={false} disabelNextButton={disabelNextButton} prevLink={'newRoom/step5'} nextLink={'newRoom/step7'} />
                 </div>

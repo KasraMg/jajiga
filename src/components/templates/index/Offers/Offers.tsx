@@ -11,7 +11,7 @@ const Offers = () => {
             <Slider
                 Card={Card}
                 navigation={true}
-                className='mySwiper w-full mx-auto lg:!pr-6 mt-4 sm:!pl-6'
+                className='mySwiper w-full mx-auto  mt-4 sm:!pl-6'
                 breakPoints={{
                     600: {
                         slidesPerView: 2,

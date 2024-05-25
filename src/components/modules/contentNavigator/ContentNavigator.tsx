@@ -1,7 +1,7 @@
 
 
 import React, { FC } from 'react'
-import Button from '../button'
+import { Button } from '../../shadcn/ui/button'
 import Link from 'next/link'
 
 interface ContentNavigatorProps {

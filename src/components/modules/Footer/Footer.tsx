@@ -7,7 +7,7 @@ import CitiesList from './components/CitiesList';
 const Footer = () => {
     return (
         <div className='bg-[#f1f1f1]  rounded-2xl pt-8 mt-10'>
-            <div className='Container mx-auto px-5'>
+            <div className='Container mx-auto px-3 sm:!px-5'>
                 <div className='flex flex-col gap-8 md:flex-row justify-between'>
                     <div className='flex flex-col w-full mb-5 lg:mb-0'>
                         <div className='flex flex-col sm:flex-row gap-[2.5rem] xl:gap-[3.75rem]'>
