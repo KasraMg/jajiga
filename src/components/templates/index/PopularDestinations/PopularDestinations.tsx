@@ -30,7 +30,7 @@ const PopularDestinations = () => {
                 spaceBetween={0}
                 navigation={true}
                 modules={[Grid, Navigation]}
-                className='PopularSwiper w-full !h-[230px] sm:!h-[260px] lg:!h-[365px] mx-auto    sm:!pl-8'
+                className='PopularSwiper w-full !h-[230px] sm:!h-[260px] lg:!h-[365px] mx-auto sm:!pl-[9px]'
             >
                 <SwiperSlide className='lg:!h-[178px] !h-[110px] sm:!h-[123px] !mx-auto'>
                     <Card />

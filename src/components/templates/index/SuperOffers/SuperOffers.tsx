@@ -15,7 +15,7 @@ const SuperOffers = () => {
                 <Slider
                     Card={Card}
                     navigation={true}
-                    className='mySwiper w-full mx-auto lg:!pr-6 text-white  sm:!pl-6'
+                    className='mySwiper w-full mx-auto  text-white  sm:!pl-6'
                     breakPoints={{
                         600: {
                             slidesPerView: 2,

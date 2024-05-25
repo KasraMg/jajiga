@@ -30,7 +30,7 @@ const page = () => {
                     <Stepper active={7} />
                 </div>
                 <div className='w-full space-y-4'>
-                    <div className='flex justify-between   pl-1 sm:!flex-row flex-col items-start sm:!items-center'>
+                    <div className='flex justify-between pl-1 sm:!flex-row flex-col items-start sm:!items-center'>
                         <p>حداقل مدت اقامت</p>
                         <div className='flex justify-between w-full sm:!my-0 my-2 sm:!w-1/2 items-center'>
                             <p onClick={() => setDayCount(prev => prev + 1)} className='text-2xl cursor-pointer hover:text-gray-500'>+</p>

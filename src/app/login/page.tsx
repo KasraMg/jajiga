@@ -3,7 +3,7 @@ import { LuEye } from "react-icons/lu";
 import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import Container from "@/src/components/modules/container/Container";
 import { Shape } from "../../components/templates/login/shape";
-import Button from "@/src/components/modules/button";
+import { Button } from "@/src/components/shadcn/ui/button";
 import Link from "next/link";
 
 const Login = () => {
@@ -12,7 +12,7 @@ const Login = () => {
       <Breadcrumb route="ورود" />
       <div className="!z-10 relative bottom-2 rounded-xl gap-8 lg:!gap-20 pt-5 sm:!pt-10 bg-white flex flex-col-reverse md:!flex-row pb-20 justify-center px-3 sm:!px-5`">
         <div className="mt-20 relative z-[9999] px-3 sm:!px-0">
-          <div className="w-full md:!w-[350px] sm:!pb-20">
+          <div className="w-full md:!w-[350px] sm:!pb-20 hidden">
             <p className="text-lg font-bold">ورود / ثبت‌نام</p>
             <span className="text-sm font-thin mt-3">
               برای ورود یا ثبت‌نام، شماره همراه خود را وارد کنید
@@ -20,12 +20,12 @@ const Login = () => {
             <div className="relative mt-4">
               <input
                 dir="ltr"
-                className="rounded-lg pl-11 pr-3 w-full  text-sm"
+                className="rounded-lg pl-11 py-3 pr-3 w-full border border-solid border-gray-400 text-sm"
                 type="number"
                 name=""
                 id=""
               />
-              <span className="absolute left-3 top-[10px] font-thin">+98</span>
+              <span className="absolute left-3 top-[12px] font-thin">+98</span>
               <span className="absolute -top-2 right-3 bg-white px-1 text-xs">
                 شماره همراه
               </span>
@@ -54,10 +54,10 @@ const Login = () => {
             <div className="my-6 relative">
               <input
                 type="text"
-                className="pl-6 pr-3 rounded-md  w-full text-sm"
+                className="pl-6 pr-3 rounded-md  w-full text-sm py-3 border border-solid border-gray-400"
                 placeholder="رمز عبور"
               />
-              <LuEye className=" cursor-pointer absolute top-3 left-3" />
+              <LuEye className=" cursor-pointer absolute top-[14px] left-3" />
             </div>
             <Button
               className="!rounded-full w-full mt-5 text-center justify-center"
@@ -86,7 +86,7 @@ const Login = () => {
               <p className="text-sm">کد فعالسازی را وارد کنید</p>
               <input
                 type="number"
-                className="px-6 !py-1 rounded-md  placeholder:text-center text-center w-full sm:!w-[150px]"
+                className="px-6 !py-1 rounded-md  placeholder:text-center text-center w-full sm:!w-[150px] border border-solid border-gray-400"
                 placeholder="11111"
               />
             </div>
@@ -111,8 +111,8 @@ const Login = () => {
             >
               ورود با رمز عبور
             </Button>
-          </div> 
-          <div className="w-full md:!w-[350px] hidden">
+          </div>
+          <div className="w-full md:!w-[350px] ">
             <div className="flex justify-between items-center">
               <p dir="ltr">+989046417084</p>
               <Button className="!px-4 !rounded-sm" variant={"outlineMain"}>
@@ -120,16 +120,26 @@ const Login = () => {
               </Button>
             </div>
             <p className="mt-2 text-2xl mb-2">ثبت‌نام</p>
-            <p className="text-sm font-thin">لطفا مشخصات صحیح خود را وارد کنید</p>
-            <input className="pl-6 pr-3 rounded-md text-sm mt-3 w-full" type="text" placeholder="نام"/>
-            <input className="pl-6 pr-3 rounded-md text-sm mt-3 w-full" type="text" placeholder="نام خانوادگی"/>
+            <p className="text-sm font-thin">
+              لطفا مشخصات صحیح خود را وارد کنید
+            </p>
+            <input
+              className="pl-6 pr-3 rounded-md text-sm mt-3 w-full py-2 border border-solid border-gray-400"
+              type="text"
+              placeholder="نام"
+            />
+            <input
+              className="pl-6 pr-3 rounded-md text-sm mt-3 w-full py-2 border border-solid border-gray-400"
+              type="text"
+              placeholder="نام خانوادگی"
+            />
             <div className=" relative">
               <input
                 type="text"
-                className="pl-6 pr-3 rounded-md text-sm  mt-3 w-full"
+                className="pl-6 pr-3 rounded-md text-sm  mt-3 w-full py-2 border border-solid border-gray-400"
                 placeholder="رمز عبور"
               />
-              <LuEye className=" cursor-pointer absolute top-[21px] left-3" />
+              <LuEye className=" cursor-pointer absolute top-[23px] left-3" />
             </div>
             <Button
               className="!rounded-full w-max mx-auto !px-12  mt-5 text-center !block"
@@ -137,9 +147,7 @@ const Login = () => {
             >
               ثبت نام
             </Button>
-          
           </div>
-
         </div>
         <Shape />
       </div>

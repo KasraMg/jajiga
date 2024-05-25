@@ -76,7 +76,7 @@ const page = () => {
                         <div className='flex justify-between lg:!items-center flex-col lg:!flex-row items-start gap-2 lg:!gap-0'>
                             <p className='text-sm font-vazir font-light '>متراژ زمین و محوطه اقامتگاه</p>
                             <div className='flex justify-between lg:!w-1/2 w-full  lg:!items-center relative'>
-                                <input value={landSize} onChange={(event) => landSizeChangeHandler(event)} type="number" dir='ltr' className='outline-none py-2 pr-8 pl-9 rounded-lg w-full' />
+                                <input value={landSize} onChange={(event) => landSizeChangeHandler(event)} type="number" dir='ltr' className='outline-none py-2 border border-gray-400 border-solid pr-8 pl-9 rounded-lg w-full' />
                                 <span className='text-sm text-gray-500 absolute top-[10px] left-2'>متر</span>
                                 {landSize as any > 9999 && <span className='text-xs text-red-600 absolute -bottom-6'>متراژ زمین نمی‌تواند بزرگتر از 9999 متر باشد</span>}
                             </div>
@@ -85,7 +85,7 @@ const page = () => {
                         <div className='flex justify-between lg:!items-center !mt-10 flex-col lg:!flex-row items-start gap-2 lg:!gap-0 !pb-4'>
                             <p className='text-sm font-vazir font-light '>متراژ زیربنای اقامتگاه</p>
                             <div className='flex justify-between lg:!w-1/2 w-full  items-center relative'>
-                                <input value={areaSize} onChange={(event) => areaSizeChangeHandler(event)} type="number" dir='ltr' className='outline-none py-2 pr-8 pl-9 rounded-lg w-full' />
+                                <input value={areaSize} onChange={(event) => areaSizeChangeHandler(event)} type="number" dir='ltr' className='outline-none py-2 border border-gray-400 border-solid pr-8 pl-9 rounded-lg w-full' />
                                 <span className='text-sm text-gray-500 absolute top-[10px] left-2'>متر</span>
                                 {landSize < areaSize && <span className='text-xs text-red-600 absolute -bottom-[36px]'>متراژ بنای اقامتگاه نمی‌تواند بزرگتر از متراژ زمین و محوطه باشد</span>}
                                 {(landSize > areaSize && areaSize as any > 9999) && <span className='text-xs text-red-600 absolute -bottom-[27px]'>متراژ زیربنا نمی‌تواند بزرگتر از 9999 متر باشد</span>}
