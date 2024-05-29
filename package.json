@@ -16,6 +16,7 @@
     "@radix-ui/react-tabs": "^1.0.4",
     "@react-three/drei": "^9.105.6",
     "@react-three/fiber": "^8.16.6",
+    "@tanstack/react-query": "^5.39.0",
     "@types/leaflet": "^1.9.8",
     "@types/three": "^0.164.0",
     "aos": "^3.0.0-beta.6",
@@ -39,7 +40,8 @@
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.164.1",
-    "yup": "^1.1.1"
+    "yup": "^1.1.1",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@types/aos": "^3.0.7",
