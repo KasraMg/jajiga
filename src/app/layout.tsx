@@ -1,7 +1,6 @@
 'use client';
-import './globals.css';
-import type { Metadata } from 'next';
-import { ThemeProvider } from "@material-tailwind/react";
+import './globals.css'; 
+import QueryWrapper from '../utils/QueryWrapper';
 import localFont from 'next/font/local'
  
 const fonts = localFont({
@@ -34,9 +33,9 @@ export default function RootLayout({
     return (
         <html lang='en'>
             <body className={`${fonts.variable}`}>
-                <ThemeProvider>
+                <QueryWrapper>
                     {children} 
-                </ThemeProvider>
+                </QueryWrapper>
             </body>
         </html >
     );
@@ -45,4 +44,19 @@ export default function RootLayout({
 {/* <Head>
 <title>Parallax Effect with React</title>
 <link rel="icon" href="/favicon.ico" />
-</Head> */}
+</Head> 
+
+<Suspense
+          fallback={
+            <div className="center bg-white w-screen h-screen fixed top-0 left-0 z-50">
+              <Image
+                className="animate-pulse"
+                src="/images/logo.svg"
+                height={20.63}
+                width={100}
+                alt="لوگوی جاب ویژن"
+              />
+            </div>
+          }
+        >
+*/}
