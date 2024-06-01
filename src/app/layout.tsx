@@ -1,4 +1,3 @@
-'use client';
 import './globals.css'; 
 import QueryWrapper from '../utils/QueryWrapper';
 import localFont from 'next/font/local'
@@ -27,9 +26,9 @@ const fonts = localFont({
 
 export default function RootLayout({
     children,
-}: {
+}:Readonly <{
     children: React.ReactElement;
-}) {
+}>) {
     return (
         <html lang='en'>
             <body className={`${fonts.variable}`}>
