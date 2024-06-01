@@ -68,11 +68,11 @@ const Navbar = ({ navbarContainer }: any) => {
                                 >
                                     <stop
                                         offset='0'
-                                        stop-color='#cc0001'
+                                        stopColor='#cc0001'
                                     ></stop>
                                     <stop
                                         offset='1'
-                                        stop-color='#840000'
+                                        stopColor='#840000'
                                     ></stop>
                                 </linearGradient>
                             </defs>
@@ -178,13 +178,13 @@ const Navbar = ({ navbarContainer }: any) => {
                                     } hidden md:!flex gap-8 font-vazir font-medium flex-row-reverse`}
                             >
                                 {/* 
-                        <li>اعلانات</li>
-                        <li>رزرو ها</li>
-                        <li>اقامتگاه ها</li>
+                        <Link href={''}>اعلانات</Link>
+                        <Link href={''}>رزرو ها</Link>
+                        <Link href={''}>اقامتگاه ها</Link>
                     */}
-                                <li>ورود / ثبت نام</li>
-                                <li>میزبان شوید</li>
-                                <li>علاقه مندی ها</li>
+                                <Link href={'/register'}>ورود / ثبت نام</Link>
+                                <Link href={'/host'}>میزبان شوید</Link>
+                                <Link href={'/wishes'}>علاقه مندی ها</Link>
                             </ul>
                             <Menu isSticky={isSticky}/>
                         </section>
