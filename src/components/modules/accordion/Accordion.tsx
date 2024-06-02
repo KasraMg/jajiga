@@ -24,7 +24,7 @@ const Accordion: FC<AccordionProps> = ({ className, title, text, id }) => {
         <AccordionTrigger className="font-vazir text-sm !font-normal hover:no-underline">
           {title}
         </AccordionTrigger>
-        <AccordionContent className="text-[#404040] font-vazir font-light  text-sm  leading-6">
+        <AccordionContent className="font-vazir text-sm font-light leading-6 text-[#404040]">
           {text}
         </AccordionContent>
       </AccordionItem>

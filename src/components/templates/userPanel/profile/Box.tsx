@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { MdOutlineEdit } from "react-icons/md";
 import React, { useState } from "react";
 import EditModal from "./components/EditModal";
@@ -9,13 +9,13 @@ const Box = () => {
   return (
     <>
       <section>
-        <div className="flex justify-between items-center mt-4">
-          <p>نام و نام خانوادگی</p> 
-          <EditModal/>
+        <div className="mt-4 flex items-center justify-between">
+          <p>نام و نام خانوادگی</p>
+          <EditModal />
         </div>
 
-        <p className="text-gray-500 text-sm mt-4">کسرا مشکل گشا</p>
-      </section> 
+        <p className="mt-4 text-sm text-gray-500">کسرا مشکل گشا</p>
+      </section>
     </>
   );
 };

@@ -10,17 +10,17 @@ const Login = () => {
   return (
     <Container>
       <Breadcrumb route="ورود" />
-      <div className="!z-10 relative bottom-2 rounded-xl gap-8 lg:!gap-20 pt-5 sm:!pt-10 bg-white flex flex-col-reverse md:!flex-row pb-20 justify-center px-3 sm:!px-5`">
-        <div className="mt-20 relative z-[9999] px-3 sm:!px-0">
-          <div className="w-full md:!w-[350px] sm:!pb-20 hidden">
+      <div className="sm:!px-5` relative bottom-2 !z-10 flex flex-col-reverse justify-center gap-8 rounded-xl bg-white px-3 pb-20 pt-5 sm:!pt-10 md:!flex-row lg:!gap-20">
+        <div className="relative z-[9999] mt-20 px-3 sm:!px-0">
+          <div className="hidden w-full sm:!pb-20 md:!w-[350px]">
             <p className="text-lg font-bold">ورود / ثبت‌نام</p>
-            <span className="text-sm font-thin mt-3">
+            <span className="mt-3 text-sm font-thin">
               برای ورود یا ثبت‌نام، شماره همراه خود را وارد کنید
             </span>
             <div className="relative mt-4">
               <input
                 dir="ltr"
-                className="rounded-lg pl-11 py-3 pr-3 w-full border border-solid border-gray-400 text-sm"
+                className="w-full rounded-lg border border-solid border-gray-400 py-3 pl-11 pr-3 text-sm"
                 type="number"
                 name=""
                 id=""
@@ -31,118 +31,118 @@ const Login = () => {
               </span>
             </div>
             <Button
-              className="!rounded-full w-full mt-6 text-center justify-center"
+              className="mt-6 w-full justify-center !rounded-full text-center"
               variant={"main"}
             >
               ادامه
             </Button>
             <Link
               href={"/rules"}
-              className="mt-4 border-b-2 pb-2 border-solid border-customYellow mx-auto block w-max"
+              className="mx-auto mt-4 block w-max border-b-2 border-solid border-customYellow pb-2"
             >
               قوانین و مقررات
             </Link>
           </div>
-          <div className="w-full md:!w-[350px] sm:!pb-7 hidden">
-            <div className="flex justify-between items-center">
+          <div className="hidden w-full sm:!pb-7 md:!w-[350px]">
+            <div className="flex items-center justify-between">
               <p dir="ltr">+989046417084</p>
-              <Button className="!px-4 !rounded-sm" variant={"outlineMain"}>
+              <Button className="!rounded-sm !px-4" variant={"outlineMain"}>
                 ویرایش
               </Button>
             </div>
             <p className="mt-2">لطفا رمز عبور خود را وارد کنید</p>
-            <div className="my-6 relative">
+            <div className="relative my-6">
               <input
                 type="text"
-                className="pl-6 pr-3 rounded-md  w-full text-sm py-3 border border-solid border-gray-400"
+                className="w-full rounded-md border border-solid border-gray-400 py-3 pl-6 pr-3 text-sm"
                 placeholder="رمز عبور"
               />
-              <LuEye className=" cursor-pointer absolute top-[14px] left-3" />
+              <LuEye className="absolute left-3 top-[14px] cursor-pointer" />
             </div>
             <Button
-              className="!rounded-full w-full mt-5 text-center justify-center"
+              className="mt-5 w-full justify-center !rounded-full text-center"
               variant={"main"}
             >
               ورود
             </Button>
             <Button
-              className="!px-4 !rounded-full mx-auto mt-5 font-thin !block"
+              className="mx-auto mt-5 !block !rounded-full !px-4 font-thin"
               variant={"outlineMain"}
             >
               ورود با کد یکبار مصرف
             </Button>
           </div>
-          <div className="w-full md:!w-[350px] hidden">
-            <div className="flex justify-between items-center">
+          <div className="hidden w-full md:!w-[350px]">
+            <div className="flex items-center justify-between">
               <p dir="ltr">+989046417084</p>
-              <Button className="!px-4 !rounded-sm" variant={"outlineMain"}>
+              <Button className="!rounded-sm !px-4" variant={"outlineMain"}>
                 ویرایش
               </Button>
             </div>
-            <p className="sm:!mt-2 mt-4 text-sm">
+            <p className="mt-4 text-sm sm:!mt-2">
               کد فعالسازی به شماره موبایل شما پیامک شد
             </p>
-            <div className="my-6 relative flex flex-col sm:!gap-0 gap-2 sm:!flex-row justify-between items-start sm:!items-center">
+            <div className="relative my-6 flex flex-col items-start justify-between gap-2 sm:!flex-row sm:!items-center sm:!gap-0">
               <p className="text-sm">کد فعالسازی را وارد کنید</p>
               <input
                 type="number"
-                className="px-6 !py-1 rounded-md  placeholder:text-center text-center w-full sm:!w-[150px] border border-solid border-gray-400"
+                className="w-full rounded-md border border-solid border-gray-400 !py-1 px-6 text-center placeholder:text-center sm:!w-[150px]"
                 placeholder="11111"
               />
             </div>
-            <div className="my-6 relative flex justify-between items-center">
+            <div className="relative my-6 flex items-center justify-between">
               <p>کد را دریافت نکردید؟</p>
               <Button
-                className="!px-4 !rounded-sm text-sm"
+                className="!rounded-sm !px-4 text-sm"
                 variant={"outlineMain"}
               >
                 ارسال دوباره کد
               </Button>
             </div>
             <Button
-              className="!rounded-full w-full mt-5 text-center justify-center"
+              className="mt-5 w-full justify-center !rounded-full text-center"
               variant={"main"}
             >
               ورود
             </Button>
             <Button
-              className="!px-4 !rounded-full mx-auto mt-5 font-thin !block"
+              className="mx-auto mt-5 !block !rounded-full !px-4 font-thin"
               variant={"outlineMain"}
             >
               ورود با رمز عبور
             </Button>
           </div>
-          <div className="w-full md:!w-[350px] ">
-            <div className="flex justify-between items-center">
+          <div className="w-full md:!w-[350px]">
+            <div className="flex items-center justify-between">
               <p dir="ltr">+989046417084</p>
-              <Button className="!px-4 !rounded-sm" variant={"outlineMain"}>
+              <Button className="!rounded-sm !px-4" variant={"outlineMain"}>
                 ویرایش
               </Button>
             </div>
-            <p className="mt-2 text-2xl mb-2">ثبت‌نام</p>
+            <p className="mb-2 mt-2 text-2xl">ثبت‌نام</p>
             <p className="text-sm font-thin">
               لطفا مشخصات صحیح خود را وارد کنید
             </p>
             <input
-              className="pl-6 pr-3 rounded-md text-sm mt-3 w-full py-2 border border-solid border-gray-400"
+              className="mt-3 w-full rounded-md border border-solid border-gray-400 py-2 pl-6 pr-3 text-sm"
               type="text"
               placeholder="نام"
             />
             <input
-              className="pl-6 pr-3 rounded-md text-sm mt-3 w-full py-2 border border-solid border-gray-400"
+              className="mt-3 w-full rounded-md border border-solid border-gray-400 py-2 pl-6 pr-3 text-sm"
               type="text"
               placeholder="نام خانوادگی"
             />
-            <div className=" relative">
+            <div className="relative">
               <input
                 type="text"
-                className="pl-6 pr-3 rounded-md text-sm  mt-3 w-full py-2 border border-solid border-gray-400"
+                className="mt-3 w-full rounded-md border border-solid border-gray-400 py-2 pl-6 pr-3 text-sm"
                 placeholder="رمز عبور"
               />
-              <LuEye className=" cursor-pointer absolute top-[23px] left-3" />
+              <LuEye className="absolute left-3 top-[23px] cursor-pointer" />
             </div>
             <Button
-              className="!rounded-full w-max mx-auto !px-12  mt-5 text-center !block"
+              className="mx-auto mt-5 !block w-max !rounded-full !px-12 text-center"
               variant={"main"}
             >
               ثبت نام

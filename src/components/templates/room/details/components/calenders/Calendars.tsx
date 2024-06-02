@@ -38,7 +38,7 @@ const Calendars = () => {
 
   return (
     <div className="w-full">
-      <h2 className="text-lg text-[#252a31] my-6 mb-4">تقویم / نرخ</h2>
+      <h2 className="my-6 mb-4 text-lg text-[#252a31]">تقویم / نرخ</h2>
       <Calendar
         value={value}
         calendar={persian}
@@ -56,12 +56,12 @@ const Calendars = () => {
           return props;
         }}
       />
-      <div className="flex justify-between mt-4">
+      <div className="mt-4 flex justify-between">
         <Sheet>
           <SheetTrigger asChild>
             <div
               onClick={() => setShowMenu(true)}
-              className="bg-[#8080801a] text-sm p-2 cursor-pointer border-0 flex gap-3 rounded-lg items-center"
+              className="flex cursor-pointer items-center gap-3 rounded-lg border-0 bg-[#8080801a] p-2 text-sm"
             >
               <BsInfoCircle />
               راهنمای تقویم
@@ -69,84 +69,84 @@ const Calendars = () => {
           </SheetTrigger>
           <SheetContent
             dir="ltr"
-            className={`rounded-l-2xl py-7 !outline-none sm:!w-[400px] right-0 fixed z-[9999] top-0 border-r h-screen overflow-y-auto transition-transform  bg-white w-72 dark:bg-gray-800`}
+            className={`fixed right-0 top-0 z-[9999] h-screen w-72 overflow-y-auto rounded-l-2xl border-r bg-white py-7 !outline-none transition-transform dark:bg-gray-800 sm:!w-[400px]`}
           >
             <SheetHeader>
-              <p className="border-b border-solid border-[#0000000f] text-lg pb-4 text-right">
+              <p className="border-b border-solid border-[#0000000f] pb-4 text-right text-lg">
                 راهنمای تقویم
               </p>
-            </SheetHeader> 
-            <div className="flex gap-3 flex-row-reverse mt-8">
-              <div className="border-2 border-solid rounded-lg text-center p-[3px] px-2 border-[#f0c807]">
-                <p className="mb-0 text-sm mt-1">{date?.slice(0, 2)}</p>
+            </SheetHeader>
+            <div className="mt-8 flex flex-row-reverse gap-3">
+              <div className="rounded-lg border-2 border-solid border-[#f0c807] p-[3px] px-2 text-center">
+                <p className="mb-0 mt-1 text-sm">{date?.slice(0, 2)}</p>
                 <span className="text-[10px]">200,000</span>
               </div>
               <div className="text-right">
                 <p className="">امروز</p>
-                <p className="font-vazir font-light  text-xs sm:!text-sm">
+                <p className="font-vazir text-xs font-light sm:!text-sm">
                   نشان دهنده تاریخ امروز در تقویم
                 </p>
               </div>
             </div>
-            <div className="flex gap-3 flex-row-reverse mt-8">
-              <div className="  bg-[#0074d9]  rounded-lg text-center p-[3px] px-2 text-white border-[#00000018] border-solid border">
-                <p className="mb-0 text-sm mt-1">{date?.slice(0, 2)}</p>
+            <div className="mt-8 flex flex-row-reverse gap-3">
+              <div className="rounded-lg border border-solid border-[#00000018] bg-[#0074d9] p-[3px] px-2 text-center text-white">
+                <p className="mb-0 mt-1 text-sm">{date?.slice(0, 2)}</p>
                 <span className="text-[10px]">200,000</span>
               </div>
               <div className="text-right">
                 <p className="">تاریخ های رزرو</p>
-                <p className="font-vazir font-light  text-xs sm:!text-sm">
+                <p className="font-vazir text-xs font-light sm:!text-sm">
                   نشان دهنده تاریخ شروع و خاتمه رزرو
                 </p>
               </div>
             </div>
-            <div className="flex gap-3 flex-row-reverse mt-8">
-              <div className="border border-solid rounded-lg text-center text-red-600 p-[3px] px-2 border-[#00000018]">
-                <p className="mb-0 text-sm mt-1">{date?.slice(0, 2)}</p>
+            <div className="mt-8 flex flex-row-reverse gap-3">
+              <div className="rounded-lg border border-solid border-[#00000018] p-[3px] px-2 text-center text-red-600">
+                <p className="mb-0 mt-1 text-sm">{date?.slice(0, 2)}</p>
                 <span className="text-[10px]">200,000</span>
               </div>
 
               <div className="text-right">
                 <p className="">تعطیلات</p>
-                <p className="font-vazir font-light  text-xs sm:!text-sm">
+                <p className="font-vazir text-xs font-light sm:!text-sm">
                   {" "}
                   روزهای آخر هفته و تعطیلات
                 </p>
               </div>
             </div>
-            <div className="flex gap-3 flex-row-reverse mt-8">
+            <div className="mt-8 flex flex-row-reverse gap-3">
               <div
                 style={{
                   background:
                     " repeating-linear-gradient(-45deg, rgb(255, 255, 255), rgb(255, 255, 255) 3px, rgba(215, 215, 215, 0.8) 0px, rgba(215, 215, 215, 0.8) 6px)",
                 }}
-                className="border border-solid rounded-lg text-center p-[3px] px-2 border-[#00000018]"
+                className="rounded-lg border border-solid border-[#00000018] p-[3px] px-2 text-center"
               >
-                <p className="mb-0 text-sm mt-1">{date?.slice(0, 2)}</p>
+                <p className="mb-0 mt-1 text-sm">{date?.slice(0, 2)}</p>
                 <span className="text-[10px]">200,000</span>
               </div>
 
               <div className="text-right">
                 <p className="">روزهای پر شده</p>
-                <p className="font-vazir font-light  text-xs sm:!text-sm">
+                <p className="font-vazir text-xs font-light sm:!text-sm">
                   روزهایی که قبلا رزرو شده اند
                 </p>
               </div>
             </div>
-            <div className="flex gap-3 flex-row-reverse mt-8">
-              <div className="border border-solid rounded-lg text-center p-[3px] text-gray-400 px-2 border-[#00000018]">
-                <p className="mb-0 text-sm mt-1">{date.slice(0, 2)}</p>
+            <div className="mt-8 flex flex-row-reverse gap-3">
+              <div className="rounded-lg border border-solid border-[#00000018] p-[3px] px-2 text-center text-gray-400">
+                <p className="mb-0 mt-1 text-sm">{date.slice(0, 2)}</p>
                 <span className="text-[10px]">200,000</span>
               </div>
 
               <div className="text-right">
                 <p className=""> روزهای گذشته</p>
-                <p className="font-vazir font-light  text-xs sm:!text-sm">
+                <p className="font-vazir text-xs font-light sm:!text-sm">
                   روزهایی سپری شده در تقویم
                 </p>
               </div>
             </div>
-            <p className=" mt-48 text-center text-sm">
+            <p className="mt-48 text-center text-sm">
               همه قیمت ها به تومان هستند
             </p>
           </SheetContent>
@@ -154,7 +154,7 @@ const Calendars = () => {
 
         <div
           onClick={handleDelete}
-          className="border-dashed bg-white text-black border  rounded-xl text-sm font-medium transition-color w-fit px-3 cursor-pointer items-center justify-right border-black flex gap-2"
+          className="transition-color justify-right flex w-fit cursor-pointer items-center gap-2 rounded-xl border border-dashed border-black bg-white px-3 text-sm font-medium text-black"
         >
           <FaTrashAlt />
           پاک کردن

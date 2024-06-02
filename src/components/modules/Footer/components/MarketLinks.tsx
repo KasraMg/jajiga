@@ -1,17 +1,17 @@
-import { FC } from 'react';
+import { FC } from "react";
 
 interface ImageSrc {
-    src: string;
+  src: string;
 }
 
-const MarketLinks:FC<ImageSrc> = ({ src }) => {
-    return (
-        <>
-            <div className='px-2 py-1 lg:!w-full w-full sm:!w-[150px] md:!w-[147px] h-full bg-black rounded-lg'>
-                <img src={src} alt='' className='w-full' />
-            </div>
-        </>
-    );
+const MarketLinks: FC<ImageSrc> = ({ src }) => {
+  return (
+    <>
+      <div className="h-full w-full rounded-lg bg-black px-2 py-1 sm:!w-[150px] md:!w-[147px] lg:!w-full">
+        <img src={src} alt="" className="w-full" />
+      </div>
+    </>
+  );
 };
 
 export default MarketLinks;
