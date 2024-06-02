@@ -18,12 +18,13 @@ function MeshComponent() {
 }
 export function Shape() {
   return (
-    <div className=" relative md:!h-auto h-[150px] lg:!w-[430px] md:!w-[300px] w-full">
-      <div className="flex justify-center items-center absolute w-full">
+    <div className="relative h-[150px] w-full md:!h-auto md:!w-[300px] lg:!w-[430px]">
+      <div className="absolute flex w-full items-center justify-center">
         <Canvas
           flat
           camera={{ fov: 30, near: 0.1, far: 500, position: [95, 5, 95] }}
-          className="md:!h-[670px] !h-[400px] !w-full md:!w-[300px] lg:!w-[430px]">
+          className="!h-[400px] !w-full md:!h-[670px] md:!w-[300px] lg:!w-[430px]"
+        >
           <OrbitControls enableZoom={false} />
           <ambientLight intensity={1.5} />
           <pointLight

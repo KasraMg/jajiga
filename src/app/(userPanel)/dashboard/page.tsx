@@ -13,54 +13,54 @@ const Dashboard = () => {
   return (
     <Container disableFooter={true}>
       <Breadcrumb className="hidden md:block" route={"پیشخان"} />
-      <main className="md:!mt-8 !mt-20 Container flex gap-4 xl:!px-0 px-4">
+      <main className="Container !mt-20 flex gap-4 px-4 md:!mt-8 xl:!px-0">
         <aside
           style={{ boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 6px" }}
-          className="xl:!w-[25%] w-[40%] md:!block hidden pb-8 p-2 rounded-2xl"
+          className="hidden w-[40%] rounded-2xl p-2 pb-8 md:!block xl:!w-[25%]"
         >
-          <div className="bg-[url(https://www.jajiga.com/static/img/backdrop-pattern.svg)] bg-customYellow mb-10 rounded-2xl relative h-24">
+          <div className="relative mb-10 h-24 rounded-2xl bg-customYellow bg-[url(https://www.jajiga.com/static/img/backdrop-pattern.svg)]">
             <Image
               width={1000}
               height={1000}
-              className=" absolute -bottom-8 left-0 right-0 mx-auto block w-20 h-20 rounded-full"
+              className="absolute -bottom-8 left-0 right-0 mx-auto block h-20 w-20 rounded-full"
               src="/images/profile.jpg"
               alt=""
             />
           </div>
-          <div className="flex justify-center gap-2 items-center">
+          <div className="flex items-center justify-center gap-2">
             <p className="font-vazir text-sm font-thin">شاهین مشکل گشا</p>
             <Link
               href={"/profile"}
-              className="bg-black text-white rounded-full text-center p-2"
+              className="rounded-full bg-black p-2 text-center text-white"
             >
               <MdOutlineModeEdit />
             </Link>
           </div>
           <div className="px-2 pt-4">
-            <Link className="flex gap-2 justify-start" href={"/profile"}>
+            <Link className="flex justify-start gap-2" href={"/profile"}>
               <RiUpload2Line className="text-2xl" />
               <p>انتخاب تصویر</p>
             </Link>
-            <Link className="flex gap-2 mt-5 justify-start" href={"/"}>
+            <Link className="mt-5 flex justify-start gap-2" href={"/"}>
               <GoHome className="text-2xl" />
               <p>صفحه اصلی</p>
             </Link>
-            <Link className="flex gap-2 mt-5 justify-start" href={"/reservs"}>
+            <Link className="mt-5 flex justify-start gap-2" href={"/reservs"}>
               <RiUpload2Line className="text-2xl" />
               <p>رزرو ها</p>
-            </Link> 
-            <Link className="flex gap-2 mt-5 justify-start" href={"/rooms"}>
+            </Link>
+            <Link className="mt-5 flex justify-start gap-2" href={"/rooms"}>
               <RiUpload2Line className="text-2xl" />
               <p>اقامتگاه ها</p>
             </Link>
-            <div className="flex gap-2 mt-5 justify-start">
+            <div className="mt-5 flex justify-start gap-2">
               <AiOutlineLogout className="text-2xl" />
               <p>خروج</p>
             </div>
           </div>
         </aside>
-        <div className="xl:!w-[75%] md:!w-[60%] w-full">
-          <div className="flex items-start rounded-r-lg border-r-2 border-red-600 border-solid shadow-lg p-3 gap-2">
+        <div className="w-full md:!w-[60%] xl:!w-[75%]">
+          <div className="flex items-start gap-2 rounded-r-lg border-r-2 border-solid border-red-600 p-3 shadow-lg">
             <svg
               className="sc-679cb2a8-0 bpgCuB w-8"
               fill="currentColor"
@@ -110,8 +110,8 @@ const Dashboard = () => {
               </Link>
             </div>
           </div>
-          <div className="flex  pb-4 relative mt-5 items-start rounded-r-lg border-r-2 border-red-600 border-solid shadow-lg p-3 gap-2">
-            <div className="p-3 rounded-full bg-red-200">
+          <div className="relative mt-5 flex items-start gap-2 rounded-r-lg border-r-2 border-solid border-red-600 p-3 pb-4 shadow-lg">
+            <div className="rounded-full bg-red-200 p-3">
               <IoNotificationsOutline className="text-2xl text-red-600" />
             </div>
             <div className="grid gap-3">
@@ -120,7 +120,7 @@ const Dashboard = () => {
                 برای دریافت اعلان رزروها و تجربه بهتر از وب اپ جاجیگا لطفا کلیک
                 کنید و گزینه اجازه دادن (ALLOW) را انتخاب کنید.
               </span>
-              <FaChevronLeft className="cursor-pointer text-sm absolute left-2 top-7" />
+              <FaChevronLeft className="absolute left-2 top-7 cursor-pointer text-sm" />
             </div>
           </div>
           {/* <div className="mt-5">
@@ -168,7 +168,7 @@ const Dashboard = () => {
               </div>
             </section>
           </div> */}
-          <div className="bg-red-200 p-4 rounded-lg text-center mx-auto mt-16">
+          <div className="mx-auto mt-16 rounded-lg bg-red-200 p-4 text-center">
             <p>آگهی ای موجود نیست</p>
           </div>
         </div>

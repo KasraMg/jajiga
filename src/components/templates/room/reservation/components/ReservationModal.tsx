@@ -7,8 +7,8 @@ import {
   DialogTrigger,
 } from "@/src/components/shadcn/ui/dialog";
 import { useState } from "react";
-import { userCountOptions } from "@/src/utils/selectOptions"; 
-import Select from 'react-select';
+import { userCountOptions } from "@/src/utils/selectOptions";
+import Select from "react-select";
 import Link from "next/link";
 import { SlInfo } from "react-icons/sl";
 const ReservationModal = () => {
@@ -26,31 +26,31 @@ const ReservationModal = () => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle className="text-center py-3">
+          <DialogTitle className="py-3 text-center">
             تماس با پشتیبانی
           </DialogTitle>
         </DialogHeader>
-        <div className="rounded-b-2xl py-[14px] px-4">
-          <p className="text-sm text-[#252a31] mb-2 font-vazir font-light ">
+        <div className="rounded-b-2xl px-4 py-[14px]">
+          <p className="font-vazir mb-2 text-sm font-light text-[#252a31]">
             تاریخ سفر
           </p>
-          <div className="flex items-center rounded-lg border-[#d6d6d6] border justify-between py-2 px-5">
-            <div className="text-[#bac7d5] text-sm">
+          <div className="flex items-center justify-between rounded-lg border border-[#d6d6d6] px-5 py-2">
+            <div className="text-sm text-[#bac7d5]">
               <p>تاریخ ورود</p>
             </div>
-            <div className='bg-[#d6d6d6] w-[1px] min-h-[30px] after:content-[""] mx-2 inline-block'></div>
-            <div className="text-[#bac7d5] text-sm">
+            <div className='mx-2 inline-block min-h-[30px] w-[1px] bg-[#d6d6d6] after:content-[""]'></div>
+            <div className="text-sm text-[#bac7d5]">
               <p>تاریخ خروج</p>
             </div>
           </div>
-          <p className="text-sm text-[#252a31] mt-8 mb-2 font-vazir font-light ">
+          <p className="font-vazir mb-2 mt-8 text-sm font-light text-[#252a31]">
             تعداد نفرات
           </p>
           <Select
             defaultValue={countSelectedOption}
             onChange={setCountSelectedOption as any}
             isClearable={true}
-            className="lg:!w-full md:w-[200px] w-full  "
+            className="w-full md:w-[200px] lg:!w-full"
             isRtl={true}
             isSearchable={true}
             options={userCountOptions as any}
@@ -58,16 +58,16 @@ const ReservationModal = () => {
           />
           <Button
             variant="yellow"
-            className=" !top-0 !left-0 !right-0 !bottom-0 !relative rounded-full w-full text-center mt-5"
+            className="!relative !bottom-0 !left-0 !right-0 !top-0 mt-5 w-full rounded-full text-center"
           >
-            <div className="flex items-baseline justify-center text-textGray mx-auto">
+            <div className="text-textGray mx-auto flex items-baseline justify-center">
               <span>ثبت درخواست رزرو</span>
               <span className="text-[10px]">(رایگان)</span>
             </div>
           </Button>
           <Link href={"/faq"}>
             <Button
-              className="w-full justify-center  !top-0 !left-0 !right-0 !bottom-0 !relative mt-5 border-[#00000028]"
+              className="!relative !bottom-0 !left-0 !right-0 !top-0 mt-5 w-full justify-center border-[#00000028]"
               variant={"white"}
             >
               <SlInfo className="!h-5 !w-5 !text-black" />

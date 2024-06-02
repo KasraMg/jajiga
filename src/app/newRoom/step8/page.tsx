@@ -110,7 +110,7 @@ const page = () => {
   const midweekHandler = (
     event: ChangeEvent<HTMLInputElement>,
     id: number,
-    date: string
+    date: string,
   ) => {
     const seasonId = id - 1;
     const season = seasonDatas[seasonId];
@@ -130,7 +130,7 @@ const page = () => {
   const lastWeekendHandler = (
     event: ChangeEvent<HTMLInputElement>,
     id: number,
-    date: string
+    date: string,
   ) => {
     const seasonId = id - 1;
     const season = seasonDatas[seasonId];
@@ -151,7 +151,7 @@ const page = () => {
   const holidaysHandler = (
     event: ChangeEvent<HTMLInputElement>,
     id: number,
-    date: string
+    date: string,
   ) => {
     const seasonId = id - 1;
     const season = seasonDatas[seasonId];
@@ -171,99 +171,99 @@ const page = () => {
 
   return (
     <StepLayout stepperActive={8}>
-      <div className="max-w-[1120px] py-8 flex gap-0 sm:!gap-5">
-        <div className="hidden md:!flex lg:!min-w-[21%] min-w-[23%] ">
+      <div className="flex max-w-[1120px] gap-0 py-8 sm:!gap-5">
+        <div className="hidden min-w-[23%] md:!flex lg:!min-w-[21%]">
           <Stepper active={8} />
         </div>
-        <div className="w-full space-y-4 mb-20">
-          <div className="flex justify-between items-center">
-            <p className="lg:!text-base text-sm">نرخ تعطیلات نوروز</p>
+        <div className="mb-20 w-full space-y-4">
+          <div className="flex items-center justify-between">
+            <p className="text-sm lg:!text-base">نرخ تعطیلات نوروز</p>
             <div className="relative w-1/2 lg:!w-[60%]">
               <input
                 type="number"
                 dir="ltr"
-                className="p-2 pl-14 rounded-md w-full border border-gray-400 border-solid"
+                className="w-full rounded-md border border-solid border-gray-400 p-2 pl-14"
               />
-              <span className="text-gray-500 absolute top-2 left-2">تومان</span>
+              <span className="absolute left-2 top-2 text-gray-500">تومان</span>
             </div>
           </div>
           {season &&
-            season.map((data) => ( 
-                <div className="py-2 pb-3">
-                  <AccordionParent className={``} type="single" collapsible>
-                    <AccordionItem value={`item-${data.id}`}>
-                      <AccordionTrigger className="font-vazir text-sm !font-normal hover:no-underline ">
-                        <div>
-                          <div className="flex gap-3 items-center">
-                            <img
-                              className="h-8 rounded-full w-8"
-                              src={data.avatar}
-                              alt=""
-                            />
-                            <p className=" font-vazir font-extrabold  ">
-                              {data.title}
-                            </p>
-                          </div>
-                          <p className="mt-2 text-sm mb-3">
-                            تکمیل قیمت‌های این فصل اجباری است
+            season.map((data) => (
+              <div className="py-2 pb-3">
+                <AccordionParent className={``} type="single" collapsible>
+                  <AccordionItem value={`item-${data.id}`}>
+                    <AccordionTrigger className="font-vazir text-sm !font-normal hover:no-underline">
+                      <div>
+                        <div className="flex items-center gap-3">
+                          <img
+                            className="h-8 w-8 rounded-full"
+                            src={data.avatar}
+                            alt=""
+                          />
+                          <p className="font-vazir font-extrabold">
+                            {data.title}
                           </p>
                         </div>
-                      </AccordionTrigger>
-                      <AccordionContent className="text-[#404040] font-vazir font-light  text-sm  leading-6">
-                        <div className="flex justify-between lg:!gap-0 gap-2 items-start lg:!items-center lg:!flex-row flex-col">
-                          <p className="lg:!text-base text-sm">وسط هفته</p>
-                          <div className="relative w-full lg:!w-[60%]">
-                            <input
-                              onChange={(event) =>
-                                midweekHandler(event, data.id, "وسط هفته")
-                              }
-                              type="number"
-                              dir="ltr"
-                              className="p-2 pl-14 rounded-md w-full"
-                            />
-                            <span className="text-gray-500 absolute top-2 left-2">
-                              تومان
-                            </span>
-                          </div>
+                        <p className="mb-3 mt-2 text-sm">
+                          تکمیل قیمت‌های این فصل اجباری است
+                        </p>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent className="font-vazir text-sm font-light leading-6 text-[#404040]">
+                      <div className="flex flex-col items-start justify-between gap-2 lg:!flex-row lg:!items-center lg:!gap-0">
+                        <p className="text-sm lg:!text-base">وسط هفته</p>
+                        <div className="relative w-full lg:!w-[60%]">
+                          <input
+                            onChange={(event) =>
+                              midweekHandler(event, data.id, "وسط هفته")
+                            }
+                            type="number"
+                            dir="ltr"
+                            className="w-full rounded-md p-2 pl-14"
+                          />
+                          <span className="absolute left-2 top-2 text-gray-500">
+                            تومان
+                          </span>
                         </div>
-                        <div className="flex justify-between lg:!gap-0 gap-2 items-start lg:!items-center lg:!flex-row flex-col my-4">
-                          <p className="lg:!text-base text-sm">
-                            آخر هفته و تعطیلات عادی
-                          </p>
-                          <div className="relative w-full lg:!w-[60%]">
-                            <input
-                              onChange={(event) =>
-                                lastWeekendHandler(event, data.id, "آخر هفته")
-                              }
-                              type="number"
-                              dir="ltr"
-                              className="p-2 pl-14 rounded-md w-full"
-                            />
-                            <span className="text-gray-500 absolute top-2 left-2">
-                              تومان
-                            </span>
-                          </div>
+                      </div>
+                      <div className="my-4 flex flex-col items-start justify-between gap-2 lg:!flex-row lg:!items-center lg:!gap-0">
+                        <p className="text-sm lg:!text-base">
+                          آخر هفته و تعطیلات عادی
+                        </p>
+                        <div className="relative w-full lg:!w-[60%]">
+                          <input
+                            onChange={(event) =>
+                              lastWeekendHandler(event, data.id, "آخر هفته")
+                            }
+                            type="number"
+                            dir="ltr"
+                            className="w-full rounded-md p-2 pl-14"
+                          />
+                          <span className="absolute left-2 top-2 text-gray-500">
+                            تومان
+                          </span>
                         </div>
-                        <div className="flex justify-between lg:!gap-0 gap-2 items-start lg:!items-center lg:!flex-row flex-col">
-                          <p className="lg:!text-base text-sm">ایام پیک</p>
-                          <div className="relative w-full lg:!w-[60%]">
-                            <input
-                              onChange={(event) =>
-                                holidaysHandler(event, data.id, "تعطیلات")
-                              }
-                              type="number"
-                              dir="ltr"
-                              className="p-2 pl-14 rounded-md w-full"
-                            />
-                            <span className="text-gray-500 absolute top-2 left-2">
-                              تومان
-                            </span>
-                          </div>
+                      </div>
+                      <div className="flex flex-col items-start justify-between gap-2 lg:!flex-row lg:!items-center lg:!gap-0">
+                        <p className="text-sm lg:!text-base">ایام پیک</p>
+                        <div className="relative w-full lg:!w-[60%]">
+                          <input
+                            onChange={(event) =>
+                              holidaysHandler(event, data.id, "تعطیلات")
+                            }
+                            type="number"
+                            dir="ltr"
+                            className="w-full rounded-md p-2 pl-14"
+                          />
+                          <span className="absolute left-2 top-2 text-gray-500">
+                            تومان
+                          </span>
                         </div>
-                      </AccordionContent>
-                    </AccordionItem>
-                  </AccordionParent>
-                </div> 
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                </AccordionParent>
+              </div>
             ))}
 
           <ContentNavigator

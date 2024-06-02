@@ -7,33 +7,33 @@ import { SlReload } from "react-icons/sl";
 const Card = () => {
   return (
     <div
-    className="xl:!w-[330px] w-full"
+      className="w-full xl:!w-[330px]"
       style={{
         boxShadow:
           "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px",
       }}
     >
-      <div className="w-full relative">
+      <div className="relative w-full">
         <img
           className="h-[210px] w-full rounded-t-lg"
           src="https://www.jajiga.com/static/img/rooms/blankHome.png"
           alt=""
         />
-        <div className="px-3 py-2 bg-[#00000080] rounded-t-lg absolute bottom-0 left-0 w-full flex items-center justify-between">
+        <div className="absolute bottom-0 left-0 flex w-full items-center justify-between rounded-t-lg bg-[#00000080] px-3 py-2">
           <p className="text-white">بدون عنوان</p>
-          <p className="bg-white text-black rounded-full p-1 px-2 font-thin text-sm">
+          <p className="rounded-full bg-white p-1 px-2 text-sm font-thin text-black">
             کد: 3243434
           </p>
         </div>
-        <div className="flex items-center gap-2 pl-2 bg-customYellow p-1 rounded-l-full absolute right-0 top-3">
+        <div className="absolute right-0 top-3 flex items-center gap-2 rounded-l-full bg-customYellow p-1 pl-2">
           <SlReload />
           <p className="text-sm text-gray-700">در حال تکمیل</p>
         </div>
       </div>
-      <div className="py-3 px-2">
-        <div className="flex items-center gap-3 mb-2">
-          <div className=" bg-[#f5f5f5] w-full rounded-full">
-            <div className="text-center rounded-full bg-customYellow  w-[25%] h-3"></div> 
+      <div className="px-2 py-3">
+        <div className="mb-2 flex items-center gap-3">
+          <div className="w-full rounded-full bg-[#f5f5f5]">
+            <div className="h-3 w-[25%] rounded-full bg-customYellow text-center"></div>
           </div>
           <p className="text-sm font-thin">25%</p>
         </div>
@@ -41,7 +41,7 @@ const Card = () => {
         <div className="flex gap-2">
           <Link className="w-full" href={"/profile"}>
             <Button
-              className="text-xs border-0 rounded-none w-full px-4 xl:!px-8 flex justify-center gap-2"
+              className="flex w-full justify-center gap-2 rounded-none border-0 px-4 text-xs xl:!px-8"
               variant={"white"}
             >
               <FaRegTrashCan />
@@ -50,7 +50,7 @@ const Card = () => {
           </Link>
           <Link className="w-full" href={"/profile"}>
             <Button
-              className="text-xs w-full px-4 xl:!px-8 flex justify-center gap-2"
+              className="flex w-full justify-center gap-2 px-4 text-xs xl:!px-8"
               variant={"main"}
             >
               ادامه ثبت

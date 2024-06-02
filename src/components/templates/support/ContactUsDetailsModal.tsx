@@ -18,7 +18,7 @@ const ContactUsDetailsModal = () => {
             boxShadow:
               "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px",
           }}
-          className="w-1/2 p-2 text-center rounded-md pb-2 cursor-pointer"
+          className="w-1/2 cursor-pointer rounded-md p-2 pb-2 text-center"
         >
           <svg
             width={28}
@@ -92,23 +92,25 @@ const ContactUsDetailsModal = () => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle className="text-center py-3">سایر راه های ارتباطی</DialogTitle>
+          <DialogTitle className="py-3 text-center">
+            سایر راه های ارتباطی
+          </DialogTitle>
         </DialogHeader>
-        <p className="text-sm text-center leading-7 text-[#404040] font-vazir font-light ">
+        <p className="font-vazir text-center text-sm font-light leading-7 text-[#404040]">
           ساعات کار پشتیبانی تلفنی از<strong> 8 صبح</strong> الی{" "}
           <strong>12 شب</strong> می‌باشد. شماره تماس:{" "}
         </p>
-        <section className=" space-y-4 pt-4">
-          <div className="flex justify-center flex-row-reverse gap-3">
-            <FaInstagram className="text-yellow-300 text-2xl" />
+        <section className="space-y-4 pt-4">
+          <div className="flex flex-row-reverse justify-center gap-3">
+            <FaInstagram className="text-2xl text-yellow-300" />
             <p dir="ltr">@_ka.s.ra_</p>
           </div>
-          <div className="flex justify-center flex-row-reverse gap-3">
-            <MdOutlineEmail className="text-yellow-300 text-2xl" />
+          <div className="flex flex-row-reverse justify-center gap-3">
+            <MdOutlineEmail className="text-2xl text-yellow-300" />
             <p>kasrakasra924@gmail.com</p>
           </div>
-          <div className="flex justify-center flex-row-reverse gap-3">
-            <FaTelegram className="text-yellow-300 text-2xl" />
+          <div className="flex flex-row-reverse justify-center gap-3">
+            <FaTelegram className="text-2xl text-yellow-300" />
             <p dir="ltr">@shahiinnnnn</p>
           </div>
         </section>
