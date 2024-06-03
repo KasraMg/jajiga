@@ -13,6 +13,7 @@ import ScrollObserver from "../utils/scrollObserver";
 import Container from "../components/modules/container/Container";
 
 export default function Home() {
+
   return (
     <main>
       <ScrollObserver>

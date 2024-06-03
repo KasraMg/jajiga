@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-export let registerSchema = Yup.object().shape({
+export let supportSchema = Yup.object().shape({
   message: Yup.string()
     .min(10, "متن شما حداقل باید 10 حرف داشته باشد")
     .max(200, "متن شما حداکثر باید 200 حرف داشته باشد")
@@ -17,3 +17,5 @@ export let registerSchema = Yup.object().shape({
     .max(12, "اسم شما حداکثر باید 12 حرف داشته باشد")
     .required("لطفا اسم خودتون و وارد کنید"),
 });
+
+ 
