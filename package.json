@@ -35,6 +35,7 @@
     "react-multi-date-picker": "^4.4.1",
     "react-multi-select-component": "^4.3.4",
     "react-parallax": "^3.5.1",
+    "react-query": "^3.39.3",
     "react-select": "^5.8.0",
     "swiper": "^11.0.5",
     "tailwind-merge": "^2.3.0",

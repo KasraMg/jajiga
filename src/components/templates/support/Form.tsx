@@ -1,5 +1,5 @@
 "use client";
-import { registerSchema } from "@/src/validations/rules";
+import { supportSchema } from "@/src/validations/rules";
 import { useFormik } from "formik";
 import React, { useState } from "react";
 
@@ -10,7 +10,7 @@ const Form = () => {
     onSubmit: (values, { setSubmitting, resetForm }) => {
       console.log(values);
     },
-    validationSchema: registerSchema,
+    validationSchema: supportSchema,
   });
   return (
     <div className="w-full">
