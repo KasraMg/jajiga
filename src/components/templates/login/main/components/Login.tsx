@@ -53,7 +53,7 @@ const Login = ({
 
   const mutation = useMutation({
     mutationFn: async () => {
-      return await fetch(`${baseUrl}signup`, {
+      return await fetch(`${baseUrl}/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -67,10 +67,7 @@ const Login = ({
         saveIntoLocalStorage("otpRegisterPhoneNumber", phoneNumber);
         setStep("register");
       }
-    },
-    onError: (error) => {
-      console.error("Error:", error);
-    },
+    } 
   });
 
   const submitHandler = () => {
@@ -83,9 +80,15 @@ const Login = ({
   };
 
   useEffect(() => {
-    const prevPhoneNumber = getFromLocalStorage("otpLoginPhoneNumber");
+    const otpLoginPhoneNumber = getFromLocalStorage("otpLoginPhoneNumber");
+    const otpRegisterPhoneNumber = getFromLocalStorage(
+      "otpRegisterPhoneNumber",
+    );
+
+    const prevPhoneNumber = otpLoginPhoneNumber || otpRegisterPhoneNumber;
+
     if (prevPhoneNumber) {
-      setPhoneNumber(phoneNumber);
+      setPhoneNumber(prevPhoneNumber);
     }
   }, []);
 
