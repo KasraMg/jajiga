@@ -1,8 +1,9 @@
-import Button from "@/src/components/modules/button";
+ 
 import React, { FC } from "react";
 import { SlEnergy } from "react-icons/sl";
 import { CiStar } from "react-icons/ci";
 import { IoIosStar } from "react-icons/io";
+import { Button } from "@/src/components/shadcn/ui/button";
 
 interface CardProps {
   className?: string;

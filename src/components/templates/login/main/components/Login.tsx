@@ -1,7 +1,11 @@
 import { Button } from "@/src/components/shadcn/ui/button";
-import useFetchData from "@/src/hooks/useFetchData";
-import { usePostData } from "@/src/hooks/usePostData";
-import { getFromLocalStorage, saveIntoLocalStorage } from "@/src/utils/utils";
+// import { usePostData } from "@/src/hooks/usePostData";
+import {
+  baseUrl,
+  getFromLocalStorage,
+  saveIntoLocalStorage,
+} from "@/src/utils/utils";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -10,32 +14,79 @@ const Login = ({
 }: {
   setStep: React.Dispatch<React.SetStateAction<string>>;
 }) => {
-  const [error, setError] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [regexError, setRegextError] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
+
+  // interface todo {
+  //     userId: number,
+  //     id: number,
+  //     title: string,
+  //     completed: boolean
+  // }
+  // function Todos() {
+  //   const {
+  //     status,
+  //     data: todos,
+  //     error,
+  //     isFetching,
+  //   } = useQuery({
+  //     queryKey: ["todos"],
+  //     queryFn: fetchTodos,
+  //   });
+
+  //   return status === "pending" ? (
+  //     <span>Loading...</span>
+  //   ) : status === "error" ? (
+  //     <span>Error: {error.message}</span>
+  //   ) : (
+  //     <>
+  //       {isFetching ? <div>Refreshing...</div> : null}
+
+  //       <div>
+  //         {todos.map((todo:todo) => (
+  //           <p>{todo.title}</p>
+  //         ))}
+  //       </div>
+  //     </>
+  //   );
+  // }
+
+  const mutation = useMutation({
+    mutationFn: async () => {
+      return await fetch(`${baseUrl}signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ Phone: phoneNumber }),
+      });
+    },
+    onSuccess: (data) => {
+      console.log("Success:", data);
+      if (data.status === 200) {
+        saveIntoLocalStorage("otpRegisterPhoneNumber", phoneNumber);
+        setStep("register");
+      }
+    },
+    onError: (error) => {
+      console.error("Error:", error);
+    },
+  });
+
   const submitHandler = () => {
     const phoneRegex = RegExp(/^(09)[0-9]{9}$/);
-
     const phoneRegexResult = phoneRegex.test(phoneNumber);
     if (phoneRegexResult) {
-      const userObj: any = {
-        Identifeir: "PhoneNum",
-        Password: "09332464029",
-      };
-      const { data }: any = usePostData({
-        course: userObj,
-        url: "/login/Phone",
-      });
-      console.log(data);
-
-      setError(false);
-      saveIntoLocalStorage("otpPhoneNumber", phoneNumber);
-      setStep("otp");
-    } else setError(true);
+      setRegextError(false);
+      mutation.mutate();
+    } else setRegextError(true);
   };
 
   useEffect(() => {
-    const phoneNumber = getFromLocalStorage("otpPhoneNumber");
-    setPhoneNumber(phoneNumber);
+    const prevPhoneNumber = getFromLocalStorage("otpLoginPhoneNumber");
+    if (prevPhoneNumber) {
+      setPhoneNumber(phoneNumber);
+    }
   }, []);
 
   return (
@@ -52,7 +103,7 @@ const Login = ({
           value={phoneNumber}
           onChange={(event) => setPhoneNumber(event.target.value)}
         />
-        {error && (
+        {regexError && (
           <span className="mt-1 block text-center text-xs text-red-600">
             شماره وارد شده معتبر نمی‌باشد
           </span>

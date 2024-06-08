@@ -9,7 +9,7 @@ const Password = ({
 }: {
   setStep: React.Dispatch<React.SetStateAction<string>>;
 }) => {
-  const phoneNumber = getFromLocalStorage("otpPhoneNumber");
+  const phoneNumber = getFromLocalStorage("otpLoginPhoneNumber");
 
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState(false);

@@ -6,7 +6,7 @@ import { FaMapLocationDot, FaRegTrashCan } from "react-icons/fa6";
 import { IoInformationCircleOutline } from "react-icons/io5";
 import { CiSearch } from "react-icons/ci";
 import Filter from "./components/filter/Filter";
-import Button from "@/src/components/modules/button";
+import { Button } from "@/src/components/shadcn/ui/button";
 const Filters = () => {
   const [maximumSpace, setMaximumSpace] = useState<number>(1);
   const incrementMaximumHandler = () => {

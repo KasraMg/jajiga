@@ -1,4 +1,4 @@
-export const baseUrl = "http://localhost:4001/";
+export const baseUrl = "https://jajiga-script.liara.run/";
 
 export const saveIntoLocalStorage = (key: string, value: string) => {
   return localStorage.setItem(key, JSON.stringify(value));

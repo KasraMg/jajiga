@@ -1,5 +1,4 @@
-import React from "react";
-import Button from "@/src/components/modules/button";
+import React from "react"; 
 import { useState } from "react";
 import Select from "react-select";
 import { userCountOptions } from "@/src/utils/selectOptions";
@@ -7,6 +6,7 @@ import { SlInfo } from "react-icons/sl";
 import Link from "next/link";
 import { BsFillInfoCircleFill } from "react-icons/bs";
 import ReservationModal from "./components/ReservationModal";
+import { Button } from "@/src/components/shadcn/ui/button";
 const Reservation = () => {
   const [countSelectedOption, setCountSelectedOption] = useState<{
     label: string;
