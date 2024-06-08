@@ -37,30 +37,30 @@ const Ads = () => {
           <path
             d="M40.3033 16.2994C40.7583 17.6696 40.9932 19.0984 41 20.5366C41 28.4932 34.2843 34.9434 26 34.9434C17.7157 34.9434 11 28.4932 11 20.5366C11 12.58 17.7157 6.12988 26 6.12988C27.4974 6.13638 28.985 6.36201 30.4117 6.799"
             stroke="#072FF0"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></path>
           <path
             d="M42.1903 7.7301L37.5484 12.3037L34.5713 9.37044"
             stroke="#072FF0"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></path>
           <path
             d="M18.7217 18.4967C18.7217 17.1936 19.8216 16.1372 21.1783 16.1372C22.5351 16.1372 23.635 17.1936 23.635 18.4967C23.635 21.4453 18.7217 21.4453 18.7217 24.9381H23.635"
             stroke="#072FF0"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></path>
           <path
             d="M31.8867 24.9385V16.9541C31.8884 16.5901 31.6385 16.2693 31.2745 16.1681C30.9105 16.067 30.5209 16.2101 30.32 16.5187C29.275 18.1418 28.135 19.9842 27.15 21.6122C26.9861 21.8846 26.9865 22.2204 27.151 22.4925C27.3155 22.7646 27.6191 22.9313 27.9467 22.9296H33.2783"
             stroke="#072FF0"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></path>
         </svg>
       ),
@@ -89,18 +89,18 @@ const Ads = () => {
           <path
             d="M20.2383 24L23.7303 27.8095L30.7145 20.1905"
             stroke="#072FF0"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></path>
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M10.833 21.945C10.833 29.3209 15.4117 35.9219 22.3201 38.5059L22.3703 38.5247C24.0661 39.159 25.9342 39.1584 27.6297 38.523L27.6703 38.5078C34.5849 35.9164 39.1663 29.307 39.1663 21.9227V15.7171C39.1663 14.2589 38.2186 12.97 36.8268 12.5353L25.9935 9.15159C25.3464 8.94947 24.653 8.94947 24.0059 9.15159L13.1726 12.5352C11.7807 12.9699 10.833 14.2588 10.833 15.717V21.945Z"
             stroke="#072FF0"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></path>
         </svg>
       ),
@@ -124,37 +124,37 @@ const Ads = () => {
           <path
             d="M35.8626 21.0186V11.6613C35.8626 10.741 35.1157 9.99399 34.1953 9.99399H31.099C30.1786 9.99399 29.4316 10.741 29.4316 11.6613V15.5063"
             stroke="#072FF0"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></path>
           <path
             d="M7.99414 22.856L20.8295 11.8548C22.0783 10.7843 23.9208 10.7843 25.1696 11.8548L38.0066 22.856"
             stroke="#072FF0"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></path>
           <path
             d="M10.1387 21.0186V36.6718C10.1387 38.5142 11.631 40.0065 13.4734 40.0065H21.3333"
             stroke="#072FF0"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></path>
           <path
             d="M32.1711 41.674C28.0277 41.674 24.668 38.3143 24.668 34.1709C24.668 30.0275 28.0277 26.6678 32.1711 26.6678C36.3162 26.6678 39.6742 30.0275 39.6742 34.1709C39.6742 38.3143 36.3162 41.674 32.1711 41.674"
             stroke="#072FF0"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></path>
           <path
             d="M35.1352 32.6885L31.4303 36.3933L29.2061 34.1707"
             stroke="#072FF0"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           ></path>
         </svg>
       ),

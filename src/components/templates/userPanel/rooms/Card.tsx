@@ -1,4 +1,5 @@
-import Button from "@/src/components/modules/button";
+
+import { Button } from "@/src/components/shadcn/ui/button";
 import Link from "next/link";
 import React from "react";
 import { FaChevronLeft } from "react-icons/fa";

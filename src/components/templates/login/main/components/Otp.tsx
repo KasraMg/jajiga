@@ -7,7 +7,7 @@ const Otp = ({
 }: {
   setStep: React.Dispatch<React.SetStateAction<string>>;
 }) => {
-  const phoneNumber = getFromLocalStorage("otpPhoneNumber");
+  const phoneNumber = getFromLocalStorage("otpLoginPhoneNumber");
   const [code, setCode] = useState('');
   const sendOtpAgain = () => {};
 

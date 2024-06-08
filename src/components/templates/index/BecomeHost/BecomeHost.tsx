@@ -1,4 +1,4 @@
-import Button from "@/src/components/modules/button";
+import { Button } from "@/src/components/shadcn/ui/button"; 
 import React from "react";
 
 const BecomeHost = () => {

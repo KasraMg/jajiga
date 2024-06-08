@@ -9,9 +9,9 @@ import { getFromLocalStorage } from "@/src/utils/utils";
 const Main = () => {
   const [step, setStep] = useState<string>("login");
   useEffect(() => {
-    const phoneNumber = getFromLocalStorage("otpPhoneNumber");
-    if (phoneNumber) {
-      setStep("password");
+    const registerPhoneNumber = getFromLocalStorage("otpRegisterPhoneNumber");
+    if (registerPhoneNumber) {
+      setStep("register");
     }
   }, []);
 
@@ -26,3 +26,5 @@ const Main = () => {
 };
 
 export default Main;
+
+ 
