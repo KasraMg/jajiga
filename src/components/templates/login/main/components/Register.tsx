@@ -55,11 +55,11 @@ const Register = ({
     },
     onSuccess: (data) => {
       console.log("Success:", data);
-      // if (data.status === 200) {
-      //   // setStep("register");
-      // saveIntoLocalStorage("formValues", values);
-      // resetForm();
-      // }
+      if (data.status === 200) {
+        setStep("otp");
+        saveIntoLocalStorage("registerUserData", formHandler.values);
+        formHandler.resetForm();
+      }
     },
   });
 
@@ -161,3 +161,5 @@ const Register = ({
 };
 
 export default Register;
+
+ 

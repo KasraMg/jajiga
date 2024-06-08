@@ -16,40 +16,7 @@ const Login = ({
 }) => {
   const [regexError, setRegextError] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
-
-  // interface todo {
-  //     userId: number,
-  //     id: number,
-  //     title: string,
-  //     completed: boolean
-  // }
-  // function Todos() {
-  //   const {
-  //     status,
-  //     data: todos,
-  //     error,
-  //     isFetching,
-  //   } = useQuery({
-  //     queryKey: ["todos"],
-  //     queryFn: fetchTodos,
-  //   });
-
-  //   return status === "pending" ? (
-  //     <span>Loading...</span>
-  //   ) : status === "error" ? (
-  //     <span>Error: {error.message}</span>
-  //   ) : (
-  //     <>
-  //       {isFetching ? <div>Refreshing...</div> : null}
-
-  //       <div>
-  //         {todos.map((todo:todo) => (
-  //           <p>{todo.title}</p>
-  //         ))}
-  //       </div>
-  //     </>
-  //   );
-  // }
+ 
 
   const mutation = useMutation({
     mutationFn: async () => {

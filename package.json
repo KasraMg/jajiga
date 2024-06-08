@@ -37,6 +37,7 @@
     "react-multi-select-component": "^4.3.4",
     "react-parallax": "^3.5.1",
     "react-select": "^5.8.0",
+    "sweetalert": "^2.1.2",
     "swiper": "^11.0.5",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",

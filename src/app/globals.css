@@ -488,4 +488,6 @@ select:focus {
   background-color: white !important;
 }
 
-  
+.swal-footer{
+  text-align: center !important;
+}
