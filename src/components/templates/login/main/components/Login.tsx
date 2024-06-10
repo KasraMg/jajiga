@@ -16,44 +16,11 @@ const Login = ({
 }) => {
   const [regexError, setRegextError] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
-
-  // interface todo {
-  //     userId: number,
-  //     id: number,
-  //     title: string,
-  //     completed: boolean
-  // }
-  // function Todos() {
-  //   const {
-  //     status,
-  //     data: todos,
-  //     error,
-  //     isFetching,
-  //   } = useQuery({
-  //     queryKey: ["todos"],
-  //     queryFn: fetchTodos,
-  //   });
-
-  //   return status === "pending" ? (
-  //     <span>Loading...</span>
-  //   ) : status === "error" ? (
-  //     <span>Error: {error.message}</span>
-  //   ) : (
-  //     <>
-  //       {isFetching ? <div>Refreshing...</div> : null}
-
-  //       <div>
-  //         {todos.map((todo:todo) => (
-  //           <p>{todo.title}</p>
-  //         ))}
-  //       </div>
-  //     </>
-  //   );
-  // }
+ 
 
   const mutation = useMutation({
     mutationFn: async () => {
-      return await fetch(`${baseUrl}signup`, {
+      return await fetch(`${baseUrl}/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -67,10 +34,7 @@ const Login = ({
         saveIntoLocalStorage("otpRegisterPhoneNumber", phoneNumber);
         setStep("register");
       }
-    },
-    onError: (error) => {
-      console.error("Error:", error);
-    },
+    } 
   });
 
   const submitHandler = () => {
@@ -83,9 +47,15 @@ const Login = ({
   };
 
   useEffect(() => {
-    const prevPhoneNumber = getFromLocalStorage("otpLoginPhoneNumber");
+    const otpLoginPhoneNumber = getFromLocalStorage("otpLoginPhoneNumber");
+    const otpRegisterPhoneNumber = getFromLocalStorage(
+      "otpRegisterPhoneNumber",
+    );
+
+    const prevPhoneNumber = otpLoginPhoneNumber || otpRegisterPhoneNumber;
+
     if (prevPhoneNumber) {
-      setPhoneNumber(phoneNumber);
+      setPhoneNumber(prevPhoneNumber);
     }
   }, []);
 

@@ -11,7 +11,7 @@ const Main = () => {
   useEffect(() => {
     const registerPhoneNumber = getFromLocalStorage("otpRegisterPhoneNumber");
     if (registerPhoneNumber) {
-      setStep("register");
+      setStep("otp");
     }
   }, []);
 
@@ -26,5 +26,3 @@ const Main = () => {
 };
 
 export default Main;
-
- 

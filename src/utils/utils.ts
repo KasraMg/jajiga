@@ -1,6 +1,6 @@
-export const baseUrl = "https://jajiga-script.liara.run/";
+export const baseUrl = "https://jajiga-script.liara.run";
 
-export const saveIntoLocalStorage = (key: string, value: string) => {
+export const saveIntoLocalStorage = (key: string, value: string | {}) => {
   return localStorage.setItem(key, JSON.stringify(value));
 };
 
