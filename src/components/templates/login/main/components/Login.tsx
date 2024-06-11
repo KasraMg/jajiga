@@ -16,7 +16,6 @@ const Login = ({
 }) => {
   const [regexError, setRegextError] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
- 
 
   const mutation = useMutation({
     mutationFn: async () => {
@@ -25,16 +24,16 @@ const Login = ({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ Phone: phoneNumber }),
-      });
+        body: JSON.stringify({ phone: phoneNumber }),
+      }).then(res=>res.json());
     },
     onSuccess: (data) => {
       console.log("Success:", data);
-      if (data.status === 200) {
+      if (data.statusCode === 200) {
         saveIntoLocalStorage("otpRegisterPhoneNumber", phoneNumber);
         setStep("register");
       }
-    } 
+    },
   });
 
   const submitHandler = () => {
@@ -86,6 +85,7 @@ const Login = ({
       <Button
         className="mt-6 w-full justify-center !rounded-full text-center"
         variant={"main"}
+        disabled={phoneNumber.length !== 11 ? true : false}
         onClick={submitHandler}
       >
         ادامه
