@@ -9,53 +9,52 @@ const Otp = ({
   setStep: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const otpLoginPhoneNumber = getFromLocalStorage("otpLoginPhoneNumber");
-  const otpRegisterPhoneNumber = getFromLocalStorage("otpRegisterPhoneNumber");
+  const otpRegisterPhoneNumber = getFromLocalStorage("registerUserData");
 
   const phoneNumber = otpLoginPhoneNumber || otpRegisterPhoneNumber;
   const registerUserData = getFromLocalStorage("registerUserData");
 
   const [otpCode, setOtpCode] = useState("");
-  const [isButtonDisable, setIsButtonDisable] = useState(true);
 
   const sendOtpAgain = () => {};
 
   const mutation = useMutation({
     mutationFn: async () => {
-      return await fetch(`${baseUrl}/auth/sendCode`, {
+      return await fetch(`${baseUrl}/auth/confirmCode`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(registerUserData),
-      });
+      }).then((res) => res.json());
     },
     onSuccess: (data) => {
       console.log("Success:", data);
-      if (data.status === 200) {
+      if (data.statusCode === 200) {
         swal({
           title: "با موفقیت ثبت نام شدید",
           icon: "success",
           buttons: [false, "حله"],
-        }); 
-      } else if (data.status === 400) {
+        });
+      } else if (data.statusCode === 400) {
         swal({
           title: "کد وارد شده اشتباه است",
           icon: "error",
           buttons: [false, "حله"],
         });
-      } else if (data.status === 405) {
+      } else if (data.statusCode === 405) {
         swal({
           title: "این کد قبلا مورد استفاده قرار گرفته است",
           icon: "error",
           buttons: [false, "حله"],
         });
-      } else if (data.status === 422) {
+      } else if (data.statusCode === 422) {
         swal({
           title: "کد وارد شده منسوخ شده است",
           icon: "error",
           buttons: [false, "حله"],
         });
-      } else if (data.status === 406) {
+      } else if (data.statusCode === 406) {
         swal({
           title: "کاربر قبلا در سایت ثبت نام شده است",
           icon: "error",
@@ -89,14 +88,6 @@ const Otp = ({
       setOtpCode(value);
     }
   };
-
-  useEffect(() => {
-    if (otpCode.length === 4) {
-      setIsButtonDisable(false);
-    } else {
-      setIsButtonDisable(true);
-    }
-  }, [otpCode]);
 
   return (
     <div className="w-full md:!w-[350px]">
@@ -134,7 +125,7 @@ const Otp = ({
       </Button>
 
       <Button
-        disabled={isButtonDisable}
+        disabled={otpCode.length !== 4 ? true : false}
         className="mt-5 w-full justify-center !rounded-full text-center"
         variant={"main"}
         onClick={registerHandler}

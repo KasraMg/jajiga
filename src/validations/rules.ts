@@ -29,19 +29,19 @@ export let registerSchema = Yup.object().shape({
     .max(20, "فامیلی شما حداکثر باید 20 حرف داشته باشد")
     .required("لطفا فامیلی خودتون رو بنویسید"),
 
-  Password: Yup.string()  
+  password: Yup.string()  
       .matches(
       /^[a-zA-Z0-9]{8,999}$/,
       "رمز عبور باید شامل حروف بزرگ و کوچک انگلیسی و اعداد باشد و حداقل 8 حرف داشته باشد"
     )
     .required("لطفا رمز عبور خودتون رو وارد کنید"),
 
-  ConfirmPassword: Yup.string()
+  confirmPassword: Yup.string()
     .oneOf(
-      [Yup.ref("Password"), null as any],
+      [Yup.ref("password"), null as any],
       "رمز عبور و تکرار رمز عبور باید مشابه باشند",
     )
     .required("لطفا رمز عبور خودتون رو تایید کنید"),
 
-  Phone: Yup.string(),
+  phone: Yup.string(),
 });

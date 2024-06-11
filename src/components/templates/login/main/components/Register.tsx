@@ -6,17 +6,16 @@ import {
 } from "@/src/utils/utils";
 import { registerSchema } from "@/src/validations/rules";
 import { useMutation } from "@tanstack/react-query";
-import { useFormik } from "formik";
-import Link from "next/link";
-import React, { useState } from "react";
+import { useFormik } from "formik"; 
+import React, { useEffect, useState } from "react";
 import { LuEye } from "react-icons/lu";
 
 interface formValues {
   firstName: string;
   lastName: string;
-  Password: string;
-  ConfirmPassword: string;
-  Phone: string;
+  password: string;
+  confirmPassword: string;
+  phone: string;
 }
 const Register = ({
   setStep,
@@ -24,20 +23,19 @@ const Register = ({
   setStep: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const phoneNumber = getFromLocalStorage("otpLoginPhoneNumber");
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false); 
+  const phoneNumber = getFromLocalStorage("otpRegisterPhoneNumber");
   const formHandler = useFormik({
     initialValues: {
       firstName: "",
       lastName: "",
-      Password: "",
-      ConfirmPassword: "",
-      Phone: phoneNumber,
+      password: "",
+      confirmPassword: "",
+      phone: phoneNumber,
     },
-    onSubmit: (values: formValues, { setSubmitting, resetForm }) => {
+    onSubmit: (values: formValues) => {
       console.log(values);
+      
       mutation.mutate(values);
     },
     validationSchema: registerSchema,
@@ -51,11 +49,11 @@ const Register = ({
           "Content-Type": "application/json",
         },
         body: JSON.stringify(values),
-      });
+      }).then((res) => res.json());
     },
     onSuccess: (data) => {
       console.log("Success:", data);
-      if (data.status === 200) {
+      if (data.statusCode === 200) {
         setStep("otp");
         saveIntoLocalStorage("registerUserData", formHandler.values);
         formHandler.resetForm();
@@ -64,10 +62,10 @@ const Register = ({
   });
 
   const submitHandler = (event: React.FormEvent) => {
-    event.preventDefault();
-    setIsSubmitted(true);
+    event.preventDefault(); 
     formHandler.handleSubmit();
   };
+   
   return (
     <form className="w-full md:!w-[350px]">
       <div className="flex items-center justify-between">
@@ -89,8 +87,9 @@ const Register = ({
         placeholder="نام"
         value={formHandler.values.firstName}
         onChange={formHandler.handleChange}
+        onBlur={formHandler.handleBlur}
       />
-      {isSubmitted && formHandler.errors.firstName && (
+      {formHandler.touched.firstName && formHandler.errors.firstName && (
         <span className="mt-2 block w-full text-center text-xs text-red-600">
           {formHandler.errors.firstName}
         </span>
@@ -101,9 +100,10 @@ const Register = ({
         name="lastName"
         placeholder="نام خانوادگی"
         value={formHandler.values.lastName}
+        onBlur={formHandler.handleBlur}
         onChange={formHandler.handleChange}
       />
-      {isSubmitted && formHandler.errors.lastName && (
+      {formHandler.touched.lastName && formHandler.errors.lastName && (
         <span className="mt-2 block w-full text-center text-xs text-red-600">
           {formHandler.errors.lastName}
         </span>
@@ -112,15 +112,16 @@ const Register = ({
         <input
           type={showPassword ? "text" : "password"}
           dir="ltr"
-          value={formHandler.values.Password}
+          value={formHandler.values.password}
+          onBlur={formHandler.handleBlur}
           onChange={formHandler.handleChange}
           className="mt-3 w-full rounded-md border border-solid border-gray-400 py-2 pl-9 pr-3 text-sm placeholder:text-right"
-          name="Password"
+          name="password"
           placeholder="رمز عبور"
         />
-        {isSubmitted && formHandler.errors.Password && (
+        {formHandler.touched.password && formHandler.errors.password && (
           <span className="mt-2 block w-full text-center text-xs text-red-600">
-            {formHandler.errors.Password}
+            {formHandler.errors.password}
           </span>
         )}
         <LuEye
@@ -132,17 +133,19 @@ const Register = ({
         <input
           type={showConfirmPassword ? "text" : "password"}
           dir="ltr"
-          value={formHandler.values.ConfirmPassword}
+          value={formHandler.values.confirmPassword}
+          onBlur={formHandler.handleBlur}
           onChange={formHandler.handleChange}
           className="mt-3 w-full rounded-md border border-solid border-gray-400 py-2 pl-9 pr-3 text-sm placeholder:text-right"
-          name="ConfirmPassword"
+          name="confirmPassword"
           placeholder="تکرار رمز عبور"
         />
-        {isSubmitted && formHandler.errors.ConfirmPassword && (
-          <span className="mt-2 block w-full text-center text-xs text-red-600">
-            {formHandler.errors.ConfirmPassword}
-          </span>
-        )}
+        {formHandler.touched.confirmPassword &&
+          formHandler.errors.confirmPassword && (
+            <span className="mt-2 block w-full text-center text-xs text-red-600">
+              {formHandler.errors.confirmPassword}
+            </span>
+          )}
         <LuEye
           onClick={() => setShowConfirmPassword((prev) => !prev)}
           className="absolute left-3 top-[23px] cursor-pointer"
@@ -153,6 +156,7 @@ const Register = ({
         onClick={(event) => submitHandler(event)}
         className="mx-auto mt-5 !block w-max !rounded-full !px-12 text-center"
         variant={"main"}
+        disabled={!formHandler.isValid || !formHandler.dirty}
       >
         ثبت نام
       </Button>
@@ -161,5 +165,3 @@ const Register = ({
 };
 
 export default Register;
-
- 
