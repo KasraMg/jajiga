@@ -10,15 +10,20 @@ const Main = () => {
   const [step, setStep] = useState<string>("login");
   useEffect(() => {
     const registerPhoneNumber = getFromLocalStorage("otpRegisterPhoneNumber");
+    const otpLoginPhoneNumber = getFromLocalStorage("otpLoginPhoneNumber");
     const registerUserData = getFromLocalStorage("registerUserData");
-    if (!registerUserData) {
-      if (registerPhoneNumber) {
-        setStep("register");
+
+    if (!otpLoginPhoneNumber) {
+      if (!registerUserData) {
+        if (registerPhoneNumber) {
+          setStep("register");
+        }
+      } else {
+        setStep("otp");
       }
-    }else{
+    } else {
       setStep("otp");
     }
-    
   }, []);
 
   return (

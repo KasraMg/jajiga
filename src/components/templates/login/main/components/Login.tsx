@@ -8,6 +8,7 @@ import {
 import { useMutation, useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import swal from "sweetalert";
 
 const Login = ({
   setStep,
@@ -25,13 +26,22 @@ const Login = ({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ phone: phoneNumber }),
-      }).then(res=>res.json());
+      }).then((res) => res.json());
     },
     onSuccess: (data) => {
       console.log("Success:", data);
       if (data.statusCode === 200) {
         saveIntoLocalStorage("otpRegisterPhoneNumber", phoneNumber);
         setStep("register");
+      } else if (data.statusCode === 411) {
+        saveIntoLocalStorage("otpLoginPhoneNumber", phoneNumber);
+        setStep("otp");
+      } else if (data.statusCode === 409) {
+        swal({
+          title: "این شماره قادر به ورود به سایت نیست",
+          icon: "error",
+          buttons: [false, "حله"],
+        });
       }
     },
   });

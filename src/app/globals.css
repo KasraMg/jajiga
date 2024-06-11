@@ -491,3 +491,10 @@ select:focus {
 .swal-footer{
   text-align: center !important;
 }
+
+.swal-button--confirm{
+  background: #f0c807 !important;
+}
+.swal-button:focus {
+  box-shadow: none !important;
+}
