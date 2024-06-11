@@ -7,7 +7,7 @@ import { AiOutlineLogout } from "react-icons/ai";
 import { GoHome } from "react-icons/go";
 import { FaChevronLeft } from "react-icons/fa6";
 import Image from "next/image";
-import Button from "@/src/components/modules/button";
+import { Button } from "@/src/components/shadcn/ui/button";
 import { IoNotificationsOutline } from "react-icons/io5";
 const Dashboard = () => {
   return (

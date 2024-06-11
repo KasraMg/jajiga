@@ -1,7 +1,9 @@
 import { Button } from "@/src/components/shadcn/ui/button";
 import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
 import { useMutation } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+
 import swal from "sweetalert";
 const Otp = ({
   setStep,
@@ -9,7 +11,8 @@ const Otp = ({
   setStep: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const otpLoginPhoneNumber = getFromLocalStorage("otpLoginPhoneNumber");
-  const otpRegisterPhoneNumber = getFromLocalStorage("registerUserData");
+  const otpRegisterPhoneNumber = getFromLocalStorage("otpRegisterPhoneNumber");
+  const router = useRouter();
 
   const phoneNumber = otpLoginPhoneNumber || otpRegisterPhoneNumber;
   const registerUserData = getFromLocalStorage("registerUserData");
@@ -18,14 +21,14 @@ const Otp = ({
 
   const sendOtpAgain = () => {};
 
-  const mutation = useMutation({
-    mutationFn: async () => {
+  const registerMutation = useMutation({
+    mutationFn: async (userData) => {
       return await fetch(`${baseUrl}/auth/confirmCode`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(registerUserData),
+        body: JSON.stringify(userData),
       }).then((res) => res.json());
     },
     onSuccess: (data) => {
@@ -35,6 +38,9 @@ const Otp = ({
           title: "با موفقیت ثبت نام شدید",
           icon: "success",
           buttons: [false, "حله"],
+        }).then(() => {
+          localStorage.clear();
+          router.push("/dashboard");
         });
       } else if (data.statusCode === 400) {
         swal({
@@ -72,15 +78,72 @@ const Otp = ({
           buttons: [false, "حله"],
         }).then(() => {
           localStorage.clear();
+          location.reload();
         });
       }
     },
   });
 
-  const registerHandler = () => {
-    registerUserData.Code = otpCode;
+  const loginMutation = useMutation({
+    mutationFn: async (code: string) => {
+      return await fetch(`${baseUrl}/loginByCode/${otpLoginPhoneNumber}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ code }),
+      }).then((res) => res.json());
+    },
+    onSuccess: (data) => {
+      console.log("Success:", data);
+      if (data.statusCode === 200) {
+        swal({
+          title: "با موفقیت ثبت نام شدید",
+          icon: "success",
+          buttons: [false, "حله"],
+        }).then(() => {
+          localStorage.clear();
+          router.push("/dashboard");
+        });
+      } else if (data.statusCode === 400) {
+        swal({
+          title: "کد وارد شده اشتباه است",
+          icon: "error",
+          buttons: [false, "حله"],
+        });
+      } else if (data.statusCode === 405) {
+        swal({
+          title: "این کد قبلا مورد استفاده قرار گرفته است",
+          icon: "error",
+          buttons: [false, "حله"],
+        });
+      } else if (data.statusCode === 422) {
+        swal({
+          title: "کد وارد شده منسوخ شده است",
+          icon: "error",
+          buttons: [false, "حله"],
+        });
+      } else {
+        swal({
+          title: "با عرض پوزش لطفا مجدد مراحل رو طی کنید",
+          icon: "error",
+          buttons: [false, "حله"],
+        }).then(() => {
+          localStorage.clear();
+          location.reload();
+        });
+      }
+    } 
+  });
 
-    mutation.mutate();
+  const registerHandler = () => {
+    registerUserData.code = otpCode;
+    registerMutation.mutate(registerUserData);
+  };
+
+  const loginHandler = () => {
+    alert(otpLoginPhoneNumber);
+    loginMutation.mutate(otpCode);
   };
 
   const inputChangeHandler = (value: string) => {
@@ -128,7 +191,7 @@ const Otp = ({
         disabled={otpCode.length !== 4 ? true : false}
         className="mt-5 w-full justify-center !rounded-full text-center"
         variant={"main"}
-        onClick={registerHandler}
+        onClick={registerUserData ? registerHandler : loginHandler}
       >
         ورود
       </Button>
