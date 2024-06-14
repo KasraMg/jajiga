@@ -60,9 +60,7 @@ const Login = ({
     const otpRegisterPhoneNumber = getFromLocalStorage(
       "otpRegisterPhoneNumber",
     );
-
     const prevPhoneNumber = otpLoginPhoneNumber || otpRegisterPhoneNumber;
-
     if (prevPhoneNumber) {
       setPhoneNumber(prevPhoneNumber);
     }

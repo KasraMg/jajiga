@@ -1,7 +1,7 @@
 import { Button } from "@/src/components/shadcn/ui/button";
 import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
 import { useMutation } from "@tanstack/react-query";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import swal from "sweetalert";
@@ -13,14 +13,24 @@ const Otp = ({
   const otpLoginPhoneNumber = getFromLocalStorage("otpLoginPhoneNumber");
   const otpRegisterPhoneNumber = getFromLocalStorage("otpRegisterPhoneNumber");
   const router = useRouter();
-
+  const [timer, setTimer] = useState<number>(0);
   const phoneNumber = otpLoginPhoneNumber || otpRegisterPhoneNumber;
   const registerUserData = getFromLocalStorage("registerUserData");
 
   const [otpCode, setOtpCode] = useState("");
 
-  const sendOtpAgain = () => {};
 
+  useEffect(() => {
+    let interval: any;
+    if (timer > 0) {
+      interval = setInterval(() => {
+        setTimer((prevTimer) => prevTimer - 1);
+      }, 1000);
+    } else if (timer === 0 && interval) {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [timer]);
   const registerMutation = useMutation({
     mutationFn: async (userData) => {
       return await fetch(`${baseUrl}/auth/confirmCode`, {
@@ -28,6 +38,7 @@ const Otp = ({
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify(userData),
       }).then((res) => res.json());
     },
@@ -91,6 +102,7 @@ const Otp = ({
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         body: JSON.stringify({ code }),
       }).then((res) => res.json());
     },
@@ -133,16 +145,49 @@ const Otp = ({
           location.reload();
         });
       }
-    } 
+    },
+  });
+
+  const resendCodeMutation = useMutation({
+    mutationFn: async () => {
+      return await fetch(
+        `${baseUrl}/resendCode/${otpRegisterPhoneNumber ? otpRegisterPhoneNumber : otpLoginPhoneNumber}}`,
+        {
+          method: "POST", 
+        },
+      ).then((res) => res.json());
+    },
+    onSuccess: (data) => {
+      console.log("Success:", data);
+      if (data.statusCode === 200) {
+        swal({
+          title: "کد با موفقیت ارسال شد",
+          icon: "success",
+          buttons: [false, "حله"],
+        }).then(() => {
+          localStorage.clear();
+          router.push("/dashboard");
+        });
+      } else {
+        swal({
+          title: "با عرض پوزش لطفا مجدد مراحل رو طی کنید",
+          icon: "error",
+          buttons: [false, "حله"],
+        }).then(() => {
+          // localStorage.clear();
+          // location.reload();
+        });
+      }
+    },
   });
 
   const registerHandler = () => {
     registerUserData.code = otpCode;
     registerMutation.mutate(registerUserData);
+    console.log(registerUserData);
   };
 
   const loginHandler = () => {
-    alert(otpLoginPhoneNumber);
     loginMutation.mutate(otpCode);
   };
 
@@ -152,6 +197,10 @@ const Otp = ({
     }
   };
 
+  const resendCodeHandler = () => {
+    setTimer(59);
+    resendCodeMutation.mutate();
+  };
   return (
     <div className="w-full md:!w-[350px]">
       <div className="flex items-center justify-between">
@@ -173,19 +222,25 @@ const Otp = ({
           type="text"
           maxLength={4}
           className="w-full rounded-md border border-solid border-gray-400 !py-1 px-6 text-center placeholder:text-center sm:!w-[150px]"
-          placeholder="11111"
+          placeholder="1111"
           value={otpCode}
           onChange={(event) => inputChangeHandler(event.target.value)}
         />
       </div>
 
-      <Button
-        onClick={sendOtpAgain}
-        className="w-full justify-center !rounded-sm !px-4 text-sm"
-        variant={"outlineMain"}
-      >
-        ارسال دوباره کد
-      </Button>
+      {timer > 0 ? (
+        <div className="w-full justify-center text-center text-sm">
+          {`${Math.floor(timer / 60)}:${timer % 60 < 10 ? `0${timer % 60}` : timer % 60} ثانیه تا ارسال مجدد کد  `}
+        </div>
+      ) : (
+        <Button
+          onClick={resendCodeHandler}
+          className="w-full justify-center !rounded-sm !px-4 text-sm"
+          variant={"outlineMain"}
+        >
+          ارسال دوباره کد
+        </Button>
+      )}
 
       <Button
         disabled={otpCode.length !== 4 ? true : false}

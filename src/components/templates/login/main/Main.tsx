@@ -19,10 +19,10 @@ const Main = () => {
           setStep("register");
         }
       } else {
-        setStep("otp");
+        setStep("login");
       }
     } else {
-      setStep("otp");
+      setStep("password");
     }
   }, []);
 

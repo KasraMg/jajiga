@@ -9,6 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useFormik } from "formik"; 
 import React, { useEffect, useState } from "react";
 import { LuEye } from "react-icons/lu";
+import swal from "sweetalert";
 
 interface formValues {
   firstName: string;
@@ -33,9 +34,7 @@ const Register = ({
       confirmPassword: "",
       phone: phoneNumber,
     },
-    onSubmit: (values: formValues) => {
-      console.log(values);
-      
+    onSubmit: (values: formValues) => { 
       mutation.mutate(values);
     },
     validationSchema: registerSchema,
@@ -57,6 +56,15 @@ const Register = ({
         setStep("otp");
         saveIntoLocalStorage("registerUserData", formHandler.values);
         formHandler.resetForm();
+      }else {
+        swal({
+          title: "با عرض پوزش لطفا مجدد مراحل رو طی کنید",
+          icon: "error",
+          buttons: [false, "حله"],
+        }).then(() => {
+          localStorage.clear();
+          location.reload();
+        });
       }
     },
   });

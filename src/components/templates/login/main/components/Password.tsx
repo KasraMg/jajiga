@@ -1,8 +1,10 @@
 import { Button } from "@/src/components/shadcn/ui/button";
-import { getFromLocalStorage } from "@/src/utils/utils";
-import Link from "next/link";
+import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { LuEye } from "react-icons/lu";
+import swal from "sweetalert";
 
 const Password = ({
   setStep,
@@ -12,7 +14,65 @@ const Password = ({
   const phoneNumber = getFromLocalStorage("otpLoginPhoneNumber");
 
   const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
+
+  const inputChangeHandler = (value: string) => {
+    setPassword(value);
+    if (/^[a-zA-Z0-9]{8,999}$/.test(value)) {
+      setError(false);
+    } else {
+      setError(true);
+    }
+  };
+
+  const mutation = useMutation({
+    mutationFn: async (password: string) => {
+      return await fetch(`${baseUrl}/loginByPassword/${phoneNumber}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ password }),
+      }).then((res) => res.json());
+    },
+    onSuccess: (data) => {
+      console.log("Success:", data);
+      if (data.statusCode === 200) {
+        swal({
+          title: "با موفقیت ثبت نام شدید",
+          icon: "success",
+          buttons: [false, "حله"],
+        }).then(() => {
+          router.push("/dashboard");
+          localStorage.clear();
+        });
+      } else if (data.statusCode === 401) {
+        swal({
+          title: "پسورد وارد شده اشتباه است",
+          icon: "error",
+          buttons: [false, "حله"],
+        });
+      } else if (data.statusCode === 409) {
+        swal({
+          title: "این شماره قادر به ورود به سایت نیست",
+          icon: "error",
+          buttons: [false, "حله"],
+        });
+      } else {
+        swal({
+          title: "با عرض پوزش لطفا مجدد مراحل رو طی کنید",
+          icon: "error",
+          buttons: [false, "حله"],
+        }).then(() => {
+          localStorage.clear();
+          location.reload();
+        });
+      }
+    },
+  });
   return (
     <div className="w-full sm:!pb-7 md:!w-[350px]">
       <div className="flex items-center justify-between">
@@ -33,7 +93,7 @@ const Password = ({
           className="w-full rounded-md border border-solid border-gray-400 py-3 pl-10 pr-3 text-sm placeholder:text-right"
           placeholder="رمز عبور"
           value={password}
-          onChange={(event) => setPassword(event.target.value)}
+          onChange={(event) => inputChangeHandler(event.target.value)}
         />
         <LuEye
           onClick={() => setShowPassword((prev) => !prev)}
@@ -41,8 +101,10 @@ const Password = ({
         />
       </div>
       <Button
+        disabled={!error ? false : true}
         className="mt-5 w-full justify-center !rounded-full text-center"
         variant={"main"}
+        onClick={() => mutation.mutate(password)}
       >
         ورود
       </Button>
