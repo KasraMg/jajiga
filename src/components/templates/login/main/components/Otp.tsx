@@ -19,18 +19,37 @@ const Otp = ({
 
   const [otpCode, setOtpCode] = useState("");
 
+  useEffect(() => {
+    const savedTimer = localStorage.getItem("otpResendTimer");
+    if (savedTimer) {
+      const remainingTime =
+        parseInt(savedTimer, 10) - Math.floor(Date.now() / 1000);
+      if (remainingTime > 0) {
+        setTimer(remainingTime);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     let interval: any;
     if (timer > 0) {
       interval = setInterval(() => {
-        setTimer((prevTimer) => prevTimer - 1);
+        setTimer((prevTimer) => {
+          const newTimer = prevTimer - 1;
+          localStorage.setItem(
+            "otpResendTimer",
+            (Math.floor(Date.now() / 1000) + newTimer).toString(),
+          );
+          return newTimer;
+        });
       }, 1000);
     } else if (timer === 0 && interval) {
       clearInterval(interval);
+      localStorage.removeItem("otpResendTimer");
     }
     return () => clearInterval(interval);
   }, [timer]);
+
   const registerMutation = useMutation({
     mutationFn: async (userData) => {
       return await fetch(`${baseUrl}/auth/confirmCode`, {
@@ -150,32 +169,21 @@ const Otp = ({
 
   const resendCodeMutation = useMutation({
     mutationFn: async () => {
-      return await fetch(
-        `${baseUrl}/resendCode/${otpRegisterPhoneNumber ? otpRegisterPhoneNumber : otpLoginPhoneNumber}}`,
-        {
-          method: "POST", 
-        },
-      ).then((res) => res.json());
+      return await fetch(`${baseUrl}/resendCode/${phoneNumber}`, {
+        method: "POST",
+      }).then((res) => res.json());
     },
     onSuccess: (data) => {
       console.log("Success:", data);
-      if (data.statusCode === 200) {
-        swal({
-          title: "کد با موفقیت ارسال شد",
-          icon: "success",
-          buttons: [false, "حله"],
-        }).then(() => {
-          localStorage.clear();
-          router.push("/dashboard");
-        });
-      } else {
+      console.log(phoneNumber);
+      if (data.statusCode !== 200) { 
         swal({
           title: "با عرض پوزش لطفا مجدد مراحل رو طی کنید",
           icon: "error",
           buttons: [false, "حله"],
         }).then(() => {
-          // localStorage.clear();
-          // location.reload();
+          localStorage.clear();
+          location.reload();
         });
       }
     },
@@ -199,6 +207,10 @@ const Otp = ({
 
   const resendCodeHandler = () => {
     setTimer(59);
+    localStorage.setItem(
+      "otpResendTimer",
+      (Math.floor(Date.now() / 1000) + 59).toString(),
+    );
     resendCodeMutation.mutate();
   };
   return (
