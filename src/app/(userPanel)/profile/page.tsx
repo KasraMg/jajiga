@@ -1,6 +1,6 @@
 import Layout from "@/src/components/modules/Layout/Layout";
 import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
-import Button from "@/src/components/modules/button";
+import { Button } from "@/src/components/shadcn/ui/button";
 import Container from "@/src/components/modules/container/Container";
 import Image from "next/image";
 import Box from "@/src/components/templates/userPanel/profile/Box";

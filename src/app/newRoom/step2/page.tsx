@@ -1,6 +1,5 @@
 "use client";
-import { Map } from "@/src/components/modules/Map/Map";
-import Alert from "@/src/components/modules/alert/Alert";
+import { Map } from "@/src/components/modules/Map/Map"; 
 import ContentNavigator from "@/src/components/modules/contentNavigator/ContentNavigator";
 import StepLayout from "@/src/components/modules/stepLayout/StepLayout";
 import Stepper from "@/src/components/modules/stepper/Stepper";
@@ -32,7 +31,7 @@ const page = () => {
             نما بر روی مکان اقامتگاه شما قرار گیرد. با استفاده از کلید + بر روی
             نقشه زوم کنید.
           </p>
-          <Alert variant={"danger"} />
+          {/* <Alert variant={"danger"} /> */}
           <Map
             className="z-10 mb-20"
             mapChangeHandler={mapChangeHandler}
