@@ -1,15 +1,16 @@
+"use client"
 import { Button } from "@/src/components/shadcn/ui/button";
 import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-
-import swal from "sweetalert";
-const Otp = ({
+import Cookies from 'js-cookie';
+import swal from "sweetalert"; 
+const Otp =({
   setStep,
 }: {
   setStep: React.Dispatch<React.SetStateAction<string>>;
-}) => {
+}) =>{
   const otpLoginPhoneNumber = getFromLocalStorage("otpLoginPhoneNumber");
   const otpRegisterPhoneNumber = getFromLocalStorage("otpRegisterPhoneNumber");
   const router = useRouter();
@@ -18,16 +19,22 @@ const Otp = ({
   const registerUserData = getFromLocalStorage("registerUserData");
 
   const [otpCode, setOtpCode] = useState("");
-
+ 
   useEffect(() => {
     const savedTimer = localStorage.getItem("otpResendTimer");
     if (savedTimer) {
       const remainingTime =
         parseInt(savedTimer, 10) - Math.floor(Date.now() / 1000);
       if (remainingTime > 0) {
-        setTimer(remainingTime);
+        setTimer(remainingTime);  
       }
     }
+    Cookies.set("ff", 'edede', {
+      expires: 365, // Expire in 365 days, you can adjust as needed
+      httpOnly: true, // httpOnly can't be set from the client-side, it's a server-side flag
+      secure: false, // true if your site is HTTPS
+      sameSite: "lax",
+    });
   }, []);
 
   useEffect(() => {
@@ -176,7 +183,7 @@ const Otp = ({
     onSuccess: (data) => {
       console.log("Success:", data);
       console.log(phoneNumber);
-      if (data.statusCode !== 200) { 
+      if (data.statusCode !== 200) {
         swal({
           title: "با عرض پوزش لطفا مجدد مراحل رو طی کنید",
           icon: "error",
@@ -273,6 +280,6 @@ const Otp = ({
       ) : null}
     </div>
   );
-};
+}
 
 export default Otp;

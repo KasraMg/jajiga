@@ -2,7 +2,7 @@ import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import Layout from "@/src/components/modules/Layout/Layout";
 import Card from "@/src/components/templates/index/SpecialAccommodations/components/Card";
 import { FaRegHeart } from "react-icons/fa";
-import Button from "@/src/components/modules/button";
+import { Button } from "@/src/components/shadcn/ui/button";
 import { CiSearch } from "react-icons/ci";
 import Container from "@/src/components/modules/container/Container";
 

@@ -1,21 +1,21 @@
  
-import { useQuery, useQueryClient } from "react-query";
+// import { useQuery, useQueryClient } from "react-query";
 
-function useFetchData(url: string | number) {
-  const queryClient = useQueryClient();
+// function useFetchData(url: string | number) {
+//   const queryClient = useQueryClient();
 
-  return useQuery(
-    ["SingleCourse", url],
-    (query) => {
-      return fetch(`${url}`).then(
-        (res) => res.json(),
-      );
-    },
-    {
-      // cacheTime: 6000,
+//   return useQuery(
+//     ["SingleCourse", url],
+//     (query) => {
+//       return fetch(`${url}`).then(
+//         (res) => res.json(),
+//       );
+//     },
+//     {
+//       // cacheTime: 6000,
       
-    },
-  );
-}
+//     },
+//   );
+// }
 
-export default useFetchData;
+// export default useFetchData;
