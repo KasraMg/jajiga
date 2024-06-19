@@ -28,13 +28,7 @@ const Otp =({
       if (remainingTime > 0) {
         setTimer(remainingTime);  
       }
-    }
-    Cookies.set("ff", 'edede', {
-      expires: 365, // Expire in 365 days, you can adjust as needed
-      httpOnly: true, // httpOnly can't be set from the client-side, it's a server-side flag
-      secure: false, // true if your site is HTTPS
-      sameSite: "lax",
-    });
+    } 
   }, []);
 
   useEffect(() => {
@@ -76,8 +70,8 @@ const Otp =({
           icon: "success",
           buttons: [false, "حله"],
         }).then(() => {
-          localStorage.clear();
-          router.push("/dashboard");
+          // localStorage.clear();
+          // router.push("/dashboard");
         });
       } else if (data.statusCode === 400) {
         swal({

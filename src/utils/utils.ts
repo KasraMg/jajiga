@@ -36,8 +36,8 @@ export const saveIntoCookies = (
 ) => {
   Cookies.set("RefreshToken", value, {
     expires: expire, // Expire in 365 days, you can adjust as needed
-    httpOnly: true, // httpOnly can't be set from the client-side, it's a server-side flag
-    secure: true, // true if your site is HTTPS
-    sameSite: "none",
+    httpOnly: false, // httpOnly can't be set from the client-side, it's a server-side flag
+    secure: false, // true if your site is HTTPS
+    sameSite: "lax",
   });
 };
