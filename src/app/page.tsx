@@ -11,9 +11,12 @@ import SupperOffers from "../components/templates/index/SuperOffers/SuperOffers"
 import Intro from "../components/templates/index/intro/Intro";
 import ScrollObserver from "../utils/scrollObserver";
 import Container from "../components/modules/container/Container";
+import authUser from "../utils/auth";
 
 export default function Home() {
-
+  authUser()
+  console.log('kir');
+  
   return (
     <main>
       <ScrollObserver>

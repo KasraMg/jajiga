@@ -11,7 +11,7 @@ export const getFromLocalStorage = (key: string) => {
 
 export const getUrlParam = (key: string) => {
   const urlParams = new URLSearchParams(window.location.search);
-  return urlParams.get(key);
+   urlParams.get(key);
 };
 
 export const addParamToUrl = (param: string, value: string) => {
@@ -30,11 +30,12 @@ export const removeParameterFromURL = (param: string) => {
 };
 
 export const saveIntoCookies = (
+  key:string,
   value: string,
   expire: number,
   httpOnly: boolean,
 ) => {
-  Cookies.set("RefreshToken", value, {
+  return Cookies.set(key, value, {
     expires: expire, // Expire in 365 days, you can adjust as needed
     httpOnly: false, // httpOnly can't be set from the client-side, it's a server-side flag
     secure: false, // true if your site is HTTPS

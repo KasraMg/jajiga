@@ -1,3 +1,4 @@
+import Loader from "@/src/components/modules/loader/Loader";
 import { Button } from "@/src/components/shadcn/ui/button";
 // import { usePostData } from "@/src/hooks/usePostData";
 import {
@@ -104,6 +105,7 @@ const Login = ({
       >
         قوانین و مقررات
       </Link>
+      {mutation.isPending && <Loader />}
     </div>
   );
 };

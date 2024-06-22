@@ -498,3 +498,32 @@ select:focus {
 .swal-button:focus {
   box-shadow: none !important;
 }
+
+
+#loader::after {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 4px solid;
+  border-color: #f0c807 transparent;
+}
+
+#loader {
+  animation: rotation 1s linear infinite
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+} 

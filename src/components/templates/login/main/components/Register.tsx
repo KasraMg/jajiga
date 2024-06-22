@@ -1,3 +1,4 @@
+import Loader from "@/src/components/modules/loader/Loader";
 import { Button } from "@/src/components/shadcn/ui/button";
 import {
   baseUrl,
@@ -168,6 +169,7 @@ const Register = ({
       >
         ثبت نام
       </Button>
+      {mutation.isPending && <Loader />}
     </form>
   );
 };
