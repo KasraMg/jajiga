@@ -1,5 +1,6 @@
+import Loader from "@/src/components/modules/loader/Loader";
 import { Button } from "@/src/components/shadcn/ui/button";
-import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
+import { baseUrl, getFromLocalStorage, saveIntoCookies } from "@/src/utils/utils";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -45,7 +46,9 @@ const Password = ({
           title: "با موفقیت ثبت نام شدید",
           icon: "success",
           buttons: [false, "حله"],
-        }).then(() => {
+        }).then(() => { 
+          saveIntoCookies("RefreshToken", data.RefreshToken, 9999999999999999, false);
+          saveIntoCookies("AccessToken", data.accessToken, 9999999999999999, false);
           router.push("/dashboard");
           localStorage.clear();
         });
@@ -115,6 +118,8 @@ const Password = ({
       >
         ورود با کد یکبار مصرف
       </Button>
+
+      {mutation.isPending && <Loader />}
     </div>
   );
 };

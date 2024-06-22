@@ -4,6 +4,7 @@ import { CiSearch } from "react-icons/ci";
 import Menu from "../menu/Menu";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import Loader from "../loader/Loader";
 
 const Navbar = ({ navbarContainer }: any) => {
   const route = usePathname();

@@ -1,16 +1,20 @@
-"use client"
+"use client";
 import { Button } from "@/src/components/shadcn/ui/button";
-import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
+import {
+  baseUrl,
+  getFromLocalStorage,
+  saveIntoCookies,
+} from "@/src/utils/utils";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Cookies from 'js-cookie';
-import swal from "sweetalert"; 
-const Otp =({
+import swal from "sweetalert";
+import Loader from "@/src/components/modules/loader/Loader";
+const Otp = ({
   setStep,
 }: {
   setStep: React.Dispatch<React.SetStateAction<string>>;
-}) =>{
+}) => {
   const otpLoginPhoneNumber = getFromLocalStorage("otpLoginPhoneNumber");
   const otpRegisterPhoneNumber = getFromLocalStorage("otpRegisterPhoneNumber");
   const router = useRouter();
@@ -19,16 +23,16 @@ const Otp =({
   const registerUserData = getFromLocalStorage("registerUserData");
 
   const [otpCode, setOtpCode] = useState("");
- 
+
   useEffect(() => {
     const savedTimer = localStorage.getItem("otpResendTimer");
     if (savedTimer) {
       const remainingTime =
         parseInt(savedTimer, 10) - Math.floor(Date.now() / 1000);
       if (remainingTime > 0) {
-        setTimer(remainingTime);  
+        setTimer(remainingTime);
       }
-    } 
+    }
   }, []);
 
   useEffect(() => {
@@ -70,8 +74,20 @@ const Otp =({
           icon: "success",
           buttons: [false, "حله"],
         }).then(() => {
-          // localStorage.clear();
-          // router.push("/dashboard");
+          saveIntoCookies(
+            "RefreshToken",
+            data.RefreshToken,
+            9999999999999999,
+            false,
+          );
+          saveIntoCookies(
+            "AccessToken",
+            data.accessToken,
+            9999999999999999,
+            false,
+          );
+          router.push("/dashboard");
+          localStorage.clear();
         });
       } else if (data.statusCode === 400) {
         swal({
@@ -108,8 +124,8 @@ const Otp =({
           icon: "error",
           buttons: [false, "حله"],
         }).then(() => {
-          localStorage.clear();
           location.reload();
+          localStorage.clear();
         });
       }
     },
@@ -134,8 +150,20 @@ const Otp =({
           icon: "success",
           buttons: [false, "حله"],
         }).then(() => {
-          localStorage.clear();
+          saveIntoCookies(
+            "RefreshToken",
+            data.RefreshToken,
+            9999999999999999,
+            false,
+          );
+          saveIntoCookies(
+            "AccessToken",
+            data.accessToken,
+            9999999999999999,
+            false,
+          );
           router.push("/dashboard");
+          localStorage.clear();
         });
       } else if (data.statusCode === 400) {
         swal({
@@ -272,8 +300,11 @@ const Otp =({
           ورود با رمز عبور
         </Button>
       ) : null}
+
+      {loginMutation.isPending && <Loader />}
+      {registerMutation.isPending && <Loader />}
     </div>
   );
-}
+};
 
 export default Otp;
