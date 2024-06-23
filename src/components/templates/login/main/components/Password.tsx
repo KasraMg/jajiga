@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { LuEye } from "react-icons/lu";
 import swal from "sweetalert";
+import Cookies from 'js-cookie'
 
 const Password = ({
   setStep,
@@ -47,8 +48,9 @@ const Password = ({
           icon: "success",
           buttons: [false, "حله"],
         }).then(() => { 
-          saveIntoCookies("RefreshToken", data.RefreshToken, 9999999999999999, false);
-          saveIntoCookies("AccessToken", data.accessToken, 9999999999999999, false);
+        Cookies.set('RefreshToken',  data.RefreshToken, { expires: 9999999, path: '' })
+        Cookies.set('AccessToken',data.accessToken, { expires: 9999999, path: '' })
+ 
           router.push("/dashboard");
           localStorage.clear();
         });

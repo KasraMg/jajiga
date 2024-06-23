@@ -2,14 +2,14 @@
 import { Button } from "@/src/components/shadcn/ui/button";
 import {
   baseUrl,
-  getFromLocalStorage,
-  saveIntoCookies,
+  getFromLocalStorage, 
 } from "@/src/utils/utils";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import swal from "sweetalert";
 import Loader from "@/src/components/modules/loader/Loader";
+import Cookies from 'js-cookie'
 const Otp = ({
   setStep,
 }: {
@@ -74,18 +74,8 @@ const Otp = ({
           icon: "success",
           buttons: [false, "حله"],
         }).then(() => {
-          saveIntoCookies(
-            "RefreshToken",
-            data.RefreshToken,
-            9999999999999999,
-            false,
-          );
-          saveIntoCookies(
-            "AccessToken",
-            data.accessToken,
-            9999999999999999,
-            false,
-          );
+          Cookies.set('RefreshToken',  data.RefreshToken, { expires: 9999999, path: '' })
+          Cookies.set('AccessToken',data.accessToken, { expires: 9999999, path: '' })
           router.push("/dashboard");
           localStorage.clear();
         });
@@ -150,18 +140,8 @@ const Otp = ({
           icon: "success",
           buttons: [false, "حله"],
         }).then(() => {
-          saveIntoCookies(
-            "RefreshToken",
-            data.RefreshToken,
-            9999999999999999,
-            false,
-          );
-          saveIntoCookies(
-            "AccessToken",
-            data.accessToken,
-            9999999999999999,
-            false,
-          );
+          Cookies.set('RefreshToken',  data.RefreshToken, { expires: 9999999, path: '' })
+        Cookies.set('AccessToken',data.accessToken, { expires: 9999999, path: '' })
           router.push("/dashboard");
           localStorage.clear();
         });
