@@ -10,7 +10,6 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import swal from "sweetalert";
-
 const Login = ({
   setStep,
 }: {
@@ -33,7 +32,7 @@ const Login = ({
       console.log("Success:", data);
       if (data.statusCode === 200) {
         saveIntoLocalStorage("otpRegisterPhoneNumber", phoneNumber);
-        setStep("register");
+        setStep("register"); 
       } else if (data.statusCode === 411) {
         saveIntoLocalStorage("otpLoginPhoneNumber", phoneNumber);
         setStep("otp");
