@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import CitiesSelector from "./components/CitiesSelector";
 import Slider from "@/src/components/modules/slider/Slider";
