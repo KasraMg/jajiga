@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import Slider from "@/src/components/modules/slider/Slider";
 import Card from "../SpecialAccommodations/components/Card";
