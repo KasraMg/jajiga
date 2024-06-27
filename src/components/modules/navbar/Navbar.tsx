@@ -5,6 +5,7 @@ import Menu from "../menu/Menu";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Loader from "../loader/Loader";
+import { authStore } from "@/src/stores/auth";
 
 const Navbar = ({ navbarContainer }: any) => {
   const route = usePathname();
@@ -12,6 +13,8 @@ const Navbar = ({ navbarContainer }: any) => {
     route.length > 2 ? true : false,
   );
 
+  const { userData } = authStore((state) => state);
+ 
   useEffect(() => {
     window?.addEventListener("scroll", () => {
       if (route.length == 1) {
@@ -172,12 +175,16 @@ const Navbar = ({ navbarContainer }: any) => {
                   isSticky ? "text-black" : "text-white"
                 } font-vazir hidden flex-row-reverse gap-8 font-medium md:!flex`}
               >
-                {/* 
-                        <Link href={''}>اعلانات</Link>
-                        <Link href={''}>رزرو ها</Link>
-                        <Link href={''}>اقامتگاه ها</Link>
-                    */}
-                <Link href={"/login"}>ورود / ثبت نام</Link>
+                {!userData ? (
+                  <Link href={"/login"}>ورود / ثبت نام</Link>
+                ) : (
+                  <>
+                    <Link href={""}>اعلانات</Link>
+                    <Link href={""}>رزرو ها</Link>
+                    <Link href={""}>اقامتگاه ها</Link>
+                  </>
+                )}
+
                 <Link href={"/host"}>میزبان شوید</Link>
                 <Link href={"/wishes"}>علاقه مندی ها</Link>
               </ul>

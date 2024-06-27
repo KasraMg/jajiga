@@ -5,12 +5,12 @@ const useCustomQuery = (
     queryFn: any,
     options = {}
 ) => {
-    const { data, isLoading, status, isError } = useQuery({
+    const { data, isLoading, status, isError,refetch } = useQuery({
         queryKey: key,
         queryFn: () => queryFn,
         ...options,
     });
-    return { data, isLoading, status, isError };
+    return { data, isLoading, status, isError, refetch};
 };
 
 export default useCustomQuery;

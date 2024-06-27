@@ -28,8 +28,7 @@ const Login = ({
         body: JSON.stringify({ phone: phoneNumber }),
       }).then((res) => res.json());
     },
-    onSuccess: (data) => {
-      console.log("Success:", data);
+    onSuccess: (data) => { 
       if (data.statusCode === 200) {
         saveIntoLocalStorage("otpRegisterPhoneNumber", phoneNumber);
         setStep("register"); 
@@ -104,7 +103,7 @@ const Login = ({
       >
         قوانین و مقررات
       </Link>
-      {mutation.isPending && <Loader />}
+      {mutation.isPending && <Loader enableOverlay={true}  />}
     </div>
   );
 };

@@ -51,8 +51,7 @@ const Register = ({
         body: JSON.stringify(values),
       }).then((res) => res.json());
     },
-    onSuccess: (data) => {
-      console.log("Success:", data);
+    onSuccess: (data) => { 
       if (data.statusCode === 200) {
         setStep("otp");
         saveIntoLocalStorage("registerUserData", formHandler.values);
@@ -169,7 +168,7 @@ const Register = ({
       >
         ثبت نام
       </Button>
-      {mutation.isPending && <Loader />}
+      {mutation.isPending && <Loader enableOverlay={true} />}
     </form>
   );
 };

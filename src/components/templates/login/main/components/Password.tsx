@@ -40,8 +40,7 @@ const Password = ({
         body: JSON.stringify({ password }),
       }).then((res) => res.json());
     },
-    onSuccess: (data) => {
-      console.log("Success:", data);
+    onSuccess: (data) => { 
       if (data.statusCode === 200) {
         swal({
           title: "با موفقیت ثبت نام شدید",
@@ -51,7 +50,7 @@ const Password = ({
         Cookies.set('RefreshToken',  data.RefreshToken, { expires: 9999999, path: '' })
         Cookies.set('AccessToken',data.accessToken, { expires: 9999999, path: '' })
  
-          router.push("/dashboard");
+        router.replace("/dashboard");
           localStorage.clear();
         });
       } else if (data.statusCode === 401) {
@@ -121,7 +120,7 @@ const Password = ({
         ورود با کد یکبار مصرف
       </Button>
 
-      {mutation.isPending && <Loader />}
+      {mutation.isPending && <Loader enableOverlay={true} />}
     </div>
   );
 };
