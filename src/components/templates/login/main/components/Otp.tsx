@@ -66,8 +66,7 @@ const Otp = ({
         body: JSON.stringify(userData),
       }).then((res) => res.json());
     },
-    onSuccess: (data) => {
-      console.log("Success:", data);
+    onSuccess: (data) => { 
       if (data.statusCode === 200) {
         swal({
           title: "با موفقیت ثبت نام شدید",
@@ -76,7 +75,7 @@ const Otp = ({
         }).then(() => {
           Cookies.set('RefreshToken',  data.RefreshToken, { expires: 9999999, path: '' })
           Cookies.set('AccessToken',data.accessToken, { expires: 9999999, path: '' })
-          router.push("/dashboard");
+        router.replace("/dashboard");
           localStorage.clear();
         });
       } else if (data.statusCode === 400) {
@@ -132,8 +131,7 @@ const Otp = ({
         body: JSON.stringify({ code }),
       }).then((res) => res.json());
     },
-    onSuccess: (data) => {
-      console.log("Success:", data);
+    onSuccess: (data) => { 
       if (data.statusCode === 200) {
         swal({
           title: "با موفقیت ثبت نام شدید",
@@ -142,7 +140,7 @@ const Otp = ({
         }).then(() => {
           Cookies.set('RefreshToken',  data.RefreshToken, { expires: 9999999, path: '' })
         Cookies.set('AccessToken',data.accessToken, { expires: 9999999, path: '' })
-          router.push("/dashboard");
+        router.replace("/dashboard");
           localStorage.clear();
         });
       } else if (data.statusCode === 400) {
@@ -182,8 +180,7 @@ const Otp = ({
         method: "POST",
       }).then((res) => res.json());
     },
-    onSuccess: (data) => {
-      console.log("Success:", data);
+    onSuccess: (data) => { 
       console.log(phoneNumber);
       if (data.statusCode !== 200) {
         swal({
@@ -281,8 +278,8 @@ const Otp = ({
         </Button>
       ) : null}
 
-      {loginMutation.isPending && <Loader />}
-      {registerMutation.isPending && <Loader />}
+      {loginMutation.isPending && <Loader enableOverlay={true} />}
+      {registerMutation.isPending && <Loader enableOverlay={true} />}
     </div>
   );
 };

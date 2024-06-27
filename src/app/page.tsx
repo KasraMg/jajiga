@@ -8,58 +8,32 @@ import SpecialAccommodations from "../components/templates/index/SpecialAccommod
 import SupperOffers from "../components/templates/index/SuperOffers/SuperOffers";
 import Intro from "../components/templates/index/intro/Intro";
 import ScrollObserver from "../utils/scrollObserver";
-import Container from "../components/modules/container/Container";
-import useAuthUser from "../utils/auth";
+import Container from "../components/modules/container/Container"; 
 
-import { authStore } from "../stores/auth";
-import Auth from "../components/templates/default/Auth";
-import { getQueryClient } from "../providers/getQueryClient";
-import { dehydrate } from "@tanstack/react-query";
-import { baseUrl } from "../utils/utils";
-import Hydrated from "../providers/Hydrated";
-import { cookies } from "next/headers";
-
-export default async function Home() {
+export default async function Home() { 
   
-  const cookieStore = cookies();
-  const accessToken = cookieStore.get("AccessToken");
-  async function fetchUsers() {
-    const res = await fetch(`${baseUrl}/getMe`, {
-      headers: {
-        Authorization: `Bearer ${accessToken?.value}`,
-      },
-    });
-    if (!res.ok) {
-      throw new Error("Failed to fetch users");
-    }
-    return res.json();
-  }
   return (
-    <main>
-      <Hydrated queryKey={["auth"]} queryFn={fetchUsers}>
-        <Auth />
-      </Hydrated>
-
-      {/* <ScrollObserver>
-        <Container> */}
-      {/* <Intro />
+    <main> 
+      <ScrollObserver>
+        <Container>
+          <Intro />
           <Layout className="bg-white">
             <PopularDestinations />
-          <FastSearch />
-             <Ads />
-         <SpecialAccommodations />  
+            <FastSearch />
+            <Ads />
+            <SpecialAccommodations />
           </Layout>
           <SupperOffers />
           <Layout>
             <Offers />
-           <Offers />
+            <Offers />
             <BecomeHost />
             <Offers />
-            <Offers /> 
             <Offers />
-          </Layout>   */}
-      {/* </Container>
-      </ScrollObserver> */}
+            <Offers />
+          </Layout>
+        </Container>
+      </ScrollObserver>
     </main>
   );
 }

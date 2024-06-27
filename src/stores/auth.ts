@@ -46,8 +46,7 @@ export type Action = {
 
 export const authStore = create<State & Action>()(
   devtools((set) => ({ 
-    userData: null,
-
+    userData: null, 
     setUserData: (val) => set(() => ({ userData: val }), false, "setUserData"), 
   })),
 );
