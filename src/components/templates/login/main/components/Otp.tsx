@@ -1,15 +1,12 @@
 "use client";
 import { Button } from "@/src/components/shadcn/ui/button";
-import {
-  baseUrl,
-  getFromLocalStorage, 
-} from "@/src/utils/utils";
-import { useMutation } from "@tanstack/react-query";
+import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import swal from "sweetalert";
 import Loader from "@/src/components/modules/loader/Loader";
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 const Otp = ({
   setStep,
 }: {
@@ -21,7 +18,7 @@ const Otp = ({
   const [timer, setTimer] = useState<number>(0);
   const phoneNumber = otpLoginPhoneNumber || otpRegisterPhoneNumber;
   const registerUserData = getFromLocalStorage("registerUserData");
-
+  const queryClient = useQueryClient();
   const [otpCode, setOtpCode] = useState("");
 
   useEffect(() => {
@@ -66,16 +63,23 @@ const Otp = ({
         body: JSON.stringify(userData),
       }).then((res) => res.json());
     },
-    onSuccess: (data) => { 
+    onSuccess: (data) => {
       if (data.statusCode === 200) {
         swal({
           title: "با موفقیت ثبت نام شدید",
           icon: "success",
           buttons: [false, "حله"],
         }).then(() => {
-          Cookies.set('RefreshToken',  data.RefreshToken, { expires: 9999999, path: '' })
-          Cookies.set('AccessToken',data.accessToken, { expires: 9999999, path: '' })
-        router.replace("/dashboard");
+          Cookies.set("RefreshToken", data.RefreshToken, {
+            expires: 9999999,
+            path: "",
+          });
+          Cookies.set("AccessToken", data.accessToken, {
+            expires: 9999999,
+            path: "",
+          });
+
+          router.replace("/dashboard");
           localStorage.clear();
         });
       } else if (data.statusCode === 400) {
@@ -131,16 +135,24 @@ const Otp = ({
         body: JSON.stringify({ code }),
       }).then((res) => res.json());
     },
-    onSuccess: (data) => { 
+    onSuccess: (data) => {
       if (data.statusCode === 200) {
         swal({
           title: "با موفقیت ثبت نام شدید",
           icon: "success",
           buttons: [false, "حله"],
         }).then(() => {
-          Cookies.set('RefreshToken',  data.RefreshToken, { expires: 9999999, path: '' })
-        Cookies.set('AccessToken',data.accessToken, { expires: 9999999, path: '' })
-        router.replace("/dashboard");
+          Cookies.set("RefreshToken", data.RefreshToken, {
+            expires: 9999999,
+            path: "",
+          });
+          Cookies.set("AccessToken", data.accessToken, {
+            expires: 9999999,
+            path: "",
+          });
+          queryClient.invalidateQueries({ queryKey: ["auth"] });
+          router.replace("/dashboard");
+
           localStorage.clear();
         });
       } else if (data.statusCode === 400) {
@@ -180,7 +192,7 @@ const Otp = ({
         method: "POST",
       }).then((res) => res.json());
     },
-    onSuccess: (data) => { 
+    onSuccess: (data) => {
       console.log(phoneNumber);
       if (data.statusCode !== 200) {
         swal({
@@ -219,6 +231,9 @@ const Otp = ({
     );
     resendCodeMutation.mutate();
   };
+
+
+  
   return (
     <div className="w-full md:!w-[350px]">
       <div className="flex items-center justify-between">
