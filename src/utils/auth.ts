@@ -18,7 +18,7 @@ const Auth = () => {
   }
 
   const { data, status, refetch } = useCustomQuery(["auth"], fetchUsers,{
-    enabled: !!accessToken,
+    // enabled: !!accessToken,
   });
   const { setUserData } = authStore((state) => state); 
 
@@ -26,13 +26,8 @@ const Auth = () => {
     if (accessToken) {
       refetch();
     }
-  }, [accessToken, refetch]);
+  }, [accessToken, refetch]); 
 
-  useEffect(() => {
-    if (accessToken) {
-      refetch();
-    }
-  }, [window.location]);
   
   useEffect(() => {
     if (status === "success" && data?.user) { 

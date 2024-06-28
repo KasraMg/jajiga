@@ -179,9 +179,7 @@ const Navbar = ({ navbarContainer }: any) => {
                   <Link href={"/login"}>ورود / ثبت نام</Link>
                 ) : (
                   <>
-                    <Link href={""}>اعلانات</Link>
-                    <Link href={""}>رزرو ها</Link>
-                    <Link href={""}>اقامتگاه ها</Link>
+                    <Link href={""}>اعلانات</Link> 
                   </>
                 )}
 
