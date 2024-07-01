@@ -33,10 +33,11 @@ export default function RootLayout({
 }>) {
   const cookieStore = cookies();
   const accessToken = cookieStore.get("AccessToken");
+
   async function fetchUsers() {
     const res = await fetch(`${baseUrl}/getMe`, {
       headers: {
-        Authorization: `Bearer ${accessToken?.value}`,
+        Authorization: `Bearer ${accessToken}`,
       },
     });
     return res.json();
