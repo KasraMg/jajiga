@@ -1,6 +1,6 @@
 import React from "react";
 import { BiSupport } from "react-icons/bi";
-import { FaRegHeart } from "react-icons/fa";
+import { FaRegHeart, FaRegUser } from "react-icons/fa";
 import {
   TbHomePlus,
   TbHome,
@@ -25,8 +25,13 @@ import {
 } from "@/src/components/shadcn/ui/sheet";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { authStore } from "@/src/stores/auth";
+import Link from "next/link";
 
 function Menu({ isSticky }: any) {
+
+  const { userData } = authStore((state) => state);
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -34,7 +39,7 @@ function Menu({ isSticky }: any) {
           <div
             className={` ${
               isSticky && "border border-solid"
-            } flex items-center gap-2 rounded-full border-[#0000005c] bg-[#ffffff54] p-1 pl-2 pr-3 text-3xl`}
+            } focus-visible:border-0 outline-none flex items-center gap-2 rounded-full border-[#0000005c] bg-[#ffffff54] p-1 pl-2 pr-3 text-3xl`}
           >
             <FaRegCircleUser className="text-gray-500" />
             <RxHamburgerMenu className="cursor-pointer text-xl text-black" />
@@ -78,38 +83,44 @@ function Menu({ isSticky }: any) {
         </SheetHeader>
         <div className="mr-4 mt-4">
           <ul>
-            <li className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl bg-[#f5f5f5] py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]">
+            <Link href="/" className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl bg-[#f5f5f5] py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]">
               <GoHome className="text-xl" />
               <span className="mt-1 text-sm">صفحه اصلی</span>
-            </li>
+            </Link>
             <li className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]">
               <FaRegHeart className="text-xl" />
               <span className="mt-1 text-sm">علاقه مندی ها</span>
             </li>
-            <li className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]">
+            {userData && (
+                 <Link href="/dashboard" className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]">
+                 <FaRegUser className="text-xl" />
+                 <span className="mt-1 text-sm">حساب کاربری</span>
+               </Link>
+            )} 
+            <Link href="/newRoom" className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]">
               <TbHomePlus className="text-xl" />
               <span className="mt-1 text-sm"> میزبان شو</span>
-            </li>
-            <li className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]">
+            </Link>
+            <Link href="/support" className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]">
               <BiSupport className="text-xl" />
               <span className="mt-1 text-sm">پشتیبانی</span>
-            </li>
-            <li className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]">
+            </Link>
+            <Link href="/faq" className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]">
               <TbMessage2Question className="text-xl" />
               <span className="mt-1 text-sm">سوالات متداول</span>
-            </li>
+            </Link>
             <li className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]">
               <IoShieldCheckmarkOutline className="text-xl" />
               <span className="mt-1 text-sm">ضمانت تحویل</span>
             </li>
-            <li className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]">
+            <Link href="/rules" className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]">
               <GrNotes className="text-xl" />
               <span className="mt-1 text-sm">قوانین وبسایت</span>
-            </li>
-            <li className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]">
+            </Link>
+            <Link href="/about" className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]">
               <TbInfoCircle className="text-xl" />
               <span className="mt-1 text-sm">درباره ما</span>
-            </li>
+            </Link>
           </ul>
         </div>
         <div className="absolute bottom-0 left-0 flex w-full flex-row-reverse justify-around rounded-t-3xl bg-[#c1c1c175] px-2 py-3 text-xl">

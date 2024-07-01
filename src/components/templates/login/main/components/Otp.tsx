@@ -78,7 +78,7 @@ const Otp = ({
             expires: 9999999,
             path: "",
           });
-
+          queryClient.invalidateQueries({ queryKey: ["auth"] });
           router.replace("/dashboard");
           localStorage.clear();
         });
@@ -150,10 +150,10 @@ const Otp = ({
             expires: 9999999,
             path: "",
           });
-          queryClient.invalidateQueries({ queryKey: ["auth"] });
+          queryClient.invalidateQueries({ queryKey: ["auth"] }); 
           router.replace("/dashboard");
 
-          localStorage.clear();
+          // localStorage.clear();
         });
       } else if (data.statusCode === 400) {
         swal({
@@ -232,12 +232,15 @@ const Otp = ({
     resendCodeMutation.mutate();
   };
 
-
-  
+  const clickHandler =async () => { 
+    queryClient.invalidateQueries({ queryKey: ["auth"] });
+    
+  };
   return (
     <div className="w-full md:!w-[350px]">
       <div className="flex items-center justify-between">
         <p dir="ltr">+98{phoneNumber.slice(1, 11)}</p>
+        <button onClick={clickHandler}>frfrfr</button>
         <Button
           onClick={() => setStep("login")}
           className="!rounded-sm !px-4"

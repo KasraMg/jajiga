@@ -5,6 +5,7 @@ import { IoMdCheckmark } from "react-icons/io";
 import { TbHomePlus } from "react-icons/tb";
 import Container from "@/src/components/modules/container/Container";
 import { Button } from "@/src/components/shadcn/ui/button";
+import Link from "next/link";
 const page = () => {
   return (
     <Container>
@@ -26,12 +27,14 @@ const page = () => {
             description='در صورتی که قادر به اتمام مراحل ثبت اقامتگاه نباشید, می توانید با کلیک بر گزینه "لغو و خروج" در بالای صفحه, مراحل ثبت را نیمه کاره بگذارید. اطلاعات وارد شده تا همان مرحله ذخیره می شود و می توانید در فرصت بعدی مراحل ثبت اقامتگاه را به پایان برسانید. پس با خیال راحت, ثبت اقامتگاه خود را شروع کنید.'
           />
         </div>
+        <Link href="/newRoom/step1"> 
         <Button
           className="mx-auto my-8 mb-12 block w-full max-w-[860px] rounded-full py-2"
           variant={"main"}
-        >
+          >
           شروع ثبت اقامتگاه
         </Button>
+          </Link>
       </Layout>
     </Container>
   );
