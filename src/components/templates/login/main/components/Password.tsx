@@ -1,12 +1,16 @@
 import Loader from "@/src/components/modules/loader/Loader";
 import { Button } from "@/src/components/shadcn/ui/button";
-import { baseUrl, getFromLocalStorage, saveIntoCookies } from "@/src/utils/utils";
+import {
+  baseUrl,
+  getFromLocalStorage,
+  saveIntoCookies,
+} from "@/src/utils/utils";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { LuEye } from "react-icons/lu";
 import swal from "sweetalert";
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 
 const Password = ({
   setStep,
@@ -40,17 +44,23 @@ const Password = ({
         body: JSON.stringify({ password }),
       }).then((res) => res.json());
     },
-    onSuccess: (data) => { 
+    onSuccess: (data) => {
       if (data.statusCode === 200) {
         swal({
           title: "با موفقیت ثبت نام شدید",
           icon: "success",
           buttons: [false, "حله"],
-        }).then(() => { 
-        Cookies.set('RefreshToken',  data.RefreshToken, { expires: 9999999, path: '' })
-        Cookies.set('AccessToken',data.accessToken, { expires: 9999999, path: '' })
- 
-        router.replace("/dashboard");
+        }).then(() => {
+          Cookies.set("RefreshToken", data.RefreshToken, {
+            expires: 9999999,
+            path: "",
+          });
+          Cookies.set("AccessToken", data.accessToken, {
+            expires: 9999999,
+            path: "",
+          });
+
+          router.replace("/dashboard");
           localStorage.clear();
         });
       } else if (data.statusCode === 401) {

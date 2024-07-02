@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
 import { useEffect } from "react";
 
 const Auth = () => {
-  
+  const accessToken = Cookies.get("AccessToken");  
   async function fetchUsers() {
   const accessToken = Cookies.get("AccessToken"); 
     console.log(accessToken); 

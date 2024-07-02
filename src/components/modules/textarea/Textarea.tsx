@@ -20,7 +20,7 @@ const Textarea: FC<TextareaProps> = ({
         placeholder={placeholder}
         value={value}
         onChange={(event) => setValue(event.target.value)}
-        className={`${className ? className : ""} ouline-none w-full rounded-lg border border-solid border-gray-300`}
+        className={`${className ? className : ""} p-2 text-sm ouline-none w-full rounded-lg border border-solid border-gray-300`}
         maxLength={maxLength}
         cols={30}
         rows={5}
