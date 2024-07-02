@@ -5,8 +5,13 @@ import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
 import Textarea from "@/src/components/modules/textarea/Textarea";
 import useStateData from "@/src/hooks/useStateData";
+import { baseUrl } from "@/src/utils/utils";
+import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 import Select from "react-select";
+import { useRouter } from "next/navigation"; 
+import Loader from "@/src/components/modules/loader/Loader";
 const stateOptions = useStateData();
 
 const page = () => {
@@ -45,7 +50,51 @@ const page = () => {
     } else setDisabelNextButton(true);
   }, [stateSelectedOption, address, citySelectedOption]);
 
-  const clickHandler = () => {};
+  const accessToken = Cookies.get("AccessToken");
+  const router = useRouter();
+
+  interface AddressData {
+    address: {
+      state: string | undefined;
+      city: string[] | undefined;
+      address: string;
+    };
+    step: 2;
+    finished: false;
+  }
+
+  const mutation = useMutation({
+    mutationFn: async (data: AddressData) => {
+      return await fetch(`${baseUrl}/villa/add`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        credentials: "include",
+        body: JSON.stringify(data),
+      }).then((res) => res.json());
+    },
+    onSuccess: (data) => {
+      console.log(data);
+      if (data.status === 200) {
+        // router.replace("/newRoom/step2");
+      }
+    },
+  });
+
+  const submitHandler = () => {
+    const userData: AddressData = {
+      address: {
+        state: stateSelectedOption?.label,
+        city: citySelectedOption?.value,
+        address,
+      },
+      step: 2,
+      finished: false,
+    };
+    mutation.mutate(userData);
+  };
   return (
     <StepLayout stepperActive={1}>
       <div className="flex max-w-[1120px] gap-0 py-8 sm:!gap-5">
@@ -106,7 +155,7 @@ const page = () => {
             </div>
           </div>
           <ContentNavigator
-            clickHandler={clickHandler}
+            clickHandler={submitHandler}
             disablelPrevButton={true}
             disabelNextButton={disabelNextButton}
             prevLink={"/"}
@@ -117,6 +166,7 @@ const page = () => {
           title="آدرس اقامتگاه"
           text="آدرس دقیق اقامتگاه, تنها پس ازقطعی شدن رزروبرای میهمان ارسال می گردد."
         />
+        {mutation.isPending && <Loader />}
       </div>
     </StepLayout>
   );

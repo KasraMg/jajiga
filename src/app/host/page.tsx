@@ -1,12 +1,19 @@
+
+"use client" 
 import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import React from "react";
 import HostCart from "@/src/components/modules/hostCart/HostCart";
 import { Button } from "@/src/components/shadcn/ui/button";
 import useHostCartData from "@/src/hooks/useHostCartData";
 import Container from "@/src/components/modules/container/Container";
+import { authStore } from "@/src/stores/auth";
+import Link from "next/link";
 
 const Host = () => {
   const HostData = useHostCartData();
+  const { userData } = authStore((state) => state);
+console.log(userData);
+
   return (
     <Container>
       <Breadcrumb
@@ -35,12 +42,14 @@ const Host = () => {
         </div>
       ))}
       <div className="sticky bottom-2 mx-auto my-4 flex h-16 w-[90%] max-w-[320px] items-center justify-center rounded-lg bg-[#00000099] px-4 sm:!w-80">
+       <Link className="w-full" href={`${userData ? '/newRoom/step1' : '/login'}`}> 
         <Button
           className="flex w-full items-center justify-center rounded-full p-2 text-center text-black duration-300 hover:bg-[#d2b43d]"
           variant="yellow"
-        >
+          >
           ثبت اقامتگاه
         </Button>
+          </Link>
       </div>
     </Container>
   );

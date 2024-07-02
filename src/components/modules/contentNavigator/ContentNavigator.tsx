@@ -42,16 +42,10 @@ const ContentNavigator: FC<ContentNavigatorProps> = ({
         </Button>
         <Button
           variant="yellow"
-          className={`${disabelNextButton && "cursor-not-allowed opacity-40 hover:!opacity-30"} rounded-md transition-colors hover:opacity-75`}
-        >
-          {" "}
-          <Link
-            onClick={clickHandler}
-            className={`${disabelNextButton && "pointer-events-none"} px-8 py-[3px]`}
-            href={`/${nextLink}`}
-          >
-            بعدی
-          </Link>
+          onClick={clickHandler} 
+          className={`${disabelNextButton && "cursor-not-allowed pointer-events-none opacity-40 hover:!opacity-30"} px-[38px] py-[3px] rounded-md transition-colors hover:opacity-75`}
+        >  
+            بعدی 
         </Button>
       </div>
     </section>
