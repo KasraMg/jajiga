@@ -3,13 +3,73 @@ import ContentNavigator from "@/src/components/modules/contentNavigator/ContentN
 import StepLayout from "@/src/components/modules/stepLayout/StepLayout";
 import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
-import Textarea from "@/src/components/modules/textarea/Textarea";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsCamera, BsTrash3 } from "react-icons/bs";
+import swal from "sweetalert";
 
 const page = () => {
-  const [description, setDescription] = useState<string>("");
+  const [images, setImages] = useState<any>([]);
+  const [imagesBaseUrl, setImagesBaseUrl] = useState<any>([]);
   const [disabelNextButton, setDisabelNextButton] = useState(true);
+
+  const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (images.length == 10) {
+      swal({
+        title: "تنها 10 عکس میتونید آپلود کنید",
+        icon: "error",
+        buttons: [false, "اوکی"],
+      });
+    } else {
+      if (event.target.files && event.target.files.length > 0) {
+        let file = event.target.files[0];
+        if (file.type === "image/png" || file.type === "image/jpeg") {
+          if (!images.length) {
+            setImages((prevImages: any) => [...prevImages, file]);
+          } else {
+            const isImgExit = images.some((img: any) => {
+              return file.name === img.name;
+            }); 
+            if (isImgExit) {
+              swal({
+                title: "این عکس قبلا انتخاب شده است.",
+                icon: "error",
+                buttons: [false, "اوکی"],
+              });
+            } else {
+              setImages((prevImages: any) => [...prevImages, file]);
+            }
+          }
+        }
+      } else {
+        swal({
+          title:
+            "تایپ فایل وارد شده اشتباه است. لطفا فایل با تایپ های .png یا .jpg وارد کنید",
+          icon: "error",
+          buttons: [false, "اوکی"],
+        });
+      }
+    }
+  };
+
+  useEffect(() => {
+    const generateImages = () => {
+      const newImagesBaseUrl: string[] = [];
+      images.forEach((img: any) => {
+        let reader = new FileReader();
+        reader.onloadend = () => {
+          newImagesBaseUrl.push(reader.result as string);
+          if (newImagesBaseUrl.length === images.length) {
+            setImagesBaseUrl(newImagesBaseUrl);
+          }
+        };
+        reader.readAsDataURL(img);
+      });
+    };
+
+    if (images.length > 0) {
+      generateImages();
+    }
+  }, [images]);
 
   return (
     <StepLayout stepperActive={3}>
@@ -21,7 +81,7 @@ const page = () => {
           <p>تصاویر اقامتگاه را آپلود کنید</p>
           <p className="font-vazir mt-3 text-sm font-light">
             ارائه تصاویر زیبا و واقعی از اقامتگاه شما می تواند نقش بسیار مهمی در
-            جلب نظر میهمانان ایفا نماید.‏‎‏ لذا:
+            جلب نظر میهمانان ایفا نماید. لذا:
           </p>
           <ul className="mr-4 mt-4 list-disc text-sm">
             <li className="font-vazir font-light">
@@ -35,6 +95,7 @@ const page = () => {
 
           <div className="relative mt-3 w-full rounded-xl border border-dashed border-gray-700 p-4 text-center">
             <input
+              onChange={(event) => inputChangeHandler(event)}
               type="file"
               className="absolute right-0 top-0 z-50 h-full w-full cursor-pointer opacity-0"
               id=""
@@ -52,28 +113,22 @@ const page = () => {
                 "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px",
             }}
           >
-            <div className="relative">
-              <img
-                className="h-[200px] w-full rounded-lg border border-dashed border-gray-600 lg:!h-[353px]"
-                src="https://storage.jajiga.com/public/pictures/medium/2024/01/28/3216492240128221348.jpg"
-                alt=""
-              />
-              <div className="absolute right-2 top-3 rounded-full bg-white px-2 pt-1 text-center text-sm text-black">
-                <p>1</p>
-              </div>
-              <div className="absolute left-3 top-3 w-max cursor-pointer rounded-md bg-red-600 p-2 text-center text-2xl text-white">
-                <BsTrash3 />
-              </div>
-            </div>
-            <div className="relative">
-              <Textarea
-                className="mx-auto mt-2 block !h-[70px] !w-[98%] rounded-lg !px-4 !pb-10 !pt-2 text-xs placeholder:text-gray-400 focus:!border-black"
-                placeholder="عنوان مناسبی برای این تصویر بنویسید"
-                maxLength={56}
-                setValue={setDescription}
-                value={description}
-              />
-            </div>
+            {imagesBaseUrl &&
+              imagesBaseUrl.map((img: string, index: number) => (
+                <div key={crypto.randomUUID()} className="relative mt-3">
+                  <img
+                    className="h-[200px] w-full rounded-lg border border-dashed border-gray-600 lg:!h-[353px]"
+                    src={`${img}`}
+                    alt=""
+                  />
+                  <div className="absolute right-2 top-3 rounded-full bg-white px-2 pt-1 text-center text-sm text-black">
+                    <p>{index + 1}</p>
+                  </div>
+                  <div className="absolute left-3 top-3 w-max cursor-pointer rounded-md bg-red-600 p-2 text-center text-2xl text-white">
+                    <BsTrash3 />
+                  </div>
+                </div>
+              ))}
           </div>
           <ContentNavigator
             disablelPrevButton={false}
