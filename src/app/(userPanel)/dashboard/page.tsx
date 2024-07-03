@@ -8,8 +8,10 @@ import { GoHome } from "react-icons/go";
 import { FaChevronLeft } from "react-icons/fa6";
 import Image from "next/image";
 import { Button } from "@/src/components/shadcn/ui/button";
-import { IoNotificationsOutline } from "react-icons/io5";
+import { IoNotificationsOutline } from "react-icons/io5"; 
+import Rooms from "@/src/components/templates/userPanel/dashboard/Rooms";
 const Dashboard = () => {
+
   return (
     <Container disableFooter={true}>
       <Breadcrumb className="hidden md:block" route={"پیشخان"} />
@@ -123,54 +125,7 @@ const Dashboard = () => {
               <FaChevronLeft className="absolute left-2 top-7 cursor-pointer text-sm" />
             </div>
           </div>
-          {/* <div className="mt-5">
-            <p>اقامتگاه های خود را تکمیل کنید</p>
-            <span className="text-xs font-thin">
-              توجه: اقامتگاه تنها بعد از تکمیل، قابل بررسی و انتشار می‌باشد.
-            </span>
-            <section className="mt-4">
-              <div className="flex justify-start gap-2 sm:!gap-0 sm:!justify-between items-center shadow-lg p-3 sm:!flex-nowrap flex-wrap">
-                <div className="flex gap-2 items-center">
-                  <div className="relative flex justify-center items-center rounded-lg overflow-hidden  p-1 ml-1 h-[60px] w-[92px] bg-[url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIhFKJwV5wJD6dkUvbLLW75ofGNZ6pbsyYWmXDGK1KTg&s)]">
-                    <p className="text-black bg-white p-1 mb-0 rounded-lg text-xs">
-                      20%
-                    </p>
-                  </div>
-                  <p className=" xl:block hidden">(3232281)</p>
-                </div>
-                <div>
-                <p className="xl:!hidden">(3232281)</p>
-                   <p className="lg:!text-sm text-xs font-thin">
-                  به‌روزرسانی: 17 اردیبهشت 1403
-                </p> 
-                </div>
-               
-                <div className="flex gap-2">
-                  <Link href={"/profile"}>
-                    <Button
-                      className="text-xs px-4 xl:!px-8 flex justify-center gap-2"
-                      variant={"danger"}
-                    >
-                      <FaRegTrashCan />
-                      حذف
-                    </Button>
-                  </Link>
-                  <Link href={"/profile"}>
-                    <Button
-                      className="text-xs px-4 xl:!px-8 flex justify-center gap-2"
-                      variant={"main"}
-                    >
-                      تکمیل
-                      <FaChevronLeft />
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            </section>
-          </div> */}
-          <div className="mx-auto mt-16 rounded-lg bg-red-200 p-4 text-center">
-            <p>آگهی ای موجود نیست</p>
-          </div>
+          <Rooms /> 
         </div>
       </main>
     </Container>

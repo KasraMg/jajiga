@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react";
 interface MapProps {
   className?: string;
   position: number[];
-  mapChangeHandler?: () => void;
+  mapChangeHandler?: (x:any,y:any) => void;
 }
 export const Map: FC<MapProps> = ({
   className,
@@ -19,14 +19,14 @@ export const Map: FC<MapProps> = ({
     const map = useMap();
     useEffect(() => {
       map.on("move", () => {
-        if (mapChangeHandler) {
-          mapChangeHandler();
-        }
         const center = map.getSize().divideBy(2);
         const targetPoint = map.containerPointToLayerPoint(center);
         const targetLatLng = map.layerPointToLatLng(targetPoint);
         markerRef.current.setLatLng(targetLatLng);
         markerRef.current.getElement().style.pointerEvents = "none";
+        if (mapChangeHandler) {
+          mapChangeHandler(  targetLatLng.lat, targetLatLng.lng);
+        }
       });
     }, [map]);
 

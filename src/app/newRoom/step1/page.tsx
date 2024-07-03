@@ -5,7 +5,7 @@ import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
 import Textarea from "@/src/components/modules/textarea/Textarea";
 import useStateData from "@/src/hooks/useStateData";
-import { baseUrl } from "@/src/utils/utils";
+import { baseUrl, saveIntoLocalStorage } from "@/src/utils/utils";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
@@ -78,7 +78,8 @@ const page = () => {
     onSuccess: (data) => {
       console.log(data);
       if (data.status === 200) {
-        // router.replace("/newRoom/step2");
+        saveIntoLocalStorage('villaId',data.villa._id)
+        router.replace("/newRoom/step2");
       }
     },
   });

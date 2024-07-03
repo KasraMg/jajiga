@@ -28,8 +28,8 @@ const Auth = () => {
   const { setUserData } = authStore((state) => state);
  
   useEffect(() => {
-    if (status === "success" && data?.user) {
-      setUserData(data.user);
+    if (status === "success" && data) {
+      setUserData(data);
     }
     console.log(data);
   }, [status, data, setUserData]);
