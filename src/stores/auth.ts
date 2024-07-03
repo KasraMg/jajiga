@@ -36,12 +36,13 @@
 
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
+import { userObj } from "../types/Auth.types";
 
 export type State = { 
-  userData: any;
+  userData: userObj | null;
 };
 export type Action = { 
-  setUserData: (val: any) => void;
+  setUserData: (val: userObj) => void;
 };
 
 export const authStore = create<State & Action>()(
