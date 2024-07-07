@@ -15,7 +15,7 @@ console.log(userData);
 
   return (
     <>
-      {userData ? (
+      {userData?.villas.length ? (
         <div className="mt-5">
           <p>اقامتگاه های خود را تکمیل کنید</p>
           <span className="text-xs font-thin">

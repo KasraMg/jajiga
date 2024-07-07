@@ -11,6 +11,17 @@ import {
   areaOptions,
 } from "@/src/utils/selectOptions";
 import StepLayout from "@/src/components/modules/stepLayout/StepLayout";
+import { useRouter } from "next/navigation";
+import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
+import Cookies from "js-cookie";
+import { useMutation } from "@tanstack/react-query";
+import Loader from "@/src/components/modules/loader/Loader";
+
+interface userObjData {
+  aboutVilla: {};
+  step: 5;
+  finished: false;
+}
 
 const page = () => {
   const [description, setDescription] = useState<string>("");
@@ -45,6 +56,47 @@ const page = () => {
     areaSelectedOption,
     description,
   ]);
+
+  const accessToken = Cookies.get("AccessToken");
+  const villaId = getFromLocalStorage("villaId");
+  const router = useRouter();
+
+  const mutation = useMutation({
+    mutationFn: async (userData: userObjData) => {
+      return await fetch(`${baseUrl}/villa/update/${villaId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        credentials: "include",
+        body: JSON.stringify(userData),
+      }).then((res) => res.json());
+    },
+    onSuccess: (data) => {
+      console.log(data);
+      if (data.status === 200) {
+        router.replace("/newRoom/step5");
+      }
+    },
+  });
+
+  const submitHandler = () => {
+    const userData: userObjData = {
+      aboutVilla: {
+        villaSpace: spaceSelectedOption?.value,
+        villaType: '668af68875bf5b2709d6d6f0',
+        // villaType: typeSelectedOption?.value,
+        villaZone: areaSelectedOption?.value,
+        aboutVilla: description,
+      },
+      finished: false,
+      step: 5,
+    };
+    console.log(userData);
+    
+    mutation.mutate(userData);
+  };
 
   return (
     <StepLayout stepperActive={4}>
@@ -117,6 +169,7 @@ const page = () => {
             </p>
           </div>
           <ContentNavigator
+            clickHandler={submitHandler}
             disablelPrevButton={false}
             disabelNextButton={disabelNextButton}
             prevLink={"newRoom/step3"}
@@ -130,6 +183,8 @@ const page = () => {
             text="بهتر است در توضیحات خود, به فراهم بودن امکانات ‏تفریحی همچون دوچرخه سواری, اسب سواری یا ماهی گیری و قایقرانی در مجاورت اقامتگاه خود اشاره کنید. همچنین نحوه و ‏فاصله دسترسی گردشگران به ‏تاکسی/اتوبوس/فرودگاه/قطار را در این قسمت مشخص نمایید تا میهمانان شما با اطلاع از شرایط زندگی در ‏محله شما و با خیالی آسوده, سفر خود را آغاز کنند.‏‎"
           />
         </div>
+        {mutation.isPending && <Loader />}
+
       </div>
     </StepLayout>
   );

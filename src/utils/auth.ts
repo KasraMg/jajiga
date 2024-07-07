@@ -28,7 +28,7 @@ const Auth = () => {
   const { setUserData } = authStore((state) => state);
  
   useEffect(() => {
-    if (status === "success" && data) {
+    if (status === "success" && data.statusCode===200) {
       setUserData(data);
     }
     console.log(data);
