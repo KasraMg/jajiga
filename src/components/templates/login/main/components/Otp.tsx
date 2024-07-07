@@ -6,6 +6,14 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import swal from "sweetalert";
 import Loader from "@/src/components/modules/loader/Loader";
+import {
+  InputOTP,
+  InputOTPGroup,
+  InputOTPSeparator,
+  InputOTPSlot,
+} from "@/src/components/shadcn/ui/input-otp";
+import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
+
 import Cookies from "js-cookie";
 const Otp = ({
   setStep,
@@ -150,7 +158,7 @@ const Otp = ({
             expires: 9999999,
             path: "",
           });
-          queryClient.invalidateQueries({ queryKey: ["auth"] }); 
+          queryClient.invalidateQueries({ queryKey: ["auth"] });
           router.replace("/dashboard");
 
           // localStorage.clear();
@@ -217,12 +225,6 @@ const Otp = ({
     loginMutation.mutate(otpCode);
   };
 
-  const inputChangeHandler = (value: string) => {
-    if (/^\d*$/.test(value)) {
-      setOtpCode(value);
-    }
-  };
-
   const resendCodeHandler = () => {
     setTimer(59);
     localStorage.setItem(
@@ -232,15 +234,10 @@ const Otp = ({
     resendCodeMutation.mutate();
   };
 
-  const clickHandler =async () => { 
-    queryClient.invalidateQueries({ queryKey: ["auth"] });
-    
-  };
   return (
     <div className="w-full md:!w-[350px]">
       <div className="flex items-center justify-between">
         <p dir="ltr">+98{phoneNumber.slice(1, 11)}</p>
-        <button onClick={clickHandler}>frfrfr</button>
         <Button
           onClick={() => setStep("login")}
           className="!rounded-sm !px-4"
@@ -254,14 +251,21 @@ const Otp = ({
       </p>
       <div className="relative my-6 flex flex-col items-start justify-between gap-2 sm:!flex-row sm:!items-center sm:!gap-0">
         <p className="text-sm">کد فعالسازی را وارد کنید</p>
-        <input
-          type="text"
-          maxLength={4}
-          className="w-full rounded-md border border-solid border-gray-400 !py-1 px-6 text-center placeholder:text-center sm:!w-[150px]"
-          placeholder="1111"
+        <InputOTP
           value={otpCode}
-          onChange={(event) => inputChangeHandler(event.target.value)}
-        />
+          type="text"
+          inputMode="numeric"
+          onChange={(value) => setOtpCode(value)}
+          maxLength={4}
+          pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
+        >
+          <InputOTPGroup dir="ltr">
+            <InputOTPSlot index={0} />
+            <InputOTPSlot index={1} />
+            <InputOTPSlot index={2} />
+            <InputOTPSlot index={3} />
+          </InputOTPGroup>
+        </InputOTP>
       </div>
 
       {timer > 0 ? (

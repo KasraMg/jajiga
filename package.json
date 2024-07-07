@@ -27,6 +27,7 @@
     "flowbite": "^2.2.0",
     "flowbite-react": "^0.7.2",
     "formik": "^2.2.9",
+    "input-otp": "^1.2.4",
     "js-cookie": "^3.0.5",
     "leaflet": "^1.9.4",
     "lucide-react": "^0.379.0",
