@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
 import Cookies from "js-cookie";
 import Alert from "@/src/components/modules/alert/Alert";
+import Loader from "@/src/components/modules/loader/Loader";
 
 interface userObjData {
   coordinates: {
@@ -38,7 +39,7 @@ const page = () => {
     };
     setChange(true);
   };
-
+ 
   const accessToken = Cookies.get("AccessToken");
   const villaId = getFromLocalStorage("villaId");
 
@@ -111,7 +112,9 @@ const page = () => {
                      همچنین می توانید با استفاده از کلیدهای + و – بزرگنمایی نقشه را تغییر دهید و یا برای دقت بیشتر, نقشه را به حالت Satellite درآورید."
           />
         </div>
+      {mutation.isPending && <Loader />}
       </div>
+
     </StepLayout>
   );
 };

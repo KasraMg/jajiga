@@ -1,4 +1,4 @@
-export const baseUrl = "https://jajiga-script.liara.run";
+export const baseUrl = "https://jajiga-backend.liara.run";
 import Cookies from "js-cookie";
 
 export const saveIntoLocalStorage = (key: string, value: string | {}) => {

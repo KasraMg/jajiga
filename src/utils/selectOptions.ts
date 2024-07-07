@@ -208,19 +208,19 @@ const spaceOptions: {
 }[] = [
         {
             label: "دربست",
-            value: "دربست"
+            value: "lockedRoom"
         },
         {
             label: "نیمه دربست",
-            value: "نیمه دربست"
+            value: "semiClosedRoom"
         },
         {
             label: "اتاق خصوصی",
-            value: "اتاق خصوصی"
+            value: "privetRoom"
         },
         {
             label: "اتاق مشترک",
-            value: "اتاق مشترک"
+            value: "commonRoom"
         }
     ]
 const typeOptions: {
@@ -229,59 +229,59 @@ const typeOptions: {
 }[] = [
         {
             label: "ویلایی",
-            value: "ویلایی"
+            value: "3333"
         },
         {
             label: "آپارتمان",
-            value: "آپارتمان"
+            value: "3333"
         },
         {
             label: "سوئیت",
-            value: "سوئیت"
+            value: "333"
         },
         {
             label: "خانه روستایی",
-            value: "خانه روستایی"
+            value: "333"
         },
         {
             label: "کلبه",
-            value: "کلبه"
+            value: "3333"
         },
         {
             label: "اقامتگاه بوم گردی",
-            value: "اقامتگاه بوم گردی"
+            value: "3333"
         },
         {
             label: "هتل آپارتمان",
-            value: "هتل آپارتمان"
+            value: "3333"
         },
         {
             label: "مهمان خانه",
-            value: "مهمان خانه"
+            value: "3333"
         },
         {
             label: "چادر / خیمه",
-            value: "چادر / خیمه"
+            value: "3333"
         },
         {
             label: "کاروانسرا",
-            value: "کاروانسرا"
+            value: "3333"
         },
         {
             label: "قایق",
-            value: "قایق"
+            value: "3333"
         },
         {
             label: "پانسیون",
-            value: "پانسیون"
+            value: "333"
         },
         {
             label: "هاستل",
-            value: "هاستل"
+            value: "2222"
         },
         {
             label: "بوتیک هتل",
-            value: "بوتیک هتل"
+            value: '111'
         }
     ]
 const areaOptions: {
@@ -290,31 +290,31 @@ const areaOptions: {
 }[] = [
         {
             label: "ساحلی",
-            value: "ساحلی"
+            value: "littoral"
         },
         {
             label: "جنگلی",
-            value: "جنگلی"
+            value: "silvan"
         },
         {
             label: "ییلاقی",
-            value: "ییلاقی"
+            value: "summerVilla"
         },
         {
             label: "بیابانی",
-            value: "بیابانی"
+            value: "desertHouse"
         },
         {
             label: "شهری",
-            value: "شهری"
+            value: "townHouse"
         },
         {
             label: "حومه شهر",
-            value: "حومه شهر"
+            value: "suburbanHouse"
         },
         {
             label: "روستایی",
-            value: "روستایی"
+            value: "cottage"
         }
     ]
 const userCountOptions:{

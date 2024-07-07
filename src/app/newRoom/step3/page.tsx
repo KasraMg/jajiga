@@ -3,14 +3,20 @@ import ContentNavigator from "@/src/components/modules/contentNavigator/ContentN
 import StepLayout from "@/src/components/modules/stepLayout/StepLayout";
 import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
+import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
+import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { BsCamera, BsTrash3 } from "react-icons/bs";
 import swal from "sweetalert";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+import Loader from "@/src/components/modules/loader/Loader";
 
 const page = () => {
   const [images, setImages] = useState<any>([]);
   const [imagesBaseUrl, setImagesBaseUrl] = useState<any>([]);
   const [disabelNextButton, setDisabelNextButton] = useState(true);
+  const router = useRouter();
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (images.length == 10) {
@@ -28,7 +34,7 @@ const page = () => {
           } else {
             const isImgExit = images.some((img: any) => {
               return file.name === img.name;
-            }); 
+            });
             if (isImgExit) {
               swal({
                 title: "این عکس قبلا انتخاب شده است.",
@@ -53,13 +59,14 @@ const page = () => {
 
   useEffect(() => {
     const generateImages = () => {
-      const newImagesBaseUrl: string[] = [];
+      const newImagesBaseUrl: any = [];
       images.forEach((img: any) => {
         let reader = new FileReader();
         reader.onloadend = () => {
-          newImagesBaseUrl.push(reader.result as string);
+          newImagesBaseUrl.push({ path: reader.result, name: img.name });
           if (newImagesBaseUrl.length === images.length) {
             setImagesBaseUrl(newImagesBaseUrl);
+            console.log(imagesBaseUrl);
           }
         };
         reader.readAsDataURL(img);
@@ -68,8 +75,58 @@ const page = () => {
 
     if (images.length > 0) {
       generateImages();
+      if (images.length > 0) {
+        setDisabelNextButton(false);
+      } else {
+        setDisabelNextButton(true);
+      }
+    } else {
+      setImagesBaseUrl([]);
+      setDisabelNextButton(true);
     }
   }, [images]);
+
+  const accessToken = Cookies.get("AccessToken");
+  const villaId = getFromLocalStorage("villaId");
+
+  const mutation = useMutation({
+    mutationFn: async (formData: any) => {
+      return await fetch(`${baseUrl}/villa/update/${villaId}`, {
+        method: "PUT",
+        headers: { 
+          Authorization: `Bearer ${accessToken}`,
+        },
+        credentials: "include",
+        body: formData,
+      }).then((res) => res.json());
+    },
+    onError:(data)=>{
+      console.log(data);
+      
+    },
+    onSuccess: (data) => {
+      console.log(data);
+      if (data.status === 200) {
+        router.replace("/newRoom/step4");
+      }
+    },
+  });
+
+  const deleteImgHandler = (name: string) => {
+    const newImages = images.filter((imgFile: any) => imgFile.name !== name);
+    setImages(newImages);
+  };
+
+  const submitHandler = () => {
+    console.log(images);
+    
+    const formData = new FormData();
+    formData.append("cover", images);
+    formData.append("step", 4);
+    formData.append("finished", false);
+    mutation.mutate(formData);
+ 
+  };
 
   return (
     <StepLayout stepperActive={3}>
@@ -85,7 +142,7 @@ const page = () => {
           </p>
           <ul className="mr-4 mt-4 list-disc text-sm">
             <li className="font-vazir font-light">
-              حداقل 10 عکسِ باکیفیت، از پذیرایی، اتاق خواب ها، آشپزخانه، سرویس
+              حداقل 3 عکسِ باکیفیت، از پذیرایی، اتاق خواب ها، آشپزخانه، سرویس
               بهداشتی، حیاط و نمای ساختمان آپلود کنید.
             </li>
             <li className="font-vazir mt-2 font-light">
@@ -114,23 +171,29 @@ const page = () => {
             }}
           >
             {imagesBaseUrl &&
-              imagesBaseUrl.map((img: string, index: number) => (
-                <div key={crypto.randomUUID()} className="relative mt-3">
-                  <img
-                    className="h-[200px] w-full rounded-lg border border-dashed border-gray-600 lg:!h-[353px]"
-                    src={`${img}`}
-                    alt=""
-                  />
-                  <div className="absolute right-2 top-3 rounded-full bg-white px-2 pt-1 text-center text-sm text-black">
-                    <p>{index + 1}</p>
+              imagesBaseUrl.map(
+                (img: { name: string; path: string }, index: number) => (
+                  <div key={crypto.randomUUID()} className="relative mt-3">
+                    <img
+                      className="h-[200px] w-full rounded-lg border border-dashed border-gray-600 lg:!h-[353px]"
+                      src={`${img.path}`}
+                      alt=""
+                    />
+                    <div className="absolute right-2 top-3 rounded-full bg-white px-2 pt-1 text-center text-sm text-black">
+                      <p>{index + 1}</p>
+                    </div>
+                    <div
+                      onClick={() => deleteImgHandler(img.name)}
+                      className="absolute left-3 top-3 w-max cursor-pointer rounded-md bg-red-600 p-2 text-center text-2xl text-white"
+                    >
+                      <BsTrash3 />
+                    </div>
                   </div>
-                  <div className="absolute left-3 top-3 w-max cursor-pointer rounded-md bg-red-600 p-2 text-center text-2xl text-white">
-                    <BsTrash3 />
-                  </div>
-                </div>
-              ))}
+                ),
+              )}
           </div>
           <ContentNavigator
+            clickHandler={submitHandler}
             disablelPrevButton={false}
             disabelNextButton={disabelNextButton}
             prevLink={"newRoom/step2"}
@@ -149,6 +212,8 @@ const page = () => {
             text="همچنین می توانید بعد از ثبت اقامتگاه, به قسمت ویرایش اقامتگاه مراجعه کرده, تصویر اصلی اقامتگاه را ‏تغییر دهید, تصاویر بیشتری اضافه کنید و یا ترتیب تصاویر را تغییر دهید"
           />
         </div>
+        {mutation.isPending && <Loader />}
+
       </div>
     </StepLayout>
   );
