@@ -5,7 +5,8 @@ import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
 import Textarea from "@/src/components/modules/textarea/Textarea";
 import { useEffect, useState } from "react";
-
+import { ToastAction } from "@/src/components/shadcn/ui/toast";
+import { useToast } from "@/src/components/shadcn/ui/use-toast";
 const page = () => {
   const [disabelNextButton, setDisabelNextButton] = useState<boolean>(true);
   const [standardSpace, setStandardSpace] = useState<number>(1);
@@ -51,6 +52,17 @@ const page = () => {
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     setAreaSize(event.target.value);
+  };
+
+  const { toast } = useToast();
+
+  const submitHandler = () => {
+    toast({
+      variant: "destructive",
+      title: "Uh oh! Something went wrong.",
+      description: "There was a problem with your request.",
+      action: <ToastAction altText="Try again">Try again</ToastAction>,
+    });
   };
   return (
     <StepLayout stepperActive={5}>
@@ -182,6 +194,7 @@ const page = () => {
             </div>
           </div>
           <ContentNavigator
+            onClick={submitHandler}
             disablelPrevButton={false}
             disabelNextButton={disabelNextButton}
             prevLink={"newRoom/step4"}

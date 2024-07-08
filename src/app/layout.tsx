@@ -1,10 +1,12 @@
 import "./globals.css";
 import QueryWrapper from "../utils/QueryWrapper";
-import localFont from "next/font/local"; 
-import Auth from "../utils/auth"; 
+import localFont from "next/font/local";
+import Auth from "../utils/auth";
 import { baseUrl } from "../utils/utils";
 import Hydrated from "../providers/Hydrated";
-import { cookies } from "next/headers"; 
+import { cookies } from "next/headers";
+import { Toaster } from "@/src/components/shadcn/ui/toaster";
+
 const fonts = localFont({
   src: [
     {
@@ -51,6 +53,7 @@ export default function RootLayout({
             <Auth />
           </Hydrated>
           {children}
+          <Toaster />
         </QueryWrapper>
       </body>
     </html>
