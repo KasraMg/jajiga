@@ -5,8 +5,19 @@ import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
 import Textarea from "@/src/components/modules/textarea/Textarea";
 import { useEffect, useState } from "react";
-import { ToastAction } from "@/src/components/shadcn/ui/toast";
 import { useToast } from "@/src/components/shadcn/ui/use-toast";
+import { useMutation } from "@tanstack/react-query";
+import { baseUrl } from "@/src/utils/utils";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+import Loader from "@/src/components/modules/loader/Loader";
+
+interface userObjData {
+  capacity: {};
+  step: 5;
+  finished: false;
+}
+
 const page = () => {
   const [disabelNextButton, setDisabelNextButton] = useState<boolean>(true);
   const [standardSpace, setStandardSpace] = useState<number>(1);
@@ -56,13 +67,46 @@ const page = () => {
 
   const { toast } = useToast();
 
+  const accessToken = Cookies.get("AccessToken");
+  const router = useRouter();
+
+  const mutation = useMutation({
+    mutationFn: async (data: userObjData) => {
+      return await fetch(`${baseUrl}/villa/add`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        credentials: "include",
+        body: JSON.stringify(data),
+      }).then((res) => res.json());
+    },
+    onSuccess: (data) => {
+      if (data.status === 200) {
+        toast({
+          variant: "success",
+          title: "اطلاعات با موفقیت بروزرسانی شد",
+        });
+        router.replace("/newRoom/step6");
+      }
+    },
+  });
+
   const submitHandler = () => {
-    toast({
-      variant: "destructive",
-      title: "Uh oh! Something went wrong.",
-      description: "There was a problem with your request.",
-      action: <ToastAction altText="Try again">Try again</ToastAction>,
-    });
+    const userData: userObjData = {
+      capacity: {
+        normalCapacity: standardSpace,
+        maxCapacity: maximumSpace,
+        buildingSize: landSize,
+        fuundationSize: areaSize,
+        bedRoom: roomCount,
+        description: description,
+      },
+      step: 5,
+      finished: false,
+    };
+    mutation.mutate(userData);
   };
   return (
     <StepLayout stepperActive={5}>
@@ -194,11 +238,10 @@ const page = () => {
             </div>
           </div>
           <ContentNavigator
-            onClick={submitHandler}
+            clickHandler={submitHandler}
             disablelPrevButton={false}
             disabelNextButton={disabelNextButton}
             prevLink={"newRoom/step4"}
-            nextLink={"newRoom/step6"}
           />
         </div>
         <div className="sticky top-[68px] hidden h-max max-w-[243px] md:!block">
@@ -218,6 +261,8 @@ const page = () => {
             text="  این قسمت, امکانات خواب اقامتگاه, همچون تعداد و نوع تخت خواب های موجود در هر اتاق خواب را مشخص کنید. تعداد و شرح   انواع رخت خواب, همچون رخت خواب سنتی (زمین خواب), مبل تخت خواب شو و غیرو ... را نیز در این قسمت وارد کنید"
           />
         </div>
+        {mutation.isPending && <Loader />}
+
       </div>
     </StepLayout>
   );

@@ -101,8 +101,7 @@ const page = () => {
             clickHandler={submitHandler}
             disablelPrevButton={false}
             disabelNextButton={disabelNextButton}
-            prevLink={"newRoom/step1"}
-            nextLink={"newRoom/step3"}
+            prevLink={"newRoom/step1"} 
           />
         </div>
         <div className="max-w-[243px]">
