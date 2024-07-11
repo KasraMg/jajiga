@@ -196,8 +196,7 @@ const page = () => {
             clickHandler={submitHandler}
             disablelPrevButton={false}
             disabelNextButton={disabelNextButton}
-            prevLink={"newRoom/step2"}
-            nextLink={"newRoom/step4"}
+            prevLink={"newRoom/step2"} 
           />
         </div>
         <div className="sticky top-[68px] hidden h-max max-w-[243px] md:!block">

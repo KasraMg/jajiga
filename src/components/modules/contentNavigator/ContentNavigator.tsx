@@ -5,15 +5,13 @@ import Link from "next/link";
 interface ContentNavigatorProps {
   disablelPrevButton: boolean;
   disabelNextButton: boolean;
-  prevLink: string;
-  nextLink: string;
+  prevLink: string; 
   className?: string;
   clickHandler?: () => void;
 }
 const ContentNavigator: FC<ContentNavigatorProps> = ({
   className,
-  clickHandler,
-  nextLink,
+  clickHandler, 
   prevLink,
   disabelNextButton,
   disablelPrevButton,

@@ -14,6 +14,16 @@ import { useRouter } from "next/navigation";
 import Loader from "@/src/components/modules/loader/Loader";
 const stateOptions = useStateData();
 
+interface userObjData {
+  address: {
+    state: string | undefined;
+    city: string[] | undefined;
+    address: string;
+  };
+  step: 2;
+  finished: false;
+}
+
 const page = () => {
   const [address, setAddress] = useState<string>("");
   const [stateSelectedOption, setStateSelectedOption] = useState<{
@@ -51,20 +61,10 @@ const page = () => {
   }, [stateSelectedOption, address, citySelectedOption]);
 
   const accessToken = Cookies.get("AccessToken");
-  const router = useRouter();
-
-  interface AddressData {
-    address: {
-      state: string | undefined;
-      city: string[] | undefined;
-      address: string;
-    };
-    step: 2;
-    finished: false;
-  }
+  const router = useRouter(); 
 
   const mutation = useMutation({
-    mutationFn: async (data: AddressData) => {
+    mutationFn: async (data: userObjData) => {
       return await fetch(`${baseUrl}/villa/add`, {
         method: "POST",
         headers: {
@@ -85,7 +85,7 @@ const page = () => {
   });
 
   const submitHandler = () => {
-    const userData: AddressData = {
+    const userData: userObjData = {
       address: {
         state: stateSelectedOption?.label,
         city: citySelectedOption?.value,
@@ -159,8 +159,7 @@ const page = () => {
             clickHandler={submitHandler}
             disablelPrevButton={true}
             disabelNextButton={disabelNextButton}
-            prevLink={"/"}
-            nextLink={"newRoom/step2"}
+            prevLink={"/"} 
           />
         </div>
         <StepperInfo
