@@ -155,8 +155,7 @@ const page = () => {
           <ContentNavigator
             disablelPrevButton={false}
             disabelNextButton={disabelNextButton}
-            prevLink={"newRoom/step8"}
-            nextLink={"newRoom/successfull"}
+            prevLink={"newRoom/step8"} 
           />
         </div>
         <div className="max-w-[243px]">
