@@ -4,12 +4,77 @@ import StepLayout from "@/src/components/modules/stepLayout/StepLayout";
 import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
 import Textarea from "@/src/components/modules/textarea/Textarea";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+import Loader from "@/src/components/modules/loader/Loader";
+import { useToast } from "@/src/components/shadcn/ui/use-toast";
+import { useMutation } from "@tanstack/react-query";
 
+interface userObjData {
+  rules: {};
+  step: 8;
+  finished: false;
+}
 const page = () => {
   const [disabelNextButton, setDisabelNextButton] = useState<boolean>(false);
   const [rules, setRules] = useState<string>("");
+  const [pet, setPet] = useState<null | boolean>(null);
+  const [party, setParty] = useState<null | boolean>(null);
+  const [smoke, setSmoke] = useState<null | boolean>(null);
+  const { toast } = useToast();
 
+  const villaId = getFromLocalStorage("villaId");
+  const accessToken = Cookies.get("AccessToken");
+  const router = useRouter();
+
+  const mutation = useMutation({
+    mutationFn: async (data: userObjData) => {
+      return await fetch(`${baseUrl}/villa/update/${villaId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        credentials: "include",
+        body: JSON.stringify(data),
+      }).then((res) => res.json());
+    },
+    onSuccess: (data: any) => {
+      if (data.status === 200) {
+        toast({
+          variant: "success",
+          title: "اطلاعات با موفقیت بروزرسانی شد",
+        });
+        router.replace("/newRoom/step8");
+      }
+    },
+  });
+
+  useEffect(() => {
+    if (smoke !== null && party !== null && pet !== null) setDisabelNextButton(false);
+    else setDisabelNextButton(true);
+    console.log(smoke);
+    console.log(party);
+    console.log(pet);
+    
+  }, [smoke, party, pet]);
+
+  const submitHandler = () => {
+    const userData: userObjData = {
+      rules: {
+        pet: pet === null ? false : pet,
+        music: party === null ? false : party,
+        smoke: smoke === null ? false : smoke,
+        more: rules,
+      },
+      step: 8,
+      finished: false,
+    };
+    console.log(userData);
+    // mutation.mutate(userData);
+  };
   return (
     <StepLayout stepperActive={9}>
       <div className="flex max-w-[1120px] gap-0 py-8 sm:!gap-5">
@@ -29,6 +94,7 @@ const page = () => {
                     id="7"
                     value="7"
                     className="peer hidden"
+                    onClick={() => setPet(true)}
                   />
                   <label
                     htmlFor={"7"}
@@ -45,6 +111,7 @@ const page = () => {
                     id="8"
                     value="8"
                     className="peer hidden"
+                    onClick={() => setPet(false)}
                   />
                   <label
                     htmlFor={"8"}
@@ -73,6 +140,7 @@ const page = () => {
                     id="3"
                     value="1"
                     className="peer hidden"
+                    onClick={() => setParty(true)}
                   />
                   <label
                     htmlFor={"3"}
@@ -89,6 +157,7 @@ const page = () => {
                     id="4"
                     value="2"
                     className="peer hidden"
+                    onClick={() => setParty(false)}
                   />
                   <label
                     htmlFor={"4"}
@@ -119,6 +188,7 @@ const page = () => {
                     id="5"
                     value="1"
                     className="peer hidden"
+                    onClick={() => setSmoke(true)}
                   />
                   <label
                     htmlFor={"5"}
@@ -135,6 +205,7 @@ const page = () => {
                     id="6"
                     value="2"
                     className="peer hidden"
+                    onClick={() => setSmoke(false)}
                   />
                   <label
                     htmlFor={"6"}
@@ -153,9 +224,10 @@ const page = () => {
             </div>
           </div>
           <ContentNavigator
+            clickHandler={submitHandler}
             disablelPrevButton={false}
             disabelNextButton={disabelNextButton}
-            prevLink={"newRoom/step8"} 
+            prevLink={"newRoom/step9"}
           />
         </div>
         <div className="max-w-[243px]">
