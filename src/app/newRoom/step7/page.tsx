@@ -3,15 +3,157 @@ import ContentNavigator from "@/src/components/modules/contentNavigator/ContentN
 import StepLayout from "@/src/components/modules/stepLayout/StepLayout";
 import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import {
   Accordion as AccordionParent,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/src/components/shadcn/ui/accordion";
+import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
+import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+import Loader from "@/src/components/modules/loader/Loader";
+import { useToast } from "@/src/components/shadcn/ui/use-toast";
+import { useMutation } from "@tanstack/react-query";
+
+interface userObjData {
+  price: {};
+  step: 8;
+  finished: false;
+}
+
 const page = () => {
-  const [disabelNextButton, setDisabelNextButton] = useState<boolean>(true);
+  const [disableNextButton, setDisableNextButton] = useState<boolean>(true);
+  const [newYearPrice, setNewYearPrice] = useState<string>("");
+  const [seasonDatas, setSeasonDatas] = useState([
+    {
+      id: 1,
+      Data: [
+        { title: "وسط هفته", amount: "" },
+        { title: "آخر هفته", amount: "" },
+        { title: "تعطیلات", amount: "" },
+      ],
+    },
+    {
+      id: 2,
+      Data: [
+        { title: "وسط هفته", amount: "" },
+        { title: "آخر هفته", amount: "" },
+        { title: "تعطیلات", amount: "" },
+      ],
+    },
+    {
+      id: 3,
+      Data: [
+        { title: "وسط هفته", amount: "" },
+        { title: "آخر هفته", amount: "" },
+        { title: "تعطیلات", amount: "" },
+      ],
+    },
+    {
+      id: 4,
+      Data: [
+        { title: "وسط هفته", amount: "" },
+        { title: "آخر هفته", amount: "" },
+        { title: "تعطیلات", amount: "" },
+      ],
+    },
+  ]);
+
+  const { toast } = useToast();
+
+  const villaId = getFromLocalStorage("villaId");
+  const accessToken = Cookies.get("AccessToken");
+  const router = useRouter();
+
+  const mutation = useMutation({
+    mutationFn: async (data: userObjData) => {
+      return await fetch(`${baseUrl}/villa/update/${villaId}`, { 
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        credentials: "include",
+        body: JSON.stringify(data),
+      }).then((res) => res.json());
+    },
+    onSuccess: (data:any) => {
+      if (data.status === 200) {
+        toast({
+          variant: "success",
+          title: "اطلاعات با موفقیت بروزرسانی شد",
+        });
+        router.replace("/newRoom/step8");
+      }
+    },
+  });
+
+  const submitHandler = () => {
+    const userData: userObjData = {
+      price: {
+        newYear: newYearPrice,
+        spring: {
+          midWeek: seasonDatas[0].Data[0].amount,
+          holidays: seasonDatas[0].Data[1].amount,
+          peakDays: seasonDatas[0].Data[2].amount,
+        },
+        summer: {
+          midWeek: seasonDatas[1].Data[0].amount,
+          holidays: seasonDatas[1].Data[1].amount,
+          peakDays: seasonDatas[1].Data[2].amount,
+        },
+        autumn: {
+          midWeek: seasonDatas[2].Data[0].amount,
+          holidays: seasonDatas[2].Data[1].amount,
+          peakDays: seasonDatas[2].Data[2].amount,
+        },
+        winter: {
+          midWeek: seasonDatas[3].Data[0].amount,
+          holidays: seasonDatas[3].Data[1].amount,
+          peakDays: seasonDatas[3].Data[2].amount,
+        },
+      },
+      step: 8,
+      finished: false,
+    };
+    console.log(userData);
+    mutation.mutate(userData);
+  };
+
+  const changeInputHandler = (
+    event: ChangeEvent<HTMLInputElement>,
+    id: number,
+    date: string,
+  ) => {
+    const updatedSeasonDatas = [...seasonDatas];
+    const seasonIndex = id - 1;
+    const dataIndex = updatedSeasonDatas[seasonIndex].Data.findIndex(
+      (data) => data.title === date,
+    );
+    updatedSeasonDatas[seasonIndex].Data[dataIndex].amount = event.target.value;
+    setSeasonDatas(updatedSeasonDatas);
+    validInputsHandler(updatedSeasonDatas);
+  };
+
+  const validInputsHandler = (updatedSeasonDatas: any) => {
+    const isAnyInputEmpty = updatedSeasonDatas.some((season:any) =>
+      season.Data.some((data:any) => data.amount.length === 0),
+    );
+    const isNewYearPriceEmpty = newYearPrice.length === 0;
+
+    if (!isAnyInputEmpty && !isNewYearPriceEmpty) {
+      setDisableNextButton(false); 
+    } else {
+      setDisableNextButton(true);
+    }
+  };
+
+  useEffect(() => {
+    validInputsHandler(seasonDatas);
+  }, [newYearPrice, seasonDatas]);
+
 
   const season = [
     {
@@ -34,140 +176,8 @@ const page = () => {
       id: 4,
       avatar: "https://www.jajiga.com/static/img/pricing/winter.png",
     },
-  ];
+  ]; 
 
-  const [seasonDatas, setseasonDatas] = useState([
-    {
-      id: 1,
-      Data: [
-        {
-          title: "وسط هفته",
-          amount: "",
-        },
-        {
-          title: "آخر هفته",
-          amount: "",
-        },
-        {
-          title: "تعطیلات",
-          amount: "",
-        },
-      ],
-    },
-    {
-      id: 2,
-      Data: [
-        {
-          title: "وسط هفته",
-          amount: "",
-        },
-        {
-          title: "آخر هفته",
-          amount: "",
-        },
-        {
-          title: "تعطیلات",
-          amount: "",
-        },
-      ],
-    },
-    {
-      id: 3,
-      Data: [
-        {
-          title: "وسط هفته",
-          amount: "",
-        },
-        {
-          title: "آخر هفته",
-          amount: "",
-        },
-        {
-          title: "تعطیلات",
-          amount: "",
-        },
-      ],
-    },
-    {
-      id: 4,
-      Data: [
-        {
-          title: "وسط هفته",
-          amount: "",
-        },
-        {
-          title: "آخر هفته",
-          amount: "",
-        },
-        {
-          title: "تعطیلات",
-          amount: "",
-        },
-      ],
-    },
-  ]);
-
-  const midweekHandler = (
-    event: ChangeEvent<HTMLInputElement>,
-    id: number,
-    date: string,
-  ) => {
-    const seasonId = id - 1;
-    const season = seasonDatas[seasonId];
-    season.Data.find((data) => {
-      if (data.title == date) {
-        return (data.amount = event.target.value);
-      }
-    });
-    seasonDatas.map((season) => {
-      season.Data.map((data) => {
-        if (data.amount.length) {
-          setDisabelNextButton(false);
-        } else setDisabelNextButton(true);
-      });
-    });
-  };
-  const lastWeekendHandler = (
-    event: ChangeEvent<HTMLInputElement>,
-    id: number,
-    date: string,
-  ) => {
-    const seasonId = id - 1;
-    const season = seasonDatas[seasonId];
-
-    season.Data.find((data) => {
-      if (data.title == date) {
-        return (data.amount = event.target.value);
-      }
-    });
-    seasonDatas.map((season) => {
-      season.Data.map((data) => {
-        if (data.amount.length) {
-          setDisabelNextButton(false);
-        } else setDisabelNextButton(true);
-      });
-    });
-  };
-  const holidaysHandler = (
-    event: ChangeEvent<HTMLInputElement>,
-    id: number,
-    date: string,
-  ) => {
-    const seasonId = id - 1;
-    const season = seasonDatas[seasonId];
-    season.Data.find((data) => {
-      if (data.title == date) {
-        return (data.amount = event.target.value);
-      }
-    });
-    seasonDatas.map((season) => {
-      season.Data.map((data) => {
-        if (data.amount.length !== 0) {
-          setDisabelNextButton(false);
-        } else setDisabelNextButton(true);
-      });
-    });
-  };
 
   return (
     <StepLayout stepperActive={8}>
@@ -180,6 +190,7 @@ const page = () => {
             <p className="text-sm lg:!text-base">نرخ تعطیلات نوروز</p>
             <div className="relative w-1/2 lg:!w-[60%]">
               <input
+                onChange={(event) => setNewYearPrice(event.target.value)}
                 type="number"
                 dir="ltr"
                 className="w-full rounded-md border border-solid border-gray-400 p-2 pl-14"
@@ -215,11 +226,11 @@ const page = () => {
                         <div className="relative w-full lg:!w-[60%]">
                           <input
                             onChange={(event) =>
-                              midweekHandler(event, data.id, "وسط هفته")
+                              changeInputHandler(event, data.id, "وسط هفته")
                             }
                             type="number"
                             dir="ltr"
-                            className="w-full rounded-md p-2 pl-14"
+                            className="w-full border-b border-solid border-black p-2 pl-14"
                           />
                           <span className="absolute left-2 top-2 text-gray-500">
                             تومان
@@ -233,11 +244,11 @@ const page = () => {
                         <div className="relative w-full lg:!w-[60%]">
                           <input
                             onChange={(event) =>
-                              lastWeekendHandler(event, data.id, "آخر هفته")
+                              changeInputHandler(event, data.id, "آخر هفته")
                             }
                             type="number"
                             dir="ltr"
-                            className="w-full rounded-md p-2 pl-14"
+                            className="w-full border-b border-solid border-black p-2 pl-14"
                           />
                           <span className="absolute left-2 top-2 text-gray-500">
                             تومان
@@ -249,11 +260,11 @@ const page = () => {
                         <div className="relative w-full lg:!w-[60%]">
                           <input
                             onChange={(event) =>
-                              holidaysHandler(event, data.id, "تعطیلات")
+                              changeInputHandler(event, data.id, "تعطیلات")
                             }
                             type="number"
                             dir="ltr"
-                            className="w-full rounded-md p-2 pl-14"
+                            className="w-full border-b border-solid border-black p-2 pl-14"
                           />
                           <span className="absolute left-2 top-2 text-gray-500">
                             تومان
@@ -267,10 +278,10 @@ const page = () => {
             ))}
 
           <ContentNavigator
+            clickHandler={submitHandler}
             disablelPrevButton={false}
-            disabelNextButton={disabelNextButton}
+            disabelNextButton={disableNextButton}
             prevLink={"newRoom/step7"}
-            nextLink={"newRoom/step9"}
           />
         </div>
         <div className="max-w-[243px]">
@@ -279,6 +290,8 @@ const page = () => {
             text="برای آسانتر شدن نرخ گذاری اقامتگاه در روزهای مختلف سال, پس از تعیین نرخهای زیر توسط شما, این نرخها با رعایت روزهای عادی و تعطیل هفته در فصول مختلف سال, بصورت خودکار در تقویم اقامتگاه شما اعمال خواهد گردید.وسط هفته: روزهای شنبه تا چهارشنبه هر هفته. آخر هفته: روزهای پنجشنبه و جمعه و تعطیلات عادی. ایام پیک: تعطیلات خاص و پر مسافر.توجه: شما همچنین می توانید با مراجعه به تقویم موجود در صفحه ویرایش اقامتگاه, اجاره بهای روزهای خاص را بصورت دستی تغییر دهید."
           />
         </div>
+        {mutation.isPending && <Loader />}
+
       </div>
     </StepLayout>
   );
