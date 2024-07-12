@@ -93,16 +93,15 @@ const page = () => {
     mutationFn: async (formData: any) => {
       return await fetch(`${baseUrl}/villa/update/${villaId}`, {
         method: "PUT",
-        headers: { 
+        headers: {
           Authorization: `Bearer ${accessToken}`,
         },
         credentials: "include",
         body: formData,
       }).then((res) => res.json());
     },
-    onError:(data)=>{
+    onError: (data) => {
       console.log(data);
-      
     },
     onSuccess: (data) => {
       console.log(data);
@@ -117,15 +116,14 @@ const page = () => {
     setImages(newImages);
   };
 
-  const submitHandler = () => {
-    console.log(images);
-    
+  const submitHandler = () => { 
     const formData = new FormData();
-    formData.append("cover", images);
-    formData.append("step", 4);
-    formData.append("finished", false);
+    images.map((img: any) => {
+      formData.append("cover", img);
+    });
+    formData.append("step", "4");
+    formData.append("finished", "false");
     mutation.mutate(formData);
- 
   };
 
   return (
@@ -196,7 +194,7 @@ const page = () => {
             clickHandler={submitHandler}
             disablelPrevButton={false}
             disabelNextButton={disabelNextButton}
-            prevLink={"newRoom/step2"} 
+            prevLink={"newRoom/step2"}
           />
         </div>
         <div className="sticky top-[68px] hidden h-max max-w-[243px] md:!block">
@@ -212,7 +210,6 @@ const page = () => {
           />
         </div>
         {mutation.isPending && <Loader />}
-
       </div>
     </StepLayout>
   );
