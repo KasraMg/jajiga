@@ -7,14 +7,14 @@ import Textarea from "@/src/components/modules/textarea/Textarea";
 import { useEffect, useState } from "react";
 import { useToast } from "@/src/components/shadcn/ui/use-toast";
 import { useMutation } from "@tanstack/react-query";
-import { baseUrl } from "@/src/utils/utils";
+import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import Loader from "@/src/components/modules/loader/Loader";
 
 interface userObjData {
   capacity: {};
-  step: 5;
+  step: 6;
   finished: false;
 }
 
@@ -67,13 +67,14 @@ const page = () => {
 
   const { toast } = useToast();
 
+  const villaId = getFromLocalStorage("villaId");
   const accessToken = Cookies.get("AccessToken");
   const router = useRouter();
 
   const mutation = useMutation({
     mutationFn: async (data: userObjData) => {
-      return await fetch(`${baseUrl}/villa/add`, {
-        method: "POST",
+      return await fetch(`${baseUrl}/villa/update/${villaId}`, { 
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
@@ -103,7 +104,7 @@ const page = () => {
         bedRoom: roomCount,
         description: description,
       },
-      step: 5,
+      step: 6,
       finished: false,
     };
     mutation.mutate(userData);

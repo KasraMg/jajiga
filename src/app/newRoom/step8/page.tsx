@@ -3,280 +3,166 @@ import ContentNavigator from "@/src/components/modules/contentNavigator/ContentN
 import StepLayout from "@/src/components/modules/stepLayout/StepLayout";
 import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
-import { ChangeEvent, useState } from "react";
-import {
-  Accordion as AccordionParent,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/src/components/shadcn/ui/accordion";
+import Textarea from "@/src/components/modules/textarea/Textarea";
+import { useState } from "react";
+
 const page = () => {
-  const [disabelNextButton, setDisabelNextButton] = useState<boolean>(true);
-
-  const season = [
-    {
-      title: "فصل بهار",
-      id: 1,
-      avatar: " https://www.jajiga.com/static/img/pricing/spring.png",
-    },
-    {
-      title: "فصل تابستان",
-      id: 2,
-      avatar: "https://www.jajiga.com/static/img/pricing/summer.png",
-    },
-    {
-      title: "فصل پاییز",
-      id: 3,
-      avatar: "https://www.jajiga.com/static/img/pricing/autumn.png",
-    },
-    {
-      title: "فصل زمستان",
-      id: 4,
-      avatar: "https://www.jajiga.com/static/img/pricing/winter.png",
-    },
-  ];
-
-  const [seasonDatas, setseasonDatas] = useState([
-    {
-      id: 1,
-      Data: [
-        {
-          title: "وسط هفته",
-          amount: "",
-        },
-        {
-          title: "آخر هفته",
-          amount: "",
-        },
-        {
-          title: "تعطیلات",
-          amount: "",
-        },
-      ],
-    },
-    {
-      id: 2,
-      Data: [
-        {
-          title: "وسط هفته",
-          amount: "",
-        },
-        {
-          title: "آخر هفته",
-          amount: "",
-        },
-        {
-          title: "تعطیلات",
-          amount: "",
-        },
-      ],
-    },
-    {
-      id: 3,
-      Data: [
-        {
-          title: "وسط هفته",
-          amount: "",
-        },
-        {
-          title: "آخر هفته",
-          amount: "",
-        },
-        {
-          title: "تعطیلات",
-          amount: "",
-        },
-      ],
-    },
-    {
-      id: 4,
-      Data: [
-        {
-          title: "وسط هفته",
-          amount: "",
-        },
-        {
-          title: "آخر هفته",
-          amount: "",
-        },
-        {
-          title: "تعطیلات",
-          amount: "",
-        },
-      ],
-    },
-  ]);
-
-  const midweekHandler = (
-    event: ChangeEvent<HTMLInputElement>,
-    id: number,
-    date: string,
-  ) => {
-    const seasonId = id - 1;
-    const season = seasonDatas[seasonId];
-    season.Data.find((data) => {
-      if (data.title == date) {
-        return (data.amount = event.target.value);
-      }
-    });
-    seasonDatas.map((season) => {
-      season.Data.map((data) => {
-        if (data.amount.length) {
-          setDisabelNextButton(false);
-        } else setDisabelNextButton(true);
-      });
-    });
-  };
-  const lastWeekendHandler = (
-    event: ChangeEvent<HTMLInputElement>,
-    id: number,
-    date: string,
-  ) => {
-    const seasonId = id - 1;
-    const season = seasonDatas[seasonId];
-
-    season.Data.find((data) => {
-      if (data.title == date) {
-        return (data.amount = event.target.value);
-      }
-    });
-    seasonDatas.map((season) => {
-      season.Data.map((data) => {
-        if (data.amount.length) {
-          setDisabelNextButton(false);
-        } else setDisabelNextButton(true);
-      });
-    });
-  };
-  const holidaysHandler = (
-    event: ChangeEvent<HTMLInputElement>,
-    id: number,
-    date: string,
-  ) => {
-    const seasonId = id - 1;
-    const season = seasonDatas[seasonId];
-    season.Data.find((data) => {
-      if (data.title == date) {
-        return (data.amount = event.target.value);
-      }
-    });
-    seasonDatas.map((season) => {
-      season.Data.map((data) => {
-        if (data.amount.length !== 0) {
-          setDisabelNextButton(false);
-        } else setDisabelNextButton(true);
-      });
-    });
-  };
+  const [disabelNextButton, setDisabelNextButton] = useState<boolean>(false);
+  const [rules, setRules] = useState<string>("");
 
   return (
-    <StepLayout stepperActive={8}>
+    <StepLayout stepperActive={9}>
       <div className="flex max-w-[1120px] gap-0 py-8 sm:!gap-5">
         <div className="hidden min-w-[23%] md:!flex lg:!min-w-[21%]">
-          <Stepper active={8} />
+          <Stepper active={9} />
         </div>
-        <div className="mb-20 w-full space-y-4">
-          <div className="flex items-center justify-between">
-            <p className="text-sm lg:!text-base">نرخ تعطیلات نوروز</p>
-            <div className="relative w-1/2 lg:!w-[60%]">
-              <input
-                type="number"
-                dir="ltr"
-                className="w-full rounded-md border border-solid border-gray-400 p-2 pl-14"
-              />
-              <span className="absolute left-2 top-2 text-gray-500">تومان</span>
+        <div className="w-full space-y-5">
+          <div>
+            <div className="flex flex-col items-start justify-between gap-2 lg:!flex-row lg:!items-center lg:!gap-0">
+              <p className="text-sm">همراه داشتن حیوان خانگی</p>
+
+              <div className="mb-4 grid w-full grid-cols-2 gap-2 rounded-[32px] bg-gray-200 p-1 lg:!mb-0 lg:!max-w-[8rem]">
+                <div>
+                  <input
+                    type="radio"
+                    name="animall"
+                    id="7"
+                    value="7"
+                    className="peer hidden"
+                  />
+                  <label
+                    htmlFor={"7"}
+                    className="block cursor-pointer select-none rounded-[50px] px-2 py-[6px] text-center peer-checked:bg-customYellow peer-checked:text-black"
+                  >
+                    مجاز
+                  </label>
+                </div>
+
+                <div>
+                  <input
+                    type="radio"
+                    name="animall"
+                    id="8"
+                    value="8"
+                    className="peer hidden"
+                  />
+                  <label
+                    htmlFor={"8"}
+                    className="block cursor-pointer select-none rounded-[50px] px-2 py-[6px] text-center peer-checked:bg-customYellow peer-checked:text-black"
+                  >
+                    ممنوع
+                  </label>
+                </div>
+              </div>
+            </div>
+            <p className="text-xs text-gray-400">توضیحات:</p>
+            <p className="text-xs text-gray-400">
+              ورود حیوان خانگی (سگ، گربه، ...) به شرط رعایت کامل نظافت مجاز است.
+              در داخل ساختمان حیوان باید در باکس مخصوص نگهداری شود.
+            </p>
+          </div>
+          <div>
+            <div className="flex flex-col items-start justify-between gap-2 lg:!flex-row lg:!items-center lg:!gap-0">
+              <p className="text-sm">برگزاری جشن و پخش موزیک</p>
+
+              <div className="mb-4 grid w-full grid-cols-2 gap-2 rounded-[32px] bg-gray-200 p-1 lg:!mb-0 lg:!max-w-[8rem]">
+                <div>
+                  <input
+                    type="radio"
+                    name="music"
+                    id="3"
+                    value="1"
+                    className="peer hidden"
+                  />
+                  <label
+                    htmlFor={"3"}
+                    className="block cursor-pointer select-none rounded-[50px] px-2 py-[6px] text-center peer-checked:bg-customYellow peer-checked:text-black"
+                  >
+                    مجاز
+                  </label>
+                </div>
+
+                <div>
+                  <input
+                    type="radio"
+                    name="music"
+                    id="4"
+                    value="2"
+                    className="peer hidden"
+                  />
+                  <label
+                    htmlFor={"4"}
+                    className="block cursor-pointer select-none rounded-[50px] px-2 py-[6px] text-center peer-checked:bg-customYellow peer-checked:text-black"
+                  >
+                    ممنوع
+                  </label>
+                </div>
+              </div>
+            </div>
+            <p className="text-xs text-gray-400">توضیحات:</p>
+            <p className="text-xs text-gray-400">
+              {" "}
+              برگزاری جشن کوچک با هماهنگی میزبان امکانپذیر است.
+            </p>
+          </div>
+          <div>
+            <div className="flex flex-col items-start justify-between gap-2 lg:!flex-row lg:!items-center lg:!gap-0">
+              <p className="text-sm">
+                استعمال دخانیات (سیگار، قلیان و ...) در فضای داخلی ساختمان
+              </p>
+
+              <div className="mb-4 grid w-full grid-cols-2 gap-2 rounded-[32px] bg-gray-200 p-1 lg:!mb-0 lg:!max-w-[8rem]">
+                <div>
+                  <input
+                    type="radio"
+                    name="smoke"
+                    id="5"
+                    value="1"
+                    className="peer hidden"
+                  />
+                  <label
+                    htmlFor={"5"}
+                    className="block cursor-pointer select-none rounded-[50px] px-2 py-[6px] text-center peer-checked:bg-customYellow peer-checked:text-black"
+                  >
+                    مجاز
+                  </label>
+                </div>
+
+                <div>
+                  <input
+                    type="radio"
+                    name="smoke"
+                    id="6"
+                    value="2"
+                    className="peer hidden"
+                  />
+                  <label
+                    htmlFor={"6"}
+                    className="block cursor-pointer select-none rounded-[50px] px-2 py-[6px] text-center peer-checked:bg-customYellow peer-checked:text-black"
+                  >
+                    ممنوع
+                  </label>
+                </div>
+              </div>
             </div>
           </div>
-          {season &&
-            season.map((data) => (
-              <div className="py-2 pb-3">
-                <AccordionParent className={``} type="single" collapsible>
-                  <AccordionItem value={`item-${data.id}`}>
-                    <AccordionTrigger className="font-vazir text-sm !font-normal hover:no-underline">
-                      <div>
-                        <div className="flex items-center gap-3">
-                          <img
-                            className="h-8 w-8 rounded-full"
-                            src={data.avatar}
-                            alt=""
-                          />
-                          <p className="font-vazir font-extrabold">
-                            {data.title}
-                          </p>
-                        </div>
-                        <p className="mb-3 mt-2 text-sm">
-                          تکمیل قیمت‌های این فصل اجباری است
-                        </p>
-                      </div>
-                    </AccordionTrigger>
-                    <AccordionContent className="font-vazir text-sm font-light leading-6 text-[#404040]">
-                      <div className="flex flex-col items-start justify-between gap-2 lg:!flex-row lg:!items-center lg:!gap-0">
-                        <p className="text-sm lg:!text-base">وسط هفته</p>
-                        <div className="relative w-full lg:!w-[60%]">
-                          <input
-                            onChange={(event) =>
-                              midweekHandler(event, data.id, "وسط هفته")
-                            }
-                            type="number"
-                            dir="ltr"
-                            className="w-full rounded-md p-2 pl-14"
-                          />
-                          <span className="absolute left-2 top-2 text-gray-500">
-                            تومان
-                          </span>
-                        </div>
-                      </div>
-                      <div className="my-4 flex flex-col items-start justify-between gap-2 lg:!flex-row lg:!items-center lg:!gap-0">
-                        <p className="text-sm lg:!text-base">
-                          آخر هفته و تعطیلات عادی
-                        </p>
-                        <div className="relative w-full lg:!w-[60%]">
-                          <input
-                            onChange={(event) =>
-                              lastWeekendHandler(event, data.id, "آخر هفته")
-                            }
-                            type="number"
-                            dir="ltr"
-                            className="w-full rounded-md p-2 pl-14"
-                          />
-                          <span className="absolute left-2 top-2 text-gray-500">
-                            تومان
-                          </span>
-                        </div>
-                      </div>
-                      <div className="flex flex-col items-start justify-between gap-2 lg:!flex-row lg:!items-center lg:!gap-0">
-                        <p className="text-sm lg:!text-base">ایام پیک</p>
-                        <div className="relative w-full lg:!w-[60%]">
-                          <input
-                            onChange={(event) =>
-                              holidaysHandler(event, data.id, "تعطیلات")
-                            }
-                            type="number"
-                            dir="ltr"
-                            className="w-full rounded-md p-2 pl-14"
-                          />
-                          <span className="absolute left-2 top-2 text-gray-500">
-                            تومان
-                          </span>
-                        </div>
-                      </div>
-                    </AccordionContent>
-                  </AccordionItem>
-                </AccordionParent>
-              </div>
-            ))}
-
+          <div className="flex flex-col justify-between pb-20 lg:!flex-row">
+            <p className="mb-3">افزودن مقررات بیشتر</p>
+            <div className="w-full lg:!w-[60%]">
+              <Textarea maxLength={250} setValue={setRules} value={rules} />
+            </div>
+          </div>
           <ContentNavigator
             disablelPrevButton={false}
             disabelNextButton={disabelNextButton}
-            prevLink={"newRoom/step7"}
-            nextLink={"newRoom/step9"}
+            prevLink={"newRoom/step8"}
+            nextLink={"newRoom/successfull"}
           />
         </div>
         <div className="max-w-[243px]">
           <StepperInfo
-            title="تعیین اجاره بها"
-            text="برای آسانتر شدن نرخ گذاری اقامتگاه در روزهای مختلف سال, پس از تعیین نرخهای زیر توسط شما, این نرخها با رعایت روزهای عادی و تعطیل هفته در فصول مختلف سال, بصورت خودکار در تقویم اقامتگاه شما اعمال خواهد گردید.وسط هفته: روزهای شنبه تا چهارشنبه هر هفته. آخر هفته: روزهای پنجشنبه و جمعه و تعطیلات عادی. ایام پیک: تعطیلات خاص و پر مسافر.توجه: شما همچنین می توانید با مراجعه به تقویم موجود در صفحه ویرایش اقامتگاه, اجاره بهای روزهای خاص را بصورت دستی تغییر دهید."
+            title=" مقررات اقامتگاه "
+            text="تعیین و درج مقررات اقامتگاه بصورت شفاف و گویا باعث حداقل شدن مشکلات آینده خواهد شد. توجه داشته باشید که تنها میهمانانی که تمامی مقررات اقامتگاه شما را می پذیرند قادر به رزرو اقامتگاه خواهند بود, لذا با رعایت تعادل در تعیین مقررات ‏تعداد کمتری از میهمانان را از دست خواهید داد."
           />
         </div>
       </div>

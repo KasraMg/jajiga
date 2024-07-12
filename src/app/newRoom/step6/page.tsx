@@ -3,7 +3,16 @@ import ContentNavigator from "@/src/components/modules/contentNavigator/ContentN
 import StepLayout from "@/src/components/modules/stepLayout/StepLayout";
 import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
+import { getFromLocalStorage } from "@/src/utils/utils";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import Loader from "@/src/components/modules/loader/Loader";
+interface userObjData {
+  capacity: {};
+  step: 5;
+  finished: false;
+}
 
 const page = () => {
   const informatin = [
@@ -65,9 +74,21 @@ const page = () => {
   const [showInput, setShowInput] = useState<boolean[]>(
     new Array(informatin.length).fill(false),
   );
+  const villaId = getFromLocalStorage("villaId");
+  const accessToken = Cookies.get("AccessToken");
+  const router = useRouter();
+
 
   useEffect(() => {}, []);
-
+  const submitHandler = () => {
+    const userData: userObjData = {
+      capacity: { 
+      },
+      step: 5,
+      finished: false,
+    };
+    // mutation.mutate(userData);
+  };
   return (
     <StepLayout stepperActive={6}>
       <div className="flex max-w-[1120px] gap-0 py-8 sm:!gap-5">
@@ -134,8 +155,8 @@ const page = () => {
           <ContentNavigator
             disablelPrevButton={false}
             disabelNextButton={disabelNextButton}
-            prevLink={"newRoom/step5"}
-            nextLink={"newRoom/step7"}
+            clickHandler={submitHandler}
+            prevLink={"newRoom/step5"} 
           />
         </div>
         <div className="sticky top-[68px] hidden h-max max-w-[243px] md:!block">
