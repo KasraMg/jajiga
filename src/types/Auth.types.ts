@@ -14,7 +14,7 @@ export interface userVillasObj {
     city: string;
     address: string;
   };
-  cover: [];
+  cover: string[];
   createdAt: string;
   finished: boolean;
   step: number;

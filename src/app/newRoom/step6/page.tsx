@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import Loader from "@/src/components/modules/loader/Loader";
+import useCustomQuery from "@/src/hooks/useCustomQuery";
 interface userObjData {
   capacity: {};
   step: 5;
@@ -15,6 +16,13 @@ interface userObjData {
 }
 
 const page = () => {
+  const getItems = async () => {
+    const data = await fetch("");
+    const res = await data.json();
+    return res;
+  };
+  const { data } = useCustomQuery(["step_6_items"], getItems);
+
   const informatin = [
     {
       title: "مبلمان",
@@ -78,12 +86,10 @@ const page = () => {
   const accessToken = Cookies.get("AccessToken");
   const router = useRouter();
 
-
   useEffect(() => {}, []);
   const submitHandler = () => {
     const userData: userObjData = {
-      capacity: { 
-      },
+      capacity: {},
       step: 5,
       finished: false,
     };
@@ -156,7 +162,7 @@ const page = () => {
             disablelPrevButton={false}
             disabelNextButton={disabelNextButton}
             clickHandler={submitHandler}
-            prevLink={"newRoom/step5"} 
+            prevLink={"newRoom/step5"}
           />
         </div>
         <div className="sticky top-[68px] hidden h-max max-w-[243px] md:!block">

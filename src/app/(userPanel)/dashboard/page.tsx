@@ -18,7 +18,7 @@ const Dashboard = () => {
       <main className="Container !mt-20 flex gap-4 px-4 md:!mt-8 xl:!px-0">
         <aside
           style={{ boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 6px" }}
-          className="hidden w-[40%] rounded-2xl p-2 pb-8 md:!block xl:!w-[25%]"
+          className="hidden w-[40%] rounded-2xl p-2 pb-8 md:!block xl:!w-[25%] h-max"
         >
           <div className="relative mb-10 h-24 rounded-2xl bg-customYellow bg-[url(https://www.jajiga.com/static/img/backdrop-pattern.svg)]">
             <Image

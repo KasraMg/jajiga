@@ -12,6 +12,7 @@ import Cookies from "js-cookie";
 import Select from "react-select";
 import { useRouter } from "next/navigation"; 
 import Loader from "@/src/components/modules/loader/Loader";
+import { useToast } from "@/src/components/shadcn/ui/use-toast";
 const stateOptions = useStateData();
 
 interface userObjData {
@@ -26,6 +27,8 @@ interface userObjData {
 
 const page = () => {
   const [address, setAddress] = useState<string>("");
+  const { toast } = useToast();
+
   const [stateSelectedOption, setStateSelectedOption] = useState<{
     label: string;
     value: string[];
@@ -78,6 +81,10 @@ const page = () => {
     onSuccess: (data) => {
       console.log(data);
       if (data.status === 200) {
+        toast({
+          variant: "success",
+          title: "ویلا ساخته و اطلاعات ابتدایی با موفقیت بروزرسانی شد",
+        });
         saveIntoLocalStorage('villaId',data.villa._id)
         router.replace("/newRoom/step2");
       }
