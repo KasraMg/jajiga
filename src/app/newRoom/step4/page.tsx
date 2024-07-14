@@ -16,6 +16,7 @@ import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
 import Cookies from "js-cookie";
 import { useMutation } from "@tanstack/react-query";
 import Loader from "@/src/components/modules/loader/Loader";
+import { useToast } from "@/src/components/shadcn/ui/use-toast";
 
 interface userObjData {
   aboutVilla: {};
@@ -25,6 +26,8 @@ interface userObjData {
 
 const page = () => {
   const [description, setDescription] = useState<string>("");
+  const { toast } = useToast();
+
   const [spaceSelectedOption, setSpaceSelectedOption] = useState<{
     label: string;
     value: string;
@@ -76,6 +79,10 @@ const page = () => {
     onSuccess: (data) => {
       console.log(data);
       if (data.status === 200) {
+        toast({
+          variant: "success",
+          title: "ویلا ساخته و اطلاعات ابتدایی با موفقیت بروزرسانی شد",
+        });
         router.replace("/newRoom/step5");
       }
     },
@@ -92,9 +99,7 @@ const page = () => {
       },
       finished: false,
       step: 5,
-    };
-    console.log(userData);
-    
+    }; 
     mutation.mutate(userData);
   };
 

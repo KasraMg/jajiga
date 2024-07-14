@@ -11,6 +11,7 @@ import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
 import Cookies from "js-cookie";
 import Alert from "@/src/components/modules/alert/Alert";
 import Loader from "@/src/components/modules/loader/Loader";
+import { useToast } from "@/src/components/shadcn/ui/use-toast";
 
 interface userObjData {
   coordinates: {
@@ -25,6 +26,9 @@ const page = () => {
   const [disabelNextButton, setDisabelNextButton] = useState(true);
   const [change, setChange] = useState(false);
   const router = useRouter();
+  const { toast } = useToast();
+
+
   let coordinates: { x: string; y: string };
   useEffect(() => {
     if (change) {
@@ -58,6 +62,10 @@ const page = () => {
     onSuccess: (data) => {
       console.log(data);
       if (data.status === 200) {
+        toast({
+          variant: "success",
+          title: "اطلاعات با موفقیت بروزرسانی شد",
+        });
         router.replace("/newRoom/step3");
       }
     },
