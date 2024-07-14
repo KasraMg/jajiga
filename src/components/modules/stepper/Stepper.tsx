@@ -20,10 +20,10 @@ const Stepper: FC<StepperProps> = ({ active, className }) => {
     { title: "تصاویر اقامتگاه", id: 3 },
     { title: "درباره اقامتگاه", id: 4 },
     { title: "ظرفیت اقامتگاه", id: 5 },
-    { title: "امکانات", id: 6 },
-    { title: "ساعات تحویل و تخلیه", id: 7 },
-    { title: "اجاره بها", id: 8 },
-    { title: "مقررات اقامتگاه", id: 9 },
+    { title: "امکانات", id: 6 }, 
+    { title: "اجاره بها", id: 7 },
+    { title: "مقررات اقامتگاه", id: 8 },
+    { title: "مقررات جاجیگا", id:9 },
   ]);
 
   return (
@@ -40,8 +40,7 @@ const Stepper: FC<StepperProps> = ({ active, className }) => {
               id="stepper_item"
               className={`${active < stepper.id && "pointer-events-none"} relative flex cursor-pointer items-center gap-3`}
             >
-              <div
-                className={`${active == stepper.id ? "bg-[#333333] text-white" : "bg-white text-[#33333]"} z-[9999] flex h-9 w-9 items-center justify-center rounded-[50%] border-2 border-solid border-black px-3 py-1`}
+              <div  className={`${active == stepper.id ? "bg-[#333333] text-white" : "bg-white text-[#33333]"} z-[9999] flex h-9 w-9 items-center justify-center rounded-[50%] border-2 border-solid border-black px-3 py-1`}
               >
                 {active == stepper.id ? (
                   <GiSandsOfTime className="absolute text-2xl" />
