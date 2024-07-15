@@ -1,18 +1,56 @@
 "use client";
 
 import { Button } from "@/src/components/shadcn/ui/button";
+import { toast, useToast } from "@/src/components/shadcn/ui/use-toast";
 import { authStore } from "@/src/stores/auth";
 import { userVillasObj } from "@/src/types/Auth.types";
-import { convertToJalali, saveIntoLocalStorage } from "@/src/utils/utils";
-import Link from "next/link";
+import { baseUrl, convertToJalali, saveIntoLocalStorage } from "@/src/utils/utils";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import Link from "next/link"; 
 import { FaChevronLeft } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
+import swal from "sweetalert";
+import Cookies from "js-cookie";
+import Loader from "@/src/components/modules/loader/Loader";
 
 const Rooms = () => {
-  const { userData } = authStore((state) => state);
-  console.log(userData?.villas);
-  console.log(userData);
+  const { userData } = authStore((state) => state);  
+  const accessToken = Cookies.get("AccessToken"); 
+  const queryClient = useQueryClient();
 
+  const mutation = useMutation({
+    mutationFn: async (id: string) => {
+      return await fetch(`${baseUrl}/villa/delete/${id}`, { 
+        method: "DELETE",
+        headers: { 
+          Authorization: `Bearer ${accessToken}`
+        } 
+      }).then((res) => res.json());
+    },
+    onSuccess: (data) => {
+      console.log(data);
+      
+      if (data.statusCode === 200) {
+        queryClient.invalidateQueries({ queryKey: ["auth"] }); 
+        toast({
+          variant: "success",
+          title: "ویلا با موفقیت حذف شد",
+        }); 
+      }
+    },
+  });
+
+  const villaDeleteHandler = (id: string) => {
+    swal({
+      title: "آیا از حذف ویلا مطمئن هستید",
+      icon: "warning",
+      buttons: ["نه", "آره"],
+    }).then((res) => {
+      if (res) {
+        mutation.mutate(id)
+      }
+    });
+  };
   return (
     <>
       {userData?.villas.length ? (
@@ -36,7 +74,7 @@ const Rooms = () => {
                     <p
                       className={`mb-0 rounded-lg bg-white p-1 text-xs text-black`}
                     >
-                      {(villa.step - 1) / (9 - 1) * 100}%
+                      {((villa.step - 1) / (9 - 1)) * 100}%
                     </p>
                   </div>
                   <p className="hidden xl:block">({villa._id.slice(18, 26)})</p>
@@ -48,16 +86,15 @@ const Rooms = () => {
                   </p>
                 </div>
 
-                <div className="flex gap-2">
-                  <Link href={"/profile"}>
+                <div className="flex gap-2"> 
                     <Button
+                      onClick={() => villaDeleteHandler(villa._id)}
                       className="flex justify-center gap-2 px-4 text-xs xl:!px-8"
                       variant={"danger"}
                     >
                       <FaRegTrashCan />
                       حذف
-                    </Button>
-                  </Link>
+                    </Button> 
                   <Link
                     onClick={() => saveIntoLocalStorage("villaId", villa._id)}
                     href={`/newRoom/step${villa.step}`}
@@ -80,6 +117,7 @@ const Rooms = () => {
           <p>آگهی ای موجود نیست</p>
         </div>
       )}
+        {mutation.isPending && <Loader />} 
     </>
   );
 };
