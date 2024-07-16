@@ -78,10 +78,11 @@ const page = () => {
     },
     onSuccess: (data) => {
       console.log(data);
-      if (data.status === 200) {
+      if (data.statusCode === 200) {
         toast({
           variant: "success",
-          title: "ویلا ساخته و اطلاعات ابتدایی با موفقیت بروزرسانی شد",
+          title: "اطلاعات با موفقیت بروزرسانی شد",
+
         });
         router.replace("/newRoom/step5");
       }

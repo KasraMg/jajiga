@@ -57,9 +57,9 @@ const page = () => {
   });
 
   useEffect(() => {
-    if (smoke !== null && party !== null && pet !== null) setDisabelNextButton(false);
+    if (smoke !== null && party !== null && pet !== null && rules) setDisabelNextButton(false);
     else setDisabelNextButton(true);
-  }, [smoke, party, pet]);
+  }, [smoke, party, pet,rules]);
 
   const submitHandler = () => {
     const userData: userObjData = {
