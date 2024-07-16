@@ -11,7 +11,7 @@ import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
 import Cookies from "js-cookie";
 import Alert from "@/src/components/modules/alert/Alert";
 import Loader from "@/src/components/modules/loader/Loader";
-import { useToast } from "@/src/components/shadcn/ui/use-toast";
+import { toast } from "@/src/components/shadcn/ui/use-toast";
 
 interface userObjData {
   coordinates: {
@@ -25,9 +25,7 @@ interface userObjData {
 const page = () => {
   const [disabelNextButton, setDisabelNextButton] = useState(true);
   const [change, setChange] = useState(false);
-  const router = useRouter();
-  const { toast } = useToast();
-
+  const router = useRouter(); 
 
   let coordinates: { x: string; y: string };
   useEffect(() => {

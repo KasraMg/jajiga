@@ -16,7 +16,8 @@ import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
 import Cookies from "js-cookie";
 import { useMutation } from "@tanstack/react-query";
 import Loader from "@/src/components/modules/loader/Loader";
-import { useToast } from "@/src/components/shadcn/ui/use-toast";
+import { toast } from "@/src/components/shadcn/ui/use-toast";
+
 
 interface userObjData {
   aboutVilla: {};
@@ -25,8 +26,7 @@ interface userObjData {
 }
 
 const page = () => {
-  const [description, setDescription] = useState<string>("");
-  const { toast } = useToast();
+  const [description, setDescription] = useState<string>(""); 
 
   const [spaceSelectedOption, setSpaceSelectedOption] = useState<{
     label: string;

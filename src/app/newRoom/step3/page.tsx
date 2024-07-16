@@ -11,14 +11,14 @@ import swal from "sweetalert";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import Loader from "@/src/components/modules/loader/Loader";
-import { useToast } from "@/src/components/shadcn/ui/use-toast";
+import { toast } from "@/src/components/shadcn/ui/use-toast";
+
 
 const page = () => {
   const [images, setImages] = useState<any>([]);
   const [imagesBaseUrl, setImagesBaseUrl] = useState<any>([]);
   const [disabelNextButton, setDisabelNextButton] = useState(true);
-  const router = useRouter();
-  const { toast } = useToast();
+  const router = useRouter(); 
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (images.length == 10) {

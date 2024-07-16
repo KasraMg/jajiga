@@ -2,9 +2,14 @@
 import Layout from "@/src/components/modules/Layout/Layout";
 import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import Container from "@/src/components/modules/container/Container";
+import { getFromLocalStorage } from "@/src/utils/utils";
 import Link from "next/link";
 
 const page = () => {
+
+  const villaId = getFromLocalStorage("villaId");
+
+
   return (
     <Container disableFooter={true}>
       <Breadcrumb route={"ثبت اقامتگاه"} />
@@ -20,7 +25,7 @@ const page = () => {
           <p className="mt-3 text-center text-xl sm:!text-2xl">
             اقامتگاه شما با موفقیت ثبت شد
           </p>
-          <Link className="text-sx text-center text-blue-600" href={"/"}>
+          <Link className="text-sx text-center text-blue-600" href={`/room/${villaId}`}>
             مشاهده اقامتگاه
           </Link>
         </div>

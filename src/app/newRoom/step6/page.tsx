@@ -3,97 +3,121 @@ import ContentNavigator from "@/src/components/modules/contentNavigator/ContentN
 import StepLayout from "@/src/components/modules/stepLayout/StepLayout";
 import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
-import { getFromLocalStorage } from "@/src/utils/utils";
+import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import Loader from "@/src/components/modules/loader/Loader";
 import useCustomQuery from "@/src/hooks/useCustomQuery";
+import { fetchStep6Items } from "@/src/utils/fetch";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "@/src/components/shadcn/ui/use-toast";
 interface userObjData {
-  capacity: {};
-  step: 5;
+  facility: {};
+  step: 7;
   finished: false;
 }
 
 const page = () => {
-  const getItems = async () => {
-    const data = await fetch("");
-    const res = await data.json();
-    return res;
-  };
-  const { data } = useCustomQuery(["step_6_items"], getItems);
-
-  const informatin = [
-    {
-      title: "مبلمان",
-      placeholder: "مثال: مبلمان راحتی برای 7 نفر",
-    },
-    {
-      title: "یخچال",
-      placeholder: "توضیحات یخچال  ",
-    },
-    {
-      title: "تلویزیون",
-      placeholder: " مثال: یک عدد تلویزیون فلت سامسونگ 48 اینچ ",
-    },
-    {
-      title: "میز نهار خوری",
-      placeholder: "مثال: میز نهارخوری برای 6 نفر و 6 عدد صندلی",
-    },
-    {
-      title: "سیستم گرمایشی",
-      placeholder: "مثال: سیستم پکیج / بخاری گازی",
-    },
-    {
-      title: "سیستم سرمایش",
-      placeholder: "مثال: اسپیلت 18 هزار",
-    },
-    {
-      title: "پارکینگ",
-      placeholder: "مثال:  پارکینگ روباز برای 3 عدد اتومبیل",
-    },
-    {
-      title: "بیلیارد",
-      placeholder: "توضیحات بیلیارد",
-    },
-    {
-      title: " اینترنت wifi",
-      placeholder: "مشخص نمایید: اینترنت کابلی / بی‌سیم-وای‌فای",
-    },
-    {
-      title: "توالت فرنگی",
-      placeholder: "توضیحات توالت فرنگی",
-    },
-    {
-      title: "استخر",
-      placeholder: "توضیحات استخر",
-    },
-  ];
-  const sanitaryItems = [
-    "تعویض روبالشتی و روتختی (برای هر میهمان جدید) ",
-    "تعویض ملحفه (برای هر میهمان جدید)",
-    "شارژ کاغذ توالت",
-    "مایع ظرفشویی",
-    "شارژ مایع دستشویی یا صابون",
-    "مواد ضدعفونی کننده",
-  ];
+  const { data, status } = useCustomQuery(["step_6_items"], fetchStep6Items); 
 
   const [disabelNextButton, setDisabelNextButton] = useState<boolean>(false);
   const [showInput, setShowInput] = useState<boolean[]>(
-    new Array(informatin.length).fill(false),
+    new Array(data?.facility.length).fill(false),
   );
+  const [facilitySelected, setFacilitySelected] = useState<any[]>([]);
+  const [sanitarySelected, setSanitarySelected] = useState<any[]>([]);
+  const [moreFacility, setMoreFacility] = useState("");
+  const [moreSanitary, setMoreSanitary] = useState("");
+
   const villaId = getFromLocalStorage("villaId");
   const accessToken = Cookies.get("AccessToken");
   const router = useRouter();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (status === "success" && data?.facility) {
+      const newFacilities = data.facility.map((item) => ({
+        title: item.engTitle,
+        status: false,
+        description: "",
+      }));
+      setFacilitySelected(newFacilities);
+
+      const newSanitary = data.sanitaryFacilities.map((item) => ({
+        title: item.engTitle,
+        status: false,
+      }));
+      setSanitarySelected(newSanitary);
+    }
+  }, [status]); 
+
+  const convertArrayToObject = (arr: any, isDesTrue: boolean) =>
+    arr.reduce((acc: any, cur: any) => {
+      acc[cur.title] = {
+        status: cur.status,
+        ...(isDesTrue && cur.description && { description: cur.description }),
+      };
+      return acc;
+    }, {});
+
   const submitHandler = () => {
+    const facilityResult = convertArrayToObject(facilitySelected, true);
+    const sanitaryResult = convertArrayToObject(sanitarySelected, false);
+
     const userData: userObjData = {
-      capacity: {},
-      step: 5,
+      facility: {
+        facility: {
+          ...facilityResult, 
+          ...(moreFacility ? { moreFacility: moreFacility } : {}),
+        },
+        sanitaryFacilities: {
+          ...sanitaryResult, 
+          ...(moreSanitary ? { moreSanitaryFacilities: moreSanitary } : {}),
+
+        },
+      },
+      step: 7,
       finished: false,
-    };
-    // mutation.mutate(userData);
+    }; 
+    mutation.mutate(userData);
+    console.log(userData);
+    
+  };
+
+  const mutation = useMutation({
+    mutationFn: async (userData: userObjData) => {
+      return await fetch(`${baseUrl}/villa/update/${villaId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        credentials: "include",
+        body: JSON.stringify(userData),
+      }).then((res) => res.json());
+    }, 
+    onSuccess: (data) => { 
+      if (data.statusCode === 200) {
+        toast({
+          variant: "success",
+          title: "اطلاعات با موفقیت بروزرسانی شد", 
+        });
+        router.replace("/newRoom/step7");
+      }
+    },
+  });
+
+
+
+  const inputChangeHandler = (value: string, itemTitle: string) => {
+    const updatedFacilitySelected = facilitySelected.map((item) => {
+      if (item.title === itemTitle) {
+        return { ...item, description: value };
+      }
+      return item;
+    });
+
+    setFacilitySelected(updatedFacilitySelected);
   };
   return (
     <StepLayout stepperActive={6}>
@@ -105,34 +129,61 @@ const page = () => {
           <p className="text-sm lg:!text-base">
             امکانات و تجهیزات موجود در اقامتگاه خود را مشخص کنید
           </p>
-          {informatin.map((data, index) => (
-            <div className="flex justify-between" key={index}>
-              <div className="flex items-center gap-3">
-                <input
-                  onClick={() => {
-                    const newShowInput = [...showInput];
-                    newShowInput[index] = !newShowInput[index];
-                    setShowInput(newShowInput);
-                  }}
-                  style={{ boxShadow: "none" }}
-                  className="cursor-pointer rounded checked:bg-black"
-                  type="checkbox"
-                />
-                <label className="text-xs lg:!text-sm">{data.title}</label>
-              </div>
-              {showInput[index] && (
-                <input
-                  placeholder={data.placeholder}
-                  className="w-[65%] rounded-md p-2 text-sm placeholder:text-gray-500"
-                  type="text"
-                />
-              )}
-            </div>
-          ))}
+          {status === "success" &&
+            data?.facility.map(
+              (
+                data: {
+                  engTitle: string;
+                  title: string;
+                  id: string;
+                  placeHolder: string;
+                },
+                index: number,
+              ) => (
+                <div className="flex justify-between" key={index}>
+                  <div className="flex items-center gap-3">
+                    <input
+                      onClick={(event) => {
+                        const newShowInput = [...showInput];
+                        newShowInput[index] = !newShowInput[index];
+                        setShowInput(newShowInput);
+
+                        const updatedFacilitySelected = facilitySelected.map(
+                          (item) => {
+                            if (item.title === data.engTitle) {
+                              return { ...item, status: event.target.checked };
+                            }
+                            return item;
+                          },
+                        );
+
+                        setFacilitySelected(updatedFacilitySelected);
+                      }}
+                      style={{ boxShadow: "none" }}
+                      className="cursor-pointer rounded checked:bg-black"
+                      type="checkbox"
+                    />
+                    <label className="text-xs lg:!text-sm">{data.title}</label>
+                  </div>
+                  {showInput[index] && (
+                    <input
+                      placeholder={data.placeHolder}
+                      onChange={(event) =>
+                        inputChangeHandler(event.target.value, data.engTitle)
+                      }
+                      className="w-[65%] rounded-md border border-solid p-2 text-sm font-thin placeholder:text-xs placeholder:text-gray-500"
+                      type="text"
+                    />
+                  )}
+                </div>
+              ),
+            )}
           <div className="flex items-center justify-between">
             <label className="text-sm">سایر امکانات</label>
             <input
               placeholder={"سایر امکانات"}
+              value={moreFacility}
+              onChange={(event) => setMoreFacility(event.target.value)}
               className="w-[65%] rounded-md border border-solid border-gray-400 p-2 text-sm placeholder:text-gray-500"
               type="text"
             />
@@ -140,19 +191,39 @@ const page = () => {
           <p className="!mt-8 border-t border-solid border-gray-200 pt-5">
             اقلام بهداشتی
           </p>
-          {sanitaryItems.map((data) => (
-            <div className="flex items-center gap-3">
-              <input
-                style={{ boxShadow: "none" }}
-                className="cursor-pointer rounded checked:bg-black"
-                type="checkbox"
-              />
-              <label className="text-xs lg:!text-sm">{data}</label>
-            </div>
-          ))}
+          {status === "success" &&
+            data?.sanitaryFacilities.map(
+              (
+                data: { engTitle: string; title: string; id: string },
+                index: number,
+              ) => (
+                <div key={index} className="flex items-center gap-3">
+                  <input
+                    style={{ boxShadow: "none" }}
+                    className="cursor-pointer rounded checked:bg-black"
+                    type="checkbox"
+                    onClick={(event) => {
+                      const updatedSanitarySelected = sanitarySelected.map(
+                        (item) => {
+                          if (item.title === data.engTitle) {
+                            return { ...item, status: event.target.checked };
+                          }
+                          return item;
+                        },
+                      );
+
+                      setSanitarySelected(updatedSanitarySelected);
+                    }}
+                  />
+                  <label className="text-xs lg:!text-sm">{data.title}</label>
+                </div>
+              ),
+            )}
           <div className="!mb-16 flex items-center justify-between">
             <label className="text-sm">سایر موارد</label>
             <input
+              value={moreSanitary}
+              onChange={(event) => setMoreSanitary(event.target.value)}
               placeholder={"سایر موارد"}
               className="w-[65%] rounded-md border border-solid border-gray-400 p-2 text-sm placeholder:text-gray-500"
               type="text"
@@ -177,6 +248,8 @@ const page = () => {
             text="‎‏تعویض و شارژ اقلام بهداشتی (شامل روبالشی, روتختی, ملحفه تمیز, کاغذ ‏توالت و صابون یا مایع دستشویی) موجب می شود تا میهمان شما احساس کند که در منزل خود حضور ‏دارد. این اقلام می باید پیش از ورود میهمان جدید تعویض یا شارژ شوند.‏"
           />
         </div>
+        {mutation.isPending && <Loader />}
+
       </div>
     </StepLayout>
   );
