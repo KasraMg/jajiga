@@ -12,7 +12,8 @@ import Cookies from "js-cookie";
 import Select from "react-select";
 import { useRouter } from "next/navigation"; 
 import Loader from "@/src/components/modules/loader/Loader";
-import { useToast } from "@/src/components/shadcn/ui/use-toast";
+import { toast } from "@/src/components/shadcn/ui/use-toast";
+
 const stateOptions = useStateData();
 
 interface userObjData {
@@ -26,8 +27,7 @@ interface userObjData {
 }
 
 const page = () => {
-  const [address, setAddress] = useState<string>("");
-  const { toast } = useToast();
+  const [address, setAddress] = useState<string>(""); 
 
   const [stateSelectedOption, setStateSelectedOption] = useState<{
     label: string;

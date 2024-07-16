@@ -5,7 +5,8 @@ import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
 import Textarea from "@/src/components/modules/textarea/Textarea";
 import { useEffect, useState } from "react";
-import { useToast } from "@/src/components/shadcn/ui/use-toast";
+import { toast } from "@/src/components/shadcn/ui/use-toast";
+
 import { useMutation } from "@tanstack/react-query";
 import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
 import { useRouter } from "next/navigation";
@@ -64,8 +65,7 @@ const page = () => {
   ) => {
     setAreaSize(event.target.value);
   };
-
-  const { toast } = useToast();
+ 
 
   const villaId = getFromLocalStorage("villaId");
   const accessToken = Cookies.get("AccessToken");

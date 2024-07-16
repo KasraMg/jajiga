@@ -8,7 +8,8 @@ import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import Loader from "@/src/components/modules/loader/Loader";
-import { useToast } from "@/src/components/shadcn/ui/use-toast";
+import { toast } from "@/src/components/shadcn/ui/use-toast";
+
 import { useMutation } from "@tanstack/react-query";
 
 interface userObjData {
@@ -17,9 +18,7 @@ interface userObjData {
 }
 const page = () => {
   const [disabelNextButton, setDisabelNextButton] = useState<boolean>(false);
-  const [acceptRules, setAcceptRules] = useState(false);
-  const { toast } = useToast();
-
+  const [acceptRules, setAcceptRules] = useState(false); 
   const villaId = getFromLocalStorage("villaId");
 
   const accessToken = Cookies.get("AccessToken");
@@ -38,7 +37,7 @@ const page = () => {
       }).then((res) => res.json());
     },
     onSuccess: (data: any) => {
-      if (data.status === 200) {
+      if (data.statusCode === 200) {
         toast({
           variant: "success",
           title: "ویلا با موفقیت ثبت شد",

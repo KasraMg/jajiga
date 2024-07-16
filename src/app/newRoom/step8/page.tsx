@@ -10,7 +10,8 @@ import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import Loader from "@/src/components/modules/loader/Loader";
-import { useToast } from "@/src/components/shadcn/ui/use-toast";
+import { toast } from "@/src/components/shadcn/ui/use-toast";
+
 import { useMutation } from "@tanstack/react-query";
 
 interface userObjData {
@@ -23,8 +24,7 @@ const page = () => {
   const [rules, setRules] = useState<string>("");
   const [pet, setPet] = useState<null | boolean>(null);
   const [party, setParty] = useState<null | boolean>(null);
-  const [smoke, setSmoke] = useState<null | boolean>(null);
-  const { toast } = useToast();
+  const [smoke, setSmoke] = useState<null | boolean>(null); 
 
   const villaId = getFromLocalStorage("villaId");
   console.log(villaId);

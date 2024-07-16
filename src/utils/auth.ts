@@ -11,7 +11,7 @@ const Auth = () => {
   const accessToken = Cookies.get("AccessToken");  
   async function fetchUsers() {
   const accessToken = Cookies.get("AccessToken"); 
-    console.log(accessToken); 
+ 
     const res = await fetch(`${baseUrl}/getMe`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,

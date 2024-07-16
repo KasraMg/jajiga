@@ -263,8 +263,7 @@ input[type=number] {
   margin-block-end: 0.67em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
-  font-weight: bold;
-  font-family: 'Vazir-light';
+  font-weight: bold; 
 }
 
 .rules-article h2 {
@@ -274,8 +273,7 @@ input[type=number] {
   margin-block-end: 0.83em;
   margin-inline-start: 0px;
   margin-inline-end: 0px;
-  font-weight: bold;
-  font-family: 'Vazir-light';
+  font-weight: bold; 
 }
 
 .rules-article p {
@@ -283,8 +281,7 @@ input[type=number] {
   margin-block-start: 1em;
   margin-block-end: 1em;
   margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  font-family: 'Vazir-light';
+  margin-inline-end: 0px; 
 }
 
 .rules-article a {
