@@ -84,7 +84,7 @@ const page = () => {
       }).then((res) => res.json());
     },
     onSuccess: (data) => {
-      if (data.status === 200) {
+      if (data.statusCode === 200) {
         toast({
           variant: "success",
           title: "اطلاعات با موفقیت بروزرسانی شد",

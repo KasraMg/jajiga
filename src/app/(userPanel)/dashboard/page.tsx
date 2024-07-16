@@ -51,7 +51,7 @@ const Dashboard = () => {
               <RiUpload2Line className="text-2xl" />
               <p>رزرو ها</p>
             </Link>
-            <Link className="mt-5 flex justify-start gap-2" href={"/rooms"}>
+            <Link className="mt-5 flex justify-start gap-2" href={"/all"}>
               <RiUpload2Line className="text-2xl" />
               <p>اقامتگاه ها</p>
             </Link>
