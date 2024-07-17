@@ -54,7 +54,7 @@ const Breadcrumb: FC<BreadcrumbProps> = ({
                   routes.map((route, index) => (
                     <Link
                       href={`/category/${route}`}
-                      className="z-50 mx-[2px] flex items-center gap-[2px] text-xs text-[#505050]"
+                      className="z-50 mx-[2px] flex items-center gap-[2px] text-sm text-[#000000]"
                       key={index}
                     >
                       {route}
