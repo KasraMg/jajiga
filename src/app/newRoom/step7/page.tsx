@@ -175,8 +175,7 @@ const page = () => {
       avatar: "https://www.jajiga.com/static/img/pricing/winter.png",
     },
   ]; 
-
-
+ 
   return (
     <StepLayout stepperActive={8}>
       <div className="flex max-w-[1120px] gap-0 py-8 sm:!gap-5">

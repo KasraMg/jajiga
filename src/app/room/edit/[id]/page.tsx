@@ -1,6 +1,19 @@
-import Layout from "@/src/components/modules/Layout/Layout"; 
+import Layout from "@/src/components/modules/Layout/Layout";
 import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import Container from "@/src/components/modules/container/Container";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/src/components/shadcn/ui/tabs";
+import BaseInformation from "@/src/components/templates/room/edit/baseInformation/BaseInformation";
+import Capacity from "@/src/components/templates/room/edit/capacity/Capacity";
+import Disable from "@/src/components/templates/room/edit/disable/Disable";
+import Facilities from "@/src/components/templates/room/edit/facilities/Facilities";
+import Images from "@/src/components/templates/room/edit/images/Images";
+import Price from "@/src/components/templates/room/edit/price/Price";
+import Rules from "@/src/components/templates/room/edit/rules/Rules";
 
 const Faq = () => {
   return (
@@ -10,7 +23,40 @@ const Faq = () => {
         routes={["اقامتگاه ها", "ویرایش اقامتگاه"]}
       />
       <Layout className="!z-10">
-        <div className="mx-auto mb-10 max-w-[815px] pt-3"></div>
+        <div className="mx-auto mb-10">
+          <Tabs defaultValue="images" className="w-full" dir="rtl">
+            <TabsList dir="rtl" className="relative bottom-[38px]">
+              <TabsTrigger value="images">تصاویر</TabsTrigger>
+              <TabsTrigger value="facilities">امکانات</TabsTrigger>
+              <TabsTrigger value="baseInformation">اطلاعات پایه</TabsTrigger>
+              <TabsTrigger value="capacity">ظرفیت</TabsTrigger>
+              <TabsTrigger value="rules">مقررات</TabsTrigger>
+              <TabsTrigger value="price">نرخ فصلی</TabsTrigger>
+              <TabsTrigger value="disable">غیر فعالسازی</TabsTrigger>
+            </TabsList>
+            <TabsContent value="images">
+              <Images />
+            </TabsContent>
+            <TabsContent value="facilities">
+              <Facilities />
+            </TabsContent>
+            <TabsContent value="baseInformation">
+              <BaseInformation />
+            </TabsContent>
+            <TabsContent value="capacity">
+              <Capacity />
+            </TabsContent>
+            <TabsContent value="rules">
+              <Rules />
+            </TabsContent>
+            <TabsContent value="price">
+              <Price />
+            </TabsContent>
+            <TabsContent value="disable">
+              <Disable />
+            </TabsContent>
+          </Tabs>
+        </div>
       </Layout>
     </Container>
   );
