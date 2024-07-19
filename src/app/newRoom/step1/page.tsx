@@ -4,15 +4,11 @@ import StepLayout from "@/src/components/modules/stepLayout/StepLayout";
 import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
 import Textarea from "@/src/components/modules/textarea/Textarea";
-import useStateData from "@/src/hooks/useStateData";
-import { baseUrl, saveIntoLocalStorage } from "@/src/utils/utils";
-import { useMutation } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
-import Cookies from "js-cookie";
-import Select from "react-select";
-import { useRouter } from "next/navigation"; 
-import Loader from "@/src/components/modules/loader/Loader";
-import { toast } from "@/src/components/shadcn/ui/use-toast";
+import useStateData from "@/src/hooks/useStateData"; 
+import { useEffect, useState } from "react"; 
+import Select from "react-select"; 
+import Loader from "@/src/components/modules/loader/Loader"; 
+import useEditVilla from "@/src/hooks/useEditVilla";
 
 const stateOptions = useStateData();
 
@@ -27,8 +23,17 @@ interface userObjData {
 }
 
 const page = () => {
-  const [address, setAddress] = useState<string>(""); 
-
+  const [address, setAddress] = useState<string>("");
+  const {
+    mutate: mutation,
+    responseData,
+    isSuccess,
+    isPending
+  } = useEditVilla<userObjData>(
+    "/newRoom/step2",
+    "ویلا ساخته و اطلاعات ابتدایی با موفقیت بروزرسانی شد",
+  );
+ 
   const [stateSelectedOption, setStateSelectedOption] = useState<{
     label: string;
     value: string[];
@@ -63,34 +68,6 @@ const page = () => {
     } else setDisabelNextButton(true);
   }, [stateSelectedOption, address, citySelectedOption]);
 
-  const accessToken = Cookies.get("AccessToken");
-  const router = useRouter(); 
-
-  const mutation = useMutation({
-    mutationFn: async (data: userObjData) => {
-      return await fetch(`${baseUrl}/villa/add`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-        credentials: "include",
-        body: JSON.stringify(data),
-      }).then((res) => res.json());
-    },
-    onSuccess: (data) => {
-      console.log(data);
-      if (data.statusCode === 200) {
-        toast({
-          variant: "success",
-          title: "ویلا ساخته و اطلاعات ابتدایی با موفقیت بروزرسانی شد",
-        });
-        saveIntoLocalStorage('villaId',data.villa._id)
-        router.replace("/newRoom/step2");
-      }
-    },
-  });
-
   const submitHandler = () => {
     const userData: userObjData = {
       address: {
@@ -101,8 +78,9 @@ const page = () => {
       step: 2,
       finished: false,
     };
-    mutation.mutate(userData);
+    mutation(userData);
   };
+
   return (
     <StepLayout stepperActive={1}>
       <div className="flex max-w-[1120px] gap-0 py-8 sm:!gap-5">
@@ -166,14 +144,14 @@ const page = () => {
             clickHandler={submitHandler}
             disablelPrevButton={true}
             disabelNextButton={disabelNextButton}
-            prevLink={"/"} 
+            prevLink={"/"}
           />
         </div>
         <StepperInfo
           title="آدرس اقامتگاه"
           text="آدرس دقیق اقامتگاه, تنها پس ازقطعی شدن رزروبرای میهمان ارسال می گردد."
         />
-        {mutation.isPending && <Loader />}
+        {isPending && <Loader />}
       </div>
     </StepLayout>
   );

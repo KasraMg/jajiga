@@ -3,15 +3,12 @@ import ContentNavigator from "@/src/components/modules/contentNavigator/ContentN
 import StepLayout from "@/src/components/modules/stepLayout/StepLayout";
 import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
-import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import Cookies from "js-cookie";
+import { getFromLocalStorage } from "@/src/utils/utils"; 
+import { useEffect, useState } from "react"; 
 import Loader from "@/src/components/modules/loader/Loader";
 import useCustomQuery from "@/src/hooks/useCustomQuery";
-import { fetchStep6Items } from "@/src/utils/fetch";
-import { useMutation } from "@tanstack/react-query";
-import { toast } from "@/src/components/shadcn/ui/use-toast";
+import { fetchStep6Items } from "@/src/utils/fetch"; 
+import useEditVilla from "@/src/hooks/useEditVilla";
 interface userObjData {
   facility: {};
   step: 7;
@@ -31,8 +28,17 @@ const page = () => {
   const [moreSanitary, setMoreSanitary] = useState("");
 
   const villaId = getFromLocalStorage("villaId");
-  const accessToken = Cookies.get("AccessToken");
-  const router = useRouter();
+  const {
+    mutate: mutation, 
+    responseData,
+    isSuccess,
+    isPending,
+  } = useEditVilla<userObjData>(
+    "/newRoom/step7",
+    "اطلاعات با موفقیت بروزرسانی شد",
+    villaId,
+  );
+
 
   useEffect(() => {
     if (status === "success" && data?.facility) {
@@ -79,36 +85,10 @@ const page = () => {
       step: 7,
       finished: false,
     }; 
-    mutation.mutate(userData);
-    console.log(userData);
-    
+    mutation(userData);  
   };
 
-  const mutation = useMutation({
-    mutationFn: async (userData: userObjData) => {
-      return await fetch(`${baseUrl}/villa/update/${villaId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-        credentials: "include",
-        body: JSON.stringify(userData),
-      }).then((res) => res.json());
-    }, 
-    onSuccess: (data) => { 
-      if (data.statusCode === 200) {
-        toast({
-          variant: "success",
-          title: "اطلاعات با موفقیت بروزرسانی شد", 
-        });
-        router.replace("/newRoom/step7");
-      }
-    },
-  });
-
-
-
+  
   const inputChangeHandler = (value: string, itemTitle: string) => {
     const updatedFacilitySelected = facilitySelected.map((item) => {
       if (item.title === itemTitle) {
@@ -248,7 +228,7 @@ const page = () => {
             text="‎‏تعویض و شارژ اقلام بهداشتی (شامل روبالشی, روتختی, ملحفه تمیز, کاغذ ‏توالت و صابون یا مایع دستشویی) موجب می شود تا میهمان شما احساس کند که در منزل خود حضور ‏دارد. این اقلام می باید پیش از ورود میهمان جدید تعویض یا شارژ شوند.‏"
           />
         </div>
-        {mutation.isPending && <Loader />}
+        {isPending && <Loader />}
 
       </div>
     </StepLayout>

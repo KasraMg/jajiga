@@ -3,22 +3,31 @@ import ContentNavigator from "@/src/components/modules/contentNavigator/ContentN
 import StepLayout from "@/src/components/modules/stepLayout/StepLayout";
 import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
-import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
-import { useMutation } from "@tanstack/react-query";
+import { getFromLocalStorage } from "@/src/utils/utils"; 
 import { useEffect, useState } from "react";
 import { BsCamera, BsTrash3 } from "react-icons/bs";
-import swal from "sweetalert";
-import Cookies from "js-cookie";
-import { useRouter } from "next/navigation";
-import Loader from "@/src/components/modules/loader/Loader";
-import { toast } from "@/src/components/shadcn/ui/use-toast";
+import swal from "sweetalert"; 
+import Loader from "@/src/components/modules/loader/Loader"; 
+import useEditVilla from "@/src/hooks/useEditVilla";
 
 
 const page = () => {
   const [images, setImages] = useState<any>([]);
   const [imagesBaseUrl, setImagesBaseUrl] = useState<any>([]);
   const [disabelNextButton, setDisabelNextButton] = useState(true);
-  const router = useRouter(); 
+  const villaId = getFromLocalStorage("villaId");
+
+  const {
+    mutate: mutation,
+    responseData,
+    isSuccess,
+    isPending,
+  } = useEditVilla<any>(
+    "/newRoom/step4",
+    "اطلاعات با موفقیت بروزرسانی شد",
+    villaId,
+    true
+  );
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (images.length == 10) {
@@ -77,7 +86,7 @@ const page = () => {
 
     if (images.length > 0) {
       generateImages();
-      if (images.length > 0) {
+      if (images.length > 2) {
         setDisabelNextButton(false);
       } else {
         setDisabelNextButton(true);
@@ -87,35 +96,7 @@ const page = () => {
       setDisabelNextButton(true);
     }
   }, [images]);
-
-  const accessToken = Cookies.get("AccessToken");
-  const villaId = getFromLocalStorage("villaId");
-
-  const mutation = useMutation({
-    mutationFn: async (formData: any) => {
-      return await fetch(`${baseUrl}/villa/update/${villaId}`, {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-        credentials: "include",
-        body: formData,
-      }).then((res) => res.json());
-    },
-    onError: (data) => {
-      console.log(data);
-    },
-    onSuccess: (data) => {
-      console.log(data);
-      if (data.statusCode === 200) {
-        toast({
-          variant: "success",
-          title: "اطلاعات با موفقیت بروزرسانی شد",
-        });
-        router.replace("/newRoom/step4");
-      }
-    },
-  });
+  
 
   const deleteImgHandler = (name: string) => {
     const newImages = images.filter((imgFile: any) => imgFile.name !== name);
@@ -129,7 +110,8 @@ const page = () => {
     });
     formData.append("step", "4");
     formData.append("finished", "false");
-    mutation.mutate(formData);
+ 
+    mutation(formData);
   };
 
   return (
@@ -215,7 +197,7 @@ const page = () => {
             text="همچنین می توانید بعد از ثبت اقامتگاه, به قسمت ویرایش اقامتگاه مراجعه کرده, تصویر اصلی اقامتگاه را ‏تغییر دهید, تصاویر بیشتری اضافه کنید و یا ترتیب تصاویر را تغییر دهید"
           />
         </div>
-        {mutation.isPending && <Loader />}
+        {isPending && <Loader />}
       </div>
     </StepLayout>
   );

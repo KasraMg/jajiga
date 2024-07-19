@@ -47,6 +47,7 @@ const Images = () => {
     // }
   };
   return (
+   <>
     <section className="flex w-full max-w-[1120px] justify-between gap-16">
       <div className="font-thin text-gray-700">
       <div className="w-full">
@@ -114,7 +115,27 @@ const Images = () => {
         />
         
     </section>
+
+    <section
+      style={{
+        transition: "transform 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955) 0s",
+      }}
+      className=" w-full z-50"
+    >
+      <div
+        className={` flex w-full gap-2 justify-between rounded-lg bg-[#00000099] px-1 py-1 `}
+      > 
+        <Button
+          variant="yellow" 
+          className={` px-2 py-2 rounded-md transition-colors hover:opacity-75 w-full justify-center`}
+        >  
+              ذخیره تغییرات
+        </Button>
+      </div>
+    </section>
+   </>
   );
 };
 
 export default Images;
+//${disabelNextButton && "cursor-not-allowed pointer-events-none opacity-40 hover:!opacity-30"} ${disablelPrevButton && "cursor-not-allowed opacity-40 hover:!opacity-30"} 

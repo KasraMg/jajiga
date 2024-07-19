@@ -10,12 +10,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/src/components/shadcn/ui/accordion";
-import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
-import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
-import Loader from "@/src/components/modules/loader/Loader";
-import { toast } from "@/src/components/shadcn/ui/use-toast";
-import { useMutation } from "@tanstack/react-query";
+import { getFromLocalStorage } from "@/src/utils/utils"; 
+import Loader from "@/src/components/modules/loader/Loader"; 
+import useEditVilla from "@/src/hooks/useEditVilla";
 
 interface userObjData {
   price: {};
@@ -60,33 +57,18 @@ const page = () => {
       ],
     },
   ]);
-  
   const villaId = getFromLocalStorage("villaId");
-  const accessToken = Cookies.get("AccessToken");
-  const router = useRouter();
-
-  const mutation = useMutation({
-    mutationFn: async (data: userObjData) => {
-      return await fetch(`${baseUrl}/villa/update/${villaId}`, { 
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-        credentials: "include",
-        body: JSON.stringify(data),
-      }).then((res) => res.json());
-    },
-    onSuccess: (data:any) => {
-      if (data.statusCode === 200) {
-        toast({
-          variant: "success",
-          title: "اطلاعات با موفقیت بروزرسانی شد",
-        });
-        router.replace("/newRoom/step8");
-      }
-    },
-  });
+  const {
+    mutate: mutation, 
+    responseData,
+    isSuccess,
+    isPending,
+  } = useEditVilla<userObjData>(
+    "/newRoom/step8",
+    "اطلاعات با موفقیت بروزرسانی شد",
+    villaId,
+  );
+  
 
   const submitHandler = () => {
     const userData: userObjData = {
@@ -115,9 +97,8 @@ const page = () => {
       },
       step: 8,
       finished: false,
-    };
-    console.log(userData);
-    mutation.mutate(userData);
+    }; 
+    mutation(userData);
   };
 
   const changeInputHandler = (
@@ -287,7 +268,7 @@ const page = () => {
             text="برای آسانتر شدن نرخ گذاری اقامتگاه در روزهای مختلف سال, پس از تعیین نرخهای زیر توسط شما, این نرخها با رعایت روزهای عادی و تعطیل هفته در فصول مختلف سال, بصورت خودکار در تقویم اقامتگاه شما اعمال خواهد گردید.وسط هفته: روزهای شنبه تا چهارشنبه هر هفته. آخر هفته: روزهای پنجشنبه و جمعه و تعطیلات عادی. ایام پیک: تعطیلات خاص و پر مسافر.توجه: شما همچنین می توانید با مراجعه به تقویم موجود در صفحه ویرایش اقامتگاه, اجاره بهای روزهای خاص را بصورت دستی تغییر دهید."
           />
         </div>
-        {mutation.isPending && <Loader />} 
+        {isPending && <Loader />} 
       </div>
     </StepLayout>
   );

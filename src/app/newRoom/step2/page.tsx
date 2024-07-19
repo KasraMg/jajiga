@@ -3,15 +3,12 @@ import { Map } from "@/src/components/modules/Map/Map";
 import ContentNavigator from "@/src/components/modules/contentNavigator/ContentNavigator";
 import StepLayout from "@/src/components/modules/stepLayout/StepLayout";
 import Stepper from "@/src/components/modules/stepper/Stepper";
-import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
-import { useMutation } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
-import Cookies from "js-cookie";
+import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo"; 
+import { useEffect, useState } from "react"; 
+import { getFromLocalStorage } from "@/src/utils/utils"; 
 import Alert from "@/src/components/modules/alert/Alert";
-import Loader from "@/src/components/modules/loader/Loader";
-import { toast } from "@/src/components/shadcn/ui/use-toast";
+import Loader from "@/src/components/modules/loader/Loader"; 
+import useEditVilla from "@/src/hooks/useEditVilla";
 
 interface userObjData {
   coordinates: {
@@ -25,7 +22,17 @@ interface userObjData {
 const page = () => {
   const [disabelNextButton, setDisabelNextButton] = useState(true);
   const [change, setChange] = useState(false);
-  const router = useRouter(); 
+  const villaId = getFromLocalStorage("villaId"); 
+  const {
+    mutate: mutation,
+    responseData,
+    isSuccess,
+    isPending,
+  } = useEditVilla<userObjData>(
+    "/newRoom/step3",
+    "اطلاعات با موفقیت بروزرسانی شد",
+    villaId,
+  );
 
   let coordinates: { x: string; y: string };
   useEffect(() => {
@@ -34,40 +41,13 @@ const page = () => {
     }
   }, [change]);
 
-  const mapChangeHandler = (x: string, y: string) => { 
+  const mapChangeHandler = (x: string, y: string) => {
     coordinates = {
-      x:`${x}`,
-      y:`${y}`
+      x: `${x}`,
+      y: `${y}`,
     };
     setChange(true);
   };
- 
-  const accessToken = Cookies.get("AccessToken");
-  const villaId = getFromLocalStorage("villaId");
-
-  const mutation = useMutation({
-    mutationFn: async (userData:userObjData) => {
-      return await fetch(`${baseUrl}/villa/update/${villaId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-        credentials: "include",
-        body: JSON.stringify(userData),
-      }).then((res) => res.json());
-    },
-    onSuccess: (data) => {
-      console.log(data);
-      if (data.statusCode === 200) {
-        toast({
-          variant: "success",
-          title: "اطلاعات با موفقیت بروزرسانی شد",
-        });
-        router.replace("/newRoom/step3");
-      }
-    },
-  });
 
   const submitHandler = () => {
     const userData: userObjData = {
@@ -75,7 +55,7 @@ const page = () => {
       step: 3,
       finished: false,
     };
-    mutation.mutate(userData);
+    mutation(userData);
   };
 
   return (
@@ -107,7 +87,7 @@ const page = () => {
             clickHandler={submitHandler}
             disablelPrevButton={false}
             disabelNextButton={disabelNextButton}
-            prevLink={"newRoom/step1"} 
+            prevLink={"newRoom/step1"}
           />
         </div>
         <div className="max-w-[243px]">
@@ -117,9 +97,8 @@ const page = () => {
                      همچنین می توانید با استفاده از کلیدهای + و – بزرگنمایی نقشه را تغییر دهید و یا برای دقت بیشتر, نقشه را به حالت Satellite درآورید."
           />
         </div>
-      {mutation.isPending && <Loader />}
+        {isPending && <Loader />}
       </div>
-
     </StepLayout>
   );
 };
