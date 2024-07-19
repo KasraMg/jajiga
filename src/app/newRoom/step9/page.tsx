@@ -4,13 +4,9 @@ import StepLayout from "@/src/components/modules/stepLayout/StepLayout";
 import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
 import { useEffect, useState } from "react";
-import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
-import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
-import Loader from "@/src/components/modules/loader/Loader";
-import { toast } from "@/src/components/shadcn/ui/use-toast";
-
-import { useMutation } from "@tanstack/react-query";
+import { getFromLocalStorage } from "@/src/utils/utils"; 
+import Loader from "@/src/components/modules/loader/Loader"; 
+import useEditVilla from "@/src/hooks/useEditVilla";
 
 interface userObjData {
   step: 9;
@@ -20,33 +16,18 @@ const page = () => {
   const [disabelNextButton, setDisabelNextButton] = useState<boolean>(false);
   const [acceptRules, setAcceptRules] = useState(false); 
   const villaId = getFromLocalStorage("villaId");
-
-  const accessToken = Cookies.get("AccessToken");
-  const router = useRouter();
-
-  const mutation = useMutation({
-    mutationFn: async (data: userObjData) => {
-      return await fetch(`${baseUrl}/villa/update/${villaId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-        credentials: "include",
-        body: JSON.stringify(data),
-      }).then((res) => res.json());
-    },
-    onSuccess: (data: any) => {
-      if (data.statusCode === 200) {
-        toast({
-          variant: "success",
-          title: "ویلا با موفقیت ثبت شد",
-        });
-        router.replace("/newRoom/successfull");
-      }
-    },
-  });
-
+  const {
+    mutate: mutation, 
+    responseData,
+    isSuccess,
+    isPending,
+  } = useEditVilla<userObjData>(
+    "/newRoom/successfull",
+    "ویلا با موفقیت ثبت شد",
+    villaId,
+  ); 
+ 
+ 
   useEffect(() => {
     if (acceptRules) setDisabelNextButton(false);
     else setDisabelNextButton(true);
@@ -56,9 +37,8 @@ const page = () => {
     const userData: userObjData = {
       step: 9,
       finished: true,
-    };
-    console.log(userData);
-    mutation.mutate(userData);
+    }; 
+    mutation(userData);
   };
   return (
     <StepLayout stepperActive={9}>
@@ -131,10 +111,11 @@ const page = () => {
             text="تعیین و درج مقررات اقامتگاه بصورت شفاف و گویا باعث حداقل شدن مشکلات آینده خواهد شد. توجه داشته باشید که تنها میهمانانی که تمامی مقررات اقامتگاه شما را می پذیرند قادر به رزرو اقامتگاه خواهند بود, لذا با رعایت تعادل در تعیین مقررات ‏تعداد کمتری از میهمانان را از دست خواهید داد."
           />
         </div>
-        {mutation.isPending && <Loader />}
+        {isPending && <Loader />}
       </div>
     </StepLayout>
   );
 };
 
 export default page;
+ 

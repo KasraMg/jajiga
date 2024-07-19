@@ -4,14 +4,10 @@ import StepLayout from "@/src/components/modules/stepLayout/StepLayout";
 import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
 import Textarea from "@/src/components/modules/textarea/Textarea";
-import { useEffect, useState } from "react";
-import { toast } from "@/src/components/shadcn/ui/use-toast";
-
-import { useMutation } from "@tanstack/react-query";
-import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
-import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
+import { useEffect, useState } from "react"; 
+import { getFromLocalStorage } from "@/src/utils/utils"; 
 import Loader from "@/src/components/modules/loader/Loader";
+import useEditVilla from "@/src/hooks/useEditVilla";
 
 interface userObjData {
   capacity: {};
@@ -27,6 +23,18 @@ const page = () => {
   const [areaSize, setAreaSize] = useState<string>("");
   const [roomCount, setRoomCount] = useState<number>(0);
   const [description, setDescription] = useState<string>("");
+  const villaId = getFromLocalStorage("villaId");
+
+  const {
+    mutate: mutation,
+    responseData,
+    isSuccess,
+    isPending,
+  } = useEditVilla<userObjData>(
+    "/newRoom/step6",
+    "اطلاعات با موفقیت بروزرسانی شد",
+    villaId,
+  );
 
   useEffect(() => {
     if (landSize.length && areaSize.length && description) {
@@ -65,34 +73,8 @@ const page = () => {
   ) => {
     setAreaSize(event.target.value);
   };
+  
  
-
-  const villaId = getFromLocalStorage("villaId");
-  const accessToken = Cookies.get("AccessToken");
-  const router = useRouter();
-
-  const mutation = useMutation({
-    mutationFn: async (data: userObjData) => {
-      return await fetch(`${baseUrl}/villa/update/${villaId}`, { 
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
-        },
-        credentials: "include",
-        body: JSON.stringify(data),
-      }).then((res) => res.json());
-    },
-    onSuccess: (data) => {
-      if (data.statusCode === 200) {
-        toast({
-          variant: "success",
-          title: "اطلاعات با موفقیت بروزرسانی شد",
-        });
-        router.replace("/newRoom/step6");
-      }
-    },
-  });
 
   const submitHandler = () => {
     const userData: userObjData = {
@@ -107,7 +89,7 @@ const page = () => {
       step: 6,
       finished: false,
     };
-    mutation.mutate(userData);
+    mutation(userData);
   };
   return (
     <StepLayout stepperActive={5}>
@@ -262,7 +244,7 @@ const page = () => {
             text="  این قسمت, امکانات خواب اقامتگاه, همچون تعداد و نوع تخت خواب های موجود در هر اتاق خواب را مشخص کنید. تعداد و شرح   انواع رخت خواب, همچون رخت خواب سنتی (زمین خواب), مبل تخت خواب شو و غیرو ... را نیز در این قسمت وارد کنید"
           />
         </div>
-        {mutation.isPending && <Loader />}
+        {isPending && <Loader />}
 
       </div>
     </StepLayout>
