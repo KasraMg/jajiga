@@ -1,12 +1,12 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { baseUrl, saveIntoLocalStorage } from "../utils/utils";
 import Cookies from "js-cookie";
 import { toast } from "../components/shadcn/ui/use-toast";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState } from "react"; 
 
 const useEditVilla = <T extends object>(
-  nextStep: string,
+  nextStep: string | null,
   successMsg: string,
   villaId?: string,
   formData?: boolean,
@@ -14,6 +14,8 @@ const useEditVilla = <T extends object>(
   const accessToken = Cookies.get("AccessToken");
   const router = useRouter();
   const [responseData, setResponseData] = useState<any>(null);
+  const queryClient = useQueryClient();
+
   const { mutate, isSuccess, isPending } = useMutation({
     mutationFn: async (data: T) => {
       const headers: HeadersInit = {
@@ -28,7 +30,7 @@ const useEditVilla = <T extends object>(
           method: !villaId ? "POST" : "PUT",
           headers,
           credentials: "include",
-          body: formData ? data as any: JSON.stringify(data) ,
+          body: formData ? (data as any) : JSON.stringify(data),
         },
       ).then((res) => res.json());
     },
@@ -41,10 +43,15 @@ const useEditVilla = <T extends object>(
           variant: "success",
           title: successMsg,
         });
-        router.replace(`${nextStep}`);
+        if (nextStep) {
+          router.replace(`${nextStep}`);
+        } else {
+          queryClient.invalidateQueries({ queryKey: ["auth"] });
+        }
       }
     },
   });
+ 
   return { mutate, responseData, isSuccess, isPending };
 };
 

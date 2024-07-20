@@ -7,7 +7,7 @@ import { getFromLocalStorage } from "@/src/utils/utils";
 import { useEffect, useState } from "react"; 
 import Loader from "@/src/components/modules/loader/Loader";
 import useCustomQuery from "@/src/hooks/useCustomQuery";
-import { fetchStep6Items } from "@/src/utils/fetch"; 
+import { fetchStep6Items } from "@/src/utils/clientFetchs"; 
 import useEditVilla from "@/src/hooks/useEditVilla";
 interface userObjData {
   facility: {};
@@ -228,8 +228,7 @@ const page = () => {
             text="‎‏تعویض و شارژ اقلام بهداشتی (شامل روبالشی, روتختی, ملحفه تمیز, کاغذ ‏توالت و صابون یا مایع دستشویی) موجب می شود تا میهمان شما احساس کند که در منزل خود حضور ‏دارد. این اقلام می باید پیش از ورود میهمان جدید تعویض یا شارژ شوند.‏"
           />
         </div>
-        {isPending && <Loader />}
-
+        {isPending && <Loader />} 
       </div>
     </StepLayout>
   );

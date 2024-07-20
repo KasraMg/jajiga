@@ -14,6 +14,8 @@ import Facilities from "@/src/components/templates/room/edit/facilities/Faciliti
 import Images from "@/src/components/templates/room/edit/images/Images";
 import Price from "@/src/components/templates/room/edit/price/Price";
 import Rules from "@/src/components/templates/room/edit/rules/Rules";
+import { getUser } from "@/src/utils/serverFetchs";
+import Hydrated from "@/src/providers/Hydrated";
 
 const Faq = () => {
   return (
@@ -24,7 +26,7 @@ const Faq = () => {
       />
       <Layout className="!z-10">
         <div className="mx-auto mb-10">
-          <Tabs defaultValue="images" className="w-full" dir="rtl">
+          <Tabs defaultValue="facilities" className="w-full" dir="rtl">
             <TabsList dir="rtl" className="relative bottom-[38px]">
               <TabsTrigger value="images">تصاویر</TabsTrigger>
               <TabsTrigger value="facilities">امکانات</TabsTrigger>
@@ -38,7 +40,9 @@ const Faq = () => {
               <Images />
             </TabsContent>
             <TabsContent value="facilities">
-              <Facilities />
+              <Hydrated queryKey={["server_step_6_items"]} queryFn={getUser}>
+                <Facilities />
+              </Hydrated>
             </TabsContent>
             <TabsContent value="baseInformation">
               <BaseInformation />

@@ -112,27 +112,8 @@ const Images = () => {
         className="w-full max-w-[380px] !relative !top-0"
         title="تصاویر اقامتگاه"
         text="تصاویر ارسالی جدید بعد از انتشار اقامتگاه در صف بررسی قرار می‌گیرد و پس از تایید محتوا و کیفیت توسط همکاران جاجیگا منتشر می‌شود."
-        />
-        
-    </section>
-
-    <section
-      style={{
-        transition: "transform 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955) 0s",
-      }}
-      className=" w-full z-50"
-    >
-      <div
-        className={` flex w-full gap-2 justify-between rounded-lg bg-[#00000099] px-1 py-1 `}
-      > 
-        <Button
-          variant="yellow" 
-          className={` px-2 py-2 rounded-md transition-colors hover:opacity-75 w-full justify-center`}
-        >  
-              ذخیره تغییرات
-        </Button>
-      </div>
-    </section>
+        /> 
+    </section> 
    </>
   );
 };
