@@ -2,25 +2,109 @@
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
 import { Button } from "@/src/components/shadcn/ui/button";
 import useCustomQuery from "@/src/hooks/useCustomQuery";
-import { fetchStep6Items } from "@/src/utils/fetch";
-import { useState } from "react";
-const Facilities = () => {
-  const { data, status } = useCustomQuery(["step_6_items"], fetchStep6Items);
-  const [facilitySelected, setFacilitySelected] = useState<any[]>([]);
-  const [moreFacility, setMoreFacility] = useState("");
-  const [disabelNextButton, setDisabelNextButton] = useState<boolean>(false);
-  const [showInput, setShowInput] = useState<boolean[]>(
-    new Array(data?.facility.length).fill(false),
-  );
-  const inputChangeHandler = (value: string, itemTitle: string) => {
-    const updatedFacilitySelected = facilitySelected.map((item) => {
-      if (item.title === itemTitle) {
-        return { ...item, description: value };
-      }
-      return item;
-    });
+import useEditVilla from "@/src/hooks/useEditVilla";
+import { authStore } from "@/src/stores/auth";
+import { fetchStep6Items } from "@/src/utils/clientFetchs";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import Loader from "@/src/components/modules/loader/Loader";
 
-    setFacilitySelected(updatedFacilitySelected);
+interface userObjData {
+  facility: {};
+  step: 9;
+  finished: true;
+}
+
+const Facilities = () => {
+  const { data, status } = useCustomQuery(
+    ["server_step_6_items"],
+    fetchStep6Items,
+  );
+  const { userData } = authStore((state) => state);
+  const params = useParams();
+  const [moreFacility, setMoreFacility] = useState("");
+  const [disabelNextButton, setDisableNextButton] = useState<boolean>(true);
+  const [facility, setFacility] = useState<any[]>([]);
+
+  const { mutate: mutation, isPending } = useEditVilla<userObjData>(
+    null,
+    "اطلاعات با موفقیت بروزرسانی شد",
+    params.id as any,
+  );
+
+  useEffect(() => {
+    if (status === "success" && userData) {
+      const newFacilities = data.facility.map((item: any) => ({
+        engtitle: item.engTitle,
+        title: item.title,
+        status: false,
+        description: "",
+        placeholder: item.placeHolder,
+      }));
+
+      const villa = userData.villas.find((villa) => villa._id === params.id);
+      const facilityData = villa?.facility?.facility || {};
+
+      const prevFacility = Object.keys(facilityData).map((key) => ({
+        title: key,
+        ...facilityData[key],
+      }));
+
+      const updatedFacilities = newFacilities.map((item: any) => {
+        const match = prevFacility.find((pf) => pf.title === item.engtitle);
+        return match
+          ? {
+              ...item,
+              status: match.status,
+              description: match.description || item.description,
+            }
+          : item;
+      });
+
+      setFacility(updatedFacilities);
+      setMoreFacility(villa?.facility?.facility?.moreFacility || "");
+    }
+  }, [status, data, userData]);
+
+  const handleInputChange = (value: boolean | string, itemTitle: string) => {
+    setDisableNextButton(false);
+    setFacility((prev) =>
+      prev.map((item) =>
+        item.title === itemTitle
+          ? typeof value === "boolean"
+            ? { ...item, status: value }
+            : { ...item, description: value }
+          : item,
+      ),
+    );
+  };
+
+  const convertArrayToObject = (arr: any[], includeDescription: boolean) =>
+    arr.reduce((acc, cur) => {
+      acc[cur.engtitle] = {
+        status: cur.status,
+        ...(includeDescription &&
+          cur.description && { description: cur.description }),
+      };
+      return acc;
+    }, {});
+
+  const submitHandler = () => {
+    const facilityResult = convertArrayToObject(facility, true);
+    const villa = userData?.villas.find((villa) => villa._id === params.id);
+    const data: userObjData = {
+      facility: {
+        facility: {
+          ...facilityResult,
+          ...(moreFacility && { moreFacility }),
+        },
+        sanitaryFacilities: villa?.facility?.sanitaryFacilities,
+      },
+      step: 9,
+      finished: true,
+    };
+    mutation(data);
+    setDisableNextButton(true);
   };
   return (
     <section className="flex w-full max-w-[1120px] justify-between gap-16">
@@ -31,65 +115,62 @@ const Facilities = () => {
             می‌توانید برای هر یک در کادر مربوطه توضیحات تکمیلی بنویسید. امکاناتی
             که در لیست نیست را در کادر فراهم شده در انتهای لیست درج کنید.
           </p>
-          {status === "success" &&
-            data?.facility.map(
-              (
-                data: {
-                  engTitle: string;
-                  title: string;
-                  id: string;
-                  placeHolder: string;
-                },
-                index: number,
-              ) => (
-                <div className="flex justify-between" key={index}>
-                  <div className="flex items-center gap-3">
-                    <input
-                      onClick={(event) => {
-                        const newShowInput = [...showInput];
-                        newShowInput[index] = !newShowInput[index];
-                        setShowInput(newShowInput);
-
-                        const updatedFacilitySelected = facilitySelected.map(
-                          (item) => {
-                            if (item.title === data.engTitle) {
-                              return { ...item, status: event.target.checked };
-                            }
-                            return item;
-                          },
-                        );
-
-                        setFacilitySelected(updatedFacilitySelected);
-                      }}
-                      style={{ boxShadow: "none" }}
-                      className="cursor-pointer rounded checked:bg-black"
-                      type="checkbox"
-                    />
-                    <label className="text-xs lg:!text-sm">{data.title}</label>
-                  </div>
-                  {showInput[index] && (
-                    <input
-                      placeholder={data.placeHolder}
-                      onChange={(event) =>
-                        inputChangeHandler(event.target.value, data.engTitle)
-                      }
-                      className="w-[65%] rounded-md border border-solid p-2 text-sm font-thin placeholder:text-xs placeholder:text-gray-500"
-                      type="text"
-                    />
-                  )}
+          {facility &&
+            facility.map((data, index: number) => (
+              <div className="flex justify-between" key={index}>
+                <div className="flex items-center gap-3">
+                  <input
+                    onClick={(event) =>
+                      handleInputChange(
+                        event.target.checked,
+                        facility[index].title,
+                      )
+                    }
+                    style={{ boxShadow: "none" }}
+                    checked={facility[index].status}
+                    className="cursor-pointer rounded checked:bg-black"
+                    type="checkbox"
+                  />
+                  <label className="text-xs lg:!text-sm">{data.title}</label>
                 </div>
-              ),
-            )}
+                {facility && facility[index].status == true && (
+                  <input
+                    placeholder={facility[index].placeholder}
+                    onChange={(event) =>
+                      handleInputChange(
+                        event.target.value,
+                        facility[index].title,
+                      )
+                    }
+                    className="w-[65%] rounded-md border border-solid p-2 text-sm font-thin placeholder:text-xs placeholder:text-gray-500"
+                    type="text"
+                  />
+                )}
+              </div>
+            ))}
           <div className="flex items-center justify-between">
             <label className="text-sm">سایر امکانات</label>
             <input
               placeholder={"سایر امکانات"}
               value={moreFacility}
-              onChange={(event) => setMoreFacility(event.target.value)}
+              onChange={(event) => {
+                setDisableNextButton(false);
+                setMoreFacility(event.target.value);
+              }}
               className="w-[65%] rounded-md border border-solid border-gray-400 p-2 text-sm placeholder:text-gray-500"
               type="text"
             />
           </div>
+
+          {!disabelNextButton && (
+            <Button
+              onClick={submitHandler}
+              variant="yellow"
+              className={`mx-auto !mt-10 block w-max justify-center rounded-md px-4 py-2 transition-colors hover:opacity-75`}
+            >
+              ذخیره تغییرات
+            </Button>
+          )}
         </div>
       </div>
       <StepperInfo
@@ -99,6 +180,7 @@ const Facilities = () => {
           بعنوان مثال بعد از افزودن «سیستم سرمایش»، وارد کنید: "دو عدد اسپیلت 18 هزار یکی در سالن و دیگری در اتاق خواب".
           ‎در صورتی که بعضی از امکانات اقامتگاه خود را در لیست نیافتید، آن موارد را ‏در کادر انتهای صفحه وارد کنید.`}
       />
+      {isPending && <Loader />}
     </section>
   );
 };

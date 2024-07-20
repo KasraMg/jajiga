@@ -1,11 +1,10 @@
 import "./globals.css";
 import QueryWrapper from "../utils/QueryWrapper";
 import localFont from "next/font/local";
-import Auth from "../utils/auth";
-import { baseUrl } from "../utils/utils";
-import Hydrated from "../providers/Hydrated";
-import { cookies } from "next/headers";
+import Auth from "../utils/auth"; 
+import Hydrated from "../providers/Hydrated"; 
 import { Toaster } from "@/src/components/shadcn/ui/toaster";
+import { getUser } from "../utils/serverFetchs";  
 
 const fonts = localFont({
   src: [
@@ -33,23 +32,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactElement;
 }>) {
-  const cookieStore = cookies();
-  const accessToken = cookieStore.get("AccessToken");
 
-  async function fetchUsers() {
-    const res = await fetch(`${baseUrl}/getMe`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-    return res.json();
-  }
+
+
 
   return (
     <html lang="en">
       <body className={`${fonts.variable}`}>
         <QueryWrapper>
-          <Hydrated queryKey={["auth"]} queryFn={fetchUsers}>
+          <Hydrated queryKey={["auth"]} queryFn={getUser}>
             <Auth />
           </Hydrated>
           {children}

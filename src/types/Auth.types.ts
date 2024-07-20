@@ -17,6 +17,7 @@ export interface userVillasObj {
   cover: string[];
   createdAt: string;
   finished: boolean;
+  facility:{},
   step: number;
   updatedAt: string;
   user: string;
