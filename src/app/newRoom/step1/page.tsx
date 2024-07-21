@@ -4,10 +4,10 @@ import StepLayout from "@/src/components/modules/stepLayout/StepLayout";
 import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
 import Textarea from "@/src/components/modules/textarea/Textarea";
-import useStateData from "@/src/hooks/useStateData"; 
-import { useEffect, useState } from "react"; 
-import Select from "react-select"; 
-import Loader from "@/src/components/modules/loader/Loader"; 
+import useStateData from "@/src/hooks/useStateData";
+import { useEffect, useState } from "react";
+import Select from "react-select";
+import Loader from "@/src/components/modules/loader/Loader";
 import useEditVilla from "@/src/hooks/useEditVilla";
 
 const stateOptions = useStateData();
@@ -28,12 +28,14 @@ const page = () => {
     mutate: mutation,
     responseData,
     isSuccess,
-    isPending
+    isPending,
   } = useEditVilla<userObjData>(
     "/newRoom/step2",
     "ویلا ساخته و اطلاعات ابتدایی با موفقیت بروزرسانی شد",
   );
- 
+
+  console.log(stateOptions);
+
   const [stateSelectedOption, setStateSelectedOption] = useState<{
     label: string;
     value: string[];

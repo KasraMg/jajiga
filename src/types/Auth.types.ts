@@ -14,10 +14,17 @@ export interface userVillasObj {
     city: string;
     address: string;
   };
+  aboutVilla: {
+    aboutVilla: string;
+    villaSpace: string;
+    villaType: string;
+    villaZone: string;
+  };
+  coordinates:{x:number,y:number}
   cover: string[];
   createdAt: string;
   finished: boolean;
-  facility:{},
+  facility: {};
   step: number;
   updatedAt: string;
   user: string;

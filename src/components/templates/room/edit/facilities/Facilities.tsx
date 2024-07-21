@@ -33,8 +33,10 @@ const Facilities = () => {
   );
 
   useEffect(() => {
-    if (status === "success" && userData) {
-      const newFacilities = data.facility.map((item: any) => ({
+    if (data.statusCode === 200 && userData && data) {
+      console.log(data);
+      
+      const newFacilities = data?.facility.map((item: any) => ({
         engtitle: item.engTitle,
         title: item.title,
         status: false,
