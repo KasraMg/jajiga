@@ -20,7 +20,15 @@ export interface userVillasObj {
     villaType: string;
     villaZone: string;
   };
-  coordinates:{x:number,y:number}
+  capacity: {
+    bedRoom: number;
+    buildingSize: string;
+    description: string;
+    fuundationSize: string;
+    maxCapacity: number;
+    normalCapacity: number;
+  };
+  coordinates: { x: number; y: number };
   cover: string[];
   createdAt: string;
   finished: boolean;

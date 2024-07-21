@@ -1,54 +1,112 @@
-"use client"
+"use client";
+import Loader from "@/src/components/modules/loader/Loader";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
 import Textarea from "@/src/components/modules/textarea/Textarea";
 import { Button } from "@/src/components/shadcn/ui/button";
+import useEditVilla from "@/src/hooks/useEditVilla";
+import { authStore } from "@/src/stores/auth";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-const Capacity = () => {
 
-    const [standardSpace, setStandardSpace] = useState<number>(1);
-    const [maximumSpace, setMaximumSpace] = useState<number>(1);
-    const [landSize, setLandSize] = useState<string>("");
-    const [areaSize, setAreaSize] = useState<string>("");
-    const [roomCount, setRoomCount] = useState<number>(0);
-    const [description, setDescription] = useState<string>("");
-  
-    useEffect(() => {
-      
-    }, [landSize, areaSize, description]);
-  
-    const incrementStandardHandler = () => {
-      setStandardSpace((prev) => prev + 1);
-      if (maximumSpace - 1 < standardSpace) {
-        setMaximumSpace((prev) => prev + 1);
-      }
-    };
-    const decrementStandardHandler = () => {
-      if (standardSpace !== 1) {
-        setStandardSpace((prev) => prev - 1);
-      }
-    };
-    const incrementMaximumHandler = () => {
+interface userObjData {
+  capacity: {};
+  step: 9;
+  finished: true;
+}
+
+const Capacity = () => {
+  const { userData } = authStore((state) => state);
+  const params = useParams();
+
+  const { mutate: mutation, isPending } = useEditVilla<userObjData>(
+    null,
+    "اطلاعات با موفقیت بروزرسانی شد",
+    params.id as any,
+  );
+
+  const [standardSpace, setStandardSpace] = useState<number>(1);
+  const [maximumSpace, setMaximumSpace] = useState<number>(1);
+  const [landSize, setLandSize] = useState<string>("");
+  const [areaSize, setAreaSize] = useState<string>("");
+  const [roomCount, setRoomCount] = useState<number>(0);
+  const [disabelNextButton, setDisableNextButton] = useState<boolean>(true);
+  const [description, setDescription] = useState<string>("");
+
+  const villa = userData?.villas.find((villa) => villa._id === params.id);
+
+  useEffect(() => {
+    if (villa) {
+      console.log(villa);
+      setStandardSpace(villa.capacity.normalCapacity as number);
+      setLandSize(villa.capacity.buildingSize as string);
+      setAreaSize(villa.capacity.fuundationSize as string);
+      setRoomCount(villa.capacity.bedRoom as number);
+      setMaximumSpace(villa.capacity.maxCapacity as number);
+      setDescription(villa.capacity.description as string);
+    }
+  }, [villa]);
+
+  useEffect(() => {}, [landSize, areaSize, description]);
+
+  const incrementStandardHandler = () => {
+    setDisableNextButton(false);
+    setStandardSpace((prev) => prev + 1);
+    if (maximumSpace - 1 < standardSpace) {
       setMaximumSpace((prev) => prev + 1);
+    }
+  };
+  const decrementStandardHandler = () => {
+    setDisableNextButton(false);
+
+    if (standardSpace !== 1) {
+      setStandardSpace((prev) => prev - 1);
+    }
+  };
+  const incrementMaximumHandler = () => {
+    setDisableNextButton(false);
+
+    setMaximumSpace((prev) => prev + 1);
+  };
+  const decrementMaximumHandler = () => {
+    setDisableNextButton(false);
+
+    if (maximumSpace !== 1 && maximumSpace !== standardSpace) {
+      setMaximumSpace((prev) => prev - 1);
+    }
+  };
+  const landSizeChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setDisableNextButton(false);
+    setLandSize(event.target.value);
+  };
+  const areaSizeChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setDisableNextButton(false);
+    setAreaSize(event.target.value);
+  };
+
+  const submitHandler = () => {
+    const data: userObjData = {
+      capacity: {
+        normalCapacity: standardSpace,
+        maxCapacity: maximumSpace,
+        buildingSize: landSize,
+        fuundationSize: areaSize,
+        bedRoom: roomCount,
+        description: description,
+      },
+      step: 9,
+      finished: true,
     };
-    const decrementMaximumHandler = () => {
-      if (maximumSpace !== 1 && maximumSpace !== standardSpace) {
-        setMaximumSpace((prev) => prev - 1);
-      }
-    };
-    const landSizeChangeHandler = (
-      event: React.ChangeEvent<HTMLInputElement>,
-    ) => {
-      setLandSize(event.target.value);
-    };
-    const areaSizeChangeHandler = (
-      event: React.ChangeEvent<HTMLInputElement>,
-    ) => {
-      setAreaSize(event.target.value);
-    };
-   
+    mutation(data);
+    setDisableNextButton(true);
+  };
+
   return (
     <section className="flex w-full max-w-[1120px] justify-between gap-16">
-      <div className="font-thin text-gray-700"> 
+      <div className="font-thin text-gray-700">
         <div className="w-full space-y-4">
           <div className="flex items-center justify-between pl-1">
             <p>ظرفیت استاندارد</p>
@@ -140,7 +198,9 @@ const Capacity = () => {
             <p>تعداد اتاق خواب</p>
             <div className="flex w-1/2 items-center justify-between">
               <p
-                onClick={() => setRoomCount((prev) => prev + 1)}
+                onClick={() => {
+                  setDisableNextButton(false)
+                  setRoomCount((prev) => prev + 1)}}
                 className="cursor-pointer text-2xl hover:text-gray-500"
               >
                 +
@@ -149,8 +209,10 @@ const Capacity = () => {
                 {roomCount == 0 ? "فاقد اتاق خواب" : roomCount + "   اتاق  "}
               </p>
               <p
-                onClick={() =>
-                  setRoomCount((prev) => prev == -1 && ((prev - 1) as any))
+                onClick={() =>{
+                  setDisableNextButton(false)
+                  setRoomCount((prev) => prev == -1 && ((prev - 1) as any)) 
+                }
                 }
                 className={`${roomCount == 0 && "!cursor-not-allowed text-gray-300"} mb-4 cursor-pointer text-2xl hover:text-gray-500`}
               >
@@ -158,13 +220,14 @@ const Capacity = () => {
               </p>
             </div>
           </div>
-          <div className="flex flex-col justify-between pb-20 lg:!flex-row border-t border-gray-300 pt-4">
+          <div className="flex flex-col justify-between border-t border-gray-300 pb-20 pt-4 lg:!flex-row">
             <p className="mb-3">توضیحات فضای خواب</p>
             <div className="w-full lg:!w-1/2">
               <Textarea
                 maxLength={250}
                 setValue={setDescription}
                 value={description}
+                buttonDisableFun={() => setDisableNextButton(false)}
               />
               <span className="mt-3 text-xs text-[#5f738c]">
                 در این قسمت می توانید توضیحات تکمیلی درباره امکانات و شرایط مهیا
@@ -173,6 +236,15 @@ const Capacity = () => {
             </div>
           </div>
         </div>
+        {!disabelNextButton && (
+          <Button
+            onClick={submitHandler}
+            variant="yellow"
+            className={`mx-auto !mt-10 block w-max justify-center rounded-md px-4 py-2 transition-colors hover:opacity-75`}
+          >
+            ذخیره تغییرات
+          </Button>
+        )}
       </div>
       <div>
         <StepperInfo
@@ -182,6 +254,7 @@ const Capacity = () => {
           حداکثر ظرفیت، حداکثر گنجایش اقامتگاه می‌باشد که بر اساس فضا، امکانات موجود و امکانات خواب تعیین می‌گردد."
         />
       </div>
+      {isPending && <Loader />}
     </section>
   );
 };
