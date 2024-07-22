@@ -31,6 +31,13 @@ export interface userVillasObj {
   coordinates: { x: number; y: number };
   cover: string[];
   createdAt: string;
+  rules: {
+    more: string;
+    music: boolean;
+    pet: boolean;
+    smoke: boolean;
+  };
+
   finished: boolean;
   facility: {};
   step: number;
