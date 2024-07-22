@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { getFromLocalStorage } from "@/src/utils/utils"; 
 import Loader from "@/src/components/modules/loader/Loader"; 
 import useEditVilla from "@/src/hooks/useEditVilla";
-
+ 
 interface userObjData {
   rules: {};
   step: 8;

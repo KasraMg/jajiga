@@ -44,9 +44,7 @@ const Capacity = () => {
       setMaximumSpace(villa.capacity.maxCapacity as number);
       setDescription(villa.capacity.description as string);
     }
-  }, [villa]);
-
-  useEffect(() => {}, [landSize, areaSize, description]);
+  }, [villa]); 
 
   const incrementStandardHandler = () => {
     setDisableNextButton(false);
