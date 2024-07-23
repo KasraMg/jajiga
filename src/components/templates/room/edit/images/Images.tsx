@@ -1,9 +1,31 @@
+"use client"
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
 import { Button } from "@/src/components/shadcn/ui/button";
+import { authStore } from "@/src/stores/auth";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import { BsCamera, BsTrash3 } from "react-icons/bs";
 import swal from "sweetalert";
-const Images = () => {
 
+interface userObjData {
+  rules: {};
+  step: 9;
+  finished: true;
+}
+ 
+const Images = () => {
+  const [disabelNextButton, setDisableNextButton] = useState<boolean>(true);
+  const [images, setImages] = useState<any>([]);
+  const { userData } = authStore((state) => state);
+  const params = useParams();
+
+  const villa = userData?.villas.find((villa) => villa._id === params.id);
+
+  useEffect(() => {
+    if (villa) {
+      console.log(villa); 
+    }
+  }, [villa]);
   const deleteImgHandler = (name: string) => {
   
   };
@@ -119,4 +141,4 @@ const Images = () => {
 };
 
 export default Images;
-//${disabelNextButton && "cursor-not-allowed pointer-events-none opacity-40 hover:!opacity-30"} ${disablelPrevButton && "cursor-not-allowed opacity-40 hover:!opacity-30"} 
+//${disabelNextButton && "cursor-not-allowed pointer-events-none opacity-40 hover:!opacity-30"} ${disablelPrevButton && "cursor-not-allowed opacity-40 hover:!opacity-30"}  

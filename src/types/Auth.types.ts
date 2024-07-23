@@ -37,7 +37,7 @@ export interface userVillasObj {
     pet: boolean;
     smoke: boolean;
   };
-
+  disable:boolean
   finished: boolean;
   facility: {};
   step: number;
