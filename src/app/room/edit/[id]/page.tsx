@@ -26,7 +26,7 @@ const Faq = () => {
       />
       <Layout className="!z-10">
         <div className="mx-auto mb-10">
-          <Tabs defaultValue="rules" className="w-full" dir="rtl">
+          <Tabs defaultValue="images" className="w-full" dir="rtl">
             <TabsList dir="rtl" className="relative bottom-[38px]">
               <TabsTrigger value="images">تصاویر</TabsTrigger>
               <TabsTrigger value="facilities">امکانات</TabsTrigger>
