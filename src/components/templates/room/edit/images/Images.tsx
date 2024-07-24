@@ -27,33 +27,18 @@ const Images = () => {
 
   useEffect(() => {
     if (villa) {
-      villa.cover.map((img) => {
-        setUserImages((prev: any) => [
-          ...prev,
-          {
-            name: `https://jajiga-backend.liara.run/villa/covers/${img}`,
-            url: `https://jajiga-backend.liara.run/villa/covers/${img}`,
-          },
-        ]);
-
-        setFinalyImages((prev: any) => [
-          ...prev,
-          {
-            name: `https://jajiga-backend.liara.run/villa/covers/${img}`,
-            url: `https://jajiga-backend.liara.run/villa/covers/${img}`,
-          },
-        ]);
-      });
+    const prevCovers=  villa.cover.map((img) => {
+      return {
+        name: `https://jajiga-backend.liara.run/villa/covers/${img}`,
+        url: `https://jajiga-backend.liara.run/villa/covers/${img}`,
+      }
+      })  
+        setUserImages(prevCovers); 
+        setFinalyImages(prevCovers);
+    
       console.log(villa);
     }
   }, [villa]);
-
-  useEffect(() => {
-    if (userimages) {
-      console.log(userimages);
-      console.log(finalyImages);
-    }
-  }, [userimages, finalyImages]);
 
   const deleteImgHandler = (name: string) => {
     const newImages = userimages.filter(
@@ -78,14 +63,14 @@ const Images = () => {
       if (event.target.files && event.target.files.length > 0) {
         let file = event.target.files[0];
         if (file.type === "image/png" || file.type === "image/jpeg") {
-          setDisableNextButton(false); 
+          setDisableNextButton(false);
           let reader = new FileReader();
           setFinalyImages((prev: any) => [...prev, file]);
           reader.onloadend = function () {
             let base64String = reader.result;
             setUserImages((prev: string) => [
               ...(prev as any),
-              { url: base64String, name: event.target.files[0].name},
+              { url: base64String, name: event.target.files[0].name },
             ]);
           };
           reader.readAsDataURL(file);
@@ -104,15 +89,21 @@ const Images = () => {
   const submitHandler = () => {
     setDisableNextButton(false);
     const formData = new FormData();
+
+    const urls = finalyImages
+      .filter((img: any) => img.url)  
+      .map((img: any) => img.url.slice(46))  
+      .join(";");  
+ 
+    if (urls) {
+      formData.append("oldPics", urls);
+    }
     finalyImages.map((img: any) => {
-      if (img.url) {
-        formData.append("cover", img.url);
-      } else {
+      if (!img.url) {
         formData.append("cover", img);
       }
-    });
-    formData.append("finished", "true");
-    
+    });  
+    formData.append("finished", "true"); 
     mutation(formData);
   };
   return (

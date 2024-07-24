@@ -104,7 +104,7 @@ const Capacity = () => {
 
   return (
     <section className="flex w-full max-w-[1120px] justify-between gap-16">
-      <div className="font-thin text-gray-700">
+      <div className="font-thin text-gray-700 w-full">
         <div className="w-full space-y-4">
           <div className="flex items-center justify-between pl-1">
             <p>ظرفیت استاندارد</p>
@@ -244,7 +244,7 @@ const Capacity = () => {
           </Button>
         )}
       </div>
-      <div>
+      <div className="md:block hidden">
         <StepperInfo
           className="w-full max-w-[380px]"
           title="ظرفیت استاندارد / ظرفیت حداکثر"

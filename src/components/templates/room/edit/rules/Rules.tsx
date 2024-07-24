@@ -59,7 +59,7 @@ const Rules = () => {
     setDisableNextButton(true);
   };
   return (
-    <section className="flex w-full max-w-[1120px] justify-between gap-16">
+    <section className="flex w-full max-w-[1120px] justify-between md:gap-16">
       <div className="font-thin text-gray-700">
         <strong className="text-sm font-extrabold">مقررات اقامتگاه :</strong>
         {villa && (

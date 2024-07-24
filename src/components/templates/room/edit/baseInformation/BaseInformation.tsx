@@ -169,7 +169,7 @@ const BaseInformation = () => {
                 setDisableNextButton(false);
               }}
               isClearable={true}
-              className="w-full md:w-[200px] lg:!w-full"
+              className="w-full  lg:!w-full"
               isRtl={true}
               isSearchable={true}
               options={stateSelectedOption as any}
@@ -188,7 +188,7 @@ const BaseInformation = () => {
                 setDisableNextButton(false);
               }}
               isClearable={true}
-              className="w-full md:w-[200px] lg:!w-full"
+              className="w-full  xl:!w-full"
               isRtl={true}
               isSearchable={true}
               options={citySelectedOption}
@@ -197,7 +197,7 @@ const BaseInformation = () => {
           )}
         </div>
         <div className="mb-20 flex flex-col justify-between md:!mb-4 md:flex-row">
-          <p className="min-w-[150px] whitespace-nowrap text-sm text-[#252a31]">
+          <p className="min-w-[150px] md:mb-0 mb-3 whitespace-nowrap text-sm text-[#252a31]">
             آدرس دقیق:
           </p>
           <div className="w-full">
@@ -255,7 +255,7 @@ const BaseInformation = () => {
           </Button>
         )}
       </div>
-      <div className="w-full max-w-[380px]">
+      <div className="w-full max-w-[380px] hidden md:block">
         <StepperInfo
           className="!relative !top-0 w-full max-w-[380px]"
           title="توضیحات تکمیلی درباره اقامتگاه"
