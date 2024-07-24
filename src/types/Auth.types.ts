@@ -37,6 +37,13 @@ export interface userVillasObj {
     pet: boolean;
     smoke: boolean;
   };
+  price:{
+    newYear:string
+    spring:priceDays
+    summer:priceDays
+    autumn:priceDays
+    winter:priceDays
+  }
   disable:boolean
   finished: boolean;
   facility: {};
@@ -47,6 +54,11 @@ export interface userVillasObj {
   _id: string;
 }
 
+interface priceDays {
+  midWeek:string
+  holidays:string
+  peakDays:string
+}
 export interface userObj {
   message: string;
   statusCode: number;
