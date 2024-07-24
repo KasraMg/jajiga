@@ -41,13 +41,10 @@ const Disable = () => {
       buttons: ["نه", "آره"],
     }).then((res) => { 
       const data: userObjData = {
-        disable: false,
+        disable: !disable,
         step: 9,
         finished: true,
-      };
-      console.log(data);
-      console.log(!disable);
-      
+      };  
       mutation(data);
     });
   };

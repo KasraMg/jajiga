@@ -97,7 +97,7 @@ const page = () => {
     }
   }, [images]);
   
-
+ 
   const deleteImgHandler = (name: string) => {
     const newImages = images.filter((imgFile: any) => imgFile.name !== name);
     setImages(newImages);
