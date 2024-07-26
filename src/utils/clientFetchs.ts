@@ -1,8 +1,9 @@
 import Cookies from "js-cookie";
 import { baseUrl } from "./utils";
-const accessToken = Cookies.get("AccessToken");
 
 export async function fetchStep6Items() {  
+const accessToken = Cookies.get("AccessToken");
+
   const res = await fetch(`${baseUrl}/villa/facility`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -12,6 +13,8 @@ export async function fetchStep6Items() {
 }
 
 export async function getUser() {  
+const accessToken = Cookies.get("AccessToken");
+
   const res = await fetch(`${baseUrl}/getMe`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,

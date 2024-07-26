@@ -27,10 +27,12 @@ import { FaRegCircleUser } from "react-icons/fa6";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { authStore } from "@/src/stores/auth";
 import Link from "next/link";
+import { AiOutlineLogout } from "react-icons/ai";
+import { useLogoutHandler } from "@/src/utils/auth";
 
 function Menu({ isSticky }: any) {
-  const { userData } = authStore((state) => state);
-
+  const { userData,login } = authStore((state) => state);
+  const logoutHandler = useLogoutHandler();
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -51,9 +53,9 @@ function Menu({ isSticky }: any) {
       >
         <SheetHeader>
           <div
-            className={`flex items-center ${!userData ? "" : ""} justify-end gap-5 px-4`}
+            className={`flex items-center ${!login ? "" : ""} justify-end gap-5 px-4`}
           >
-            {!userData ? (
+            {!userData && !login ? (
               <Link href={"/login"}>
                 <Button variant={"outlineMain"} size={"sm"}>
                   ورود / ثبت نام
@@ -62,7 +64,7 @@ function Menu({ isSticky }: any) {
             ) : (
               <div className="flex flex-col gap-[5px] text-right text-sm font-thin">
                 <p>
-                  {userData.user.firstName} {userData.user.lastName}
+                  {userData?.user.firstName} {userData?.user.lastName}
                 </p>
                 <Link className="text-[10px]" href={"/profile"}>
                   ویرایش حساب کاربری
@@ -105,7 +107,7 @@ function Menu({ isSticky }: any) {
               <GoHome className="text-xl" />
               <span className="mt-1 text-sm">صفحه اصلی</span>
             </Link>
-            {userData && (
+            {login && (
               <>
                 <Link
                   href="/wishes"
@@ -163,6 +165,12 @@ function Menu({ isSticky }: any) {
               <TbInfoCircle className="text-xl" />
               <span className="mt-1 text-sm">درباره ما</span>
             </Link>
+            {login && (
+              <li onClick={logoutHandler} className="font-vazir flex cursor-pointer flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]">
+                <AiOutlineLogout className="text-xl" />
+                <span className="mt-1 text-sm">خروج</span>
+              </li>
+            )}
           </ul>
         </div>
         <div className="absolute bottom-0 left-0 flex w-full flex-row-reverse justify-around rounded-t-3xl bg-[#c1c1c175] px-2 py-3 text-xl">

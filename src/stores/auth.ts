@@ -40,14 +40,18 @@ import { userObj } from "../types/Auth.types";
 
 export type State = { 
   userData: userObj | null;
+  login:boolean
 };
 export type Action = { 
   setUserData: (val: userObj) => void;
+  setLogin: (val: boolean) => void;
 };
 
 export const authStore = create<State & Action>()(
   devtools((set) => ({ 
-    userData: null, 
+  login:false,
+  userData: null, 
     setUserData: (val) => set(() => ({ userData: val }), false, "setUserData"), 
+    setLogin: (val) => set(() => ({ login: val }), false, "setLogin"), 
   })),
 );

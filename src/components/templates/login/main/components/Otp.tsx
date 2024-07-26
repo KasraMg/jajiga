@@ -72,21 +72,23 @@ const Otp = ({
       }).then((res) => res.json());
     },
     onSuccess: (data) => {
+
       if (data.statusCode === 200) {
+        Cookies.set("RefreshToken", data.RefreshToken, {
+          expires: 9999999,
+          path: "",
+        });
+        Cookies.set("AccessToken", data.accessToken, {
+          expires: 9999999,
+          path: "",
+        });
+        queryClient.invalidateQueries({ queryKey: ["auth"] });
         swal({
           title: "با موفقیت ثبت نام شدید",
           icon: "success",
           buttons: [false, "حله"],
         }).then(() => {
-          Cookies.set("RefreshToken", data.RefreshToken, {
-            expires: 9999999,
-            path: "",
-          });
-          Cookies.set("AccessToken", data.accessToken, {
-            expires: 9999999,
-            path: "",
-          });
-          queryClient.invalidateQueries({ queryKey: ["auth"] });
+ 
           router.replace("/dashboard");
           localStorage.clear();
         });
@@ -145,21 +147,22 @@ const Otp = ({
     },
     onSuccess: (data) => {
       if (data.statusCode === 200) {
+        Cookies.set("RefreshToken", data.RefreshToken, {
+          expires: 9999999,
+          path: "",
+        });
+        Cookies.set("AccessToken", data.accessToken, {
+          expires: 9999999,
+          path: "",
+        });
+        queryClient.invalidateQueries({ queryKey: ["auth"] });
+
         swal({
           title: "با موفقیت ثبت نام شدید",
           icon: "success",
           buttons: [false, "حله"],
         }).then(() => {
-          Cookies.set("RefreshToken", data.RefreshToken, {
-            expires: 9999999,
-            path: "",
-          });
-          Cookies.set("AccessToken", data.accessToken, {
-            expires: 9999999,
-            path: "",
-          });
-          queryClient.invalidateQueries({ queryKey: ["auth"] });
-          router.replace("/dashboard");
+        router.replace("/dashboard");
 
           // localStorage.clear();
         });
