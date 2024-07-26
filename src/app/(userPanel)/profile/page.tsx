@@ -4,7 +4,10 @@ import { Button } from "@/src/components/shadcn/ui/button";
 import Container from "@/src/components/modules/container/Container";
 import Image from "next/image";
 import Box from "@/src/components/templates/userPanel/profile/Box";
+import ChangePassword from "@/src/components/templates/userPanel/profile/components/ChangePassword";
+ 
 const Profile = () => {
+ 
   return (
     <Container disableFooter={true}>
       <Breadcrumb className="!pb-[70px]" route={"حساب کاربری"} />
@@ -31,9 +34,7 @@ const Profile = () => {
             <Box />
             <Box />
           </div>
-          <Button size={"sm"} className="my-5 block bg-gray-100 text-black">
-            ﺗﻐﯿﯿﺮ رمزعبور
-          </Button>
+          <ChangePassword />
           <Button
             size={"sm"}
             className="border-2 border-solid border-red-500 text-red-500"

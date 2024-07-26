@@ -1,10 +1,6 @@
 import Loader from "@/src/components/modules/loader/Loader";
 import { Button } from "@/src/components/shadcn/ui/button";
-import {
-  baseUrl,
-  getFromLocalStorage,
-  saveIntoCookies,
-} from "@/src/utils/utils";
+import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

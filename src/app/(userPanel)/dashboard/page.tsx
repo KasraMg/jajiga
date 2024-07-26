@@ -1,3 +1,4 @@
+"use client"
 import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import Container from "@/src/components/modules/container/Container";
 import Link from "next/link";
@@ -10,7 +11,9 @@ import Image from "next/image";
 import { Button } from "@/src/components/shadcn/ui/button";
 import { IoNotificationsOutline } from "react-icons/io5"; 
 import Rooms from "@/src/components/templates/userPanel/dashboard/Rooms";
+import { useLogoutHandler } from "@/src/utils/auth";
 const Dashboard = () => {
+  const logoutHandler = useLogoutHandler();
 
   return (
     <Container disableFooter={true}>
@@ -55,7 +58,9 @@ const Dashboard = () => {
               <RiUpload2Line className="text-2xl" />
               <p>اقامتگاه ها</p>
             </Link>
-            <div className="mt-5 flex justify-start gap-2">
+            <div 
+            onClick={()=>logoutHandler()}
+             className="mt-5 flex justify-start gap-2 cursor-pointer">
               <AiOutlineLogout className="text-2xl" />
               <p>خروج</p>
             </div>

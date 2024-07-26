@@ -13,7 +13,7 @@ const Navbar = ({ navbarContainer }: any) => {
     route.length > 2 ? true : false,
   );
 
-  const { userData } = authStore((state) => state);
+  const { userData,login } = authStore((state) => state);
  
   useEffect(() => {
     window?.addEventListener("scroll", () => {
@@ -175,7 +175,7 @@ const Navbar = ({ navbarContainer }: any) => {
                   isSticky ? "text-black" : "text-white"
                 } font-vazir hidden flex-row-reverse gap-8 font-medium md:!flex`}
               >
-                {!userData ? (
+                {!login ? (
                   <Link href={"/login"}>ورود / ثبت نام</Link>
                 ) : (
                   <>

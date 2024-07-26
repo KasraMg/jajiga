@@ -1,37 +1,44 @@
-// import { useMutation, useQueryClient } from "@tanstack/react-query";
-// import { baseUrl } from "../utils/utils";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { baseUrl } from "../utils/utils";
+import Cookies from "js-cookie";
+import { toast } from "../components/shadcn/ui/use-toast";
+const usePostData = <T extends object>(
+  url: string,
+  successMsg: string,
+  put?: boolean,
+  formData?: boolean,
+) => {
+  const accessToken = Cookies.get("AccessToken");
+  const queryClient = useQueryClient();
 
-// interface PostDataProps {
-//   course: any;
-//   url: string;
-// }
+  const { mutate, isSuccess, isPending,isError } = useMutation({
+    mutationFn: async (data: T) => {
+      const headers: HeadersInit = {
+        Authorization: `Bearer ${accessToken}`,
+      };
+      if (!formData) {
+        headers["Content-Type"] = "application/json";
+      }
+      return await fetch(`${baseUrl}${url}`, {
+        method: !put ? "POST" : "PUT",
+        headers,
+        credentials: "include",
+        body: formData ? (data as any) : JSON.stringify(data),
+      }).then((res) => res.json());
+    },
+    onSuccess: (data) => {
+      console.log(data);
+      if (data.statusCode === 200) {
+        toast({
+          variant: "success",
+          title: successMsg,
+        });
+        // queryClient.invalidateQueries({ queryKey: ["auth"] });
+      }
+    },
+  });
 
-// export const usePostData = ({ course, url }: PostDataProps) => {
-//   const queryClient = useQueryClient();
+  return { mutate, isSuccess, isPending,isError };
+};
 
-//   const mutation = useMutation(
-//     async () => {
-//       const response = await fetch(`${baseUrl}${url}`, {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(course),
-//       });
- 
-//       return response.json();
-//     },
-//     {
-//       onSuccess: (data: any) => {
-//         console.log("Data posted successfully:", data);
-//         // هر نوع عملیات اضافی که بعد از موفقیت لازم است، مانند به‌روز رسانی کش
-//         // queryClient.invalidateQueries("some-query-key"); در صورت نیاز به بروز رسانی کوئری‌ها
-//       },
-//       onError: (error: Error) => {
-//         console.error("Error posting data:", error);
-//       },
-//     },
-//   );
-
-//   return mutation;
-// };
+export default usePostData;
