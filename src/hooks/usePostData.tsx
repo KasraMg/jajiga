@@ -4,14 +4,15 @@ import Cookies from "js-cookie";
 import { toast } from "../components/shadcn/ui/use-toast";
 const usePostData = <T extends object>(
   url: string,
-  successMsg: string,
+  successMsg: string | null,
   put?: boolean,
+  successFunc?: (data: any) => void,
   formData?: boolean,
 ) => {
   const accessToken = Cookies.get("AccessToken");
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient(); 
 
-  const { mutate, isSuccess, isPending,isError } = useMutation({
+  const { mutate, isSuccess, isPending, isError } = useMutation({
     mutationFn: async (data: T) => {
       const headers: HeadersInit = {
         Authorization: `Bearer ${accessToken}`,
@@ -28,17 +29,19 @@ const usePostData = <T extends object>(
     },
     onSuccess: (data) => {
       console.log(data);
-      if (data.statusCode === 200) {
+      if (successFunc) {  
+        successFunc(data);
+      }
+      if (successMsg && data.statusCode === 200) {
         toast({
           variant: "success",
           title: successMsg,
         });
-        // queryClient.invalidateQueries({ queryKey: ["auth"] });
       }
     },
   });
 
-  return { mutate, isSuccess, isPending,isError };
+  return { mutate, isSuccess, isPending, isError };
 };
 
 export default usePostData;
