@@ -22,7 +22,7 @@ const Password = ({
 
   const inputChangeHandler = (value: string) => {
     setPassword(value);
-    if (/^[a-zA-Z0-9]{8,999}$/.test(value)) {
+    if (/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9.@$-_#]{8,}$/.test(value)) {
       setError(false);
     } else {
       setError(true);

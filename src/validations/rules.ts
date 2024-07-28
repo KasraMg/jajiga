@@ -31,7 +31,7 @@ export let registerSchema = Yup.object().shape({
 
   password: Yup.string()
     .matches(
-      /^[a-zA-Z0-9]{8,999}$/,
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9.@$-_#]{8,}$/,
       "رمز عبور باید شامل حروف بزرگ و کوچک انگلیسی و اعداد باشد و حداقل 8 حرف داشته باشد",
     )
     .required("لطفا رمز عبور خودتون رو وارد کنید"),
@@ -49,14 +49,14 @@ export let registerSchema = Yup.object().shape({
 export let changePasswordSchema = Yup.object().shape({
   currentPassword: Yup.string()
     .matches(
-      /^[a-zA-Z0-9]{8,999}$/,
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9.@$-_#]{8,}$/,
       "رمز عبور باید شامل حروف بزرگ و کوچک انگلیسی و اعداد باشد و حداقل 8 حرف داشته باشد",
     )
     .required("لطفا رمز عبور فعلی خودتون رو وارد کنید"),
 
   newPassword: Yup.string()
     .matches( 
-      /^[a-zA-Z0-9]{8,999}$/,
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9.@$-_#]{8,}$/,
       "رمز عبور باید شامل حروف بزرگ و کوچک انگلیسی و اعداد باشد و حداقل 8 حرف داشته باشد",
     )
     .required("لطفا رمز عبور جدید رو وارد کنید"),

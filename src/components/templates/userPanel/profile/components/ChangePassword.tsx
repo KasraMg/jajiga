@@ -1,13 +1,15 @@
 "use client";
+import Loader from "@/src/components/modules/loader/Loader";
 import { Button } from "@/src/components/shadcn/ui/button";
 import {
   Dialog,
-  DialogContent, 
+  DialogContent,
   DialogTrigger,
 } from "@/src/components/shadcn/ui/dialog";
+import { toast } from "@/src/components/shadcn/ui/use-toast";
 import usePostData from "@/src/hooks/usePostData";
 import { changePasswordSchema } from "@/src/validations/rules";
-import {  useFormik } from "formik";
+import { useFormik } from "formik";
 import { useState, useEffect } from "react";
 import { LuEye } from "react-icons/lu";
 
@@ -17,6 +19,26 @@ interface newPasswordData {
   confirmPassword?: string;
 }
 const ChangePassword = () => {
+  const successFunc = (data: { statusCode: number }) => {
+    if (data.statusCode === 200) {
+      formHandler.resetForm()
+      toast({
+        variant: "success",
+        title: "رمز عبور با موفقیت بروزرسانی شد",
+      });
+    } else if (data.statusCode === 401) {
+      toast({
+        variant: "danger",
+        title: "رمز عبور فعلی شما اشتباه است",
+      });
+    }else if (data.statusCode === 402) {
+      toast({
+        variant: "danger",
+        title: "این رمز قبلا ست شده و نیازه یک رمز جدید وارد کنید",
+      });
+    }
+  };
+
   const {
     mutate: mutation,
     isPending,
@@ -24,17 +46,13 @@ const ChangePassword = () => {
     isSuccess,
   } = usePostData<newPasswordData>(
     "/user/changePassword",
-    "رمز عبور با موفقیت بروزرسانی شد",
+    null,
     true,
+    successFunc,
   );
   const [showNewPass, setShowNewPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
- 
-  useEffect(() => {
-    console.log(isError);
-    console.log(isSuccess);
-  }, [isSuccess, isError]);
-
+  
   const formHandler = useFormik({
     initialValues: {
       currentPassword: "",
@@ -129,9 +147,68 @@ const ChangePassword = () => {
         <Button
           onClick={(event) => submitHandler(event)}
           variant={"main"}
-          className="mx-auto my-3 block"
+          className="mx-auto my-3 block h-[36px] w-[90px]"
         >
-          ﺗﻐﯿﯿﺮ رمزعبور
+          {isPending ? (
+            <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+              <circle
+                fill="#FFFFFF"
+                stroke="#FFFFFF"
+                strokeWidth="15"
+                r="15"
+                cx="40"
+                cy="100"
+              >
+                <animate
+                  attributeName="opacity"
+                  calcMode="spline"
+                  dur="2"
+                  values="1;0;1;"
+                  keySplines=".5 0 .5 1;.5 0 .5 1"
+                  repeatCount="indefinite"
+                  begin="-.4"
+                ></animate>
+              </circle>
+              <circle
+                fill="#FFFFFF"
+                stroke="#FFFFFF"
+                strokeWidth="15"
+                r="15"
+                cx="100"
+                cy="100"
+              >
+                <animate
+                  attributeName="opacity"
+                  calcMode="spline"
+                  dur="2"
+                  values="1;0;1;"
+                  keySplines=".5 0 .5 1;.5 0 .5 1"
+                  repeatCount="indefinite"
+                  begin="-.2"
+                ></animate>
+              </circle>
+              <circle
+                fill="#FFFFFF"
+                stroke="#FFFFFF"
+                strokeWidth="15"
+                r="15"
+                cx="160"
+                cy="100"
+              >
+                <animate
+                  attributeName="opacity"
+                  calcMode="spline"
+                  dur="2"
+                  values="1;0;1;"
+                  keySplines=".5 0 .5 1;.5 0 .5 1"
+                  repeatCount="indefinite"
+                  begin="0"
+                ></animate>
+              </circle>
+            </svg>
+          ) : (
+            "ﺗﻐﯿﯿﺮ رمزعبور"
+          )}
         </Button>
       </DialogContent>
     </Dialog>

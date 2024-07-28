@@ -3,6 +3,9 @@ export interface userInfoObj {
   firstName: string;
   lastName: string;
   password: string;
+  avatar:any;
+  gender:string;
+  aboutMe:string;
   phone: string;
   refreshToken: string;
   role: string;
