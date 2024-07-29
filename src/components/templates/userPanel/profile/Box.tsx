@@ -11,6 +11,7 @@ import { MdOutlineEdit } from "react-icons/md";
 import { Button } from "@/src/components/shadcn/ui/button";
 import usePostData from "@/src/hooks/usePostData";
 import { userInfoObj } from "@/src/types/Auth.types";
+import { toast } from "@/src/components/shadcn/ui/use-toast";
 
 interface BoxProps {
   type: string;
@@ -42,6 +43,16 @@ const Box: FC<BoxProps> = ({
   const [error, setError] = useState(false);
   const [disabled, setdisabled] = useState(true);
 
+  const successFunc = (data: { statusCode: number }) => {
+    if (data.statusCode === 200) {
+      toast({
+        variant: "success",
+        title: "اطلاعات با موفقیت بروزرسانی شد",
+      });
+      setOpen(false);
+    }
+  };
+
   const inputChangeHandler = (value: string, setHandler: any) => {
     setdisabled(false);
     if (type !== "radio") {
@@ -61,10 +72,15 @@ const Box: FC<BoxProps> = ({
     }
   };
 
-  const { mutate: mutation, isPending } = usePostData<userInfoObj>(
+  const {
+    mutate: mutation,
+    isPending,
+    isSuccess,
+  } = usePostData<userInfoObj>(
     "/user/edit",
-    "اطلاعات با موفقیت بروزرسانی شد",
+    null,
     true,
+    successFunc
   );
 
   const submitHandler = () => {
@@ -76,30 +92,29 @@ const Box: FC<BoxProps> = ({
         },
         {},
       );
-      console.log(data);
-
-      mutation(data);
+      mutation(data); 
     } else {
       if (type === "radio") {
         const data = {
           [requestBody]: value === "مرد" ? "male" : "female",
         };
-      mutation(data as any); 
+        mutation(data as any); 
       } else {
         const data = {
-          [requestBody]: value ,
+          [requestBody]: value,
         };
         mutation(data as any); 
       }
     }
   };
+  const [open, setOpen] = useState(false);
 
   return (
     <>
       <section>
         <div className="mt-4 flex items-center justify-between">
           <p>{title}</p>
-          <Dialog>
+          <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>
               <MdOutlineEdit className="cursor-pointer" />
             </DialogTrigger>
@@ -131,6 +146,9 @@ const Box: FC<BoxProps> = ({
                         name={type == "radio" ? "radio" : title}
                         className={`${type == "radio" ? "mt-1 w-max" : "w-full"} rounded-md border border-gray-300 p-2 text-sm font-thin outline-0`}
                         type={type}
+                        checked={
+                          options && value === options[index] ? true : false
+                        }
                         value={
                           values ? values[index] : options && options[index]
                         }
@@ -153,7 +171,9 @@ const Box: FC<BoxProps> = ({
               )}
 
               {error && (
-                <span className="mt-2 text-xs text-red-600">{errorText}</span>
+                <span className="mt-2 text-center text-xs text-red-600">
+                  {errorText}
+                </span>
               )}
 
               <Button

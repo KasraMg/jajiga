@@ -7,6 +7,7 @@ export interface userInfoObj {
   gender:string;
   aboutMe:string;
   phone: string;
+  email: string;
   refreshToken: string;
   role: string;
   updatedAt: string;

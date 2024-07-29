@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { baseUrl } from "../utils/utils";
 import Cookies from "js-cookie";
 import { toast } from "../components/shadcn/ui/use-toast";
@@ -10,8 +10,7 @@ const usePostData = <T extends object>(
   formData?: boolean,
 ) => {
   const accessToken = Cookies.get("AccessToken");
-  const queryClient = useQueryClient(); 
-
+ 
   const { mutate, isSuccess, isPending, isError } = useMutation({
     mutationFn: async (data: T) => {
       const headers: HeadersInit = {
