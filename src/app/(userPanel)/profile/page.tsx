@@ -8,6 +8,7 @@ import Box from "@/src/components/templates/userPanel/profile/Box";
 import ChangePassword from "@/src/components/templates/userPanel/profile/components/ChangePassword";
 import { useEffect, useState } from "react";
 import { authStore } from "@/src/stores/auth";
+import TwoStepBox from "@/src/components/templates/userPanel/profile/twoStepBox";
 
 const Profile = () => {
   const { userData } = authStore((state) => state);
@@ -29,7 +30,9 @@ const Profile = () => {
           : "زن"
         : "این فیلد تکمیل نشده است",
     );
-    setEmail("این فیلد تکمیل نشده است");
+    setEmail( userData?.user.email
+      ? userData?.user.email
+      : "این فیلد تکمیل نشده است");
     setAbout(
       userData?.user.aboutMe
         ? userData?.user.aboutMe
@@ -40,7 +43,6 @@ const Profile = () => {
 
   const profileChangeHandler = (event) => {
     console.log(event);
-    
   };
   return (
     <Container disableFooter={true}>
@@ -55,16 +57,16 @@ const Profile = () => {
               alt="profile"
               src="/images/profile.jpg"
             />
-            <span className="absolute bottom-1 -right-2 pl-[20px] h-7 w-7 rounded-full bg-customYellow px-[10px] pb-[.1rem] pt-[.2rem]">
+            <span className="absolute -right-2 bottom-1 h-7 w-7 rounded-full bg-customYellow px-[10px] pb-[.1rem] pl-[20px] pt-[.2rem]">
               +
               <input
                 type="file"
                 onChange={(event) => profileChangeHandler(event)}
-                className="h-full w-full opacity-0 absolute right-0 top-0 cursor-pointer"
+                className="absolute right-0 top-0 h-full w-full cursor-pointer opacity-0"
               />
             </span>
           </div>
-          <div className="grid grid-cols-[auto] gap-5 border-t border-solid border-[#00000031] px-2 pt-4 md:!px-0 lg:!grid-cols-[auto,auto]">
+          <div className="grid grid-cols-[auto] gap-5 border-t border-solid border-[#00000031] px-2 pt-4 md:!px-0 lg:!grid-cols-[1fr,1fr]">
             <Box
               setValues={[setUserName, setUserFamily]}
               values={[userName, userFamily]}
@@ -75,22 +77,24 @@ const Profile = () => {
               regex={/^[آ-یپچژگ\s]{3,15}$/}
               errorText="نام و نام خانوادگی باید فارسی، و حداقل 3 و حداکثر 15 حرف داشته باشد"
             />
-            <Box
+            <TwoStepBox
               setValue={setPhoneNumber}
               value={phoneNumber}
               type="number"
               title="شماره موبایل"
-              regex={/^[آ-یپچژگ\s]{3,15}$/}
-              errorText="نام و نام خانوادگی باید فارسی، و حداقل 3 و حداکثر 15 حرف داشته باشد"
-            />
-            <Box
+              requestBody="phone"
+              regex={/((0?9)|(\+?989))\d{2}\W?\d{3}\W?\d{4}/}
+              errorText="شماره موبایل نامعتبر است"
+            /> 
+            <TwoStepBox
               setValue={setEmail}
               value={email}
-              type="input"
-              title="آدرس ایمیل"
-              regex={/^[آ-یپچژگ\s]{3,15}$/}
-              errorText="نام و نام خانوادگی باید فارسی، و حداقل 3 و حداکثر 15 حرف داشته باشد"
-            />
+              type="email"
+              title="ایمیل"
+              requestBody="email"
+              regex={/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/}
+              errorText="ایمیل نامعتبر است"
+            />  
             <Box
               setValue={setGender}
               value={gender}
