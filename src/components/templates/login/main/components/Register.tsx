@@ -1,16 +1,15 @@
 import Loader from "@/src/components/modules/loader/Loader";
 import { Button } from "@/src/components/shadcn/ui/button";
-import {
-  baseUrl,
+import { toast } from "@/src/components/shadcn/ui/use-toast";
+import usePostData from "@/src/hooks/usePostData";
+import { 
   getFromLocalStorage,
   saveIntoLocalStorage,
 } from "@/src/utils/utils";
-import { registerSchema } from "@/src/validations/rules";
-import { useMutation } from "@tanstack/react-query";
+import { registerSchema } from "@/src/validations/rules"; 
 import { useFormik } from "formik"; 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { LuEye } from "react-icons/lu";
-import swal from "sweetalert";
 
 interface formValues {
   firstName: string;
@@ -24,6 +23,28 @@ const Register = ({
 }: {
   setStep: React.Dispatch<React.SetStateAction<string>>;
 }) => {
+  const successFunc = (data: {
+    statusCode: number; 
+  }) => {
+
+    if (data.statusCode === 200) {
+      toast({
+        variant: "success",
+        title: "اطلاعات با موفقیت ثبت شد",
+      });
+      setStep("otp");
+      saveIntoLocalStorage("registerUserData", formHandler.values);
+      formHandler.resetForm();
+    }else {
+      toast({
+        variant: "danger",
+        title: "با عرض پوزش لطفا مجدد مراحل رو طی کنید",
+      });
+      localStorage.clear();
+      location.reload();
+    } 
+  };
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false); 
   const phoneNumber = getFromLocalStorage("otpRegisterPhoneNumber");
@@ -36,39 +57,19 @@ const Register = ({
       phone: phoneNumber,
     },
     onSubmit: (values: formValues) => { 
-      mutation.mutate(values);
+      mutation(values as any);
     },
     validationSchema: registerSchema,
   });
 
-  const mutation = useMutation({
-    mutationFn: async (values: formValues) => {
-      return await fetch(`${baseUrl}/auth/sendCode`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      }).then((res) => res.json());
-    },
-    onSuccess: (data) => { 
-      if (data.statusCode === 200) {
-        setStep("otp");
-        saveIntoLocalStorage("registerUserData", formHandler.values);
-        formHandler.resetForm();
-      }else {
-        swal({
-          title: "با عرض پوزش لطفا مجدد مراحل رو طی کنید",
-          icon: "error",
-          buttons: [false, "حله"],
-        }).then(() => {
-          localStorage.clear();
-          location.reload();
-        });
-      }
-    },
-  });
+  const { mutate: mutation, isPending } = usePostData<{ values: formValues }>(
+    "/auth/sendCode",
+    null,
+    false,
+    successFunc,
+  );
 
+  
   const submitHandler = (event: React.FormEvent) => {
     event.preventDefault(); 
     formHandler.handleSubmit();
@@ -77,7 +78,7 @@ const Register = ({
   return (
     <form className="w-full md:!w-[350px]">
       <div className="flex items-center justify-between">
-        <p dir="ltr">+989046417084</p>
+      <p dir="ltr">+98{phoneNumber?.slice(1, 11)}</p> 
         <Button
           className="!rounded-sm !px-4"
           onClick={() => setStep("login")}
@@ -168,7 +169,7 @@ const Register = ({
       >
         ثبت نام
       </Button>
-      {mutation.isPending && <Loader enableOverlay={true} />}
+      {isPending && <Loader enableOverlay={true} />}
     </form>
   );
 };

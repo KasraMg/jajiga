@@ -1,15 +1,14 @@
 import Loader from "@/src/components/modules/loader/Loader";
 import { Button } from "@/src/components/shadcn/ui/button";
-// import { usePostData } from "@/src/hooks/usePostData";
+import { toast } from "@/src/components/shadcn/ui/use-toast";
+import usePostData from "@/src/hooks/usePostData";
 import {
   baseUrl,
   getFromLocalStorage,
   saveIntoLocalStorage,
-} from "@/src/utils/utils";
-import { useMutation, useQuery } from "@tanstack/react-query";
+} from "@/src/utils/utils"; 
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import swal from "sweetalert";
+import { useEffect, useState } from "react"; 
 const Login = ({
   setStep,
 }: {
@@ -18,39 +17,36 @@ const Login = ({
   const [regexError, setRegextError] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
 
-  const mutation = useMutation({
-    mutationFn: async () => {
-      return await fetch(`${baseUrl}/signup`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ phone: phoneNumber }),
-      }).then((res) => res.json());
-    },
-    onSuccess: (data) => { 
-      if (data.statusCode === 200) {
-        saveIntoLocalStorage("otpRegisterPhoneNumber", phoneNumber);
-        setStep("register"); 
-      } else if (data.statusCode === 411) {
-        saveIntoLocalStorage("otpLoginPhoneNumber", phoneNumber);
-        setStep("otp");
-      } else if (data.statusCode === 409) {
-        swal({
-          title: "این شماره قادر به ورود به سایت نیست",
-          icon: "error",
-          buttons: [false, "حله"],
-        });
-      }
-    },
-  });
+  const successFunc = (data: { statusCode: number }) => {
+    if (data.statusCode === 200) {
+      saveIntoLocalStorage("otpRegisterPhoneNumber", phoneNumber);
+      setStep("register");
+      localStorage.removeItem('otpLoginPhoneNumber') 
+    } else if (data.statusCode === 411) {
+      saveIntoLocalStorage("otpLoginPhoneNumber", phoneNumber);
+      localStorage.removeItem('otpRegisterPhoneNumber')
+      setStep("otp");
+    } else if (data.statusCode === 409) {
+      toast({
+        variant: "danger",
+        title: "این شماره قادر به ورود به سایت نیست",
+      });
+    }
+  };
+  
+  const { mutate: mutation, isPending } = usePostData<{ phone: string }>(
+    "/signup",
+    null,
+    false,
+    successFunc,
+  );
 
   const submitHandler = () => {
     const phoneRegex = RegExp(/^(09)[0-9]{9}$/);
     const phoneRegexResult = phoneRegex.test(phoneNumber);
     if (phoneRegexResult) {
       setRegextError(false);
-      mutation.mutate();
+      mutation({ phone: phoneNumber });
     } else setRegextError(true);
   };
 
@@ -103,7 +99,7 @@ const Login = ({
       >
         قوانین و مقررات
       </Link>
-      {mutation.isPending && <Loader enableOverlay={true}  />}
+      {isPending && <Loader enableOverlay={true} />}
     </div>
   );
 };

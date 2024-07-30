@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  images: {
+    domains: ["jajiga-backend.liara.run"],
+  },  
+};
 
-module.exports = nextConfig
-                                                                       
+module.exports = nextConfig;

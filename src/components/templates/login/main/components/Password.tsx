@@ -1,20 +1,58 @@
 import Loader from "@/src/components/modules/loader/Loader";
 import { Button } from "@/src/components/shadcn/ui/button";
-import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
-import { useMutation } from "@tanstack/react-query";
+import { getFromLocalStorage } from "@/src/utils/utils"; 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { LuEye } from "react-icons/lu";
-import swal from "sweetalert";
+import { LuEye } from "react-icons/lu"; 
 import Cookies from "js-cookie";
+import usePostData from "@/src/hooks/usePostData";
+import { toast } from "@/src/components/shadcn/ui/use-toast";
 
 const Password = ({
   setStep,
 }: {
   setStep: React.Dispatch<React.SetStateAction<string>>;
 }) => {
-  const phoneNumber = getFromLocalStorage("otpLoginPhoneNumber");
+  const successFunc = (data: {
+    statusCode: number;
+    RefreshToken: string;
+    accessToken: string;
+  }) => {
+    if (data.statusCode === 200) {
+      toast({
+        variant: "success",
+        title: "با موفقیت وارد شدید",
+      });
+      Cookies.set("RefreshToken", data.RefreshToken, {
+        expires: 9999999,
+        path: "",
+      });
+      Cookies.set("AccessToken", data.accessToken, {
+        expires: 9999999,
+        path: "",
+      });
+      router.replace("/dashboard");
+    } else if (data.statusCode === 401) {
+      toast({
+        variant: "danger",
+        title: "پسورد وارد شده اشتباه است",
+      });
+    } else if (data.statusCode === 409) {
+      toast({
+        variant: "danger",
+        title: "این شماره قادر به ورود به سایت نیست",
+      });
+    } else {
+      toast({
+        variant: "danger",
+        title: "با عرض پوزش لطفا مجدد مراحل رو طی کنید",
+      });
+      localStorage.clear();
+      location.reload();
+    }
+  };
 
+  const phoneNumber = getFromLocalStorage("otpLoginPhoneNumber");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
@@ -28,61 +66,22 @@ const Password = ({
       setError(true);
     }
   };
+  const { mutate: mutation, isPending } = usePostData<{ password: string }>(
+    `/loginByPassword/${phoneNumber}`,
+    null,
+    false,
+    successFunc,
+  );
 
-  const mutation = useMutation({
-    mutationFn: async (password: string) => {
-      return await fetch(`${baseUrl}/loginByPassword/${phoneNumber}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({ password }),
-      }).then((res) => res.json());
-    },
-    onSuccess: (data) => {
-      if (data.statusCode === 200) {
-        swal({
-          title: "با موفقیت ثبت نام شدید",
-          icon: "success",
-          buttons: [false, "حله"],
-        }).then(() => {
-          Cookies.set("RefreshToken", data.RefreshToken, {
-            expires: 9999999,
-            path: "",
-          });
-          Cookies.set("AccessToken", data.accessToken, {
-            expires: 9999999,
-            path: "",
-          });
-
-          router.replace("/dashboard");
-          localStorage.clear();
-        });
-      } else if (data.statusCode === 401) {
-        swal({
-          title: "پسورد وارد شده اشتباه است",
-          icon: "error",
-          buttons: [false, "حله"],
-        });
-      } else if (data.statusCode === 409) {
-        swal({
-          title: "این شماره قادر به ورود به سایت نیست",
-          icon: "error",
-          buttons: [false, "حله"],
-        });
-      } else {
-        swal({
-          title: "با عرض پوزش لطفا مجدد مراحل رو طی کنید",
-          icon: "error",
-          buttons: [false, "حله"],
-        }).then(() => {
-          localStorage.clear();
-          location.reload();
-        });
-      }
-    },
-  });
+  const { mutate: resendCode } = usePostData<any>(
+    `/resendCode/${phoneNumber}`,
+    null,
+    false,
+  );
+  const resendCodeHandler =()=>{
+    setStep("otp")
+    resendCode({})
+  }
   return (
     <div className="w-full sm:!pb-7 md:!w-[350px]">
       <div className="flex items-center justify-between">
@@ -114,21 +113,22 @@ const Password = ({
         disabled={!error ? false : true}
         className="mt-5 w-full justify-center !rounded-full text-center"
         variant={"main"}
-        onClick={() => mutation.mutate(password)}
+        onClick={() => mutation({ password: password })}
       >
         ورود
       </Button>
       <Button
-        onClick={() => setStep("otp")}
+        onClick={resendCodeHandler}
         className="mx-auto mt-5 !block !rounded-full !px-4 font-thin"
         variant={"outlineMain"}
       >
         ورود با کد یکبار مصرف
       </Button>
 
-      {mutation.isPending && <Loader enableOverlay={true} />}
+      {isPending && <Loader enableOverlay={true} />}
     </div>
   );
 };
 
 export default Password;
+
