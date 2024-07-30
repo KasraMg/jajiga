@@ -26,6 +26,7 @@ const ChangePassword = () => {
         variant: "success",
         title: "رمز عبور با موفقیت بروزرسانی شد",
       });
+      setOpen(false)
     } else if (data.statusCode === 401) {
       toast({
         variant: "danger",
@@ -71,8 +72,9 @@ const ChangePassword = () => {
     event.preventDefault();
     formHandler.handleSubmit();
   };
+  const [open,setOpen] = useState(false)
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button size={"sm"} className="my-5 block bg-gray-100 text-black">
           ﺗﻐﯿﯿﺮ رمزعبور

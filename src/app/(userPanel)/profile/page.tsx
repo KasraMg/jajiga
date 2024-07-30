@@ -6,9 +6,11 @@ import Container from "@/src/components/modules/container/Container";
 import Image from "next/image";
 import Box from "@/src/components/templates/userPanel/profile/Box";
 import ChangePassword from "@/src/components/templates/userPanel/profile/components/ChangePassword";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { authStore } from "@/src/stores/auth";
-import TwoStepBox from "@/src/components/templates/userPanel/profile/twoStepBox";
+import TwoStepBox from "@/src/components/templates/userPanel/profile/TwoStepBox";
+import usePostData from "@/src/hooks/usePostData";
+import Loader from "@/src/components/modules/loader/Loader";
 
 const Profile = () => {
   const { userData } = authStore((state) => state);
@@ -19,6 +21,18 @@ const Profile = () => {
   const [email, setEmail] = useState("");
   const [gender, setGender] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [avatar, setAvatar] = useState("");
+
+  const {
+    mutate: mutation, 
+    isPending
+  } = usePostData<any>(
+    "/user/edit",
+    "آواتار با موفقیت بروزرسانی شد",
+    true,
+    null,
+    true,
+  );
 
   useEffect(() => {
     setUserName(userData?.user.firstName as string);
@@ -30,19 +44,40 @@ const Profile = () => {
           : "زن"
         : "این فیلد تکمیل نشده است",
     );
-    setEmail( userData?.user.email
-      ? userData?.user.email
-      : "این فیلد تکمیل نشده است");
+    setEmail(
+      userData?.user.email ? userData?.user.email : "این فیلد تکمیل نشده است",
+    );
     setAbout(
       userData?.user.aboutMe
         ? userData?.user.aboutMe
         : "این فیلد تکمیل نشده است",
     );
+    setAvatar(userData?.user.avatar ? `https://jajiga-backend.liara.run/villa/covers/${userData?.user.avatar}` : "");
     setPhoneNumber(userData?.user.phone as string);
   }, [userData]);
 
-  const profileChangeHandler = (event) => {
-    console.log(event);
+
+  useEffect(() => {
+    console.log(avatar);
+    
+  }, [avatar]);
+
+  
+  const profileChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      let file = event.target.files[0];
+      if (file.type === "image/png" || file.type === "image/jpeg") {
+        let reader = new FileReader();
+        reader.onloadend = function () {
+          let base64String = reader.result;
+          setAvatar(base64String as string);
+          const formData = new FormData()
+          formData.append('avatar',file)
+          mutation(formData)
+        };
+        reader.readAsDataURL(file);
+      }
+    }
   };
   return (
     <Container disableFooter={true}>
@@ -55,9 +90,9 @@ const Profile = () => {
               height={1000}
               width={1000}
               alt="profile"
-              src="/images/profile.jpg"
+              src={avatar ? avatar : `/images/profile.jpg`}
             />
-            <span className="absolute -right-2 bottom-1 h-7 w-7 rounded-full bg-customYellow px-[10px] pb-[.1rem] pl-[20px] pt-[.2rem]">
+            <span className="absolute -right-2 bottom-1 h-7 w-7 cursor-pointer rounded-full bg-customYellow px-[10px] pb-[.1rem] pl-[20px] pt-[.2rem]">
               +
               <input
                 type="file"
@@ -85,7 +120,7 @@ const Profile = () => {
               requestBody="phone"
               regex={/((0?9)|(\+?989))\d{2}\W?\d{3}\W?\d{4}/}
               errorText="شماره موبایل نامعتبر است"
-            /> 
+            />
             <TwoStepBox
               setValue={setEmail}
               value={email}
@@ -94,7 +129,7 @@ const Profile = () => {
               requestBody="email"
               regex={/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/}
               errorText="ایمیل نامعتبر است"
-            />  
+            />
             <Box
               setValue={setGender}
               value={gender}
@@ -121,6 +156,7 @@ const Profile = () => {
           >
             حذف حساب کاربری
           </Button>
+          {isPending && <Loader />}
         </main>
       </Layout>
     </Container>

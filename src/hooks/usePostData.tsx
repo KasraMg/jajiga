@@ -6,7 +6,7 @@ const usePostData = <T extends object>(
   url: string,
   successMsg: string | null,
   put?: boolean,
-  successFunc?: (data: any) => void,
+  successFunc?: ((data: any) => void) | null   ,
   formData?: boolean,
 ) => {
   const accessToken = Cookies.get("AccessToken");

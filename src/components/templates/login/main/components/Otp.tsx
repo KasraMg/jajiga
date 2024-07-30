@@ -1,20 +1,20 @@
 "use client";
 import { Button } from "@/src/components/shadcn/ui/button";
-import { baseUrl, getFromLocalStorage } from "@/src/utils/utils";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { getFromLocalStorage } from "@/src/utils/utils";
+import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import swal from "sweetalert";
 import Loader from "@/src/components/modules/loader/Loader";
 import {
   InputOTP,
   InputOTPGroup,
-  InputOTPSeparator,
   InputOTPSlot,
 } from "@/src/components/shadcn/ui/input-otp";
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
-
 import Cookies from "js-cookie";
+import usePostData from "@/src/hooks/usePostData";
+import { toast } from "@/src/components/shadcn/ui/use-toast";
+
 const Otp = ({
   setStep,
 }: {
@@ -28,6 +28,67 @@ const Otp = ({
   const registerUserData = getFromLocalStorage("registerUserData");
   const queryClient = useQueryClient();
   const [otpCode, setOtpCode] = useState("");
+
+  const successFunc = (data: {
+    statusCode: number;
+    RefreshToken: string;
+    accessToken: string;
+  }) => {
+    if (data.statusCode === 200) {
+      Cookies.set("RefreshToken", data.RefreshToken, {
+        expires: 9999999,
+        path: "",
+      });
+      Cookies.set("AccessToken", data.accessToken, {
+        expires: 9999999,
+        path: "",
+      });
+      queryClient.invalidateQueries({ queryKey: ["auth"] });
+      toast({
+        variant: "success",
+        title: otpLoginPhoneNumber
+          ? "با موفقیت وارد شدید"
+          : "با موفقیت ثبت نام شدید",
+      });
+      router.replace("/dashboard");
+    } else if (data.statusCode === 400) {
+      toast({
+        variant: "danger",
+        title: "کد اشتباه است",
+      });
+    } else if (data.statusCode === 405) {
+      toast({
+        variant: "danger",
+        title: "این کد قبلا مورد استفاده قرار گرفته است",
+      });
+    } else if (data.statusCode === 422) {
+      toast({
+        variant: "danger",
+        title: "کد وارد شده منسوخ شده است",
+      });
+    } else if (data.statusCode === 406) {
+      toast({
+        variant: "danger",
+        title: "کاربر قبلا در سایت ثبت نام شده است",
+      });
+    } else {
+      toast({
+        variant: "danger",
+        title: "با عرض پوزش لطفا مجدد مراحل رو طی کنید",
+      });
+      location.reload();
+      localStorage.clear();
+    }
+  };
+
+  const { mutate: mutation, isPending } = usePostData<{ code: string }>(
+    otpLoginPhoneNumber
+      ? `/loginByCode/${otpLoginPhoneNumber}`
+      : "/auth/confirmCode",
+    null,
+    false,
+    successFunc,
+  );
 
   useEffect(() => {
     const savedTimer = localStorage.getItem("otpResendTimer");
@@ -60,172 +121,20 @@ const Otp = ({
     return () => clearInterval(interval);
   }, [timer]);
 
-  const registerMutation = useMutation({
-    mutationFn: async (userData) => {
-      return await fetch(`${baseUrl}/auth/confirmCode`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify(userData),
-      }).then((res) => res.json());
-    },
-    onSuccess: (data) => {
+  const { mutate: resendCode } = usePostData<any>(
+    `/resendCode/${phoneNumber}`,
+    null,
+    false,
+  );
 
-      if (data.statusCode === 200) {
-        Cookies.set("RefreshToken", data.RefreshToken, {
-          expires: 9999999,
-          path: "",
-        });
-        Cookies.set("AccessToken", data.accessToken, {
-          expires: 9999999,
-          path: "",
-        });
-        queryClient.invalidateQueries({ queryKey: ["auth"] });
-        swal({
-          title: "با موفقیت ثبت نام شدید",
-          icon: "success",
-          buttons: [false, "حله"],
-        }).then(() => {
- 
-          router.replace("/dashboard");
-          localStorage.clear();
-        });
-      } else if (data.statusCode === 400) {
-        swal({
-          title: "کد وارد شده اشتباه است",
-          icon: "error",
-          buttons: [false, "حله"],
-        });
-      } else if (data.statusCode === 405) {
-        swal({
-          title: "این کد قبلا مورد استفاده قرار گرفته است",
-          icon: "error",
-          buttons: [false, "حله"],
-        });
-      } else if (data.statusCode === 422) {
-        swal({
-          title: "کد وارد شده منسوخ شده است",
-          icon: "error",
-          buttons: [false, "حله"],
-        });
-      } else if (data.statusCode === 406) {
-        swal({
-          title: "کاربر قبلا در سایت ثبت نام شده است",
-          icon: "error",
-          buttons: ["رفتن به لاگین", false],
-        }).then((res) => {
-          if (res) {
-            localStorage.clear();
-            setStep("login");
-          }
-        });
-      } else {
-        swal({
-          title: "با عرض پوزش لطفا مجدد مراحل رو طی کنید",
-          icon: "error",
-          buttons: [false, "حله"],
-        }).then(() => {
-          location.reload();
-          localStorage.clear();
-        });
-      }
-    },
-  });
-
-  const loginMutation = useMutation({
-    mutationFn: async (code: string) => {
-      return await fetch(`${baseUrl}/loginByCode/${otpLoginPhoneNumber}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({ code }),
-      }).then((res) => res.json());
-    },
-    onSuccess: (data) => {
-      if (data.statusCode === 200) {
-        Cookies.set("RefreshToken", data.RefreshToken, {
-          expires: 9999999,
-          path: "",
-        });
-        Cookies.set("AccessToken", data.accessToken, {
-          expires: 9999999,
-          path: "",
-        });
-        queryClient.invalidateQueries({ queryKey: ["auth"] });
-
-        swal({
-          title: "با موفقیت ثبت نام شدید",
-          icon: "success",
-          buttons: [false, "حله"],
-        }).then(() => {
-        router.replace("/dashboard");
-
-          // localStorage.clear();
-        });
-      } else if (data.statusCode === 400) {
-        swal({
-          title: "کد وارد شده اشتباه است",
-          icon: "error",
-          buttons: [false, "حله"],
-        });
-      } else if (data.statusCode === 405) {
-        swal({
-          title: "این کد قبلا مورد استفاده قرار گرفته است",
-          icon: "error",
-          buttons: [false, "حله"],
-        });
-      } else if (data.statusCode === 422) {
-        swal({
-          title: "کد وارد شده منسوخ شده است",
-          icon: "error",
-          buttons: [false, "حله"],
-        });
-      } else {
-        swal({
-          title: "با عرض پوزش لطفا مجدد مراحل رو طی کنید",
-          icon: "error",
-          buttons: [false, "حله"],
-        }).then(() => {
-          localStorage.clear();
-          location.reload();
-        });
-      }
-    },
-  });
-
-  const resendCodeMutation = useMutation({
-    mutationFn: async () => {
-      return await fetch(`${baseUrl}/resendCode/${phoneNumber}`, {
-        method: "POST",
-      }).then((res) => res.json());
-    },
-    onSuccess: (data) => {
-      console.log(phoneNumber);
-      if (data.statusCode !== 200) {
-        swal({
-          title: "با عرض پوزش لطفا مجدد مراحل رو طی کنید",
-          icon: "error",
-          buttons: [false, "حله"],
-        }).then(() => {
-          localStorage.clear();
-          location.reload();
-        });
-      }
-    },
-  });
-
-  const registerHandler = () => {
-    registerUserData.code = otpCode;
-    registerMutation.mutate(registerUserData);
-    console.log(registerUserData);
-  };
-
-  const loginHandler = () => {
-    loginMutation.mutate(otpCode);
+  const submitHandler = () => {
+    if (otpLoginPhoneNumber) {
+      const data = { code: otpCode };
+      mutation(data);
+    } else {
+      registerUserData.code = otpCode;
+      mutation(registerUserData);
+    }
   };
 
   const resendCodeHandler = () => {
@@ -234,13 +143,13 @@ const Otp = ({
       "otpResendTimer",
       (Math.floor(Date.now() / 1000) + 59).toString(),
     );
-    resendCodeMutation.mutate();
+    resendCode({});
   };
 
   return (
     <div className="w-full md:!w-[350px]">
       <div className="flex items-center justify-between">
-        <p dir="ltr">+98{phoneNumber.slice(1, 11)}</p>
+        <p dir="ltr">+98{phoneNumber?.slice(1, 11)}</p>
         <Button
           onClick={() => setStep("login")}
           className="!rounded-sm !px-4"
@@ -289,7 +198,7 @@ const Otp = ({
         disabled={otpCode.length !== 4 ? true : false}
         className="mt-5 w-full justify-center !rounded-full text-center"
         variant={"main"}
-        onClick={registerUserData ? registerHandler : loginHandler}
+        onClick={submitHandler}
       >
         ورود
       </Button>
@@ -303,8 +212,7 @@ const Otp = ({
         </Button>
       ) : null}
 
-      {loginMutation.isPending && <Loader enableOverlay={true} />}
-      {registerMutation.isPending && <Loader enableOverlay={true} />}
+      {isPending && <Loader enableOverlay={true} />}
     </div>
   );
 };
