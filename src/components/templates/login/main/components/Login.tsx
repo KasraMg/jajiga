@@ -1,9 +1,8 @@
-import Loader from "@/src/components/modules/loader/Loader";
+import { ButtonLoader } from "@/src/components/modules/loader/Loader";
 import { Button } from "@/src/components/shadcn/ui/button";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
 import usePostData from "@/src/hooks/usePostData";
-import {
-  baseUrl,
+import { 
   getFromLocalStorage,
   saveIntoLocalStorage,
 } from "@/src/utils/utils"; 
@@ -86,20 +85,19 @@ const Login = ({
         </span>
       </div>
       <Button
-        className="mt-6 w-full justify-center !rounded-full text-center"
+        className="mt-6 w-full h-[36px] justify-center !rounded-full text-center"
         variant={"main"}
         disabled={phoneNumber.length !== 11 ? true : false}
         onClick={submitHandler}
       >
-        ادامه
+        {isPending ? <ButtonLoader /> : "ادامه"} 
       </Button>
       <Link
         href={"/rules"}
         className="mx-auto mt-4 block w-max border-b-2 border-solid border-customYellow pb-2"
       >
         قوانین و مقررات
-      </Link>
-      {isPending && <Loader enableOverlay={true} />}
+      </Link> 
     </div>
   );
 };
