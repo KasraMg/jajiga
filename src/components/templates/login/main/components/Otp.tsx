@@ -4,7 +4,7 @@ import { getFromLocalStorage } from "@/src/utils/utils";
 import { useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Loader from "@/src/components/modules/loader/Loader";
+import { ButtonLoader } from "@/src/components/modules/loader/Loader";
 import {
   InputOTP,
   InputOTPGroup,
@@ -194,13 +194,14 @@ const Otp = ({
         </Button>
       )}
 
+
       <Button
         disabled={otpCode.length !== 4 ? true : false}
-        className="mt-5 w-full justify-center !rounded-full text-center"
+        className="mt-5 h-[36px] w-full justify-center !rounded-full text-center"
         variant={"main"}
         onClick={submitHandler}
       >
-        ورود
+        {isPending ? <ButtonLoader /> : "ورود"}  
       </Button>
       {!otpRegisterPhoneNumber ? (
         <Button
@@ -211,8 +212,7 @@ const Otp = ({
           ورود با رمز عبور
         </Button>
       ) : null}
-
-      {isPending && <Loader enableOverlay={true} />}
+ 
     </div>
   );
 };

@@ -1,6 +1,4 @@
 "use client";
-
-import useCustomQuery from "@/src/hooks/useCustomQuery";
 import { authStore } from "@/src/stores/auth";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import Cookies from "js-cookie";

@@ -1,4 +1,4 @@
-import Loader from "@/src/components/modules/loader/Loader";
+import { ButtonLoader } from "@/src/components/modules/loader/Loader";
 import { Button } from "@/src/components/shadcn/ui/button";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
 import usePostData from "@/src/hooks/usePostData";
@@ -163,13 +163,13 @@ const Register = ({
       <Button
         type="submit"
         onClick={(event) => submitHandler(event)}
-        className="mx-auto mt-5 !block w-max !rounded-full !px-12 text-center"
+        className="mx-auto h-[36px] mt-5 !block w-max !rounded-full !px-12 text-center"
         variant={"main"}
         disabled={!formHandler.isValid || !formHandler.dirty}
-      >
-        ثبت نام
-      </Button>
-      {isPending && <Loader enableOverlay={true} />}
+      > 
+        {isPending ? <ButtonLoader /> : "ثبت نام"}  
+
+      </Button> 
     </form>
   );
 };

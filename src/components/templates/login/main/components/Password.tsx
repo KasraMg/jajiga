@@ -1,9 +1,9 @@
-import Loader from "@/src/components/modules/loader/Loader";
+import { ButtonLoader } from "@/src/components/modules/loader/Loader";
 import { Button } from "@/src/components/shadcn/ui/button";
-import { getFromLocalStorage } from "@/src/utils/utils"; 
+import { getFromLocalStorage } from "@/src/utils/utils";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { LuEye } from "react-icons/lu"; 
+import { LuEye } from "react-icons/lu";
 import Cookies from "js-cookie";
 import usePostData from "@/src/hooks/usePostData";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
@@ -78,10 +78,10 @@ const Password = ({
     null,
     false,
   );
-  const resendCodeHandler =()=>{
-    setStep("otp")
-    resendCode({})
-  }
+  const resendCodeHandler = () => {
+    setStep("otp");
+    resendCode({});
+  };
   return (
     <div className="w-full sm:!pb-7 md:!w-[350px]">
       <div className="flex items-center justify-between">
@@ -111,11 +111,11 @@ const Password = ({
       </div>
       <Button
         disabled={!error ? false : true}
-        className="mt-5 w-full justify-center !rounded-full text-center"
+        className="mt-5 w-full h-[36px] justify-center !rounded-full text-center"
         variant={"main"}
         onClick={() => mutation({ password: password })}
       >
-        ورود
+        {isPending ? <ButtonLoader /> : "ورود"}
       </Button>
       <Button
         onClick={resendCodeHandler}
@@ -123,12 +123,9 @@ const Password = ({
         variant={"outlineMain"}
       >
         ورود با کد یکبار مصرف
-      </Button>
-
-      {isPending && <Loader enableOverlay={true} />}
+      </Button> 
     </div>
   );
 };
 
 export default Password;
-
