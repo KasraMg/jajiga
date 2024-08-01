@@ -69,3 +69,4 @@ export interface userObj {
   user: userInfoObj;
   villas: userVillasObj[];
 }
+ 

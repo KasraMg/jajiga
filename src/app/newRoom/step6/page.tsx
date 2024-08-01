@@ -6,7 +6,7 @@ import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
 import { getFromLocalStorage } from "@/src/utils/utils"; 
 import { useEffect, useState } from "react"; 
 import Loader from "@/src/components/modules/loader/Loader";
-import useCustomQuery from "@/src/hooks/useCustomQuery";
+import useGetData from "@/src/hooks/useGetData";
 import { fetchStep6Items } from "@/src/utils/clientFetchs"; 
 import useEditVilla from "@/src/hooks/useEditVilla";
 interface userObjData {
@@ -16,7 +16,7 @@ interface userObjData {
 }
 
 const page = () => {
-  const { data, status } = useCustomQuery(["step_6_items"], fetchStep6Items); 
+  const { data, status } = useGetData(["step_6_items"], fetchStep6Items); 
 
   const [disabelNextButton, setDisabelNextButton] = useState<boolean>(false);
   const [showInput, setShowInput] = useState<boolean[]>(

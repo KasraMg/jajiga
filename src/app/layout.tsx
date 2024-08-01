@@ -1,10 +1,10 @@
 import "./globals.css";
 import QueryWrapper from "../utils/QueryWrapper";
-import localFont from "next/font/local";
-import Auth from "../utils/auth"; 
-import Hydrated from "../providers/Hydrated"; 
+import localFont from "next/font/local"; 
+import Hydrated from "../providers/Hydrated";
 import { Toaster } from "@/src/components/shadcn/ui/toaster";
-import { getUser } from "../utils/serverFetchs";  
+import { getUser } from "../utils/serverFetchs";
+import Auth from "../utils/auth";
 
 const fonts = localFont({
   src: [
@@ -32,10 +32,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactElement;
 }>) {
-
-
-
-
   return (
     <html lang="en">
       <body className={`${fonts.variable}`}>
