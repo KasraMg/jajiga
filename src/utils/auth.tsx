@@ -1,27 +1,26 @@
 "use client";
 import { authStore } from "@/src/stores/auth";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import Cookies from "js-cookie";
 import { useEffect } from "react";
 import { getUser } from "./clientFetchs";
 import swal from "sweetalert";
 import { useRouter } from "next/navigation";
-
+import useGetData from "../hooks/useGetData";
+import { userObj } from "../types/Auth.types";
+import Loader from "../components/modules/loader/Loader";
 
 const Auth = () => {
   const accessToken = Cookies.get("AccessToken");
-  const { data, isLoading, status, isError, refetch } = useQuery({
-    queryKey: ["auth"],
-    queryFn: getUser,
-  });
 
+  const { data, status, isLoading } = useGetData<userObj>(["auth"], getUser);
   const { setUserData, setLogin } = authStore((state) => state);
 
   useEffect(() => {
-    if (status === "success" && data.statusCode === 200) {
+    if (status === "success" && data?.statusCode === 200) {
       setUserData(data);
       setLogin(true);
-    } else if (status === "success" && data.statusCode === 500) {
+    } else if (status === "success" && data?.statusCode === 500) {
       setLogin(false);
     } else {
       setLogin(false);
@@ -29,7 +28,7 @@ const Auth = () => {
     console.log(data);
   }, [status, data, setUserData]);
 
-  return null;
+  return isLoading ? <Loader /> : null;
 };
 
 export default Auth;
@@ -45,7 +44,7 @@ export const useLogoutHandler = () => {
       buttons: ["نه", "آره"],
     }).then((res) => {
       if (res) {
-        router.push('/')
+        router.push("/");
         Cookies.remove("AccessToken");
         Cookies.remove("RefreshToken");
         queryClient.invalidateQueries({ queryKey: ["auth"] });

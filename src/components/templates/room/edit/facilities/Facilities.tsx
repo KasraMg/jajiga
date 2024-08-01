@@ -1,7 +1,7 @@
 "use client";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
 import { Button } from "@/src/components/shadcn/ui/button";
-import useCustomQuery from "@/src/hooks/useCustomQuery";
+import useGetData from "@/src/hooks/useGetData";
 import useEditVilla from "@/src/hooks/useEditVilla";
 import { authStore } from "@/src/stores/auth";
 import { fetchStep6Items } from "@/src/utils/clientFetchs";
@@ -16,7 +16,7 @@ interface userObjData {
 }
 
 const Facilities = () => {
-  const { data, status } = useCustomQuery(
+  const { data, status } = useGetData(
     ["server_step_6_items"],
     fetchStep6Items,
   );
