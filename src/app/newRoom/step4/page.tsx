@@ -10,7 +10,7 @@ import {
   typeOptions,
   areaOptions,
 } from "@/src/utils/selectOptions";
-import StepLayout from "@/src/components/modules/stepLayout/StepLayout"; 
+import StepLayout from "@/src/components/layouts/stepLayout/StepLayout"; 
 import { getFromLocalStorage } from "@/src/utils/utils"; 
 import Loader from "@/src/components/modules/loader/Loader"; 
 import useEditVilla from "@/src/hooks/useEditVilla";

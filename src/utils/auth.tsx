@@ -10,16 +10,14 @@ import useGetData from "../hooks/useGetData";
 import { userObj } from "../types/Auth.types";
 import Loader from "../components/modules/loader/Loader";
 
-const Auth = () => {
-  const accessToken = Cookies.get("AccessToken");
-
+const Auth = () => { 
   const { data, status, isLoading } = useGetData<userObj>(["auth"], getUser);
   const { setUserData, setLogin } = authStore((state) => state);
 
   useEffect(() => {
     if (status === "success" && data?.statusCode === 200) {
       setUserData(data);
-      setLogin(true);
+      setLogin(true); 
     } else if (status === "success" && data?.statusCode === 500) {
       setLogin(false);
     } else {

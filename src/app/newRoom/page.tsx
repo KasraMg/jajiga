@@ -1,4 +1,4 @@
-import Layout from "@/src/components/modules/Layout/Layout";
+import Layout from "@/src/components/layouts/pageLayout/Layout";
 import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import HostCart from "@/src/components/modules/hostCart/HostCart";
 import { IoMdCheckmark } from "react-icons/io";

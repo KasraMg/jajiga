@@ -1,5 +1,5 @@
 import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
-import Layout from "@/src/components/modules/Layout/Layout";
+import Layout from "@/src/components/layouts/pageLayout/Layout";
 import Card from "@/src/components/templates/index/SpecialAccommodations/components/Card";
 import { FaRegHeart } from "react-icons/fa";
 import { Button } from "@/src/components/shadcn/ui/button";

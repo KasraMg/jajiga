@@ -1,6 +1,6 @@
 "use client";
 import react, { FC } from "react";
-import Layout from "@/src/components/modules/Layout/Layout";
+import Layout from "@/src/components/layouts/pageLayout/Layout";
 import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import Container from "@/src/components/modules/container/Container";
 import Stepper from "@/src/components/modules/stepper/Stepper";

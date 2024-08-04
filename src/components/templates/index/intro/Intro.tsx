@@ -1,7 +1,7 @@
 "use client"
 import { CiSearch } from "react-icons/ci";
 import { useContext, useRef } from "react";
-import { ScrollContext } from "@/src/utils/scrollObserver";
+import { ScrollContext } from "@/src/providers/scrollObserver";
 import { IoIosArrowDown } from "react-icons/io";
 
 const Intro = () => {
