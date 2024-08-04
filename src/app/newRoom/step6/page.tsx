@@ -1,22 +1,21 @@
 "use client";
 import ContentNavigator from "@/src/components/modules/contentNavigator/ContentNavigator";
-import StepLayout from "@/src/components/modules/stepLayout/StepLayout";
+import StepLayout from "@/src/components/layouts/stepLayout/StepLayout";
 import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
-import { getFromLocalStorage } from "@/src/utils/utils"; 
-import { useEffect, useState } from "react"; 
+import { getFromLocalStorage } from "@/src/utils/utils";
+import { useEffect, useState } from "react";
 import Loader from "@/src/components/modules/loader/Loader";
 import useGetData from "@/src/hooks/useGetData";
-import { fetchStep6Items } from "@/src/utils/clientFetchs"; 
+import { fetchStep6Items } from "@/src/utils/clientFetchs";
 import useEditVilla from "@/src/hooks/useEditVilla";
 interface userObjData {
   facility: {};
   step: 7;
   finished: false;
 }
-
 const page = () => {
-  const { data, status } = useGetData(["step_6_items"], fetchStep6Items); 
+  const { data, status } = useGetData(["step_6_items"], fetchStep6Items);
 
   const [disabelNextButton, setDisabelNextButton] = useState<boolean>(false);
   const [showInput, setShowInput] = useState<boolean[]>(
@@ -29,7 +28,7 @@ const page = () => {
 
   const villaId = getFromLocalStorage("villaId");
   const {
-    mutate: mutation, 
+    mutate: mutation,
     responseData,
     isSuccess,
     isPending,
@@ -39,23 +38,22 @@ const page = () => {
     villaId,
   );
 
-
   useEffect(() => {
     if (status === "success" && data?.facility) {
-      const newFacilities = data.facility.map((item) => ({
+      const newFacilities = data.facility.map((item: { engTitle: string }) => ({
         title: item.engTitle,
         status: false,
         description: "",
       }));
       setFacilitySelected(newFacilities);
 
-      const newSanitary = data.sanitaryFacilities.map((item) => ({
+      const newSanitary = data.sanitaryFacilities.map((item: { engTitle: string }) => ({
         title: item.engTitle,
         status: false,
       }));
       setSanitarySelected(newSanitary);
     }
-  }, [status]); 
+  }, [status]);
 
   const convertArrayToObject = (arr: any, isDesTrue: boolean) =>
     arr.reduce((acc: any, cur: any) => {
@@ -73,22 +71,20 @@ const page = () => {
     const userData: userObjData = {
       facility: {
         facility: {
-          ...facilityResult, 
+          ...facilityResult,
           ...(moreFacility ? { moreFacility: moreFacility } : {}),
         },
         sanitaryFacilities: {
-          ...sanitaryResult, 
+          ...sanitaryResult,
           ...(moreSanitary ? { moreSanitaryFacilities: moreSanitary } : {}),
-
         },
       },
       step: 7,
       finished: false,
-    }; 
-    mutation(userData);  
+    };
+    mutation(userData);
   };
 
-  
   const inputChangeHandler = (value: string, itemTitle: string) => {
     const updatedFacilitySelected = facilitySelected.map((item) => {
       if (item.title === itemTitle) {
@@ -228,7 +224,7 @@ const page = () => {
             text="‎‏تعویض و شارژ اقلام بهداشتی (شامل روبالشی, روتختی, ملحفه تمیز, کاغذ ‏توالت و صابون یا مایع دستشویی) موجب می شود تا میهمان شما احساس کند که در منزل خود حضور ‏دارد. این اقلام می باید پیش از ورود میهمان جدید تعویض یا شارژ شوند.‏"
           />
         </div>
-        {isPending && <Loader />} 
+        {isPending && <Loader />}
       </div>
     </StepLayout>
   );

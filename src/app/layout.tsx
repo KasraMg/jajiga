@@ -1,10 +1,12 @@
 import "./globals.css";
-import QueryWrapper from "../utils/QueryWrapper";
-import localFont from "next/font/local"; 
+import QueryWrapper from "../providers/QueryWrapper";
+import localFont from "next/font/local";
 import Hydrated from "../providers/Hydrated";
 import { Toaster } from "@/src/components/shadcn/ui/toaster";
 import { getUser } from "../utils/serverFetchs";
 import Auth from "../utils/auth";
+import Loader from "../components/modules/loader/Loader";
+import { Suspense } from "react";
 
 const fonts = localFont({
   src: [
@@ -35,10 +37,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${fonts.variable}`}>
-        <QueryWrapper>
-          <Hydrated queryKey={["auth"]} queryFn={getUser}>
-            <Auth />
-          </Hydrated>
+        <QueryWrapper> 
+            <Hydrated queryKey={["auth"]} queryFn={getUser}>
+              <Auth />
+            </Hydrated> 
           {children}
           <Toaster />
         </QueryWrapper>

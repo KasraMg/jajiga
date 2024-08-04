@@ -12,12 +12,14 @@ import { Button } from "@/src/components/shadcn/ui/button";
 import { IoNotificationsOutline } from "react-icons/io5"; 
 import Rooms from "@/src/components/templates/userPanel/dashboard/Rooms";
 import { useLogoutHandler } from "@/src/utils/auth";
+import Layout from "@/src/components/layouts/userLayout/Layout";
 const Dashboard = () => {
   const logoutHandler = useLogoutHandler();
 
   return (
     <Container disableFooter={true}>
       <Breadcrumb className="hidden md:block" route={"پیشخان"} />
+      <Layout> 
       <main className="Container !mt-20 flex gap-4 px-4 md:!mt-8 xl:!px-0">
         <aside
           style={{ boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 6px" }}
@@ -133,6 +135,7 @@ const Dashboard = () => {
           <Rooms /> 
         </div>
       </main>
+      </Layout> 
     </Container>
   );
 };

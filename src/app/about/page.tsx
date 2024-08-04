@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import Layout from "@/src/components/modules/Layout/Layout";
+import Layout from "@/src/components/layouts/pageLayout/Layout";
 import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import React from "react";
 import AOS from "aos";

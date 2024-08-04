@@ -1,7 +1,7 @@
 "use client";
 import { Map } from "@/src/components/modules/Map/Map";
 import ContentNavigator from "@/src/components/modules/contentNavigator/ContentNavigator";
-import StepLayout from "@/src/components/modules/stepLayout/StepLayout";
+import StepLayout from "@/src/components/layouts/stepLayout/StepLayout";
 import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo"; 
 import { useEffect, useState } from "react"; 

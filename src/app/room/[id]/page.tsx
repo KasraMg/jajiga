@@ -3,8 +3,10 @@ import Container from "@/src/components/modules/container/Container";
 import Gallery from "@/src/components/templates/room/gallery/Gallery";
 import Details from "@/src/components/templates/room/details/Details";
 import Reservation from "@/src/components/templates/room/reservation/Reservation";
+import Hydrated from "@/src/providers/Hydrated";
 const Room = () => {
   return (
+    // <Hydrated queryKey={["villa"]} queryFn={getUser}> 
     <Container>
       <div className="Container mt-[3.8rem] md:!mt-20">
         <Gallery />
@@ -14,6 +16,7 @@ const Room = () => {
         </div>
       </div>
     </Container>
+    // </Hydrated> 
   );
 };
 
