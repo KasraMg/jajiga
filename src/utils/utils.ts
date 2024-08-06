@@ -39,3 +39,8 @@ export function convertToJalali(date: string) {
 
   return `${day} ${month} ${year}`;
 }
+
+export const formatNumber = (num:string) => {
+  return num.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  
+};
