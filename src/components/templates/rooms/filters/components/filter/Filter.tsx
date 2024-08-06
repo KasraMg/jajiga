@@ -9,7 +9,7 @@ interface FilterProps {
 
 const Filter: FC<FilterProps> = ({
   // show,
-  smRight,
+  smRight, 
   title,
   icon,
   children,
