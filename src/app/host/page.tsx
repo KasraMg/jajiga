@@ -11,9 +11,7 @@ import Link from "next/link";
 
 const Host = () => {
   const HostData = useHostCartData();
-  const { userData } = authStore((state) => state);
-console.log(userData);
-
+  const { userData } = authStore((state) => state); 
   return (
     <Container>
       <Breadcrumb

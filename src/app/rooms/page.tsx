@@ -4,6 +4,8 @@ import Posts from "@/src/components/templates/rooms/posts/Posts";
 import React from "react";
 
 const rooms = () => {
+
+
   return (
     <Container navbarContainer={true} disableFooter={true}>
       <main className="mt-[58px]">

@@ -1,10 +1,31 @@
 "use client";
 import Select from "react-select";
+import Cookies from "js-cookie";
 import { useState } from "react";
 import { GoDotFill } from "react-icons/go";
 import { categoryFilterOptions } from "@/src/utils/selectOptions";
 import Card from "../../index/SpecialAccommodations/components/Card";
+import useGetData from "@/src/hooks/useGetData";
+import { baseUrl } from "@/src/utils/utils";
+import Loader from "@/src/components/modules/loader/Loader";
 const Posts = () => {
+  const accessToken = Cookies.get("AccessToken");
+  const getVilla = async () => {
+    let url = `${baseUrl}/villa/s?city=tehran&gstnum=5&minp=1000&maxp=10000&order=x&zone=villaZone&type=villaType&feature=y`;
+    if (true) {
+      url += `&categoryId=${true};`;
+    } 
+    const res = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    const data = res.json();
+    return data;
+  };
+
+  const { data, status, isPending } = useGetData(["category"], getVilla);
+
   const [spaceSelectedOption, setSpaceSelectedOption] = useState<{
     label: string;
     value: string;
@@ -45,6 +66,7 @@ const Posts = () => {
           <Card />
         </main>
       </div>
+      {/* {isPending && <Loader />} */}
     </div>
   );
 };

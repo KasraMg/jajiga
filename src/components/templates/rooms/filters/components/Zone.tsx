@@ -6,7 +6,28 @@ import {
 import { Button } from "@/src/components/shadcn/ui/button";
 import { CiSearch } from "react-icons/ci";
 import { FaMapLocationDot, FaRegTrashCan } from "react-icons/fa6";
+import { useEffect, useState } from "react";
+import { categoryStore } from "@/src/stores/category";
+import { areaOptions } from "@/src/utils/selectOptions";
 const Zone = () => {
+  const { villaZone, setVillaZone } = categoryStore((state) => state);
+  const [defaultVillaZone, setDefaultVillaZone] = useState([]);
+
+  const submitHandler = () => {
+    setVillaZone(defaultVillaZone);
+  };
+  const deleteFilterHandler = () => {
+    setDefaultVillaZone([]);
+    setVillaZone([]);
+  };
+  const inputChangeHandler = (status: boolean, value: string) => {
+    if (status) {
+      setDefaultVillaZone((prev) => [...prev, value] as any);
+    } else {
+      const newZone = defaultVillaZone.filter((zone) => zone !== value);
+      setDefaultVillaZone(newZone);
+    }
+  }; 
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -24,56 +45,38 @@ const Zone = () => {
             منطقه اقامتگاه
           </p>
           <div className="mt-4 grid grid-cols-[auto,auto] gap-3">
-            <div className="flex justify-between border-b border-solid border-gray-200 px-3 pb-2">
-              <p className="text-xs sm:!text-base">جنگلی</p>
-              <input
-                className="rounded-md border-gray-300"
-                type="checkbox"
-                id=""
-              />
-            </div>
-            <div className="flex justify-between border-b border-solid border-gray-200 px-3 pb-2">
-              <p className="text-xs sm:!text-base">بیابانی</p>
-              <input
-                className="rounded-md border-gray-300"
-                type="checkbox"
-                id=""
-              />
-            </div>
-            <div className="flex justify-between border-b border-solid border-gray-200 px-3 pb-2">
-              <p className="text-xs sm:!text-base">ساحلی</p>
-              <input
-                className="rounded-md border-gray-300"
-                type="checkbox"
-                id=""
-              />
-            </div>
-            <div className="flex justify-between border-b border-solid border-gray-200 px-3 pb-2">
-              <p className="text-xs sm:!text-base">ییلاقی</p>
-              <input
-                className="rounded-md border-gray-300"
-                type="checkbox"
-                id=""
-              />
-            </div>
-            <div className="flex justify-between px-3 pb-2">
-              <p className="text-xs sm:!text-base">شهری</p>
-              <input
-                className="rounded-md border-gray-300"
-                type="checkbox"
-                id=""
-              />
-            </div>
+            {areaOptions.map((zone) => {
+              const isCheck = defaultVillaZone.some(villaZone=>villaZone === zone.value)
+              return (
+                <div className="flex justify-between border-b border-solid border-gray-200 px-3 pb-2">
+                  <p className="text-xs sm:!text-base">{zone.label}</p>
+                  <input
+                    className="rounded-md border-gray-300"
+                    type="checkbox"
+                    value={zone.value}
+                    checked={isCheck}
+                    onChange={(event) =>
+                      inputChangeHandler(event.target.checked, zone.value)
+                    }
+                  />
+                </div>
+              );
+            })}
           </div>
           <div className="mt-4 flex items-center justify-between">
             <Button
               className="flex items-center gap-2 border-dashed"
               variant={"white"}
+              onClick={deleteFilterHandler}
             >
               <FaRegTrashCan />
               پاک کردن
             </Button>
-            <Button className="flex items-center gap-2" variant={"main"}>
+            <Button
+              onClick={submitHandler}
+              className="flex items-center gap-2"
+              variant={"main"}
+            >
               <CiSearch />
               اعمال
             </Button>

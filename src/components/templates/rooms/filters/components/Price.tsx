@@ -9,10 +9,25 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import { TbMoneybag } from "react-icons/tb";
 import { useState } from "react";
 import { formatNumber } from "@/src/utils/utils";
+import { categoryStore } from "@/src/stores/category";
 
 const Price = () => {
-  const [maxPrice, setMaxPrice] = useState("");
-  const [minPrice, setMinPrice] = useState("");
+  const { minPrice, setMinPrice, maxPrice, setMaxPrice } = categoryStore(
+    (state) => state,
+  );
+  const [defaultMaxPrice, setDefaultMaxPrice] = useState<string>("");
+  const [defaultMinPrice, setDefaultMinPrice] = useState<string>("");
+
+  const submitHandler = () => {
+    setMaxPrice(defaultMaxPrice as any)
+    setMinPrice(defaultMinPrice as any) 
+   };
+  const deleteFilterHandler = () => {
+    setMaxPrice(null)
+    setMinPrice(null)
+    setDefaultMaxPrice("")
+    setDefaultMinPrice("")
+  };
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -35,10 +50,10 @@ const Price = () => {
               <div className="relative w-full gap-3">
                 <input
                   dir="ltr"
-                  value={formatNumber(minPrice)}
+                  value={formatNumber(defaultMinPrice as string)}
                   onChange={(event) => {
-                    /^[0-9,]*$/.test(event.target.value)
-                      ? setMinPrice(event.target.value)
+                    /^[0-9,]*$/.test(event.target.value as string)
+                      ? setDefaultMinPrice(event.target.value)
                       : null;
                   }}
                   type="text"
@@ -55,10 +70,10 @@ const Price = () => {
                   type="text"
                   onChange={(event) => {
                     /^[0-9,]*$/.test(event.target.value)
-                      ? setMaxPrice(event.target.value)
+                      ? setDefaultMaxPrice(event.target.value as string)
                       : null;
                   }}
-                  value={formatNumber(maxPrice)}
+                  value={formatNumber(defaultMaxPrice as string)}
                   className="border-1 w-full rounded-lg border-b border-solid border-gray-300 pb-1 pl-14"
                 />
                 <span className="absolute -top-1 left-3">تومان</span>
@@ -68,13 +83,18 @@ const Price = () => {
 
           <div className="mt-4 flex items-center justify-between">
             <Button
+              onClick={deleteFilterHandler}
               className="flex items-center gap-2 border-dashed"
               variant={"white"}
             >
               <FaRegTrashCan />
               پاک کردن
             </Button>
-            <Button className="flex items-center gap-2" variant={"main"}>
+            <Button
+              onClick={submitHandler}
+              className="flex items-center gap-2"
+              variant={"main"}
+            >
               <CiSearch />
               اعمال
             </Button>

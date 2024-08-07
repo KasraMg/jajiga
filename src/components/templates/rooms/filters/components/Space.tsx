@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MdOutlinePeople } from "react-icons/md";
 import {
   Popover,
@@ -9,17 +9,28 @@ import { Button } from "@/src/components/shadcn/ui/button";
 import { CiSearch } from "react-icons/ci";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { IoInformationCircleOutline } from "react-icons/io5";
+import { categoryStore } from "@/src/stores/category";
 
 const Space = () => {
-  const [maximumSpace, setMaximumSpace] = useState<number>(1);
+  const { maximumSpace, setMaximumSpace } = categoryStore((state) => state);
+  const [defaultMaximumSpace, setDefaultMaximumSpace] = useState(1);
+
   const incrementMaximumHandler = () => {
-    setMaximumSpace((prev) => prev + 1);
+    setDefaultMaximumSpace((prev) => prev + 1);
   };
   const decrementMaximumHandler = () => {
-    if (maximumSpace !== 1) {
-      setMaximumSpace((prev) => prev - 1);
+    if (defaultMaximumSpace !== 1) {
+      setDefaultMaximumSpace((prev) => prev - 1);
     }
   };
+
+  const submitHandler = () => {
+    setMaximumSpace(defaultMaximumSpace);
+  };
+  const deleteFilterHandler = () => {
+    setMaximumSpace(1);
+    setDefaultMaximumSpace(1);
+  }; 
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -44,10 +55,10 @@ const Space = () => {
                   >
                     +
                   </p>
-                  <p className="text-sm">{maximumSpace} نفر</p>
+                  <p className="text-sm">{defaultMaximumSpace} نفر</p>
                   <p
                     onClick={decrementMaximumHandler}
-                    className={`${maximumSpace == 1 && "!cursor-not-allowed text-gray-300"} mb-4 cursor-pointer text-2xl hover:text-gray-500`}
+                    className={`${defaultMaximumSpace == 1 && "!cursor-not-allowed text-gray-300"} mb-4 cursor-pointer text-2xl hover:text-gray-500`}
                   >
                     _
                   </p>
@@ -65,13 +76,18 @@ const Space = () => {
           </div>
           <div className="mt-4 flex items-center justify-between">
             <Button
+              onClick={deleteFilterHandler}
               className="flex items-center gap-2 border-dashed"
               variant={"white"}
             >
               <FaRegTrashCan />
               پاک کردن
             </Button>
-            <Button className="flex items-center gap-2" variant={"main"}>
+            <Button
+              onClick={submitHandler}
+              className="flex items-center gap-2"
+              variant={"main"}
+            >
               <CiSearch />
               اعمال
             </Button>
