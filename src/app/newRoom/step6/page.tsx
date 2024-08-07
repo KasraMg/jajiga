@@ -16,6 +16,7 @@ interface userObjData {
 }
 const page = () => {
   const { data, status } = useGetData(["step_6_items"], fetchStep6Items);
+console.log(data);
 
   const [disabelNextButton, setDisabelNextButton] = useState<boolean>(false);
   const [showInput, setShowInput] = useState<boolean[]>(

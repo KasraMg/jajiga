@@ -249,11 +249,7 @@ const typeOptions: {
   {
     label: "اقامتگاه بوم گردی",
     value: "6696cff30e8c458c0ea8ca1c",
-  },
-  {
-    label: "هتل آپارتمان",
-    value: "6696d08a0e8c458c0ea8ca30",
-  },
+  }, 
   {
     label: "مهمان خانه",
     value: "6696d0b20e8c458c0ea8ca34",
@@ -261,27 +257,7 @@ const typeOptions: {
   {
     label: "چادر / خیمه",
     value: "6696d0ec0e8c458c0ea8ca3b",
-  },
-  {
-    label: "کاروانسرا",
-    value: "6696d1dd0e8c458c0ea8ca5f",
-  },
-  {
-    label: "قایق",
-    value: "6696d2420e8c458c0ea8ca73",
-  },
-  {
-    label: "پانسیون",
-    value: "6696d10c0e8c458c0ea8ca3f",
-  },
-  {
-    label: "هاستل",
-    value: "6696d1830e8c458c0ea8ca4f",
-  },
-  {
-    label: "بوتیک هتل",
-    value: "6696d2100e8c458c0ea8ca69",
-  },
+  }, 
 ];
 const areaOptions: {
   label: string;
