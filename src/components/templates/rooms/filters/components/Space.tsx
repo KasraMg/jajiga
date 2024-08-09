@@ -12,8 +12,9 @@ import { IoInformationCircleOutline } from "react-icons/io5";
 import { categoryStore } from "@/src/stores/category";
 
 const Space = () => {
-  const { maximumSpace, setMaximumSpace } = categoryStore((state) => state);
+  const { setMaximumSpace, maximumSpace } = categoryStore((state) => state);
   const [defaultMaximumSpace, setDefaultMaximumSpace] = useState(1);
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const incrementMaximumHandler = () => {
     setDefaultMaximumSpace((prev) => prev + 1);
@@ -26,13 +27,21 @@ const Space = () => {
 
   const submitHandler = () => {
     setMaximumSpace(defaultMaximumSpace);
+    setIsPopoverOpen(false);
   };
   const deleteFilterHandler = () => {
-    setMaximumSpace(1);
+    setMaximumSpace(null);
     setDefaultMaximumSpace(1);
-  }; 
+  };
+
+  useEffect(() => {
+    maximumSpace
+      ? setDefaultMaximumSpace(maximumSpace as any)
+      : setDefaultMaximumSpace(1);
+  }, [isPopoverOpen]);
+
   return (
-    <Popover>
+    <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
       <PopoverTrigger asChild>
         <Button
           className="flex items-center gap-1 rounded-full !border-0 bg-white p-2 text-sm md:relative"

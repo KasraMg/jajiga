@@ -7,29 +7,41 @@ import { Button } from "@/src/components/shadcn/ui/button";
 import { CiSearch } from "react-icons/ci";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { TbMoneybag } from "react-icons/tb";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { formatNumber } from "@/src/utils/utils";
 import { categoryStore } from "@/src/stores/category";
 
 const Price = () => {
-  const { minPrice, setMinPrice, maxPrice, setMaxPrice } = categoryStore(
+  const { setMinPrice, setMaxPrice, minPrice, maxPrice } = categoryStore(
     (state) => state,
   );
   const [defaultMaxPrice, setDefaultMaxPrice] = useState<string>("");
   const [defaultMinPrice, setDefaultMinPrice] = useState<string>("");
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const submitHandler = () => {
-    setMaxPrice(defaultMaxPrice as any)
-    setMinPrice(defaultMinPrice as any) 
-   };
-  const deleteFilterHandler = () => {
-    setMaxPrice(null)
-    setMinPrice(null)
-    setDefaultMaxPrice("")
-    setDefaultMinPrice("")
+    setMaxPrice(parseFloat(defaultMaxPrice.replace(/,/g, "")) as any);
+    setMinPrice(parseFloat(defaultMinPrice.replace(/,/g, "")) as any);
+    setIsPopoverOpen(false);
   };
+  const deleteFilterHandler = () => {
+    setMaxPrice(null);
+    setMinPrice(null);
+    setDefaultMaxPrice("");
+    setDefaultMinPrice("");
+  };
+
+  useEffect(() => { 
+if (isPopoverOpen) {
+  console.log(minPrice);
+  console.log(maxPrice);
+  
+  setDefaultMinPrice(minPrice ? String(minPrice) : "") 
+  setDefaultMaxPrice(maxPrice ? String(maxPrice) : "") 
+}
+  }, [isPopoverOpen]);
   return (
-    <Popover>
+    <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
       <PopoverTrigger asChild>
         <Button
           className="flex items-center gap-1 rounded-full !border-0 bg-white p-2 text-sm md:relative"

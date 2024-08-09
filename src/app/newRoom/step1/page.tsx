@@ -33,9 +33,7 @@ const page = () => {
     "/newRoom/step2",
     "ویلا ساخته و اطلاعات ابتدایی با موفقیت بروزرسانی شد",
   );
-
-  console.log(stateOptions);
-
+ 
   const [stateSelectedOption, setStateSelectedOption] = useState<{
     label: string;
     value: string[];

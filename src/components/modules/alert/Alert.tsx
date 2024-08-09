@@ -14,8 +14,10 @@ type AlertProps = {
 const Alert: FC<AlertProps> = ({ title, children }) => {
   return (
     <AlertComponent variant="destructive">
-      <AlertCircle className="h-4 w-4" />
+      <div className="flex items-center gap-2">
+        <AlertCircle className="h-4 w-4" />
       <AlertTitle>{title}</AlertTitle>
+      </div>
       <AlertDescription>{children}</AlertDescription>
     </AlertComponent>
   );

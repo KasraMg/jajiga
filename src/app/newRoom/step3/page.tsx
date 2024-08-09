@@ -3,13 +3,12 @@ import ContentNavigator from "@/src/components/modules/contentNavigator/ContentN
 import StepLayout from "@/src/components/layouts/stepLayout/StepLayout";
 import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
-import { getFromLocalStorage } from "@/src/utils/utils"; 
+import { getFromLocalStorage } from "@/src/utils/utils";
 import { useEffect, useState } from "react";
 import { BsCamera, BsTrash3 } from "react-icons/bs";
-import swal from "sweetalert"; 
-import Loader from "@/src/components/modules/loader/Loader"; 
+import swal from "sweetalert";
+import Loader from "@/src/components/modules/loader/Loader";
 import useEditVilla from "@/src/hooks/useEditVilla";
-
 
 const page = () => {
   const [images, setImages] = useState<any>([]);
@@ -26,7 +25,7 @@ const page = () => {
     "/newRoom/step4",
     "اطلاعات با موفقیت بروزرسانی شد",
     villaId,
-    true
+    true,
   );
 
   const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,7 +38,13 @@ const page = () => {
     } else {
       if (event.target.files && event.target.files.length > 0) {
         let file = event.target.files[0];
-        if (file.type === "image/png" || file.type === "image/jpeg") {
+        if (
+          file.type === "image/png" ||
+          file.type === "image/jpeg" ||
+          file.type === "image/webp" ||
+          file.type === "image/jpg" ||
+          file.type === "image/jfif"
+        ) {
           if (!images.length) {
             setImages((prevImages: any) => [...prevImages, file]);
           } else {
@@ -60,7 +65,7 @@ const page = () => {
       } else {
         swal({
           title:
-            "تایپ فایل وارد شده اشتباه است. لطفا فایل با تایپ های .png یا .jpg وارد کنید",
+            "تایپ فایل وارد شده اشتباه است. لطفا فایل با تایپ های .png , jfif, jpeg یا .jpg وارد کنید",
           icon: "error",
           buttons: [false, "اوکی"],
         });
@@ -96,21 +101,20 @@ const page = () => {
       setDisabelNextButton(true);
     }
   }, [images]);
-  
- 
+
   const deleteImgHandler = (name: string) => {
     const newImages = images.filter((imgFile: any) => imgFile.name !== name);
     setImages(newImages);
   };
 
-  const submitHandler = () => { 
+  const submitHandler = () => {
     const formData = new FormData();
     images.map((img: any) => {
       formData.append("cover", img);
     });
     formData.append("step", "4");
     formData.append("finished", "false");
- 
+
     mutation(formData);
   };
 

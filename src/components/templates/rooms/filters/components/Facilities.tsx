@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 const Facilities = () => {
   const { facilities, setFacilities } = categoryStore((state) => state);
   const [defaultFacilities, setDefaulFacilities] = useState([]);
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const facilitiesOptions: {
     label: string;
@@ -46,6 +47,7 @@ const Facilities = () => {
 
   const submitHandler = () => {
     setFacilities(defaultFacilities);
+    setIsPopoverOpen(false)
   };
   const deleteFilterHandler = () => {
     setDefaulFacilities([]);
@@ -58,12 +60,12 @@ const Facilities = () => {
       const newType = defaultFacilities.filter((type) => type !== value);
       setDefaulFacilities(newType);
     }
-  };
+  }; 
   useEffect(() => {
-    console.log(defaultFacilities, facilities);
-  }, [defaultFacilities, facilities]);
+    setDefaulFacilities(facilities as any);
+  }, [isPopoverOpen]);
   return (
-    <Popover>
+    <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
       <PopoverTrigger asChild>
         <Button
           className="flex items-center gap-1 rounded-full !border-0 bg-white p-2 text-sm md:relative"

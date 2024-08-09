@@ -225,39 +225,48 @@ const spaceOptions: {
 const typeOptions: {
   label: string;
   value: string;
+  href: string;
 }[] = [
   {
     label: "ویلایی",
     value: "6696cebe0e8c458c0ea8c9f1",
+    href: "house",
   },
   {
     label: "آپارتمان",
     value: "6696d05d0e8c458c0ea8ca29",
+    href: "apartment",
   },
   {
     label: "سوئیت",
     value: "6696cf4d0e8c458c0ea8c9f8",
+    href: "suite",
   },
   {
     label: "خانه روستایی",
     value: "6696cf880e8c458c0ea8ca02",
+    href: "farmhouse",
   },
   {
     label: "کلبه",
     value: "6696cfc10e8c458c0ea8ca15",
+    href: "cottage",
   },
   {
     label: "اقامتگاه بوم گردی",
     value: "6696cff30e8c458c0ea8ca1c",
-  }, 
+    href: "ecoResort",
+  },
   {
     label: "مهمان خانه",
     value: "6696d0b20e8c458c0ea8ca34",
+    href: "guestHouse",
   },
   {
     label: "چادر / خیمه",
     value: "6696d0ec0e8c458c0ea8ca3b",
-  }, 
+    href: "tent",
+  },
 ];
 const areaOptions: {
   label: string;
@@ -319,19 +328,19 @@ const categoryFilterOptions: {
 }[] = [
   {
     label: "ارزانترین",
-    value: "ارزانترین",
+    value: "low_price",
   },
   {
     label: "گرانترین",
-    value: "گرانترین",
+    value: "high_price",
   },
   {
     label: "جدید ترین",
-    value: "جدید ترین",
+    value: "newest",
   },
   {
     label: "قدیمی ترین",
-    value: "قدیمی ترین",
+    value: "older",
   },
 ];
 

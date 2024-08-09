@@ -24,9 +24,7 @@ const page = () => {
 
   const villaId = getFromLocalStorage("villaId");
   const {
-    mutate: mutation, 
-    responseData,
-    isSuccess,
+    mutate: mutation,  
     isPending,
   } = useEditVilla<userObjData>(
     "/newRoom/step9",
@@ -36,21 +34,21 @@ const page = () => {
  
 
   useEffect(() => {
-    if (smoke !== null && party !== null && pet !== null && rules) setDisabelNextButton(false);
+    if (smoke !== null && party !== null && pet !== null) setDisabelNextButton(false);
     else setDisabelNextButton(true);
-  }, [smoke, party, pet,rules]);
+  }, [smoke, party, pet]);
 
   const submitHandler = () => {
     const userData: userObjData = {
       rules: {
         pet: pet === null ? false : pet,
         music: party === null ? false : party,
-        smoke: smoke === null ? false : smoke,
-        more: rules,
+        smoke: smoke === null ? false : smoke, 
+        ...(rules ? { more: rules } : {})
       },
       step: 8,
       finished: false,
-    }; 
+    };  
     mutation(userData);
   };
   return (

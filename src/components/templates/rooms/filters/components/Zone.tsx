@@ -12,9 +12,12 @@ import { areaOptions } from "@/src/utils/selectOptions";
 const Zone = () => {
   const { villaZone, setVillaZone } = categoryStore((state) => state);
   const [defaultVillaZone, setDefaultVillaZone] = useState([]);
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const submitHandler = () => {
     setVillaZone(defaultVillaZone);
+    setIsPopoverOpen(false)
+
   };
   const deleteFilterHandler = () => {
     setDefaultVillaZone([]);
@@ -28,8 +31,12 @@ const Zone = () => {
       setDefaultVillaZone(newZone);
     }
   }; 
+
+  useEffect(() => {
+    setDefaultVillaZone(villaZone as any);
+  }, [isPopoverOpen]);
   return (
-    <Popover>
+    <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
       <PopoverTrigger asChild>
         <Button
           className="flex items-center gap-1 rounded-full !border-0 bg-white p-2 text-sm md:relative"
