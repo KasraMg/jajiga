@@ -1,20 +1,61 @@
 "use client";
 import Select from "react-select";
 import Cookies from "js-cookie";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GoDotFill } from "react-icons/go";
 import { categoryFilterOptions } from "@/src/utils/selectOptions";
 import Card from "../../index/SpecialAccommodations/components/Card";
 import useGetData from "@/src/hooks/useGetData";
 import { baseUrl } from "@/src/utils/utils";
 import Loader from "@/src/components/modules/loader/Loader";
+import { categoryStore } from "@/src/stores/category";
+import { useSearchParams } from "next/navigation";
+
 const Posts = () => {
+  const searchParams = useSearchParams();
+  const city = searchParams.get("city");
+  const { 
+    order,
+    maximumSpace,
+    minPrice,
+    maxPrice,
+    facilities,
+    villaType,
+    villaZone,
+  } = categoryStore((state) => state);
   const accessToken = Cookies.get("AccessToken");
   const getVilla = async () => {
-    let url = `${baseUrl}/villa/s?city=tehran&gstnum=5&minp=1000&maxp=10000&order=x&zone=villaZone&type=villaType&feature=y`;
-    if (true) {
-      url += `&categoryId=${true};`;
-    } 
+    let url = `${baseUrl}/villa/s`; 
+    city ? (url += `?city=${city}`) : (url += `?city=all`);
+
+    if (order) {
+      url += `&order=${order}`;
+    }
+    if (maximumSpace) {
+      url += `&gstnum=${maximumSpace}`;
+    }
+    if (minPrice) {
+      url += `&minp=${minPrice}`;
+    }
+    if (maxPrice) {
+      url += `&maxp=${maxPrice}`;
+    }
+    if (villaZone.length) {
+      const zone = villaZone?.map((item) => item).join("-");
+      url += `&zone=${zone}`;
+    }
+    if (facilities.length) {
+      const prevFacilities = facilities?.map((item) => item).join("-");
+      url += `&feature=${prevFacilities}`;
+    }
+    if (villaType.length) {
+      const type = villaType?.map((item) => item).join("-");
+      console.log("type", type);
+
+      url += `&type=${type}`;
+    }
+    console.log(url);
+
     const res = await fetch(url, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -24,12 +65,28 @@ const Posts = () => {
     return data;
   };
 
-  const { data, status, isPending } = useGetData(["category"], getVilla);
+  const { data, status, isPending, refetch } = useGetData(
+    ["category"],
+    getVilla,
+  );
+console.log(data);
 
   const [spaceSelectedOption, setSpaceSelectedOption] = useState<{
     label: string;
     value: string;
-  } | null>({ label: "جدید ترین", value: "جدید ترین" });
+  } | null>({ label: "جدید ترین", value: "newest" });
+ 
+  useEffect(() => {
+    refetch();
+  }, [
+    order,
+    maximumSpace,
+    minPrice,
+    maxPrice,
+    facilities,
+    villaType,
+    villaZone,
+  ]);
 
   return (
     <div className="px-4 pb-5 sm:!px-8">
@@ -66,7 +123,7 @@ const Posts = () => {
           <Card />
         </main>
       </div>
-      {/* {isPending && <Loader />} */}
+      {isPending && <Loader />}
     </div>
   );
 };

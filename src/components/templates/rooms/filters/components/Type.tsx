@@ -12,29 +12,34 @@ import { categoryStore } from "@/src/stores/category";
 import { useEffect, useState } from "react";
 
 const Type = () => {
-  const { villaType, setVillaType } = categoryStore((state) => state);
+  const { setVillaType, villaType } = categoryStore((state) => state);
   const [defaultVillaType, setDefaultVillaType] = useState([]);
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const submitHandler = () => {
-    setVillaType(defaultVillaType)
+    setVillaType(defaultVillaType);
+    setIsPopoverOpen(false)
+
   };
   const deleteFilterHandler = () => {
-    setDefaultVillaType([])
-    setVillaType([]) 
+    setDefaultVillaType([]);
+    setVillaType([]);
   };
-  const inputChangeHandler = (status: boolean, value: string) => { 
+  const inputChangeHandler = (status: boolean, href: string) => {
     if (status) {
-      setDefaultVillaType((prev) => [...prev, value] as any);
+      setDefaultVillaType((prev) => [...prev, href] as any);
     } else {
-      const newType = defaultVillaType.filter((type) => type !== value);
-      setDefaultVillaType(newType)
+      const newType = defaultVillaType.filter((type) => type !== href);
+      setDefaultVillaType(newType);
     }
   };
 
-   
-  
+  useEffect(() => {
+    setDefaultVillaType(villaType as any);
+  }, [isPopoverOpen]);
+
   return (
-    <Popover>
+    <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
       <PopoverTrigger asChild>
         <Button
           className="flex items-center gap-1 rounded-full !border-0 bg-white p-2 text-sm md:relative"
@@ -51,21 +56,23 @@ const Type = () => {
           </p>
           <div className="mt-4 grid grid-cols-[auto,auto] gap-3">
             {typeOptions.map((type) => {
-              const isCheck = defaultVillaType.some(villaType=>villaType === type.value) 
+              const isCheck = defaultVillaType.some(
+                (villaType) => villaType === type.href,
+              );
               return (
                 <div className="flex justify-between border-b border-solid border-gray-200 px-3 pb-2">
                   <p className="text-xs sm:!text-base">{type.label}</p>
                   <input
                     className="rounded-md border-gray-300"
                     type="checkbox"
-                    value={type.value}
+                    value={type.href}
                     checked={isCheck}
                     onChange={(event) =>
-                      inputChangeHandler(event.target.checked, type.value)
+                      inputChangeHandler(event.target.checked, type.href)
                     }
                   />
                 </div>
-              )
+              );
             })}
           </div>
           <div className="mt-4 flex items-center justify-between">
