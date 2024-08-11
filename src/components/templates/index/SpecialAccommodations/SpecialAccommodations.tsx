@@ -1,7 +1,7 @@
 "use client"
 import React from "react";
 import Slider from "@/src/components/modules/slider/Slider";
-import Card from "./components/Card";
+import Card from "../../../modules/card/Card";
 
 const SpecialAccommodations = () => {
   return (

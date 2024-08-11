@@ -1,7 +1,7 @@
 "use client"
 import React from "react";
 import Slider from "@/src/components/modules/slider/Slider";
-import Card from "../SpecialAccommodations/components/Card";
+import Card from "../../../modules/card/Card";
 const Offers = () => {
   return (
     <div className="mt-8">
