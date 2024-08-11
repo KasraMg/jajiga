@@ -2,7 +2,7 @@
 import React from "react";
 import CitiesSelector from "./components/CitiesSelector";
 import Slider from "@/src/components/modules/slider/Slider";
-import Card from "../SpecialAccommodations/components/Card";
+import Card from "../../../modules/card/Card";
 const SuperOffers = () => {
   return (
     <div className="superOfferBg relative z-20 overflow-hidden rounded-t-xl py-6">

@@ -1,6 +1,6 @@
 import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import Layout from "@/src/components/layouts/pageLayout/Layout";
-import Card from "@/src/components/templates/index/SpecialAccommodations/components/Card";
+import Card from "@/src/components/modules/card/Card";
 import { FaRegHeart } from "react-icons/fa";
 import { Button } from "@/src/components/shadcn/ui/button";
 import { CiSearch } from "react-icons/ci";

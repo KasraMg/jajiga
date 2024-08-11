@@ -21,8 +21,7 @@ export type Action = {
 };
 
 export const categoryStore = create<State & Action>()(
-  devtools((set) => ({ 
-  login:false,
+  devtools((set) => ({  
   maximumSpace: null, 
   maxPrice: null, 
   minPrice: null, 

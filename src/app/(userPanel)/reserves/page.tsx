@@ -1,7 +1,7 @@
 import Layout from "@/src/components/layouts/userLayout/Layout";
 import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import Container from "@/src/components/modules/container/Container";
-import Card from "@/src/components/templates/index/SpecialAccommodations/components/Card";
+import Card from "@/src/components/modules/card/Card";
 const Reserve = () => {
   return (
     <Container disableFooter={true}>

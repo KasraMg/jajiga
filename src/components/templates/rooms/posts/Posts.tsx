@@ -4,17 +4,19 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { GoDotFill } from "react-icons/go";
 import { categoryFilterOptions } from "@/src/utils/selectOptions";
-import Card from "../../index/SpecialAccommodations/components/Card";
+import Card from "../../../modules/card/Card";
 import useGetData from "@/src/hooks/useGetData";
 import { baseUrl } from "@/src/utils/utils";
 import Loader from "@/src/components/modules/loader/Loader";
 import { categoryStore } from "@/src/stores/category";
 import { useSearchParams } from "next/navigation";
+import { VillaType } from "@/src/types/Villa.types";
+import Notfound from "./components/Notfound";
 
 const Posts = () => {
   const searchParams = useSearchParams();
   const city = searchParams.get("city");
-  const { 
+  const {
     order,
     maximumSpace,
     minPrice,
@@ -25,7 +27,7 @@ const Posts = () => {
   } = categoryStore((state) => state);
   const accessToken = Cookies.get("AccessToken");
   const getVilla = async () => {
-    let url = `${baseUrl}/villa/s`; 
+    let url = `${baseUrl}/villa/s`;
     city ? (url += `?city=${city}`) : (url += `?city=all`);
 
     if (order) {
@@ -50,8 +52,6 @@ const Posts = () => {
     }
     if (villaType.length) {
       const type = villaType?.map((item) => item).join("-");
-      console.log("type", type);
-
       url += `&type=${type}`;
     }
     console.log(url);
@@ -65,17 +65,17 @@ const Posts = () => {
     return data;
   };
 
-  const { data, status, isPending, refetch } = useGetData(
+  const { data, status, isFetching, refetch,isLoading } = useGetData(
     ["category"],
     getVilla,
   );
-console.log(data);
+  console.log(data);
 
   const [spaceSelectedOption, setSpaceSelectedOption] = useState<{
     label: string;
     value: string;
   } | null>({ label: "جدید ترین", value: "newest" });
- 
+
   useEffect(() => {
     refetch();
   }, [
@@ -101,8 +101,7 @@ console.log(data);
       <div className="mt-12">
         <div className="flex flex-col items-center justify-between sm:!flex-row">
           <p className="text-sm">
-            <strong>1466 اقامتگاه </strong> از <strong>300٬000</strong>{" "}
-            <span className="text-xs">تومان</span>
+            <strong>{data?.villas.length} اقامتگاه </strong>
           </p>
           <Select
             defaultValue={spaceSelectedOption}
@@ -113,17 +112,12 @@ console.log(data);
             options={categoryFilterOptions}
           />
         </div>
-        <main className="mt-6 grid justify-evenly gap-3 sm:!grid-cols-[auto,auto] lg:!grid-cols-[auto,auto,auto] xl:!grid-cols-[auto,auto,auto,auto]">
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+        <main className="mt-6 grid justify-evenly gap-3 sm:!grid-cols-[1fr,1fr] lg:!grid-cols-[1fr,1fr,1fr] xl:!grid-cols-[1fr,1fr,1fr,1fr]">
+          {data && data.villas.map((villa: VillaType) => <Card data={villa} />)}
         </main>
+        {data && data.statusCode === 404 && <Notfound />}
       </div>
-      {isPending && <Loader />}
+      {isFetching  && <Loader />}
     </div>
   );
 };

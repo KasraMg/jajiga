@@ -11,7 +11,7 @@ const useGetData =<T extends object> (
     queryFn: queryFn,
     ...options,
   });
-  return { data, isPending, status, isError,isLoading, refetch,isSuccess };
+  return { data, isPending, status, isError,isLoading, refetch,isSuccess,isFetching };
 };
 
 export default useGetData;

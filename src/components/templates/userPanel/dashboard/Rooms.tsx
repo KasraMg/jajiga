@@ -16,6 +16,7 @@ import { FaRegTrashCan } from "react-icons/fa6";
 import swal from "sweetalert";
 import Cookies from "js-cookie";
 import Loader from "@/src/components/modules/loader/Loader";
+import Image from "next/image";
 
 const Rooms = () => {
   const { userData } = authStore((state) => state);
@@ -23,7 +24,6 @@ const Rooms = () => {
   const queryClient = useQueryClient();
   queryClient.invalidateQueries({ queryKey: ["auth"] });
 
-  
   const mutation = useMutation({
     mutationFn: async (id: string) => {
       return await fetch(`${baseUrl}/villa/delete/${id}`, {
@@ -70,16 +70,28 @@ const Rooms = () => {
               <div className="flex flex-wrap items-center justify-start gap-2 p-3 shadow-lg sm:!flex-nowrap sm:!justify-between sm:!gap-0">
                 <div className="flex items-center gap-2">
                   <div
-                     style={{
-                      backgroundImage: villa.cover
-                        ? `url(https://jajiga-backend.liara.run/villa/covers/${villa.cover[0]})`
-                        : "url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIhFKJwV5wJD6dkUvbLLW75ofGNZ6pbsyYWmXDGK1KTg&s)",
-                    }}
-                   className={`relative ml-1 flex h-[60px] w-[92px] items-center justify-center overflow-hidden rounded-lg p-1`}
+                    className={`relative ml-1 flex h-[60px] w-[92px] items-center justify-center overflow-hidden rounded-lg p-1`}
                   >
-                    
-                    <p
-                      className={`mb-0 rounded-lg bg-white p-1 text-xs text-black`}
+                    {villa.cover ? (
+                      <Image
+                        alt="avatar"
+                        width={1000}
+                        height={1000}
+                        crossOrigin="anonymous"
+                        src={`https://jajiga-backend.liara.run/villa/covers/${villa.cover[0]}`}
+                      />
+                    ) : (
+                      <Image
+                        alt="avatar"
+                        width={1000}
+                        height={1000}
+                        crossOrigin="anonymous"
+                        src={
+                          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIhFKJwV5wJD6dkUvbLLW75ofGNZ6pbsyYWmXDGK1KTg&s"
+                        }
+                      />
+                    )} 
+                    <p  className={`mb-0 rounded-lg bg-white p-1 text-xs text-black absolute left-7 top-4`}
                     >
                       {((villa.step - 1) / (9 - 1)) * 100}%
                     </p>
@@ -103,9 +115,7 @@ const Rooms = () => {
                     حذف
                   </Button>
                   {villa.finished ? (
-                    <Link 
-                      href={`/room/edit/${villa._id}`}
-                    >
+                    <Link href={`/room/edit/${villa._id}`}>
                       <Button
                         className="flex justify-center gap-2 px-4 text-xs xl:!px-8"
                         variant={"blue"}
@@ -144,4 +154,3 @@ const Rooms = () => {
 };
 
 export default Rooms;
-
