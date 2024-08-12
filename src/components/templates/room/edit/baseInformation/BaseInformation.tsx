@@ -43,7 +43,7 @@ const BaseInformation = () => {
 
   const [address, setAddress] = useState<string>("");
   const [description, setDescription] = useState<string>("");
-  const [disabelNextButton, setDisableNextButton] = useState<boolean>(true);
+  const [disableNextButton, setDisableNextButton] = useState<boolean>(true);
 
   const [stateSelectedOption, setStateSelectedOption] = useState<{
     label: string;
@@ -245,7 +245,7 @@ const BaseInformation = () => {
             نقشه زوم کنید.
           </p>
         </div>
-        {!disabelNextButton && (
+        {!disableNextButton && (
           <Button
             onClick={submitHandler}
             variant="yellow"

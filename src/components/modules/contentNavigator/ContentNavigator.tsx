@@ -4,7 +4,7 @@ import Link from "next/link";
 
 interface ContentNavigatorProps {
   disablelPrevButton: boolean;
-  disabelNextButton: boolean;
+  disableNextButton: boolean;
   prevLink: string; 
   className?: string;
   clickHandler?: () => void;
@@ -13,7 +13,7 @@ const ContentNavigator: FC<ContentNavigatorProps> = ({
   className,
   clickHandler, 
   prevLink,
-  disabelNextButton,
+  disableNextButton,
   disablelPrevButton,
 }) => {
   return (
@@ -41,7 +41,7 @@ const ContentNavigator: FC<ContentNavigatorProps> = ({
         <Button
           variant="yellow"
           onClick={clickHandler} 
-          className={`${disabelNextButton && "cursor-not-allowed pointer-events-none opacity-40 hover:!opacity-30"} px-[38px] py-[3px] rounded-md transition-colors hover:opacity-75`}
+          className={`${disableNextButton && "cursor-not-allowed pointer-events-none opacity-40 hover:!opacity-30"} px-[38px] py-[3px] rounded-md transition-colors hover:opacity-75`}
         >  
             بعدی 
         </Button>

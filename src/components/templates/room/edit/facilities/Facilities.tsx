@@ -23,7 +23,7 @@ const Facilities = () => {
   const { userData } = authStore((state) => state);
   const params = useParams();
   const [moreFacility, setMoreFacility] = useState("");
-  const [disabelNextButton, setDisableNextButton] = useState<boolean>(true);
+  const [disableNextButton, setDisableNextButton] = useState<boolean>(true);
   const [facility, setFacility] = useState<any[]>([]);
 
   const { mutate: mutation, isPending } = useEditVilla<userObjData>(
@@ -164,7 +164,7 @@ const Facilities = () => {
             />
           </div>
 
-          {!disabelNextButton && (
+          {!disableNextButton && (
             <Button
               onClick={submitHandler}
               variant="yellow"

@@ -10,18 +10,21 @@ import useGetData from "../hooks/useGetData";
 import { userObj } from "../types/Auth.types";
 import Loader from "../components/modules/loader/Loader";
 
-const Auth = () => { 
+const Auth = () => {
   const { data, status, isLoading } = useGetData<userObj>(["auth"], getUser);
-  const { setUserData, setLogin } = authStore((state) => state);
+  const { setUserData, setLogin, setIsPending} = authStore((state) => state);
 
   useEffect(() => {
     if (status === "success" && data?.statusCode === 200) {
       setUserData(data);
-      setLogin(true); 
+      setLogin(true);
+      setIsPending(false);
     } else if (status === "success" && data?.statusCode === 500) {
       setLogin(false);
+      setIsPending(false);
     } else {
       setLogin(false);
+      setIsPending(false);
     }
     console.log(data);
   }, [status, data, setUserData]);

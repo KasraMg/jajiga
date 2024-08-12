@@ -10,13 +10,18 @@ import {
   typeOptions,
   areaOptions,
 } from "@/src/utils/selectOptions";
-import StepLayout from "@/src/components/layouts/stepLayout/StepLayout"; 
-import { getFromLocalStorage } from "@/src/utils/utils"; 
-import Loader from "@/src/components/modules/loader/Loader"; 
+import StepLayout from "@/src/components/layouts/stepLayout/StepLayout";
+import { getFromLocalStorage } from "@/src/utils/utils";
+import Loader from "@/src/components/modules/loader/Loader";
 import useEditVilla from "@/src/hooks/useEditVilla";
 
 interface userObjData {
-  aboutVilla: {};
+  aboutVilla: {
+    villaSpace: string | undefined;
+    villaType: string | undefined;
+    villaZone: string | undefined;
+    aboutVilla: string | undefined;
+  };
   step: 5;
   finished: false;
 }
@@ -24,12 +29,7 @@ interface userObjData {
 const page = () => {
   const [description, setDescription] = useState<string>("");
   const villaId = getFromLocalStorage("villaId");
-  const {
-    mutate: mutation,
-    responseData,
-    isSuccess,
-    isPending,
-  } = useEditVilla<userObjData>(
+  const { mutate: mutation, isPending } = useEditVilla<userObjData>(
     "/newRoom/step5",
     "اطلاعات با موفقیت بروزرسانی شد",
     villaId,
@@ -46,7 +46,7 @@ const page = () => {
     label: string;
     value: string;
   } | null>(null);
-  const [disabelNextButton, setDisabelNextButton] = useState<boolean>(true);
+  const [disableNextButton, setDisableNextButton] = useState(true);
 
   useEffect(() => {
     if (
@@ -55,20 +55,20 @@ const page = () => {
       areaSelectedOption &&
       description
     ) {
-      setDisabelNextButton(false);
+      setDisableNextButton(false);
     } else {
-      setDisabelNextButton(true);
+      setDisableNextButton(true);
     }
   }, [
     spaceSelectedOption,
     typeSelectedOption,
     areaSelectedOption,
     description,
-  ]); 
+  ]);
   const submitHandler = () => {
     const userData: userObjData = {
       aboutVilla: {
-        villaSpace: spaceSelectedOption?.value, 
+        villaSpace: spaceSelectedOption?.value,
         villaType: typeSelectedOption?.value,
         villaZone: areaSelectedOption?.value,
         aboutVilla: description,
@@ -77,6 +77,7 @@ const page = () => {
       step: 5,
     };
     mutation(userData);
+    setDisableNextButton(true);
   };
 
   return (
@@ -152,7 +153,7 @@ const page = () => {
           <ContentNavigator
             clickHandler={submitHandler}
             disablelPrevButton={false}
-            disabelNextButton={disabelNextButton}
+            disableNextButton={disableNextButton}
             prevLink={"newRoom/step3"}
           />
         </div>

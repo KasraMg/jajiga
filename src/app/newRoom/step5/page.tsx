@@ -4,19 +4,26 @@ import StepLayout from "@/src/components/layouts/stepLayout/StepLayout";
 import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
 import Textarea from "@/src/components/modules/textarea/Textarea";
-import { useEffect, useState } from "react"; 
-import { getFromLocalStorage } from "@/src/utils/utils"; 
+import { useEffect, useState } from "react";
+import { getFromLocalStorage } from "@/src/utils/utils";
 import Loader from "@/src/components/modules/loader/Loader";
 import useEditVilla from "@/src/hooks/useEditVilla";
 
 interface userObjData {
-  capacity: {};
+  capacity: {
+    bedRoom: number;
+    buildingSize: string;
+    description: string;
+    fuundationSize: string;
+    maxCapacity: number;
+    normalCapacity: number;
+  };
   step: 6;
   finished: false;
 }
 
 const page = () => {
-  const [disabelNextButton, setDisabelNextButton] = useState<boolean>(true);
+  const [disableNextButton, setDisableNextButton] = useState(true); 
   const [standardSpace, setStandardSpace] = useState<number>(1);
   const [maximumSpace, setMaximumSpace] = useState<number>(1);
   const [landSize, setLandSize] = useState<string>("");
@@ -25,12 +32,7 @@ const page = () => {
   const [description, setDescription] = useState<string>("");
   const villaId = getFromLocalStorage("villaId");
 
-  const {
-    mutate: mutation,
-    responseData,
-    isSuccess,
-    isPending,
-  } = useEditVilla<userObjData>(
+  const { mutate: mutation, isPending } = useEditVilla<userObjData>(
     "/newRoom/step6",
     "اطلاعات با موفقیت بروزرسانی شد",
     villaId,
@@ -38,9 +40,9 @@ const page = () => {
 
   useEffect(() => {
     if (landSize.length && areaSize.length && description) {
-      setDisabelNextButton(false);
+      setDisableNextButton(false);
     } else {
-      setDisabelNextButton(true);
+      setDisableNextButton(true);
     }
   }, [landSize, areaSize, description]);
 
@@ -73,8 +75,6 @@ const page = () => {
   ) => {
     setAreaSize(event.target.value);
   };
-  
- 
 
   const submitHandler = () => {
     const userData: userObjData = {
@@ -90,7 +90,15 @@ const page = () => {
       finished: false,
     };
     mutation(userData);
+    setDisableNextButton(true);
   };
+
+  useEffect(() => {
+  console.log('area',areaSize);
+  console.log('land',landSize);
+  
+  }, [areaSize ,landSize])
+  
   return (
     <StepLayout stepperActive={5}>
       <div className="flex max-w-[1120px] gap-0 py-8 sm:!gap-5">
@@ -171,12 +179,12 @@ const page = () => {
               <span className="absolute left-2 top-[10px] text-sm text-gray-500">
                 متر
               </span>
-              {landSize < areaSize && (
+              {areaSize > landSize ? (
                 <span className="absolute -bottom-[36px] text-xs text-red-600">
                   متراژ بنای اقامتگاه نمی‌تواند بزرگتر از متراژ زمین و محوطه
                   باشد
                 </span>
-              )}
+              ):null}
               {landSize > areaSize && (areaSize as any) > 9999 && (
                 <span className="absolute -bottom-[27px] text-xs text-red-600">
                   متراژ زیربنا نمی‌تواند بزرگتر از 9999 متر باشد
@@ -223,7 +231,7 @@ const page = () => {
           <ContentNavigator
             clickHandler={submitHandler}
             disablelPrevButton={false}
-            disabelNextButton={disabelNextButton}
+            disableNextButton={disableNextButton}
             prevLink={"newRoom/step4"}
           />
         </div>
@@ -245,7 +253,6 @@ const page = () => {
           />
         </div>
         {isPending && <Loader />}
-
       </div>
     </StepLayout>
   );

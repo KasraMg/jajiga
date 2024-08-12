@@ -1,57 +1,26 @@
-// import { create } from "zustand";
-// import { devtools } from "zustand/middleware";
-
-// export type State = {
-//   // showBookletModal: boolean;
-//   // courseId: string;
-//   // showGradeBookModal: boolean;
-//   userData: {};
-// };
-// export type Action = {
-//   // setShowBookletOpen: () => void;
-//   // setShowBookletClose: () => void;
-//   // setCourseId: (val: string) => void;
-//   setUserData: (val: {}) => void;
-// };
-
-// export const authStore = create<State & Action>()(
-//   devtools((set) => ({
-//     // showBookletModal: false,
-//     // showGradeBookModal: false,
-//     // courseId: "",
-//     userData: {},
-
-//     setUserData: (val) => set(() => ({ userData: val }), false, "setUserData"),
-
-//     // setCourseId: (val) => set(() => ({ courseId: val }), false, "setCourseId"),
-
-//     // setShowBookletClose: () =>
-//     //   set(() => ({ showBookletModal: false }), false, "setShowBookletClose"),
-
-//     // setShowBookletOpen: () =>
-//     //   set(() => ({ showBookletModal: true }), false, "setShowBookletOpen"),
-//   })),
-// );
-
-
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { userObj } from "../types/Auth.types";
 
-export type State = { 
+export type State = {
   userData: userObj | null;
-  login:boolean
+  login: boolean;
+  isPending: boolean;
 };
-export type Action = { 
-  setUserData: (val: userObj) => void;
+export type Action = {
+  setUserData: (val: userObj | null) => void;
   setLogin: (val: boolean) => void;
+  setIsPending: (val: boolean) => void;
 };
 
 export const authStore = create<State & Action>()(
-  devtools((set) => ({ 
-  login:false,
-  userData: null, 
-    setUserData: (val) => set(() => ({ userData: val }), false, "setUserData"), 
-    setLogin: (val) => set(() => ({ login: val }), false, "setLogin"), 
+  devtools((set) => ({
+    login: false,
+    userData: null,
+    isPending: true,
+    setUserData: (val) => set(() => ({ userData: val }), false, "setUserData"),
+    setLogin: (val) => set(() => ({ login: val }), false, "setLogin"),
+    setIsPending: (val) =>
+      set(() => ({ isPending: val }), false, "setIsPending"),
   })),
 );

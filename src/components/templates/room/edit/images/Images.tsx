@@ -10,7 +10,7 @@ import { BsCamera, BsTrash3 } from "react-icons/bs";
 import swal from "sweetalert";
 
 const Images = () => {
-  const [disabelNextButton, setDisableNextButton] = useState<boolean>(true);
+  const [disableNextButton, setDisableNextButton] = useState<boolean>(true);
   const [userimages, setUserImages] = useState<any>([]);
   const [finalyImages, setFinalyImages] = useState<any>([]);
   const { userData } = authStore((state) => state);
@@ -164,7 +164,7 @@ const Images = () => {
                 )}
             </div>
           </div>
-          {!disabelNextButton &&
+          {!disableNextButton &&
             (userimages.length < 3 ? (
               <Button
                 variant="danger"
