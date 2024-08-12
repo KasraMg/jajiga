@@ -24,12 +24,12 @@ const Posts = () => {
     facilities,
     villaType,
     villaZone,
+    setOrder,
   } = categoryStore((state) => state);
   const accessToken = Cookies.get("AccessToken");
   const getVilla = async () => {
     let url = `${baseUrl}/villa/s`;
-    city ? (url += `?city=${city}`) : (url += `?city=all`);
-
+    city ? (url += `?city=${city}`) : (url += `?city=all`); 
     if (order) {
       url += `&order=${order}`;
     }
@@ -53,8 +53,7 @@ const Posts = () => {
     if (villaType.length) {
       const type = villaType?.map((item) => item).join("-");
       url += `&type=${type}`;
-    }
-    console.log(url);
+    } 
 
     const res = await fetch(url, {
       headers: {
@@ -65,10 +64,9 @@ const Posts = () => {
     return data;
   };
 
-  const { data, status, isFetching, refetch,isLoading } = useGetData(
-    ["category"],
-    getVilla,
-  );
+  const { data, isFetching, refetch } = useGetData(["category"], getVilla, {
+    refetchOnWindowFocus: false,
+  });
   console.log(data);
 
   const [spaceSelectedOption, setSpaceSelectedOption] = useState<{
@@ -86,7 +84,12 @@ const Posts = () => {
     facilities,
     villaType,
     villaZone,
+    spaceSelectedOption,
   ]);
+
+  useEffect(() => {
+    setOrder(spaceSelectedOption?.value as string);
+  }, [spaceSelectedOption]);
 
   return (
     <div className="px-4 pb-5 sm:!px-8">
@@ -117,7 +120,7 @@ const Posts = () => {
         </main>
         {data && data.statusCode === 404 && <Notfound />}
       </div>
-      {isFetching  && <Loader />}
+      {isFetching && <Loader />}
     </div>
   );
 };

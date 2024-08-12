@@ -17,17 +17,14 @@ const page = () => {
   const [acceptRules, setAcceptRules] = useState(false); 
   const villaId = getFromLocalStorage("villaId");
   const {
-    mutate: mutation, 
-    responseData,
-    isSuccess,
+    mutate: mutation,  
     isPending,
   } = useEditVilla<userObjData>(
     "/newRoom/successfull",
     "ویلا با موفقیت ثبت شد",
     villaId,
   ); 
- 
- 
+  
   useEffect(() => {
     if (acceptRules) setDisabelNextButton(false);
     else setDisabelNextButton(true);
@@ -38,7 +35,7 @@ const page = () => {
       step: 9,
       finished: true,
     }; 
-    mutation(userData);
+    mutation(userData); 
   };
   return (
     <StepLayout stepperActive={9}>
