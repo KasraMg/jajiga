@@ -12,7 +12,7 @@ import useEditVilla from "@/src/hooks/useEditVilla";
  
 interface userObjData {
   rules: {};
-  step: 8;
+  step: 9;
   finished: false;
 }
 const page = () => {
@@ -46,7 +46,7 @@ const page = () => {
         smoke: smoke === null ? false : smoke, 
         ...(rules ? { more: rules } : {})
       },
-      step: 8,
+      step: 9,
       finished: false,
     };  
     mutation(userData);

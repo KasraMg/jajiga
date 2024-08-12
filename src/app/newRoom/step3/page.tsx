@@ -17,9 +17,7 @@ const page = () => {
   const villaId = getFromLocalStorage("villaId");
 
   const {
-    mutate: mutation,
-    responseData,
-    isSuccess,
+    mutate: mutation, 
     isPending,
   } = useEditVilla<any>(
     "/newRoom/step4",
