@@ -53,9 +53,10 @@ if (isPopoverOpen) {
       </PopoverTrigger>
       <PopoverContent className="w-96">
         <div className="relative z-50 bg-white p-3 py-5 before:absolute before:bottom-0 before:right-0 before:top-4 before:block before:h-8 before:w-2 before:rounded-l-lg before:bg-customYellow before:content-['']">
-          <p className="font-vazir text-base font-normal sm:!text-lg">
-            محدوده اجاره‌بها
-          </p>
+          <div className="font-vazir gap-20 font-normal flex justify-between">
+          <p className="sm:!text-lg text-base whitespace-nowrap">محدوده اجاره‌بها</p>
+          <span className="text-red-500 text-xs">فیلترینگ بر اساس میانگین قیمت 4 فصل میباشد</span>
+          </div>
           <div className="mt-4 flex flex-col gap-3">
             <div className="flex items-center">
               <label className="mb-1 mt-2 block w-20">نرخ هر شب از</label>

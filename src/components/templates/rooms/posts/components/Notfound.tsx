@@ -1,8 +1,10 @@
 import { Button } from "@/src/components/shadcn/ui/button";
 import { categoryStore } from "@/src/stores/category";
 import Image from "next/image"; 
+import { useRouter } from "next/navigation";
 
 const Notfound = () => {
+  const router = useRouter()
   const {
     setFacilities,
     setMaxPrice,
@@ -20,7 +22,8 @@ const Notfound = () => {
     setVillaZone([]);
     setVillaType([]);
     setFacilities([]);
-    setOrder("");
+    setOrder(""); 
+    router.push('/rooms');
   };
   return (
     <div className="text-center">
@@ -31,7 +34,7 @@ const Notfound = () => {
         height={1000}
         src={"/images/notFound.png"}
       />
-      <p>اقامتگاهی با این فیلترینگ یافت نشد</p>
+      <p>اقامتگاهی  در این شهر یا با این فیلترینگ یافت نشد</p>
       <Button onClick={clearFiltringHandler} className="mt-5" variant={"main"}>
         حذف فیلترینگ
       </Button>

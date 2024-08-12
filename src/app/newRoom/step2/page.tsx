@@ -20,13 +20,11 @@ interface userObjData {
 }
 
 const page = () => {
-  const [disabelNextButton, setDisabelNextButton] = useState(true);
+  const [disableNextButton, setDisableNextButton] = useState(true);  
   const [change, setChange] = useState(false);
   const villaId = getFromLocalStorage("villaId"); 
   const {
-    mutate: mutation,
-    responseData,
-    isSuccess,
+    mutate: mutation, 
     isPending,
   } = useEditVilla<userObjData>(
     "/newRoom/step3",
@@ -37,7 +35,7 @@ const page = () => {
   let coordinates: { x: string; y: string };
   useEffect(() => {
     if (change) {
-      setDisabelNextButton(false);
+      setDisableNextButton(false);
     }
   }, [change]);
 
@@ -56,6 +54,8 @@ const page = () => {
       finished: false,
     };
     mutation(userData);
+    setDisableNextButton(true)
+
   };
 
   return (
@@ -86,7 +86,7 @@ const page = () => {
           <ContentNavigator
             clickHandler={submitHandler}
             disablelPrevButton={false}
-            disabelNextButton={disabelNextButton}
+            disableNextButton={disableNextButton}
             prevLink={"newRoom/step1"}
           />
         </div>

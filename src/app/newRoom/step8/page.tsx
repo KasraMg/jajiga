@@ -1,41 +1,42 @@
 "use client";
-
 import ContentNavigator from "@/src/components/modules/contentNavigator/ContentNavigator";
 import StepLayout from "@/src/components/layouts/stepLayout/StepLayout";
 import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
 import Textarea from "@/src/components/modules/textarea/Textarea";
 import { useEffect, useState } from "react";
-import { getFromLocalStorage } from "@/src/utils/utils"; 
-import Loader from "@/src/components/modules/loader/Loader"; 
+import { getFromLocalStorage } from "@/src/utils/utils";
+import Loader from "@/src/components/modules/loader/Loader";
 import useEditVilla from "@/src/hooks/useEditVilla";
- 
+
 interface userObjData {
-  rules: {};
+  rules: {
+    more: any;
+    music: boolean;
+    pet: boolean;
+    smoke: boolean;
+  };
   step: 9;
   finished: false;
 }
 const page = () => {
-  const [disabelNextButton, setDisabelNextButton] = useState<boolean>(false);
+  const [disableNextButton, setDisableNextButton] = useState(true);
   const [rules, setRules] = useState<string>("");
   const [pet, setPet] = useState<null | boolean>(null);
   const [party, setParty] = useState<null | boolean>(null);
-  const [smoke, setSmoke] = useState<null | boolean>(null); 
+  const [smoke, setSmoke] = useState<null | boolean>(null);
 
   const villaId = getFromLocalStorage("villaId");
-  const {
-    mutate: mutation,  
-    isPending,
-  } = useEditVilla<userObjData>(
+  const { mutate: mutation, isPending } = useEditVilla<userObjData>(
     "/newRoom/step9",
     "اطلاعات با موفقیت بروزرسانی شد",
     villaId,
-  ); 
- 
+  );
 
   useEffect(() => {
-    if (smoke !== null && party !== null && pet !== null) setDisabelNextButton(false);
-    else setDisabelNextButton(true);
+    if (smoke !== null && party !== null && pet !== null)
+      setDisableNextButton(false);
+    else setDisableNextButton(true);
   }, [smoke, party, pet]);
 
   const submitHandler = () => {
@@ -43,13 +44,14 @@ const page = () => {
       rules: {
         pet: pet === null ? false : pet,
         music: party === null ? false : party,
-        smoke: smoke === null ? false : smoke, 
-        ...(rules ? { more: rules } : {})
+        smoke: smoke === null ? false : smoke,
+        ...(rules ? { more: rules } : {}),
       },
       step: 9,
       finished: false,
-    };  
+    };
     mutation(userData);
+    setDisableNextButton(true); 
   };
   return (
     <StepLayout stepperActive={8}>
@@ -202,7 +204,7 @@ const page = () => {
           <ContentNavigator
             clickHandler={submitHandler}
             disablelPrevButton={false}
-            disabelNextButton={disabelNextButton}
+            disableNextButton={disableNextButton}
             prevLink={"newRoom/step9"}
           />
         </div>
@@ -212,7 +214,7 @@ const page = () => {
             text="تعیین و درج مقررات اقامتگاه بصورت شفاف و گویا باعث حداقل شدن مشکلات آینده خواهد شد. توجه داشته باشید که تنها میهمانانی که تمامی مقررات اقامتگاه شما را می پذیرند قادر به رزرو اقامتگاه خواهند بود, لذا با رعایت تعادل در تعیین مقررات ‏تعداد کمتری از میهمانان را از دست خواهید داد."
           />
         </div>
-        {isPending && <Loader />} 
+        {isPending && <Loader />}
       </div>
     </StepLayout>
   );

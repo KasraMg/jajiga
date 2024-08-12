@@ -10,18 +10,30 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/src/components/shadcn/ui/accordion";
-import { getFromLocalStorage } from "@/src/utils/utils"; 
-import Loader from "@/src/components/modules/loader/Loader"; 
+import { getFromLocalStorage } from "@/src/utils/utils";
+import Loader from "@/src/components/modules/loader/Loader";
 import useEditVilla from "@/src/hooks/useEditVilla";
 
+interface priceDays {
+  midWeek: string;
+  holidays: string;
+  peakDays: string;
+}
+
 interface userObjData {
-  price: {};
+  price: {
+    newYear: string;
+    spring: priceDays;
+    summer: priceDays;
+    autumn: priceDays;
+    winter: priceDays;
+  };
   step: 8;
   finished: false;
 }
 
 const page = () => {
-  const [disableNextButton, setDisableNextButton] = useState<boolean>(true);
+  const [disableNextButton, setDisableNextButton] = useState(true);
   const [newYearPrice, setNewYearPrice] = useState<string>("");
   const [seasonDatas, setSeasonDatas] = useState([
     {
@@ -59,7 +71,7 @@ const page = () => {
   ]);
   const villaId = getFromLocalStorage("villaId");
   const {
-    mutate: mutation, 
+    mutate: mutation,
     responseData,
     isSuccess,
     isPending,
@@ -68,7 +80,6 @@ const page = () => {
     "اطلاعات با موفقیت بروزرسانی شد",
     villaId,
   );
-   
 
   const submitHandler = () => {
     const userData: userObjData = {
@@ -97,8 +108,9 @@ const page = () => {
       },
       step: 8,
       finished: false,
-    }; 
+    };
     mutation(userData);
+    setDisableNextButton(true);
   };
 
   const changeInputHandler = (
@@ -117,13 +129,13 @@ const page = () => {
   };
 
   const validInputsHandler = (updatedSeasonDatas: any) => {
-    const isAnyInputEmpty = updatedSeasonDatas.some((season:any) =>
-      season.Data.some((data:any) => data.amount.length === 0),
+    const isAnyInputEmpty = updatedSeasonDatas.some((season: any) =>
+      season.Data.some((data: any) => data.amount.length === 0),
     );
     const isNewYearPriceEmpty = newYearPrice.length === 0;
 
     if (!isAnyInputEmpty && !isNewYearPriceEmpty) {
-      setDisableNextButton(false); 
+      setDisableNextButton(false);
     } else {
       setDisableNextButton(true);
     }
@@ -132,7 +144,6 @@ const page = () => {
   useEffect(() => {
     validInputsHandler(seasonDatas);
   }, [newYearPrice, seasonDatas]);
-
 
   const season = [
     {
@@ -155,8 +166,8 @@ const page = () => {
       id: 4,
       avatar: "https://www.jajiga.com/static/img/pricing/winter.png",
     },
-  ]; 
- 
+  ];
+
   return (
     <StepLayout stepperActive={8}>
       <div className="flex max-w-[1120px] gap-0 py-8 sm:!gap-5">
@@ -258,7 +269,7 @@ const page = () => {
           <ContentNavigator
             clickHandler={submitHandler}
             disablelPrevButton={false}
-            disabelNextButton={disableNextButton}
+            disableNextButton={disableNextButton}
             prevLink={"newRoom/step7"}
           />
         </div>
@@ -268,7 +279,7 @@ const page = () => {
             text="برای آسانتر شدن نرخ گذاری اقامتگاه در روزهای مختلف سال, پس از تعیین نرخهای زیر توسط شما, این نرخها با رعایت روزهای عادی و تعطیل هفته در فصول مختلف سال, بصورت خودکار در تقویم اقامتگاه شما اعمال خواهد گردید.وسط هفته: روزهای شنبه تا چهارشنبه هر هفته. آخر هفته: روزهای پنجشنبه و جمعه و تعطیلات عادی. ایام پیک: تعطیلات خاص و پر مسافر.توجه: شما همچنین می توانید با مراجعه به تقویم موجود در صفحه ویرایش اقامتگاه, اجاره بهای روزهای خاص را بصورت دستی تغییر دهید."
           />
         </div>
-        {isPending && <Loader />} 
+        {isPending && <Loader />}
       </div>
     </StepLayout>
   );

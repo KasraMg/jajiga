@@ -17,7 +17,7 @@ const Card: FC<CardProps> = ({ data, className }) => {
   const villaType = typeOptions.find(type=>type.value === data.aboutVilla.villaType) 
 
   return (
-    <Link href={`/room/${data._id}`} className={`mx-auto xl:!w-full ${className} `}>
+    <Link href={`/room/${data._id}`} className={`mx-auto xl:!w-full w-full ${className} `}>
       <div className="relative w-full"> 
         <Image
           className="h-52 w-full rounded-xl object-cover"

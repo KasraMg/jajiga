@@ -1,11 +1,10 @@
 "use client";
 import { useState, useEffect } from "react";
-import { CiSearch } from "react-icons/ci";
 import Menu from "../menu/Menu";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import Loader from "../loader/Loader";
 import { authStore } from "@/src/stores/auth";
+import SearchBox from "./components/SearchBox";
 
 const Navbar = ({ navbarContainer }: any) => {
   const route = usePathname();
@@ -13,8 +12,7 @@ const Navbar = ({ navbarContainer }: any) => {
     route.length > 2 ? true : false,
   );
 
-  const { userData,login } = authStore((state) => state);
-  const [isShowSearchBox,setIsShowSearchBox] = useState(false)
+  const { login } = authStore((state) => state);
   useEffect(() => {
     window?.addEventListener("scroll", () => {
       if (route.length == 1) {
@@ -98,20 +96,7 @@ const Navbar = ({ navbarContainer }: any) => {
           <div className="flex items-center justify-end gap-0 sm:!justify-normal sm:!gap-6">
             {isSticky && (
               <div className="flex w-[60%] gap-3 sm:!w-[55%] md:!w-max">
-                <div className="relative mx-auto w-full md:!w-max">
-                  <i className={`${isShowSearchBox ? 'bg-customYellow':''} absolute left-[2px] top-[1.5px] cursor-pointer rounded-full px-2 py-2 text-[1.2rem] text-black sm:!left-1 sm:!top-[4.3px]`}>
-                    <CiSearch />
-                  </i>
-                  <input
-                    style={{ boxShadow: "none" }}
-                    dir="rtl"
-                    type="text"
-                    onBlur={()=>setIsShowSearchBox(false)}
-                    onFocus={()=>setIsShowSearchBox(true)}
-                    className="h-full w-full rounded-full border border-[#0000005c] py-2 pl-8 pr-3 text-sm placeholder:text-sm placeholder:text-gray-300 focus:!border-[#6B7280] sm:!w-full sm:!text-base sm:placeholder:!text-base md:!w-[170px] md:!py-0 lg:!w-[363px]"
-                    placeholder="میخوای کجا بری؟"
-                  />
-                </div>
+               <SearchBox />
                 <Link
                   href={"/support"}
                   className="hidden rounded-full border border-solid border-[#0000003c] p-1 md:!block"
@@ -173,7 +158,7 @@ const Navbar = ({ navbarContainer }: any) => {
             )}
             <section className="flex items-center gap-8">
               <ul
-                className={` ${
+                className={`${
                   isSticky ? "text-black" : "text-white"
                 } font-vazir hidden flex-row-reverse gap-8 font-medium md:!flex`}
               >
@@ -181,7 +166,7 @@ const Navbar = ({ navbarContainer }: any) => {
                   <Link href={"/login"}>ورود / ثبت نام</Link>
                 ) : (
                   <>
-                    <Link href={""}>اعلانات</Link> 
+                    <Link href={""}>اعلانات</Link>
                   </>
                 )}
 

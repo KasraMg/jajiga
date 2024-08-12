@@ -16,7 +16,7 @@ interface userObjData {
 }
 
 const Rules = () => {
-  const [disabelNextButton, setDisableNextButton] = useState<boolean>(true);
+  const [disableNextButton, setDisableNextButton] = useState<boolean>(true);
 
   const [rules, setRules] = useState<string>("");
   const [pet, setPet] = useState<null | boolean>(null);
@@ -239,7 +239,7 @@ const Rules = () => {
           </>
         )}
 
-        {!disabelNextButton && (
+        {!disableNextButton && (
           <Button
             onClick={submitHandler}
             variant="yellow"

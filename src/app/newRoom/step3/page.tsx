@@ -13,13 +13,10 @@ import useEditVilla from "@/src/hooks/useEditVilla";
 const page = () => {
   const [images, setImages] = useState<any>([]);
   const [imagesBaseUrl, setImagesBaseUrl] = useState<any>([]);
-  const [disabelNextButton, setDisabelNextButton] = useState(true);
+  const [disableNextButton, setDisableNextButton] = useState(true); 
   const villaId = getFromLocalStorage("villaId");
 
-  const {
-    mutate: mutation, 
-    isPending,
-  } = useEditVilla<any>(
+  const { mutate: mutation, isPending } = useEditVilla<any>(
     "/newRoom/step4",
     "اطلاعات با موفقیت بروزرسانی شد",
     villaId,
@@ -90,13 +87,13 @@ const page = () => {
     if (images.length > 0) {
       generateImages();
       if (images.length > 2) {
-        setDisabelNextButton(false);
+        setDisableNextButton(false);
       } else {
-        setDisabelNextButton(true);
+        setDisableNextButton(true);
       }
     } else {
       setImagesBaseUrl([]);
-      setDisabelNextButton(true);
+      setDisableNextButton(true);
     }
   }, [images]);
 
@@ -112,8 +109,8 @@ const page = () => {
     });
     formData.append("step", "4");
     formData.append("finished", "false");
-
     mutation(formData);
+    setDisableNextButton(true);
   };
 
   return (
@@ -183,7 +180,7 @@ const page = () => {
           <ContentNavigator
             clickHandler={submitHandler}
             disablelPrevButton={false}
-            disabelNextButton={disabelNextButton}
+            disableNextButton={disableNextButton}
             prevLink={"newRoom/step2"}
           />
         </div>

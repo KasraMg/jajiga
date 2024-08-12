@@ -24,16 +24,11 @@ interface userObjData {
 
 const page = () => {
   const [address, setAddress] = useState<string>("");
-  const {
-    mutate: mutation,
-    responseData,
-    isSuccess,
-    isPending,
-  } = useEditVilla<userObjData>(
+  const { mutate: mutation, isPending } = useEditVilla<userObjData>(
     "/newRoom/step2",
     "ویلا ساخته و اطلاعات ابتدایی با موفقیت بروزرسانی شد",
   );
- 
+
   const [stateSelectedOption, setStateSelectedOption] = useState<{
     label: string;
     value: string[];
@@ -46,7 +41,7 @@ const page = () => {
     { label: string; value: string[] }[]
   >([]);
   const [citySelectorDisabel, setcitySelectorDisabel] = useState(true);
-  const [disabelNextButton, setDisabelNextButton] = useState(true);
+  const [disableNextButton, setDisableNextButton] = useState(true);
 
   useEffect(() => {
     setCitySelectedOption(null);
@@ -64,8 +59,8 @@ const page = () => {
 
   useEffect(() => {
     if (stateSelectedOption && address && citySelectedOption) {
-      setDisabelNextButton(false);
-    } else setDisabelNextButton(true);
+      setDisableNextButton(false);
+    } else setDisableNextButton(true);
   }, [stateSelectedOption, address, citySelectedOption]);
 
   const submitHandler = () => {
@@ -79,6 +74,7 @@ const page = () => {
       finished: false,
     };
     mutation(userData);
+    setDisableNextButton(true);
   };
 
   return (
@@ -87,7 +83,7 @@ const page = () => {
         <div className="hidden min-w-[23%] md:!flex lg:!min-w-[21%]">
           <Stepper active={1} />
         </div>
-        <div className="flex w-full flex-col gap-8">
+        <div className="flex w-full flex-col gap-5">
           <div className="flex flex-col items-start justify-between gap-2 md:flex-row md:!items-center md:!gap-0">
             <p className="min-w-[150px] whitespace-nowrap text-sm text-[#252a31]">
               انتخاب استان:
@@ -104,7 +100,7 @@ const page = () => {
             />
           </div>
 
-          <div className="mt-2 flex flex-col items-start justify-between gap-2 md:flex-row md:!items-center md:!gap-0">
+          <div className="flex flex-col items-start justify-between gap-2 md:flex-row md:!items-center md:!gap-0">
             <p className="min-w-[150px] whitespace-nowrap text-sm text-[#252a31]">
               انتخاب شهر:
             </p>
@@ -143,7 +139,7 @@ const page = () => {
           <ContentNavigator
             clickHandler={submitHandler}
             disablelPrevButton={true}
-            disabelNextButton={disabelNextButton}
+            disableNextButton={disableNextButton}
             prevLink={"/"}
           />
         </div>

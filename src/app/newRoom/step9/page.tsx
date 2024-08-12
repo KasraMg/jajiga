@@ -4,8 +4,8 @@ import StepLayout from "@/src/components/layouts/stepLayout/StepLayout";
 import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
 import { useEffect, useState } from "react";
-import { getFromLocalStorage } from "@/src/utils/utils"; 
-import Loader from "@/src/components/modules/loader/Loader"; 
+import { getFromLocalStorage } from "@/src/utils/utils";
+import Loader from "@/src/components/modules/loader/Loader";
 import useEditVilla from "@/src/hooks/useEditVilla";
 
 interface userObjData {
@@ -13,29 +13,27 @@ interface userObjData {
   finished: true;
 }
 const page = () => {
-  const [disabelNextButton, setDisabelNextButton] = useState<boolean>(false);
-  const [acceptRules, setAcceptRules] = useState(false); 
+  const [disableNextButton, setDisableNextButton] = useState(true);
+  const [acceptRules, setAcceptRules] = useState(false);
   const villaId = getFromLocalStorage("villaId");
-  const {
-    mutate: mutation,  
-    isPending,
-  } = useEditVilla<userObjData>(
+  const { mutate: mutation, isPending } = useEditVilla<userObjData>(
     "/newRoom/successfull",
     "ویلا با موفقیت ثبت شد",
     villaId,
-  ); 
-  
+  );
+
   useEffect(() => {
-    if (acceptRules) setDisabelNextButton(false);
-    else setDisabelNextButton(true);
+    if (acceptRules) setDisableNextButton(false);
+    else setDisableNextButton(true);
   }, [acceptRules]);
 
   const submitHandler = () => {
     const userData: userObjData = {
       step: 9,
       finished: true,
-    }; 
-    mutation(userData); 
+    };
+    mutation(userData);
+    setDisableNextButton(true);
   };
   return (
     <StepLayout stepperActive={9}>
@@ -98,7 +96,7 @@ const page = () => {
           <ContentNavigator
             clickHandler={submitHandler}
             disablelPrevButton={false}
-            disabelNextButton={disabelNextButton}
+            disableNextButton={disableNextButton}
             prevLink={"newRoom/step9"}
           />
         </div>
@@ -115,4 +113,3 @@ const page = () => {
 };
 
 export default page;
- 

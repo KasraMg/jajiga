@@ -16,6 +16,7 @@ import Notfound from "./components/Notfound";
 const Posts = () => {
   const searchParams = useSearchParams();
   const city = searchParams.get("city");
+
   const {
     order,
     maximumSpace,
@@ -53,8 +54,7 @@ const Posts = () => {
     if (villaType.length) {
       const type = villaType?.map((item) => item).join("-");
       url += `&type=${type}`;
-    } 
-
+    }   
     const res = await fetch(url, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -85,6 +85,7 @@ const Posts = () => {
     villaType,
     villaZone,
     spaceSelectedOption,
+    searchParams
   ]);
 
   useEffect(() => {

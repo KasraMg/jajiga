@@ -34,7 +34,7 @@ export interface userVillasObj {
   };
   coordinates: { x: number; y: number };
   cover: string[];
-  createdAt: string;
+  createdAt: string; 
   rules: {
     more: string;
     music: boolean;

@@ -15,10 +15,10 @@ interface userObjData {
   finished: false;
 }
 const page = () => {
-  const { data, status } = useGetData(["step_6_items"], fetchStep6Items);
-console.log(data);
+  const { data, status,isLoading } = useGetData(["step_6_items"], fetchStep6Items);
+   
+  const [disableNextButton, setDisableNextButton] = useState(false);
 
-  const [disabelNextButton, setDisabelNextButton] = useState<boolean>(false);
   const [showInput, setShowInput] = useState<boolean[]>(
     new Array(data?.facility.length).fill(false),
   );
@@ -28,12 +28,7 @@ console.log(data);
   const [moreSanitary, setMoreSanitary] = useState("");
 
   const villaId = getFromLocalStorage("villaId");
-  const {
-    mutate: mutation,
-    responseData,
-    isSuccess,
-    isPending,
-  } = useEditVilla<userObjData>(
+  const { mutate: mutation, isPending } = useEditVilla<userObjData>(
     "/newRoom/step7",
     "اطلاعات با موفقیت بروزرسانی شد",
     villaId,
@@ -48,10 +43,12 @@ console.log(data);
       }));
       setFacilitySelected(newFacilities);
 
-      const newSanitary = data.sanitaryFacilities.map((item: { engTitle: string }) => ({
-        title: item.engTitle,
-        status: false,
-      }));
+      const newSanitary = data.sanitaryFacilities.map(
+        (item: { engTitle: string }) => ({
+          title: item.engTitle,
+          status: false,
+        }),
+      );
       setSanitarySelected(newSanitary);
     }
   }, [status]);
@@ -84,6 +81,7 @@ console.log(data);
       finished: false,
     };
     mutation(userData);
+    setDisableNextButton(true);
   };
 
   const inputChangeHandler = (value: string, itemTitle: string) => {
@@ -155,6 +153,7 @@ console.log(data);
                 </div>
               ),
             )}
+            {isLoading && '...'}
           <div className="flex items-center justify-between">
             <label className="text-sm">سایر امکانات</label>
             <input
@@ -196,6 +195,8 @@ console.log(data);
                 </div>
               ),
             )}
+            {isLoading && '...'}
+
           <div className="!mb-16 flex items-center justify-between">
             <label className="text-sm">سایر موارد</label>
             <input
@@ -208,7 +209,7 @@ console.log(data);
           </div>
           <ContentNavigator
             disablelPrevButton={false}
-            disabelNextButton={disabelNextButton}
+            disableNextButton={disableNextButton}
             clickHandler={submitHandler}
             prevLink={"newRoom/step5"}
           />

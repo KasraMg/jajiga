@@ -29,7 +29,7 @@ const Capacity = () => {
   const [landSize, setLandSize] = useState<string>("");
   const [areaSize, setAreaSize] = useState<string>("");
   const [roomCount, setRoomCount] = useState<number>(0);
-  const [disabelNextButton, setDisableNextButton] = useState<boolean>(true);
+  const [disableNextButton, setDisableNextButton] = useState<boolean>(true);
   const [description, setDescription] = useState<string>("");
 
   const villa = userData?.villas.find((villa) => villa._id === params.id);
@@ -44,7 +44,7 @@ const Capacity = () => {
       setMaximumSpace(villa.capacity.maxCapacity as number);
       setDescription(villa.capacity.description as string);
     }
-  }, [villa]); 
+  }, [villa]);
 
   const incrementStandardHandler = () => {
     setDisableNextButton(false);
@@ -104,7 +104,7 @@ const Capacity = () => {
 
   return (
     <section className="flex w-full max-w-[1120px] justify-between gap-16">
-      <div className="font-thin text-gray-700 w-full">
+      <div className="w-full font-thin text-gray-700">
         <div className="w-full space-y-4">
           <div className="flex items-center justify-between pl-1">
             <p>ظرفیت استاندارد</p>
@@ -178,13 +178,14 @@ const Capacity = () => {
               />
               <span className="absolute left-2 top-[10px] text-sm text-gray-500">
                 متر
-              </span>
-              {landSize < areaSize && (
+              </span>  
+              {areaSize > landSize ? (
                 <span className="absolute -bottom-[36px] text-xs text-red-600">
                   متراژ بنای اقامتگاه نمی‌تواند بزرگتر از متراژ زمین و محوطه
                   باشد
                 </span>
-              )}
+              ) : null}
+
               {landSize > areaSize && (areaSize as any) > 9999 && (
                 <span className="absolute -bottom-[27px] text-xs text-red-600">
                   متراژ زیربنا نمی‌تواند بزرگتر از 9999 متر باشد
@@ -197,8 +198,9 @@ const Capacity = () => {
             <div className="flex w-1/2 items-center justify-between">
               <p
                 onClick={() => {
-                  setDisableNextButton(false)
-                  setRoomCount((prev) => prev + 1)}}
+                  setDisableNextButton(false);
+                  setRoomCount((prev) => prev + 1);
+                }}
                 className="cursor-pointer text-2xl hover:text-gray-500"
               >
                 +
@@ -207,11 +209,10 @@ const Capacity = () => {
                 {roomCount == 0 ? "فاقد اتاق خواب" : roomCount + "   اتاق  "}
               </p>
               <p
-                onClick={() =>{
-                  setDisableNextButton(false)
-                  setRoomCount((prev) => prev == -1 && ((prev - 1) as any)) 
-                }
-                }
+                onClick={() => {
+                  setDisableNextButton(false);
+                  setRoomCount((prev) => prev == -1 && ((prev - 1) as any));
+                }}
                 className={`${roomCount == 0 && "!cursor-not-allowed text-gray-300"} mb-4 cursor-pointer text-2xl hover:text-gray-500`}
               >
                 _
@@ -234,7 +235,7 @@ const Capacity = () => {
             </div>
           </div>
         </div>
-        {!disabelNextButton && (
+        {!disableNextButton && (
           <Button
             onClick={submitHandler}
             variant="yellow"
@@ -244,7 +245,7 @@ const Capacity = () => {
           </Button>
         )}
       </div>
-      <div className="md:block hidden">
+      <div className="hidden md:block">
         <StepperInfo
           className="w-full max-w-[380px]"
           title="ظرفیت استاندارد / ظرفیت حداکثر"
