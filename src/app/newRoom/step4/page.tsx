@@ -8,7 +8,7 @@ import Select from "react-select";
 import {
   spaceOptions,
   typeOptions,
-  areaOptions,
+  zoneOptions,
 } from "@/src/utils/selectOptions";
 import StepLayout from "@/src/components/layouts/stepLayout/StepLayout";
 import { getFromLocalStorage } from "@/src/utils/utils";
@@ -128,7 +128,7 @@ const page = () => {
               className="font-vazir w-full font-light md:w-[200px] lg:!w-full"
               isRtl={true}
               isSearchable={true}
-              options={areaOptions}
+              options={zoneOptions}
               placeholder={"منطقه اقامتگاه خود را انتخاب کنید"}
             />
           </div>

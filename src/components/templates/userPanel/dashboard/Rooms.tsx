@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/src/components/shadcn/ui/button";
-import { toast, useToast } from "@/src/components/shadcn/ui/use-toast";
+import { toast } from "@/src/components/shadcn/ui/use-toast";
 import { authStore } from "@/src/stores/auth";
 import { userVillasObj } from "@/src/types/Auth.types";
 import {
@@ -90,13 +90,16 @@ const Rooms = () => {
                           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIhFKJwV5wJD6dkUvbLLW75ofGNZ6pbsyYWmXDGK1KTg&s"
                         }
                       />
-                    )} 
-                    <p  className={`mb-0 rounded-lg bg-white p-1 text-xs text-black absolute left-7 top-4`}
+                    )}
+                    <p
+                      className={`absolute left-[1.7rem] top-[18px] mb-0 rounded-lg bg-white p-1 text-xs text-black`}
                     >
                       {((villa.step - 1) / (9 - 1)) * 100}%
                     </p>
                   </div>
-                  <p className="hidden xl:block">({villa._id.slice(18, 26)})</p>
+                  <Link href={`/room/${villa._id}`} className="hidden xl:block">
+                    ({villa._id.slice(18, 26)})
+                  </Link>
                 </div>
                 <div>
                   <p className="xl:!hidden">({villa._id.slice(18, 26)})</p>

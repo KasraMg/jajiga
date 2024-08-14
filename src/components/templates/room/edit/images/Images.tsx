@@ -70,7 +70,7 @@ const Images = () => {
             let base64String = reader.result;
             setUserImages((prev: string) => [
               ...(prev as any),
-              { url: base64String, name: event?.target?.files?[0]?.name },
+              { url: base64String, name: event.target.files[0].name }
             ]);
           };
           reader.readAsDataURL(file);
