@@ -16,10 +16,7 @@ interface userObjData {
 }
 
 const Facilities = () => {
-  const { data, status } = useGetData(
-    ["server_step_6_items"],
-    fetchStep6Items,
-  );
+  const { data, status } = useGetData(["server_step_6_items"], fetchStep6Items);
   const { userData } = authStore((state) => state);
   const params = useParams();
   const [moreFacility, setMoreFacility] = useState("");
@@ -35,8 +32,8 @@ const Facilities = () => {
   useEffect(() => {
     if (data.statusCode === 200 && userData && data) {
       console.log(data);
-      
-      const newFacilities = data?.facility.map((item: any) => ({
+
+      const newFacilities = data?.facility?.map((item: any) => ({
         engtitle: item.engTitle,
         title: item.title,
         status: false,

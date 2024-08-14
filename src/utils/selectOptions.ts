@@ -268,7 +268,7 @@ const typeOptions: {
     href: "tent",
   },
 ];
-const areaOptions: {
+const zoneOptions: {
   label: string;
   value: string;
 }[] = [
@@ -347,7 +347,7 @@ const categoryFilterOptions: {
 export {
   firstTimeOptions,
   secondTimeOptions,
-  areaOptions,
+  zoneOptions,
   typeOptions,
   spaceOptions,
   userCountOptions,

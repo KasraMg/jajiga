@@ -7,7 +7,7 @@ const SearchBox = () => {
   const [isShowSearchBox, setIsShowSearchBox] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const router = useRouter();
-  const inputChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const inputChangeHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.keyCode === 13 && searchValue.length) {
       router.push(`/rooms?city=${searchValue}`);
       setIsShowSearchBox(false);

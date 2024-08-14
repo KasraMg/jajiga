@@ -1,3 +1,5 @@
+import { userVillasObj } from "./Auth.types";
+
 interface priceDays {
   midWeek: string;
   holidays: string;
@@ -25,7 +27,31 @@ export interface VillaType {
   cover: string[];
   createdAt: string;
   disable: boolean;
-  facility: {};
+  facility: {
+    facility: {
+      coolingSystem: { status: boolean; description?: string };
+      diningTable: { status: boolean; description?: string };
+      eightball: { status: boolean; description?: string };
+      fridge: { status: boolean; description: string };
+      furniture: { status: boolean; description: string };
+      heatingSystem: { status: boolean; description?: string };
+      parking: { status: boolean; description?: string };
+      pool: { status: boolean; description?: string };
+      toilet: { status: boolean; description?: string };
+      tv: { status: boolean; description: string };
+      wifi: { status: boolean; description?: string };
+      moreFacility?: string;
+    };
+    sanitaryFacilities: {
+      antiseptics: { status: boolean };
+      changeTheBedsheet: { status: boolean };
+      changeThePillow: { status: boolean };
+      chargingDishSoap: { status: boolean };
+      chargingToiletPaper: { status: boolean };
+      dishSoap: { status: boolean };
+      moreSanitaryFacilities?: string;
+    };
+  };
   finished: boolean;
   price: {
     newYear: string;
@@ -41,3 +67,4 @@ export interface VillaType {
   __v: number;
   _id: string;
 }
+ 

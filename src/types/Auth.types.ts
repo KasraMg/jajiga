@@ -3,9 +3,9 @@ export interface userInfoObj {
   firstName: string;
   lastName: string;
   password: string;
-  avatar:any;
-  gender:string;
-  aboutMe:string;
+  avatar: any;
+  gender: string;
+  aboutMe: string;
   phone: string;
   email: string;
   refreshToken: string;
@@ -34,23 +34,48 @@ export interface userVillasObj {
   };
   coordinates: { x: number; y: number };
   cover: string[];
-  createdAt: string; 
+  createdAt: string;
+  costly: boolean;
   rules: {
     more: string;
     music: boolean;
     pet: boolean;
     smoke: boolean;
   };
-  price:{
-    newYear:string
-    spring:priceDays
-    summer:priceDays
-    autumn:priceDays
-    winter:priceDays
-  }
-  disable:boolean
+  price: {
+    newYear: string;
+    spring: priceDays;
+    summer: priceDays;
+    autumn: priceDays;
+    winter: priceDays;
+  };
+  disable: boolean;
   finished: boolean;
-  facility: {};
+  facility: {
+    facility: {
+      coolingSystem: { status: boolean; description?: string };
+      diningTable: { status: boolean; description?: string };
+      eightball: { status: boolean; description?: string };
+      fridge: { status: boolean; description: string };
+      furniture: { status: boolean; description: string };
+      heatingSystem: { status: boolean; description?: string };
+      parking: { status: boolean; description?: string };
+      pool: { status: boolean; description?: string };
+      toilet: { status: boolean; description?: string };
+      tv: { status: boolean; description: string };
+      wifi: { status: boolean; description?: string };
+      moreFacility?: string;
+    };
+    sanitaryFacilities: {
+      antiseptics: { status: boolean };
+      changeTheBedsheet: { status: boolean };
+      changeThePillow: { status: boolean };
+      chargingDishSoap: { status: boolean };
+      chargingToiletPaper: { status: boolean };
+      dishSoap: { status: boolean };
+      moreSanitaryFacilities?: string;
+    };
+  };
   step: number;
   updatedAt: string;
   user: string;
@@ -59,9 +84,9 @@ export interface userVillasObj {
 }
 
 interface priceDays {
-  midWeek:string
-  holidays:string
-  peakDays:string
+  midWeek: string;
+  holidays: string;
+  peakDays: string;
 }
 export interface userObj {
   message: string;
@@ -69,4 +94,3 @@ export interface userObj {
   user: userInfoObj;
   villas: userVillasObj[];
 }
- 

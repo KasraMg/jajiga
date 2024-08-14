@@ -8,7 +8,7 @@ import { CiSearch } from "react-icons/ci";
 import { FaMapLocationDot, FaRegTrashCan } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { categoryStore } from "@/src/stores/category";
-import { areaOptions } from "@/src/utils/selectOptions";
+import { zoneOptions } from "@/src/utils/selectOptions";
 const Zone = () => {
   const { villaZone, setVillaZone } = categoryStore((state) => state);
   const [defaultVillaZone, setDefaultVillaZone] = useState([]);
@@ -52,7 +52,7 @@ const Zone = () => {
             منطقه اقامتگاه
           </p>
           <div className="mt-4 grid grid-cols-[auto,auto] gap-3">
-            {areaOptions.map((zone) => {
+            {zoneOptions.map((zone) => {
               const isCheck = defaultVillaZone.some(villaZone=>villaZone === zone.value)
               return (
                 <div className="flex justify-between border-b border-solid border-gray-200 px-3 pb-2">

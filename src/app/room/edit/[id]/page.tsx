@@ -14,14 +14,14 @@ import Facilities from "@/src/components/templates/room/edit/facilities/Faciliti
 import Images from "@/src/components/templates/room/edit/images/Images";
 import Price from "@/src/components/templates/room/edit/price/Price";
 import Rules from "@/src/components/templates/room/edit/rules/Rules";
-import { getUser } from "@/src/utils/serverFetchs";
+import { fetchStep6Items } from "@/src/utils/serverFetchs";
 import Hydrated from "@/src/providers/Hydrated";
 
 const Faq = () => {
   return (
     <Container>
       <Breadcrumb
-        className="!pb-[70px]"
+        className="!pb-[70px]" 
         routes={["اقامتگاه ها", "ویرایش اقامتگاه"]}
       />
       <Layout className="!z-10">
@@ -43,7 +43,7 @@ const Faq = () => {
               <Images />
             </TabsContent>
             <TabsContent value="facilities">
-              <Hydrated queryKey={["server_step_6_items"]} queryFn={getUser}>
+              <Hydrated queryKey={["server_step_6_items"]} queryFn={fetchStep6Items}>
                 <Facilities />
               </Hydrated>
             </TabsContent>
