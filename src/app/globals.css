@@ -447,7 +447,14 @@ select:focus {
 .rmdp-day-picker {
   gap: 10px;
 }
-
+@media (max-width:1100px) {
+.rmdp-day-picker div {
+  min-width: 40px !important;
+  
+}.rmdp-calendar{
+  padding: 0px !important;
+}
+}
 .rmdp-day:not(.rmdp-disabled, .rmdp-day-hidden) span:hover {
   background-color: unset !important;
   color: unset !important;
