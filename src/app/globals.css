@@ -445,7 +445,7 @@ select:focus {
 }
 
 .rmdp-day-picker {
-  gap: 20px;
+  gap: 10px;
 }
 
 .rmdp-day:not(.rmdp-disabled, .rmdp-day-hidden) span:hover {
@@ -468,6 +468,8 @@ select:focus {
 
 .rmdp-day-picker div {
   width: 100%;
+  min-height: 48px;
+  min-width: 48px;
 }
 
 .rmdp-border {

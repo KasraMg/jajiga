@@ -7,8 +7,7 @@ import Calendars from "./components/calenders/Calendars";
 import Rules from "./components/rules/Rules";
 import { Map } from "@/src/components/modules/Map/Map";
 import Comments from "./components/comments/Comments";
-import { userVillasObj } from "@/src/types/Auth.types";
-import { typeOptions } from "@/src/utils/selectOptions";
+import { userVillasObj } from "@/src/types/Auth.types"; 
 import Costly from "./components/costly/Costly";
 
 const Details = (data: userVillasObj) => { 
@@ -48,13 +47,13 @@ const Details = (data: userVillasObj) => {
       <main className="w-full px-4 md:!px-0">
         <Infoes {...data} />
         <Costly costly={data.costly} />
-        <Calendars />
-        <Rules />
+        <Calendars {...data}/>
+        <Rules {...data}/>
         <div className="w-full border-b border-solid border-gray-300 pb-8">
           <p className="my-6 mb-4 text-lg text-[#252a31]">نقشه</p>
           <Map
             className="rounded-lg"
-            position={[35.37469588708887, -105.45046566470816]}
+            position={[data.coordinates.x, data.coordinates.y]}
           />
         </div>
         <Comments />
