@@ -8,7 +8,7 @@ import { userVillasObj } from "@/src/types/Auth.types";
 const Gallery = (data: userVillasObj) => {
   return (
     <section>
-      <div className="mb-4 hidden h-[300px] gap-x-3 md:!flex">
+      <div className="mb-4 hidden h-[300px] gap-x-3 md:!flex px-4 xl:!px-0">
         <div className="w-1/2">
           <Image
             width={1000}

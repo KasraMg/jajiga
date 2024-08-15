@@ -5,9 +5,7 @@ import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import { FaTrashAlt } from "react-icons/fa";
 import { BsInfoCircle } from "react-icons/bs";
-import useDateHandler from "@/src/hooks/useDateHandler";
-
-import { Button } from "@/src/components/shadcn/ui/button";
+import useDateHandler from "@/src/hooks/useDateHandler"; 
 import {
   Sheet,
   SheetContent,
@@ -17,33 +15,28 @@ import {
 import { userVillasObj } from "@/src/types/Auth.types";
 
 const Calendars = (data: userVillasObj) => {
-  const [value, setValue] = useState<any>();
-  const [open, setOpen] = useState(0);
-  const [showMenu, setShowMenu] = useState<boolean>(false);
+  const [value, setValue] = useState<any>();  
   const date = useDateHandler();
-  const handleOpen = (value: number) => {
-    setOpen(open === value ? 0 : value);
-  };
+   
 
   function handleChange(value: DateObject | DateObject[] | null) {
     setValue(value);
+    console.log(value);
+    
   }
 
-  const handleDelete = () => {
-    // Check if any day is selected
-    if (value?.length > 0) {
-      // Clear the selected day
+  const handleDelete = () => { 
+    if (value?.length > 0) { 
       setValue([]);
     }
   };
 
-  const getSeason = (monthIndex:number) => { 
+  const getSeason = (monthIndex: number) => {
     if (monthIndex >= 0 && monthIndex <= 2) return "spring";
     if (monthIndex >= 3 && monthIndex <= 5) return "summer";
     if (monthIndex >= 6 && monthIndex <= 8) return "autumn";
     return "winter";
-  }; 
-
+  };
 
   return (
     <div className="w-full">
@@ -53,7 +46,7 @@ const Calendars = (data: userVillasObj) => {
         calendar={persian}
         locale={persian_fa}
         className="!w-full"
-        numberOfMonths={window.innerWidth >= 500 ? 2 : 1}
+        numberOfMonths={window.innerWidth >= 1023 ? 2 : 1}
         shadow={false}
         minDate={new Date()}
         onChange={handleChange}
@@ -66,14 +59,25 @@ const Calendars = (data: userVillasObj) => {
           const isPast = currentDate.getTime() < todayDate.getTime();
           const color = isWeekend && !isPast ? "#ff0000" : "";
 
-          const season = getSeason(date.month.index);     
+          const season = getSeason(date.month.index);
           const priceType = isWeekend ? "holidays" : "midWeek";
           const dayPrice = data.price[season][priceType];
           return {
             children: (
               <div style={{ textAlign: "center" }}>
-                <p style={{ marginTop: "7px",marginLeft:'6px' }}>{date.day}</p>
-                <p style={{ fontSize: "10px", color: "#555",letterSpacing:'-1px',marginLeft:'9px' }}>{dayPrice.toLocaleString('fa-IR')}</p>
+                <p style={{ marginTop: "7px", marginLeft: "6px" }}>
+                  {date.day}
+                </p>
+                <p
+                  style={{
+                    fontSize: "10px",
+                    color: "#555",
+                    letterSpacing: "-1px",
+                    marginLeft: "9px",
+                  }}
+                >
+                  {dayPrice.toLocaleString("fa-IR")}
+                </p>
               </div>
             ),
             style: {
@@ -85,8 +89,7 @@ const Calendars = (data: userVillasObj) => {
       <div className="mt-4 flex justify-between">
         <Sheet>
           <SheetTrigger asChild>
-            <div
-              onClick={() => setShowMenu(true)}
+            <div 
               className="flex cursor-pointer items-center gap-3 rounded-lg border-0 bg-[#8080801a] p-2 text-sm"
             >
               <BsInfoCircle />
@@ -191,4 +194,3 @@ const Calendars = (data: userVillasObj) => {
 };
 
 export default Calendars;
-
