@@ -14,8 +14,9 @@ import {
   SheetHeader,
   SheetTrigger,
 } from "@/src/components/shadcn/ui/sheet";
+import { userVillasObj } from "@/src/types/Auth.types";
 
-const Calendars = () => {
+const Calendars = (data: userVillasObj) => {
   const [value, setValue] = useState<any>();
   const [open, setOpen] = useState(0);
   const [showMenu, setShowMenu] = useState<boolean>(false);
@@ -36,6 +37,14 @@ const Calendars = () => {
     }
   };
 
+  const getSeason = (monthIndex:number) => { 
+    if (monthIndex >= 0 && monthIndex <= 2) return "spring";
+    if (monthIndex >= 3 && monthIndex <= 5) return "summer";
+    if (monthIndex >= 6 && monthIndex <= 8) return "autumn";
+    return "winter";
+  }; 
+
+
   return (
     <div className="w-full">
       <h2 className="my-6 mb-4 text-lg text-[#252a31]">تقویم / نرخ</h2>
@@ -49,11 +58,28 @@ const Calendars = () => {
         minDate={new Date()}
         onChange={handleChange}
         range
-        mapDays={({ date }) => {
-          let props = {} as any;
-          let isWeekend = [0, 6].includes(date.weekDay.index);
-          if (isWeekend) props.className = "highlight highlight-red";
-          return props;
+        mapDays={({ date, today }) => {
+          const isWeekend =
+            date.weekDay.index === 5 || date.weekDay.index === 6;
+          const todayDate = new Date(today.year, today.month.index, today.day);
+          const currentDate = new Date(date.year, date.month.index, date.day);
+          const isPast = currentDate.getTime() < todayDate.getTime();
+          const color = isWeekend && !isPast ? "#ff0000" : "";
+
+          const season = getSeason(date.month.index);     
+          const priceType = isWeekend ? "holidays" : "midWeek";
+          const dayPrice = data.price[season][priceType];
+          return {
+            children: (
+              <div style={{ textAlign: "center" }}>
+                <p style={{ marginTop: "7px",marginLeft:'6px' }}>{date.day}</p>
+                <p style={{ fontSize: "10px", color: "#555",letterSpacing:'-1px',marginLeft:'9px' }}>{dayPrice.toLocaleString('fa-IR')}</p>
+              </div>
+            ),
+            style: {
+              color,
+            },
+          };
         }}
       />
       <div className="mt-4 flex justify-between">
@@ -165,3 +191,4 @@ const Calendars = () => {
 };
 
 export default Calendars;
+
