@@ -11,6 +11,8 @@ import { userVillasObj } from "@/src/types/Auth.types";
 import Costly from "./components/costly/Costly";
 
 const Details = (data: userVillasObj) => { 
+  console.log(data);
+  
   return (
     <div className="flex w-full flex-col items-start justify-between pt-4 md:!w-[66.66%] md:!pt-0">
       <div className="mb-4 flex w-full justify-between px-4 md:!px-0">

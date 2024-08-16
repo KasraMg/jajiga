@@ -5,7 +5,7 @@ import persian from "react-date-object/calendars/persian";
 import persian_fa from "react-date-object/locales/persian_fa";
 import { FaTrashAlt } from "react-icons/fa";
 import { BsInfoCircle } from "react-icons/bs";
-import useDateHandler from "@/src/hooks/useDateHandler"; 
+import useDateHandler from "@/src/hooks/useDateHandler";
 import {
   Sheet,
   SheetContent,
@@ -13,21 +13,32 @@ import {
   SheetTrigger,
 } from "@/src/components/shadcn/ui/sheet";
 import { userVillasObj } from "@/src/types/Auth.types";
+import { roomStore } from "@/src/stores/room";
 
 const Calendars = (data: userVillasObj) => {
-  const [value, setValue] = useState<any>();  
   const date = useDateHandler();
-   
-
+  const { setStartDate, setEndtDate, startDate } = roomStore((state) => state);
+  const [defaultValue, setDefultValue] = useState([]);
   function handleChange(value: DateObject | DateObject[] | null) {
-    setValue(value);
-    console.log(value);
-    
+    setDefultValue(value as any);
+    if (Array.isArray(value)) {
+      value.forEach((date, index) => {
+        console.log(date.format());
+        if (index + 1 === 1) setStartDate(date.format());
+        if (index + 1 === 2) {
+          setEndtDate(date.format());
+        } else {
+          setEndtDate(null);
+        }
+      });
+    }
   }
 
-  const handleDelete = () => { 
-    if (value?.length > 0) { 
-      setValue([]);
+  const handleDelete = () => {
+    if (startDate) {
+      setDefultValue([]);
+      setStartDate(null);
+      setEndtDate(null);
     }
   };
 
@@ -39,10 +50,10 @@ const Calendars = (data: userVillasObj) => {
   };
 
   return (
-    <div className="w-full">
+    <div id="calender" className="w-full">
       <h2 className="my-6 mb-4 text-lg text-[#252a31]">تقویم / نرخ</h2>
       <Calendar
-        value={value}
+        value={defaultValue}
         calendar={persian}
         locale={persian_fa}
         className="!w-full"
@@ -71,12 +82,12 @@ const Calendars = (data: userVillasObj) => {
                 <p
                   style={{
                     fontSize: "10px",
-                    color: "#555",
+                    color: isWeekend ? "#ff0000" : isPast ? "cccbcb" : "#555",
                     letterSpacing: "-1px",
                     marginLeft: "9px",
                   }}
                 >
-                  {dayPrice.toLocaleString("fa-IR")}
+                  {new Intl.NumberFormat("fa-IR").format(dayPrice as any)}
                 </p>
               </div>
             ),
@@ -89,9 +100,7 @@ const Calendars = (data: userVillasObj) => {
       <div className="mt-4 flex justify-between">
         <Sheet>
           <SheetTrigger asChild>
-            <div 
-              className="flex cursor-pointer items-center gap-3 rounded-lg border-0 bg-[#8080801a] p-2 text-sm"
-            >
+            <div className="flex cursor-pointer items-center gap-3 rounded-lg border-0 bg-[#8080801a] p-2 text-sm">
               <BsInfoCircle />
               راهنمای تقویم
             </div>

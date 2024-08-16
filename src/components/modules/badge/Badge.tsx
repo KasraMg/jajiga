@@ -2,7 +2,7 @@ import React, { FC } from "react";
 
 type BadgeProps = {
   bgColor: string;
-  children: string;
+  children: any;
 };
 
 const Badge: FC<BadgeProps> = ({ bgColor, children }) => {

@@ -100,7 +100,7 @@ const Infoes = (data: userVillasObj) => {
         <div className="grid grid-cols-[auto,auto] gap-3 text-sm text-gray-800">
           {facibilityData &&
             facibilityData.map((option:{title:string,description:string}) => (
-              <div className="flex items-center gap-2">
+              <div key={option.title} className="flex items-center gap-2">
                 <FaRegSnowflake />
                 <p>{option.title}</p>
                 <div

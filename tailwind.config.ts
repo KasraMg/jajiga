@@ -20,7 +20,8 @@ const config = {
     },
     extend: {  
       colors: {
-        customYellow: '#f0c807', // مثال از رنگ سبز تیره
+        customYellow: '#f0c807',
+        shimmer: "#bebec3"
       },
       keyframes: {
         "caret-blink": {
