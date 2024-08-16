@@ -31,7 +31,7 @@ const Rules = (data: userVillasObj) => {
         {data.rules.more && (
           <li>
             <GoDotFill />
-            برگزاری مهمانی و پخش موزیک ممنوع است.
+           { data.rules.more}
           </li>
         )}
       </ul>

@@ -21,7 +21,9 @@ export interface userVillasObj {
   aboutVilla: {
     aboutVilla: string;
     villaSpace: string;
-    villaType: string;
+    villaType: { 
+      title: string 
+    };
     villaZone: string;
   };
   capacity: {
