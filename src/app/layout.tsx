@@ -2,11 +2,9 @@ import "./globals.css";
 import QueryWrapper from "../providers/QueryWrapper";
 import localFont from "next/font/local";
 import Hydrated from "../providers/Hydrated";
-import { Toaster } from "@/src/components/shadcn/ui/toaster";
 import { getUser } from "../utils/serverFetchs";
 import Auth from "../utils/auth";
-import Loader from "../components/modules/loader/Loader";
-import { Suspense } from "react";
+import { Toaster } from "@/src/components/shadcn/ui/toaster";
 
 const fonts = localFont({
   src: [
@@ -29,6 +27,9 @@ const fonts = localFont({
   variable: "--font-vazir",
 });
 
+import ContextMenu from "../providers/ContextMenu";
+ 
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -37,19 +38,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${fonts.variable}`}>
-        <QueryWrapper> 
-            <Hydrated queryKey={["auth"]} queryFn={getUser}>
-              <Auth />
-            </Hydrated> 
-          {children}
+        <QueryWrapper>
+          <Hydrated queryKey={["auth"]} queryFn={getUser}>
+            <Auth />
+          </Hydrated> 
+          <ContextMenu>{children}</ContextMenu> 
           <Toaster />
         </QueryWrapper>
       </body>
     </html>
   );
-}
 
-{
   /* <Head>
 <title>Parallax Effect with React</title>
 <link rel="icon" href="/favicon.ico" />
