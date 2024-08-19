@@ -3,8 +3,7 @@ import React, { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import Navbar from "../../templates/adminPanel/components/Navbar";
-import Sidebar from "../../templates/adminPanel/components/Sidebar";
-import ContextMenu from "../../modules/contextMenu/ContextMenu";
+import Sidebar from "../../templates/adminPanel/components/Sidebar"; 
 const Layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   const router = useRouter();
 
@@ -16,8 +15,7 @@ const Layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   //   }, [router]);
 
   return (
-    <div className="flex bg-customYellow pl-4">
-      <ContextMenu />
+    <div className="flex bg-customYellow pl-4"> 
 
       <Sidebar />
       <div className="my-4 w-full rounded-lg bg-white">

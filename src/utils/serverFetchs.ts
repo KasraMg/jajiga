@@ -22,3 +22,13 @@ export async function fetchStep6Items() {
   return res.json();
 }
 
+export async function getAllVillas(){
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get("AccessToken");
+  const res = await fetch(`${baseUrl}/villa/getAllActivated`, {
+    headers: {
+      Authorization: `Bearer ${accessToken?.value}`,
+    },
+  });
+  return res.json();
+}

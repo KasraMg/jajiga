@@ -8,22 +8,25 @@ import SpecialAccommodations from "../components/templates/index/SpecialAccommod
 import SupperOffers from "../components/templates/index/SuperOffers/SuperOffers";
 import Intro from "../components/templates/index/intro/Intro";
 import ScrollObserver from "../providers/scrollObserver";
-import Container from "../components/modules/container/Container"; 
+import Container from "../components/modules/container/Container";
+import Hydrated from "../providers/Hydrated";
+import { getAllVillas } from "../utils/serverFetchs";
 
-export default async function Home() { 
-  
+export default async function Home() {
   return (
-    <main> 
+    <main>
       <ScrollObserver>
         <Container>
           <Intro />
           <Layout className="bg-white">
-            <PopularDestinations />
-            <FastSearch />
-            <Ads />
-            <SpecialAccommodations />
+            {/*  <PopularDestinations />
+           <FastSearch />
+            <Ads />*/}
+            <Hydrated queryKey={["specialVillas"]} queryFn={getAllVillas}>
+              <SpecialAccommodations />
+            </Hydrated>
           </Layout>
-          <SupperOffers />
+          {/* <SupperOffers />
           <Layout>
             <Offers />
             <Offers />
@@ -31,7 +34,7 @@ export default async function Home() {
             <Offers />
             <Offers />
             <Offers />
-          </Layout>
+          </Layout> */}
         </Container>
       </ScrollObserver>
     </main>
