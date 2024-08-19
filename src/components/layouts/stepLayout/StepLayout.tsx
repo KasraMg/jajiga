@@ -19,7 +19,7 @@ const StepLayout: FC<StepLayoutProps> = ({ stepperActive, children }) => {
   const queryClient = useQueryClient();
   queryClient.invalidateQueries({ queryKey: ["auth"] });
 
-  const { userData,login,isPending } = authStore((state) => state);
+  const { userData,isPending } = authStore((state) => state);
   const route = useRouter();
   useEffect(() => { 
     !isPending && !userData && route.push('/login')
