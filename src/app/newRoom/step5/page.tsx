@@ -39,12 +39,12 @@ const page = () => {
   );
 
   useEffect(() => {
-    if (landSize.length && areaSize.length && description) {
+    if (landSize.length && areaSize.length) {
       setDisableNextButton(false);
     } else {
       setDisableNextButton(true);
     }
-  }, [landSize, areaSize, description]);
+  }, [landSize, areaSize]);
 
   const incrementStandardHandler = () => {
     setStandardSpace((prev) => prev + 1);

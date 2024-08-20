@@ -5,13 +5,15 @@ interface CardProps {
   text: string;
   svg: any;
 }
-const Card: FC<CardProps> = (props) => {
+const Card: FC<CardProps> = (data:CardProps) => {
+  console.log(data);
+  
   return (
     <section className="border border-solid flex gap-3 items-center border-[#00000026] rounded-xl w-full px-5 py-3">
-      {props.svg}
+      {data.svg}
       <div>
-        <p>{props.title}</p>
-        <span className="font-vazir font-light  text-xs">{props.text}</span>
+        <p>{data.title}</p>
+        <span className="font-vazir font-light  text-xs">{data.text}</span>
       </div>
     </section>
   );

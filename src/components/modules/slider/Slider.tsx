@@ -14,7 +14,7 @@ const Slider: FC<SliderProps> = ({
   breakPoints,
   navigation,
   className,
-  datas,
+  data,
 }) => {
   return (
     <Swiper
@@ -29,10 +29,10 @@ const Slider: FC<SliderProps> = ({
       modules={[Navigation]}
       breakpoints={breakPoints}
     >
-      {datas ? (
-        datas.map((data: any) => (
+      {data ? (
+        data.map((data: any) => (
           <SwiperSlide key={crypto.randomUUID()}>
-            <Card {...data} />
+            <Card data={data} />
           </SwiperSlide>
         ))
       ) : (

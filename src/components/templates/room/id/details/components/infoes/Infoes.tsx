@@ -42,11 +42,11 @@ const Infoes = (data: userVillasObj) => {
             }
           : item;
       });
-     
+
       const checkFcibility = updatedFacilities.filter(
         (facibility: { status: boolean }) => facibility.status,
-      );  
-      setFacilityData(checkFcibility); 
+      );
+      setFacilityData(checkFcibility);
     }
   }, [status, data]);
 
@@ -99,21 +99,27 @@ const Infoes = (data: userVillasObj) => {
         <h2 className="my-6 mb-4 text-lg text-[#252a31]">امکانات</h2>
         <div className="grid grid-cols-[auto,auto] gap-3 text-sm text-gray-800">
           {facibilityData &&
-            facibilityData.map((option:{title:string,description:string}) => (
-              <div key={option.title} className="flex items-center gap-2">
-                <FaRegSnowflake />
-                <p>{option.title}</p>
-                <div
-                  className="relative cursor-pointer text-[#6378f1]"
-                  id="tooltip"
-                >
-                  <BsInfoCircleFill />
-                  <div className="invisible absolute -left-[2.5rem] -top-[2.5rem] whitespace-nowrap rounded-lg bg-black px-4 py-2 text-xs text-white">
-                    <span>{option.description}</span>
+            facibilityData.map(
+              (option: { title: string; description: string }) => (
+                <div key={option.title} className="flex items-center gap-2">
+                  <FaRegSnowflake />
+                  <p>{option.title}</p>
+                  <div
+                    className="relative cursor-pointer text-[#6378f1]"
+                    id="tooltip"
+                  >
+                    {option.description && (
+                      <>
+                        <BsInfoCircleFill />
+                        <div className="invisible absolute -left-[2.5rem] -top-[2.5rem] whitespace-nowrap rounded-lg bg-black px-4 py-2 text-xs text-white">
+                          <span>{option.description}</span>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
-              </div>
-            ))}
+              ),
+            )}
         </div>
       </div>
     </div>

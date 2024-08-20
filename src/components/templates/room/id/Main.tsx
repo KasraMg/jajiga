@@ -6,7 +6,7 @@ import Gallery from "./gallery/Gallery";
 import Reservation from "./reservation/Reservation";
 import Cookies from "js-cookie";
 import { baseUrl } from "@/src/utils/utils";
-import { useParams } from "next/navigation"; 
+import { useParams } from "next/navigation";
 import { userVillasObj } from "@/src/types/Auth.types";
 const Main = () => {
   const params = useParams();
@@ -21,15 +21,20 @@ const Main = () => {
     return res.json();
   }
 
-  const { data, status, isLoading } = useGetData<any>(["villa"], getVilla); 
+  const { data, status, isLoading } = useGetData<any>(["villa"], getVilla);
+console.log(data);
 
   return (
     <div className="Container mt-[3.8rem] md:!mt-20">
-      <Gallery {...data.villa}/>
-      <div className="flex items-start gap-8 px-0 md:!mt-9 md:!px-4 xl:!px-0">
-        <Details {...data.villa} />
-        <Reservation {...data.villa} />
-      </div>
+      {data && data.statusCode === 200 && (
+        <>
+          <Gallery {...data.villa} />
+          <div className="flex items-start gap-8 px-0 md:!mt-9 md:!px-4 xl:!px-0">
+            <Details {...data.villa} />
+            <Reservation {...data.villa} />
+          </div>
+        </>
+      )}
     </div>
   );
 };
