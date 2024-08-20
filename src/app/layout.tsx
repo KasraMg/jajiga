@@ -42,7 +42,9 @@ export default function RootLayout({
           <Hydrated queryKey={["auth"]} queryFn={getUser}>
             <Auth />
           </Hydrated> 
-          <ContextMenu>{children}</ContextMenu> 
+          {/* <ContextMenu> */}
+            {children}
+            {/* </ContextMenu>  */}
           <Toaster />
         </QueryWrapper>
       </body>

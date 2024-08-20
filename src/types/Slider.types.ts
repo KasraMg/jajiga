@@ -9,6 +9,6 @@ export interface SliderProps {
     breakPoints: Breakpoints,
     navigation:boolean,
     Card: React.ElementType,
-    datas?: any
+    data?: any
 }
 

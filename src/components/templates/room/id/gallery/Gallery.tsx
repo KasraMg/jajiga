@@ -7,9 +7,10 @@ import Image from "next/image";
 import { userVillasObj } from "@/src/types/Auth.types";
 
 const Gallery = (data: userVillasObj) => {
-  const imageLoadedRef = useRef<boolean[]>(Array(data.cover.length).fill(false));
+  const imageLoadedRef = useRef<boolean[]>(Array(data?.cover?.length).fill(false));
   const [imageLoaded, setImageLoaded] = useState<boolean[]>(imageLoadedRef.current);
-
+  console.log('gallery',data);
+  
   const handleImageLoad = (index: number) => {
     if (!imageLoadedRef.current[index]) {
       imageLoadedRef.current[index] = true;

@@ -10,7 +10,7 @@ import Intro from "../components/templates/index/intro/Intro";
 import ScrollObserver from "../providers/scrollObserver";
 import Container from "../components/modules/container/Container";
 import Hydrated from "../providers/Hydrated";
-import { getAllVillas } from "../utils/serverFetchs";
+import { getPrivilegedVillas } from "../utils/serverFetchs";
 
 export default async function Home() {
   return (
@@ -19,10 +19,10 @@ export default async function Home() {
         <Container>
           <Intro />
           <Layout className="bg-white">
-            {/*  <PopularDestinations />
-           <FastSearch />
-            <Ads />*/}
-            <Hydrated queryKey={["specialVillas"]} queryFn={getAllVillas}>
+              <PopularDestinations />
+          <FastSearch />
+            <Ads />
+            <Hydrated queryKey={["specialVillas"]} queryFn={getPrivilegedVillas}>
               <SpecialAccommodations />
             </Hydrated>
           </Layout>

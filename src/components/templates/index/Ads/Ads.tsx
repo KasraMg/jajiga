@@ -164,7 +164,7 @@ const Ads = () => {
   return (
     <Slider
       Card={Card}
-      datas={data}
+      data={data}
       navigation={false}
       className="mt-10 mb-10 !pl-0"
       breakPoints={{
