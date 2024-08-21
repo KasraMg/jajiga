@@ -3,7 +3,7 @@ import Select from "react-select";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { GoDotFill } from "react-icons/go";
-import { categoryFilterOptions } from "@/src/utils/selectOptions";
+import { categoryFilterOptions } from "@/src/utils/options";
 import Card from "../../../modules/card/Card";
 import useGetData from "@/src/hooks/useGetData";
 import { baseUrl } from "@/src/utils/utils";

@@ -1,9 +1,13 @@
+"use client";
 import MarketLinks from "./components/MarketLinks";
 import Link from "next/link";
 import { LiaInstagram, LiaTelegram } from "react-icons/lia";
 import { FaInstagram } from "react-icons/fa";
 import CitiesList from "./components/CitiesList";
+import { authStore } from "@/src/stores/auth";
 const Footer = () => {
+  const { login } = authStore((state) => state);
+
   return (
     <div className="mt-10 rounded-2xl bg-[#f1f1f1] pt-8">
       <div className="Container mx-auto px-3 sm:!px-5">
@@ -14,55 +18,66 @@ const Footer = () => {
                 <p className="mb-3 text-center">لینک های دسترسی</p>
                 <div className="flex w-full items-center justify-around gap-8 lg:w-max">
                   <div className="flex flex-col space-y-2">
+                    {!login ? (
+                      <Link
+                        className="font-vazir text-sm font-light text-blue-700"
+                        href={"/login"}
+                      >
+                        ورود/ثبت نام
+                      </Link>
+                    ) : (
+                      <Link
+                        className="font-vazir text-sm font-light text-blue-700"
+                        href={"/dashboard"}
+                      >
+                        حساب کاربری
+                      </Link>
+                    )}
+
                     <Link
-                      className="font-vazir text-sm font-bold font-light text-blue-700"
+                      className="font-vazir text-sm font-light text-blue-700"
                       href={"/"}
                     >
-                      چگونه مهمان شویم
+                      صفحه اصلی
                     </Link>
                     <Link
-                      className="font-vazir text-sm font-bold font-light text-blue-700"
-                      href={"/"}
+                      className="font-vazir text-sm font-light text-blue-700"
+                      href={"/rooms"}
                     >
-                      چگونه مهمان شویم
+                      همه اقامتگاه ها
                     </Link>
                     <Link
-                      className="font-vazir text-sm font-bold font-light text-blue-700"
-                      href={"/"}
+                      className="font-vazir text-sm font-light text-blue-700"
+                      href={"/host"}
                     >
-                      چگونه مهمان شویم
-                    </Link>
-                    <Link
-                      className="font-vazir text-sm font-bold font-light text-blue-700"
-                      href={"/"}
-                    >
-                      چگونه مهمان شویم
+                      میزبان شو
                     </Link>
                   </div>
                   <div className="flex flex-col space-y-2">
                     <Link
-                      className="font-vazir text-sm font-bold font-light text-blue-700"
-                      href={"/"}
+                      className="font-vazir text-sm font-light text-blue-700"
+                      href={"/rules"}
                     >
-                      چگونه مهمان شویم
+                      قوانین وبسایت
                     </Link>
                     <Link
-                      className="font-vazir text-sm font-bold font-light text-blue-700"
-                      href={"/"}
+                      className="font-vazir text-sm font-light text-blue-700"
+                      href={"/faq"}
                     >
-                      چگونه مهمان شویم
+                      سوالات متداول
                     </Link>
                     <Link
-                      className="font-vazir text-sm font-bold font-light text-blue-700"
-                      href={"/"}
+                      className="font-vazir text-sm font-light text-blue-700"
+                      href={"/support"}
                     >
-                      چگونه مهمان شویم
+                      پشتیبانی
                     </Link>
+
                     <Link
-                      className="font-vazir text-sm font-bold font-light text-blue-700"
-                      href={"/"}
+                      className="font-vazir text-sm font-light text-blue-700"
+                      href={"/about"}
                     >
-                      چگونه مهمان شویم
+                      درباره ما
                     </Link>
                   </div>
                 </div>

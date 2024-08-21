@@ -7,7 +7,7 @@ import {
   DialogTrigger,
 } from "@/src/components/shadcn/ui/dialog";
 import { useState } from "react";
-import { userCountOptions } from "@/src/utils/selectOptions";
+import { userCountOptions } from "@/src/utils/options";
 import Select from "react-select";
 import Link from "next/link";
 import { SlInfo } from "react-icons/sl";

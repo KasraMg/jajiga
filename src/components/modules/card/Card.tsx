@@ -5,7 +5,7 @@ import { IoIosStar } from "react-icons/io";
 import { Button } from "@/src/components/shadcn/ui/button";
 import { VillaType } from "@/src/types/Villa.types";
 import Image from "next/image";
-import { typeOptions } from "@/src/utils/selectOptions";
+import { typeOptions } from "@/src/utils/options";
 import { formatNumber } from "@/src/utils/utils";
 import Link from "next/link";
 

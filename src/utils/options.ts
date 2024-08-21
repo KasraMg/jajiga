@@ -344,6 +344,26 @@ const categoryFilterOptions: {
   },
 ];
 
+const footerOptions: {
+  lable: string;
+  href: string;
+}[] = [
+  { lable: " اجاره اقامتگاه گیلان", href: "/rooms?city=gilan" },
+  { lable: "اجاره اقامتگاه رامسر", href: "/rooms?city=ramsar" },
+  { lable: "اجاره اقامتگاه مشهد", href: "/rooms?city=mashhad" },
+  { lable: "اجاره اقامتگاه کردان", href: "/rooms?city=kordan" },
+  { lable: "اجاره اقامتگاه ماسال", href: "/rooms?city=masal" },
+  { lable: "اجاره اقامتگاه در کیش", href: "/rooms?city=kish" },
+  { lable: "اجاره اقامتگاه  تهران", href: "/rooms?city=tehran" },
+  { lable: "اجاره اقامتگاه بوشهر", href: "/rooms?city=bushehr" },
+  { lable: "اجاره اقامتگاه قشم", href: "/rooms?city=gheshm" },
+  { lable: "اجاره اقامتگاه آستارا", href: "/rooms?city=astara" },
+  { lable: "اجاره اقامتگاه چالوس", href: "/rooms?city=chaloos" },
+  { lable: "اجاره اقامتگاه شیراز", href: "/rooms?city=shiraz" },
+  { lable: "اجاره اقامتگاه تبریز", href: "/rooms?city=tabriz" },
+  { lable: "اجاره اقامتگاه آبادان", href: "/rooms?city=abadan" },
+  { lable: "اجاره اقامتگاه اهواز", href: "/rooms?city=ahvaz" },
+];
 export {
   firstTimeOptions,
   secondTimeOptions,
@@ -352,4 +372,5 @@ export {
   spaceOptions,
   userCountOptions,
   categoryFilterOptions,
+  footerOptions,
 };

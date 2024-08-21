@@ -1,7 +1,7 @@
 import useGetData from "@/src/hooks/useGetData";
 import { userVillasObj } from "@/src/types/Auth.types";
 import { fetchStep6Items } from "@/src/utils/clientFetchs";
-import { zoneOptions } from "@/src/utils/selectOptions";
+import { zoneOptions } from "@/src/utils/options";
 import React, { useEffect, useState } from "react";
 import { BsInfoCircleFill } from "react-icons/bs";
 import { FaRegSnowflake } from "react-icons/fa";
