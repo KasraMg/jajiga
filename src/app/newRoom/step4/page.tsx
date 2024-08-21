@@ -9,7 +9,7 @@ import {
   spaceOptions,
   typeOptions,
   zoneOptions,
-} from "@/src/utils/selectOptions";
+} from "@/src/utils/options";
 import StepLayout from "@/src/components/layouts/stepLayout/StepLayout";
 import { getFromLocalStorage } from "@/src/utils/utils";
 import Loader from "@/src/components/modules/loader/Loader";

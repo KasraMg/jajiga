@@ -7,7 +7,7 @@ import { Button } from "@/src/components/shadcn/ui/button";
 import { CiSearch } from "react-icons/ci";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { TbHomeQuestion } from "react-icons/tb";
-import { typeOptions } from "@/src/utils/selectOptions";
+import { typeOptions } from "@/src/utils/options";
 import { categoryStore } from "@/src/stores/category";
 import { useEffect, useState } from "react";
 

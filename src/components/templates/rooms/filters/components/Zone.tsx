@@ -8,7 +8,7 @@ import { CiSearch } from "react-icons/ci";
 import { FaMapLocationDot, FaRegTrashCan } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 import { categoryStore } from "@/src/stores/category";
-import { zoneOptions } from "@/src/utils/selectOptions";
+import { zoneOptions } from "@/src/utils/options";
 const Zone = () => {
   const { villaZone, setVillaZone } = categoryStore((state) => state);
   const [defaultVillaZone, setDefaultVillaZone] = useState([]);

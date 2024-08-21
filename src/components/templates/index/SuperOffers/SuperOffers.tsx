@@ -3,17 +3,22 @@ import React from "react";
 import CitiesSelector from "./components/CitiesSelector";
 import Slider from "@/src/components/modules/slider/Slider";
 import Card from "../../../modules/card/Card";
+import useGetData from "@/src/hooks/useGetData";
+import { getAllActivatedVillas } from "@/src/utils/fetchs";
 const SuperOffers = () => {
-  return (
+  const { data, status, isLoading } = useGetData<any>(["allActivatedVillas"], getAllActivatedVillas);
+console.log(data);
+
+  return ( 
     <div className="superOfferBg relative z-20 overflow-hidden rounded-t-xl py-6">
       <div className="Container mx-auto px-3 sm:!px-4 xl:!px-0">
         <div className="mb-6 flex flex-col items-baseline justify-center lg:flex-row lg:justify-between">
           <p className="w-full text-2xl font-thin text-white">
-            تخفیف های سفر انگیز
+        اقامتگاه های ویلایی 
           </p>
-          <CitiesSelector />
+          <CitiesSelector /> 
         </div>
-        <Slider
+        {/* <Slider
           Card={Card}
           navigation={true}
           className="mySwiper mx-auto w-full text-white sm:!pl-6"
@@ -27,7 +32,7 @@ const SuperOffers = () => {
               spaceBetween: 15,
             },
           }}
-        />
+        /> */}
       </div>
     </div>
   );

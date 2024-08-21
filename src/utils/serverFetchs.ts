@@ -22,8 +22,3 @@ export async function fetchStep6Items() {
   return res.json();
 }
 
-export async function getPrivilegedVillas(){ 
-  const res = await fetch(`${baseUrl}/villa/privilegedVillas`, { 
-  });
-  return res.json();
-}

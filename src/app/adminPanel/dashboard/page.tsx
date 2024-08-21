@@ -20,7 +20,7 @@ const page = () => {
         </div>
       </div>
       <div className="flex flex-col-reverse xl:!flex-row">
-        <div className="xl:!w-1/2 w-full bg-white px-7 pb-8 text-base xl:!text-xl">
+        <div className="xl:!w-1/2 w-full bg-white  md:!px-7 pb-8 text-sm sm:!text-base xl:!text-xl">
           <table className="table" id="users-table">
             <tbody>
               <tr>

@@ -1,5 +1,5 @@
 import { userVillasObj } from "@/src/types/Auth.types";
-import { spaceOptions } from "@/src/utils/selectOptions";
+import { spaceOptions } from "@/src/utils/options";
 import React from "react";
 import { IoHomeOutline, IoPeopleOutline } from "react-icons/io5";
 import { MdOutlineBedroomParent } from "react-icons/md";
