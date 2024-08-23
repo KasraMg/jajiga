@@ -6,6 +6,7 @@ import Offers from "../components/templates/index/Offers/Offers";
 import PopularDestinations from "../components/templates/index/PopularDestinations/PopularDestinations";
 import SpecialAccommodations from "../components/templates/index/SpecialAccommodations/SpecialAccommodations";
 import Villas from "../components/templates/index/Villas/Villas";
+import Note from "../components/templates/index/Note/Note";
 import Intro from "../components/templates/index/intro/Intro";
 import ScrollObserver from "../providers/scrollObserver";
 import Container from "../components/modules/container/Container";
@@ -43,21 +44,17 @@ export default async function Home() {
               <SpecialAccommodations />
             </Hydrated>
           </Layout>
-
+   <BecomeHost />
           <Hydrated
             queryKey={["allActivatedVillas"]}
             queryFn={getAllActivatedVillas}
           >
             <Villas />
           </Hydrated>
-          {/*    <Layout>
-            <Offers />
-            <Offers />
-            <BecomeHost /> 
-            <Offers />
-            <Offers />
-            <Offers />
-          </Layout> */}
+    
+         
+            <Note />
+         
         </Container>
       </ScrollObserver>
     </main>

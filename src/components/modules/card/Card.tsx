@@ -14,11 +14,6 @@ interface CardProps {
   data: VillaType;
 }
 const Card: FC<CardProps> = ({ data, className }) => {
- 
-  const villaType = typeOptions.find(
-    (type) => type.value === data?.aboutVilla?.villaType,
-  );
-
   return (
     data && (
       <Link
@@ -58,10 +53,12 @@ const Card: FC<CardProps> = ({ data, className }) => {
         </div>
         <p className="mt-3 text-sm">
           اجاره{" "}
-          {villaType?.label === "ویلایی" ? "منزل ویلایی" : villaType?.label} در{" "}
-          {data.address.city}
+          {data.aboutVilla.villaType.title === "ویلایی"
+            ? "منزل ویلایی"
+            : data.aboutVilla.villaType.title}{" "}
+          در {data.address.city}
         </p>
-        <div className="font-vazir mt-1 flex items-center gap-1 text-xs font-light text-gray-500">
+        <div className="font-vazir mt-1 flex items-center gap-1 text-xs font-light text-[#939cae]">
           <p>{data.capacity.bedRoom} خوابه . </p>
           <p> {data.capacity.fuundationSize} متر . </p>
           <p>تا {data.capacity.maxCapacity} مهمان</p>

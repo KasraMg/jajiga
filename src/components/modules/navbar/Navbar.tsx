@@ -167,7 +167,7 @@ const Navbar = ({ navbarContainer }: any) => {
                 ) : (
                   <>
                     <Link href={""}>اعلانات</Link>
-                  </>
+                  </> 
                 )}
 
                 <Link href={"/host"}>میزبان شوید</Link>

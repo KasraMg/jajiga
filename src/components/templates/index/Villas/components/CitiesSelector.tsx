@@ -18,11 +18,11 @@ const CitiesSelector = ({
     "کیش",
   ];
   return (
-    <div className="no-scrollbar mt-4 flex w-screen items-center justify-center overflow-x-scroll text-white">
+    <div className="no-scrollbar mt-4 flex w-screen items-center  justify-start sm:!justify-center overflow-x-scroll text-white">
       {cities.map((city) => (
         <p
           onClick={() => setStatus(city)}
-          className={`${status === city ? "bg-customYellow text-black rounded-full" : null} px-2 cursor-pointer ml-5 whitespace-nowrap`}
+          className={`${status === city ? "bg-customYellow text-black rounded-full" : null} px-2 cursor-pointer ml-5 sm:!text-base text-sm whitespace-nowrap`}
         >
           {city}
         </p>

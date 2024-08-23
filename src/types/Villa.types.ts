@@ -9,7 +9,9 @@ interface priceDays {
 export interface VillaType {
   aboutVilla: {
     villaSpace: string;
-    villaType: string;
+    villaType: { 
+      title: string 
+    };
     villaZone: string;
     aboutVilla: string;
   };

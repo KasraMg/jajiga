@@ -18,7 +18,7 @@ const SearchBox = () => {
       router.push(`/rooms?city=${searchValue}`);
       setIsShowSearchBox(false);
     }
-  };
+  }; 
   return (
     <div className="relative mx-auto w-full md:!w-max">
       <i
