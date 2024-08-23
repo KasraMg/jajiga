@@ -30,8 +30,11 @@ const Space = () => {
     setIsPopoverOpen(false);
   };
   const deleteFilterHandler = () => {
-    setMaximumSpace(null);
-    setDefaultMaximumSpace(1);
+    setIsPopoverOpen(false)  
+    if (maximumSpace) {
+      setMaximumSpace(null);
+      setDefaultMaximumSpace(1);
+    }
   };
 
   useEffect(() => {

@@ -16,12 +16,14 @@ const Zone = () => {
 
   const submitHandler = () => {
     setVillaZone(defaultVillaZone);
-    setIsPopoverOpen(false)
-
+    setIsPopoverOpen(false);
   };
   const deleteFilterHandler = () => {
-    setDefaultVillaZone([]);
-    setVillaZone([]);
+    if (villaZone.length) {
+      setVillaZone([]);
+      setDefaultVillaZone([]);
+    }
+    setIsPopoverOpen(false);
   };
   const inputChangeHandler = (status: boolean, value: string) => {
     if (status) {
@@ -30,7 +32,7 @@ const Zone = () => {
       const newZone = defaultVillaZone.filter((zone) => zone !== value);
       setDefaultVillaZone(newZone);
     }
-  }; 
+  };
 
   useEffect(() => {
     setDefaultVillaZone(villaZone as any);
@@ -53,7 +55,9 @@ const Zone = () => {
           </p>
           <div className="mt-4 grid grid-cols-[auto,auto] gap-3">
             {zoneOptions.map((zone) => {
-              const isCheck = defaultVillaZone.some(villaZone=>villaZone === zone.value)
+              const isCheck = defaultVillaZone.some(
+                (villaZone) => villaZone === zone.value,
+              );
               return (
                 <div className="flex justify-between border-b border-solid border-gray-200 px-3 pb-2">
                   <p className="text-xs sm:!text-base">{zone.label}</p>

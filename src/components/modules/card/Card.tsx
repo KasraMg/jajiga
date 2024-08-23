@@ -14,8 +14,7 @@ interface CardProps {
   data: VillaType;
 }
 const Card: FC<CardProps> = ({ data, className }) => {
-  console.log(data);
-
+ 
   const villaType = typeOptions.find(
     (type) => type.value === data?.aboutVilla?.villaType,
   );

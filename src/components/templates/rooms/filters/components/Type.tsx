@@ -21,9 +21,12 @@ const Type = () => {
     setIsPopoverOpen(false)
 
   };
-  const deleteFilterHandler = () => {
-    setDefaultVillaType([]);
-    setVillaType([]);
+  const deleteFilterHandler = () => { 
+    if (villaType.length) {
+      setVillaType([]);
+      setDefaultVillaType([]);
+    }
+    setIsPopoverOpen(false);
   };
   const inputChangeHandler = (status: boolean, href: string) => {
     if (status) {

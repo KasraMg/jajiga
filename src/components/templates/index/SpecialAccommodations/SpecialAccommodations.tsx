@@ -11,8 +11,7 @@ const SpecialAccommodations = () => {
     ["privilegedVillas"],
     getPrivilegedVillas,
   );
-  console.log(data);
-
+ 
   return (
     <div>
       <p className="text-xl">اقامتگاه های ممتاز</p>

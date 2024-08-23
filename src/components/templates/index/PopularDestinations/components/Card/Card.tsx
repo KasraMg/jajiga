@@ -1,17 +1,28 @@
-const Card = () => {
+import Image from "next/image";
+import Link from "next/link";
+
+const Card = (data: {
+  cover: string;
+  persianTitle: string;
+  title: string;
+  count: number;
+}) => {
   return (
-    <section className="flex cursor-pointer items-center justify-center gap-2 sm:!justify-start">
-      <img
+    <Link href={`/rooms?city=${data.persianTitle}`} className="flex cursor-pointer items-center justify-center gap-2 sm:!justify-start">
+      <Image
         className="h-[70px] w-[70px] rounded-lg sm:!h-20 sm:!w-20 lg:!h-36 lg:!w-36"
-        src="https://www.jajiga.com/static/img/home/top-locations/ramsar.jpg?v=8"
-        alt=""
+        alt="img"
+        width={1000}
+        height={1000}
+        crossOrigin="anonymous"
+        src={`https://jajiga-backend.liara.run/static/city/${data.cover}`}
       />
       <div>
         <p className="font-vazir text-[12px] font-light">اجاره ویلا در</p>
-        <span>شیراز</span>
-        <p className="font-vazir text-[12px] font-light">1206 ویلا</p>
+        <span>{data.persianTitle}</span>
+        <p className="font-vazir text-[12px] font-light">{data.count} ویلا</p>
       </div>
-    </section>
+    </Link>
   );
 };
 

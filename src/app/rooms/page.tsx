@@ -3,9 +3,7 @@ import Filters from "@/src/components/templates/rooms/filters/Filters";
 import Posts from "@/src/components/templates/rooms/posts/Posts";
 import React from "react";
 
-const rooms = () => {
-
-
+const rooms = () => { 
   return (
     <Container navbarContainer={true} disableFooter={true}>
       <main className="mt-[58px]">
