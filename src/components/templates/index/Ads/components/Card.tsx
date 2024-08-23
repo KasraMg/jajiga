@@ -1,13 +1,14 @@
 import React, { FC } from "react";
 
 interface CardProps {
+  data:{
   title: string;
   text: string;
   svg: any;
+  }
 }
-const Card: FC<CardProps> = (data:CardProps) => {
-  console.log(data);
-  
+const Card: FC<CardProps> = ({data}:CardProps) => {
+ 
   return (
     <section className="border border-solid flex gap-3 items-center border-[#00000026] rounded-xl w-full px-5 py-3">
       {data.svg}

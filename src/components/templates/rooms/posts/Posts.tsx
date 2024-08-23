@@ -66,8 +66,7 @@ const Posts = () => {
 
   const { data, isFetching, refetch } = useGetData(["category"], getVilla, {
     refetchOnWindowFocus: false,
-  });
-  console.log(data);
+  }); 
 
   const [spaceSelectedOption, setSpaceSelectedOption] = useState<{
     label: string;

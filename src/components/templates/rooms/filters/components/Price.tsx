@@ -29,13 +29,11 @@ const Price = () => {
     setMinPrice(null);
     setDefaultMaxPrice("");
     setDefaultMinPrice("");
+    setIsPopoverOpen(false) 
   };
 
   useEffect(() => { 
-if (isPopoverOpen) {
-  console.log(minPrice);
-  console.log(maxPrice);
-  
+if (isPopoverOpen) { 
   setDefaultMinPrice(minPrice ? String(minPrice) : "") 
   setDefaultMaxPrice(maxPrice ? String(maxPrice) : "") 
 }

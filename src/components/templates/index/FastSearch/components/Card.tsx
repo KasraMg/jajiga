@@ -1,12 +1,31 @@
-import React, { FC } from "react";
-interface CardProps {}
-const Card: FC<CardProps> = () => {
+import { categoryStore } from "@/src/stores/category";
+import Image from "next/image";
+import Link from "next/link";
+
+const Card = ({
+  data,
+}: {
+  data: {
+    cover: string;
+    count: string;
+    title: string;
+    persianTitle: string;
+  };
+}) => {
+  const { setVillaZone } = categoryStore((state) => state);
+
   return (
-    <div className="relative cursor-pointer text-white">
-      <img
+    <Link
+      onClick={() => setVillaZone([data.title])}
+      href={`/rooms?city=all`}
+      className="relative cursor-pointer text-white"
+    >
+      <Image
         className="!h-[247px] w-full rounded-xl object-cover sm:!h-[274px]"
-        src="https://www.jajiga.com/static/img/home/special-filters/cottageForest.jpg?v=3"
-        alt=""
+        alt="img"
+        width={1000}
+        height={1000}
+        src={`https://jajiga-backend.liara.run/static/zone/${data.cover}`}
       />
       <div
         style={{
@@ -14,14 +33,14 @@ const Card: FC<CardProps> = () => {
         }}
         className="absolute bottom-0 w-full rounded-xl pb-4 text-center"
       >
-        <p className="mb-2">کلبه چوبی</p>
+        <p className="mb-2">{data.persianTitle}</p>
         <div className="flex items-center justify-center gap-2">
           <span className="font-vazir text-[12px] font-light">
-            558 اقامتگاه
+            {data.count} اقامتگاه
           </span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

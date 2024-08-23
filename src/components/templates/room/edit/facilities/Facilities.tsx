@@ -31,7 +31,7 @@ const Facilities = () => {
 
   useEffect(() => {
     if (data.statusCode === 200 && userData && data) {
-      console.log(data);
+  
 
       const newFacilities = data?.facility?.map((item: any) => ({
         engtitle: item.engTitle,

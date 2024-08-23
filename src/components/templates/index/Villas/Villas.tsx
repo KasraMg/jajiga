@@ -1,26 +1,33 @@
-"use client"
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import CitiesSelector from "./components/CitiesSelector";
 import Slider from "@/src/components/modules/slider/Slider";
 import Card from "../../../modules/card/Card";
 import useGetData from "@/src/hooks/useGetData";
 import { getAllActivatedVillas } from "@/src/utils/fetchs";
-const SuperOffers = () => {
-  const { data, status, isLoading } = useGetData<any>(["allActivatedVillas"], getAllActivatedVillas);
-console.log(data);
+const Villas = () => {
+  const { data, isLoading } = useGetData<any>(
+    ["allActivatedVillas"],
+    getAllActivatedVillas,
+  );
+  const [status,setStatus] = useState('همه شهرها')
+  
+  console.log(data);
 
-  return ( 
+  return (
     <div className="superOfferBg relative z-20 overflow-hidden rounded-t-xl py-6">
       <div className="Container mx-auto px-3 sm:!px-4 xl:!px-0">
         <div className="mb-6 flex flex-col items-baseline justify-center lg:flex-row lg:justify-between">
           <p className="w-full text-2xl font-thin text-white">
-        اقامتگاه های ویلایی 
+            اقامتگاه های ویلایی
           </p>
-          <CitiesSelector /> 
+          <CitiesSelector status={status} setStatus={setStatus} />
         </div>
-        {/* <Slider
+        <Slider
           Card={Card}
           navigation={true}
+          data={data.villas
+          }
           className="mySwiper mx-auto w-full text-white sm:!pl-6"
           breakPoints={{
             600: {
@@ -32,10 +39,10 @@ console.log(data);
               spaceBetween: 15,
             },
           }}
-        /> */}
+        />
       </div>
     </div>
   );
 };
 
-export default SuperOffers;
+export default Villas;

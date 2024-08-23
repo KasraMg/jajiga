@@ -47,11 +47,15 @@ const Facilities = () => {
 
   const submitHandler = () => {
     setFacilities(defaultFacilities);
-    setIsPopoverOpen(false)
+    setIsPopoverOpen(false);
   };
   const deleteFilterHandler = () => {
-    setDefaulFacilities([]);
-    setFacilities([]);
+    setIsPopoverOpen(false);
+
+    if (facilities.length) {
+      setFacilities([]);
+      setDefaulFacilities([]);
+    }
   };
   const inputChangeHandler = (status: boolean, value: string) => {
     if (status) {
@@ -60,7 +64,7 @@ const Facilities = () => {
       const newType = defaultFacilities.filter((type) => type !== value);
       setDefaulFacilities(newType);
     }
-  }; 
+  };
   useEffect(() => {
     setDefaulFacilities(facilities as any);
   }, [isPopoverOpen]);
