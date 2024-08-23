@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from "react";
+import React, { FC } from "react";
 import Footer from "../Footer/Footer";
 import Navbar from "../navbar/Navbar";
 import MobileMenu from "../mobileMenu/MobileMenu";
