@@ -44,17 +44,15 @@ export default async function Home() {
               <SpecialAccommodations />
             </Hydrated>
           </Layout>
-   <BecomeHost />
+          <BecomeHost />
           <Hydrated
             queryKey={["allActivatedVillas"]}
             queryFn={getAllActivatedVillas}
           >
             <Villas />
           </Hydrated>
-    
-         
-            <Note />
-         
+
+          <Note />
         </Container>
       </ScrollObserver>
     </main>

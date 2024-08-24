@@ -7,6 +7,7 @@ import React from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Container from "@/src/components/modules/container/Container";
+import Image from "next/image";
 const About = () => {
   useEffect(() => {
     AOS.init();
@@ -16,13 +17,16 @@ const About = () => {
       <Breadcrumb route="درباره ما" />
       <Layout>
         <section className="mt-20 flex flex-row-reverse items-center gap-16 px-24 leading-7">
-          <img
+          <Image
             style={{
               boxShadow: "rgba(0, 0, 0, 0.25) 0px 8px 16px 0px",
             }}
             className="h-[351px] w-[439px] rounded-xl"
-            src="https://www.jajiga.com/static/img/about/about_img1.jpg"
-            alt=""
+            src={"https://www.jajiga.com/static/img/about/about_img1.jpg"}
+            alt="about"
+            crossOrigin="anonymous"
+            width={1000}
+            height={1000}
           />
           <div className="space-y-6">
             <p className="text-2xl">رویکرد جدید گردشگران</p>
@@ -31,20 +35,24 @@ const About = () => {
               در منازل شخصی مردم و در کنار ایشان فضای صمیمی تری را تجربه کنند
             </p>
             <p>
-              امروزه بسیاری از گردشگران داخلی و خارجی ترجیح میدهند تا با اقامت
-              در منازل شخصی مردم و در کنار ایشان فضای صمیمی تری را{" "}
+              این رویکرد در کشوری همچون ایران به واسطه سنت دیرین میهمان پذیری و
+              میهمان نوازی بسیار پررنگتر و چشمگیرتر می‌باشد
             </p>
           </div>
         </section>
         <section className="mt-10 flex items-center gap-16 px-24 leading-7">
-          <img
+          <Image
             style={{
               boxShadow: "rgba(0, 0, 0, 0.25) 0px 8px 16px 0px",
             }}
-            className="h-[351px] w-[439px] rounded-xl"
-            src="https://www.jajiga.com/static/img/about/about_img1.jpg"
-            alt=""
+            className="h-[321px] w-[439px] rounded-xl"
+            src={"https://www.jajiga.com/static/img/about/about_img2.jpg"}
+            alt="about"
+            crossOrigin="anonymous"
+            width={1000}
+            height={1000}
           />
+
           <div className="space-y-6">
             <p>
               به اعتراف اکثر گردشگرانی که از ایران دیدن کرده اند, در کنار آثار
@@ -57,14 +65,18 @@ const About = () => {
           </div>
         </section>
         <section className="mt-10 flex flex-row-reverse items-center gap-16 px-24 leading-7">
-          <img
+          <Image
             style={{
               boxShadow: "rgba(0, 0, 0, 0.25) 0px 8px 16px 0px",
             }}
-            className="h-[351px] w-[439px] rounded-xl"
-            src="https://www.jajiga.com/static/img/about/about_img1.jpg"
-            alt=""
+            className="h-[351px] w-[499px] rounded-xl"
+            src={"https://www.jajiga.com/static/img/about/about_img3.jpg"}
+            alt="about"
+            crossOrigin="anonymous"
+            width={1000}
+            height={1000}
           />
+
           <div className="space-y-6">
             <p>
               این رویکرد جدید با افزایش آگاهی گردشگران و پایبندی ایشان به هنجار
@@ -74,23 +86,29 @@ const About = () => {
           </div>
         </section>
         <section className="my-20">
-          <img
+          <Image
             style={{
               boxShadow: "rgba(0, 0, 0, 0.25) 0px 8px 16px 0px",
             }}
             className="w-full rounded-xl"
-            src="https://www.jajiga.com/static/img/about/about_img4.jpg"
-            alt=""
+            src={"https://www.jajiga.com/static/img/about/about_img4.jpg"}
+            alt="about"
+            crossOrigin="anonymous"
+            width={1000}
+            height={1000}
           />
         </section>
         <section className="mt-20 flex flex-row-reverse gap-16 px-24 leading-7">
-          <img
+          <Image
             style={{
               boxShadow: "rgba(0, 0, 0, 0.25) 0px 8px 16px 0px",
             }}
             className="h-[390px] w-[264px] rounded-xl"
-            src="/images/about/about_img5.jpg"
-            alt=""
+            src={"/images/about/about_img5.jpg"}
+            alt="about"
+            crossOrigin="anonymous"
+            width={1000}
+            height={1000}
           />
           <div className="mt-6 space-y-6">
             <p className="text-2xl">لمس زندگی روزمره مردم محلی</p>
@@ -98,14 +116,19 @@ const About = () => {
               امروزه بسیاری از گردشگران داخلی و خارجی ترجیح میدهند تا با اقامت
               در منازل شخصی مردم و در کنار ایشان فضای صمیمی تری را تجربه کنند
             </p>
-            <img
+
+            <Image
               style={{
                 boxShadow: "rgba(0, 0, 0, 0.25) 0px 8px 16px 0px",
               }}
               className="h-[308px] w-full rounded-xl"
-              src="/images/about/about_img6.jpg"
-              alt=""
+              src={"/images/about/about_img6.jpg"}
+              alt="about"
+              crossOrigin="anonymous"
+              width={1000}
+              height={1000}
             />
+
             <p>
               امروزه بسیاری از گردشگران داخلی و خارجی ترجیح میدهند تا با اقامت
               در منازل شخصی مردم و در کنار ایشان فضای صمیمی تری را{" "}
@@ -113,14 +136,18 @@ const About = () => {
           </div>
         </section>
         <section className="my-20 flex gap-[4.5rem] px-24 leading-7">
-          <img
+          <Image
             style={{
               boxShadow: "rgba(0, 0, 0, 0.25) 0px 8px 16px 0px",
             }}
             className="h-[239px] w-[239px] rounded-xl"
-            src="https://www.jajiga.com/static/img/about/about_img13.jpg"
-            alt=""
+            src={"https://www.jajiga.com/static/img/about/about_img13.jpg"}
+            alt="about"
+            crossOrigin="anonymous"
+            width={1000}
+            height={1000}
           />
+
           <div className="mt-5">
             <p>
               تنوع مکانهای اقامتی این کسب و کار به وسعت تنوع سکونتگاه های سرزمین
@@ -128,21 +155,28 @@ const About = () => {
               کویر و مزارع زیبا
             </p>
             <div className="flex justify-between">
-              <img
+              <Image
                 style={{
                   boxShadow: "rgba(0, 0, 0, 0.25) 0px 8px 16px 0px",
                 }}
                 className="mt-12 h-[244px] w-[244px] rounded-xl"
-                src="https://www.jajiga.com/static/img/about/about_img13.jpg"
-                alt=""
+                src="https://www.jajiga.com/static/img/about/about_img14.jpg"
+                alt="about"
+                crossOrigin="anonymous"
+                width={1000}
+                height={1000}
               />
-              <img
+
+              <Image
                 style={{
                   boxShadow: "rgba(0, 0, 0, 0.25) 0px 8px 16px 0px",
                 }}
                 className="mt-48 h-[244px] w-[244px] rounded-xl"
-                src="https://www.jajiga.com/static/img/about/about_img13.jpg"
-                alt=""
+                src="https://www.jajiga.com/static/img/about/about_img15.jpg"
+                alt="about"
+                crossOrigin="anonymous"
+                width={1000}
+                height={1000}
               />
             </div>
           </div>

@@ -29,7 +29,7 @@ const Calendars = (data: userVillasObj) => {
           setEndtDate(date.format());
         } else {
           setEndtDate(null);
-        }
+        } 
       });
     }
   }
