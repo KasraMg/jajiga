@@ -146,11 +146,7 @@ function Menu({ isSticky }: any) {
             >
               <TbMessage2Question className="text-xl" />
               <span className="mt-1 text-sm">سوالات متداول</span>
-            </Link>
-            <li className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]">
-              <IoShieldCheckmarkOutline className="text-xl" />
-              <span className="mt-1 text-sm">ضمانت تحویل</span>
-            </li>
+            </Link> 
             <Link
               href="/rules"
               className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]"

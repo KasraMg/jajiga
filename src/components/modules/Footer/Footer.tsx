@@ -87,23 +87,23 @@ const Footer = () => {
                   نصب اپلیکیشن جاجیگا
                 </p>
                 <div className="mx-auto grid w-full grid-cols-2 gap-x-4 gap-y-2 sm:!grid-cols-1 md:!w-[unset] md:!grid-cols-2">
-                  <MarketLinks src="/images/markets/Bazzar.png" />
-                  <MarketLinks src="/images/markets/Myket.png" />
-                  <MarketLinks src="/images/markets/PlayStore.png" />
-                  <MarketLinks src="/images/markets/WebApp.png" />
+                  <MarketLinks href="https://cafebazaar.ir/app/com.jajiga.app" src="/images/markets/Bazzar.png" />
+                  <MarketLinks href="https://myket.ir/app/com.jajiga.app" src="/images/markets/Myket.png" />
+                  <MarketLinks href="https://play.google.com/store/apps/details?id=com.jajiga.app" src="/images/markets/PlayStore.png" />
+                  <MarketLinks href="" src="/images/markets/WebApp.png" />
                 </div>
               </div>
               <div className="hidden lg:block">
                 <p className="mb-3 text-center">با ما همراه شوید</p>
                 <Link
-                  href="/"
+                  href="https://www.instagram.com/jajiga.iran"
                   className="instagramGradiant mx-auto flex h-[45.3px] w-1/2 min-w-[150px] items-center justify-center rounded-lg py-2 text-white"
                 >
                   <p>700K</p>
                   <FaInstagram className="mr-4 text-3xl" />
                 </Link>
                 <Link
-                  href="/"
+                  href="https://t.me/jajiga"
                   className="telegramGradiant mx-auto mt-2 flex h-[45.3px] w-1/2 min-w-[150px] items-center justify-center rounded-lg py-2 text-white"
                 >
                   <p>20K</p>

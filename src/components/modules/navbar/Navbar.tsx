@@ -5,13 +5,13 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { authStore } from "@/src/stores/auth";
 import SearchBox from "./components/SearchBox";
+import Notification from "./components/Notification";
 
 const Navbar = ({ navbarContainer }: any) => {
   const route = usePathname();
   const [isSticky, setIsSticky] = useState<boolean>(
     route.length > 2 ? true : false,
   );
-
   const { login } = authStore((state) => state);
   useEffect(() => {
     window?.addEventListener("scroll", () => {
@@ -96,7 +96,7 @@ const Navbar = ({ navbarContainer }: any) => {
           <div className="flex items-center justify-end gap-0 sm:!justify-normal sm:!gap-6">
             {isSticky && (
               <div className="flex w-[60%] gap-3 sm:!w-[55%] md:!w-max">
-               <SearchBox />
+                <SearchBox />
                 <Link
                   href={"/support"}
                   className="hidden rounded-full border border-solid border-[#0000003c] p-1 md:!block"
@@ -165,9 +165,7 @@ const Navbar = ({ navbarContainer }: any) => {
                 {!login ? (
                   <Link href={"/login"}>ورود / ثبت نام</Link>
                 ) : (
-                  <>
-                    <Link href={""}>اعلانات</Link>
-                  </> 
+                  <Notification />
                 )}
 
                 <Link href={"/host"}>میزبان شوید</Link>

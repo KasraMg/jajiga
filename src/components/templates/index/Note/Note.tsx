@@ -2,7 +2,7 @@ import React from "react";
 
 const Note = () => {
   return (
-    <div className="!mt-12 Container">
+    <div className="!my-20 Container">
       <p className="text-base font-extrabold text-center"> اجاره ویلا، آنلاین و مطمئن در جاجیگا</p>
       <p className="font-thin text-sm mt-4">
         سفر تو خون ما ایرانیهاست و معمولا بهترین خاطرات عمرمون در سفرهامون رقم
