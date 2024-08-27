@@ -7,23 +7,31 @@ import Image from "next/image";
 import { userVillasObj } from "@/src/types/Auth.types";
 
 const Gallery = (data: userVillasObj) => {
-  const imageLoadedRef = useRef<boolean[]>(Array(data?.cover?.length).fill(false));
-  const [imageLoaded, setImageLoaded] = useState<boolean[]>(imageLoadedRef.current);
-  console.log('gallery',data);
-  
+  const imageLoadedRef = useRef<boolean[]>(
+    Array(data?.cover?.length).fill(false),
+  );
+  const [imageLoaded, setImageLoaded] = useState<boolean[]>(
+    imageLoadedRef.current,
+  );
+  console.log("gallery", data);
+
   const handleImageLoad = (index: number) => {
     if (!imageLoadedRef.current[index]) {
       imageLoadedRef.current[index] = true;
       setImageLoaded([...imageLoadedRef.current]);
     }
-  }; 
+  };
+
+  console.log(data.cover.slice(1).length);
+  console.log(data.cover.length);
+
   return (
     <section>
       <div className="mb-4 hidden h-[300px] gap-x-3 px-4 md:!flex xl:!px-0">
         <div className="relative w-1/2">
           {!imageLoaded[0] && (
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="bg-shimmer h-full w-full animate-pulse rounded-xl"></div>
+              <div className="h-full w-full animate-pulse rounded-xl bg-shimmer"></div>
             </div>
           )}
           <Image
@@ -40,7 +48,7 @@ const Gallery = (data: userVillasObj) => {
             <div key={crypto.randomUUID()} className="relative">
               {!imageLoaded[index + 1] && (
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="bg-shimmer h-full w-full animate-pulse rounded-lg"></div>
+                  <div className="h-full w-full animate-pulse rounded-lg bg-shimmer"></div>
                 </div>
               )}
               <Image
@@ -53,6 +61,20 @@ const Gallery = (data: userVillasObj) => {
               />
             </div>
           ))}
+
+          {data.cover.slice(1).length < 4 &&
+            Array(4 - data.cover.slice(1).length)
+              .fill(0)
+              .map((_, index) => (
+                <Image
+                  width={1000}
+                  height={1000}
+                  key={index}
+                  className="h-36 w-full rounded-lg object-cover"
+                  alt="cover" 
+                  src="/images/img.jpg"
+                />
+              ))}
         </div>
       </div>
 
@@ -67,7 +89,7 @@ const Gallery = (data: userVillasObj) => {
           <SwiperSlide key={crypto.randomUUID()} className="relative">
             {!imageLoaded[index + 1] && (
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="bg-shimmer h-full w-full animate-pulse rounded-xl"></div>
+                <div className="h-full w-full animate-pulse rounded-xl bg-shimmer"></div>
               </div>
             )}
             <Image

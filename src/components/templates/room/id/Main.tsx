@@ -6,8 +6,7 @@ import Gallery from "./gallery/Gallery";
 import Reservation from "./reservation/Reservation";
 import Cookies from "js-cookie";
 import { baseUrl } from "@/src/utils/utils";
-import { useParams } from "next/navigation";
-import { userVillasObj } from "@/src/types/Auth.types";
+import { useParams } from "next/navigation"; 
 const Main = () => {
   const params = useParams();
   async function getVilla() {

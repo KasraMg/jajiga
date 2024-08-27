@@ -8,13 +8,15 @@ import ReservationModal from "./components/ReservationModal";
 import { Button } from "@/src/components/shadcn/ui/button";
 import { userVillasObj } from "@/src/types/Auth.types";
 import { roomStore } from "@/src/stores/room";
-import { todayVillaPrice } from "@/src/utils/utils";
+import { useParams } from "next/navigation";
+import { baseUrl, todayVillaPrice } from "@/src/utils/utils";
 const Reservation = (data: userVillasObj) => {
   const [countSelectedOption, setCountSelectedOption] = useState<{
     label: string;
     value: string[];
   } | null>(null);
 
+  const params = useParams();
   const { startDate, endtDate } = roomStore((state) => state);
   const [disable, setDisable] = useState(true);
 
@@ -33,9 +35,28 @@ const Reservation = (data: userVillasObj) => {
   }
 
   useEffect(() => {
-    if (countSelectedOption && startDate && endtDate) setDisable(false);
-    else setDisable(true);
-  }, [countSelectedOption,startDate,endtDate]);
+    if (countSelectedOption && startDate && endtDate) {
+      console.log(startDate);
+      console.log(endtDate);
+
+      setDisable(false);
+      const data = {
+        date: {
+          from: "1403/06/22",
+          to: "1403/06/25",
+        },
+      };
+      fetch(`${baseUrl}/villa/book/price/${params.id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then((datas) => console.log(datas));
+    } else setDisable(true);
+  }, [countSelectedOption, startDate, endtDate]);
 
   return (
     <>
