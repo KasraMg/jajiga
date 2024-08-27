@@ -25,3 +25,4 @@ const Room = ({ params }:any) => {
 };
 
 export default Room;
+ 
