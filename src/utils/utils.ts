@@ -70,9 +70,9 @@ export const todayVillaPrice = (price: {
   const priceType = isWeekend ? "holidays" : "midWeek";
 
   const getSeason = (monthIndex: number) => {
-    if (monthIndex >= 0 && monthIndex <= 2) return "spring";
-    if (monthIndex >= 3 && monthIndex <= 5) return "summer";
-    if (monthIndex >= 6 && monthIndex <= 8) return "autumn";
+    if (monthIndex >= 1 && monthIndex <= 3) return "spring";
+    if (monthIndex >= 4 && monthIndex <= 6) return "summer";
+    if (monthIndex >= 7 && monthIndex <= 9) return "autumn";
     return "winter";
   };
 
@@ -80,3 +80,18 @@ export const todayVillaPrice = (price: {
 
   return new Intl.NumberFormat("fa-IR").format(dayPrice as any);
 };
+
+
+export function convertNumbers(str:string, toEnglish:boolean) {
+  const persianNumbers = [/۰/g, /۱/g, /۲/g, /۳/g, /۴/g, /۵/g, /۶/g, /۷/g, /۸/g, /۹/g];
+  const englishNumbers = [/0/g, /1/g, /2/g, /3/g, /4/g, /5/g, /6/g, /7/g, /8/g, /9/g];
+  
+  const fromNumbers = toEnglish ? persianNumbers : englishNumbers;
+  const toNumbers = toEnglish ? ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'] : ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+
+  for (let i = 0; i < 10; i++) {
+      str = str.replace(fromNumbers[i], toNumbers[i]);
+  }
+
+  return str;
+}

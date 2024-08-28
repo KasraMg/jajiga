@@ -12,19 +12,14 @@ const Gallery = (data: userVillasObj) => {
   );
   const [imageLoaded, setImageLoaded] = useState<boolean[]>(
     imageLoadedRef.current,
-  );
-  console.log("gallery", data);
+  ); 
 
   const handleImageLoad = (index: number) => {
     if (!imageLoadedRef.current[index]) {
       imageLoadedRef.current[index] = true;
       setImageLoaded([...imageLoadedRef.current]);
     }
-  };
-
-  console.log(data.cover.slice(1).length);
-  console.log(data.cover.length);
-
+  }; 
   return (
     <section>
       <div className="mb-4 hidden h-[300px] gap-x-3 px-4 md:!flex xl:!px-0">

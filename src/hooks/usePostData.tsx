@@ -5,7 +5,7 @@ import { toast } from "../components/shadcn/ui/use-toast";
 const usePostData = <T extends object>(
   url: string,
   successMsg: string | null,
-  put?: boolean,
+  put?: boolean, 
   successFunc?: ((data: any) => void) | null   ,
   formData?: boolean,
 ) => {
