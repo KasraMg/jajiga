@@ -14,6 +14,7 @@ import {
 } from "@/src/components/shadcn/ui/sheet";
 import { userVillasObj } from "@/src/types/Auth.types";
 import { roomStore } from "@/src/stores/room";
+import { convertNumbers } from "@/src/utils/utils";
 
 const Calendars = (data: userVillasObj) => {
   const date = useDateHandler();
@@ -23,13 +24,13 @@ const Calendars = (data: userVillasObj) => {
     setDefultValue(value as any);
     if (Array.isArray(value)) {
       value.forEach((date, index) => {
-        console.log(date.format());
-        if (index + 1 === 1) setStartDate(date.format());
+        console.log(convertNumbers(date.format(),true));
+        if (index + 1 === 1) setStartDate(convertNumbers(date.format(), true));
         if (index + 1 === 2) {
-          setEndtDate(date.format());
+          setEndtDate(convertNumbers(date.format(), true));
         } else {
           setEndtDate(null);
-        } 
+        }
       });
     }
   }
@@ -82,7 +83,7 @@ const Calendars = (data: userVillasObj) => {
                 <p
                   style={{
                     fontSize: "10px",
-                    color: isWeekend ? "#ff0000" : isPast ? "cccbcb" : "#555",
+                    color: isWeekend ?  isPast ? "cccbcb" : "#ff0000" : isPast ? "cccbcb" : "#555",
                     letterSpacing: "-1px",
                     marginLeft: "9px",
                   }}

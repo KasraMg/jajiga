@@ -10,6 +10,19 @@ import { userVillasObj } from "@/src/types/Auth.types";
 import { roomStore } from "@/src/stores/room";
 import { useParams } from "next/navigation";
 import { baseUrl, todayVillaPrice } from "@/src/utils/utils";
+import usePostData from "@/src/hooks/usePostData";
+
+interface userSelectData {
+  fridays: number;
+  holyDays: number;
+  holyDaysTotalPrice: number;
+  midWeekTotalPrice: number;
+  midWeeks: number;
+  statusCode: number;
+  thursdays: number;
+  totalDays: number;
+  totalPrice: number;
+}
 const Reservation = (data: userVillasObj) => {
   const [countSelectedOption, setCountSelectedOption] = useState<{
     label: string;
@@ -19,9 +32,18 @@ const Reservation = (data: userVillasObj) => {
   const params = useParams();
   const { startDate, endtDate } = roomStore((state) => state);
   const [disable, setDisable] = useState(true);
+  const [userSelectData, setUserSelectData] = useState<userSelectData | null>();
+  const successFunc = (data: userSelectData) => {
+    if (data.statusCode === 200) {
+      setUserSelectData(data);
+    }
+  };
+
+  useEffect(() => {
+    console.log(userSelectData);
+  }, [userSelectData]);
 
   const price = todayVillaPrice(data.price);
-
   const userCountOptions: {
     label: string;
     value: string;
@@ -34,27 +56,27 @@ const Reservation = (data: userVillasObj) => {
     });
   }
 
+  const { mutate: mutation, isPending } = usePostData<any>(
+    `/villa/book/price/${params.id}`,
+    null,
+    false,
+    successFunc,
+  );
+
   useEffect(() => {
-    if (countSelectedOption && startDate && endtDate) {
-      console.log(startDate);
-      console.log(endtDate);
+    if (!endtDate) setUserSelectData(null)
+    if (countSelectedOption && startDate && endtDate) { 
 
       setDisable(false);
       const data = {
         date: {
-          from: "1403/06/22",
-          to: "1403/06/25",
+          from: startDate,
+          to: endtDate,
         },
       };
-      fetch(`${baseUrl}/villa/book/price/${params.id}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-        .then((res) => res.json())
-        .then((datas) => console.log(datas));
+      console.log(data);
+
+      mutation(data);
     } else setDisable(true);
   }, [countSelectedOption, startDate, endtDate]);
 
@@ -108,6 +130,32 @@ const Reservation = (data: userVillasObj) => {
             options={userCountOptions as any}
             placeholder={"تعداد نفرات را مشخص کنید"}
           />
+ 
+   
+          {userSelectData && (
+            <div className="p-2 px-5 font-light text-[.8rem] mt-6 text-gray-600" style={{ boxShadow: 'rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px'}}>
+              {userSelectData.midWeeks !== 0 && (
+                <div className="flex justify-between border-b border-solid border-gray-300 pb-3 py-3">
+                  <p> {userSelectData.midWeeks} شب * 1,5000 تومان </p>
+                  <p>{userSelectData.midWeekTotalPrice} تومان</p>
+                </div>
+              )}
+              {userSelectData.holyDays !== 0 && (
+                <div className="flex justify-between border-b border-solid border-gray-300 pb-3 py-3">
+                  <p> {userSelectData.holyDays} شب * 1,5000 تومان </p>
+                  <p>{userSelectData.holyDaysTotalPrice} تومان</p>
+                </div>
+              )}
+              <div className="flex justify-between border-b border-solid border-gray-300 pb-3 py-3">
+                <p> مجموع اجاره‌بها - {userSelectData.totalDays} شب</p>
+                <p>{userSelectData.totalPrice} تومان</p>
+              </div>
+              <div className="flex justify-between py-3">
+                <p> مبلغ قابل پرداخت</p>
+                <p>{userSelectData.totalPrice} تومان</p>
+              </div>
+            </div>
+          )}
           <Button
             variant="yellow"
             disabled={disable}

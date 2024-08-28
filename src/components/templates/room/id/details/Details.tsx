@@ -7,11 +7,13 @@ import Calendars from "./components/calenders/Calendars";
 import Rules from "./components/rules/Rules";
 import { Map } from "@/src/components/modules/Map/Map";
 import Comments from "./components/comments/Comments";
-import { userVillasObj } from "@/src/types/Auth.types"; 
+import { userVillasObj } from "@/src/types/Auth.types";
 import Costly from "./components/costly/Costly";
+import { FaHeart } from "react-icons/fa";
+import ShareModal from "./components/share/ShareModal";
 
-const Details = (data: userVillasObj) => { 
- 
+const Details = (data: userVillasObj) => {
+  const wishesHandler = () => {};
   return (
     <div className="flex w-full flex-col items-start justify-between pt-4 md:!w-[66.66%] md:!pt-0">
       <div className="mb-4 flex w-full justify-between px-4 md:!px-0">
@@ -29,9 +31,16 @@ const Details = (data: userVillasObj) => {
             در {data.address.city}
           </p>
           <div className="mt-5 flex gap-x-1">
-            <Badge bgColor="bg-yellow-300">
+            <Badge bgColor="bg-customYellow">
               کد: ({data._id.slice(18, 26)})
             </Badge>
+            <div
+              onClick={wishesHandler}
+              className="flex cursor-pointer items-center rounded-full bg-customYellow p-2 text-black"
+            >
+              <FaHeart />
+            </div>
+            <ShareModal />
             {/* <Badge bgColor="bg-[#f1f1f1]">+300 رزرو موفق</Badge> */}
             {/* stars component */}
           </div>
@@ -48,8 +57,8 @@ const Details = (data: userVillasObj) => {
       <main className="w-full px-4 md:!px-0">
         <Infoes {...data} />
         <Costly costly={data.costly} />
-        <Calendars {...data}/>
-        <Rules {...data}/>
+        <Calendars {...data} />
+        <Rules {...data} />
         <div className="w-full border-b border-solid border-gray-300 pb-8">
           <p className="my-6 mb-4 text-lg text-[#252a31]">نقشه</p>
           <Map
