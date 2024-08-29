@@ -11,6 +11,7 @@ import { roomStore } from "@/src/stores/room";
 import { useParams } from "next/navigation";
 import { baseUrl, todayVillaPrice } from "@/src/utils/utils";
 import usePostData from "@/src/hooks/usePostData";
+import { ButtonLoader } from "@/src/components/modules/loader/Loader";
 
 interface userSelectData {
   fridays: number;
@@ -22,6 +23,17 @@ interface userSelectData {
   thursdays: number;
   totalDays: number;
   totalPrice: number;
+
+  firstMonthDays: number;
+  firstMonthHoliDays: number;
+  firstMonthHoliDaysPrice: number;
+  firstMonthMidWeekDays: number;
+  firstMonthMidWeekDaysPrice: number;
+  secondMonthDays: number;
+  secondMonthHoliDays: number;
+  secondMonthHoliDaysPrice: number;
+  secondMonthMidWeekDays: number;
+  secondMonthMidWeekDaysPrice: number;
 }
 const Reservation = (data: userVillasObj) => {
   const [countSelectedOption, setCountSelectedOption] = useState<{
@@ -38,10 +50,6 @@ const Reservation = (data: userVillasObj) => {
       setUserSelectData(data);
     }
   };
-
-  useEffect(() => {
-    console.log(userSelectData);
-  }, [userSelectData]);
 
   const price = todayVillaPrice(data.price);
   const userCountOptions: {
@@ -64,20 +72,21 @@ const Reservation = (data: userVillasObj) => {
   );
 
   useEffect(() => {
-    if (!endtDate) setUserSelectData(null)
-    if (countSelectedOption && startDate && endtDate) { 
+    if (userSelectData) setDisable(false);
+    console.log(userSelectData);
+  }, [userSelectData]);
 
-      setDisable(false);
+  useEffect(() => {
+    if (!endtDate || !countSelectedOption) setUserSelectData(null);
+    if (countSelectedOption && startDate && endtDate) {
       const data = {
         date: {
           from: startDate,
           to: endtDate,
         },
       };
-      console.log(data);
-
       mutation(data);
-    } else setDisable(true);
+    }
   }, [countSelectedOption, startDate, endtDate]);
 
   return (
@@ -130,41 +139,168 @@ const Reservation = (data: userVillasObj) => {
             options={userCountOptions as any}
             placeholder={"تعداد نفرات را مشخص کنید"}
           />
- 
-   
+
           {userSelectData && (
-            <div className="p-2 px-5 font-light text-[.8rem] mt-6 text-gray-600" style={{ boxShadow: 'rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px'}}>
-              {userSelectData.midWeeks !== 0 && (
-                <div className="flex justify-between border-b border-solid border-gray-300 pb-3 py-3">
-                  <p> {userSelectData.midWeeks} شب * 1,5000 تومان </p>
-                  <p>{userSelectData.midWeekTotalPrice} تومان</p>
+            <>
+              {userSelectData.firstMonthDays ? (
+                <div
+                  className="mt-6 p-2 px-5 text-[.8rem] font-light text-gray-600"
+                  style={{
+                    boxShadow:
+                      "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px",
+                  }}
+                >
+                  <span>ماه اول</span>
+
+                  {userSelectData.firstMonthMidWeekDays !== 0 && (
+                    <div className="flex justify-between border-b border-solid border-gray-300 py-3 pb-3">
+                      <p>
+                        {" "}
+                        {userSelectData.firstMonthMidWeekDays} شب *{" "}
+                        {userSelectData.firstMonthMidWeekDaysPrice.toLocaleString()}{" "}
+                        تومان{" "}
+                      </p>
+                      <p>
+                        {(
+                          userSelectData.firstMonthMidWeekDays *
+                          userSelectData.firstMonthMidWeekDaysPrice
+                        ).toLocaleString()}{" "}
+                        تومان
+                      </p>
+                    </div>
+                  )}
+                  {userSelectData.firstMonthHoliDays !== 0 && (
+                    <div className="flex justify-between border-b border-solid border-gray-300 py-3 pb-3">
+                      <p>
+                        {" "}
+                        {userSelectData.firstMonthHoliDays} شب *{" "}
+                        {userSelectData.firstMonthHoliDaysPrice.toLocaleString()}{" "}
+                        تومان{" "}
+                      </p>
+                      <p>
+                        {(
+                          userSelectData.firstMonthHoliDays *
+                          userSelectData.firstMonthHoliDaysPrice
+                        ).toLocaleString()}{" "}
+                        تومان
+                      </p>
+                    </div>
+                  )}
+
+                  <span className="mt-3 block">ماه دوم</span>
+
+                  {userSelectData.secondMonthMidWeekDays !== 0 && (
+                    <div className="flex justify-between border-b border-solid border-gray-300 py-3 pb-3">
+                      <p>
+                        {" "}
+                        {userSelectData.secondMonthMidWeekDays} شب *{" "}
+                        {userSelectData.secondMonthMidWeekDaysPrice.toLocaleString()}{" "}
+                        تومان{" "}
+                      </p>
+                      <p>
+                        {(
+                          userSelectData.secondMonthMidWeekDays *
+                          userSelectData.secondMonthMidWeekDaysPrice
+                        ).toLocaleString()}{" "}
+                        تومان
+                      </p>
+                    </div>
+                  )}
+                  {userSelectData.secondMonthHoliDays !== 0 && (
+                    <div className="flex justify-between border-b border-solid border-gray-300 py-3 pb-3">
+                      <p>
+                        {" "}
+                        {userSelectData.secondMonthHoliDays} شب *{" "}
+                        {userSelectData.secondMonthHoliDaysPrice.toLocaleString()}{" "}
+                        تومان{" "}
+                      </p>
+                      <p>
+                        {(
+                          userSelectData.secondMonthHoliDays *
+                          userSelectData.secondMonthHoliDaysPrice
+                        ).toLocaleString()}{" "}
+                        تومان
+                      </p>
+                    </div>
+                  )}
+
+                  <div className="flex justify-between border-b border-solid border-gray-300 py-3 pb-3">
+                    <p> مجموع اجاره‌بها - {userSelectData.totalDays} شب</p>
+                    <p>{userSelectData.totalPrice.toLocaleString()} تومان</p>
+                  </div>
+                  <div className="flex justify-between py-3 text-black">
+                    <p> مبلغ قابل پرداخت</p>
+                    <p>{userSelectData.totalPrice.toLocaleString()} تومان</p>
+                  </div>
+                </div>
+              ) : (
+                <div
+                  className="mt-6 p-2 px-5 text-[.8rem] font-light text-gray-600"
+                  style={{
+                    boxShadow:
+                      "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px",
+                  }}
+                >
+                  {userSelectData.midWeeks !== 0 && (
+                    <div className="flex justify-between border-b border-solid border-gray-300 py-3 pb-3">
+                      <p>
+                        {" "}
+                        {userSelectData.midWeeks} شب *{" "}
+                        {userSelectData.midWeekTotalPrice.toLocaleString()}{" "}
+                        تومان{" "}
+                      </p>
+                      <p>
+                        {(
+                          userSelectData.midWeeks *
+                          userSelectData.midWeekTotalPrice
+                        ).toLocaleString()}{" "}
+                        تومان
+                      </p>
+                    </div>
+                  )}
+                  {userSelectData.holyDays !== 0 && (
+                    <div className="flex justify-between border-b border-solid border-gray-300 py-3 pb-3">
+                      <p>
+                        {" "}
+                        {userSelectData.holyDays} شب *{" "}
+                        {userSelectData.holyDaysTotalPrice.toLocaleString()}{" "}
+                        تومان{" "}
+                      </p>
+                      <p>
+                        {(
+                          userSelectData.holyDays *
+                          userSelectData.holyDaysTotalPrice
+                        ).toLocaleString()}{" "}
+                        تومان
+                      </p>
+                    </div>
+                  )}
+                  <div className="flex justify-between border-b border-solid border-gray-300 py-3 pb-3">
+                    <p> مجموع اجاره‌بها - {userSelectData.totalDays} شب</p>
+                    <p>{userSelectData.totalPrice.toLocaleString()} تومان</p>
+                  </div>
+                  <div className="flex justify-between py-3 text-black">
+                    <p> مبلغ قابل پرداخت</p>
+                    <p>{userSelectData.totalPrice.toLocaleString()} تومان</p>
+                  </div>
                 </div>
               )}
-              {userSelectData.holyDays !== 0 && (
-                <div className="flex justify-between border-b border-solid border-gray-300 pb-3 py-3">
-                  <p> {userSelectData.holyDays} شب * 1,5000 تومان </p>
-                  <p>{userSelectData.holyDaysTotalPrice} تومان</p>
-                </div>
-              )}
-              <div className="flex justify-between border-b border-solid border-gray-300 pb-3 py-3">
-                <p> مجموع اجاره‌بها - {userSelectData.totalDays} شب</p>
-                <p>{userSelectData.totalPrice} تومان</p>
-              </div>
-              <div className="flex justify-between py-3">
-                <p> مبلغ قابل پرداخت</p>
-                <p>{userSelectData.totalPrice} تومان</p>
-              </div>
-            </div>
+            </>
           )}
+
           <Button
             variant="yellow"
             disabled={disable}
-            className="mt-5 w-full rounded-full text-center"
+            className="mt-5 h-[36px] w-full rounded-full text-center"
           >
-            <div className="text-textGray mx-auto flex items-baseline justify-center">
-              <span>ثبت درخواست رزرو</span>
-              <span className="text-[10px]">(رایگان)</span>
-            </div>
+            {isPending ? (
+              <ButtonLoader />
+            ) : (
+              <div className="text-textGray mx-auto flex items-baseline justify-center">
+                <span>ثبت درخواست رزرو</span>
+                <span className="text-[10px]">(رایگان)</span>
+              </div>
+            )}
           </Button>
           <Link href={"/faq"}>
             <Button

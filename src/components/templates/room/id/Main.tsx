@@ -6,9 +6,10 @@ import Gallery from "./gallery/Gallery";
 import Reservation from "./reservation/Reservation";
 import Cookies from "js-cookie";
 import { baseUrl } from "@/src/utils/utils";
-import { useParams } from "next/navigation"; 
+import { useParams, useRouter } from "next/navigation"; 
 const Main = () => {
   const params = useParams();
+  const router = useRouter();
   async function getVilla() {
     const accessToken = Cookies.get("AccessToken");
 
@@ -22,6 +23,7 @@ const Main = () => {
 
   const { data, status, isLoading } = useGetData<any>(["villa"], getVilla);
 console.log(data);
+
 
   return (
     <div className="Container mt-[3.8rem] md:!mt-20">

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Calendar, DateObject } from "react-multi-date-picker";
 import { useState } from "react";
 import persian from "react-date-object/calendars/persian";
@@ -18,6 +18,21 @@ import { convertNumbers } from "@/src/utils/utils";
 
 const Calendars = (data: userVillasObj) => {
   const date = useDateHandler();
+
+  const [numberOfMonths, setNumberOfMonths] = useState(
+    window.innerWidth >= 1023 ? 2 : 1
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setNumberOfMonths(window.innerWidth >= 1023 ? 2 : 1);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   const { setStartDate, setEndtDate, startDate } = roomStore((state) => state);
   const [defaultValue, setDefultValue] = useState([]);
   function handleChange(value: DateObject | DateObject[] | null) {
@@ -58,7 +73,7 @@ const Calendars = (data: userVillasObj) => {
         calendar={persian}
         locale={persian_fa}
         className="!w-full"
-        numberOfMonths={window.innerWidth >= 1023 ? 2 : 1}
+        numberOfMonths={numberOfMonths}
         shadow={false}
         minDate={new Date()}
         onChange={handleChange}
@@ -84,8 +99,7 @@ const Calendars = (data: userVillasObj) => {
                   style={{
                     fontSize: "10px",
                     color: isWeekend ?  isPast ? "cccbcb" : "#ff0000" : isPast ? "cccbcb" : "#555",
-                    letterSpacing: "-1px",
-                    marginLeft: "9px",
+                    letterSpacing: "-1px", 
                   }}
                 >
                   {new Intl.NumberFormat("fa-IR").format(dayPrice as any)}
