@@ -206,6 +206,24 @@ table th {
   align-items: center;
 }
 
+@media (min-width:1023px) {
+  .rmdp-day-picker div p:nth-child(2){ 
+    margin-left: 8px
+   }
+}
+@media (max-width:350px) {
+  .rmdp-day-picker div p:nth-child(2){
+    font-size: 9px !important;
+    margin-left: 5px
+   }
+}
+@media (max-width:400px) {
+  .rmdp-day-picker {
+   padding: 0px !important
+} .rmdp-day-picker div p:nth-child(2){
+  font-size: 9px !important; 
+ }
+}
 @media (max-width:767px) {
   [data-testid="modal-overlay"] .max-w-2xl {
     padding-top: 13rem !important;
