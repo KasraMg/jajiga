@@ -40,6 +40,48 @@ export function convertToJalali(date: string) {
   return `${day} ${month} ${year}`;
 }
 
+export function getJalaliDateInfo(jalaliDate: string) {
+  const [year, month, day] = jalaliDate.split('/').map(Number);
+  const gregorianDate = jalaali.toGregorian(year, month, day);
+  const date = new Date(gregorianDate.gy, gregorianDate.gm - 1, gregorianDate.gd);
+
+  const daysOfWeek = [
+    "یکشنبه",
+    "دوشنبه",
+    "سه‌شنبه",
+    "چهارشنبه",
+    "پنج‌شنبه",
+    "جمعه",
+    "شنبه",
+  ];
+
+  const months = [
+    "فروردین",
+    "اردیبهشت",
+    "خرداد",
+    "تیر",
+    "مرداد",
+    "شهریور",
+    "مهر",
+    "آبان",
+    "آذر",
+    "دی",
+    "بهمن",
+    "اسفند",
+  ];
+
+  const dayOfWeek = daysOfWeek[date.getDay()];
+  const monthName = months[month - 1];
+
+  return {
+    dayOfWeek,
+    monthName,
+    day,
+    year,
+  };
+}
+ 
+
 export const formatNumber = (num: string) => {
   return num.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
