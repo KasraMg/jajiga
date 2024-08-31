@@ -28,7 +28,7 @@ const usePostData = <T extends object>(
     },
     onSuccess: (data) => {
       console.log(data);
-      if (successFunc) {  
+      if (successFunc) {   
         successFunc(data);
       }
       if (successMsg && data.statusCode === 200) {

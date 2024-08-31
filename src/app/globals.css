@@ -580,4 +580,9 @@ select:focus {
   }
 } 
 
- 
+ .stepper-bg::after{
+  transform: translate(0.75em, -50%);
+  background-image: linear-gradient(90deg, rgb(51, 51, 51) 75%, transparent 75%, transparent 100%);
+  background-size: 12px 1px;
+  
+ }

@@ -12,6 +12,7 @@ import { useParams } from "next/navigation";
 import { baseUrl, todayVillaPrice } from "@/src/utils/utils";
 import usePostData from "@/src/hooks/usePostData";
 import { ButtonLoader } from "@/src/components/modules/loader/Loader";
+import ReservationStepper from "./components/ReservationStepper";
 
 interface userSelectData {
   fridays: number;
@@ -288,20 +289,23 @@ const Reservation = (data: userVillasObj) => {
             </>
           )}
 
-          <Button
-            variant="yellow"
-            disabled={disable}
-            className="mt-5 h-[36px] w-full rounded-full text-center"
-          >
-            {isPending ? (
+          {isPending ? (
+            <Button
+              variant="yellow"
+              disabled={disable}
+              className="mt-5 h-[36px] w-full rounded-full text-center"
+            >
               <ButtonLoader />
-            ) : (
-              <div className="text-textGray mx-auto flex items-baseline justify-center">
-                <span>ثبت درخواست رزرو</span>
-                <span className="text-[10px]">(رایگان)</span>
-              </div>
-            )}
-          </Button>
+            </Button>
+          ) : (
+            <ReservationStepper
+              disable={disable}
+              data={data}
+              totalPrice={userSelectData?.totalPrice.toLocaleString() as string}
+              usersCount={countSelectedOption?.value as string}
+              totalDays={userSelectData?.totalDays}
+            />
+          )}
           <Link href={"/faq"}>
             <Button
               className="mt-5 w-full justify-center border-[#00000028]"

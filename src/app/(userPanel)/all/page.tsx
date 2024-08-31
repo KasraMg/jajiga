@@ -1,11 +1,12 @@
-"use client"; 
+"use client";
 import Layout from "@/src/components/layouts/userLayout/Layout";
 import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import Container from "@/src/components/modules/container/Container";
 import Card from "@/src/components/templates/userPanel/all/Card";
 import { authStore } from "@/src/stores/auth";
 import { userVillasObj } from "@/src/types/Auth.types";
-import { useState } from "react";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 const Reserve = () => {
   const [showUnComplatePosts, setShowUnComplatePosts] = useState(false);
   const { userData } = authStore((state) => state);
@@ -27,7 +28,7 @@ const Reserve = () => {
                     "border-b-2 border-solid border-black font-bold !text-black"
                   } cursor-pointer pb-2 text-gray-700`}
                 >
-                  همه (1){" "}
+                  همه ({userData?.villas.length}){" "}
                 </p>
                 <p
                   onClick={() => setShowUnComplatePosts(true)}
@@ -36,7 +37,13 @@ const Reserve = () => {
                     "border-b-2 border-solid border-black font-bold !text-black"
                   } cursor-pointer pb-2 text-gray-700`}
                 >
-                  در حال تکمیل (1){" "}
+                  در حال تکمیل (
+                  {
+                    userData?.villas?.filter(
+                      (villa: userVillasObj) => !villa.finished,
+                    ).length
+                  }
+                  ){" "}
                 </p>
               </div>
 
@@ -44,15 +51,40 @@ const Reserve = () => {
                 <>
                   {showUnComplatePosts ? (
                     <div className="grid !grid-cols-[auto] gap-4 md:!grid-cols-[auto,auto] xl:!grid-cols-[auto,auto,auto]">
-                      {userData.villas?.map((villa: userVillasObj) =>
-                        villa.finished ? <Card {...villa} /> : null,
+                      {userData?.villas?.filter(
+                        (villa: userVillasObj) => !villa.finished,
+                      ).length ? (
+                        userData.villas?.map((villa: userVillasObj) =>
+                          !villa.finished ? <Card {...villa} /> : null,
+                        )
+                      ) : (
+                        <div className="text-center">
+                          <Image
+                            src={
+                              "https://www.jajiga.com/static/img/404/error404.png"
+                            }
+                            height={1000}
+                            className="mx-auto block h-[340px] w-[583px]"
+                            alt="notFound"
+                            width={1000}
+                          />
+                          <p className="text-2xl font-medium">
+                           اقامتگاهی یافت نشد.
+                          </p>
+                        </div>
                       )}
                     </div>
                   ) : (
                     <div className="grid !grid-cols-[auto] gap-4 md:!grid-cols-[auto,auto] xl:!grid-cols-[auto,auto,auto]">
-                      {userData.villas?.map((villa: userVillasObj) => (
-                        <Card {...villa} />
-                      ))}
+                      {userData.villas.length ? (
+                        userData.villas?.map((villa: userVillasObj) => (
+                          <Card {...villa} />
+                        ))
+                      ) : (
+                        <div className="mx-auto mt-16 p-4 text-center">
+                          <p>آگهی ای موجود نیست</p>
+                        </div>
+                      )}
                     </div>
                   )}
                 </>
