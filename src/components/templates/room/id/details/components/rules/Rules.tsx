@@ -1,7 +1,7 @@
-import { userVillasObj } from "@/src/types/Auth.types";
+import { VillaDetails } from "@/src/types/Villa.types";
 import React from "react";
 import { GoDotFill } from "react-icons/go";
-const Rules = (data: userVillasObj) => {
+const Rules = (data: VillaDetails) => {
   return (
     <div className="mt-8 w-full border border-x-0 border-solid border-gray-300">
       <h2 className="my-4 text-lg text-[#252a31]">مقررات</h2>

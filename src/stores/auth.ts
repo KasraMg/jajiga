@@ -20,7 +20,6 @@ export const authStore = create<State & Action>()(
     isPending: true,
     setUserData: (val) => set(() => ({ userData: val }), false, "setUserData"),
     setLogin: (val) => set(() => ({ login: val }), false, "setLogin"),
-    setIsPending: (val) =>
-      set(() => ({ isPending: val }), false, "setIsPending"),
+    setIsPending: (val) =>  set(() => ({ isPending: val }), false, "setIsPending"),
   })),
 );

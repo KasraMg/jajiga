@@ -10,7 +10,7 @@ import { LuClock9 } from "react-icons/lu";
 import { CiCalendar } from "react-icons/ci";
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { getJalaliDateInfo } from "@/src/utils/utils";
-import { userVillasObj } from "@/src/types/Auth.types";
+import { VillaDetails } from "@/src/types/Villa.types";
 import { PiWarningCircle } from "react-icons/pi";
 import usePostData from "@/src/hooks/usePostData";
 import { useParams } from "next/navigation";
@@ -18,13 +18,15 @@ import { ButtonLoader } from "@/src/components/modules/loader/Loader";
 
 import { useRouter } from "next/navigation";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
+import { authStore } from "@/src/stores/auth";
 
 interface ReservationStepperProps {
   disable: boolean;
   totalDays: number | undefined;
   usersCount: string | undefined;
   totalPrice: string | undefined;
-  data: userVillasObj;
+  data: VillaDetails;
+  setOpenReserveModal?: any;
 }
 
 const ReservationStepper: FC<ReservationStepperProps> = ({
@@ -33,19 +35,22 @@ const ReservationStepper: FC<ReservationStepperProps> = ({
   usersCount,
   totalPrice,
   data,
+  setOpenReserveModal,
 }) => {
   const [open, setOpen] = useState(false);
-    const router = useRouter();
+  const router = useRouter();
+  const { login } = authStore((state) => state);
 
   const successFunc = (data: { statusCode: number }) => {
-    console.log('data',data);
-    
+    console.log("data", data);
+
     if (data.statusCode === 200) {
       toast({
         variant: "success",
         title: "ویلا با موفقیت رزرو شد",
       });
       setOpen(false);
+      setOpenReserveModal(false);
       router.push("/reserves");
     } else if (data.statusCode === 422) {
       toast({
@@ -62,7 +67,7 @@ const ReservationStepper: FC<ReservationStepperProps> = ({
   };
 
   const [step, setStep] = useState(1);
-  const { startDate, endtDate } = roomStore((state) => state);
+  const { startDate, endDate } = roomStore((state) => state);
   const params = useParams();
   const { mutate: mutation, isPending } = usePostData<any>(
     `/villa/book/${params.id}`,
@@ -70,12 +75,12 @@ const ReservationStepper: FC<ReservationStepperProps> = ({
     false,
     successFunc,
   );
- 
+
   const reserveHandler = () => {
     const date = {
       date: {
         from: startDate,
-        to: endtDate,
+        to: endDate,
       },
     };
     mutation(date);
@@ -84,17 +89,17 @@ const ReservationStepper: FC<ReservationStepperProps> = ({
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
-          disabled={disable}
+          disabled={disable || !login}
           variant={"yellow"}
           className="mt-5 h-[36px] w-full rounded-full text-center"
         >
           <div className="text-textGray mx-auto flex items-baseline justify-center">
-            <span>ثبت درخواست رزرو</span>
+            <span> ثبت درخواست رزرو</span>
             <span className="text-[10px]">(رایگان)</span>
           </div>
         </Button>
       </DialogTrigger>
-      <DialogContent className="!bg-[#e9edf1] sm:max-w-[525px]">
+      <DialogContent className="h-[72%] w-full max-w-full !bg-[#e9edf1] px-0 sm:!max-w-[525px] sm:!p-6">
         <div className="mx-auto flex w-[85%] justify-between">
           <div className="stepper-bg relative z-[50] w-full text-center after:absolute after:right-[calc(50%+0.75em)] after:top-[calc(1.3em)] after:z-0 after:h-[2px] after:w-[calc(100%-0.75em)] after:rounded-xl after:content-['']">
             <div
@@ -124,7 +129,7 @@ const ReservationStepper: FC<ReservationStepperProps> = ({
           </div>
         </div>
 
-        <main className="mx-auto w-[90%] rounded-xl bg-white p-4">
+        <main className="mx-auto w-full rounded-xl bg-white p-4 sm:!w-[90%]">
           {step === 1 && (
             <>
               <div className="flex justify-evenly">
@@ -134,7 +139,7 @@ const ReservationStepper: FC<ReservationStepperProps> = ({
                     <p>ورود:</p>
                   </div>
                   {startDate && (
-                    <p className="my-1">
+                    <p className="my-1 text-sm sm:!text-base">
                       {getJalaliDateInfo(startDate).dayOfWeek}{" "}
                       {getJalaliDateInfo(startDate).day}{" "}
                       {getJalaliDateInfo(startDate).monthName}
@@ -147,11 +152,11 @@ const ReservationStepper: FC<ReservationStepperProps> = ({
                     <CiCalendar className="text-2xl" />
                     <p>خروج:</p>
                   </div>
-                  {endtDate && (
-                    <p className="my-1">
-                      {getJalaliDateInfo(endtDate).dayOfWeek}{" "}
-                      {getJalaliDateInfo(endtDate).day}{" "}
-                      {getJalaliDateInfo(endtDate).monthName}
+                  {endDate && (
+                    <p className="my-1 text-sm sm:!text-base">
+                      {getJalaliDateInfo(endDate).dayOfWeek}{" "}
+                      {getJalaliDateInfo(endDate).day}{" "}
+                      {getJalaliDateInfo(endDate).monthName}
                     </p>
                   )}
                   <p className="text-sm text-gray-600">از 9 صبح</p>

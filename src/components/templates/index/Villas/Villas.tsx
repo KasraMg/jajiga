@@ -5,7 +5,7 @@ import Slider from "@/src/components/modules/slider/Slider";
 import Card from "../../../modules/card/Card";
 import useGetData from "@/src/hooks/useGetData";
 import { getAllActivatedVillas } from "@/src/utils/fetchs";
-import { userVillasObj } from "@/src/types/Auth.types";
+import { VillaDetails } from "@/src/types/Villa.types";
 import Image from "next/image";
 const Villas = () => {
   const { data, isLoading } = useGetData<any>(
@@ -20,7 +20,7 @@ const Villas = () => {
       setVillaData(data.villas);
     } else {
       const filtredResult = data.villas.filter(
-        (villa: userVillasObj) => villa.address.city === status,
+        (villa: VillaDetails) => villa.address.city === status,
       );
       setVillaData(filtredResult);
     }

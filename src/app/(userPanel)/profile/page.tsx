@@ -51,9 +51,9 @@ const Profile = () => {
     );
     setAvatar(
       userData?.user.avatar
-        ? `https://jajiga-backend.liara.run/villa/covers/${userData?.user.avatar}`
+        ? `https://jajiga-backend.liara.run/user/avatars//${userData?.user.avatar}`
         : "",
-    );
+    );       
     setPhoneNumber(userData?.user.phone as string);
   }, [userData]);
 

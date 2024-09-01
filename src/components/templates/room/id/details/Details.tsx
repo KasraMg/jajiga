@@ -7,12 +7,14 @@ import Calendars from "./components/calenders/Calendars";
 import Rules from "./components/rules/Rules";
 import { Map } from "@/src/components/modules/Map/Map";
 import Comments from "./components/comments/Comments";
-import { userVillasObj } from "@/src/types/Auth.types";
+import { VillaResponse } from "@/src/types/Villa.types";
 import Costly from "./components/costly/Costly";
 import { FaHeart } from "react-icons/fa";
 import ShareModal from "./components/share/ShareModal";
+import Image from "next/image";
+import { baseUrl } from "@/src/utils/utils";
 
-const Details = (data: userVillasObj) => {
+const Details = (data: VillaResponse) => {
   const wishesHandler = () => {};
   return (
     <div className="flex w-full flex-col items-start justify-between pt-4 md:!w-[66.66%] md:!pt-0">
@@ -20,19 +22,19 @@ const Details = (data: userVillasObj) => {
         <div className="relative bottom-2 flex flex-col">
           <Breadcrumb
             className="py-2 text-sm"
-            city={data.address.city}
-            state={data.address.state}
+            city={data.villa.address.city}
+            state={data.villa.address.state}
           />
           <p>
             اجاره{" "}
-            {data.aboutVilla.villaType.title === "ویلایی"
+            {data.villa.aboutVilla.villaType.title === "ویلایی"
               ? "منزل ویلایی"
-              : data.aboutVilla.villaType.title}{" "}
-            در {data.address.city}
+              : data.villa.aboutVilla.villaType.title}{" "}
+            در {data.villa.address.city}
           </p>
           <div className="mt-5 flex gap-x-1">
             <Badge bgColor="bg-customYellow">
-              کد: ({data._id.slice(18, 26)})
+              کد: ({data.villa._id.slice(18, 26)})
             </Badge>
             <div
               onClick={wishesHandler}
@@ -46,27 +48,29 @@ const Details = (data: userVillasObj) => {
           </div>
         </div>
         <div className="h-[72px] w-[72px]">
-          <img
-            src="https://storage.jajiga.com/public/avatar/small/1910012115521179193.jpg"
-            alt=""
+          <Image
+            alt="avatar"
+            width={1000}
+            height={1000}
             className="h-full w-full rounded-full"
+            src={`${baseUrl}/user/avatars/${data.villa.user.avatar}`}
           />
         </div>
       </div>
-      <Summery {...data} />
+      <Summery {...data.villa} />
       <main className="w-full px-4 md:!px-0">
-        <Infoes {...data} />
-        <Costly costly={data.costly} />
-        <Calendars {...data} />
-        <Rules {...data} />
+        <Infoes {...data.villa} />
+        <Costly costly={data.villa.costly} />
+        <Calendars {...data.villa} />
+        <Rules {...data.villa} />
         <div className="w-full border-b border-solid border-gray-300 pb-8">
           <p className="my-6 mb-4 text-lg text-[#252a31]">نقشه</p>
           <Map
             className="rounded-lg"
-            position={[data.coordinates.x, data.coordinates.y]}
+            position={[data.villa.coordinates.x, data.villa.coordinates.y]}
           />
         </div>
-        <Comments />
+        <Comments  {...data.comments}/>
       </main>
     </div>
   );

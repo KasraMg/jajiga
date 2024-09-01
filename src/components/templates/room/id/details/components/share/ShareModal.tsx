@@ -11,7 +11,7 @@ const ShareModal = () => {
       <div className="flex cursor-pointer items-center rounded-full bg-customYellow p-2 text-black">
         <FaShareAlt />
       </div>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:!max-w-[425px] w-full max-w-full">
         <p>برای ارسال این صفحه به دوستانت، کلیک کن</p>
       </DialogContent>
     </Dialog>

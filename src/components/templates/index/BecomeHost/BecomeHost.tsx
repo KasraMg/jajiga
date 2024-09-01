@@ -5,7 +5,7 @@ import React from "react";
 
 const BecomeHost = () => {
   return (
-    <div className="becomeHostBg Container !my-8 flex flex-col items-center justify-between rounded-2xl md:flex-row">
+    <div className="becomeHostBg Container overflow-hidden !my-8 flex flex-col items-center justify-between rounded-2xl md:flex-row">
       <div className="my-2 mr-4 w-full space-y-4 md:!w-1/2">
         <p className="mt-3 text-center text-lg text-[#252a31] md:mt-5 md:text-start lg:!mt-0">
           میزبان شوید

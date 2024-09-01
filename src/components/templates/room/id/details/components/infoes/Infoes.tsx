@@ -1,12 +1,12 @@
 import useGetData from "@/src/hooks/useGetData";
-import { userVillasObj } from "@/src/types/Auth.types";
+import { VillaDetails } from "@/src/types/Villa.types";
 import { fetchStep6Items } from "@/src/utils/clientFetchs";
 import { zoneOptions } from "@/src/utils/options";
 import React, { useEffect, useState } from "react";
 import { BsInfoCircleFill } from "react-icons/bs";
 import { FaRegSnowflake } from "react-icons/fa";
 
-const Infoes = (data: userVillasObj) => {
+const Infoes = (data: VillaDetails) => {
   const [facibilityData, setFacilityData] = useState([]);
   const villaZone = zoneOptions.find(
     (zone) => zone.value === data.aboutVilla.villaZone,
@@ -50,6 +50,9 @@ const Infoes = (data: userVillasObj) => {
     }
   }, [status, data]);
 
+  console.log(data);
+  console.log(facibilityData);
+  
   return (
     <div>
       <h2 className="my-6 mb-4 text-lg text-[#252a31]">درباره اقامتگاه</h2>

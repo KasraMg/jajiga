@@ -90,7 +90,7 @@ const ContactUsDetailsModal = () => {
           <p className="text-xs">سایر راه های ارتباطی</p>
         </div>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:!max-w-[425px] w-full max-w-full">
         <DialogHeader>
           <DialogTitle className="py-3 text-center">
             سایر راه های ارتباطی
