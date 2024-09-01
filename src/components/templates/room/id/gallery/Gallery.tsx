@@ -4,9 +4,9 @@ import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import Image from "next/image";
-import { userVillasObj } from "@/src/types/Auth.types";
+import { VillaDetails } from "@/src/types/Villa.types";
 
-const Gallery = (data: userVillasObj) => {
+const Gallery = (data: VillaDetails) => {
   const imageLoadedRef = useRef<boolean[]>(
     Array(data?.cover?.length).fill(false),
   );
@@ -39,7 +39,7 @@ const Gallery = (data: userVillasObj) => {
           />
         </div>
         <div className="grid w-1/2 grid-cols-2 gap-3">
-          {data.cover.slice(1).map((cover, index) => (
+          {data.cover.slice(1,5).map((cover, index) => (
             <div key={crypto.randomUUID()} className="relative">
               {!imageLoaded[index + 1] && (
                 <div className="absolute inset-0 flex items-center justify-center">

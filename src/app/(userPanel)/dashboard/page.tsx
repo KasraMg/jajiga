@@ -12,11 +12,12 @@ import { Button } from "@/src/components/shadcn/ui/button";
 import { IoNotificationsOutline } from "react-icons/io5"; 
 import Rooms from "@/src/components/templates/userPanel/dashboard/Rooms";
 import { useLogoutHandler } from "@/src/utils/auth";
+import { authStore } from "@/src/stores/auth";
 import Layout from "@/src/components/layouts/userLayout/Layout";
 const Dashboard = () => {
   const logoutHandler = useLogoutHandler();
-
-  return (
+  const { userData } = authStore((state) => state);
+  return ( 
     <Container disableFooter={true}>
       <Breadcrumb className="hidden md:block" route={"پیشخان"} />
       <Layout> 
@@ -35,7 +36,7 @@ const Dashboard = () => {
             />
           </div>
           <div className="flex items-center justify-center gap-2">
-            <p className="font-vazir text-sm font-thin">شاهین مشکل گشا</p>
+            <p className="font-vazir text-sm font-thin">{userData?.user.firstName} {userData?.user.lastName}</p>
             <Link
               href={"/profile"}
               className="rounded-full bg-black p-2 text-center text-white"

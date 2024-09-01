@@ -6,47 +6,29 @@ import Link from "next/link";
 import { BsFillInfoCircleFill } from "react-icons/bs";
 import ReservationModal from "./components/ReservationModal";
 import { Button } from "@/src/components/shadcn/ui/button";
-import { userVillasObj } from "@/src/types/Auth.types";
+import { VillaDetails, userDateSelectData } from "@/src/types/Villa.types";
 import { roomStore } from "@/src/stores/room";
 import { useParams } from "next/navigation";
 import { baseUrl, todayVillaPrice } from "@/src/utils/utils";
 import usePostData from "@/src/hooks/usePostData";
 import { ButtonLoader } from "@/src/components/modules/loader/Loader";
 import ReservationStepper from "./components/ReservationStepper";
+import { authStore } from "@/src/stores/auth";
 
-interface userSelectData {
-  fridays: number;
-  holyDays: number;
-  holyDaysTotalPrice: number;
-  midWeekTotalPrice: number;
-  midWeeks: number;
-  statusCode: number;
-  thursdays: number;
-  totalDays: number;
-  totalPrice: number;
-
-  firstMonthDays: number;
-  firstMonthHoliDays: number;
-  firstMonthHoliDaysPrice: number;
-  firstMonthMidWeekDays: number;
-  firstMonthMidWeekDaysPrice: number;
-  secondMonthDays: number;
-  secondMonthHoliDays: number;
-  secondMonthHoliDaysPrice: number;
-  secondMonthMidWeekDays: number;
-  secondMonthMidWeekDaysPrice: number;
-}
-const Reservation = (data: userVillasObj) => {
+const Reservation = (data: VillaDetails) => {
   const [countSelectedOption, setCountSelectedOption] = useState<{
     label: string;
     value: string[];
   } | null>(null);
 
   const params = useParams();
-  const { startDate, endtDate } = roomStore((state) => state);
+  const { startDate, endDate } = roomStore((state) => state);
+  const { login } = authStore((state) => state);
+
   const [disable, setDisable] = useState(true);
-  const [userSelectData, setUserSelectData] = useState<userSelectData | null>();
-  const successFunc = (data: userSelectData) => {
+  const [userSelectData, setUserSelectData] =
+    useState<userDateSelectData | null>();
+  const successFunc = (data: userDateSelectData) => {
     if (data.statusCode === 200) {
       setUserSelectData(data);
     }
@@ -74,21 +56,20 @@ const Reservation = (data: userVillasObj) => {
 
   useEffect(() => {
     if (userSelectData) setDisable(false);
-    console.log(userSelectData);
   }, [userSelectData]);
 
   useEffect(() => {
-    if (!endtDate || !countSelectedOption) setUserSelectData(null);
-    if (countSelectedOption && startDate && endtDate) {
+    if (!endDate || !countSelectedOption) setUserSelectData(null);
+    if (countSelectedOption && startDate && endDate && login) {
       const data = {
         date: {
           from: startDate,
-          to: endtDate,
+          to: endDate,
         },
       };
       mutation(data);
     }
-  }, [countSelectedOption, startDate, endtDate]);
+  }, [countSelectedOption, startDate, endDate, login]);
 
   return (
     <>
@@ -106,25 +87,25 @@ const Reservation = (data: userVillasObj) => {
           </p>
           <div className="flex items-center justify-evenly rounded-lg border border-[#d6d6d6] px-5 py-2">
             <div className="text-sm text-[#bac7d5]">
-              <a href="#calender">
+              <Link href="#calender">
                 {" "}
                 {startDate ? (
                   <p className="text-black">{startDate}</p>
                 ) : (
                   "تاریخ ورود"
                 )}{" "}
-              </a>
+              </Link>
             </div>
             <div className='mx-2 inline-block min-h-[30px] w-[1px] bg-[#d6d6d6] after:content-[""]'></div>
             <div className="text-sm text-[#bac7d5]">
-              <a href="#calender">
+              <Link href="#calender">
                 {" "}
-                {endtDate ? (
-                  <p className="text-black">{endtDate}</p>
+                {endDate ? (
+                  <p className="text-black">{endDate}</p>
                 ) : (
                   "تاریخ خروج"
                 )}{" "}
-              </a>
+              </Link>
             </div>
           </div>
           <p className="font-vazir mb-2 mt-8 text-sm font-light text-[#252a31]">
@@ -136,6 +117,7 @@ const Reservation = (data: userVillasObj) => {
             isClearable={true}
             className="w-full md:w-[200px] lg:!w-full"
             isRtl={true}
+            isDisabled={!login}
             isSearchable={true}
             options={userCountOptions as any}
             placeholder={"تعداد نفرات را مشخص کنید"}
@@ -145,7 +127,7 @@ const Reservation = (data: userVillasObj) => {
             <>
               {userSelectData.firstMonthDays ? (
                 <div
-                  className="mt-6 p-2 px-5 text-[.8rem] font-light text-gray-600"
+                  className="mt-6 p-2 sm:!px-5 text-[.8rem] font-light text-gray-600"
                   style={{
                     boxShadow:
                       "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px",
@@ -236,7 +218,7 @@ const Reservation = (data: userVillasObj) => {
                 </div>
               ) : (
                 <div
-                  className="mt-6 p-2 px-5 text-[.8rem] font-light text-gray-600"
+                  className="mt-6 p-2 sm:px-5 text-[.8rem] font-light text-gray-600"
                   style={{
                     boxShadow:
                       "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px",
@@ -297,12 +279,23 @@ const Reservation = (data: userVillasObj) => {
             >
               <ButtonLoader />
             </Button>
+          ) : !login ? (
+            <Link href="/login">
+              <Button
+                variant={"yellow"}
+                className="mt-5 w-full rounded-full text-center"
+              >
+                <div className="text-textGray mx-auto flex items-baseline justify-center">
+                  <span> ابتدا ثبت نام یا لاگین کنید</span>
+                </div>
+              </Button>
+            </Link>
           ) : (
             <ReservationStepper
               disable={disable}
               data={data}
               totalPrice={userSelectData?.totalPrice.toLocaleString() as string}
-              usersCount={countSelectedOption?.value as string}
+              usersCount={countSelectedOption?.value as any}
               totalDays={userSelectData?.totalDays}
             />
           )}
@@ -318,10 +311,10 @@ const Reservation = (data: userVillasObj) => {
         </div>
       </div>
       <div className="fixed bottom-16 block w-full px-5 md:!hidden">
-        <div className="flex w-full items-center justify-between rounded-lg bg-[#00000099] px-2 py-3 text-white">
+        <div className="z-[999] flex w-full items-center justify-between rounded-lg bg-[#00000099] px-2 py-3 text-white">
           <div>
             <p className="text-xs">
-              هر شب از <span className="text-sm">2,000,000</span> تومان{" "}
+              هر شب از <span className="text-sm">{price}</span> تومان{" "}
             </p>
             <Link
               className="flex flex-row-reverse items-center justify-end gap-2 text-sm"
@@ -330,7 +323,10 @@ const Reservation = (data: userVillasObj) => {
               راهنمای رزرو <BsFillInfoCircleFill />{" "}
             </Link>
           </div>
-          <ReservationModal />
+          <ReservationModal
+            data={data}
+            count={data.capacity.maxCapacity as number}
+          />
         </div>
       </div>
     </>

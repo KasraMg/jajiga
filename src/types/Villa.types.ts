@@ -1,34 +1,50 @@
-import { userVillasObj } from "./Auth.types";
-
 interface priceDays {
   midWeek: string;
   holidays: string;
   peakDays: string;
 }
 
-export interface VillaType {
+export interface VillaDetails {
+  address: {
+    state: string;
+    city: string;
+    address: string;
+  };
   aboutVilla: {
+    aboutVilla: string;
     villaSpace: string;
-    villaType: { 
-      title: string 
+    villaType: {
+      title: string;
     };
     villaZone: string;
-    aboutVilla: string;
   };
-  address: { state: string; city: string; address: string };
   capacity: {
-    normalCapacity: number;
-    maxCapacity: number;
-    buildingSize: number;
-    fuundationSize: number;
     bedRoom: number;
+    buildingSize: string;
     description: string;
+    fuundationSize: string;
+    maxCapacity: number;
+    normalCapacity: number;
   };
-  coordinates: { x: string; y: string };
-  costly: boolean;
+  coordinates: { x: number; y: number };
   cover: string[];
   createdAt: string;
+  costly: boolean;
+  rules: {
+    more: string;
+    music: boolean;
+    pet: boolean;
+    smoke: boolean;
+  };
+  price: {
+    newYear: string;
+    spring: priceDays;
+    summer: priceDays;
+    autumn: priceDays;
+    winter: priceDays;
+  };
   disable: boolean;
+  finished: boolean;
   facility: {
     facility: {
       coolingSystem: { status: boolean; description?: string };
@@ -54,19 +70,44 @@ export interface VillaType {
       moreSanitaryFacilities?: string;
     };
   };
-  finished: boolean;
-  price: {
-    newYear: string;
-    spring: priceDays;
-    summer: priceDays;
-    autumn: priceDays;
-    winter: priceDays;
-  };
-  rules: { pet: boolean; music: boolean; smoke: boolean; more: string };
   step: number;
   updatedAt: string;
-  user: string;
+  user: {
+    avatar: string;
+    firstName: string;
+    lastName: string;
+    role: string;
+    _id: string;
+  };
   __v: number;
   _id: string;
 }
- 
+
+export interface VillaResponse {
+  bookDate: [];
+  comments: [];
+  statusCode: number;
+  villa: VillaDetails;
+}
+
+export interface userDateSelectData {
+  fridays: number;
+  holyDays: number;
+  holyDaysTotalPrice: number;
+  midWeekTotalPrice: number;
+  midWeeks: number;
+  statusCode: number;
+  thursdays: number;
+  totalDays: number;
+  totalPrice: number;
+  firstMonthDays: number;
+  firstMonthHoliDays: number;
+  firstMonthHoliDaysPrice: number;
+  firstMonthMidWeekDays: number;
+  firstMonthMidWeekDaysPrice: number;
+  secondMonthDays: number;
+  secondMonthHoliDays: number;
+  secondMonthHoliDaysPrice: number;
+  secondMonthMidWeekDays: number;
+  secondMonthMidWeekDaysPrice: number;
+}

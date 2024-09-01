@@ -80,7 +80,7 @@ const ChangePassword = () => {
           ﺗﻐﯿﯿﺮ رمزعبور
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:!max-w-[425px] w-full max-w-full">
         <div>
           <p>رمز عبور فعلی</p>
           <input

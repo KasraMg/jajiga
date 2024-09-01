@@ -12,11 +12,11 @@ import {
   SheetHeader,
   SheetTrigger,
 } from "@/src/components/shadcn/ui/sheet";
-import { userVillasObj } from "@/src/types/Auth.types";
+import { VillaDetails } from "@/src/types/Villa.types";
 import { roomStore } from "@/src/stores/room";
 import { convertNumbers } from "@/src/utils/utils";
 
-const Calendars = (data: userVillasObj) => {
+const Calendars = (data: VillaDetails) => {
   const date = useDateHandler();
 
   const [numberOfMonths, setNumberOfMonths] = useState(
@@ -33,7 +33,7 @@ const Calendars = (data: userVillasObj) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  const { setStartDate, setEndtDate, startDate } = roomStore((state) => state);
+  const { setStartDate, setEndDate, startDate } = roomStore((state) => state);
   const [defaultValue, setDefultValue] = useState([]);
   function handleChange(value: DateObject | DateObject[] | null) {
     setDefultValue(value as any);
@@ -42,9 +42,9 @@ const Calendars = (data: userVillasObj) => {
         console.log(convertNumbers(date.format(),true));
         if (index + 1 === 1) setStartDate(convertNumbers(date.format(), true));
         if (index + 1 === 2) {
-          setEndtDate(convertNumbers(date.format(), true));
+          setEndDate(convertNumbers(date.format(), true));
         } else {
-          setEndtDate(null);
+          setEndDate(null);
         }
       });
     }
@@ -54,7 +54,7 @@ const Calendars = (data: userVillasObj) => {
     if (startDate) {
       setDefultValue([]);
       setStartDate(null);
-      setEndtDate(null);
+      setEndDate(null);
     }
   };
 

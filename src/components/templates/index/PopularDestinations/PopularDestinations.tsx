@@ -29,11 +29,7 @@ const PopularDestinations = () => {
           768: {
             slidesPerView: 4,
             spaceBetween: 0,
-          },
-          1024: {
-            slidesPerView: 4,
-            spaceBetween: 0,
-          },
+          } 
         }}
         rewind={true}
         spaceBetween={0}

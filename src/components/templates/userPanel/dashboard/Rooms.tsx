@@ -3,7 +3,7 @@
 import { Button } from "@/src/components/shadcn/ui/button";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
 import { authStore } from "@/src/stores/auth";
-import { userVillasObj } from "@/src/types/Auth.types";
+import { VillaDetails } from "@/src/types/Villa.types";
 import {
   baseUrl,
   convertToJalali,
@@ -65,7 +65,7 @@ const Rooms = () => {
           <span className="text-xs font-thin">
             توجه: اقامتگاه تنها بعد از تکمیل، قابل بررسی و انتشار می‌باشد.
           </span>
-          {userData.villas?.map((villa: userVillasObj) => (
+          {userData.villas?.map((villa: VillaDetails) => (
             <section className="mt-4">
               <div className="flex flex-wrap items-center justify-start gap-2 p-3 shadow-lg sm:!flex-nowrap sm:!justify-between sm:!gap-0">
                 <div className="flex items-center gap-2">

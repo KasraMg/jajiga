@@ -3,15 +3,15 @@ import { SlEnergy } from "react-icons/sl";
 import { CiStar } from "react-icons/ci";
 import { IoIosStar } from "react-icons/io";
 import { Button } from "@/src/components/shadcn/ui/button";
-import { VillaType } from "@/src/types/Villa.types";
+import { VillaDetails } from "@/src/types/Villa.types";
 import Image from "next/image";
 import { typeOptions } from "@/src/utils/options";
 import { formatNumber } from "@/src/utils/utils";
 import Link from "next/link";
 
 interface CardProps {
-  className?: string;
-  data: VillaType;
+  className?: string; 
+  data: VillaDetails;
 }
 const Card: FC<CardProps> = ({ data, className }) => {
   return (

@@ -4,11 +4,7 @@ import { baseUrl } from "./utils";
 export async function fetchStep6Items() {  
 const accessToken = Cookies.get("AccessToken");
 
-  const res = await fetch(`${baseUrl}/villa/facility`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
+  const res = await fetch(`${baseUrl}/villa/facility`);
   return res.json();
 }
 

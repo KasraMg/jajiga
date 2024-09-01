@@ -10,7 +10,7 @@ import { baseUrl } from "@/src/utils/utils";
 import Loader from "@/src/components/modules/loader/Loader";
 import { categoryStore } from "@/src/stores/category";
 import { useSearchParams } from "next/navigation";
-import { VillaType } from "@/src/types/Villa.types";
+import { VillaDetails } from "@/src/types/Villa.types";
 import Notfound from "./components/Notfound";
 
 const Posts = () => {
@@ -116,7 +116,7 @@ const Posts = () => {
           />
         </div>
         <main className="mt-6 grid justify-evenly gap-3 sm:!grid-cols-[1fr,1fr] lg:!grid-cols-[1fr,1fr,1fr] xl:!grid-cols-[1fr,1fr,1fr,1fr]">
-          {data && data.villas.map((villa: VillaType) => <Card data={villa} />)}
+          {data && data.villas.map((villa: VillaDetails ) => <Card data={villa} />)}
         </main>
         {data && data.statusCode === 404 && <Notfound />}
       </div>

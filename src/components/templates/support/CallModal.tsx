@@ -72,7 +72,7 @@ const CallModal = () => {
           <p className="text-xs">تماس</p>
         </div>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:!max-w-[425px] w-full max-w-full">
         <DialogHeader>
           <DialogTitle className="py-3 text-center">
             تماس با پشتیبانی

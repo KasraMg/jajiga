@@ -1,10 +1,10 @@
-import { userVillasObj } from "@/src/types/Auth.types";
+import { VillaDetails } from "@/src/types/Villa.types";
 import { spaceOptions } from "@/src/utils/options";
 import React from "react";
 import { IoHomeOutline, IoPeopleOutline } from "react-icons/io5";
 import { MdOutlineBedroomParent } from "react-icons/md";
 import { TbArrowAutofitHeight } from "react-icons/tb";
-const Summery = (data:userVillasObj) => {
+const Summery = (data:VillaDetails) => {
   const space = spaceOptions.find(option => option.value === data.aboutVilla.villaSpace)
   return (
     <div className="flex w-full items-center justify-between rounded-lg bg-[#f3f3f3] px-4 py-[14px]">

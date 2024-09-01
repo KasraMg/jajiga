@@ -4,7 +4,7 @@ import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import Container from "@/src/components/modules/container/Container";
 import Card from "@/src/components/templates/userPanel/all/Card";
 import { authStore } from "@/src/stores/auth";
-import { userVillasObj } from "@/src/types/Auth.types";
+import { VillaDetails } from "@/src/types/Villa.types";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 const Reserve = () => {
@@ -40,7 +40,7 @@ const Reserve = () => {
                   در حال تکمیل (
                   {
                     userData?.villas?.filter(
-                      (villa: userVillasObj) => !villa.finished,
+                      (villa: VillaDetails) => !villa.finished,
                     ).length
                   }
                   ){" "}
@@ -52,9 +52,9 @@ const Reserve = () => {
                   {showUnComplatePosts ? (
                     <div className="grid !grid-cols-[auto] gap-4 md:!grid-cols-[auto,auto] xl:!grid-cols-[auto,auto,auto]">
                       {userData?.villas?.filter(
-                        (villa: userVillasObj) => !villa.finished,
+                        (villa: VillaDetails) => !villa.finished,
                       ).length ? (
-                        userData.villas?.map((villa: userVillasObj) =>
+                        userData.villas?.map((villa: VillaDetails) =>
                           !villa.finished ? <Card {...villa} /> : null,
                         )
                       ) : (
@@ -77,7 +77,7 @@ const Reserve = () => {
                   ) : (
                     <div className="grid !grid-cols-[auto] gap-4 md:!grid-cols-[auto,auto] xl:!grid-cols-[auto,auto,auto]">
                       {userData.villas.length ? (
-                        userData.villas?.map((villa: userVillasObj) => (
+                        userData.villas?.map((villa: VillaDetails) => (
                           <Card {...villa} />
                         ))
                       ) : (

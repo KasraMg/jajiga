@@ -1,6 +1,6 @@
 import { Button } from "@/src/components/shadcn/ui/button";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
-import { userVillasObj } from "@/src/types/Auth.types";
+import { VillaDetails } from "@/src/types/Villa.types";
 import { baseUrl } from "@/src/utils/utils";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
@@ -11,7 +11,7 @@ import { SlReload } from "react-icons/sl";
 import Cookies from "js-cookie";
 
 import swal from "sweetalert";
-const Card = (villa: userVillasObj) => {
+const Card = (villa: VillaDetails) => {
   const accessToken = Cookies.get("AccessToken");
   const queryClient = useQueryClient();
 
