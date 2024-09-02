@@ -7,6 +7,7 @@ const CitiesList = () => {
     <div className="mt-8 grid grid-cols-[auto,auto] gap-2 sm:!grid-cols-5">
       {footerOptions.map((option) => (
         <Link
+        key={option.href}
           href={option.href}
           style={{
             boxShadow:

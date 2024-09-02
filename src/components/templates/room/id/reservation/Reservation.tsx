@@ -115,7 +115,7 @@ const Reservation = (data: VillaDetails) => {
             defaultValue={countSelectedOption}
             onChange={setCountSelectedOption as any}
             isClearable={true}
-            className="w-full md:w-[200px] lg:!w-full"
+            className="w-full"
             isRtl={true}
             isDisabled={!login}
             isSearchable={true}

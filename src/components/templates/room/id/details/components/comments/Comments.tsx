@@ -3,7 +3,7 @@ import Image from "next/image";
 import { FaStar } from "react-icons/fa";
 
 const Comments = (comments: any) => {
-  console.log(comments);
+  // console.log(comments);
 
   return (
     <>
