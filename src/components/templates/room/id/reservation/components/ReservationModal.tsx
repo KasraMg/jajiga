@@ -82,8 +82,7 @@ const ReservationModal = ({
   }, [countSelectedOption, startDate, endDate, login]);
 
   useEffect(() => {
-    if (userSelectData) setDisable(false);
-    console.log(userSelectData);
+    if (userSelectData) setDisable(false); 
   }, [userSelectData]);
 
   for (let index = 0; index < count; index++) {

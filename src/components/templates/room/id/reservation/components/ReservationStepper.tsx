@@ -19,6 +19,7 @@ import { ButtonLoader } from "@/src/components/modules/loader/Loader";
 import { useRouter } from "next/navigation";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
 import { authStore } from "@/src/stores/auth";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface ReservationStepperProps {
   disable: boolean;
@@ -40,6 +41,7 @@ const ReservationStepper: FC<ReservationStepperProps> = ({
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const { login } = authStore((state) => state);
+  const queryClient = useQueryClient();
 
   const successFunc = (data: { statusCode: number }) => {
     console.log("data", data);
@@ -49,6 +51,7 @@ const ReservationStepper: FC<ReservationStepperProps> = ({
         variant: "success",
         title: "ویلا با موفقیت رزرو شد",
       });
+      queryClient.invalidateQueries({ queryKey: ["villa"] }); 
       setOpen(false);
       setOpenReserveModal(false);
       router.push("/reserves");

@@ -6,21 +6,22 @@ import persian_fa from "react-date-object/locales/persian_fa";
 import { FaTrashAlt } from "react-icons/fa";
 import { BsInfoCircle } from "react-icons/bs";
 import useDateHandler from "@/src/hooks/useDateHandler";
+import jalaali from "jalaali-js";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTrigger,
 } from "@/src/components/shadcn/ui/sheet";
-import { VillaDetails } from "@/src/types/Villa.types";
+import { VillaResponse } from "@/src/types/Villa.types";
 import { roomStore } from "@/src/stores/room";
 import { convertNumbers } from "@/src/utils/utils";
 
-const Calendars = (data: VillaDetails) => {
+const Calendars = (data: VillaResponse) => {
   const date = useDateHandler();
 
   const [numberOfMonths, setNumberOfMonths] = useState(
-    window.innerWidth >= 1023 ? 2 : 1
+    window.innerWidth >= 1023 ? 2 : 1,
   );
 
   useEffect(() => {
@@ -38,8 +39,7 @@ const Calendars = (data: VillaDetails) => {
   function handleChange(value: DateObject | DateObject[] | null) {
     setDefultValue(value as any);
     if (Array.isArray(value)) {
-      value.forEach((date, index) => {
-        console.log(convertNumbers(date.format(),true));
+      value.forEach((date, index) => { 
         if (index + 1 === 1) setStartDate(convertNumbers(date.format(), true));
         if (index + 1 === 2) {
           setEndDate(convertNumbers(date.format(), true));
@@ -65,6 +65,20 @@ const Calendars = (data: VillaDetails) => {
     return "winter";
   };
 
+  const isDateInRange = (today:string, from:string, to:string) => {
+    const todayDate = jalaali.toGregorian(
+      ...convertNumbers(`${today}`, true).split("/").map(Number),
+    );
+    const startDate = jalaali.toGregorian(...from.split("/").map(Number));
+    const endDate = jalaali.toGregorian(...to.split("/").map(Number));
+ 
+    const todayObj = new Date(todayDate.gy, todayDate.gm - 1, todayDate.gd);
+    const startObj = new Date(startDate.gy, startDate.gm - 1, startDate.gd);
+    const endObj = new Date(endDate.gy, endDate.gm - 1, endDate.gd);
+ 
+    return todayObj >= startObj && todayObj <= endObj;
+  };
+
   return (
     <div id="calender" className="w-full">
       <h2 className="my-6 mb-4 text-lg text-[#252a31]">تقویم / نرخ</h2>
@@ -79,39 +93,71 @@ const Calendars = (data: VillaDetails) => {
         onChange={handleChange}
         range
         mapDays={({ date, today }) => {
+          let isInRange = false;
+
+          // بررسی می‌کنیم که آیا تاریخ در هر کدام از محدوده‌های تاریخ‌ها قرار دارد یا خیر
+          data.bookDate.forEach((range) => {
+            if (isDateInRange(date, range.from, range.to)) {
+              isInRange = true; 
+            }
+          });
+
           const isWeekend =
             date.weekDay.index === 5 || date.weekDay.index === 6;
           const todayDate = new Date(today.year, today.month.index, today.day);
           const currentDate = new Date(date.year, date.month.index, date.day);
           const isPast = currentDate.getTime() < todayDate.getTime();
-          const color = isWeekend && !isPast ? "#ff0000" : "";
+          const color = isInRange
+            ? "#c1c1c1"
+            : isWeekend && !isPast
+              ? "#ff0000"
+              : "";
 
           const season = getSeason(date.month.index);
           const priceType = isWeekend ? "holidays" : "midWeek";
-          const dayPrice = data.price[season][priceType];
+          const dayPrice = data.villa.price[season][priceType];
           return {
             children: (
-              <div style={{ textAlign: "center" }}>
-                <p style={{ marginTop: "7px", marginLeft: "6px" }}>
+              <span 
+                style={
+                  isInRange
+                    ? {
+                        background:
+                          " repeating-linear-gradient(-45deg, rgb(255, 255, 255), rgb(255, 255, 255) 3px, rgba(215, 215, 215, 0.8) 0px, rgba(215, 215, 215, 0.8) 6px)",
+                      }
+                    : { textAlign: "center" }
+                }
+              >
+                <p style={{ marginTop: "3px",   }}>
                   {date.day}
                 </p>
-                <p
-                  style={{
-                    fontSize: "10px",
-                    color: isWeekend ?  isPast ? "cccbcb" : "#ff0000" : isPast ? "cccbcb" : "#555",
-                    letterSpacing: "-1px", 
-                  }}
-                >
-                  {new Intl.NumberFormat("fa-IR").format(dayPrice as any)}
-                </p>
-              </div>
+                {!isInRange && (
+                  <p
+                    style={{
+                      fontSize: "9px",
+                      color: isWeekend
+                        ? isPast
+                          ? "cccbcb"
+                          : "#ff0000"
+                        : isPast
+                          ? "cccbcb"
+                          : "#555",
+                      letterSpacing: "-1px",
+                    }}
+                  >
+                    {new Intl.NumberFormat("fa-IR").format(dayPrice as any)}
+                  </p>
+                )}
+              </span>
             ),
             style: {
               color,
             },
+            disabled: isInRange
           };
         }}
       />
+
       <div className="mt-4 flex justify-between">
         <Sheet>
           <SheetTrigger asChild>

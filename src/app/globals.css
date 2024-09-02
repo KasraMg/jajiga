@@ -207,20 +207,30 @@ table th {
 }
 
 @media (min-width:1023px) {
-  .rmdp-day-picker div p:nth-child(2){ 
-    margin-left: 8px
-   }
+   
+}
+.rmdp-day-picker div:not(.rmdp-week div){
+  width: 100%;
+}
+
+.rmdp-week div { 
+  min-height: 47px;
+  min-width: 47px ;
+}
+.rmdp-week span span{
+  position: unset;
+  border: 0px !important;
+  height: -webkit-fill-available;
 }
 @media (max-width:350px) {
-  .rmdp-day-picker div p:nth-child(2){
-    font-size: 9px !important;
-    margin-left: 5px
+  .rmdp-week div p:nth-child(2){
+    font-size: 9px !important; 
    }
 }
 @media (max-width:400px) {
   .rmdp-day-picker {
    padding: 0px !important
-} .rmdp-day-picker div p:nth-child(2){
+} .rmdp-week div p:nth-child(2){
   font-size: 9px !important; 
  }
 }
@@ -494,7 +504,7 @@ select:focus {
   gap: 10px;
 }
 @media (max-width:1100px) {
-.rmdp-day-picker div {
+.rmdp-week div {
   min-width: 40px !important;
   
 }.rmdp-calendar{
@@ -519,11 +529,6 @@ select:focus {
   width: 100% !important;
 }
 
-.rmdp-day-picker div {
-  width: 100%;
-  min-height: 48px;
-  min-width: 48px;
-}
 
 .rmdp-border {
   border: 0 !important;
@@ -587,5 +592,80 @@ select:focus {
   
  }
 
+
+ 
+ 
+.fullScreenSwiper1 .swiper {
+  width: 100%;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.fullScreenSwiper1 .swiper-slide {
+  background-size: cover;
+  background-position: center;
+}
+
+.fullScreenSwiper2 {
+  height: 80%;
+  width: 100%;
+}
+
+.fullScreenSwiper2 img{
+  width: 80%;
+  border-radius: 20px;
+  height: 100% !important;
+  object-fit: cover;
+  margin: 0 auto;
+}
+.fullScreenSwiper1 img{
+border-radius: 5px;
+cursor: pointer;
+}
+  
+.fullScreenSwiper1 .mySwiper {
+  height: 20%;
+  box-sizing: border-box;
+  padding: 10px 0;
+}
+
+.fullScreenSwiper1 .mySwiper .swiper-slide {
+  width: 25%;
+  height: 100%;
+  opacity: 0.4;
+}
+
+.swiper-slide-thumb-active {
+  opacity: 1 !important;
+}
+.fullScreenSwiper1 div{
+  opacity: .5;
+}
+.fullScreenSwiper1 .swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.fullScreenSwiper2 .swiper-button-prev, .fullScreenSwiper2 .swiper-button-next {
+  background: rgb(0 0 0);
+}
+
+.fullScreenSwiper2 .swiper-button-prev:after, .fullScreenSwiper2 .swiper-button-next:after { 
+  color: #ffffff;
+}
+
+.fullScreenSwiper2 .swiper-button-prev {
+  right: 27px !important;
+  top: 55%;
+}
+.fullScreenSwiper2 .swiper-button-next {
+  left: 27px !important;
+  top: 55%;
+
+}
 
  

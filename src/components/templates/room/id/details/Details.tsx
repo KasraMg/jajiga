@@ -13,11 +13,12 @@ import { FaHeart } from "react-icons/fa";
 import ShareModal from "./components/share/ShareModal";
 import Image from "next/image";
 import { baseUrl } from "@/src/utils/utils";
+import { IoIosHeartEmpty } from "react-icons/io";
 
 const Details = (data: VillaResponse) => {
   const wishesHandler = () => {};
   return (
-    <div className="flex w-full flex-col items-start justify-between pt-4 md:!w-[66.66%] md:!pt-0">
+    <div className="flex w-full flex-col items-start justify-between pt-4 lg:!w-[80.66%] xl:!w-[66.66%] md:!w-[66.66%] md:!pt-0">
       <div className="mb-4 flex w-full justify-between px-4 md:!px-0">
         <div className="relative bottom-2 flex flex-col">
           <Breadcrumb
@@ -40,7 +41,7 @@ const Details = (data: VillaResponse) => {
               onClick={wishesHandler}
               className="flex cursor-pointer items-center rounded-full bg-customYellow p-2 text-black"
             >
-              <FaHeart />
+              <IoIosHeartEmpty />
             </div>
             <ShareModal />
             {/* <Badge bgColor="bg-[#f1f1f1]">+300 رزرو موفق</Badge> */}
@@ -61,7 +62,7 @@ const Details = (data: VillaResponse) => {
       <main className="w-full px-4 md:!px-0">
         <Infoes {...data.villa} />
         <Costly costly={data.villa.costly} />
-        <Calendars {...data.villa} />
+        <Calendars {...data} />
         <Rules {...data.villa} />
         <div className="w-full border-b border-solid border-gray-300 pb-8">
           <p className="my-6 mb-4 text-lg text-[#252a31]">نقشه</p>

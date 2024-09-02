@@ -48,11 +48,7 @@ const Infoes = (data: VillaDetails) => {
       );
       setFacilityData(checkFcibility);
     }
-  }, [status, data]);
-
-  console.log(data);
-  console.log(facibilityData);
-  
+  }, [status, data]); 
   return (
     <div>
       <h2 className="my-6 mb-4 text-lg text-[#252a31]">درباره اقامتگاه</h2>
