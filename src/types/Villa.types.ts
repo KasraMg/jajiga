@@ -111,3 +111,18 @@ export interface userDateSelectData {
   secondMonthMidWeekDays: number;
   secondMonthMidWeekDaysPrice: number;
 }
+
+export interface comment {
+  answer: [];
+  body: string;
+  createdAt: string;
+  creator: { _id: string; firstName: number; avatar: null };
+  date: string;
+  haveAnswer:number;
+  isAccept: number;
+  isAnswer: number;
+  score: number;
+  updatedAt:string;
+  villa: { _id: string}; 
+  _id: string;
+}

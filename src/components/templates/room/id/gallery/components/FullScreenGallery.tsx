@@ -18,7 +18,7 @@ const FullScreenGallery = ({
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   return (
-    <div className="fixed left-0 top-0 z-[999] h-full w-full bg-[#161418]">
+    <div className="fixed left-0 top-0 z-[999] h-full w-full bg-[#161418] md:!block hidden">
       <Swiper 
         spaceBetween={10}
         dir="rtl"

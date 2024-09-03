@@ -9,16 +9,23 @@ import { Map } from "@/src/components/modules/Map/Map";
 import Comments from "./components/comments/Comments";
 import { VillaResponse } from "@/src/types/Villa.types";
 import Costly from "./components/costly/Costly";
-import { FaHeart } from "react-icons/fa";
 import ShareModal from "./components/share/ShareModal";
 import Image from "next/image";
 import { baseUrl } from "@/src/utils/utils";
 import { IoIosHeartEmpty } from "react-icons/io";
+import { useParams } from "next/navigation";
+import usePostData from "@/src/hooks/usePostData";
 
 const Details = (data: VillaResponse) => {
+  const params = useParams();
+  const { mutate: mutation, isPending } = usePostData<any>(
+    `/wishes/${params?.id}`,
+    "اقامتگاه با موفقیت به علاقه مندی های شما اضافه شد",
+  );
+
   const wishesHandler = () => {};
   return (
-    <div className="flex w-full flex-col items-start justify-between pt-4 lg:!w-[80.66%] xl:!w-[66.66%] md:!w-[66.66%] md:!pt-0">
+    <div className="flex w-full flex-col items-start justify-between pt-4 md:!w-[66.66%] md:!pt-0 lg:!w-[80.66%] xl:!w-[66.66%]">
       <div className="mb-4 flex w-full justify-between px-4 md:!px-0">
         <div className="relative bottom-2 flex flex-col">
           <Breadcrumb
@@ -71,7 +78,7 @@ const Details = (data: VillaResponse) => {
             position={[data.villa.coordinates.x, data.villa.coordinates.y]}
           />
         </div>
-        <Comments  {...data.comments}/>
+        <Comments comments={data.comments} />
       </main>
     </div>
   );

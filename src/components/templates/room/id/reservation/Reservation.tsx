@@ -14,18 +14,22 @@ import usePostData from "@/src/hooks/usePostData";
 import { ButtonLoader } from "@/src/components/modules/loader/Loader";
 import ReservationStepper from "./components/ReservationStepper";
 import { authStore } from "@/src/stores/auth";
+import { book } from "@/src/types/Auth.types";
 
-const Reservation = (data: VillaDetails) => {
+const Reservation = (data: VillaDetails) => { 
+   const [reserveData, setReserveData] = useState<null | book>(null);
+
   const [countSelectedOption, setCountSelectedOption] = useState<{
     label: string;
-    value: string[];
-  } | null>(null);
+    value: string;
+  } | null>(reserveData ? { label: '2', value: '2' } : null);
 
   const params = useParams();
   const { startDate, endDate } = roomStore((state) => state);
-  const { login } = authStore((state) => state);
+  const { login, userData } = authStore((state) => state);
 
   const [disable, setDisable] = useState(true);
+
   const [userSelectData, setUserSelectData] =
     useState<userDateSelectData | null>();
   const successFunc = (data: userDateSelectData) => {
@@ -59,6 +63,15 @@ const Reservation = (data: VillaDetails) => {
   }, [userSelectData]);
 
   useEffect(() => {
+    if (userData) {
+      const reserve = userData.books.find((book) => book.villa === params.id); 
+      if (reserve) {
+        setReserveData(reserve);
+      } else setReserveData(null);
+    }
+  }, [userData]);
+
+  useEffect(() => {
     if (!endDate || !countSelectedOption) setUserSelectData(null);
     if (countSelectedOption && startDate && endDate && login) {
       const data = {
@@ -83,41 +96,45 @@ const Reservation = (data: VillaDetails) => {
         </div>
         <div className="rounded-b-2xl px-4 py-[14px] shadow-lg">
           <p className="font-vazir mb-2 text-sm font-light text-[#252a31]">
-            تاریخ سفر
+            {reserveData ? "تاریخ رزرو شما" : " تاریخ سفر"}
           </p>
           <div className="flex items-center justify-evenly rounded-lg border border-[#d6d6d6] px-5 py-2">
             <div className="text-sm text-[#bac7d5]">
               <Link href="#calender">
                 {" "}
-                {startDate ? (
+                {reserveData ? (
+                  <p className="text-black">{reserveData.date.from}</p>
+                ) : startDate ? (
                   <p className="text-black">{startDate}</p>
                 ) : (
                   "تاریخ ورود"
-                )}{" "}
+                )}
               </Link>
             </div>
             <div className='mx-2 inline-block min-h-[30px] w-[1px] bg-[#d6d6d6] after:content-[""]'></div>
             <div className="text-sm text-[#bac7d5]">
               <Link href="#calender">
-                {" "}
-                {endDate ? (
+                {reserveData ? (
+                  <p className="text-black">{reserveData.date.to}</p>
+                ) : endDate ? (
                   <p className="text-black">{endDate}</p>
                 ) : (
                   "تاریخ خروج"
-                )}{" "}
+                )}
               </Link>
             </div>
           </div>
           <p className="font-vazir mb-2 mt-8 text-sm font-light text-[#252a31]">
             تعداد نفرات
           </p>
+
           <Select
             defaultValue={countSelectedOption}
             onChange={setCountSelectedOption as any}
             isClearable={true}
             className="w-full"
             isRtl={true}
-            isDisabled={!login}
+            isDisabled={!login || reserveData ? true : false}
             isSearchable={true}
             options={userCountOptions as any}
             placeholder={"تعداد نفرات را مشخص کنید"}
@@ -127,7 +144,7 @@ const Reservation = (data: VillaDetails) => {
             <>
               {userSelectData.firstMonthDays ? (
                 <div
-                  className="mt-6 p-2 sm:!px-5 text-[.8rem] font-light text-gray-600"
+                  className="mt-6 p-2 text-[.8rem] font-light text-gray-600 sm:!px-5"
                   style={{
                     boxShadow:
                       "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px",
@@ -218,7 +235,7 @@ const Reservation = (data: VillaDetails) => {
                 </div>
               ) : (
                 <div
-                  className="mt-6 p-2 sm:px-5 text-[.8rem] font-light text-gray-600"
+                  className="mt-6 p-2 text-[.8rem] font-light text-gray-600 sm:px-5"
                   style={{
                     boxShadow:
                       "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px",
@@ -290,6 +307,23 @@ const Reservation = (data: VillaDetails) => {
                 </div>
               </Button>
             </Link>
+          ) : reserveData ? (
+            <>
+              <div className="px- mt-5 h-[36px] w-full cursor-not-allowed rounded-full bg-red-600 py-2 text-center text-white">
+                <div className="text-textGray mx-auto flex items-baseline justify-center">
+                  <span className="text-sm">
+                    {" "}
+                    این ویلا توسط شما رزرو شده است{" "}
+                  </span>
+                </div>
+              </div>
+              <Link
+                href={"/reserves"}
+                className="mt-2 block w-full text-left text-[10px] text-red-600"
+              >
+                (مشاهده تمامی رزرو ها )
+              </Link>
+            </>
           ) : (
             <ReservationStepper
               disable={disable}
