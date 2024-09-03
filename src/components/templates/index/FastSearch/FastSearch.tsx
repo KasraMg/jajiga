@@ -11,8 +11,7 @@ const FastSearch = () => {
     ["FastSearch"],
     getFastSearchOptions,
   );
- 
-  console.log('FastSearch',data);
+  
   return (
     <section className="pb-5 text-right">
       <p className="mb-5 text-xl text-black">جستجوی سریع</p>

@@ -639,7 +639,7 @@ cursor: pointer;
 .swiper-slide-thumb-active {
   opacity: 1 !important;
 }
-.fullScreenSwiper1 div{
+.fullScreenSwiper1 .swiper-wrapper div{
   opacity: .5;
 }
 .fullScreenSwiper1 .swiper-slide img {
