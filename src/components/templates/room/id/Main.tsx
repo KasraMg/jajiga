@@ -15,7 +15,7 @@ const Main = () => {
 
     const headers = {
       ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
-    }
+    } 
     const res = await fetch(`${baseUrl}/villa/get/${params.id}`, {
       headers,
     });
@@ -33,7 +33,7 @@ const Main = () => {
           <Gallery {...data.villa} />
           <div className="flex items-start gap-8 px-0 md:!mt-9 md:!px-4 xl:!px-0">
             <Details {...data} />
-            <Reservation {...data.villa} />
+            <Reservation {...data} />
           </div>
         </div>
       ) : (

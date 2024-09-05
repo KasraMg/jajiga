@@ -16,6 +16,7 @@ import {
 import { VillaResponse } from "@/src/types/Villa.types";
 import { roomStore } from "@/src/stores/room";
 import { convertNumbers } from "@/src/utils/utils";
+import { authStore } from "@/src/stores/auth";
 
 const Calendars = (data: VillaResponse) => {
   const date = useDateHandler();
@@ -35,11 +36,13 @@ const Calendars = (data: VillaResponse) => {
     };
   }, []);
   const { setStartDate, setEndDate, startDate } = roomStore((state) => state);
+  const { userData } = authStore((state) => state);
   const [defaultValue, setDefultValue] = useState([]);
+  
   function handleChange(value: DateObject | DateObject[] | null) {
     setDefultValue(value as any);
     if (Array.isArray(value)) {
-      value.forEach((date, index) => { 
+      value.forEach((date, index) => {
         if (index + 1 === 1) setStartDate(convertNumbers(date.format(), true));
         if (index + 1 === 2) {
           setEndDate(convertNumbers(date.format(), true));
@@ -65,17 +68,17 @@ const Calendars = (data: VillaResponse) => {
     return "winter";
   };
 
-  const isDateInRange = (today:string, from:string, to:string) => {
+  const isDateInRange = (today: string, from: string, to: string) => {
     const todayDate = jalaali.toGregorian(
       ...convertNumbers(`${today}`, true).split("/").map(Number),
     );
     const startDate = jalaali.toGregorian(...from.split("/").map(Number));
     const endDate = jalaali.toGregorian(...to.split("/").map(Number));
- 
+
     const todayObj = new Date(todayDate.gy, todayDate.gm - 1, todayDate.gd);
     const startObj = new Date(startDate.gy, startDate.gm - 1, startDate.gd);
     const endObj = new Date(endDate.gy, endDate.gm - 1, endDate.gd);
- 
+
     return todayObj >= startObj && todayObj <= endObj;
   };
 
@@ -98,7 +101,7 @@ const Calendars = (data: VillaResponse) => {
           // بررسی می‌کنیم که آیا تاریخ در هر کدام از محدوده‌های تاریخ‌ها قرار دارد یا خیر
           data.bookDate.forEach((range) => {
             if (isDateInRange(date, range.from, range.to)) {
-              isInRange = true; 
+              isInRange = true;
             }
           });
 
@@ -118,7 +121,7 @@ const Calendars = (data: VillaResponse) => {
           const dayPrice = data.villa.price[season][priceType];
           return {
             children: (
-              <span 
+              <span
                 style={
                   isInRange
                     ? {
@@ -128,9 +131,7 @@ const Calendars = (data: VillaResponse) => {
                     : { textAlign: "center" }
                 }
               >
-                <p style={{ marginTop: "3px",   }}>
-                  {date.day}
-                </p>
+                <p style={{ marginTop: "3px" }}>{date.day}</p>
                 {!isInRange && (
                   <p
                     style={{
@@ -153,7 +154,7 @@ const Calendars = (data: VillaResponse) => {
             style: {
               color,
             },
-            disabled: isInRange
+            disabled: data.villa.user._id === userData?.user._id || isInRange,
           };
         }}
       />
@@ -251,13 +252,15 @@ const Calendars = (data: VillaResponse) => {
           </SheetContent>
         </Sheet>
 
-        <div
-          onClick={handleDelete}
-          className="transition-color justify-right flex w-fit cursor-pointer items-center gap-2 rounded-xl border border-dashed border-black bg-white px-3 text-sm font-medium text-black"
-        >
-          <FaTrashAlt />
-          پاک کردن
-        </div>
+        {data.villa.user._id !== userData?.user._id && (
+          <div
+            onClick={handleDelete}
+            className="transition-color justify-right flex w-fit cursor-pointer items-center gap-2 rounded-xl border border-dashed border-black bg-white px-3 text-sm font-medium text-black"
+          >
+            <FaTrashAlt />
+            پاک کردن
+          </div>
+        )}
       </div>
     </div>
   );

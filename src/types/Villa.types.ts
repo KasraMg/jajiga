@@ -1,3 +1,5 @@
+import { book } from "./Auth.types";
+
 interface priceDays {
   midWeek: string;
   holidays: string;
@@ -84,7 +86,7 @@ export interface VillaDetails {
 }
 
 export interface VillaResponse {
-  bookDate: [];
+  bookDate: book[];
   comments: [];
   statusCode: number;
   villa: VillaDetails;

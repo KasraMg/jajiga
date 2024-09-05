@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { baseUrl } from "../utils/utils";
 import Cookies from "js-cookie";
 import { toast } from "../components/shadcn/ui/use-toast";
+
 const usePostData = <T extends object>(
   url: string,
   successMsg: string | null,
@@ -9,6 +10,7 @@ const usePostData = <T extends object>(
   successFunc?: ((data: any) => void) | null   ,
   formData?: boolean,
 ) => {
+  
   const accessToken = Cookies.get("AccessToken");
  
   const { mutate, isSuccess, isPending, isError } = useMutation({
