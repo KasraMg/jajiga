@@ -61,11 +61,11 @@ const Rooms = () => {
     <>
       {userData?.villas.length ? (
         <div className="mt-5">
-          <p>اقامتگاه های خود را تکمیل کنید</p>
+          <p>اقامتگاه های خود را تکمیل یا ویرایش کنید</p>
           <span className="text-xs font-thin">
             توجه: اقامتگاه تنها بعد از تکمیل، قابل بررسی و انتشار می‌باشد.
           </span>
-          {userData.villas?.map((villa: VillaDetails) => (
+          {userData.villas.slice(0,3).map((villa: VillaDetails) => (
             <section className="mt-4">
               <div className="flex flex-wrap items-center justify-start gap-2 p-3 shadow-lg sm:!flex-nowrap sm:!justify-between sm:!gap-0">
                 <div className="flex items-center gap-2">
@@ -145,6 +145,7 @@ const Rooms = () => {
               </div>
             </section>
           ))}
+        {userData.villas.length > 3 && <Link className="text-center my-4 block text-xs text-red-600 w-full" href={'/all'}>مشاهده تمام اقامتگاه ها</Link>}  
         </div>
       ) : (
         <div className="mx-auto mt-16 rounded-lg bg-red-200 p-4 text-center">

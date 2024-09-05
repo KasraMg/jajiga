@@ -13,6 +13,7 @@ export interface userInfoObj {
   refreshToken: string;
   role: string;
   updatedAt: string;
+  _id:string
 }
 
 export interface userObj {

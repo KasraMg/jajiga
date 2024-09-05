@@ -5,17 +5,28 @@ import { toast } from "@/src/components/shadcn/ui/use-toast";
 import usePostData from "@/src/hooks/usePostData";
 import { authStore } from "@/src/stores/auth";
 import { comment } from "@/src/types/Villa.types";
+import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { IoIosStarOutline } from "react-icons/io";
 
-const Comments = ({ comments }: { comments: comment[] }) => {
+const Comments = ({
+  comments,
+  userId,
+}: {
+  comments: comment[];
+  userId: string;
+}) => {
   const [isReserve, setIsReserve] = useState(false);
   const { userData } = authStore((state) => state);
   const [body, setBody] = useState("");
+  const [answerbody, setAnswerBody] = useState("");
+  const [mainCommentID, setMainCommentID] = useState("");
   const [score, setScore] = useState<number | null>(null);
+  const [idAnswer, setIdAnswer] = useState("");
+  const queryClient = useQueryClient();
 
   const params = useParams();
   const handleClick = (index: number) => {
@@ -40,22 +51,24 @@ const Comments = ({ comments }: { comments: comment[] }) => {
         title:
           "نظر شما با موفقیت ثبت و پس از تایید ادمین به سایت اضافه خواهد شد",
       });
+      queryClient.invalidateQueries({ queryKey: ["villa"] });
     } else {
       toast({
         variant: "danger",
         title: "مشکلی در ثبت نظر وجود دارد...",
       });
-      location.reload();
+      // location.reload();
     }
   };
   const { mutate: mutation, isPending } = usePostData<any>(
-    `/comment/create`,
+    idAnswer ? `/comment/answer/${mainCommentID}` : `/comment/create`,
     null,
     false,
     successFunc,
   );
 
   const addCommentHandler = () => {
+    setIdAnswer("");
     if (score && body) {
       const data = {
         body,
@@ -70,6 +83,18 @@ const Comments = ({ comments }: { comments: comment[] }) => {
       });
   };
 
+  const addAnswerCommentHandler = () => {
+    if (answerbody) {
+      const data = {
+        body: answerbody,
+      };
+      mutation(data);
+    } else
+      toast({
+        variant: "danger",
+        title: "لطفا پاسخی بنویسید",
+      });
+  };
   return (
     <>
       {isReserve && (
@@ -98,7 +123,7 @@ const Comments = ({ comments }: { comments: comment[] }) => {
             className="mt-3 h-9 px-5"
             variant={"danger"}
           >
-            {isPending ? <ButtonLoader /> : "ثبت نظر"}
+            {!idAnswer && isPending ? <ButtonLoader /> : "ثبت نظر"}
           </Button>
         </div>
       )}
@@ -109,7 +134,6 @@ const Comments = ({ comments }: { comments: comment[] }) => {
           </p>
           <div className="mt-6">
             <>
-              {" "}
               {comments?.map((comment) => (
                 <section className="mb-6 border-b border-solid border-gray-200 pb-4">
                   <div className="flex justify-between">
@@ -148,6 +172,49 @@ const Comments = ({ comments }: { comments: comment[] }) => {
                   <p className="font-vazir mt-5 text-sm font-light">
                     {comment.body}
                   </p>
+
+                  {idAnswer !== comment._id &&
+                    userId === userData?.user._id && (
+                      <Button
+                        onClick={() => setIdAnswer(comment._id)}
+                        variant={"main"}
+                        className="mr-auto block px-4"
+                      >
+                        {" "}
+                        پاسخ
+                      </Button>
+                    )}
+
+                  {idAnswer == comment._id && (
+                    <div className="mt-3">
+                      <Textarea
+                        maxLength={250}
+                        setValue={setAnswerBody}
+                        value={answerbody}
+                        placeholder={`پاسخ شما به جناب ${comment.creator.firstName}`}
+                      />
+                      <Button
+                        onClick={() => {
+                          setMainCommentID(comment._id);
+                          addAnswerCommentHandler();
+                        }}
+                        className="mt-3 h-9 px-5"
+                        variant={"danger"}
+                      >
+                        {isPending ? <ButtonLoader /> : "ثبت نظر"}
+                      </Button>
+                      <Button
+                        onClick={() => {
+                          setMainCommentID("");
+                          setIdAnswer("");
+                        }}
+                        className="mr-3 mt-3 h-9 px-5"
+                        variant={"blue"}
+                      >
+                        لغو
+                      </Button>
+                    </div>
+                  )}
                   {/* <section className="mx-3 mt-3 rounded-md bg-[#f3f3f3] p-2">
                     <div className="flex items-center gap-3">
                       <Image

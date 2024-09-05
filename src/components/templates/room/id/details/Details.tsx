@@ -78,7 +78,7 @@ const Details = (data: VillaResponse) => {
             position={[data.villa.coordinates.x, data.villa.coordinates.y]}
           />
         </div>
-        <Comments comments={data.comments} />
+        <Comments userId={data.villa.user._id} comments={data.comments} />
       </main>
     </div>
   );
