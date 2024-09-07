@@ -1,5 +1,4 @@
 import Badge from "@/src/components/modules/badge/Badge";
-import React from "react";
 import Summery from "./components/summery/Summery";
 import Infoes from "./components/infoes/Infoes";
 import Breadcrumb from "./components/breadcrumb/Breadcrumb";
@@ -11,19 +10,10 @@ import { VillaResponse } from "@/src/types/Villa.types";
 import Costly from "./components/costly/Costly";
 import ShareModal from "./components/share/ShareModal";
 import Image from "next/image";
-import { baseUrl } from "@/src/utils/utils";
-import { IoIosHeartEmpty } from "react-icons/io";
-import { useParams } from "next/navigation";
-import usePostData from "@/src/hooks/usePostData";
+import { baseUrl } from "@/src/utils/utils"; 
+import Wishes from "./components/wishes/Wishes";
 
 const Details = (data: VillaResponse) => {
-  const params = useParams();
-  const { mutate: mutation, isPending } = usePostData<any>(
-    `/wishes/${params?.id}`,
-    "اقامتگاه با موفقیت به علاقه مندی های شما اضافه شد",
-  );
-
-  const wishesHandler = () => {};
   return (
     <div className="flex w-full flex-col items-start justify-between pt-4 md:!w-[66.66%] md:!pt-0 lg:!w-[80.66%] xl:!w-[66.66%]">
       <div className="mb-4 flex w-full justify-between px-4 md:!px-0">
@@ -44,12 +34,7 @@ const Details = (data: VillaResponse) => {
             <Badge bgColor="bg-customYellow">
               کد: ({data.villa._id.slice(18, 26)})
             </Badge>
-            <div
-              onClick={wishesHandler}
-              className="flex cursor-pointer items-center rounded-full bg-customYellow p-2 text-black"
-            >
-              <IoIosHeartEmpty />
-            </div>
+            <Wishes wishesStatus={data.villa.isWishes} />
             <ShareModal />
             {/* <Badge bgColor="bg-[#f1f1f1]">+300 رزرو موفق</Badge> */}
             {/* stars component */}

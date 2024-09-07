@@ -12,6 +12,7 @@ import { Button } from "@/src/components/shadcn/ui/button";
 import usePostData from "@/src/hooks/usePostData";
 import { userInfoObj } from "@/src/types/Auth.types";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface BoxProps {
   type: string;
@@ -34,7 +35,7 @@ const Box: FC<BoxProps> = ({
   value,
   setValue,
   errorText,
-  multiple,
+  multiple, 
   values,
   setValues,
   requestBody,
@@ -42,6 +43,7 @@ const Box: FC<BoxProps> = ({
 }) => {
   const [error, setError] = useState(false);
   const [disabled, setdisabled] = useState(true);
+  const queryClient = useQueryClient();
 
   const successFunc = (data: { statusCode: number }) => {
     if (data.statusCode === 200) {
@@ -50,6 +52,7 @@ const Box: FC<BoxProps> = ({
         title: "اطلاعات با موفقیت بروزرسانی شد",
       });
       setOpen(false);
+      queryClient.invalidateQueries({ queryKey: ["auth"] }); 
     }
   };
 
@@ -86,7 +89,7 @@ const Box: FC<BoxProps> = ({
   const submitHandler = () => {
     if (values) {
       const data = requestBody.reduce(
-        (acc: string, title: string, index: number) => {
+        (acc: any, title: any, index: number) => {
           acc[title] = values[index];
           return acc;
         },

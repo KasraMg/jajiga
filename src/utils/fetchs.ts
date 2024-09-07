@@ -1,4 +1,5 @@
 import { baseUrl } from "./utils";
+import Cookies from "js-cookie";
 
 export async function getPrivilegedVillas() {
   const res = await fetch(`${baseUrl}/villa/privilegedVillas`, {});
@@ -19,5 +20,18 @@ export async function getPopularDestinations() {
     `,
     {},
   );
+  return res.json();
+}
+
+export async function fetchWishes() {
+const accessToken = Cookies.get("AccessToken");
+
+  const res = await fetch(`${baseUrl}/wishes`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    credentials: "include",
+
+  });
   return res.json();
 }

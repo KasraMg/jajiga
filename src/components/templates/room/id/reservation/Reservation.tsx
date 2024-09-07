@@ -68,7 +68,7 @@ const Reservation = (data: VillaResponse) => {
 
   useEffect(() => {
     if (userData) {
-      const reserve = userData.books.find((book) => book.villa === params.id);
+      const reserve = userData.booked.find((book) => book.villa === params.id);
       if (reserve) {
         setReserveData(reserve);
       } else setReserveData(null);
@@ -98,7 +98,7 @@ const Reservation = (data: VillaResponse) => {
             <p className="mr-1 text-sm">تومان</p>
           </div>
         </div>
-        {data.villa.user._id === userData?.user._id ? (
+        {data.villa.isOwner ? (
           <div className="rounded-b-2xl px-4 py-[14px] shadow-lg">
             <p> آخرین رزرو ها</p>
             {data.bookDate.map((book) => (

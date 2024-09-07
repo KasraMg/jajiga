@@ -12,9 +12,7 @@ import { MdOutlineEmail } from "react-icons/md";
 import { IoShareSocialOutline } from "react-icons/io5";
 import Link from "next/link";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
-const ShareModal = () => {
-  console.log();
-
+const ShareModal = () => { 
   return (
     <Dialog>
       <DialogTrigger asChild>

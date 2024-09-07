@@ -20,6 +20,7 @@ import {
 import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
 import { FaAngleRight } from "react-icons/fa6";
 import Cookies from "js-cookie";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface BoxProps {
   type: string;
@@ -48,6 +49,7 @@ const TwoStepBox: FC<BoxProps> = ({
   const [timer, setTimer] = useState<number>(0);
   const [step, setStep] = useState(1);
   const [prevValue, setPrevValue] = useState<string | undefined>(undefined);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     if (type === "email" && !prevValue && value?.includes("@")) {
@@ -100,6 +102,8 @@ const TwoStepBox: FC<BoxProps> = ({
             variant: "success",
             title: "ایمیل با موفقیت ثبت شد",
           });
+      queryClient.invalidateQueries({ queryKey: ["auth"] });
+
           setStep(1) 
           setOpen(false) 
         } else if (data.statusCode === 400) {

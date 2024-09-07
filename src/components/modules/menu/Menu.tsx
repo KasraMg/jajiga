@@ -29,9 +29,11 @@ import { authStore } from "@/src/stores/auth";
 import Link from "next/link";
 import { AiOutlineLogout } from "react-icons/ai";
 import { useLogoutHandler } from "@/src/utils/auth";
+import Image from "next/image";
+import { baseUrl } from "@/src/utils/utils";
 
 function Menu({ isSticky }: any) {
-  const { userData,login } = authStore((state) => state);
+  const { userData, login } = authStore((state) => state);
   const logoutHandler = useLogoutHandler();
   return (
     <Sheet>
@@ -71,30 +73,39 @@ function Menu({ isSticky }: any) {
                 </Link>
               </div>
             )}
-
-            <svg
-              width={56}
-              className="sc-679cb2a8-0 iBzAsR sc-2fa8747d-1 eAKzKD"
-              fill="#d6d6d6"
-              viewBox="0 0 32 32"
-              preserveAspectRatio="xMidYMid meet"
-            >
-              <defs>
-                <clipPath id="clip-path">
-                  <polygon
-                    points="0 0 32 0 32 1.23 32 32 0 32 0 0"
-                    style={{ fill: "none" }}
-                  ></polygon>
-                </clipPath>
-              </defs>
-              <g style={{ clipPath: "url(&quot;#clip-path&quot)" }}>
-                <path d="M16,32A16,16,0,1,1,32,16,16,16,0,0,1,16,32ZM16,1.52A14.48,14.48,0,0,0,1.52,16a14.82,14.82,0,0,0,.28,2.82,14.48,14.48,0,0,0,28.4,0A15,15,0,0,0,30.48,16,14.5,14.5,0,0,0,16,1.52Z"></path>
-                <path
-                  d="M20.5,13.5A4.5,4.5,0,1,1,16,9,4.49,4.49,0,0,1,20.5,13.5ZM19,18.71a6,6,0,1,0-5.94,0A9.76,9.76,0,0,0,6.25,28a.75.75,0,0,0,1.5,0,8.25,8.25,0,0,1,15.87-3.16h0A8.18,8.18,0,0,1,24.25,28a.75.75,0,0,0,1.5,0A9.76,9.76,0,0,0,19,18.71Z"
-                  style={{ fillRule: "evenodd" }}
-                ></path>
-              </g>
-            </svg>
+            {userData?.user.avatar ? (
+              <Image
+                alt="avatar"
+                width={1000}
+                height={1000}
+                className="rounded-full w-14 h-14 rounded-full"
+                src={`${baseUrl}/user/avatars/${userData?.user.avatar}`}
+              />
+            ) : (
+              <svg
+                width={56}
+                className="sc-679cb2a8-0 iBzAsR sc-2fa8747d-1 eAKzKD"
+                fill="#d6d6d6"
+                viewBox="0 0 32 32"
+                preserveAspectRatio="xMidYMid meet"
+              >
+                <defs>
+                  <clipPath id="clip-path">
+                    <polygon
+                      points="0 0 32 0 32 1.23 32 32 0 32 0 0"
+                      style={{ fill: "none" }}
+                    ></polygon>
+                  </clipPath>
+                </defs>
+                <g style={{ clipPath: "url(&quot;#clip-path&quot)" }}>
+                  <path d="M16,32A16,16,0,1,1,32,16,16,16,0,0,1,16,32ZM16,1.52A14.48,14.48,0,0,0,1.52,16a14.82,14.82,0,0,0,.28,2.82,14.48,14.48,0,0,0,28.4,0A15,15,0,0,0,30.48,16,14.5,14.5,0,0,0,16,1.52Z"></path>
+                  <path
+                    d="M20.5,13.5A4.5,4.5,0,1,1,16,9,4.49,4.49,0,0,1,20.5,13.5ZM19,18.71a6,6,0,1,0-5.94,0A9.76,9.76,0,0,0,6.25,28a.75.75,0,0,0,1.5,0,8.25,8.25,0,0,1,15.87-3.16h0A8.18,8.18,0,0,1,24.25,28a.75.75,0,0,0,1.5,0A9.76,9.76,0,0,0,19,18.71Z"
+                    style={{ fillRule: "evenodd" }}
+                  ></path>
+                </g>
+              </svg>
+            )}
           </div>
           <hr className="mt-5" />
         </SheetHeader>
@@ -133,6 +144,26 @@ function Menu({ isSticky }: any) {
               <TbHomePlus className="text-xl" />
               <span className="mt-1 text-sm"> میزبان شو</span>
             </Link>
+
+            {userData?.booked.length ? (
+              <Link
+                href="/reserves"
+                className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]"
+              >
+                <TbHomePlus className="text-xl" />
+                <span className="mt-1 text-sm">رزرو ها</span>
+              </Link>
+            ) : null}
+
+            {userData?.villas.length ? (
+              <Link
+                href="/all"
+                className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]"
+              >
+                <TbHomePlus className="text-xl" />
+                <span className="mt-1 text-sm">اقامتگاه ها</span>
+              </Link>
+            ) : null}
             <Link
               href="/support"
               className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]"
@@ -146,7 +177,7 @@ function Menu({ isSticky }: any) {
             >
               <TbMessage2Question className="text-xl" />
               <span className="mt-1 text-sm">سوالات متداول</span>
-            </Link> 
+            </Link>
             <Link
               href="/rules"
               className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]"
@@ -162,7 +193,10 @@ function Menu({ isSticky }: any) {
               <span className="mt-1 text-sm">درباره ما</span>
             </Link>
             {login && (
-              <li onClick={logoutHandler} className="font-vazir flex cursor-pointer flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]">
+              <li
+                onClick={logoutHandler}
+                className="font-vazir flex cursor-pointer flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]"
+              >
                 <AiOutlineLogout className="text-xl" />
                 <span className="mt-1 text-sm">خروج</span>
               </li>

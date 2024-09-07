@@ -1,19 +1,50 @@
 import React, { FC } from "react";
-import { SlEnergy } from "react-icons/sl";
 import { CiStar } from "react-icons/ci";
-import { IoIosStar } from "react-icons/io";
 import { Button } from "@/src/components/shadcn/ui/button";
 import { VillaDetails } from "@/src/types/Villa.types";
 import Image from "next/image";
-import { typeOptions } from "@/src/utils/options";
 import { formatNumber } from "@/src/utils/utils";
 import Link from "next/link";
+import { FaTrash } from "react-icons/fa";
+import usePostData from "@/src/hooks/usePostData";
+import { ButtonLoader } from "../loader/Loader";
+import { toast } from "../../shadcn/ui/use-toast";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface CardProps {
-  className?: string; 
+  className?: string;
   data: VillaDetails;
+  wishes?: boolean;
 }
-const Card: FC<CardProps> = ({ data, className }) => {
+const Card: FC<CardProps> = ({ data, className, wishes }) => {
+  const queryClient = useQueryClient();
+
+  const successFunc = (resdata: { statusCode: number }) => {
+    if (resdata.statusCode === 200) {
+      toast({
+        variant: "success",
+        title: "اقامتگاه با موفقیت از علاقه مندی های شما حذف شد",
+      });
+      queryClient.invalidateQueries({ queryKey: ["auth"] });
+    } else {
+      toast({
+        variant: "success",
+        title: "خطایی غیر منتظره رخ داد",
+      });
+      // location.reload();
+    }
+  };
+
+  const { mutate: mutation, isPending } = usePostData<any>(
+    `/wishes/${data._id}`,
+    null,
+    false,
+    successFunc,
+  );
+
+  const deleteFromWishesHandler = () => {
+    mutation({ flag: false });
+  };
   return (
     data && (
       <Link
@@ -33,7 +64,7 @@ const Card: FC<CardProps> = ({ data, className }) => {
               <Button
                 size={"sm"}
                 variant={"yellow"}
-                className="font-vazir w-[78px] font-light"
+                className="w-[78px] font-light"
               >
                 <CiStar className="ml-1" />
                 مـمـتــــــاز
@@ -51,14 +82,19 @@ const Card: FC<CardProps> = ({ data, className }) => {
             <p>از {formatNumber(String(data.price.autumn.midWeek))} تومان</p>
           </div>
         </div>
-        <p className="mt-3 text-sm">
+        <div className="flex gap-2 mt-3 items-center">
+          <p className=" text-sm">
           اجاره{" "}
           {data.aboutVilla.villaType.title === "ویلایی"
             ? "منزل ویلایی"
             : data.aboutVilla.villaType.title}{" "}
           در {data.address.city}
         </p>
-        <div className="font-vazir mt-1 flex items-center gap-1 text-xs font-light text-[#939cae]">
+        <p className=" text-xs font-light text-[#939cae]">+{data.Booked} رزرو موفق</p>
+
+        </div>
+        
+        <div className="mt-1 flex items-center gap-1 text-xs font-light text-[#939cae]">
           <p>{data.capacity.bedRoom} خوابه . </p>
           <p> {data.capacity.fuundationSize} متر . </p>
           <p>تا {data.capacity.maxCapacity} مهمان</p>
@@ -66,8 +102,18 @@ const Card: FC<CardProps> = ({ data, className }) => {
           <IoIosStar className="text-sm text-yellow-400" />
           <p className="pt-1"> 4.9</p>
         </div> */}
-          <p className="pt-1">(0 نظر)</p>
+          <p className="pt-1">({data.comments} نظر)</p> 
         </div>
+        {wishes && (
+          <Button
+            variant={"danger"}
+            className="mt-2 h-9 w-full justify-center font-light"
+            onClick={deleteFromWishesHandler}
+          >
+            <FaTrash className="ml-1" />
+            {isPending ? <ButtonLoader /> : "حذف"}
+          </Button>
+        )}
       </Link>
     )
   );
