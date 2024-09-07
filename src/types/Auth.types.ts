@@ -21,7 +21,8 @@ export interface userObj {
   statusCode: number;
   user: userInfoObj;
   villas: VillaDetails[];
-  books: book[];
+  booked :book[];
+  wishes:VillaDetails[]
 }
 
 export interface book {

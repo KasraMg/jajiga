@@ -46,6 +46,7 @@ export const useLogoutHandler = () => {
     }).then((res) => {
       if (res) {
         router.push("/");
+        alert('kir')
         Cookies.remove("AccessToken");
         Cookies.remove("RefreshToken");
         queryClient.invalidateQueries({ queryKey: ["auth"] });

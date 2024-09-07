@@ -39,7 +39,7 @@ const Comments = ({
 
   useEffect(() => {
     if (userData) {
-      const reserve = userData.books.some((book) => book.villa === params.id);
+      const reserve = userData.booked.some((book) => book.villa === params.id);
       setIsReserve(reserve);
     }
   }, [userData]);
@@ -57,7 +57,7 @@ const Comments = ({
         variant: "danger",
         title: "مشکلی در ثبت نظر وجود دارد...",
       });
-      // location.reload();
+      location.reload();
     }
   };
   const { mutate: mutation, isPending } = usePostData<any>(
@@ -144,7 +144,7 @@ const Comments = ({
                         width={1000}
                         height={1000}
                         src={
-                          comment.creator.avatar
+                          comment?.creator?.avatar
                             ? `https://jajiga-backend.liara.run/user/avatars/${comment.creator.avatar}`
                             : `/images/profile.jpg`
                         }
@@ -173,7 +173,35 @@ const Comments = ({
                     {comment.body}
                   </p>
 
-                  {idAnswer !== comment._id &&
+                  {comment.answerComment && (
+                    <section className="mx-3 mt-3 rounded-md bg-[#f3f3f3] p-2">
+                      <div className="flex items-center gap-3">
+                        <Image
+                          className="h-10 w-10 rounded-full object-cover"
+                          alt="author"
+                          width={1000}
+                          height={1000}
+                          src={
+                            comment.answerComment.creator.avatar
+                              ? `https://jajiga-backend.liara.run/user/avatars/${comment.answerComment.creator.avatar}`
+                              : "/images/about/about_img6.jpg"
+                          }
+                        />
+                        <div>
+                          <p className="text-sm">پاسخ میزبان</p>
+                          <span className="text-sm text-gray-500">
+                            {comment.answerComment.date}
+                          </span>
+                        </div>
+                      </div>
+                      <p className="font-vazir mt-5 text-sm font-light">
+                        {comment.answerComment.body}
+                      </p>
+                    </section>
+                  )}
+
+                  {!comment.answerComment &&
+                    idAnswer !== comment._id &&
                     userId === userData?.user._id && (
                       <Button
                         onClick={() => setIdAnswer(comment._id)}
@@ -215,26 +243,6 @@ const Comments = ({
                       </Button>
                     </div>
                   )}
-                  {/* <section className="mx-3 mt-3 rounded-md bg-[#f3f3f3] p-2">
-                    <div className="flex items-center gap-3">
-                      <Image
-                        className="h-10 w-10 rounded-full object-cover"
-                        alt="author"
-                        width={1000}
-                        height={1000}
-                        src={"/images/about/about_img6.jpg"}
-                      />
-                      <div>
-                        <p className="text-sm">پاسخ میزبان</p>
-                        <span className="text-sm text-gray-500">
-                          07 دی 1402
-                        </span>
-                      </div>
-                    </div>
-                    <p className="font-vazir mt-5 text-sm font-light">
-                      عالی بود، از همه چیز راضی بودیم
-                    </p>
-                  </section> */}
                 </section>
               ))}
             </>

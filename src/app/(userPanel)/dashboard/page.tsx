@@ -30,7 +30,7 @@ const Dashboard = () => {
               <Image
                 width={1000}
                 height={1000}
-                className="absolute object-cover -bottom-8 left-0 right-0 mx-auto block h-20 w-20 rounded-full"
+                className="absolute -bottom-8 left-0 right-0 mx-auto block h-20 w-20 rounded-full object-cover"
                 src={
                   userData?.user.avatar
                     ? `https://jajiga-backend.liara.run/user/avatars/${userData?.user.avatar}`
@@ -59,7 +59,10 @@ const Dashboard = () => {
                 <GoHome className="text-2xl" />
                 <p>صفحه اصلی</p>
               </Link>
-              <Link className="mt-5 flex justify-start gap-2" href={"/reservs"}>
+              <Link
+                className="mt-5 flex justify-start gap-2"
+                href={"/reserves"}
+              >
                 <RiUpload2Line className="text-2xl" />
                 <p>رزرو ها</p>
               </Link>

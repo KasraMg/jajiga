@@ -47,6 +47,9 @@ export interface VillaDetails {
   };
   disable: boolean;
   finished: boolean;
+  Booked: number;
+  averageScore: number;
+  comments: number;
   facility: {
     facility: {
       coolingSystem: { status: boolean; description?: string };
@@ -74,6 +77,9 @@ export interface VillaDetails {
   };
   step: number;
   updatedAt: string;
+  isAccepted: boolean;
+  isOwner: boolean;
+  isWishes: boolean;
   user: {
     avatar: string;
     firstName: string;
@@ -120,11 +126,27 @@ export interface comment {
   createdAt: string;
   creator: { _id: string; firstName: number; avatar: null };
   date: string;
-  haveAnswer:number;
+  haveAnswer: number;
+  answerComment: {
+    body: string;
+    createdAt:string;
+    creator: {
+      _id: string;
+      firstName: string;
+      avatar: string;
+    };
+    date:string;
+    haveAnswer: number;
+    isAccept: number;
+    isAnswer: number;
+    mainCommentID:string;
+    updatedAt:string;
+    villa: { _id: string };
+  };
   isAccept: number;
   isAnswer: number;
   score: number;
-  updatedAt:string;
-  villa: { _id: string}; 
+  updatedAt: string;
+  villa: { _id: string };
   _id: string;
 }

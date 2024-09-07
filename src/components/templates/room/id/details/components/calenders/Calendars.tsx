@@ -17,9 +17,12 @@ import { VillaResponse } from "@/src/types/Villa.types";
 import { roomStore } from "@/src/stores/room";
 import { convertNumbers } from "@/src/utils/utils";
 import { authStore } from "@/src/stores/auth";
+import { book } from "@/src/types/Auth.types";
+import { useParams } from "next/navigation";
 
 const Calendars = (data: VillaResponse) => {
   const date = useDateHandler();
+  const params = useParams();
 
   const [numberOfMonths, setNumberOfMonths] = useState(
     window.innerWidth >= 1023 ? 2 : 1,
@@ -38,7 +41,8 @@ const Calendars = (data: VillaResponse) => {
   const { setStartDate, setEndDate, startDate } = roomStore((state) => state);
   const { userData } = authStore((state) => state);
   const [defaultValue, setDefultValue] = useState([]);
-  
+  const [reserveData, setReserveData] = useState<null | book>(null);
+
   function handleChange(value: DateObject | DateObject[] | null) {
     setDefultValue(value as any);
     if (Array.isArray(value)) {
@@ -67,8 +71,18 @@ const Calendars = (data: VillaResponse) => {
     if (monthIndex >= 6 && monthIndex <= 8) return "autumn";
     return "winter";
   };
+  useEffect(() => {
+    if (userData) {
+      const reserve = userData.booked.find(
+        (book) => book.villa._id === params.id,
+      ); 
+      if (reserve) {
+        setReserveData(reserve);
+      } else setReserveData(null);
+    }
+  }, [userData]);
 
-  const isDateInRange = (today: string, from: string, to: string) => {
+  const isDateInRange = (today: any, from: string, to: string) => {
     const todayDate = jalaali.toGregorian(
       ...convertNumbers(`${today}`, true).split("/").map(Number),
     );
@@ -97,10 +111,16 @@ const Calendars = (data: VillaResponse) => {
         range
         mapDays={({ date, today }) => {
           let isInRange = false;
+          let isYourRange = false;
 
-          // بررسی می‌کنیم که آیا تاریخ در هر کدام از محدوده‌های تاریخ‌ها قرار دارد یا خیر
+          if (reserveData) {
+            isDateInRange(date, reserveData.date.from, reserveData.date.to)
+              ? (isYourRange = true)
+              : (isYourRange = false);
+          }
+
           data.bookDate.forEach((range) => {
-            if (isDateInRange(date, range.from, range.to)) {
+            if (isDateInRange(date, range.date.from, range.date.to)) {
               isInRange = true;
             }
           });
@@ -120,7 +140,26 @@ const Calendars = (data: VillaResponse) => {
           const priceType = isWeekend ? "holidays" : "midWeek";
           const dayPrice = data.villa.price[season][priceType];
           return {
-            children: (
+            children: isYourRange ? (
+              <span
+                style={{
+                  color: "#0074d9",
+                  background:
+                    " repeating-linear-gradient(-45deg, rgb(255, 255, 255), rgb(255, 255, 255) 3px, rgba(215, 215, 215, 0.8) 0px, rgba(215, 215, 215, 0.8) 6px)",
+                }}
+              >
+                <p style={{ marginTop: "3px" }}>{date.day}</p>
+
+                <p
+                  style={{
+                    fontSize: "9px",
+                    color: "#0074d9",
+                  }}
+                >
+                  رزرو شما
+                </p>
+              </span>
+            ) : (
               <span
                 style={
                   isInRange
@@ -154,7 +193,7 @@ const Calendars = (data: VillaResponse) => {
             style: {
               color,
             },
-            disabled: data.villa.user._id === userData?.user._id || isInRange,
+            disabled: data.villa.isOwner || isInRange || reserveData,
           };
         }}
       />
@@ -262,6 +301,12 @@ const Calendars = (data: VillaResponse) => {
           </div>
         )}
       </div>
+
+      {reserveData && (
+        <p className="mt-2 text-xs text-red-600">
+          بیش از 1 رزرو برای ویلا نمیتونید داشته باشید
+        </p>
+      )}
     </div>
   );
 };
