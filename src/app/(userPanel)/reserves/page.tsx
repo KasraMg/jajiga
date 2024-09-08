@@ -9,17 +9,25 @@ const Reserve = () => {
 
   return (
     <Container disableFooter={true}>
-      <Breadcrumb route={"رزرو ها"} />
+      <Breadcrumb
+        description={
+          <p className="w-full text-xs text-red-900">
+            {" "}
+            بعد از گذشت از موعد پایان اجاره، اطلاعات مربوط به رزرو پاک خواهد شد
+          </p>
+        }
+        route={"رزرو ها"}
+      />
       <Layout>
         <div
           className={`relative bottom-2 z-10 flex w-full !min-w-full gap-4 rounded-xl bg-white px-3 sm:!px-5`}
         >
           <div className="Container">
             <main>
-              {userData?.books.length ? (
-                <div className="mb-5 mt-5 grid gap-4 md:!grid-cols-[auto,auto] lg:!grid-cols-[auto,auto,auto]">
+              {userData?.booked.length ? (
+                <div className="mb-5 mt-5 grid gap-4 md:!grid-cols-[auto,auto] lg:!grid-cols-[1fr,1fr,1fr]">
                   {userData.booked.map((book) => (
-                    <Card data={false} className="w-full" />
+                    <Card className="w-full" key={book._id} data={book} />
                   ))}
                 </div>
               ) : (

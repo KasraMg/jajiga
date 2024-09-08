@@ -26,13 +26,14 @@ export interface userObj {
 }
 
 export interface book {
+  villa:VillaDetails;
   createdAt: string;
   date: {
       from: string;
       to: string;
   };
   updatedAt: string;
-  user: string;
-  villa: string;
+  user: string; 
+  price:string;
   _id: string;
 }

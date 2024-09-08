@@ -52,6 +52,7 @@ const ReservationStepper: FC<ReservationStepperProps> = ({
         title: "ویلا با موفقیت رزرو شد",
       });
       queryClient.invalidateQueries({ queryKey: ["villa"] }); 
+      queryClient.invalidateQueries({ queryKey: ["auth"] }); 
       setOpen(false);
       setOpenReserveModal(false);
       router.push("/reserves");

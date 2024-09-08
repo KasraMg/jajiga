@@ -12,6 +12,8 @@ const Villas = () => {
     ["allActivatedVillas"],
     getAllActivatedVillas,
   );
+  console.log(data);
+  
   const [status, setStatus] = useState("همه شهرها");
   const [villaData, setVillaData] = useState(data.villas);
   console.log(data);

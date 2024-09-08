@@ -45,8 +45,7 @@ export const useLogoutHandler = () => {
       buttons: ["نه", "آره"],
     }).then((res) => {
       if (res) {
-        router.push("/");
-        alert('kir')
+        router.push("/"); 
         Cookies.remove("AccessToken");
         Cookies.remove("RefreshToken");
         queryClient.invalidateQueries({ queryKey: ["auth"] });

@@ -47,7 +47,7 @@ export interface VillaDetails {
   };
   disable: boolean;
   finished: boolean;
-  Booked: number;
+  booked: number;
   averageScore: number;
   comments: number;
   facility: {

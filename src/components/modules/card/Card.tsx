@@ -18,6 +18,7 @@ interface CardProps {
 }
 const Card: FC<CardProps> = ({ data, className, wishes }) => {
   const queryClient = useQueryClient();
+  console.log(data);
 
   const successFunc = (resdata: { statusCode: number }) => {
     if (resdata.statusCode === 200) {
@@ -25,13 +26,13 @@ const Card: FC<CardProps> = ({ data, className, wishes }) => {
         variant: "success",
         title: "اقامتگاه با موفقیت از علاقه مندی های شما حذف شد",
       });
-      queryClient.invalidateQueries({ queryKey: ["auth"] });
+      queryClient.invalidateQueries({ queryKey: ["wishes"] });
     } else {
       toast({
         variant: "success",
         title: "خطایی غیر منتظره رخ داد",
       });
-      // location.reload();
+      location.reload();
     }
   };
 
@@ -47,11 +48,8 @@ const Card: FC<CardProps> = ({ data, className, wishes }) => {
   };
   return (
     data && (
-      <Link
-        href={`/room/${data._id}`}
-        className={`mx-auto w-full xl:!w-full ${className} `}
-      >
-        <div className="relative w-full">
+      <div className={`mx-auto w-full xl:!w-full ${className} `}>
+        <Link href={`/room/${data._id}`} className="relative w-full">
           <Image
             className="h-52 w-full rounded-xl object-cover"
             alt="avatar"
@@ -81,19 +79,22 @@ const Card: FC<CardProps> = ({ data, className, wishes }) => {
           >
             <p>از {formatNumber(String(data.price.autumn.midWeek))} تومان</p>
           </div>
+        </Link>
+        <div className="mt-3 flex items-center gap-2">
+          <Link href={`/room/${data._id}`} className="text-sm">
+            اجاره{" "}
+            {data.aboutVilla.villaType.title === "ویلایی"
+              ? "منزل ویلایی"
+              : data.aboutVilla.villaType.title}{" "}
+            در {data.address.city}
+          </Link>
+          {data.booked !==  0 &&(
+              <p className="text-xs font-light text-[#939cae]">
+                +{data.booked} رزرو موفق
+              </p>
+            )}
         </div>
-        <div className="flex gap-2 mt-3 items-center">
-          <p className=" text-sm">
-          اجاره{" "}
-          {data.aboutVilla.villaType.title === "ویلایی"
-            ? "منزل ویلایی"
-            : data.aboutVilla.villaType.title}{" "}
-          در {data.address.city}
-        </p>
-        <p className=" text-xs font-light text-[#939cae]">+{data.Booked} رزرو موفق</p>
 
-        </div>
-        
         <div className="mt-1 flex items-center gap-1 text-xs font-light text-[#939cae]">
           <p>{data.capacity.bedRoom} خوابه . </p>
           <p> {data.capacity.fuundationSize} متر . </p>
@@ -102,7 +103,7 @@ const Card: FC<CardProps> = ({ data, className, wishes }) => {
           <IoIosStar className="text-sm text-yellow-400" />
           <p className="pt-1"> 4.9</p>
         </div> */}
-          <p className="pt-1">({data.comments} نظر)</p> 
+          <p className="pt-1">({data.comments} نظر)</p>
         </div>
         {wishes && (
           <Button
@@ -110,11 +111,16 @@ const Card: FC<CardProps> = ({ data, className, wishes }) => {
             className="mt-2 h-9 w-full justify-center font-light"
             onClick={deleteFromWishesHandler}
           >
-            <FaTrash className="ml-1" />
-            {isPending ? <ButtonLoader /> : "حذف"}
+            {isPending ? (
+              <ButtonLoader />
+            ) : (
+              <>
+                <FaTrash className="ml-1" /> حذف{" "}
+              </>
+            )}
           </Button>
         )}
-      </Link>
+      </div>
     )
   );
 };
