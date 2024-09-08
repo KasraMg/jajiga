@@ -6,8 +6,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { Button } from "@/src/components/shadcn/ui/button";
 import { CiSearch } from "react-icons/ci";
 import Container from "@/src/components/modules/container/Container";
-import Link from "next/link";
-import { authStore } from "@/src/stores/auth";
+import Link from "next/link"; 
 import useGetData from "@/src/hooks/useGetData";
 import { fetchWishes } from "@/src/utils/fetchs";
 import { VillaDetails } from "@/src/types/Villa.types";
@@ -20,9 +19,8 @@ const page = () => {
   const { data, status, isPending } = useGetData<wishesProps>(
     ["wishes"],
     fetchWishes,
-  );
-
-  console.log(data);
+  ); 
+console.log(data);
 
   return (
     <Container disableFooter={true}>
@@ -30,7 +28,7 @@ const page = () => {
       <Layout>
         <div className="mx-auto flex flex-col items-center justify-center space-y-4 pt-8">
           <Layout>
-            {data?.faveVillas.length ? (
+            {data?.faveVillas?.length ? (
               <div className="mx-auto max-w-[1120px] pt-2">
                 <div className="mt-4 grid grid-cols-2 gap-4 lg:grid-cols-3">
                   {data.faveVillas.map((data: VillaDetails) => (

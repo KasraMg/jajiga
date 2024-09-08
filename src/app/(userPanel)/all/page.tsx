@@ -7,7 +7,7 @@ import { authStore } from "@/src/stores/auth";
 import { VillaDetails } from "@/src/types/Villa.types";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-const Reserve = () => {
+const Villas = () => {
   const [showUnComplatePosts, setShowUnComplatePosts] = useState(false);
   const { userData } = authStore((state) => state);
 
@@ -55,7 +55,7 @@ const Reserve = () => {
                         (villa: VillaDetails) => !villa.finished,
                       ).length ? (
                         userData.villas?.map((villa: VillaDetails) =>
-                          !villa.finished ? <Card {...villa} /> : null,
+                          !villa.finished ? <Card key={villa._id} {...villa} /> : null,
                         )
                       ) : (
                         <div className="text-center">
@@ -78,7 +78,7 @@ const Reserve = () => {
                     <div className="grid !grid-cols-[auto] gap-4 md:!grid-cols-[auto,auto] xl:!grid-cols-[auto,auto,auto]">
                       {userData.villas.length ? (
                         userData.villas?.map((villa: VillaDetails) => (
-                          <Card {...villa} />
+                          <Card key={villa._id} {...villa} />
                         ))
                       ) : (
                         <div className="mx-auto mt-16 p-4 text-center">
@@ -133,4 +133,4 @@ const Reserve = () => {
   );
 };
 
-export default Reserve;
+export default Villas;

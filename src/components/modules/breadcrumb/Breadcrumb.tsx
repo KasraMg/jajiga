@@ -6,7 +6,7 @@ interface BreadcrumbProps {
   className?: string;
   route?: string;
   routes?: string[];
-  description?: string;
+  description?: string | React.ReactElement;
   title?: string;
   template?: boolean;
   children?: any;

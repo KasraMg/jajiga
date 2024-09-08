@@ -39,7 +39,9 @@ const Comments = ({
 
   useEffect(() => {
     if (userData) {
-      const reserve = userData.booked.some((book) => book.villa === params.id);
+      const reserve = userData.booked.some(
+        (book) => book.villa._id === params.id,
+      );
       setIsReserve(reserve);
     }
   }, [userData]);
@@ -52,12 +54,15 @@ const Comments = ({
           "نظر شما با موفقیت ثبت و پس از تایید ادمین به سایت اضافه خواهد شد",
       });
       queryClient.invalidateQueries({ queryKey: ["villa"] });
+      setIdAnswer(""); 
+      setBody("");
+      setIdAnswer("");
     } else {
       toast({
         variant: "danger",
         title: "مشکلی در ثبت نظر وجود دارد...",
       });
-      location.reload();
+      // location.reload();
     }
   };
   const { mutate: mutation, isPending } = usePostData<any>(
@@ -97,36 +102,6 @@ const Comments = ({
   };
   return (
     <>
-      {isReserve && (
-        <div className="border-b border-solid border-gray-300 pb-8">
-          <div className="flex items-center justify-between">
-            <p className="my-6 mb-4 text-lg text-[#252a31]">
-              تجربه شما از این رزرو چطور بود؟
-            </p>
-            <div className="flex gap-1 text-xl [&>*]:cursor-pointer">
-              {Array(5)
-                .fill(0)
-                .map((_, index) => (
-                  <div key={index} onClick={() => handleClick(index)}>
-                    {index < (score ?? 0) ? (
-                      <FaStar className="text-orange-500" />
-                    ) : (
-                      <IoIosStarOutline />
-                    )}
-                  </div>
-                ))}
-            </div>
-          </div>
-          <Textarea maxLength={250} setValue={setBody} value={body} />
-          <Button
-            onClick={addCommentHandler}
-            className="mt-3 h-9 px-5"
-            variant={"danger"}
-          >
-            {!idAnswer && isPending ? <ButtonLoader /> : "ثبت نظر"}
-          </Button>
-        </div>
-      )}
       {comments && (
         <div className="w-full pb-3">
           <p className="my-6 mb-4 text-lg text-[#252a31]">
@@ -221,7 +196,8 @@ const Comments = ({
                         value={answerbody}
                         placeholder={`پاسخ شما به جناب ${comment.creator.firstName}`}
                       />
-                      <Button
+                    <div className="flex">
+                    <Button
                         onClick={() => {
                           setMainCommentID(comment._id);
                           addAnswerCommentHandler();
@@ -242,11 +218,43 @@ const Comments = ({
                         لغو
                       </Button>
                     </div>
+                    </div>
                   )}
                 </section>
               ))}
             </>
           </div>
+        </div>
+      )}
+
+      {isReserve && (
+        <div className="border-b border-solid border-gray-300 pb-8">
+          <div className="flex items-center justify-between">
+            <p className="my-6 mb-4 text-lg text-[#252a31]">
+              تجربه شما از این رزرو چطور بود؟
+            </p>
+            <div className="flex gap-1 text-xl [&>*]:cursor-pointer">
+              {Array(5)
+                .fill(0)
+                .map((_, index) => (
+                  <div key={index} onClick={() => handleClick(index)}>
+                    {index < (score ?? 0) ? (
+                      <FaStar className="text-orange-500" />
+                    ) : (
+                      <IoIosStarOutline />
+                    )}
+                  </div>
+                ))}
+            </div>
+          </div>
+          <Textarea maxLength={250} setValue={setBody} value={body} />
+          <Button
+            onClick={addCommentHandler}
+            className="mt-3 h-9 px-5"
+            variant={"danger"}
+          >
+            {!idAnswer && isPending ? <ButtonLoader /> : "ثبت نظر"}
+          </Button>
         </div>
       )}
     </>

@@ -26,7 +26,7 @@ const Reservation = (data: VillaResponse) => {
   const [countSelectedOption, setCountSelectedOption] = useState<{
     label: string;
     value: string;
-  } | null>(reserveData ? { label: "2", value: "2" } : null);
+  } | null>(null);
 
   const params = useParams();
   const { startDate, endDate } = roomStore((state) => state);
@@ -68,9 +68,11 @@ const Reservation = (data: VillaResponse) => {
 
   useEffect(() => {
     if (userData) {
-      const reserve = userData.booked.find((book) => book.villa === params.id);
+      const reserve = userData.booked.find((book) => book.villa._id === params.id);
       if (reserve) {
         setReserveData(reserve);
+        console.log(reserve);
+        
       } else setReserveData(null);
     }
   }, [userData]);
@@ -103,7 +105,7 @@ const Reservation = (data: VillaResponse) => {
             <p> آخرین رزرو ها</p>
             {data.bookDate.map((book) => (
               <div className="my-3 text-center text-[13px]">
-                از {book.from} الی {book.to} توسط جناب کیومرث
+                از {book.date.from} الی {book.date.to} توسط جناب کیومرث
               </div>
             ))}
             <p className="text-center text-xs text-red-600">
@@ -162,9 +164,14 @@ const Reservation = (data: VillaResponse) => {
               isDisabled={!login || reserveData ? true : false}
               isSearchable={true}
               options={userCountOptions as any}
-              placeholder={"تعداد نفرات را مشخص کنید"}
+              placeholder={reserveData ? reserveData.user : "تعداد نفرات را مشخص کنید"}
             />
-
+            {reserveData ? (
+              <div className="flex gap-1 text-xs text-blue-600 mt-2">
+                <p>مبلغ پرداخت شده:</p>
+            <p>{Number(reserveData.price).toLocaleString()} تومان</p>
+              </div>
+            ) : null}
             {userSelectData && (
               <>
                 {userSelectData.firstMonthDays ? (

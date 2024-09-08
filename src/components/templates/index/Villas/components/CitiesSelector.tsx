@@ -21,6 +21,7 @@ const CitiesSelector = ({
     <div className="no-scrollbar mt-4 flex w-screen items-center  justify-start sm:!justify-center overflow-x-scroll text-white">
       {cities.map((city) => (
         <p
+        key={crypto.randomUUID()}
           onClick={() => setStatus(city)}
           className={`${status === city ? "bg-customYellow text-black rounded-full" : null} px-2 cursor-pointer ml-5 sm:!text-base text-sm whitespace-nowrap`}
         >
