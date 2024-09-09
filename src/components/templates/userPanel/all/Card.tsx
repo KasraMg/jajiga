@@ -12,6 +12,8 @@ import Cookies from "js-cookie";
 
 import swal from "sweetalert";
 const Card = (villa: VillaDetails) => {
+  console.log(villa);
+   
   const accessToken = Cookies.get("AccessToken");
   const queryClient = useQueryClient();
 

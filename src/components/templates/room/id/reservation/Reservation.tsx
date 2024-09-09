@@ -22,7 +22,8 @@ import { book } from "@/src/types/Auth.types";
 
 const Reservation = (data: VillaResponse) => {
   const [reserveData, setReserveData] = useState<null | book>(null);
-
+  console.log(data);
+  
   const [countSelectedOption, setCountSelectedOption] = useState<{
     label: string;
     value: string;
@@ -102,15 +103,15 @@ const Reservation = (data: VillaResponse) => {
         </div>
         {data.villa.isOwner ? (
           <div className="rounded-b-2xl px-4 py-[14px] shadow-lg">
-            <p> آخرین رزرو ها</p>
+            {/* <p> آخرین رزرو ها</p>
             {data.bookDate.map((book) => (
               <div className="my-3 text-center text-[13px]">
-                از {book.date.from} الی {book.date.to} توسط جناب کیومرث
+                از {book.date.from} الی {book.date.to}  
               </div>
-            ))}
-            <p className="text-center text-xs text-red-600">
+            ))} */}
+            <Link href={'/all'} className="text-center block text-xs text-red-600">
               برای مشاهده تمام رزرو ها کلیک کنید
-            </p>
+            </Link>
             <Link href={`/room/edit/${data.villa._id}`}>
               <Button
                 variant={"yellow"}

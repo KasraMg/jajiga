@@ -8,7 +8,7 @@ import { VillaDetails } from "@/src/types/Villa.types";
 import { IoImageOutline } from "react-icons/io5";
 import FullScreenGallery from "./components/FullScreenGallery";
 
-const Gallery = (data: VillaDetails) => {
+const Gallery = (data: VillaDetails) => { 
   const imageLoadedRef = useRef<boolean[]>(
     Array(data?.cover?.length).fill(false),
   );
@@ -21,7 +21,7 @@ const Gallery = (data: VillaDetails) => {
       imageLoadedRef.current[index] = true;
       setImageLoaded([...imageLoadedRef.current]);
     }
-  };
+  }; 
 
   const [showFullScreenGallery, setShowFullScreenGallery] = useState(false);
   return (

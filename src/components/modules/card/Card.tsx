@@ -20,8 +20,8 @@ const Card: FC<CardProps> = ({ data, className, wishes }) => {
   const queryClient = useQueryClient();
   console.log(data);
 
-  const successFunc = (resdata: { statusCode: number }) => {
-    if (resdata.statusCode === 200) {
+  const successFunc = (res: { statusCode: number }) => {
+    if (res.statusCode === 200) {
       toast({
         variant: "success",
         title: "اقامتگاه با موفقیت از علاقه مندی های شما حذف شد",

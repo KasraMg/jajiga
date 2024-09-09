@@ -29,9 +29,22 @@ const accessToken = Cookies.get("AccessToken");
   const res = await fetch(`${baseUrl}/wishes`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
-    },
-    credentials: "include",
-
+    },  
   });
   return res.json();
 }
+
+export async function getAllComments() {  
+  const accessToken = Cookies.get("AccessToken"); 
+    const res = await fetch(`${baseUrl}/comment/getAll`);
+    return res.json();
+  }
+export async function getAllUsers() {  
+  const accessToken = Cookies.get("AccessToken"); 
+    const res = await fetch(`${baseUrl}/user/getAll`,{
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return res.json();
+  }
