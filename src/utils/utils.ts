@@ -118,8 +118,7 @@ export const todayVillaPrice = (price: {
     return "winter";
   };
 
-  const dayPrice = price[getSeason(jalaaliDate.jm)][priceType];
-
+  const dayPrice = price[getSeason(jalaaliDate.jm)][priceType]; 
   return new Intl.NumberFormat("fa-IR").format(dayPrice as any);
 };
 

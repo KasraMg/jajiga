@@ -1,13 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { BiSupport } from "react-icons/bi";
 import { FaRegHeart, FaRegUser } from "react-icons/fa";
-import {
-  TbHomePlus,
-  TbHome,
-  TbInfoCircle,
-  TbMessage2Question,
-} from "react-icons/tb";
-import { IoShieldCheckmarkOutline } from "react-icons/io5";
+import { TbHomePlus, TbInfoCircle, TbMessage2Question } from "react-icons/tb";
 import { GrNotes } from "react-icons/gr";
 import {
   PiGithubLogo,
@@ -15,7 +9,6 @@ import {
   PiTelegramLogoLight,
 } from "react-icons/pi";
 import { GoHome } from "react-icons/go";
-
 import { Button } from "@/src/components/shadcn/ui/button";
 import {
   Sheet,
@@ -31,10 +24,71 @@ import { AiOutlineLogout } from "react-icons/ai";
 import { useLogoutHandler } from "@/src/utils/auth";
 import Image from "next/image";
 import { baseUrl } from "@/src/utils/utils";
-
+import { usePathname } from 'next/navigation';
 function Menu({ isSticky }: any) {
   const { userData, login } = authStore((state) => state);
   const logoutHandler = useLogoutHandler();
+  const [smallAvatarLoading, setSmallAvatarLoading] = useState(true);
+  const [largeAvatarLoading, setLargeAvatarLoading] = useState(true);
+ 
+  const pathname = usePathname();
+
+  const navLinks = [
+    { name: "صفحه اصلی", path: "/", icon: <GoHome className="text-xl" /> },
+    {
+      name: "میزبان شو",
+      path: "/newRoom",
+      icon: <TbHomePlus className="text-xl" />,
+    },
+    {
+      name: "پشتیبانی",
+      path: "/support",
+      icon: <BiSupport className="text-xl" />,
+    },
+    {
+      name: "سوالات متداول",
+      path: "/faq",
+      icon: <TbMessage2Question className="text-xl" />,
+    },
+    {
+      name: "قوانین وبسایت",
+      path: "/rules",
+      icon: <GrNotes className="text-xl" />,
+    },
+    {
+      name: "درباره ما",
+      path: "/about",
+      icon: <TbInfoCircle className="text-xl" />,
+    },
+  ];
+
+  if (login) {
+    navLinks.splice(1, 0, {
+      name: "علاقه مندی ها",
+      path: "/wishes",
+      icon: <FaRegHeart className="text-xl" />,
+    });
+    navLinks.splice(2, 0, {
+      name: "حساب کاربری",
+      path: "/dashboard",
+      icon: <FaRegUser className="text-xl" />,
+    });
+  }
+  if (userData?.booked.length) {
+    navLinks.splice(4, 0, {
+      name: "رزرو ها",
+      path: "/reserves",
+      icon: <TbHomePlus className="text-xl" />,
+    });
+  }
+
+  if (userData?.villas.length) {
+    navLinks.splice(5, 0, {
+      name: "اقامتگاه ها",
+      path: "/all",
+      icon: <TbHomePlus className="text-xl" />,
+    });
+  }
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -44,7 +98,23 @@ function Menu({ isSticky }: any) {
               isSticky && "border border-solid"
             } flex items-center gap-2 rounded-full border-[#0000005c] bg-[#ffffff54] p-1 pl-2 pr-3 text-3xl outline-none focus-visible:border-0`}
           >
-            <FaRegCircleUser className="text-gray-500" />
+            {userData?.user.avatar ? (
+              <>
+                {smallAvatarLoading && (
+                  <div className="h-8 w-8 animate-pulse rounded-full bg-shimmer"></div>
+                )}
+                <Image
+                  alt="avatar"
+                  width={1000}
+                  height={1000}
+                  onLoadingComplete={() => setSmallAvatarLoading(false)}
+                  className="h-8 w-8 rounded-full"
+                  src={`${baseUrl}/user/avatars/${userData?.user.avatar}`}
+                />
+              </>
+            ) : (
+              <FaRegCircleUser className="text-gray-500" />
+            )}
             <RxHamburgerMenu className="cursor-pointer text-xl text-black" />
           </div>
         </Button>
@@ -74,13 +144,19 @@ function Menu({ isSticky }: any) {
               </div>
             )}
             {userData?.user.avatar ? (
-              <Image
-                alt="avatar"
-                width={1000}
-                height={1000}
-                className="rounded-full w-14 h-14 rounded-full"
-                src={`${baseUrl}/user/avatars/${userData?.user.avatar}`}
-              />
+              <>
+                {largeAvatarLoading && (
+                  <div className="h-14 w-14 animate-pulse rounded-full bg-shimmer"></div>
+                )}
+                <Image
+                  alt="avatar"
+                  width={1000}
+                  height={1000}
+                  onLoadingComplete={() => setLargeAvatarLoading(false)}
+                  className="h-14 w-14 rounded-full"
+                  src={`${baseUrl}/user/avatars/${userData?.user.avatar}`}
+                />
+              </>
             ) : (
               <svg
                 width={56}
@@ -111,87 +187,15 @@ function Menu({ isSticky }: any) {
         </SheetHeader>
         <div className="mr-4 mt-4">
           <ul>
-            <Link
-              href="/"
-              className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl bg-[#f5f5f5] py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]"
-            >
-              <GoHome className="text-xl" />
-              <span className="mt-1 text-sm">صفحه اصلی</span>
-            </Link>
-            {login && (
-              <>
-                <Link
-                  href="/wishes"
-                  className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]"
-                >
-                  <FaRegHeart className="text-xl" />
-                  <span className="mt-1 text-sm">علاقه مندی ها</span>
-                </Link>
-
-                <Link
-                  href="/dashboard"
-                  className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]"
-                >
-                  <FaRegUser className="text-xl" />
-                  <span className="mt-1 text-sm">حساب کاربری</span>
-                </Link>
-              </>
-            )}
-            <Link
-              href="/newRoom"
-              className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]"
-            >
-              <TbHomePlus className="text-xl" />
-              <span className="mt-1 text-sm"> میزبان شو</span>
-            </Link>
-
-            {userData?.booked.length ? (
+            {navLinks.map((link) => (
               <Link
-                href="/reserves"
-                className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]"
+                href={link.path}
+                className={`${pathname === link.path ? 'bg-[#f5f5f5]' :null} font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl  py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]`}
               >
-                <TbHomePlus className="text-xl" />
-                <span className="mt-1 text-sm">رزرو ها</span>
+                {link.icon}
+                <span className="mt-1 text-sm">{link.name}</span>
               </Link>
-            ) : null}
-
-            {userData?.villas.length ? (
-              <Link
-                href="/all"
-                className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]"
-              >
-                <TbHomePlus className="text-xl" />
-                <span className="mt-1 text-sm">اقامتگاه ها</span>
-              </Link>
-            ) : null}
-            <Link
-              href="/support"
-              className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]"
-            >
-              <BiSupport className="text-xl" />
-              <span className="mt-1 text-sm">پشتیبانی</span>
-            </Link>
-            <Link
-              href="/faq"
-              className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]"
-            >
-              <TbMessage2Question className="text-xl" />
-              <span className="mt-1 text-sm">سوالات متداول</span>
-            </Link>
-            <Link
-              href="/rules"
-              className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]"
-            >
-              <GrNotes className="text-xl" />
-              <span className="mt-1 text-sm">قوانین وبسایت</span>
-            </Link>
-            <Link
-              href="/about"
-              className="font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]"
-            >
-              <TbInfoCircle className="text-xl" />
-              <span className="mt-1 text-sm">درباره ما</span>
-            </Link>
+            ))}
             {login && (
               <li
                 onClick={logoutHandler}
