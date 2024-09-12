@@ -12,12 +12,10 @@ const Villas = () => {
     ["allActivatedVillas"],
     getAllActivatedVillas,
   );
-  console.log(data);
-  
+ 
   const [status, setStatus] = useState("همه شهرها");
   const [villaData, setVillaData] = useState(data.villas);
-  console.log(data);
-  useEffect(() => {
+   useEffect(() => {
     if (status === "همه شهرها") {
       setVillaData(data.villas);
     } else {
@@ -55,7 +53,7 @@ const Villas = () => {
             }}
           />
         ) : (
-          <div className="text-center h-[263px] flex flex-col items-center gap-5">
+          <div className="flex h-[263px] flex-col items-center gap-5 text-center">
             <Image
               alt="notFound"
               width={1000}
@@ -63,7 +61,7 @@ const Villas = () => {
               height={1000}
               src={"/images/notFound.png"}
             />
-            <p className="text-white">اقامتگاهی در این شهر یافت نشد</p> 
+            <p className="text-white">اقامتگاهی در این شهر یافت نشد</p>
           </div>
         )}
       </div>

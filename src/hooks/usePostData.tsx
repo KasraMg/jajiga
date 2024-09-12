@@ -6,13 +6,12 @@ import { toast } from "../components/shadcn/ui/use-toast";
 const usePostData = <T extends object>(
   url: string,
   successMsg: string | null,
-  put?: boolean, 
-  successFunc?: ((data: any) => void) | null   ,
+  put?: boolean,
+  successFunc?: ((data: any) => void) | null,
   formData?: boolean,
 ) => {
-  
   const accessToken = Cookies.get("AccessToken");
- 
+
   const { mutate, isSuccess, isPending, isError } = useMutation({
     mutationFn: async (data: T) => {
       const headers: HeadersInit = {
@@ -30,7 +29,7 @@ const usePostData = <T extends object>(
     },
     onSuccess: (data) => {
       console.log(data);
-      if (successFunc) {   
+      if (successFunc) {
         successFunc(data);
       }
       if (successMsg && data.statusCode === 200) {
@@ -40,9 +39,19 @@ const usePostData = <T extends object>(
         });
       }
     },
+    onError: (data) => {
+      console.log(data);
+      
+      toast({
+        variant: "danger",
+        title: "خطایی غیر منتظره رخ داد",
+      });
+      // location.reload();
+    },
   });
 
   return { mutate, isSuccess, isPending, isError };
 };
 
 export default usePostData;
+ 

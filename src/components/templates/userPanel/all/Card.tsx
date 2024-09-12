@@ -27,8 +27,7 @@ const Card = (villa: VillaDetails) => {
       }).then((res) => res.json());
     },
     onSuccess: (data) => {
-      console.log(data);
-
+      console.log(data);  
       if (data.statusCode === 200) {
         queryClient.invalidateQueries({ queryKey: ["auth"] });
         toast({
@@ -41,7 +40,7 @@ const Card = (villa: VillaDetails) => {
 
   const villaDeleteHandler = (id: string) => {
     swal({
-      title: "آیا از حذف ویلا مطمئن هستید",
+      title: "آیا از حذف ویلا مطمئن هستید؟", 
       icon: "warning",
       buttons: ["نه", "آره"],
     }).then((res) => {

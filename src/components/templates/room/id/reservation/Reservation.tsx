@@ -22,15 +22,16 @@ import { book } from "@/src/types/Auth.types";
 
 const Reservation = (data: VillaResponse) => {
   const [reserveData, setReserveData] = useState<null | book>(null);
-  console.log(data);
-  
+
   const [countSelectedOption, setCountSelectedOption] = useState<{
     label: string;
     value: string;
   } | null>(null);
 
   const params = useParams();
-  const { startDate, endDate } = roomStore((state) => state);
+  const { startDate, endDate, setStartDate, setEndDate } = roomStore(
+    (state) => state,
+  );
   const { login, userData } = authStore((state) => state);
 
   const [disable, setDisable] = useState(true);
@@ -69,11 +70,11 @@ const Reservation = (data: VillaResponse) => {
 
   useEffect(() => {
     if (userData) {
-      const reserve = userData.booked.find((book) => book.villa._id === params.id);
+      const reserve = userData.booked.find(
+        (book) => book.villa._id === params.id,
+      );
       if (reserve) {
         setReserveData(reserve);
-        console.log(reserve);
-        
       } else setReserveData(null);
     }
   }, [userData]);
@@ -91,6 +92,11 @@ const Reservation = (data: VillaResponse) => {
     }
   }, [countSelectedOption, startDate, endDate, login]);
 
+  useEffect(() => {
+    setStartDate(null);
+    setEndDate(null);
+  }, []);
+
   return (
     <>
       <div className="sticky top-[68px] hidden w-[33.33%] md:!block">
@@ -103,14 +109,11 @@ const Reservation = (data: VillaResponse) => {
         </div>
         {data.villa.isOwner ? (
           <div className="rounded-b-2xl px-4 py-[14px] shadow-lg">
-            {/* <p> آخرین رزرو ها</p>
-            {data.bookDate.map((book) => (
-              <div className="my-3 text-center text-[13px]">
-                از {book.date.from} الی {book.date.to}  
-              </div>
-            ))} */}
-            <Link href={'/all'} className="text-center block text-xs text-red-600">
-              برای مشاهده تمام رزرو ها کلیک کنید
+            <Link
+              href={"/all"}
+              className="block text-center text-xs text-red-600"
+            >
+              برای مشاهده رزرو ها کلیک کنید
             </Link>
             <Link href={`/room/edit/${data.villa._id}`}>
               <Button
@@ -165,12 +168,16 @@ const Reservation = (data: VillaResponse) => {
               isDisabled={!login || reserveData ? true : false}
               isSearchable={true}
               options={userCountOptions as any}
-              placeholder={reserveData ? reserveData.user : "تعداد نفرات را مشخص کنید"}
+              placeholder={
+                reserveData
+                  ? reserveData.guestNumber
+                  : "تعداد نفرات را مشخص کنید"
+              }
             />
             {reserveData ? (
-              <div className="flex gap-1 text-xs text-blue-600 mt-2">
+              <div className="mt-2 flex gap-1 text-xs text-blue-600">
                 <p>مبلغ پرداخت شده:</p>
-            <p>{Number(reserveData.price).toLocaleString()} تومان</p>
+                <p>{Number(reserveData.price).toLocaleString()} تومان</p>
               </div>
             ) : null}
             {userSelectData && (

@@ -14,6 +14,8 @@ export interface userInfoObj {
   role: string;
   updatedAt: string;
   _id:string
+  villa:{id:string[],number:number}
+  booked:{id:string[],number:number}
 }
 
 export interface userObj {
@@ -34,6 +36,8 @@ export interface book {
   };
   updatedAt: string;
   user: string; 
+  guestNumber:number;
   price:string;
+  days:number;
   _id: string;
 }

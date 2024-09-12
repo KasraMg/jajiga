@@ -2,12 +2,20 @@
 import Layout from "@/src/components/layouts/adminLayout/page";
 import { Button } from "@/src/components/shadcn/ui/button";
 import useGetData from "@/src/hooks/useGetData";
+import usePostData from "@/src/hooks/usePostData";
+import { userInfoObj } from "@/src/types/Auth.types";
 import { getAllUsers } from "@/src/utils/fetchs";
 import { convertToJalali } from "@/src/utils/utils";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import swal from "sweetalert";
-
+import {
+  Dialog,
+  DialogContent, 
+  DialogTrigger,
+} from "@/src/components/shadcn/ui/dialog";
+import Link from "next/link";
 const columns = [
   {
     name: "کاربر",
@@ -40,33 +48,111 @@ const columns = [
     sortable: true,
   },
   {
+    name: "تغییر سطح",
+    selector: (row) => row.changeRole,
+    sortable: true,
+  },
+  {
     name: "بن",
     selector: (row) => row.ban,
     sortable: true,
   },
 ];
 
-const showBodyHandler = (body: string) => {
-  swal({
-    title: body,
-    buttons: ["تایید", false],
-  });
-};
-
 const page = () => {
   const { data: users, status, isLoading } = useGetData(["users"], getAllUsers);
+  const [userInfoRoleChange, setUserInfoRoleChange] = useState<any>([]);
   let data = [];
   console.log(users);
+  const params = useParams();
+
+  const { mutate: mutation, isPending } = usePostData<any>(
+    `/user/changeRole/${userInfoRoleChange[0]}/${userInfoRoleChange[1]}`,
+    "تغییر سطح کاربر با موفقیت انجام شد",
+    true,
+    null,
+  );
+
+  const changeRole = (role: any, phone: string) => {
+    if (role === "user") {
+      swal({
+        title: `آیا از تغییر سطح این کاربر به ${role === "user" ? "ادمین" : "کاربر عادی"} اطمینان دارین؟`,
+        icon: "warning",
+        buttons: ["نه", "اره"],
+      }).then((result) => {
+        if (result) {
+          setUserInfoRoleChange([role === "admin" ? "user" : "admin", phone]);
+          mutation(null);
+        }
+      });
+    }
+  };
 
   useEffect(() => {
-    users?.users.map((user) =>
+    users?.users.map((user: userInfoObj) =>
       data.push({
-        userData: user.firstName + user.lastName,
+        userData: user.firstName + " " + user.lastName,
         phone: user.phone,
-        rooms: "3",
+        rooms: (
+          <div className="flex items-center gap-2">
+            <p> {user.villa.number}</p>
+            {user.villa.number !== 0 &&
+              (user.villa.number === 1 ? (
+                <Button size={"sm"} variant={"main"}>
+                  <Link href={`/room/${user.villa.id[0]}`}>مشاهده</Link>
+                </Button>
+              ) : (
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button size={"sm"} variant={"main"}>
+                      مشاهده
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="w-full max-w-full text-center sm:!max-w-[425px]">
+                    {user.villa.id.map((book: string, index: number) => (
+                      <Link href={`/room/${book}`}>
+                        اقامتگاه شماره {index + 1}
+                      </Link>
+                    ))}
+                  </DialogContent>
+                </Dialog>
+              ))}
+          </div>
+        ),
         register: convertToJalali(user.createdAt.slice(0, 10)),
-        reserves: "3",
+        reserves: (
+          <div className="flex items-center gap-2">
+            <p> {user.booked.number}</p>
+            {user.booked.number !== 0 &&
+              (user.booked.number === 1 ? (
+                <Button size={"sm"} variant={"main"}>
+                  <Link href={`/room/${user.booked.id[0]}`}>مشاهده</Link>
+                </Button>
+              ) : (
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button size={"sm"} variant={"main"}>
+                      مشاهده
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="w-full max-w-full text-center sm:!max-w-[425px]">
+                    {user.booked.id.map((book: string, index: number) => (
+                      <Link href={`/room/${book}`}>رزرو شماره {index + 1}</Link>
+                    ))}
+                  </DialogContent>
+                </Dialog>
+              ))}
+          </div>
+        ),
         role: user.role === "user" ? "کاربر عادی" : "ادمین",
+        changeRole: (
+          <Button
+            onClick={() => changeRole(user.role, user.phone)}
+            variant={"blue"}
+          >
+            تغییر{" "}
+          </Button>
+        ),
         ban: <Button variant={"danger"}>بن</Button>,
       }),
     );

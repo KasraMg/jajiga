@@ -1,10 +1,10 @@
 import { Button } from "@/src/components/shadcn/ui/button";
 import { categoryStore } from "@/src/stores/category";
-import Image from "next/image"; 
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-const Notfound = () => {
-  const router = useRouter()
+const Notfound = ({ isFilter }: { isFilter: boolean }) => {
+  const router = useRouter();
   const {
     setFacilities,
     setMaxPrice,
@@ -16,14 +16,16 @@ const Notfound = () => {
   } = categoryStore((state) => state);
 
   const clearFiltringHandler = () => {
-    setMaximumSpace(null);
-    setMaxPrice(null);
-    setMinPrice(null);
-    setVillaZone([]);
-    setVillaType([]);
-    setFacilities([]);
-    setOrder(""); 
-    router.push('/rooms');
+    if (isFilter) {
+      setMaximumSpace(null);
+      setMaxPrice(null);
+      setMinPrice(null);
+      setVillaZone([]);
+      setVillaType([]);
+      setFacilities([]);
+      setOrder("");
+    }
+    router.push("/rooms");
   };
   return (
     <div className="text-center">
@@ -34,10 +36,29 @@ const Notfound = () => {
         height={1000}
         src={"/images/notFound.png"}
       />
-      <p>اقامتگاهی  در این شهر یا با این فیلترینگ یافت نشد</p>
-      <Button onClick={clearFiltringHandler} className="mt-5" variant={"main"}>
-        حذف فیلترینگ
-      </Button>
+      {isFilter ? (
+        <div>
+          <p>اقامتگاهی در این شهر یا با این فیلترینگ یافت نشد</p>
+          <Button
+            onClick={clearFiltringHandler}
+            className="mt-5"
+            variant={"main"}
+          >
+            حذف فیلترینگ
+          </Button>
+        </div>
+      ) : (
+        <div>
+          <p>اقامتگاهی در این شهر یافت نشد</p>
+          <Button
+            onClick={clearFiltringHandler}
+            className="mt-5"
+            variant={"main"}
+          >
+            مشاهده تمام شهر ها
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

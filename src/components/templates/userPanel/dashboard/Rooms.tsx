@@ -48,7 +48,7 @@ const Rooms = () => {
 
   const villaDeleteHandler = (id: string) => {
     swal({
-      title: "آیا از حذف ویلا مطمئن هستید",
+      title: "آیا از حذف ویلا مطمئن هستید؟",
       icon: "warning",
       buttons: ["نه", "آره"],
     }).then((res) => {
@@ -65,14 +65,14 @@ const Rooms = () => {
           <span className="text-xs font-thin">
             توجه: اقامتگاه تنها بعد از تکمیل، قابل بررسی و انتشار می‌باشد.
           </span>
-          {userData.villas.slice(0,3).map((villa: VillaDetails) => (
+          {userData.villas.slice(0, 3).map((villa: VillaDetails) => (
             <section className="mt-4">
               <div className="flex flex-wrap items-center justify-start gap-2 p-3 shadow-lg sm:!flex-nowrap sm:!justify-between sm:!gap-0">
                 <div className="flex items-center gap-2">
                   <div
                     className={`relative ml-1 flex h-[60px] w-[92px] items-center justify-center overflow-hidden rounded-lg p-1`}
                   >
-                    {villa.cover ? (
+                    {villa.cover.length ? (
                       <Image
                         alt="avatar"
                         width={1000}
@@ -86,9 +86,7 @@ const Rooms = () => {
                         width={1000}
                         height={1000}
                         crossOrigin="anonymous"
-                        src={
-                          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIhFKJwV5wJD6dkUvbLLW75ofGNZ6pbsyYWmXDGK1KTg&s"
-                        }
+                        src={"/images/room404img.jfif"}
                       />
                     )}
                     <p
@@ -145,7 +143,14 @@ const Rooms = () => {
               </div>
             </section>
           ))}
-        {userData.villas.length > 3 && <Link className="text-center my-4 block text-xs text-red-600 w-full" href={'/all'}>مشاهده تمام اقامتگاه ها</Link>}  
+          {userData.villas.length > 3 && (
+            <Link
+              className="my-4 block w-full text-center text-xs text-red-600"
+              href={"/all"}
+            >
+              مشاهده تمام اقامتگاه ها
+            </Link>
+          )}
         </div>
       ) : (
         <div className="mx-auto mt-16 rounded-lg bg-red-200 p-4 text-center">

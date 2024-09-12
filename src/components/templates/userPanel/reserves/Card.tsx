@@ -10,9 +10,7 @@ interface CardProps {
   className?: string;
   data: book;
 }
-const Card: FC<CardProps> = ({ className, data }) => {
-  console.log(data);
-
+const Card: FC<CardProps> = ({ className, data }) => { 
   return (
     <div className={`mx-auto w-full xl:!w-full ${className} `}>
       <Link href={`/room/${data._id}`} className="relative w-full">
@@ -62,12 +60,12 @@ const Card: FC<CardProps> = ({ className, data }) => {
         <p>
           از {data.date.from} الی {data.date.to}
         </p>
-        <span className="text-xs text-red-600">(4 شب)</span>
+        <span className="text-xs text-red-600">({data.days} شب)</span>
       </div>
       <div className="flex items-center justify-between mt-2">
         <div className="flex gap-2">
           <FiUsers />
-          <p>4 نفر</p>
+          <p>{data.guestNumber} نفر</p>
         </div>
         <div className="flex gap-1 text-xs text-blue-600">
           <p>مبلغ پرداخت شده:</p>

@@ -35,6 +35,7 @@ const Auth = () => {
 export default Auth;
 
 export const useLogoutHandler = () => {
+  const { setUserData, setLogin, setIsPending} = authStore((state) => state);
   const queryClient = useQueryClient();
   const router = useRouter();
 
@@ -48,6 +49,8 @@ export const useLogoutHandler = () => {
         router.push("/"); 
         Cookies.remove("AccessToken");
         Cookies.remove("RefreshToken");
+        setUserData(null)
+        setLogin(false)
         queryClient.invalidateQueries({ queryKey: ["auth"] });
       }
     });

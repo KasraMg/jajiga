@@ -16,7 +16,7 @@ import Notfound from "./components/Notfound";
 const Posts = () => {
   const searchParams = useSearchParams();
   const city = searchParams.get("city");
-
+  const [isFilter, setIsFilter] = useState(false);
   const {
     order,
     maximumSpace,
@@ -30,7 +30,19 @@ const Posts = () => {
   const accessToken = Cookies.get("AccessToken");
   const getVilla = async () => {
     let url = `${baseUrl}/villa/s`;
-    city ? (url += `?city=${city}`) : (url += `?city=all`); 
+    city ? (url += `?city=${city}`) : (url += `?city=all`);
+    if (
+      maximumSpace ||
+      minPrice ||
+      maxPrice ||
+      villaZone.length ||
+      facilities.length ||
+      villaType.length
+    ) {
+      setIsFilter(true);
+    } else {
+      setIsFilter(false);
+    }
     if (order) {
       url += `&order=${order}`;
     }
@@ -54,7 +66,7 @@ const Posts = () => {
     if (villaType.length) {
       const type = villaType?.map((item) => item).join("-");
       url += `&type=${type}`;
-    }   
+    }
     const res = await fetch(url, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -67,7 +79,6 @@ const Posts = () => {
   const { data, isFetching, refetch } = useGetData(["category"], getVilla, {
     refetchOnWindowFocus: false,
   }); 
-
   const [spaceSelectedOption, setSpaceSelectedOption] = useState<{
     label: string;
     value: string;
@@ -84,7 +95,7 @@ const Posts = () => {
     villaType,
     villaZone,
     spaceSelectedOption,
-    searchParams
+    searchParams,
   ]);
 
   useEffect(() => {
@@ -116,9 +127,10 @@ const Posts = () => {
           />
         </div>
         <main className="mt-6 grid justify-evenly gap-3 sm:!grid-cols-[1fr,1fr] lg:!grid-cols-[1fr,1fr,1fr] xl:!grid-cols-[1fr,1fr,1fr,1fr]">
-          {data && data.villas.map((villa: VillaDetails ) => <Card data={villa} />)}
+          {data &&
+            data.villas.map((villa: VillaDetails) => <Card data={villa} />)}
         </main>
-        {data && data.statusCode === 404 && <Notfound />}
+        {data && data.statusCode === 404 && <Notfound isFilter={isFilter} />}
       </div>
       {isFetching && <Loader />}
     </div>

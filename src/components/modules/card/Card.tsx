@@ -17,8 +17,7 @@ interface CardProps {
   wishes?: boolean;
 }
 const Card: FC<CardProps> = ({ data, className, wishes }) => {
-  const queryClient = useQueryClient();
-  console.log(data);
+  const queryClient = useQueryClient(); 
 
   const successFunc = (res: { statusCode: number }) => {
     if (res.statusCode === 200) {

@@ -18,7 +18,7 @@ const SearchBox = () => {
       router.push(`/rooms?city=${searchValue}`);
       setIsShowSearchBox(false);
     }
-  }; 
+  };
   return (
     <div className="relative mx-auto w-full md:!w-max">
       <i
@@ -53,9 +53,24 @@ const SearchBox = () => {
           className="absolute top-[110%] z-[9999] flex w-full items-center justify-center gap-4 rounded-md bg-white py-5 transition-transform"
         >
           <div className="flex gap-2 [&>*]:rounded-full [&>*]:bg-customYellow [&>*]:p-1 [&>*]:px-2 [&>*]:text-xs [&>*]:font-light">
-            <Link href={"/rooms?city=رامسر"}>رامسر</Link>
-            <Link href={"/rooms?city=ماسال"}>ماسال</Link>
-            <Link href={"/rooms?city=شیراز"}>شیراز</Link>
+            <Link
+              onClick={() => setIsShowSearchBox(false)}
+              href={"/rooms?city=رامسر"}
+            >
+              رامسر
+            </Link>
+            <Link
+              onClick={() => setIsShowSearchBox(false)}
+              href={"/rooms?city=ماسال"}
+            >
+              ماسال
+            </Link>
+            <Link
+              onClick={() => setIsShowSearchBox(false)}
+              href={"/rooms?city=شیراز"}
+            >
+              شیراز
+            </Link>
           </div>
           <p dir="rtl">مقاصد پر طرفدار:</p>
         </div>
