@@ -185,7 +185,7 @@ const page = () => {
                   باشد
                 </span>
               ):null}
-              {landSize > areaSize && (areaSize as any) > 9999 && (
+              {landSize < areaSize && (areaSize as any) > 9999 && (
                 <span className="absolute -bottom-[27px] text-xs text-red-600">
                   متراژ زیربنا نمی‌تواند بزرگتر از 9999 متر باشد
                 </span>

@@ -81,13 +81,13 @@ const page = () => {
         buttons: ["نه", "اره"],
       }).then((result) => {
         if (result) {
-          setUserInfoRoleChange([role === "admin" ? "user" : "admin", phone]);
+          setUserInfoRoleChange([role === "admin" ? "demotion" : "promotion", phone]);
           mutation(null);
         }
       });
     }
   };
-
+ 
   useEffect(() => {
     users?.users.map((user: userInfoObj) =>
       data.push({
