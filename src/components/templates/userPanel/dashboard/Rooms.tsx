@@ -7,8 +7,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
-import swal from "sweetalert";
-import Cookies from "js-cookie";
+import swal from "sweetalert"; 
 import Loader from "@/src/components/modules/loader/Loader";
 import Image from "next/image";
 import useDeleteData from "@/src/hooks/useDeleteData";
@@ -16,8 +15,7 @@ import { useState } from "react";
 
 const Rooms = () => {
   const { userData } = authStore((state) => state);
-  const [villaId, setVillaId] = useState("");
-  const accessToken = Cookies.get("AccessToken");
+  const [villaId, setVillaId] = useState(""); 
   const queryClient = useQueryClient();
   queryClient.invalidateQueries({ queryKey: ["auth"] });
 

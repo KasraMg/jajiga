@@ -5,15 +5,14 @@ import useGetData from "@/src/hooks/useGetData";
 import { VillaDetails } from "@/src/types/Villa.types";
 import { getAllVillas } from "@/src/utils/fetchs";
 import { baseUrl, convertToJalali } from "@/src/utils/utils";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import Cookies from "js-cookie";
-import { toast } from "@/src/components/shadcn/ui/use-toast";
 import swal from "sweetalert";
 import usePostData from "@/src/hooks/usePostData";
 import Loader, { ButtonLoader } from "@/src/components/modules/loader/Loader";
+import useDeleteData from "@/src/hooks/useDeleteData";
 
 const columns = [
   {
@@ -57,7 +56,8 @@ const page = () => {
     ["allVillas"],
     getAllVillas,
   );
-  const queryClient = useQueryClient();
+  const [villaId, setVillaId] = useState("");
+
   const [roomStatusChange, setRoomStatusChange] = useState<
     [] | [string, string]
   >([]);
@@ -136,29 +136,12 @@ const page = () => {
     }
   }, [villas]);
 
-  const accessToken = Cookies.get("AccessToken");
-
-  const deleteMutation = useMutation({
-    mutationFn: async (id: string) => {
-      return await fetch(`${baseUrl}/villa/delete/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }).then((res) => res.json());
-    },
-    onSuccess: (data) => {
-      console.log(data);
-      if (data.statusCode === 200) {
-        queryClient.invalidateQueries({ queryKey: ["allVillas"] });
-        toast({
-          variant: "success",
-          title: "ویلا با موفقیت حذف شد",
-        });
-      }
-    },
-  });
-
+  const { mutate: deleteHandlerMutation, isPending: deleteHandlerPending } =
+    useDeleteData(
+      `/villa/delete/${villaId}`,
+      "ویلا با موفقیت حذف شد",
+      "allVillas",
+    );
   const villaDeleteHandler = (id: string) => {
     swal({
       title: "آیا از حذف ویلا مطمئن هستید؟",
@@ -166,7 +149,8 @@ const page = () => {
       buttons: ["نه", "آره"],
     }).then((res) => {
       if (res) {
-        deleteMutation.mutate(id);
+        setVillaId(id);
+        deleteHandlerMutation();
       }
     });
   };
@@ -187,6 +171,7 @@ const page = () => {
         pagination
       />
       {getVillasPending && <Loader />}
+      {deleteHandlerPending && <Loader />}
     </Layout>
   );
 };

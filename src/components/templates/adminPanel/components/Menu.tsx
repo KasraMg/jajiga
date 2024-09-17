@@ -83,8 +83,8 @@ const Menu = () => {
         </li> 
         <li>
           <Link
-            className={`${params.slice(12) === "users" ? "bg-white text-red-600" : null} mr-4 flex flex-row-reverse items-center justify-end gap-2 rounded-r-full py-2 pr-8 transition-colors hover:text-red-600`}
-            href={"/adminPanel/users"}
+            className={`${params.slice(12) === "categories" ? "bg-white text-red-600" : null} mr-4 flex flex-row-reverse items-center justify-end gap-2 rounded-r-full py-2 pr-8 transition-colors hover:text-red-600`}
+            href={"/adminPanel/categories"}
           >
             دسته بندی ها <FiUsers />{" "}
           </Link>
