@@ -13,44 +13,9 @@ import swal from "sweetalert";
 import usePostData from "@/src/hooks/usePostData";
 import Loader, { ButtonLoader } from "@/src/components/modules/loader/Loader";
 import useDeleteData from "@/src/hooks/useDeleteData";
+import { roomColumns } from "@/src/utils/dataTableColumns";
 
-const columns = [
-  {
-    name: "اطلاعات مالک",
-    selector: (row: { userData: string }) => row.userData,
-    sortable: true,
-  },
-  {
-    name: "پیش نمایش",
-    selector: (row: { preview: string }) => row.preview,
-    sortable: true,
-  },
-  {
-    name: "آدرس",
-    selector: (row: { address: string }) => row.address,
-    sortable: true,
-  },
-  {
-    name: "تعداد رزروها",
-    selector: (row: { reserves: string }) => row.reserves,
-    sortable: true,
-  },
-  {
-    name: "وضعیت",
-    selector: (row: { status: string }) => row.status,
-    sortable: true,
-  },
-  {
-    name: "زمان ثبت",
-    selector: (row: { register: string }) => row.register,
-    sortable: true,
-  },
-  {
-    name: "حذف ویلا",
-    selector: (row: { delete: string }) => row.delete,
-    sortable: true,
-  },
-];
+
 const page = () => {
   const { data: villas, isPending: getVillasPending } = useGetData(
     ["allVillas"],
@@ -164,7 +129,7 @@ const page = () => {
         </div>
       </div>
       <DataTable
-        columns={columns as any}
+        columns={roomColumns as any}
         data={rows}
         progressPending={pending}
         progressComponent={".... "}

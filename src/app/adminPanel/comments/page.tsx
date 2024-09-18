@@ -1,45 +1,16 @@
 "use client";
 import Layout from "@/src/components/layouts/adminLayout/page";
 import Loader, { ButtonLoader } from "@/src/components/modules/loader/Loader";
+import { Button } from "@/src/components/shadcn/ui/button";
+import useDeleteData from "@/src/hooks/useDeleteData";
 import useGetData from "@/src/hooks/useGetData";
 import usePostData from "@/src/hooks/usePostData";
+import { commentColumns } from "@/src/utils/dataTableColumns";
 import { getAllComments } from "@/src/utils/fetchs";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import swal from "sweetalert";
-
-const columns = [
-  {
-    name: "نویسنده",
-    selector: (row: { userData: string }) => row.userData,
-    sortable: true,
-  },
-  {
-    name: "پیش نمایش",
-    selector: (row: { preview: string }) => row.preview,
-    sortable: true,
-  },
-  {
-    name: "اقامتگاه",
-    selector: (row: { room: string }) => row.room,
-    sortable: true,
-  },
-  {
-    name: "زمان ثبت",
-    selector: (row: { register: string }) => row.register,
-    sortable: true,
-  },
-  {
-    name: "وضعیت",
-    selector: (row: { status: string }) => row.status,
-    sortable: true,
-  },
-  {
-    name: "حذف",
-    selector: (row: { delete: string }) => row.delete,
-    sortable: true,
-  },
-];
 
 const showBodyHandler = (body: string) => {
   swal({
@@ -49,6 +20,8 @@ const showBodyHandler = (body: string) => {
 };
 
 const page = () => {
+  const [commentId, setCommentId] = useState("");
+
   const { data: comments, isPending: getCommentsPending } = useGetData(
     ["comments"],
     getAllComments,
@@ -68,67 +41,95 @@ const page = () => {
   );
 
   useEffect(() => {
-    // const tableData = comments?.comment.map((comment) => ({
-    //   userData: `${comment.creator.firstName} مشگل کشا`,
-    //   preview: (
-    //     <Button onClick={() => showBodyHandler(comment.body)} variant={"blue"}>
-    //       مشاهده
-    //     </Button>
-    //   ),
-    //   room: <Link href={`/room/${comment._id}`}>مشاهده</Link>,
-    //   register: comment.date,
-    //   status:
-    //     comment.isAccept === "true" ? (
-    //       "تایید شده"
-    //     ) : comment.isAccept === "rejected" ? (
-    //       <p>رد شده</p>
-    //     ) : (
-    //       <div className="flex gap-1">
-    //         <Button
-    //           onClick={() => {
-    //             setCommentStatusChange(["accept", comment._id]);
-    //             mutation(null);
-    //           }}
-    //           className="h-8 w-12 justify-center"
-    //           variant={"blue"}
-    //         >
-    //           {commentStatusChange[0] === "accept" && isPending ? (
-    //             <ButtonLoader />
-    //           ) : (
-    //             "تایید"
-    //           )}
-    //         </Button>
-    //         <Button
-    //           onClick={() => {
-    //             setCommentStatusChange(["reject", comment._id]);
-    //             mutation(null);
-    //           }}
-    //           className="h-8 w-12 justify-center"
-    //           variant={"danger"}
-    //         >
-    //           {commentStatusChange[0] === "reject" && isPending ? (
-    //             <ButtonLoader />
-    //           ) : (
-    //             "رد"
-    //           )}
-    //         </Button>
-    //       </div>
-    //     ),
-    //   delete: <Button variant={"danger"}>حذف</Button>,
-    // }));
-    // data = tableData;
-    // console.log(tableData);
+    const tableData = comments?.comment.map((comment) => ({
+      userData: `${comment.creator.firstName} مشگل کشا`,
+      preview: (
+        <Button onClick={() => showBodyHandler(comment.body)} variant={"blue"}>
+          مشاهده
+        </Button>
+      ),
+      room: <Link href={`/room/${comment._id}`}>مشاهده</Link>,
+      register: comment.date,
+      status:
+        comment.isAccept === "true" ? (
+          "تایید شده"
+        ) : comment.isAccept === "rejected" ? (
+          <p>رد شده</p>
+        ) : (
+          <div className="flex gap-1">
+            <Button
+              onClick={() => {
+                setCommentStatusChange(["accept", comment._id]);
+                mutation(null);
+              }}
+              className="h-8 w-12 justify-center"
+              variant={"blue"}
+            >
+              {commentStatusChange[0] === "accept" && isPending ? (
+                <ButtonLoader />
+              ) : (
+                "تایید"
+              )}
+            </Button>
+            <Button
+              onClick={() => {
+                setCommentStatusChange(["reject", comment._id]);
+                mutation(null);
+              }}
+              className="h-8 w-12 justify-center"
+              variant={"danger"}
+            >
+              {commentStatusChange[0] === "reject" && isPending ? (
+                <ButtonLoader />
+              ) : (
+                "رد"
+              )}
+            </Button>
+          </div>
+        ),
+      delete: (
+        <Button
+          onClick={() => deleteCommentHandler(comment._id)}
+          variant={"danger"}
+        >
+          حذف
+        </Button>
+      ),
+    }));
+    data = tableData;
+    console.log(tableData);
     console.log(comments);
   }, [comments]);
 
   const [pending, setPending] = useState(true);
   const [rows, setRows] = useState([]);
+
   useEffect(() => {
     if (comments) {
       setRows(data);
       setPending(false);
     }
   }, [comments]);
+
+  const { mutate: deleteHandlerMutation, isPending: deleteHandlerPending } =
+    useDeleteData(
+      `/comment/delete/${commentId}`,
+      "نظر با موفقیت حذف شد",
+      "comments",
+    );
+
+  const deleteCommentHandler = (commentId: string) => {
+    swal({
+      title: "آیا از حذف نظر مطمئن هستید؟",
+      icon: "warning",
+      buttons: ["نه", "آره"],
+    }).then((res) => {
+      if (res) {
+        setCommentId(commentId);
+        deleteHandlerMutation();
+      }
+    });
+  };
   return (
     <Layout>
       <div className="relative my-10">
@@ -139,13 +140,14 @@ const page = () => {
         </div>
       </div>
       <DataTable
-        columns={columns as any}
+        columns={commentColumns as any}
         data={rows}
         progressPending={pending}
         progressComponent={".... "}
         pagination
       />
       {getCommentsPending && <Loader />}
+      {deleteHandlerPending && <Loader />}
     </Layout>
   );
 };

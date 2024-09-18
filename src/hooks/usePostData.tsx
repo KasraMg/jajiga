@@ -51,7 +51,7 @@ const usePostData = <T extends object>(
         variant: "danger",
         title: "خطایی غیر منتظره رخ داد",
       });
-      location.reload();
+      // location.reload();
     },
   });
 
