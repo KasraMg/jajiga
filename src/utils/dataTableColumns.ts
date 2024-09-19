@@ -135,3 +135,46 @@ export const categoryColumns = [
     },
   ];
   
+  export const reservesColumns = [
+    {
+      name: "کاربر",
+      selector:(row: { userData: string }) => row.userData,
+      sortable: true,
+    },
+    {
+      name: "شماره",
+      selector:(row: { phone: string }) => row.phone,
+      sortable: true,
+    },
+    {
+      name: "تعداد اقامتگاه",
+      selector:(row: { rooms: string }) => row.rooms,
+      sortable: true,
+    },
+    {
+      name: "تاریخ عضویت",
+      selector:(row: { register: string }) => row.register,
+      sortable: true,
+    },
+    {
+      name: "تعداد رزرو",
+      selector:(row: { reserves: string }) => row.reserves,
+      sortable: true,
+    },
+    {
+      name: "سطح",
+      selector:(row: { role: string }) => row.role,
+      sortable: true,
+    },
+    {
+      name: "تغییر سطح",
+      selector:(row: { changeRole: string }) => row.changeRole,
+      sortable: true,
+    },
+    {
+      name: "بن",
+      selector:(row: { ban: string }) => row.ban,
+      sortable: true,
+    },
+  ];
+  

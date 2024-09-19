@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -13,6 +13,7 @@ import usePostData from "@/src/hooks/usePostData";
 import { userInfoObj } from "@/src/types/Auth.types";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
 import { useQueryClient } from "@tanstack/react-query";
+import { ButtonLoader } from "@/src/components/modules/loader/Loader";
 
 interface BoxProps {
   type: string;
@@ -35,7 +36,7 @@ const Box: FC<BoxProps> = ({
   value,
   setValue,
   errorText,
-  multiple, 
+  multiple,
   values,
   setValues,
   requestBody,
@@ -43,7 +44,20 @@ const Box: FC<BoxProps> = ({
 }) => {
   const [error, setError] = useState(false);
   const [disabled, setdisabled] = useState(true);
+  const [data, setData] = useState<any>();
+  const [secondData, setSecondData] = useState<any>();
   const queryClient = useQueryClient();
+
+  useEffect(() => {
+    if (value) {
+      setData(value);
+    } else {
+      if (values) {
+        setData(values[0]);
+        setSecondData(values[1]);
+      }
+    }
+  }, [value, values]);
 
   const successFunc = (data: { statusCode: number }) => {
     if (data.statusCode === 200) {
@@ -52,7 +66,7 @@ const Box: FC<BoxProps> = ({
         title: "اطلاعات با موفقیت بروزرسانی شد",
       });
       setOpen(false);
-      queryClient.invalidateQueries({ queryKey: ["auth"] }); 
+      queryClient.invalidateQueries({ queryKey: ["auth"] });
     }
   };
 
@@ -63,50 +77,42 @@ const Box: FC<BoxProps> = ({
         setError(true);
       } else {
         setError(false);
-      }
-
+      }  
       if (values) {
         setHandler(value);
       } else {
-        setValue && setValue(value);
+        setValue && setData(value);
       }
     } else {
       setHandler(value);
     }
   };
 
-  const {
-    mutate: mutation,
-    isPending,
-    isSuccess,
-  } = usePostData<userInfoObj>(
+  const { mutate: mutation, isPending } = usePostData<userInfoObj>(
     "/user/edit",
     null,
     true,
-    successFunc
+    successFunc,
   );
 
   const submitHandler = () => {
     if (values) {
-      const data = requestBody.reduce(
-        (acc: any, title: any, index: number) => {
-          acc[title] = values[index];
-          return acc;
-        },
-        {},
-      );
-      mutation(data); 
+      const newData = {
+        [requestBody[0]]: data,
+        [requestBody[1]]: secondData,
+      };
+      mutation(newData as any);
     } else {
       if (type === "radio") {
-        const data = {
-          [requestBody]: value === "مرد" ? "male" : "female",
+        const newData = {
+          [requestBody]: data === "مرد" ? "male" : "female",
         };
-        mutation(data as any); 
+        mutation(newData as any);
       } else {
-        const data = {
-          [requestBody]: value,
+        const newData = {
+          [requestBody]: data,
         };
-        mutation(data as any); 
+        mutation(newData as any);
       }
     }
   };
@@ -143,17 +149,25 @@ const Box: FC<BoxProps> = ({
                         onChange={(event) => {
                           inputChangeHandler(
                             event.target.value,
-                            setValues ? setValues[index] : setValue,
+                            setValues
+                              ? index === 0
+                                ? setData
+                                : setSecondData
+                              : setData,
                           );
                         }}
                         name={type == "radio" ? "radio" : title}
                         className={`${type == "radio" ? "mt-1 w-max" : "w-full"} rounded-md border border-gray-300 p-2 text-sm font-thin outline-0`}
                         type={type}
                         checked={
-                          options && value === options[index] ? true : false
+                          options && data === options[index] ? true : false
                         }
                         value={
-                          values ? values[index] : options && options[index]
+                          values
+                            ? index === 0
+                              ? data && data
+                              : secondData
+                            : options && options[index]
                         }
                       />
                     </div>
@@ -168,7 +182,7 @@ const Box: FC<BoxProps> = ({
                     }
                     className="w-full rounded-md border border-gray-300 p-2 text-sm font-thin"
                     type={type}
-                    value={value}
+                    value={data}
                   />
                 </div>
               )}
@@ -185,70 +199,7 @@ const Box: FC<BoxProps> = ({
                 variant="main"
                 onClick={submitHandler}
               >
-                {isPending ? (
-                  <svg
-                    className="h-full w-full"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 200 200"
-                  >
-                    <circle
-                      fill="#FFFFFF"
-                      stroke="#FFFFFF"
-                      strokeWidth="15"
-                      r="15"
-                      cx="40"
-                      cy="100"
-                    >
-                      <animate
-                        attributeName="opacity"
-                        calcMode="spline"
-                        dur="2"
-                        values="1;0;1;"
-                        keySplines=".5 0 .5 1;.5 0 .5 1"
-                        repeatCount="indefinite"
-                        begin="-.4"
-                      ></animate>
-                    </circle>
-                    <circle
-                      fill="#FFFFFF"
-                      stroke="#FFFFFF"
-                      strokeWidth="15"
-                      r="15"
-                      cx="100"
-                      cy="100"
-                    >
-                      <animate
-                        attributeName="opacity"
-                        calcMode="spline"
-                        dur="2"
-                        values="1;0;1;"
-                        keySplines=".5 0 .5 1;.5 0 .5 1"
-                        repeatCount="indefinite"
-                        begin="-.2"
-                      ></animate>
-                    </circle>
-                    <circle
-                      fill="#FFFFFF"
-                      stroke="#FFFFFF"
-                      strokeWidth="15"
-                      r="15"
-                      cx="160"
-                      cy="100"
-                    >
-                      <animate
-                        attributeName="opacity"
-                        calcMode="spline"
-                        dur="2"
-                        values="1;0;1;"
-                        keySplines=".5 0 .5 1;.5 0 .5 1"
-                        repeatCount="indefinite"
-                        begin="0"
-                      ></animate>
-                    </circle>
-                  </svg>
-                ) : (
-                  "ذخیره"
-                )}
+                {isPending ? <ButtonLoader /> : "ذخیره"}
               </Button>
             </DialogContent>
           </Dialog>

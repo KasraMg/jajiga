@@ -28,7 +28,7 @@ const fonts = localFont({
 });
 
 import ContextMenu from "../providers/ContextMenu";
- 
+import InternetStatus from "../utils/InternetStatus";
 
 export default function RootLayout({
   children,
@@ -41,10 +41,11 @@ export default function RootLayout({
         <QueryWrapper>
           <Hydrated queryKey={["auth"]} queryFn={getUser}>
             <Auth />
-          </Hydrated> 
+          </Hydrated>
+          <InternetStatus />
           {/* <ContextMenu> */}
-            {children}
-            {/* </ContextMenu>  */}
+          {children}
+          {/* </ContextMenu>  */}
           <Toaster />
         </QueryWrapper>
       </body>

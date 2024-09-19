@@ -12,7 +12,7 @@ import usePostData from "@/src/hooks/usePostData";
 import Loader from "@/src/components/modules/loader/Loader";
 import Layout from "@/src/components/layouts/userLayout/Layout";
 import { useQueryClient } from "@tanstack/react-query";
-import swal from "sweetalert"; 
+import swal from "sweetalert";
 
 const Profile = () => {
   const { userData } = authStore((state) => state);
