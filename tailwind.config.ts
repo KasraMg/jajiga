@@ -1,28 +1,27 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
   content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-    './node_modules/shadcn/dist/**/*.{js,ts,jsx,tsx}'
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+    "./node_modules/shadcn/dist/**/*.{js,ts,jsx,tsx}",
   ],
   prefix: "",
-  theme: { 
+  theme: {
     container: {
       center: true,
       padding: "2rem",
       screens: {
         "2xl": "1400px",
-        "طس" : "360px"
       },
     },
-    extend: {  
+    extend: {
       colors: {
-        customYellow: '#f0c807',
-        shimmer: "#bebec3"
+        customYellow: "#f0c807",
+        shimmer: "#bebec3",
       },
       keyframes: {
         "caret-blink": {
@@ -39,15 +38,13 @@ const config = {
         },
       },
       animation: {
-        "caret-blink": "caret-blink 1.25s ease-out infinite", 
+        "caret-blink": "caret-blink 1.25s ease-out infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
+} satisfies Config;
 
-export default config
-
- 
+export default config;

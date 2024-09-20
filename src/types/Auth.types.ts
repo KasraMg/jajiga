@@ -37,6 +37,8 @@ export interface book {
   updatedAt: string;
   user: {
     firstName: string;
+    phone:string;
+    id:string;
     lastName: string;
   };
   guestNumber: number;

@@ -1,4 +1,5 @@
-import { book, userInfoObj } from "./Auth.types";
+import { book, userInfoObj, userObj } from "./Auth.types";
+import { VillaDetails, comment } from "./Villa.types";
 
 export interface dashboardTypes {
   booksCount: number;
@@ -16,4 +17,31 @@ export interface dashboardTypes {
   books: book[];
   usersCount: number;
   villasCount: number;
+}
+
+export interface categoryResTypes {
+  status: number;
+  categories: categoryTypes[];
+}
+export interface categoryTypes {
+  cover: string;
+  createdAt: string;
+  href: string;
+  title: string;
+  updatedAt: string;
+  villas: number;
+  _id: string;
+}
+
+export interface commentResTypes {
+  comment: comment[];
+  statusCode: number;
+}
+export interface villaResTypes {
+  villas: VillaDetails[];
+  statusCode: number;
+}
+export interface userResTypes {
+  users: userInfoObj[];
+  statusCode: number;
 }

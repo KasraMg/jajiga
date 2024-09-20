@@ -1,5 +1,5 @@
 "use client";
-import Loader from "@/src/components/modules/loader/Loader";
+import Loader, { ButtonLoader } from "@/src/components/modules/loader/Loader";
 import { Button } from "@/src/components/shadcn/ui/button";
 import {
   Dialog,
@@ -21,18 +21,18 @@ interface newPasswordData {
 const ChangePassword = () => {
   const successFunc = (data: { statusCode: number }) => {
     if (data.statusCode === 200) {
-      formHandler.resetForm()
+      formHandler.resetForm();
       toast({
         variant: "success",
         title: "رمز عبور با موفقیت بروزرسانی شد",
       });
-      setOpen(false)
+      setOpen(false);
     } else if (data.statusCode === 401) {
       toast({
         variant: "danger",
         title: "رمز عبور فعلی شما اشتباه است",
       });
-    }else if (data.statusCode === 402) {
+    } else if (data.statusCode === 402) {
       toast({
         variant: "danger",
         title: "این رمز قبلا ست شده و نیازه یک رمز جدید وارد کنید",
@@ -40,12 +40,7 @@ const ChangePassword = () => {
     }
   };
 
-  const {
-    mutate: mutation,
-    isPending,
-    isError,
-    isSuccess,
-  } = usePostData<newPasswordData>(
+  const { mutate: mutation, isPending } = usePostData<newPasswordData>(
     "/user/changePassword",
     null,
     true,
@@ -53,7 +48,7 @@ const ChangePassword = () => {
   );
   const [showNewPass, setShowNewPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
-  
+
   const formHandler = useFormik({
     initialValues: {
       currentPassword: "",
@@ -72,7 +67,7 @@ const ChangePassword = () => {
     event.preventDefault();
     formHandler.handleSubmit();
   };
-  const [open,setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -80,7 +75,7 @@ const ChangePassword = () => {
           ﺗﻐﯿﯿﺮ رمزعبور
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:!max-w-[425px] w-full max-w-full">
+      <DialogContent className="w-full max-w-full sm:!max-w-[425px]">
         <div>
           <p>رمز عبور فعلی</p>
           <input
@@ -121,7 +116,6 @@ const ChangePassword = () => {
               </span>
             )}
         </div>
-
         <div>
           <p>تکرار رمز عبور جدید</p>
           <div className="relative">
@@ -149,65 +143,10 @@ const ChangePassword = () => {
         <Button
           onClick={(event) => submitHandler(event)}
           variant={"main"}
-          className="mx-auto my-3 block h-[36px] w-[90px]"
+          className="mx-auto my-3 block h-9 w-[90px]"
         >
           {isPending ? (
-            <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-              <circle
-                fill="#FFFFFF"
-                stroke="#FFFFFF"
-                strokeWidth="15"
-                r="15"
-                cx="40"
-                cy="100"
-              >
-                <animate
-                  attributeName="opacity"
-                  calcMode="spline"
-                  dur="2"
-                  values="1;0;1;"
-                  keySplines=".5 0 .5 1;.5 0 .5 1"
-                  repeatCount="indefinite"
-                  begin="-.4"
-                ></animate>
-              </circle>
-              <circle
-                fill="#FFFFFF"
-                stroke="#FFFFFF"
-                strokeWidth="15"
-                r="15"
-                cx="100"
-                cy="100"
-              >
-                <animate
-                  attributeName="opacity"
-                  calcMode="spline"
-                  dur="2"
-                  values="1;0;1;"
-                  keySplines=".5 0 .5 1;.5 0 .5 1"
-                  repeatCount="indefinite"
-                  begin="-.2"
-                ></animate>
-              </circle>
-              <circle
-                fill="#FFFFFF"
-                stroke="#FFFFFF"
-                strokeWidth="15"
-                r="15"
-                cx="160"
-                cy="100"
-              >
-                <animate
-                  attributeName="opacity"
-                  calcMode="spline"
-                  dur="2"
-                  values="1;0;1;"
-                  keySplines=".5 0 .5 1;.5 0 .5 1"
-                  repeatCount="indefinite"
-                  begin="0"
-                ></animate>
-              </circle>
-            </svg>
+           <ButtonLoader />
           ) : (
             "ﺗﻐﯿﯿﺮ رمزعبور"
           )}

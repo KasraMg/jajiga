@@ -6,7 +6,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { Button } from "@/src/components/shadcn/ui/button";
 import { CiSearch } from "react-icons/ci";
 import Container from "@/src/components/modules/container/Container";
-import Link from "next/link"; 
+import Link from "next/link";
 import useGetData from "@/src/hooks/useGetData";
 import { fetchWishes } from "@/src/utils/fetchs";
 import { VillaDetails } from "@/src/types/Villa.types";
@@ -16,12 +16,7 @@ interface wishesProps {
   faveVillas: VillaDetails[];
 }
 const page = () => {
-  const { data, status, isPending } = useGetData<wishesProps>(
-    ["wishes"],
-    fetchWishes,
-  ); 
-console.log(data);
-
+  const { data, isPending } = useGetData<wishesProps>(["wishes"], fetchWishes);
   return (
     <Container disableFooter={true}>
       <Breadcrumb route="علاقه‌مندی‌ها" />

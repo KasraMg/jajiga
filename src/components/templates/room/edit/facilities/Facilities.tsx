@@ -31,8 +31,6 @@ const Facilities = () => {
 
   useEffect(() => {
     if (data.statusCode === 200 && userData && data) {
-  
-
       const newFacilities = data?.facility?.map((item: any) => ({
         engtitle: item.engTitle,
         title: item.title,
@@ -119,9 +117,9 @@ const Facilities = () => {
               <div className="flex justify-between" key={index}>
                 <div className="flex items-center gap-3">
                   <input
-                    onClick={(event) =>
+                    onClick={(event) => 
                       handleInputChange(
-                        event.target.checked,
+                        (event.target as HTMLInputElement).checked,
                         facility[index].title,
                       )
                     }

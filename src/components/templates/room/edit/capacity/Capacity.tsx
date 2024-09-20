@@ -178,7 +178,7 @@ const Capacity = () => {
               />
               <span className="absolute left-2 top-[10px] text-sm text-gray-500">
                 متر
-              </span>  
+              </span>
               {areaSize > landSize ? (
                 <span className="absolute -bottom-[36px] text-xs text-red-600">
                   متراژ بنای اقامتگاه نمی‌تواند بزرگتر از متراژ زمین و محوطه

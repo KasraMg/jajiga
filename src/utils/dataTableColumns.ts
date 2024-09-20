@@ -147,34 +147,51 @@ export const categoryColumns = [
       sortable: true,
     },
     {
-      name: "تعداد اقامتگاه",
-      selector:(row: { rooms: string }) => row.rooms,
+      name: "اقامتگاه",
+      selector:(row: { room: string }) => row.room,
       sortable: true,
     },
     {
-      name: "تاریخ عضویت",
+      name: "تاریخ رزرو",
       selector:(row: { register: string }) => row.register,
       sortable: true,
     },
     {
-      name: "تعداد رزرو",
-      selector:(row: { reserves: string }) => row.reserves,
+      name: "قیمت",
+      selector:(row: { price: string }) => row.price,
+      sortable: true,
+    }, 
+  ];
+  
+  export const reserveModalColumns = [
+    {
+      name: "رزرو شده توسط",
+      selector: (row: { reserveBy: string }) => row.reserveBy,
       sortable: true,
     },
     {
-      name: "سطح",
-      selector:(row: { role: string }) => row.role,
+      name: "قیمت کلی",
+      selector: (row: { price: string }) => row.price,
       sortable: true,
     },
     {
-      name: "تغییر سطح",
-      selector:(row: { changeRole: string }) => row.changeRole,
+      name: "زمان شروع رزرو",
+      selector: (row: { from: string }) => row.from,
       sortable: true,
     },
     {
-      name: "بن",
-      selector:(row: { ban: string }) => row.ban,
+      name: "زمان پایان رزرو",
+      selector: (row: { to: string }) => row.to,
+      sortable: true,
+    },
+    {
+      name: "تعداد نفرات",
+      selector: (row: { count: string }) => row.count,
+      sortable: true,
+    },
+    {
+      name: "زمان ثبت رزرو",
+      selector: (row: { register: string }) => row.register,
       sortable: true,
     },
   ];
-  

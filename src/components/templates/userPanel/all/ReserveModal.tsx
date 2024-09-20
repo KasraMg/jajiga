@@ -5,47 +5,16 @@ import {
   DialogTrigger,
 } from "@/src/components/shadcn/ui/dialog";
 import { book } from "@/src/types/Auth.types";
+import { reserveModalColumns } from "@/src/utils/dataTableColumns";
 import { convertToJalali } from "@/src/utils/utils";
 import { useEffect, useState } from "react";
 import DataTable  from "react-data-table-component";
 import { FaRegTrashCan } from "react-icons/fa6";
 
-const columns = [
-  {
-    name: "رزرو شده توسط",
-    selector: (row: { reserveBy: string }) => row.reserveBy,
-    sortable: true,
-  },
-  {
-    name: "قیمت کلی",
-    selector: (row: { price: string }) => row.price,
-    sortable: true,
-  },
-  {
-    name: "زمان شروع رزرو",
-    selector: (row: { from: string }) => row.from,
-    sortable: true,
-  },
-  {
-    name: "زمان پایان رزرو",
-    selector: (row: { to: string }) => row.to,
-    sortable: true,
-  },
-  {
-    name: "تعداد نفرات",
-    selector: (row: { count: string }) => row.count,
-    sortable: true,
-  },
-  {
-    name: "زمان ثبت رزرو",
-    selector: (row: { register: string }) => row.register,
-    sortable: true,
-  },
-];
 
-const ReserveModal = ({ booked }: { booked: book[] }) => {
-  const data = [];
-  const [rows, setRows] = useState([]);
+
+const ReserveModal = ({ booked }: { booked: book[] }) => { 
+  const [data, setData] = useState([]);
   console.log(booked);
 
   useEffect(() => {
@@ -58,7 +27,7 @@ const ReserveModal = ({ booked }: { booked: book[] }) => {
         count: book.guestNumber,
         register: convertToJalali(book.createdAt.slice(0, 10)),
       }));
-      setRows(tableData as any);
+      setData(tableData as any);
     }
   }, [booked]);
 
@@ -75,9 +44,9 @@ const ReserveModal = ({ booked }: { booked: book[] }) => {
       </DialogTrigger>
       <DialogContent className="w-full max-w-full sm:!max-w-[80%]">
         <DataTable
-          columns={columns as any}
-          data={rows}
-          progressComponent={".... "}
+          columns={reserveModalColumns as any}
+          data={data}
+          progressComponent={"...."}
           pagination
         />
       </DialogContent>

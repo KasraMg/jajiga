@@ -15,8 +15,7 @@ const Main = () => {
   const { userData, isPending } = authStore((state) => state);
 
   async function getVilla() {
-    const accessToken = Cookies.get("AccessToken");
-
+    const accessToken = Cookies.get("AccessToken"); 
     const headers = {
       ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
     };
@@ -27,26 +26,31 @@ const Main = () => {
   }
 
   const { data } = useGetData<any>(["villa"], getVilla);
-
+ console.log(data);
+ 
   useEffect(() => {
-    if (!isPending && !userData && data.villa.isAccepted !== "true") {
-      router.push("/") 
-    }
-
+    if (
+      data.statusCode === 200 &&
+      !isPending &&
+      !userData &&
+      data?.villa.isAccepted !== "true"
+    ) {
+      router.push("/");
+    } 
     if (data && data.statusCode === 200 && userData && !isPending) {
       !data.villa.isOwner &&
+      !isPending &&
         data.villa.isAccepted !== "true" &&
-        userData?.user.role !== "admin" &&
+        userData.user.role !== "admin" && 
         router.push("/");
     } else {
       data &&
-      data.statusCode === 200 &&
-      !isPending &&
-      data.villa.isAccepted !== "true"
-        && router.push("/") 
+        data.statusCode === 200 &&
+        !isPending &&
+        data.villa.isAccepted !== "true" &&
+        router.push("/");
     }
-  }, [isPending]);
-  console.log(data);
+  }, [isPending]); 
 
   return (
     <div className="Container mt-[3.8rem] md:!mt-20">

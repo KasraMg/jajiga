@@ -22,7 +22,7 @@ const Room = ({ params }:any) => {
       </Container>
     </Hydrated>
   );
-};
+};  
 
 export default Room;
- 
+  

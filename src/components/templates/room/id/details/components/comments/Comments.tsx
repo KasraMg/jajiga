@@ -40,7 +40,7 @@ const Comments = ({
   useEffect(() => {
     if (userData) {
       const reserve = userData.booked.some(
-        (book) => book.villa._id === params.id,
+        (book) => book.villa._id === params.id, 
       );
       setIsReserve(reserve);
     }
@@ -54,9 +54,9 @@ const Comments = ({
           "نظر شما با موفقیت ثبت و پس از تایید ادمین به سایت اضافه خواهد شد",
       });
       queryClient.invalidateQueries({ queryKey: ["villa"] });
-      setIdAnswer(""); 
-      setBody("");
       setIdAnswer("");
+      setBody("");
+      setScore(null);
     } else {
       toast({
         variant: "danger",
@@ -109,119 +109,122 @@ const Comments = ({
           </p>
           <div className="mt-6">
             <>
-              {comments?.map((comment) => (
-                <section className="mb-6 border-b border-solid border-gray-200 pb-4">
-                  <div className="flex justify-between">
-                    <div className="flex items-center gap-3">
-                      <Image
-                        className="h-14 w-14 rounded-full object-cover"
-                        alt="author"
-                        width={1000}
-                        height={1000}
-                        src={
-                          comment?.creator?.avatar
-                            ? `https://jajiga-backend.liara.run/user/avatars/${comment.creator.avatar}`
-                            : `/images/profile.jpg`
-                        }
-                      />
-                      <div>
-                        <p>{comment.creator.firstName}</p>
-                        <span className="text-sm text-gray-500">
-                          {comment.date}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="flex gap-1 text-xs">
-                      {Array(comment.score)
-                        .fill(0)
-                        .map(() => (
-                          <FaStar className="text-orange-500" />
-                        ))}
-                      {Array(5 - comment.score)
-                        .fill(0)
-                        .map(() => (
-                          <IoIosStarOutline />
-                        ))}
-                    </div>
-                  </div>
-                  <p className="font-vazir mt-5 text-sm font-light">
-                    {comment.body}
-                  </p>
-
-                  {comment.answerComment && (
-                    <section className="mx-3 mt-3 rounded-md bg-[#f3f3f3] p-2">
-                      <div className="flex items-center gap-3">
-                        <Image
-                          className="h-10 w-10 rounded-full object-cover"
-                          alt="author"
-                          width={1000}
-                          height={1000}
-                          src={
-                            comment.answerComment.creator.avatar
-                              ? `https://jajiga-backend.liara.run/user/avatars/${comment.answerComment.creator.avatar}`
-                              : "/images/about/about_img6.jpg"
-                          }
-                        />
-                        <div>
-                          <p className="text-sm">پاسخ میزبان</p>
-                          <span className="text-sm text-gray-500">
-                            {comment.answerComment.date}
-                          </span>
+              {comments?.map(
+                (comment) =>
+                  comment.isAccept === "true" && (
+                    <section className="mb-6 border-b border-solid border-gray-200 pb-4">
+                      <div className="flex justify-between">
+                        <div className="flex items-center gap-3">
+                          <Image
+                            className="h-14 w-14 rounded-full object-cover"
+                            alt="author"
+                            width={1000}
+                            height={1000}
+                            src={
+                              comment?.creator?.avatar
+                                ? `https://jajiga-backend.liara.run/user/avatars/${comment.creator.avatar}`
+                                : `/images/profile.jpg`
+                            }
+                          />
+                          <div>
+                            <p>{comment.creator.firstName}</p>
+                            <span className="text-sm text-gray-500">
+                              {comment.date}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="flex gap-1 text-xs">
+                          {Array(comment.score)
+                            .fill(0)
+                            .map(() => (
+                              <FaStar className="text-orange-500" />
+                            ))}
+                          {Array(5 - comment.score)
+                            .fill(0)
+                            .map(() => (
+                              <IoIosStarOutline />
+                            ))}
                         </div>
                       </div>
                       <p className="font-vazir mt-5 text-sm font-light">
-                        {comment.answerComment.body}
+                        {comment.body}
                       </p>
+
+                      {comment.answerComment && (
+                        <section className="mx-3 mt-3 rounded-md bg-[#f3f3f3] p-2">
+                          <div className="flex items-center gap-3">
+                            <Image
+                              className="h-10 w-10 rounded-full object-cover"
+                              alt="author"
+                              width={1000}
+                              height={1000}
+                              src={
+                                comment.answerComment.creator.avatar
+                                  ? `https://jajiga-backend.liara.run/user/avatars/${comment.answerComment.creator.avatar}`
+                                  : "/images/about/about_img6.jpg"
+                              }
+                            />
+                            <div>
+                              <p className="text-sm">پاسخ میزبان</p>
+                              <span className="text-sm text-gray-500">
+                                {comment.answerComment.date}
+                              </span>
+                            </div>
+                          </div>
+                          <p className="font-vazir mt-5 text-sm font-light">
+                            {comment.answerComment.body}
+                          </p>
+                        </section>
+                      )}
+
+                      {!comment.answerComment &&
+                        idAnswer !== comment._id &&
+                        userId === userData?.user._id && (
+                          <Button
+                            onClick={() => setIdAnswer(comment._id)}
+                            variant={"main"}
+                            className="mr-auto block px-4"
+                          >
+                            {" "}
+                            پاسخ
+                          </Button>
+                        )}
+
+                      {idAnswer == comment._id && (
+                        <div className="mt-3">
+                          <Textarea
+                            maxLength={250}
+                            setValue={setAnswerBody}
+                            value={answerbody}
+                            placeholder={`پاسخ شما به جناب ${comment.creator.firstName}`}
+                          />
+                          <div className="flex">
+                            <Button
+                              onClick={() => {
+                                setMainCommentID(comment._id);
+                                addAnswerCommentHandler();
+                              }}
+                              className="mt-3 h-9 px-5"
+                              variant={"danger"}
+                            >
+                              {isPending ? <ButtonLoader /> : "ثبت نظر"}
+                            </Button>
+                            <Button
+                              onClick={() => {
+                                setMainCommentID("");
+                                setIdAnswer("");
+                              }}
+                              className="mr-3 mt-3 h-9 px-5"
+                              variant={"blue"}
+                            >
+                              لغو
+                            </Button>
+                          </div>
+                        </div>
+                      )}
                     </section>
-                  )}
-
-                  {!comment.answerComment &&
-                    idAnswer !== comment._id &&
-                    userId === userData?.user._id && (
-                      <Button
-                        onClick={() => setIdAnswer(comment._id)}
-                        variant={"main"}
-                        className="mr-auto block px-4"
-                      >
-                        {" "}
-                        پاسخ
-                      </Button>
-                    )}
-
-                  {idAnswer == comment._id && (
-                    <div className="mt-3">
-                      <Textarea
-                        maxLength={250}
-                        setValue={setAnswerBody}
-                        value={answerbody}
-                        placeholder={`پاسخ شما به جناب ${comment.creator.firstName}`}
-                      />
-                    <div className="flex">
-                    <Button
-                        onClick={() => {
-                          setMainCommentID(comment._id);
-                          addAnswerCommentHandler();
-                        }}
-                        className="mt-3 h-9 px-5"
-                        variant={"danger"}
-                      >
-                        {isPending ? <ButtonLoader /> : "ثبت نظر"}
-                      </Button>
-                      <Button
-                        onClick={() => {
-                          setMainCommentID("");
-                          setIdAnswer("");
-                        }}
-                        className="mr-3 mt-3 h-9 px-5"
-                        variant={"blue"}
-                      >
-                        لغو
-                      </Button>
-                    </div>
-                    </div>
-                  )}
-                </section>
-              ))}
+                  ),
+              )}
             </>
           </div>
         </div>

@@ -4,29 +4,29 @@ import { Button } from "@/src/components/shadcn/ui/button";
 import useGetData from "@/src/hooks/useGetData";
 import { VillaDetails } from "@/src/types/Villa.types";
 import { getAllVillas } from "@/src/utils/fetchs";
-import { baseUrl, convertToJalali } from "@/src/utils/utils";
+import { convertToJalali } from "@/src/utils/utils";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import Cookies from "js-cookie";
 import swal from "sweetalert";
 import usePostData from "@/src/hooks/usePostData";
 import Loader, { ButtonLoader } from "@/src/components/modules/loader/Loader";
 import useDeleteData from "@/src/hooks/useDeleteData";
 import { roomColumns } from "@/src/utils/dataTableColumns";
-
+import { villaResTypes } from "@/src/types/AdminPanel.types";
 
 const page = () => {
-  const { data: villas, isPending: getVillasPending } = useGetData(
-    ["allVillas"],
-    getAllVillas,
-  );
-  const [villaId, setVillaId] = useState("");
+  const { data: villas, isPending: getVillasPending } =
+    useGetData<villaResTypes>(["allVillas"], getAllVillas);
 
+  const [villaId, setVillaId] = useState(""); 
+  const [data, setData] = useState<VillaDetails[]>([]);
+  const [pending, setPending] = useState(true);
+  
   const [roomStatusChange, setRoomStatusChange] = useState<
     [] | [string, string]
   >([]);
-  let data = [];
+
   const { mutate: mutation, isPending } = usePostData<any>(
     `/villa/accessVisit/${roomStatusChange[0]}/${roomStatusChange[1]}`,
     `ویلا با موفقیت ${roomStatusChange[0] === "accept" ? "تایید" : "رد"} شد`,
@@ -37,7 +37,7 @@ const page = () => {
   );
 
   useEffect(() => {
-    const tableData = villas?.villas.map((villa: VillaDetails) => ({
+    const tableData: unknown = villas?.villas.map((villa: VillaDetails) => ({
       userData: villa.user.firstName + " " + villa.user.lastName,
       preview: <Link href={`/room/${villa._id}`}>مشاهده</Link>,
       address: villa.address.state + "،" + villa.address.city,
@@ -89,17 +89,14 @@ const page = () => {
         </Button>
       ),
     }));
-    data = tableData;
+    setData(tableData as VillaDetails[]);
   }, [villas]);
 
-  const [pending, setPending] = useState(true);
-  const [rows, setRows] = useState([]);
   useEffect(() => {
-    if (villas) {
-      setRows(data);
+    if (data) {
       setPending(false);
     }
-  }, [villas]);
+  }, [data]);
 
   const { mutate: deleteHandlerMutation, isPending: deleteHandlerPending } =
     useDeleteData(
@@ -130,7 +127,7 @@ const page = () => {
       </div>
       <DataTable
         columns={roomColumns as any}
-        data={rows}
+        data={data}
         progressPending={pending}
         progressComponent={".... "}
         pagination
