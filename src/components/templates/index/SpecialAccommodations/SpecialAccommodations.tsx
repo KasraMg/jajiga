@@ -10,8 +10,7 @@ const SpecialAccommodations = () => {
   const { data, status, isLoading } = useGetData<any>(
     ["privilegedVillas"],
     getPrivilegedVillas,
-  );
- 
+  ); 
   return (
     <div>
       <p className="text-xl">اقامتگاه های ممتاز</p>

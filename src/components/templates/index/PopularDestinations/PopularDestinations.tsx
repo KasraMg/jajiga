@@ -10,7 +10,9 @@ const PopularDestinations = () => {
     ["popularDestinations"],
     getPopularDestinations,
   );
+
   console.log(data);
+  
 
   return (
     <section className="py-5 text-right">

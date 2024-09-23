@@ -10,7 +10,7 @@ const FastSearch = () => {
   const { data, status, isLoading } = useGetData<any>(
     ["FastSearch"],
     getFastSearchOptions,
-  );
+  ); 
   
   return (
     <section className="pb-5 text-right">

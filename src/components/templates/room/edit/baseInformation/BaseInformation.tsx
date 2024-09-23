@@ -87,8 +87,7 @@ const BaseInformation = () => {
       finished: true,
     };
     mutation(data);
-    console.log(data); 
-    setDisableNextButton(true);
+     setDisableNextButton(true);
   };
 
   useEffect(() => {

@@ -26,17 +26,15 @@ interface ReservationStepperProps {
   totalDays: number | undefined;
   usersCount: string | undefined;
   totalPrice: string | undefined;
-  data: VillaDetails;
-  setOpenReserveModal?: any;
-}
+  data: VillaDetails; 
+} 
 
 const ReservationStepper: FC<ReservationStepperProps> = ({
   disable,
   totalDays,
   usersCount,
   totalPrice,
-  data,
-  setOpenReserveModal,
+  data, 
 }) => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -51,10 +49,9 @@ const ReservationStepper: FC<ReservationStepperProps> = ({
         variant: "success",
         title: "ویلا با موفقیت رزرو شد",
       });
-      queryClient.invalidateQueries({ queryKey: ["villa"] }); 
-      queryClient.invalidateQueries({ queryKey: ["auth"] }); 
-      setOpen(false);
-      setOpenReserveModal(false);
+      queryClient.invalidateQueries({ queryKey: ["villa"] });
+      queryClient.invalidateQueries({ queryKey: ["auth"] });
+      setOpen(false); 
       router.push("/reserves");
     } else if (data.statusCode === 422) {
       toast({
@@ -66,7 +63,7 @@ const ReservationStepper: FC<ReservationStepperProps> = ({
         variant: "danger",
         title: "فرایند  رزرو موفقیت آمیز نبود ",
       });
-      location.reload();
+      // location.reload();
     }
   };
 
@@ -81,13 +78,14 @@ const ReservationStepper: FC<ReservationStepperProps> = ({
   );
 
   const reserveHandler = () => {
-    const date = {
+    const reserveData = {
       date: {
         from: startDate,
         to: endDate,
       },
+      guestNumber: Number(usersCount?.slice(0, 1)),
     };
-    mutation(date);
+    mutation(reserveData);
   };
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -244,7 +242,7 @@ const ReservationStepper: FC<ReservationStepperProps> = ({
           )}
         </main>
 
-        <div className="mx-auto mt-12 flex w-[90%] justify-between">
+        <div className="mx-auto mt-12 flex w-[90%] items-center justify-between">
           <Button
             onClick={() => (step === 1 ? setOpen(false) : setStep(step - 1))}
             variant={"white"}

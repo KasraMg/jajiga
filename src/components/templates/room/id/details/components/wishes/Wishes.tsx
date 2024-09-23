@@ -7,7 +7,7 @@ import { FaHeart, FaRegHeart } from "react-icons/fa6";
 import Loader from "@/src/components/modules/loader/Loader";
 import { useQueryClient } from "@tanstack/react-query";
 
-const Wishes = ({ wishesStatus }: { wishesStatus: boolean }) => {
+const Wishes = ({ wishesStatus }: { wishesStatus: boolean }) => { 
   const queryClient = useQueryClient();
   const { userData } = authStore((store) => store);
   const [wishes, setWishes] = useState(wishesStatus);
@@ -21,6 +21,7 @@ const Wishes = ({ wishesStatus }: { wishesStatus: boolean }) => {
       });
       setWishes((prev) => !prev);
       queryClient.invalidateQueries({ queryKey: ["auth"] });
+      queryClient.invalidateQueries({ queryKey: ["villa"] });
 
     } else {
       toast({

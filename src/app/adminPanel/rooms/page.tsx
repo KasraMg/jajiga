@@ -1,7 +1,17 @@
 "use client";
 import Layout from "@/src/components/layouts/adminLayout/page";
+import { Button } from "@/src/components/shadcn/ui/button";
+import useGetData from "@/src/hooks/useGetData";
+import { VillaDetails } from "@/src/types/Villa.types";
+import { getAllVillas } from "@/src/utils/fetchs";
+import { baseUrl, convertToJalali } from "@/src/utils/utils";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
+import Cookies from "js-cookie";
+import { toast } from "@/src/components/shadcn/ui/use-toast";
+import swal from "sweetalert";
 
 const columns = [
   {
@@ -20,6 +30,11 @@ const columns = [
     sortable: true,
   },
   {
+    name: "تعداد رزروها",
+    selector: (row) => row.reserves,
+    sortable: true,
+  },
+  {
     name: "وضعیت",
     selector: (row) => row.status,
     sortable: true,
@@ -27,6 +42,11 @@ const columns = [
   {
     name: "زمان ثبت",
     selector: (row) => row.register,
+    sortable: true,
+  },
+  {
+    name: "حذف ویلا",
+    selector: (row) => row.delete,
     sortable: true,
   },
 ];
@@ -67,15 +87,89 @@ const data = [
 ];
 
 const page = () => {
+  const { data: villas } = useGetData(["allVillas"], getAllVillas);
+  const queryClient = useQueryClient();
+
+  let data = [];
+  console.log(villas);
+
+  useEffect(() => {
+    villas?.villas.map((villa: VillaDetails) =>
+      data.push({
+        userData: villa.user.firstName + " " + villa.user.lastName,
+        preview: <Link href={`/room/${villa._id}`}>مشاهده</Link>,
+        address: villa.address.state + "،" + villa.address.city,
+        reserves: 1,
+        status: villa.isAccepted ? (
+          "تایید شده"
+        ) : (
+          <div className="flex gap-1">
+            <Button className="w-12 justify-center" variant={"blue"}>
+              تایید
+            </Button>
+            <Button className="w-12 justify-center" variant={"danger"}>
+              رد
+            </Button>
+          </div>
+        ),
+        register: convertToJalali(villa.createdAt.slice(0, 10)),
+        delete: (
+          <Button
+            onClick={() => villaDeleteHandler(villa._id)}
+            variant={"danger"}
+          >
+            حذف
+          </Button>
+        ),
+      }),
+    );
+  }, [villas]);
+
   const [pending, setPending] = useState(true);
   const [rows, setRows] = useState([]);
   useEffect(() => {
-    const timeout = setTimeout(() => {
+    if (villas) {
       setRows(data);
       setPending(false);
-    }, 2000);
-    return () => clearTimeout(timeout);
-  }, []);
+    }
+  }, [villas]);
+
+  const accessToken = Cookies.get("AccessToken");
+
+  const mutation = useMutation({
+    mutationFn: async (id: string) => {
+      return await fetch(`${baseUrl}/villa/delete/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }).then((res) => res.json());
+    },
+    onSuccess: (data) => {
+      console.log(data);
+
+      if (data.statusCode === 200) {
+        queryClient.invalidateQueries({ queryKey: ["allVillas"] });
+
+        toast({
+          variant: "success",
+          title: "ویلا با موفقیت حذف شد",
+        });
+      }
+    },
+  });
+
+  const villaDeleteHandler = (id: string) => {
+    swal({
+      title: "آیا از حذف ویلا مطمئن هستید؟",
+      icon: "warning",
+      buttons: ["نه", "آره"],
+    }).then((res) => {
+      if (res) {
+        mutation.mutate(id);
+      }
+    });
+  };
   return (
     <Layout>
       <div className="relative my-10">

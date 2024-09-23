@@ -17,7 +17,7 @@ const Card = ({
   return (
     <Link
       onClick={() => setVillaZone([data.title])}
-      href={`/rooms?city=all`}
+      href={`/rooms`}
       className="relative cursor-pointer text-white"
     >
       <Image
