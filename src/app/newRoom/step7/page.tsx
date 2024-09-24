@@ -70,12 +70,7 @@ const page = () => {
     },
   ]);
   const villaId = getFromLocalStorage("villaId");
-  const {
-    mutate: mutation,
-    responseData,
-    isSuccess,
-    isPending,
-  } = useEditVilla<userObjData>(
+  const { mutate: mutation, isPending } = useEditVilla<userObjData>(
     "/newRoom/step8",
     "اطلاعات با موفقیت بروزرسانی شد",
     villaId,
@@ -113,18 +108,38 @@ const page = () => {
     setDisableNextButton(true);
   };
 
+  const formatNumber = (num: string) => {
+    return num.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
+  const unformatNumber = (num: string) => {
+    return num.replace(/,/g, "");
+  };
+
+  const newYearInputChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    const inputValue = event.target.value;
+    const unformattedValue = unformatNumber(inputValue);
+    if (!isNaN(Number(unformattedValue))) {
+      setNewYearPrice(unformattedValue);
+    }
+  };
   const changeInputHandler = (
     event: ChangeEvent<HTMLInputElement>,
     id: number,
     date: string,
   ) => {
+    const inputValue = event.target.value;
+    const unformattedValue = unformatNumber(inputValue);
+    const formattedValue = formatNumber(unformattedValue);
+
     const updatedSeasonDatas = [...seasonDatas];
     const seasonIndex = id - 1;
     const dataIndex = updatedSeasonDatas[seasonIndex].Data.findIndex(
       (data) => data.title === date,
     );
-    updatedSeasonDatas[seasonIndex].Data[dataIndex].amount = event.target.value;
+    updatedSeasonDatas[seasonIndex].Data[dataIndex].amount = unformattedValue;
     setSeasonDatas(updatedSeasonDatas);
+    event.target.value = formattedValue;
     validInputsHandler(updatedSeasonDatas);
   };
 
@@ -169,18 +184,19 @@ const page = () => {
   ];
 
   return (
-    <StepLayout stepperActive={8}>
+    <StepLayout stepperActive={7}>
       <div className="flex max-w-[1120px] gap-0 py-8 sm:!gap-5">
         <div className="hidden min-w-[23%] md:!flex lg:!min-w-[21%]">
-          <Stepper active={8} />
+          <Stepper active={7} />
         </div>
         <div className="mb-20 w-full space-y-4">
           <div className="flex items-center justify-between">
             <p className="text-sm lg:!text-base">نرخ تعطیلات نوروز</p>
             <div className="relative w-1/2 lg:!w-[60%]">
               <input
-                onChange={(event) => setNewYearPrice(event.target.value)}
-                type="number"
+                value={formatNumber(newYearPrice)}
+                onChange={newYearInputChangeHandler}
+                type="text"
                 dir="ltr"
                 className="w-full rounded-md border border-solid border-gray-400 p-2 pl-14"
               />
@@ -189,7 +205,7 @@ const page = () => {
           </div>
           {season &&
             season.map((data) => (
-              <div className="py-2 pb-3">
+              <div className="py-2 pb-3" key={data.id}>
                 <AccordionParent className={``} type="single" collapsible>
                   <AccordionItem value={`item-${data.id}`}>
                     <AccordionTrigger className="font-vazir text-sm !font-normal hover:no-underline">
@@ -210,14 +226,17 @@ const page = () => {
                       </div>
                     </AccordionTrigger>
                     <AccordionContent className="font-vazir text-sm font-light leading-6 text-[#404040]">
-                      <div className="flex flex-col items-start justify-between gap-2 lg:!flex-row lg:!items-center lg:!gap-0">
+                      <div className="mb-5 flex flex-col items-start justify-between gap-2 lg:!mb-3 lg:!flex-row lg:!items-center lg:!gap-0">
                         <p className="text-sm lg:!text-base">وسط هفته</p>
                         <div className="relative w-full lg:!w-[60%]">
                           <input
+                            value={formatNumber(
+                              seasonDatas[data.id - 1].Data[0].amount,
+                            )}
                             onChange={(event) =>
                               changeInputHandler(event, data.id, "وسط هفته")
                             }
-                            type="number"
+                            type="text"
                             dir="ltr"
                             className="w-full border-b border-solid border-black p-2 pl-14"
                           />
@@ -226,16 +245,17 @@ const page = () => {
                           </span>
                         </div>
                       </div>
-                      <div className="my-4 flex flex-col items-start justify-between gap-2 lg:!flex-row lg:!items-center lg:!gap-0">
-                        <p className="text-sm lg:!text-base">
-                          آخر هفته و تعطیلات عادی
-                        </p>
+                      <div className="mb-5 flex flex-col items-start justify-between gap-2 lg:!mb-3 lg:!flex-row lg:!items-center lg:!gap-0">
+                        <p className="text-sm lg:!text-base">آخر هفته</p>
                         <div className="relative w-full lg:!w-[60%]">
                           <input
+                            value={formatNumber(
+                              seasonDatas[data.id - 1].Data[1].amount,
+                            )}
                             onChange={(event) =>
                               changeInputHandler(event, data.id, "آخر هفته")
                             }
-                            type="number"
+                            type="text"
                             dir="ltr"
                             className="w-full border-b border-solid border-black p-2 pl-14"
                           />
@@ -244,14 +264,17 @@ const page = () => {
                           </span>
                         </div>
                       </div>
-                      <div className="flex flex-col items-start justify-between gap-2 lg:!flex-row lg:!items-center lg:!gap-0">
-                        <p className="text-sm lg:!text-base">ایام پیک</p>
+                      <div className="mb-5 flex flex-col items-start justify-between gap-2 lg:!mb-3 lg:!flex-row lg:!items-center lg:!gap-0">
+                        <p className="text-sm lg:!text-base">تعطیلات</p>
                         <div className="relative w-full lg:!w-[60%]">
                           <input
+                            value={formatNumber(
+                              seasonDatas[data.id - 1].Data[2].amount,
+                            )}
                             onChange={(event) =>
                               changeInputHandler(event, data.id, "تعطیلات")
                             }
-                            type="number"
+                            type="text"
                             dir="ltr"
                             className="w-full border-b border-solid border-black p-2 pl-14"
                           />
