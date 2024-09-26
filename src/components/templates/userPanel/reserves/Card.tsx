@@ -10,7 +10,7 @@ interface CardProps {
   className?: string;
   data: book;
 }
-const Card: FC<CardProps> = ({ className, data }) => { 
+const Card: FC<CardProps> = ({ className, data }) => {
   return (
     <div className={`mx-auto w-full xl:!w-full ${className} `}>
       <Link href={`/room/${data._id}`} className="relative w-full">
@@ -62,7 +62,7 @@ const Card: FC<CardProps> = ({ className, data }) => {
         </p>
         <span className="text-xs text-red-600">({data.days} شب)</span>
       </div>
-      <div className="flex items-center justify-between mt-2">
+      <div className="mt-2 flex items-center justify-between">
         <div className="flex gap-2">
           <FiUsers />
           <p>{data.guestNumber} نفر</p>

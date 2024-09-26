@@ -25,8 +25,8 @@ const Menu = () => {
               gradientTransform="matrix(1 0 0 -1 0 502)"
               gradientUnits="userSpaceOnUse"
             >
-              <stop offset="0" stop-color="#cc0001"></stop>
-              <stop offset="1" stop-color="#840000"></stop>
+              <stop offset="0" stopColor="#cc0001"></stop>
+              <stop offset="1" stopColor="#840000"></stop>
             </linearGradient>
           </defs>
           <path

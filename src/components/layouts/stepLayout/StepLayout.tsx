@@ -19,15 +19,15 @@ const StepLayout: FC<StepLayoutProps> = ({ stepperActive, children }) => {
   const queryClient = useQueryClient();
   queryClient.invalidateQueries({ queryKey: ["auth"] });
 
-  const { userData,isPending } = authStore((state) => state);
+  const { userData, isPending } = authStore((state) => state);
   const route = useRouter();
-  useEffect(() => { 
-    !isPending && !userData && route.push('/login')
-    
+  useEffect(() => {
+    !isPending && !userData && route.push("/login");
+
     const villa = userData?.villas.find((villa) => villa._id === villaId);
     const villaParamStep = params.slice(13, 20);
 
-    if (villaId && (villa?.step as any) < villaParamStep) { 
+    if (villaId && (villa?.step as any) + 1 < villaParamStep) { 
       route.push(`/newRoom/step${villa?.step}`);
     }
   }, [userData]);

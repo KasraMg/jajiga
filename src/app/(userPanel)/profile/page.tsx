@@ -12,8 +12,7 @@ import usePostData from "@/src/hooks/usePostData";
 import Loader from "@/src/components/modules/loader/Loader";
 import Layout from "@/src/components/layouts/userLayout/Layout";
 import { useQueryClient } from "@tanstack/react-query";
-import swal from "sweetalert";
-import { toast } from "@/src/components/shadcn/ui/use-toast";
+import swal from "sweetalert"; 
 
 const Profile = () => {
   const { userData } = authStore((state) => state);
@@ -27,21 +26,13 @@ const Profile = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [avatar, setAvatar] = useState("");
 
-  const successFunc = (data: { statusCode: number }) => {
-    if (data.statusCode === 200) {
-      toast({
-        variant: "success",
-        title:  "آواتار با موفقیت بروزرسانی شد",
-      });
-      queryClient.invalidateQueries({ queryKey: ["auth"] }); 
-  }
-}
   const { mutate: mutation, isPending } = usePostData<any>(
     "/user/edit",
-   null,
+    "آواتار با موفقیت بروزرسانی شد",
     true,
-    successFunc,
-    true,
+    null,
+    false,
+    "auth",
   );
 
   useEffect(() => {
@@ -68,7 +59,7 @@ const Profile = () => {
         : "",
     );
     setPhoneNumber(userData?.user.phone as string);
-  }, [userData]); 
+  }, [userData]);
 
   const profileChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {

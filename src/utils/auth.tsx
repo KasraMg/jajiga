@@ -21,7 +21,7 @@ const Auth = () => {
       setIsPending(false);
     } else if (status === "success" && data?.statusCode === 500) {
       setLogin(false);
-      setIsPending(false);
+      setIsPending(false); 
     } else {
       setLogin(false);
       setIsPending(false);

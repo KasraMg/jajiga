@@ -61,3 +61,12 @@ export async function getAllUsers() {
   });
   return res.json();
 }
+export async function getDashboardInfoes() {
+  const accessToken = Cookies.get("AccessToken");
+  const res = await fetch(`${baseUrl}/admin-panel`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  return res.json();
+}

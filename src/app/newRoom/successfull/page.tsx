@@ -22,8 +22,8 @@ const page = () => {
             src="https://img.icons8.com/3d-fluency/94/verified-account.png"
             alt="verified-account"
           />
-          <p className="mt-3 text-center text-xl sm:!text-2xl">
-            اقامتگاه شما با موفقیت ثبت شد
+          <p className="mt-3 text-center text-xl sm:!text-xl">
+            اقامتگاه شما با موفقیت ثبت شد و پس از تایید ادمین به لیست ویلا ها اضافه خواهد شد
           </p>
           <Link className="text-sx text-center text-blue-600" href={`/room/${villaId}`}>
             مشاهده اقامتگاه

@@ -109,7 +109,7 @@ const page = () => {
   };
 
   const formatNumber = (num: string) => {
-    return num.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return num.replace(/\B(?=(\d{3})+(?!\d))/g, ","); 
   };
 
   const unformatNumber = (num: string) => {

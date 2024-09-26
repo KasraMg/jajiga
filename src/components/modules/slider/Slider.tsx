@@ -3,13 +3,13 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { FC } from "react";
-import { SliderProps } from "@/src/types/Slider.types";
+import { SliderTypes } from "@/src/types/Slider.types";
 import "swiper/css";
 import "swiper/css/grid";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-const Slider: FC<SliderProps> = ({
+const Slider: FC<SliderTypes> = ({
   Card,
   breakPoints,
   navigation,

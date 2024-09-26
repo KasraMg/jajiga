@@ -1,16 +1,14 @@
- 
 import { IoStatsChart } from "react-icons/io5";
-const Box = ({ title, value }: { title: string; value: string }) => {
+const Box = ({ title, value }: { title: string; value: number | undefined }) => {
   return (
-    <div className='w-full p-4 bg-[#dc26261c] rounded-lg'>
+    <div className="w-full rounded-lg bg-[#dc26261c] p-4">
       <span>{value}</span>
-      <div className="flex justify-between items-center">
-        <p className="sm:!text-base text-xs">{title}</p>
-        <IoStatsChart className='text-red-600 text-2xl' />
+      <div className="flex items-center justify-between">
+        <p className="text-xs sm:!text-base">{title}</p>
+        <IoStatsChart className="text-2xl text-red-600" />
       </div>
     </div>
   );
 };
 
 export default Box;
- 

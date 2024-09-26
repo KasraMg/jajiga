@@ -30,7 +30,10 @@ const Details = (data: VillaResponse) => {
               : data.villa.aboutVilla.villaType.title}{" "}
             در {data.villa.address.city}
           </p>
-          <div className="mt-5 flex gap-x-1">
+          {data.villa.isAccepted === "rejected" ? (
+            <p className="text-red-600">رد شده</p>
+          ):(
+            <div className="mt-5 flex gap-x-1">
             <Badge bgColor="bg-customYellow">
               کد: ({data.villa._id.slice(18, 26)})
             </Badge>
@@ -39,6 +42,8 @@ const Details = (data: VillaResponse) => {
             {/* <Badge bgColor="bg-[#f1f1f1]">+300 رزرو موفق</Badge> */}
             {/* stars component */}
           </div>
+          )}
+          
         </div>
         <div className="h-[72px] w-[72px]">
           <Image

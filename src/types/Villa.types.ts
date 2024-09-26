@@ -47,7 +47,7 @@ export interface VillaDetails {
   };
   disable: boolean;
   finished: boolean;
-  booked: number;
+  booked: number | book[];
   averageScore: number;
   comments: number;
   facility: {
@@ -77,7 +77,7 @@ export interface VillaDetails {
   };
   step: number;
   updatedAt: string;
-  isAccepted: boolean;
+  isAccepted: string;
   isOwner: boolean;
   isWishes: boolean;
   user: {

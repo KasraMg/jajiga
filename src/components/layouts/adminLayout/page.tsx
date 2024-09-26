@@ -2,17 +2,20 @@
 import React, { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Cookies from "js-cookie";
-import Navbar from "../../templates/adminPanel/components/Navbar"; 
+import Navbar from "../../templates/adminPanel/components/Navbar";
 import Menu from "../../templates/adminPanel/components/Menu";
+import { authStore } from "@/src/stores/auth";
 const Layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   const router = useRouter();
+  const { userData, isPending  } = authStore((state) => state);
 
-  //   useEffect(() => {
-  //     const token = Cookies.get("AccessToken");
-  //     if (!token) {
-  //       router.replace("/login");
-  //     }
-  //   }, [router]);
+  useEffect(() => { 
+      if (userData?.statusCode === 200 && userData.user.role !== "admin") {
+        router.push("/");
+      }else if(!userData && !isPending ){
+        router.push("/");
+      }    
+  }, [isPending]);
 
   return (
     <div className="flex md:!bg-customYellow md:!pl-4">
