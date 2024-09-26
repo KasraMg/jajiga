@@ -12,117 +12,119 @@ import DataTable from "react-data-table-component";
 import Cookies from "js-cookie";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
 import swal from "sweetalert";
+import usePostData from "@/src/hooks/usePostData";
+import Loader, { ButtonLoader } from "@/src/components/modules/loader/Loader";
 
 const columns = [
   {
     name: "اطلاعات مالک",
-    selector: (row) => row.userData,
+    selector: (row: { userData: string }) => row.userData,
     sortable: true,
   },
   {
     name: "پیش نمایش",
-    selector: (row) => row.preview,
+    selector: (row: { preview: string }) => row.preview,
     sortable: true,
   },
   {
     name: "آدرس",
-    selector: (row) => row.address,
+    selector: (row: { address: string }) => row.address,
     sortable: true,
   },
   {
     name: "تعداد رزروها",
-    selector: (row) => row.reserves,
+    selector: (row: { reserves: string }) => row.reserves,
     sortable: true,
   },
   {
     name: "وضعیت",
-    selector: (row) => row.status,
+    selector: (row: { status: string }) => row.status,
     sortable: true,
   },
   {
     name: "زمان ثبت",
-    selector: (row) => row.register,
+    selector: (row: { register: string }) => row.register,
     sortable: true,
   },
   {
     name: "حذف ویلا",
-    selector: (row) => row.delete,
+    selector: (row: { delete: string }) => row.delete,
     sortable: true,
   },
 ];
-
-const data = [
-  {
-    id: 1,
-    userData: "john",
-    status: "active",
-    preview: "23243435343",
-    register: "2022/03/24",
-    address: "efefe",
-  },
-  {
-    id: 2,
-    userData: "john",
-    status: "active",
-    preview: "23243435343",
-    register: "2022/03/24",
-    address: "efefe",
-  },
-  {
-    id: 3,
-    userData: "john",
-    status: "active",
-    preview: "23243435343",
-    register: "2022/03/24",
-    address: "efefe",
-  },
-  {
-    id: 4,
-    userData: "john",
-    status: "active",
-    preview: "23243435343",
-    register: "2022/03/24",
-    address: "efefe",
-  },
-];
-
 const page = () => {
-  const { data: villas } = useGetData(["allVillas"], getAllVillas);
+  const { data: villas, isPending: getVillasPending } = useGetData(
+    ["allVillas"],
+    getAllVillas,
+  );
   const queryClient = useQueryClient();
-
+  const [roomStatusChange, setRoomStatusChange] = useState<
+    [] | [string, string]
+  >([]);
   let data = [];
-  console.log(villas);
+  const { mutate: mutation, isPending } = usePostData<any>(
+    `/villa/accessVisit/${roomStatusChange[0]}/${roomStatusChange[1]}`,
+    `ویلا با موفقیت ${roomStatusChange[0] === "accept" ? "تایید" : "رد"} شد`,
+    true,
+    null,
+    true,
+    "allVillas",
+  );
 
   useEffect(() => {
-    villas?.villas.map((villa: VillaDetails) =>
-      data.push({
-        userData: villa.user.firstName + " " + villa.user.lastName,
-        preview: <Link href={`/room/${villa._id}`}>مشاهده</Link>,
-        address: villa.address.state + "،" + villa.address.city,
-        reserves: 1,
-        status: villa.isAccepted ? (
+    const tableData = villas?.villas.map((villa: VillaDetails) => ({
+      userData: villa.user.firstName + " " + villa.user.lastName,
+      preview: <Link href={`/room/${villa._id}`}>مشاهده</Link>,
+      address: villa.address.state + "،" + villa.address.city,
+      reserves: villa.booked,
+      status:
+        villa.isAccepted === "true" ? (
           "تایید شده"
+        ) : villa.isAccepted === "rejected" ? (
+          <p>رد شده</p>
         ) : (
           <div className="flex gap-1">
-            <Button className="w-12 justify-center" variant={"blue"}>
-              تایید
+            <Button
+              onClick={() => {
+                setRoomStatusChange(["accept", villa._id]);
+                mutation(null);
+              }}
+              className="h-8 w-12 justify-center"
+              variant={"blue"}
+            >
+              {roomStatusChange[0] == "accept" && isPending ? (
+                <ButtonLoader />
+              ) : (
+                "تایید"
+              )}
             </Button>
-            <Button className="w-12 justify-center" variant={"danger"}>
-              رد
+            <Button
+              onClick={() => {
+                setRoomStatusChange(["reject", villa._id]);
+                mutation(null);
+              }}
+              className="h-8 w-12 justify-center"
+              variant={"danger"}
+            >
+              {roomStatusChange[0] === "reject" && isPending ? (
+                <ButtonLoader />
+              ) : (
+                "رد"
+              )}
             </Button>
           </div>
         ),
-        register: convertToJalali(villa.createdAt.slice(0, 10)),
-        delete: (
-          <Button
-            onClick={() => villaDeleteHandler(villa._id)}
-            variant={"danger"}
-          >
-            حذف
-          </Button>
-        ),
-      }),
-    );
+      register: convertToJalali(villa.createdAt.slice(0, 10)),
+      delete: (
+        <Button
+          onClick={() => villaDeleteHandler(villa._id)}
+          variant={"danger"}
+        >
+          حذف
+        </Button>
+      ),
+    }));
+    data = tableData;
   }, [villas]);
 
   const [pending, setPending] = useState(true);
@@ -136,7 +138,7 @@ const page = () => {
 
   const accessToken = Cookies.get("AccessToken");
 
-  const mutation = useMutation({
+  const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
       return await fetch(`${baseUrl}/villa/delete/${id}`, {
         method: "DELETE",
@@ -147,10 +149,8 @@ const page = () => {
     },
     onSuccess: (data) => {
       console.log(data);
-
       if (data.statusCode === 200) {
         queryClient.invalidateQueries({ queryKey: ["allVillas"] });
-
         toast({
           variant: "success",
           title: "ویلا با موفقیت حذف شد",
@@ -166,7 +166,7 @@ const page = () => {
       buttons: ["نه", "آره"],
     }).then((res) => {
       if (res) {
-        mutation.mutate(id);
+        deleteMutation.mutate(id);
       }
     });
   };
@@ -180,12 +180,13 @@ const page = () => {
         </div>
       </div>
       <DataTable
-        columns={columns}
+        columns={columns as any}
         data={rows}
         progressPending={pending}
         progressComponent={".... "}
         pagination
       />
+      {getVillasPending && <Loader />}
     </Layout>
   );
 };

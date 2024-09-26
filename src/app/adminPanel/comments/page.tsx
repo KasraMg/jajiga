@@ -1,10 +1,9 @@
 "use client";
 import Layout from "@/src/components/layouts/adminLayout/page";
-import { Button } from "@/src/components/shadcn/ui/button";
+import Loader, { ButtonLoader } from "@/src/components/modules/loader/Loader";
 import useGetData from "@/src/hooks/useGetData";
 import usePostData from "@/src/hooks/usePostData";
 import { getAllComments } from "@/src/utils/fetchs";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import swal from "sweetalert";
@@ -12,32 +11,32 @@ import swal from "sweetalert";
 const columns = [
   {
     name: "نویسنده",
-    selector: (row) => row.userData,
+    selector: (row: { userData: string }) => row.userData,
     sortable: true,
   },
   {
     name: "پیش نمایش",
-    selector: (row) => row.preview,
+    selector: (row: { preview: string }) => row.preview,
     sortable: true,
   },
   {
     name: "اقامتگاه",
-    selector: (row) => row.room,
+    selector: (row: { room: string }) => row.room,
     sortable: true,
   },
   {
     name: "زمان ثبت",
-    selector: (row) => row.register,
+    selector: (row: { register: string }) => row.register,
     sortable: true,
   },
   {
     name: "وضعیت",
-    selector: (row) => row.status,
+    selector: (row: { status: string }) => row.status,
     sortable: true,
   },
   {
     name: "حذف",
-    selector: (row) => row.delete,
+    selector: (row: { delete: string }) => row.delete,
     sortable: true,
   },
 ];
@@ -50,65 +49,76 @@ const showBodyHandler = (body: string) => {
 };
 
 const page = () => {
-  const {
-    data: comments,
-  } = useGetData(["comments"], getAllComments);
+  const { data: comments, isPending: getCommentsPending } = useGetData(
+    ["comments"],
+    getAllComments,
+  );
   let data = [];
   console.log(comments);
   const [commentStatusChange, setCommentStatusChange] = useState<
     [] | [string, string]
   >([]);
   const { mutate: mutation, isPending } = usePostData<any>(
-    `/comment/${commentStatusChange[0] === "accept" ? "accept" : "reject"}/${commentStatusChange[1]}`,
+    `/comment/${commentStatusChange[0]}/${commentStatusChange[1]}`,
     `کامنت با موفقیت ${commentStatusChange[0] === "accept" ? "تایید" : "رد"} شد`,
     true,
     null,
+    true,
+    "comments",
   );
 
   useEffect(() => {
-    comments?.comment.map((comment) =>
-      data.push({
-        userData: `${comment.creator.firstName} مشگل کشا`,
-        preview: (
-          <Button
-            onClick={() => showBodyHandler(comment.body)}
-            variant={"blue"}
-          >
-            مشاهده
-          </Button>
-        ),
-        room: <Link href={`/room/${comment._id}`}>مشاهده</Link>,
-        register: comment.date,
-        status:
-          comment.isAccept === 1 ? (
-            "تایید شده"
-          ) : (
-            <div className="flex gap-1">
-              <Button
-                onClick={() => {
-                  setCommentStatusChange(["accept", comment._id]);
-                  mutation(null);
-                }}
-                className="w-12 justify-center"
-                variant={"blue"}
-              >
-                تایید
-              </Button>
-              <Button
-                onClick={() => {
-                  setCommentStatusChange(["reject", comment._id]);
-                  mutation(null);
-                }}
-                className="w-12 justify-center"
-                variant={"danger"}
-              >
-                رد
-              </Button>
-            </div>
-          ),
-        delete: <Button variant={"danger"}>حذف</Button>,
-      }),
-    );
+    // const tableData = comments?.comment.map((comment) => ({
+    //   userData: `${comment.creator.firstName} مشگل کشا`,
+    //   preview: (
+    //     <Button onClick={() => showBodyHandler(comment.body)} variant={"blue"}>
+    //       مشاهده
+    //     </Button>
+    //   ),
+    //   room: <Link href={`/room/${comment._id}`}>مشاهده</Link>,
+    //   register: comment.date,
+    //   status:
+    //     comment.isAccept === "true" ? (
+    //       "تایید شده"
+    //     ) : comment.isAccept === "rejected" ? (
+    //       <p>رد شده</p>
+    //     ) : (
+    //       <div className="flex gap-1">
+    //         <Button
+    //           onClick={() => {
+    //             setCommentStatusChange(["accept", comment._id]);
+    //             mutation(null);
+    //           }}
+    //           className="h-8 w-12 justify-center"
+    //           variant={"blue"}
+    //         >
+    //           {commentStatusChange[0] === "accept" && isPending ? (
+    //             <ButtonLoader />
+    //           ) : (
+    //             "تایید"
+    //           )}
+    //         </Button>
+    //         <Button
+    //           onClick={() => {
+    //             setCommentStatusChange(["reject", comment._id]);
+    //             mutation(null);
+    //           }}
+    //           className="h-8 w-12 justify-center"
+    //           variant={"danger"}
+    //         >
+    //           {commentStatusChange[0] === "reject" && isPending ? (
+    //             <ButtonLoader />
+    //           ) : (
+    //             "رد"
+    //           )}
+    //         </Button>
+    //       </div>
+    //     ),
+    //   delete: <Button variant={"danger"}>حذف</Button>,
+    // }));
+    // data = tableData;
+    // console.log(tableData);
+    console.log(comments);
   }, [comments]);
 
   const [pending, setPending] = useState(true);
@@ -129,12 +139,13 @@ const page = () => {
         </div>
       </div>
       <DataTable
-        columns={columns}
+        columns={columns as any}
         data={rows}
         progressPending={pending}
         progressComponent={".... "}
         pagination
       />
+      {getCommentsPending && <Loader />}
     </Layout>
   );
 };

@@ -6,23 +6,20 @@ import Link from "next/link";
 import { BsFillInfoCircleFill } from "react-icons/bs";
 import ReservationModal from "./components/ReservationModal";
 import { Button } from "@/src/components/shadcn/ui/button";
-import {
-  VillaDetails,
-  VillaResponse,
-  userDateSelectData,
-} from "@/src/types/Villa.types";
+import { VillaResponse, userDateSelectData } from "@/src/types/Villa.types";
 import { roomStore } from "@/src/stores/room";
 import { useParams } from "next/navigation";
-import { baseUrl, todayVillaPrice } from "@/src/utils/utils";
+import { todayVillaPrice } from "@/src/utils/utils";
 import usePostData from "@/src/hooks/usePostData";
-import { ButtonLoader } from "@/src/components/modules/loader/Loader";
+import Loader, { ButtonLoader } from "@/src/components/modules/loader/Loader";
 import ReservationStepper from "./components/ReservationStepper";
 import { authStore } from "@/src/stores/auth";
 import { book } from "@/src/types/Auth.types";
+import { toast } from "@/src/components/shadcn/ui/use-toast";
+import useDeleteData from "@/src/hooks/useDeleteData";
 
 const Reservation = (data: VillaResponse) => {
   const [reserveData, setReserveData] = useState<null | book>(null);
-
   const [countSelectedOption, setCountSelectedOption] = useState<{
     label: string;
     value: string;
@@ -33,9 +30,7 @@ const Reservation = (data: VillaResponse) => {
     (state) => state,
   );
   const { login, userData } = authStore((state) => state);
-
   const [disable, setDisable] = useState(true);
-
   const [userSelectData, setUserSelectData] =
     useState<userDateSelectData | null>();
   const successFunc = (data: userDateSelectData) => {
@@ -43,7 +38,6 @@ const Reservation = (data: VillaResponse) => {
       setUserSelectData(data);
     }
   };
-
   const price = todayVillaPrice(data.villa.price);
   const userCountOptions: {
     label: string;
@@ -63,6 +57,12 @@ const Reservation = (data: VillaResponse) => {
     false,
     successFunc,
   );
+  const { mutate: deleteMutation, isPending: deleteMutationPending } =
+    useDeleteData(
+      `/villa/delete/${data.villa._id}`,
+      "ویلا با موفقیت حذف شد",
+      "villa",
+    );
 
   useEffect(() => {
     if (userSelectData) setDisable(false);
@@ -108,23 +108,75 @@ const Reservation = (data: VillaResponse) => {
           </div>
         </div>
         {data.villa.isOwner ? (
-          <div className="rounded-b-2xl px-4 py-[14px] shadow-lg">
-            <Link
-              href={"/all"}
-              className="block text-center text-xs text-red-600"
-            >
-              برای مشاهده رزرو ها کلیک کنید
-            </Link>
-            <Link href={`/room/edit/${data.villa._id}`}>
+          data.villa.isAccepted === "true" ? (
+            <div className="rounded-b-2xl px-4 py-[14px] shadow-lg">
+              <Link
+                href={"/all"}
+                className="block text-center text-xs text-red-600"
+              >
+                برای مشاهده رزرو ها کلیک کنید
+              </Link>
+              <Link href={`/room/edit/${data.villa._id}`}>
+                <Button
+                  variant={"yellow"}
+                  className="mt-5 w-full justify-center rounded-full text-center"
+                >
+                  <span>ویرایش اقامتگاه </span>
+                </Button>
+              </Link>
+            </div>
+          ) : data.villa.isAccepted === "rejected" ? (
+            <div className="space-y-3 rounded-b-2xl p-3 text-center text-sm shadow-lg">
+              <p className="text-red-600">
+                این اقامتگاه به دلایلی توسط ادمین سایت رد شده است
+              </p>
+              <p>
+                در صورت اعتراض یا هرگونه انتقاد با{" "}
+                <Link className="text-blue-600" href={"/support"}>
+                  پشتیبان سایت
+                </Link>{" "}
+                در ارتباط باشید
+              </p>
               <Button
-                variant={"yellow"}
+                variant={"danger"}
+                onClick={() => deleteMutation()}
                 className="mt-5 w-full justify-center rounded-full text-center"
               >
-                <span>ویرایش اقامتگاه </span>
+                <span>حذف اقامتگاه</span>
               </Button>
-            </Link>
-          </div>
-        ) : (
+            </div>
+          ) : (
+            <div className="space-y-3 rounded-b-2xl p-3 text-sm shadow-lg">
+              <p>
+                اقامتگاه شما هنوز توسط ادمین سایت{" "}
+                <span className="text-red-600"> تایید نشده </span> است
+              </p>
+              <p>
+                برای ورود به پنل ادمین شماره 09046417084 رو وارد و سپس ورود با
+                رمز عبور رو انتخاب کنید
+              </p>
+              <p>
+                رمز ورود{" "}
+                <span
+                  onClick={() => {
+                    navigator.clipboard
+                      .writeText("jajigaAdmin2024")
+                      .then(() => {
+                        toast({
+                          variant: "success",
+                          title: "رمز با موفقیت کپی شد",
+                        });
+                      });
+                  }}
+                  className="cursor-pointer text-red-600"
+                >
+                  jajigaAdmin2024
+                </span>{" "}
+                است و سپس اقامتگاه خودتان را تایید کنید
+              </p>
+            </div>
+          )
+        ) : data.villa.isAccepted === "true" ? (
           <div className="rounded-b-2xl px-4 py-[14px] shadow-lg">
             <p className="font-vazir mb-2 text-sm font-light text-[#252a31]">
               {reserveData ? "تاریخ رزرو شما" : " تاریخ سفر"}
@@ -158,7 +210,6 @@ const Reservation = (data: VillaResponse) => {
             <p className="font-vazir mb-2 mt-8 text-sm font-light text-[#252a31]">
               تعداد نفرات
             </p>
-
             <Select
               defaultValue={countSelectedOption}
               onChange={setCountSelectedOption as any}
@@ -385,36 +436,108 @@ const Reservation = (data: VillaResponse) => {
               </Button>
             </Link>
           </div>
+        ) : (
+          <div className="space-y-3 rounded-b-2xl p-3 text-sm shadow-lg">
+            {data.villa.isAccepted === "rejected" ? (
+              <p className="text-center">
+                این اقامتگاه توسط ادمین <span className="text-red-600">رد</span>{" "}
+                شده است
+              </p>
+            ) : (
+              <>
+                <p>
+                  ادمین محترم این اقامتگاه هنوز توسط شما{" "}
+                  <span className="text-red-600">تایید نشده</span> است
+                </p>
+                <p>
+                  به{" "}
+                  <Link className="text-blue-600" href={"/adminPanel/rooms"}>
+                    داشبورد
+                  </Link>{" "}
+                  مراجعه کرده و این اقامتگاه را رد یا تایید کنید.
+                </p>
+              </>
+            )}
+          </div>
         )}
       </div>
       <div className="fixed bottom-16 block w-full px-5 md:!hidden">
-        <div className="z-[999] flex w-full items-center justify-between rounded-lg bg-[#00000099] px-2 py-3 text-white">
-          <div>
-            <p className="text-xs">
-              هر شب از <span className="text-sm">{price}</span> تومان{" "}
-            </p>
-            <Link
-              className="flex flex-row-reverse items-center justify-end gap-2 text-sm"
-              href={"/faq"}
-            >
-              راهنمای رزرو <BsFillInfoCircleFill />{" "}
-            </Link>
-          </div>
-          {data.villa.user._id === userData?.user._id ? (
-            <Link href={`/room/edit/${data.villa._id}`}>
-              <Button
-                variant={"yellow"}
-                className="w-full justify-center rounded-full text-center"
-              >
-                <span>ویرایش اقامتگاه </span>
-              </Button>
-            </Link>
+        <div className="z-[999] flex w-full items-center justify-between rounded-lg bg-[#000000ba] px-2 py-3 text-white">
+          {data.villa.isAccepted === "rejected" ? (
+            <div className="text-xs">
+              <p className="text-customYellow">
+                این اقامتگاه به دلایلی توسط ادمین سایت رد شده است
+              </p>
+              <p className="mt-2">
+                در صورت اعتراض یا هرگونه انتقاد با{" "}
+                <Link className="text-blue-600" href={"/support"}>
+                  پشتیبان سایت
+                </Link>{" "}
+                در ارتباط باشید
+              </p>
+            </div>
+          ) : data.villa.isAccepted === "true" ? (
+            <>
+              <div>
+                <p className="text-xs">
+                  هر شب از <span className="text-sm">{price}</span> تومان{" "}
+                </p>
+                <Link
+                  className="flex flex-row-reverse items-center justify-end gap-2 text-sm"
+                  href={"/faq"}
+                >
+                  راهنمای رزرو <BsFillInfoCircleFill />{" "}
+                </Link>
+              </div>
+              {data.villa.user._id === userData?.user._id ? (
+                <Link href={`/room/edit/${data.villa._id}`}>
+                  <Button
+                    variant={"yellow"}
+                    className="w-full justify-center rounded-full text-center"
+                  >
+                    <span>ویرایش اقامتگاه </span>
+                  </Button>
+                </Link>
+              ) : (
+                <ReservationModal
+                  data={data.villa}
+                  count={data.villa.capacity.maxCapacity as number}
+                />
+              )}
+            </>
           ) : (
-            <ReservationModal
-              data={data.villa}
-              count={data.villa.capacity.maxCapacity as number}
-            />
+            <div className="space-y-2 text-xs">
+              <p>
+                اقامتگاه شما هنوز توسط ادمین سایت{" "}
+                <span className="text-customYellow"> تایید نشده </span> است
+              </p>
+              <p>
+                برای ورود به پنل ادمین شماره 09046417084 رو وارد و سپس ورود با
+                رمز عبور رو انتخاب کنید
+              </p>
+              <p>
+                رمز ورود{" "}
+                <span
+                  onClick={() => {
+                    navigator.clipboard
+                      .writeText("jajigaAdmin2024")
+                      .then(() => {
+                        toast({
+                          variant: "success",
+                          title: "رمز با موفقیت کپی شد",
+                        });
+                      });
+                  }}
+                  className="cursor-pointer text-customYellow"
+                >
+                  jajigaAdmin2024
+                </span>{" "}
+                است و سپس اقامتگاه خودتان را تایید کنید
+              </p>
+            </div>
           )}
+
+          {deleteMutationPending && <Loader />}
         </div>
       </div>
     </>

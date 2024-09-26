@@ -36,14 +36,12 @@ const ReservationStepper: FC<ReservationStepperProps> = ({
   totalPrice,
   data, 
 }) => {
-  const [open, setOpen] = useState(false);
-  const router = useRouter();
+  const [open, setOpen] = useState(false); 
   const { login } = authStore((state) => state);
   const queryClient = useQueryClient();
 
   const successFunc = (data: { statusCode: number }) => {
-    console.log("data", data);
-
+    console.log("data", data); 
     if (data.statusCode === 200) {
       toast({
         variant: "success",
@@ -51,8 +49,7 @@ const ReservationStepper: FC<ReservationStepperProps> = ({
       });
       queryClient.invalidateQueries({ queryKey: ["villa"] });
       queryClient.invalidateQueries({ queryKey: ["auth"] });
-      setOpen(false); 
-      router.push("/reserves");
+      setOpen(false);  
     } else if (data.statusCode === 422) {
       toast({
         variant: "danger",
@@ -63,7 +60,7 @@ const ReservationStepper: FC<ReservationStepperProps> = ({
         variant: "danger",
         title: "فرایند  رزرو موفقیت آمیز نبود ",
       });
-      // location.reload();
+      location.reload();
     }
   };
 

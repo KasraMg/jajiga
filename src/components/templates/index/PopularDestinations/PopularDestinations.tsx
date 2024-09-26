@@ -10,10 +10,7 @@ const PopularDestinations = () => {
     ["popularDestinations"],
     getPopularDestinations,
   );
-
-  console.log(data);
   
-
   return (
     <section className="py-5 text-right">
       <p className="mb-5 text-xl text-black">مقاصد پر طرفدار</p>
@@ -39,7 +36,7 @@ const PopularDestinations = () => {
         modules={[Grid, Navigation]}
         className="PopularSwiper mx-auto !h-[230px] w-full sm:!h-[260px] sm:!pl-[9px] lg:!h-[365px]"
       >
-        {data.sortedCities.map(
+        {data?.sortedCities.map(
           (city: {
             cover: string;
             persianTitle: string;

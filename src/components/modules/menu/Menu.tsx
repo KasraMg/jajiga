@@ -24,13 +24,14 @@ import { AiOutlineLogout } from "react-icons/ai";
 import { useLogoutHandler } from "@/src/utils/auth";
 import Image from "next/image";
 import { baseUrl } from "@/src/utils/utils";
-import { usePathname } from 'next/navigation';
+import { usePathname } from "next/navigation";
+import { RiAdminLine } from "react-icons/ri";
 function Menu({ isSticky }: any) {
   const { userData, login } = authStore((state) => state);
   const logoutHandler = useLogoutHandler();
   const [smallAvatarLoading, setSmallAvatarLoading] = useState(true);
   const [largeAvatarLoading, setLargeAvatarLoading] = useState(true);
- 
+
   const pathname = usePathname();
 
   const navLinks = [
@@ -62,6 +63,13 @@ function Menu({ isSticky }: any) {
     },
   ];
 
+  if (userData?.user.role === "admin") {
+    navLinks.splice(1, 0, {
+      name: "داشبورد ادمین",
+      path: "/adminPanel/dashboard",
+      icon: <RiAdminLine className="text-xl" />,
+    });
+  }
   if (login) {
     navLinks.splice(1, 0, {
       name: "علاقه مندی ها",
@@ -190,7 +198,7 @@ function Menu({ isSticky }: any) {
             {navLinks.map((link) => (
               <Link
                 href={link.path}
-                className={`${pathname === link.path ? 'bg-[#f5f5f5]' :null} font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl  py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]`}
+                className={`${pathname === link.path ? "bg-[#f5f5f5]" : null} font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]`}
               >
                 {link.icon}
                 <span className="mt-1 text-sm">{link.name}</span>

@@ -1,15 +1,24 @@
+"use client"
 import Layout from "@/src/components/layouts/adminLayout/page";
+import Loader from "@/src/components/modules/loader/Loader";
 import Box from "@/src/components/templates/adminPanel/dashboard/Box";
 import Chart from "@/src/components/templates/adminPanel/dashboard/Chart";
+import useGetData from "@/src/hooks/useGetData";
+import { dashboardTypes } from "@/src/types/AdminPanel.types";
+import { getDashboardInfoes } from "@/src/utils/fetchs";
 
 const page = () => {
+  const { data, isPending } = useGetData<dashboardTypes>(["dashboard"], getDashboardInfoes);
+console.log(data);
+ 
+
   return (
     <Layout>
       <section className="mt-7 xl:!flex grid lg:!grid-cols-[auto,auto,auto] grid-cols-[auto,auto] xl:justify-between gap-4">
-        <Box title="مجموع اقامتگاه ها" value="5005" />
-        <Box title="مجموع کل رزرو ها" value="9990" />
-        <Box title="مجموع کتگوری ها" value="333" />
-        <Box title="مجموع کاربر های سایت" value="10" />
+        <Box title="مجموع اقامتگاه ها" value={data?.villasCount} />
+        <Box title="مجموع کل رزرو ها" value={data?.booksCount} />
+        <Box title="مجموع کتگوری ها" value={data?.categoriesCount} />
+        <Box title="مجموع کاربر های سایت" value={data?.usersCount} />
       </section>
 
       <div className="relative my-10">
@@ -62,10 +71,12 @@ const page = () => {
             </tbody>
           </table>
         </div>
-        <Chart />
+        <Chart {...data}/>
+        {isPending && <Loader />}
       </div>
     </Layout>
   );
 };
 
 export default page;
+ 

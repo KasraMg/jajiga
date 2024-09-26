@@ -4,7 +4,7 @@ type Breakpoints = {
         spaceBetween: number
     }
 }
-export interface SliderProps {
+export interface SliderTypes {
     className?: string,
     breakPoints: Breakpoints,
     navigation:boolean,

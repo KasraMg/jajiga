@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 const Villas = () => {
   const [showUnComplatePosts, setShowUnComplatePosts] = useState(false);
   const { userData } = authStore((state) => state);
- 
+
   return (
     <Container disableFooter={true}>
       <Breadcrumb className="!pb-[80px]" route={"اقامتگاه ها"} />
@@ -50,13 +50,17 @@ const Villas = () => {
               {userData?.villas.length ? (
                 <>
                   {showUnComplatePosts ? (
-                    <div className="grid !grid-cols-[auto] gap-4 md:!grid-cols-[auto,auto] xl:!grid-cols-[auto,auto,auto]">
+                    <>
                       {userData?.villas?.filter(
                         (villa: VillaDetails) => !villa.finished,
                       ).length ? (
-                        userData.villas?.map((villa: VillaDetails) =>
-                          !villa.finished ? <Card key={villa._id} {...villa} /> : null,
-                        )
+                        <div className="grid !grid-cols-[auto] gap-4 md:!grid-cols-[auto,auto] xl:!grid-cols-[auto,auto,auto]">
+                          {userData.villas?.map((villa: VillaDetails) =>
+                            !villa.finished ? (
+                              <Card key={villa._id} {...villa} />
+                            ) : null,
+                          )}
+                        </div>
                       ) : (
                         <div className="text-center">
                           <Image
@@ -69,22 +73,20 @@ const Villas = () => {
                             width={1000}
                           />
                           <p className="text-2xl font-medium">
-                           اقامتگاهی یافت نشد.
+                            اقامتگاهی یافت نشد.
                           </p>
                         </div>
                       )}
+                    </>
+                  ) : userData.villas.length ? (
+                    <div className="grid !grid-cols-[auto] gap-4 md:!grid-cols-[auto,auto] xl:!grid-cols-[auto,auto,auto]">
+                      {userData.villas?.map((villa: VillaDetails) => (
+                        <Card key={villa._id} {...villa} />
+                      ))}
                     </div>
                   ) : (
-                    <div className="grid !grid-cols-[auto] gap-4 md:!grid-cols-[auto,auto] xl:!grid-cols-[auto,auto,auto]">
-                      {userData.villas.length ? (
-                        userData.villas?.map((villa: VillaDetails) => (
-                          <Card key={villa._id} {...villa} />
-                        ))
-                      ) : (
-                        <div className="mx-auto mt-16 p-4 text-center">
-                          <p>آگهی ای موجود نیست</p>
-                        </div>
-                      )}
+                    <div className="mx-auto mt-16 p-4 text-center">
+                      <p>آگهی ای موجود نیست</p>
                     </div>
                   )}
                 </>

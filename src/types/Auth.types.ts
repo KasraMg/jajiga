@@ -13,9 +13,9 @@ export interface userInfoObj {
   refreshToken: string;
   role: string;
   updatedAt: string;
-  _id:string
-  villa:{id:string[],number:number}
-  booked:{id:string[],number:number}
+  _id: string;
+  villa: { id: string[]; number: number };
+  booked: { id: string[]; number: number };
 }
 
 export interface userObj {
@@ -23,21 +23,24 @@ export interface userObj {
   statusCode: number;
   user: userInfoObj;
   villas: VillaDetails[];
-  booked :book[];
-  wishes:VillaDetails[]
+  booked: book[];
+  wishes: VillaDetails[];
 }
 
 export interface book {
-  villa:VillaDetails;
+  villa: VillaDetails;
   createdAt: string;
   date: {
-      from: string;
-      to: string;
+    from: string;
+    to: string;
   };
   updatedAt: string;
-  user: string; 
-  guestNumber:number;
-  price:string;
-  days:number;
+  user: {
+    firstName: string;
+    lastName: string;
+  };
+  guestNumber: number;
+  price: string;
+  days: number;
   _id: string;
 }

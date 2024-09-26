@@ -7,39 +7,21 @@ import { formatNumber } from "@/src/utils/utils";
 import Link from "next/link";
 import { FaTrash } from "react-icons/fa";
 import usePostData from "@/src/hooks/usePostData";
-import { ButtonLoader } from "../loader/Loader";
-import { toast } from "../../shadcn/ui/use-toast";
-import { useQueryClient } from "@tanstack/react-query";
+import { ButtonLoader } from "../loader/Loader";  
 
 interface CardProps {
   className?: string;
   data: VillaDetails;
   wishes?: boolean;
 }
-const Card: FC<CardProps> = ({ data, className, wishes }) => {
-  const queryClient = useQueryClient(); 
-
-  const successFunc = (res: { statusCode: number }) => {
-    if (res.statusCode === 200) {
-      toast({
-        variant: "success",
-        title: "اقامتگاه با موفقیت از علاقه مندی های شما حذف شد",
-      });
-      queryClient.invalidateQueries({ queryKey: ["wishes"] });
-    } else {
-      toast({
-        variant: "success",
-        title: "خطایی غیر منتظره رخ داد",
-      });
-      location.reload();
-    }
-  };
-
+const Card: FC<CardProps> = ({ data, className, wishes }) => { 
   const { mutate: mutation, isPending } = usePostData<any>(
     `/wishes/${data._id}`,
+    "اقامتگاه با موفقیت از علاقه مندی های شما حذف شد",
+    false,
     null,
     false,
-    successFunc,
+    "wishes",
   );
 
   const deleteFromWishesHandler = () => {
@@ -87,11 +69,11 @@ const Card: FC<CardProps> = ({ data, className, wishes }) => {
               : data.aboutVilla.villaType.title}{" "}
             در {data.address.city}
           </Link>
-          {data.booked !==  0 &&(
-              <p className="text-xs font-light text-[#939cae]">
-                +{data.booked} رزرو موفق
-              </p>
-            )}
+          {data.booked !== 0 && (
+            <p className="text-xs font-light text-[#939cae]">
+              +{data.booked} رزرو موفق
+            </p>
+          )}
         </div>
 
         <div className="mt-1 flex items-center gap-1 text-xs font-light text-[#939cae]">

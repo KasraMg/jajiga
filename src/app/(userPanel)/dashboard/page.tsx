@@ -14,8 +14,9 @@ import Rooms from "@/src/components/templates/userPanel/dashboard/Rooms";
 import { useLogoutHandler } from "@/src/utils/auth";
 import { authStore } from "@/src/stores/auth";
 import Layout from "@/src/components/layouts/userLayout/Layout";
+import { TbHomePlus } from "react-icons/tb";
 const Dashboard = () => {
-  const logoutHandler = useLogoutHandler(); 
+  const logoutHandler = useLogoutHandler();
   const { userData } = authStore((state) => state);
   return (
     <Container disableFooter={true}>
@@ -53,7 +54,7 @@ const Dashboard = () => {
             <div className="px-2 pt-4">
               <Link className="flex justify-start gap-2" href={"/profile"}>
                 <RiUpload2Line className="text-2xl" />
-                <p>انتخاب تصویر</p>
+                <p>انتخاب تصویر</p> 
               </Link>
               <Link className="mt-5 flex justify-start gap-2" href={"/"}>
                 <GoHome className="text-2xl" />
@@ -63,11 +64,11 @@ const Dashboard = () => {
                 className="mt-5 flex justify-start gap-2"
                 href={"/reserves"}
               >
-                <RiUpload2Line className="text-2xl" />
+                <TbHomePlus className="text-2xl" />
                 <p>رزرو ها</p>
               </Link>
               <Link className="mt-5 flex justify-start gap-2" href={"/all"}>
-                <RiUpload2Line className="text-2xl" />
+                <TbHomePlus className="text-2xl" />
                 <p>اقامتگاه ها</p>
               </Link>
               <div

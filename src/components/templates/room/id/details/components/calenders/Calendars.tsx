@@ -75,7 +75,7 @@ const Calendars = (data: VillaResponse) => {
     if (userData) {
       const reserve = userData.booked.find(
         (book) => book.villa._id === params.id,
-      ); 
+      );
       if (reserve) {
         setReserveData(reserve);
       } else setReserveData(null);
@@ -84,7 +84,7 @@ const Calendars = (data: VillaResponse) => {
 
   const isDateInRange = (today: any, from: string, to: string) => {
     const todayDate = jalaali.toGregorian(
-      ...convertNumbers(`${today}`, true).split("/").map(Number),
+      ...convertNumbers(`${today}`, true).split("/").map(Number) ,
     );
     const startDate = jalaali.toGregorian(...from.split("/").map(Number));
     const endDate = jalaali.toGregorian(...to.split("/").map(Number));
@@ -117,8 +117,7 @@ const Calendars = (data: VillaResponse) => {
             isDateInRange(date, reserveData.date.from, reserveData.date.to)
               ? (isYourRange = true)
               : (isYourRange = false);
-          }
-
+          } 
           data.bookDate.forEach((range) => {
             if (isDateInRange(date, range.date.from, range.date.to)) {
               isInRange = true;
@@ -193,11 +192,14 @@ const Calendars = (data: VillaResponse) => {
             style: {
               color,
             },
-            disabled: data.villa.isOwner || isInRange || reserveData,
+            disabled:
+              data.villa.isOwner ||
+              isInRange ||
+              reserveData ||
+              data.villa.isAccepted !== "true",
           };
         }}
-      />
-
+      /> 
       <div className="mt-4 flex justify-between">
         <Sheet>
           <SheetTrigger asChild>
@@ -300,8 +302,7 @@ const Calendars = (data: VillaResponse) => {
             پاک کردن
           </div>
         )}
-      </div>
-
+      </div> 
       {reserveData && (
         <p className="mt-2 text-xs text-red-600">
           بیش از 1 رزرو برای ویلا نمیتونید داشته باشید
