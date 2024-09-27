@@ -34,17 +34,19 @@ const usePostData = <T extends object>(
       if (successFunc) {
         successFunc(data);
       }
+      if (data.statusCode === 200) {
+        queryUpdate &&
+          queryClient.invalidateQueries({ queryKey: [queryUpdate] });
+      }
       if (successMsg && data.statusCode === 200) {
         toast({
           variant: "success",
           title: successMsg,
         });
-        queryUpdate &&
-          queryClient.invalidateQueries({ queryKey: [queryUpdate] });
       }
     },
     onError: (data) => {
-      console.log(data); 
+      console.log(data);
       toast({
         variant: "danger",
         title: "خطایی غیر منتظره رخ داد",

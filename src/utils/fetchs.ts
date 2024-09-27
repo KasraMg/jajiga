@@ -70,3 +70,12 @@ export async function getDashboardInfoes() {
   });
   return res.json();
 }
+export async function getAllCategories() {
+  const accessToken = Cookies.get("AccessToken");
+  const res = await fetch(`${baseUrl}/category/getAll`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  return res.json();
+}
