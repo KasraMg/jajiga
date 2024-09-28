@@ -6,7 +6,6 @@ import usePostData from "@/src/hooks/usePostData";
 import { userInfoObj } from "@/src/types/Auth.types";
 import { getAllUsers } from "@/src/utils/fetchs";
 import { convertToJalali } from "@/src/utils/utils";
-import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import swal from "sweetalert";
@@ -17,49 +16,8 @@ import {
 } from "@/src/components/shadcn/ui/dialog";
 import Link from "next/link";
 import Loader, { ButtonLoader } from "@/src/components/modules/loader/Loader";
-
-const columns = [
-  {
-    name: "کاربر",
-    selector:(row: { userData: string }) => row.userData,
-    sortable: true,
-  },
-  {
-    name: "شماره",
-    selector:(row: { phone: string }) => row.phone,
-    sortable: true,
-  },
-  {
-    name: "تعداد اقامتگاه",
-    selector:(row: { rooms: string }) => row.rooms,
-    sortable: true,
-  },
-  {
-    name: "تاریخ عضویت",
-    selector:(row: { register: string }) => row.register,
-    sortable: true,
-  },
-  {
-    name: "تعداد رزرو",
-    selector:(row: { reserves: string }) => row.reserves,
-    sortable: true,
-  },
-  {
-    name: "سطح",
-    selector:(row: { role: string }) => row.role,
-    sortable: true,
-  },
-  {
-    name: "تغییر سطح",
-    selector:(row: { changeRole: string }) => row.changeRole,
-    sortable: true,
-  },
-  {
-    name: "بن",
-    selector:(row: { ban: string }) => row.ban,
-    sortable: true,
-  },
-];
+import { userColumns } from "@/src/utils/dataTableColumns";
+import UserBanModal from "@/src/components/templates/adminPanel/users/UserBanModal";
 
 const page = () => {
   const { data: users, isPending: getUsersPending } = useGetData(
@@ -68,28 +26,16 @@ const page = () => {
   );
   const [userInfoRoleChange, setUserInfoRoleChange] = useState<any>([]);
   let data = [];
-
-  const params = useParams();
+console.log(users);
 
   const { mutate: mutation, isPending } = usePostData<any>(
     `/user/changeRole/${userInfoRoleChange[0]}/${userInfoRoleChange[1]}`,
     "تغییر سطح کاربر با موفقیت انجام شد",
     false,
     null,
-    true,
+    false,
     "users",
-  );
-
-  const banHandler = (userId: string) => {
-    swal({
-      title: `آیا از بن این کاربر مطمئن هستید؟`,
-      icon: "warning",
-      buttons: ["نه", "اره"],
-    }).then((result) => {
-      if (result) {
-      }
-    });
-  };
+  ); 
 
   const changeRole = (role: any, phone: string) => {
     swal({
@@ -108,7 +54,7 @@ const page = () => {
   };
 
   useEffect(() => {
-   const tableData = users?.users.map((user: userInfoObj) => ({
+    const tableData = users?.users.map((user: userInfoObj) => ({
       userData: user.firstName + " " + user.lastName,
       phone: user.phone,
       rooms: (
@@ -172,13 +118,9 @@ const page = () => {
           {isPending ? <ButtonLoader /> : "تغییر"}{" "}
         </Button>
       ),
-      ban: (
-        <Button onClick={() => banHandler(user._id)} variant={"danger"}>
-          بن
-        </Button>
-      ),
+      ban: <UserBanModal userPhone={user.phone} />,
     }));
-    data= tableData
+    data = tableData;
   }, [users]);
 
   const [pending, setPending] = useState(true);
@@ -199,7 +141,7 @@ const page = () => {
         </div>
       </div>
       <DataTable
-        columns={columns as any}
+        columns={userColumns as any}
         data={rows}
         progressPending={pending}
         progressComponent={".... "}

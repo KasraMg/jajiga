@@ -7,31 +7,11 @@ import { convertToJalali } from "@/src/utils/utils";
 import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import swal from "sweetalert"; 
-import Loader, { ButtonLoader } from "@/src/components/modules/loader/Loader";
+import Loader from "@/src/components/modules/loader/Loader";
 import useDeleteData from "@/src/hooks/useDeleteData";
 import AddCategoryModal from "@/src/components/templates/adminPanel/categories/AddCategoryModal";
-const columns = [
-  {
-    name: "نام دسته بندی",
-    selector: (row: { title: string }) => row.title,
-    sortable: true,
-  },
-  {
-    name: "تعداد اقامتگاه های ثبت شده",
-    selector: (row: { count: string }) => row.count,
-    sortable: true,
-  },
-  {
-    name: "زمان ثبت",
-    selector: (row: { register: string }) => row.register,
-    sortable: true,
-  },
-  {
-    name: "حذف دسته بندی",
-    selector: (row: { delete: string }) => row.delete,
-    sortable: true,
-  },
-];
+import { categoryColumns } from "@/src/utils/dataTableColumns";
+
 const page = () => {
   const { data: categories, isPending: getCategoriesPending } = useGetData(
     ["allCategories"],
@@ -97,7 +77,7 @@ const page = () => {
       </div>
       <AddCategoryModal />
       <DataTable
-        columns={columns as any}
+        columns={categoryColumns as any}
         data={rows}
         progressPending={pending}
         progressComponent={".... "}
