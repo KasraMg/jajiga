@@ -19,7 +19,7 @@ const FastSearch = () => {
         Card={Card}
         navigation={true}
         className="sm:!pl-6"
-        data={data.orderedVillas}
+        data={data?.orderedVillas}
         breakPoints={{
           320: {
             slidesPerView: 2,

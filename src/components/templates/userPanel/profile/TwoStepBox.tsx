@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useEffect, useRef, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -50,6 +50,7 @@ const TwoStepBox: FC<BoxProps> = ({
   const [step, setStep] = useState(1);
   const [prevValue, setPrevValue] = useState<string | undefined>(undefined);
   const queryClient = useQueryClient();
+  const [data, setData] = useState<any>();
 
   useEffect(() => {
     if (type === "email" && !prevValue && value?.includes("@")) {
@@ -58,7 +59,10 @@ const TwoStepBox: FC<BoxProps> = ({
       if (!isNaN(value as any) && !prevValue) {
         setPrevValue(value);
       }
-    } 
+    }
+    if (value) {
+      setData(value);
+    }
   }, [prevValue, value]);
 
   const inputChangeHandler = (value: string) => {
@@ -68,8 +72,8 @@ const TwoStepBox: FC<BoxProps> = ({
       setError(true);
     } else {
       setError(false);
-    } 
-    setValue && setValue(value);
+    }
+    setValue && setData(value);
   };
 
   const successFunc = (data: {
@@ -102,10 +106,9 @@ const TwoStepBox: FC<BoxProps> = ({
             variant: "success",
             title: "ایمیل با موفقیت ثبت شد",
           });
-      queryClient.invalidateQueries({ queryKey: ["auth"] });
-
-          setStep(1) 
-          setOpen(false) 
+          queryClient.invalidateQueries({ queryKey: ["auth"] });
+          setStep(1);
+          setOpen(false);
         } else if (data.statusCode === 400) {
           toast({
             variant: "danger",
@@ -156,8 +159,9 @@ const TwoStepBox: FC<BoxProps> = ({
             variant: "success",
             title: "شماره موبایل با موفقیت تغییر یافت",
           });
-          setStep(1) 
-          setOpen(false) 
+          queryClient.invalidateQueries({ queryKey: ["auth"] });
+          setStep(1);
+          setOpen(false);
         } else if (data.statusCode === 400) {
           toast({
             variant: "danger",
@@ -204,19 +208,19 @@ const TwoStepBox: FC<BoxProps> = ({
 
   const submitHandler = () => {
     if (step === 1) {
-      const data = {
-        [requestBody]: value,
-      }; 
-      mutation(data as any);
+      const newData = {
+        [requestBody]: data,
+      };
+      mutation(newData as any);
     } else {
-      const data = {
-        [type === "email" ? "email" : "phone"]: value,
+      const newData = {
+        [type === "email" ? "email" : "phone"]: data,
         code: otpCode,
       };
       if (type === "email") {
-        data.newsletter = false as any;
-      } 
-      mutation(data as any);
+        newData.newsletter = false as any;
+      }
+      mutation(newData as any);
     }
   };
 
@@ -257,10 +261,10 @@ const TwoStepBox: FC<BoxProps> = ({
       `${type === "email" ? "email" : "phone"}otpResendTimer`,
       (Math.floor(Date.now() / 1000) + 59).toString(),
     );
-    const data = {
-      [requestBody]: value,
+    const newData = {
+      [requestBody]: data,
     };
-    resendCode(data as any);
+    resendCode(newData as any);
   };
 
   const [open, setOpen] = useState(false);
@@ -314,7 +318,7 @@ const TwoStepBox: FC<BoxProps> = ({
                       }
                       className="w-full rounded-md border border-gray-300 p-2 text-sm font-thin"
                       type={type}
-                      value={value}
+                      value={data}
                     />
                   </div>
                 ) : (
@@ -346,7 +350,7 @@ const TwoStepBox: FC<BoxProps> = ({
 
               <Button
                 disabled={
-                  prevValue === value
+                  prevValue === data
                     ? true
                     : false ||
                         error ||

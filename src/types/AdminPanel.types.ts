@@ -1,4 +1,4 @@
-import { userInfoObj } from "./Auth.types";
+import { book, userInfoObj } from "./Auth.types";
 
 export interface dashboardTypes {
   booksCount: number;
@@ -13,7 +13,7 @@ export interface dashboardTypes {
   lastFiveMonthAddedVillasCount: { month: number; villasCount: number }[];
   lastFiveMonthBookedReserve: { month: number; booksCount: number }[];
   statusCode: number;
-  users: userInfoObj[];
+  books: book[];
   usersCount: number;
   villasCount: number;
 }

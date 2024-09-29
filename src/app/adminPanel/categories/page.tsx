@@ -6,7 +6,7 @@ import { getAllCategories } from "@/src/utils/fetchs";
 import { convertToJalali } from "@/src/utils/utils";
 import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import swal from "sweetalert"; 
+import swal from "sweetalert";
 import Loader from "@/src/components/modules/loader/Loader";
 import useDeleteData from "@/src/hooks/useDeleteData";
 import AddCategoryModal from "@/src/components/templates/adminPanel/categories/AddCategoryModal";
@@ -24,7 +24,7 @@ const page = () => {
   useEffect(() => {
     const tableData = categories?.categories.map((category) => ({
       title: category.title,
-      count: 3,
+      count: category.villas,
       register: convertToJalali(category.createdAt.slice(0, 10)),
       delete: (
         <Button

@@ -1,20 +1,18 @@
 import { useLogoutHandler } from "@/src/utils/auth";
 import Image from "next/image";
 import { AiOutlineLogout } from "react-icons/ai";
-
 import Menu from "./Menu";
-import { Button } from "@/src/components/shadcn/ui/button";
 import {
   Sheet,
   SheetContent,
-  SheetHeader,
   SheetTrigger,
 } from "@/src/components/shadcn/ui/sheet";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { authStore } from "@/src/stores/auth";
+
 const Navbar = () => {
   const { userData } = authStore((state) => state);
-
+  const logout = useLogoutHandler();
   return (
     <div className="flex h-12 w-full items-center justify-between bg-white px-3 md:!mt-4">
       <div className="flex items-center gap-3">
@@ -24,8 +22,8 @@ const Navbar = () => {
           </SheetTrigger>
           <SheetContent
             dir="rtl"
-            className={`fixed right-0 px-0 top-0 z-[9999] h-screen w-72 overflow-y-auto rounded-l-2xl border-r bg-customYellow py-7 transition-transform dark:bg-gray-800`}
-          > 
+            className={`fixed right-0 top-0 z-[9999] h-screen w-72 overflow-y-auto rounded-l-2xl border-r bg-customYellow px-0 py-7 transition-transform dark:bg-gray-800`}
+          >
             <Menu />
           </SheetContent>
         </Sheet>
@@ -53,7 +51,7 @@ const Navbar = () => {
       </div>
 
       <div
-        onClick={() => useLogoutHandler()}
+        onClick={() => logout()}
         className="flex cursor-pointer justify-start gap-2"
       >
         <p className="font-thin">خروج</p>
