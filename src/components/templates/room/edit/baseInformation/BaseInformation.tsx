@@ -87,7 +87,7 @@ const BaseInformation = () => {
       finished: true,
     };
     mutation(data);
-     setDisableNextButton(true);
+    setDisableNextButton(true);
   };
 
   useEffect(() => {
@@ -135,9 +135,7 @@ const BaseInformation = () => {
   const handleTextareaChange = () => {
     setDisableNextButton(false);
   };
-  
 
-  
   return (
     <section className="flex w-full max-w-[1120px] justify-between gap-16">
       <div className="space-y-4 font-thin text-gray-700">
@@ -146,7 +144,7 @@ const BaseInformation = () => {
           <Textarea
             maxLength={994}
             setValue={setDescription}
-            value={description}  
+            value={description}
             buttonDisableFun={handleTextareaChange}
           />
           <p className="text-xs leading-5 text-gray-500">
@@ -168,7 +166,7 @@ const BaseInformation = () => {
                 setDisableNextButton(false);
               }}
               isClearable={true}
-              className="w-full  lg:!w-full"
+              className="w-full lg:!w-full"
               isRtl={true}
               isSearchable={true}
               options={stateSelectedOption as any}
@@ -187,7 +185,7 @@ const BaseInformation = () => {
                 setDisableNextButton(false);
               }}
               isClearable={true}
-              className="w-full  xl:!w-full"
+              className="w-full xl:!w-full"
               isRtl={true}
               isSearchable={true}
               options={citySelectedOption}
@@ -196,7 +194,7 @@ const BaseInformation = () => {
           )}
         </div>
         <div className="mb-20 flex flex-col justify-between md:!mb-4 md:flex-row">
-          <p className="min-w-[150px] md:mb-0 mb-3 whitespace-nowrap text-sm text-[#252a31]">
+          <p className="mb-3 min-w-[150px] whitespace-nowrap text-sm text-[#252a31] md:mb-0">
             آدرس دقیق:
           </p>
           <div className="w-full">
@@ -204,7 +202,7 @@ const BaseInformation = () => {
               className="h-[104px]"
               maxLength={250}
               setValue={setAddress}
-              buttonDisableFun={handleTextareaChange} 
+              buttonDisableFun={handleTextareaChange}
               value={address}
             />
             <span className="mt-3 text-xs text-[#5f738c]">
@@ -254,7 +252,7 @@ const BaseInformation = () => {
           </Button>
         )}
       </div>
-      <div className="w-full max-w-[380px] hidden md:block">
+      <div className="hidden w-full max-w-[380px] md:block">
         <StepperInfo
           className="!relative !top-0 w-full max-w-[380px]"
           title="توضیحات تکمیلی درباره اقامتگاه"

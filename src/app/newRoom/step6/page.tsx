@@ -15,8 +15,11 @@ interface userObjData {
   finished: false;
 }
 const page = () => {
-  const { data, status,isLoading } = useGetData(["step_6_items"], fetchStep6Items);
-   
+  const { data, status, isLoading } = useGetData(
+    ["step_6_items"],
+    fetchStep6Items,
+  );
+
   const [disableNextButton, setDisableNextButton] = useState(false);
 
   const [showInput, setShowInput] = useState<boolean[]>(
@@ -126,7 +129,11 @@ const page = () => {
                         const updatedFacilitySelected = facilitySelected.map(
                           (item) => {
                             if (item.title === data.engTitle) {
-                              return { ...item, status: event.target.checked };
+                              return {
+                                ...item,
+                                status: (event.target as HTMLInputElement)
+                                  .checked,
+                              };
                             }
                             return item;
                           },
@@ -153,7 +160,7 @@ const page = () => {
                 </div>
               ),
             )}
-            {isLoading && '...'}
+          {isLoading && "..."}
           <div className="flex items-center justify-between">
             <label className="text-sm">سایر امکانات</label>
             <input
@@ -182,12 +189,15 @@ const page = () => {
                       const updatedSanitarySelected = sanitarySelected.map(
                         (item) => {
                           if (item.title === data.engTitle) {
-                            return { ...item, status: event.target.checked };
+                            return {
+                              ...item,
+                              status: (event.target as HTMLInputElement)
+                                .checked,
+                            };
                           }
                           return item;
                         },
-                      );
-
+                      ); 
                       setSanitarySelected(updatedSanitarySelected);
                     }}
                   />
@@ -195,7 +205,7 @@ const page = () => {
                 </div>
               ),
             )}
-            {isLoading && '...'}
+          {isLoading && "..."}
 
           <div className="!mb-16 flex items-center justify-between">
             <label className="text-sm">سایر موارد</label>

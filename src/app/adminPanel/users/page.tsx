@@ -3,7 +3,7 @@ import Layout from "@/src/components/layouts/adminLayout/page";
 import { Button } from "@/src/components/shadcn/ui/button";
 import useGetData from "@/src/hooks/useGetData";
 import usePostData from "@/src/hooks/usePostData";
-import { userInfoObj } from "@/src/types/Auth.types";
+import { userInfoObj, userObj } from "@/src/types/Auth.types";
 import { getAllUsers } from "@/src/utils/fetchs";
 import { convertToJalali } from "@/src/utils/utils";
 import { useEffect, useState } from "react";
@@ -18,15 +18,16 @@ import Link from "next/link";
 import Loader, { ButtonLoader } from "@/src/components/modules/loader/Loader";
 import { userColumns } from "@/src/utils/dataTableColumns";
 import UserBanModal from "@/src/components/templates/adminPanel/users/UserBanModal";
+import { userResTypes } from "@/src/types/AdminPanel.types";
 
 const page = () => {
-  const { data: users, isPending: getUsersPending } = useGetData(
+  const { data: users, isPending: getUsersPending } = useGetData<userResTypes>(
     ["users"],
     getAllUsers,
   );
   const [userInfoRoleChange, setUserInfoRoleChange] = useState<any>([]);
-  let data = [];
-console.log(users);
+  const [data, setData] = useState<userInfoObj[]>([]);
+  const [pending, setPending] = useState(true);
 
   const { mutate: mutation, isPending } = usePostData<any>(
     `/user/changeRole/${userInfoRoleChange[0]}/${userInfoRoleChange[1]}`,
@@ -35,7 +36,7 @@ console.log(users);
     null,
     false,
     "users",
-  ); 
+  );
 
   const changeRole = (role: any, phone: string) => {
     swal({
@@ -54,7 +55,7 @@ console.log(users);
   };
 
   useEffect(() => {
-    const tableData = users?.users.map((user: userInfoObj) => ({
+    const tableData: unknown = users?.users.map((user: userInfoObj) => ({
       userData: user.firstName + " " + user.lastName,
       phone: user.phone,
       rooms: (
@@ -120,17 +121,14 @@ console.log(users);
       ),
       ban: <UserBanModal userPhone={user.phone} />,
     }));
-    data = tableData;
+    setData(tableData as userInfoObj[]);
   }, [users]);
 
-  const [pending, setPending] = useState(true);
-  const [rows, setRows] = useState([]);
   useEffect(() => {
-    if (users) {
-      setRows(data);
+    if (data) {
       setPending(false);
     }
-  }, [users]);
+  }, [data]);
   return (
     <Layout>
       <div className="relative my-10">
@@ -142,7 +140,7 @@ console.log(users);
       </div>
       <DataTable
         columns={userColumns as any}
-        data={rows}
+        data={data}
         progressPending={pending}
         progressComponent={".... "}
         pagination

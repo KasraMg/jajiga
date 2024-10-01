@@ -39,12 +39,12 @@ const Disable = () => {
       title: `از ${disable ? "فعال کردن" : "غیر فعال کردن"} اقامتگاه اطمینان دارید؟`,
       icon: "warning",
       buttons: ["نه", "آره"],
-    }).then((res) => { 
+    }).then((res) => {
       const data: userObjData = {
         disable: !disable,
         step: 9,
         finished: true,
-      };  
+      };
       mutation(data);
     });
   };

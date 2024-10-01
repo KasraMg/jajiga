@@ -11,18 +11,17 @@ import Loader from "@/src/components/modules/loader/Loader";
 import useDeleteData from "@/src/hooks/useDeleteData";
 import AddCategoryModal from "@/src/components/templates/adminPanel/categories/AddCategoryModal";
 import { categoryColumns } from "@/src/utils/dataTableColumns";
+import { categoryResTypes, categoryTypes } from "@/src/types/AdminPanel.types";
 
 const page = () => {
-  const { data: categories, isPending: getCategoriesPending } = useGetData(
-    ["allCategories"],
-    getAllCategories,
-  );
+  const { data: categories, isPending: getCategoriesPending } =
+    useGetData<categoryResTypes>(["allCategories"], getAllCategories);
   const [categoryId, setCategoryId] = useState("");
-
-  let data = [];
-
+  const [data, setData] = useState<categoryTypes[]>([]);
+  const [pending, setPending] = useState(true); 
+  
   useEffect(() => {
-    const tableData = categories?.categories.map((category) => ({
+    const tableData:unknown = categories?.categories.map((category) => ({
       title: category.title,
       count: category.villas,
       register: convertToJalali(category.createdAt.slice(0, 10)),
@@ -35,18 +34,14 @@ const page = () => {
         </Button>
       ),
     }));
-    data = tableData;
-    console.log(categories);
+    setData(tableData as categoryTypes[]) 
   }, [categories]);
 
-  const [pending, setPending] = useState(true);
-  const [rows, setRows] = useState([]);
   useEffect(() => {
-    if (categories) {
-      setRows(data);
+    if (data) { 
       setPending(false);
     }
-  }, [categories]);
+  }, [data]);
 
   const { mutate: deleteHandlerMutation, isPending: deleteHandlerPending } =
     useDeleteData(
@@ -78,7 +73,7 @@ const page = () => {
       <AddCategoryModal />
       <DataTable
         columns={categoryColumns as any}
-        data={rows}
+        data={data}
         progressPending={pending}
         progressComponent={".... "}
         pagination

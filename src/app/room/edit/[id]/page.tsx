@@ -21,7 +21,7 @@ const Faq = () => {
   return (
     <Container>
       <Breadcrumb
-        className="!pb-[70px]" 
+        className="!pb-[70px]"
         routes={["اقامتگاه ها", "ویرایش اقامتگاه"]}
       />
       <Layout className="!z-10">
@@ -43,7 +43,10 @@ const Faq = () => {
               <Images />
             </TabsContent>
             <TabsContent value="facilities">
-              <Hydrated queryKey={["server_step_6_items"]} queryFn={fetchStep6Items}>
+              <Hydrated
+                queryKey={["server_step_6_items"]}
+                queryFn={fetchStep6Items}
+              >
                 <Facilities />
               </Hydrated>
             </TabsContent>

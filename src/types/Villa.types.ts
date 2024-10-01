@@ -143,7 +143,7 @@ export interface comment {
     updatedAt:string;
     villa: { _id: string };
   };
-  isAccept: number;
+  isAccept: string;
   isAnswer: number;
   score: number;
   updatedAt: string;

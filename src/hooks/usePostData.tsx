@@ -13,6 +13,7 @@ const usePostData = <T extends object>(
 ) => {
   const accessToken = Cookies.get("AccessToken");
   const queryClient = useQueryClient();
+console.log(url);
 
   const { mutate, isSuccess, isPending, isError } = useMutation({
     mutationFn: async (data: T) => {

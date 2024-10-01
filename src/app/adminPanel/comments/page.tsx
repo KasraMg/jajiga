@@ -5,6 +5,8 @@ import { Button } from "@/src/components/shadcn/ui/button";
 import useDeleteData from "@/src/hooks/useDeleteData";
 import useGetData from "@/src/hooks/useGetData";
 import usePostData from "@/src/hooks/usePostData";
+import { commentResTypes } from "@/src/types/AdminPanel.types";
+import { comment } from "@/src/types/Villa.types";
 import { commentColumns } from "@/src/utils/dataTableColumns";
 import { getAllComments } from "@/src/utils/fetchs";
 import Link from "next/link";
@@ -21,16 +23,18 @@ const showBodyHandler = (body: string) => {
 
 const page = () => {
   const [commentId, setCommentId] = useState("");
+  const [data, setData] = useState<comment[]>([]);
+  const [pending, setPending] = useState(true);  
 
-  const { data: comments, isPending: getCommentsPending } = useGetData(
+  const { data: comments, isPending: getCommentsPending } = useGetData<commentResTypes>(
     ["comments"],
     getAllComments,
-  );
-  let data = [];
+  ); 
   console.log(comments);
   const [commentStatusChange, setCommentStatusChange] = useState<
     [] | [string, string]
   >([]);
+
   const { mutate: mutation, isPending } = usePostData<any>(
     `/comment/${commentStatusChange[0]}/${commentStatusChange[1]}`,
     `کامنت با موفقیت ${commentStatusChange[0] === "accept" ? "تایید" : "رد"} شد`,
@@ -41,7 +45,7 @@ const page = () => {
   );
 
   useEffect(() => {
-    const tableData = comments?.comment.map((comment) => ({
+    const tableData:unknown = comments?.comment.map((comment:comment) => ({
       userData: `${comment.creator.firstName} مشگل کشا`,
       preview: (
         <Button onClick={() => showBodyHandler(comment.body)} variant={"blue"}>
@@ -96,20 +100,17 @@ const page = () => {
         </Button>
       ),
     }));
-    data = tableData;
+    setData(tableData as comment[])
     console.log(tableData);
     console.log(comments);
   }, [comments]);
 
-  const [pending, setPending] = useState(true);
-  const [rows, setRows] = useState([]);
 
   useEffect(() => {
-    if (comments) {
-      setRows(data);
+    if (data) { 
       setPending(false);
     }
-  }, [comments]);
+  }, [data]);
 
   const { mutate: deleteHandlerMutation, isPending: deleteHandlerPending } =
     useDeleteData(
@@ -141,7 +142,7 @@ const page = () => {
       </div>
       <DataTable
         columns={commentColumns as any}
-        data={rows}
+        data={data}
         progressPending={pending}
         progressComponent={".... "}
         pagination
