@@ -2,12 +2,9 @@ import { ButtonLoader } from "@/src/components/modules/loader/Loader";
 import { Button } from "@/src/components/shadcn/ui/button";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
 import usePostData from "@/src/hooks/usePostData";
-import { 
-  getFromLocalStorage,
-  saveIntoLocalStorage,
-} from "@/src/utils/utils";
-import { registerSchema } from "@/src/validations/rules"; 
-import { useFormik } from "formik"; 
+import { getFromLocalStorage, saveIntoLocalStorage } from "@/src/utils/utils";
+import { registerSchema } from "@/src/validations/rules";
+import { useFormik } from "formik";
 import React, { useState } from "react";
 import { LuEye } from "react-icons/lu";
 
@@ -23,10 +20,7 @@ const Register = ({
 }: {
   setStep: React.Dispatch<React.SetStateAction<string>>;
 }) => {
-  const successFunc = (data: {
-    statusCode: number; 
-  }) => {
-
+  const successFunc = (data: { statusCode: number }) => {
     if (data.statusCode === 200) {
       toast({
         variant: "success",
@@ -35,18 +29,18 @@ const Register = ({
       setStep("otp");
       saveIntoLocalStorage("registerUserData", formHandler.values);
       formHandler.resetForm();
-    }else {
+    } else {
       toast({
         variant: "danger",
         title: "با عرض پوزش لطفا مجدد مراحل رو طی کنید",
       });
       localStorage.clear();
       location.reload();
-    } 
+    }
   };
 
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false); 
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const phoneNumber = getFromLocalStorage("otpRegisterPhoneNumber");
   const formHandler = useFormik({
     initialValues: {
@@ -56,7 +50,7 @@ const Register = ({
       confirmPassword: "",
       phone: phoneNumber,
     },
-    onSubmit: (values: formValues) => { 
+    onSubmit: (values: formValues) => {
       mutation(values as any);
     },
     validationSchema: registerSchema,
@@ -69,16 +63,15 @@ const Register = ({
     successFunc,
   );
 
-  
   const submitHandler = (event: React.FormEvent) => {
-    event.preventDefault(); 
+    event.preventDefault();
     formHandler.handleSubmit();
   };
-   
+
   return (
     <form className="w-full md:!w-[350px]">
       <div className="flex items-center justify-between">
-      <p dir="ltr">+98{phoneNumber?.slice(1, 11)}</p> 
+        <p dir="ltr">+98{phoneNumber?.slice(1, 11)}</p>
         <Button
           className="!rounded-sm !px-4"
           onClick={() => setStep("login")}
@@ -163,13 +156,12 @@ const Register = ({
       <Button
         type="submit"
         onClick={(event) => submitHandler(event)}
-        className="mx-auto h-[36px] mt-5 !block w-max !rounded-full !px-12 text-center"
+        className="mx-auto mt-5 !block h-[36px] w-max !rounded-full !px-12 text-center"
         variant={"main"}
         disabled={!formHandler.isValid || !formHandler.dirty}
-      > 
-        {isPending ? <ButtonLoader /> : "ثبت نام"}  
-
-      </Button> 
+      >
+        {isPending ? <ButtonLoader /> : "ثبت نام"}
+      </Button>
     </form>
   );
 };

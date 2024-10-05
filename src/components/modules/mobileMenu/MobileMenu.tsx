@@ -13,21 +13,23 @@ const MobileMenu = () => {
   const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollPos = window.scrollY;
-      if (currentScrollPos > prevScrollPos) {
-        setScroll(true);
-      } else {
-        setScroll(false);
-      }
-      setPrevScrollPos(currentScrollPos);
-    };
+    if (typeof window !== "undefined") {
+      const handleScroll = () => {
+        const currentScrollPos = window.scrollY;
+        if (currentScrollPos > prevScrollPos) {
+          setScroll(true);
+        } else {
+          setScroll(false);
+        }
+        setPrevScrollPos(currentScrollPos);
+      };
 
-    window.addEventListener("scroll", handleScroll);
+      window.addEventListener("scroll", handleScroll);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }
   }, [prevScrollPos]);
 
   return (

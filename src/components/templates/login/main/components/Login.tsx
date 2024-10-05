@@ -2,12 +2,9 @@ import { ButtonLoader } from "@/src/components/modules/loader/Loader";
 import { Button } from "@/src/components/shadcn/ui/button";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
 import usePostData from "@/src/hooks/usePostData";
-import { 
-  getFromLocalStorage,
-  saveIntoLocalStorage,
-} from "@/src/utils/utils"; 
+import { getFromLocalStorage, saveIntoLocalStorage } from "@/src/utils/utils";
 import Link from "next/link";
-import { useEffect, useState } from "react"; 
+import { useEffect, useState } from "react";
 const Login = ({
   setStep,
 }: {
@@ -20,10 +17,10 @@ const Login = ({
     if (data.statusCode === 200) {
       saveIntoLocalStorage("otpRegisterPhoneNumber", phoneNumber);
       setStep("register");
-      localStorage.removeItem('otpLoginPhoneNumber') 
+      localStorage.removeItem("otpLoginPhoneNumber");
     } else if (data.statusCode === 411) {
       saveIntoLocalStorage("otpLoginPhoneNumber", phoneNumber);
-      localStorage.removeItem('otpRegisterPhoneNumber')
+      localStorage.removeItem("otpRegisterPhoneNumber");
       setStep("otp");
     } else if (data.statusCode === 409) {
       toast({
@@ -32,7 +29,7 @@ const Login = ({
       });
     }
   };
-  
+
   const { mutate: mutation, isPending } = usePostData<{ phone: string }>(
     "/signup",
     null,
@@ -85,19 +82,19 @@ const Login = ({
         </span>
       </div>
       <Button
-        className="mt-6 w-full h-[36px] justify-center !rounded-full text-center"
+        className="mt-6 h-[36px] w-full justify-center !rounded-full text-center"
         variant={"main"}
         disabled={phoneNumber.length !== 11 ? true : false}
         onClick={submitHandler}
       >
-        {isPending ? <ButtonLoader /> : "ادامه"} 
+        {isPending ? <ButtonLoader /> : "ادامه"}
       </Button>
       <Link
         href={"/rules"}
         className="mx-auto mt-4 block w-max border-b-2 border-solid border-customYellow pb-2"
       >
         قوانین و مقررات
-      </Link> 
+      </Link>
     </div>
   );
 };

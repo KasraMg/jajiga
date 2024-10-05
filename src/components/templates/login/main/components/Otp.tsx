@@ -14,6 +14,7 @@ import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
 import Cookies from "js-cookie";
 import usePostData from "@/src/hooks/usePostData";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
+import Timer from "./Timer";
 
 const Otp = ({
   setStep,
@@ -23,7 +24,6 @@ const Otp = ({
   const otpLoginPhoneNumber = getFromLocalStorage("otpLoginPhoneNumber");
   const otpRegisterPhoneNumber = getFromLocalStorage("otpRegisterPhoneNumber");
   const router = useRouter();
-  const [timer, setTimer] = useState<number>(0);
   const phoneNumber = otpLoginPhoneNumber || otpRegisterPhoneNumber;
   const registerUserData = getFromLocalStorage("registerUserData");
   const queryClient = useQueryClient();
@@ -35,14 +35,14 @@ const Otp = ({
     accessToken: string;
   }) => {
     if (data.statusCode === 200) {
-      Cookies.set("RefreshToken", data.RefreshToken, {
-        expires: 9999999,
-        path: "",
-      });
-      Cookies.set("AccessToken", data.accessToken, {
-        expires: 9999999,
-        path: "",
-      });
+      // Cookies.set("RefreshToken", data.RefreshToken, {
+      //   expires: 9999999,
+      //   path: "",
+      // });
+      // Cookies.set("AccessToken", data.accessToken, {
+      //   expires: 9999999,
+      //   path: "",
+      // });
       queryClient.invalidateQueries({ queryKey: ["auth"] });
       toast({
         variant: "success",
@@ -50,7 +50,7 @@ const Otp = ({
           ? "با موفقیت وارد شدید"
           : "با موفقیت ثبت نام شدید",
       });
-      router.replace("/dashboard");
+      // router.replace("/dashboard");
     } else if (data.statusCode === 400) {
       toast({
         variant: "danger",
@@ -90,43 +90,6 @@ const Otp = ({
     successFunc,
   );
 
-  useEffect(() => {
-    const savedTimer = localStorage.getItem("otpResendTimer");
-    if (savedTimer) {
-      const remainingTime =
-        parseInt(savedTimer, 10) - Math.floor(Date.now() / 1000);
-      if (remainingTime > 0) {
-        setTimer(remainingTime);
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    let interval: any;
-    if (timer > 0) {
-      interval = setInterval(() => {
-        setTimer((prevTimer) => {
-          const newTimer = prevTimer - 1;
-          localStorage.setItem(
-            "otpResendTimer",
-            (Math.floor(Date.now() / 1000) + newTimer).toString(),
-          );
-          return newTimer;
-        });
-      }, 1000);
-    } else if (timer === 0 && interval) {
-      clearInterval(interval);
-      localStorage.removeItem("otpResendTimer");
-    }
-    return () => clearInterval(interval);
-  }, [timer]);
-
-  const { mutate: resendCode } = usePostData<any>(
-    `/resendCode/${phoneNumber}`,
-    null,
-    false,
-  );
-
   const submitHandler = () => {
     if (otpLoginPhoneNumber) {
       const data = { code: otpCode };
@@ -135,15 +98,6 @@ const Otp = ({
       registerUserData.code = otpCode;
       mutation(registerUserData);
     }
-  };
-
-  const resendCodeHandler = () => {
-    setTimer(59);
-    localStorage.setItem(
-      "otpResendTimer",
-      (Math.floor(Date.now() / 1000) + 59).toString(),
-    );
-    resendCode({});
   };
 
   return (
@@ -178,30 +132,15 @@ const Otp = ({
             <InputOTPSlot index={3} />
           </InputOTPGroup>
         </InputOTP>
-      </div>
-
-      {timer > 0 ? (
-        <div className="w-full justify-center text-center text-sm">
-          {`${Math.floor(timer / 60)}:${timer % 60 < 10 ? `0${timer % 60}` : timer % 60} ثانیه تا ارسال مجدد کد  `}
-        </div>
-      ) : (
-        <Button
-          onClick={resendCodeHandler}
-          className="w-full justify-center !rounded-sm !px-4 text-sm"
-          variant={"outlineMain"}
-        >
-          ارسال دوباره کد
-        </Button>
-      )}
-
-
+      </div> 
+      <Timer />   
       <Button
         disabled={otpCode.length !== 4 ? true : false}
         className="mt-5 h-[36px] w-full justify-center !rounded-full text-center"
         variant={"main"}
         onClick={submitHandler}
       >
-        {isPending ? <ButtonLoader /> : "ورود"}  
+        {isPending ? <ButtonLoader /> : "ورود"}
       </Button>
       {!otpRegisterPhoneNumber ? (
         <Button
@@ -212,7 +151,6 @@ const Otp = ({
           ورود با رمز عبور
         </Button>
       ) : null}
- 
     </div>
   );
 };
