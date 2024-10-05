@@ -10,7 +10,7 @@ const PopularDestinations = () => {
     ["popularDestinations"],
     getPopularDestinations,
   );
-  
+
   return (
     <section className="py-5 text-right">
       <p className="mb-5 text-xl text-black">مقاصد پر طرفدار</p>
@@ -28,7 +28,7 @@ const PopularDestinations = () => {
           768: {
             slidesPerView: 4,
             spaceBetween: 0,
-          } 
+          },
         }}
         rewind={true}
         spaceBetween={0}
@@ -43,7 +43,10 @@ const PopularDestinations = () => {
             title: string;
             count: number;
           }) => (
-            <SwiperSlide className="!mx-auto !h-[110px] sm:!h-[123px] lg:!h-[178px]">
+            <SwiperSlide
+              key={city.title}
+              className="!mx-auto !h-[110px] sm:!h-[123px] lg:!h-[178px]"
+            >
               <Card {...city} />
             </SwiperSlide>
           ),

@@ -216,7 +216,7 @@ function Menu({ isSticky }: any) {
           </ul>
         </div>
         <div className="absolute bottom-0 left-0 flex w-full flex-row-reverse justify-around rounded-t-3xl bg-[#c1c1c175] px-2 py-3 text-xl">
-          <a href="https://t.me/shahiinnnnn">
+          <a href="https://t.me/MrShahiin">
             <PiTelegramLogoLight />
           </a>
           <a href="https://github.com/KasraMg">

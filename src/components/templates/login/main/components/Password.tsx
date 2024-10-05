@@ -82,6 +82,7 @@ const Password = ({
     setStep("otp");
     resendCode({});
   };
+ 
   return (
     <div className="w-full sm:!pb-7 md:!w-[350px]">
       <div className="flex items-center justify-between">
@@ -111,7 +112,7 @@ const Password = ({
       </div>
       <Button
         disabled={!error ? false : true}
-        className="mt-5 w-full h-[36px] justify-center !rounded-full text-center"
+        className="mt-5 h-[36px] w-full justify-center !rounded-full text-center"
         variant={"main"}
         onClick={() => mutation({ password: password })}
       >
@@ -123,7 +124,7 @@ const Password = ({
         variant={"outlineMain"}
       >
         ورود با کد یکبار مصرف
-      </Button> 
+      </Button>
     </div>
   );
 };
