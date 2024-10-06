@@ -1,3 +1,4 @@
+import { toast } from "@/src/components/shadcn/ui/use-toast";
 import React, { useState } from "react";
 import { IoMdNotificationsOutline } from "react-icons/io";
 
@@ -6,17 +7,76 @@ const Notification = () => {
 
   return (
     <div className="relative">
-      <p className="cursor-pointer" onClick={() => setShowNotification(true)}>
+      <p
+        className="relative cursor-pointer"
+        onClick={() => setShowNotification(true)}
+      >
         اعلانات
+        <span className="absolute -left-2 -top-1 rounded-full bg-customYellow px-1 pt-[2px] text-[8px] text-black">
+          1
+        </span>
       </p>
       {showNotification && (
         <>
-          <div style={{ boxShadow: 'rgba(37, 42, 49, 0.16) 0px 4px 8px 0px, rgba(37, 42, 49, 0.24) 0px 8px 24px 0px'}} className="absolute z-[9999] right-0 top-7 w-96 rounded-lg bg-white pb-7 text-black">
+          <div
+            style={{
+              boxShadow:
+                "rgba(37, 42, 49, 0.16) 0px 4px 8px 0px, rgba(37, 42, 49, 0.24) 0px 8px 24px 0px",
+            }}
+            className="absolute right-0 top-7 z-[9999] w-96 rounded-lg bg-white pb-7 text-black"
+          >
             <div className="flex flex-row-reverse justify-between border-b border-gray-300 px-4 py-3 text-right">
-              اعلانات <IoMdNotificationsOutline className="text-2xl"/>
+              اعلانات <IoMdNotificationsOutline className="text-2xl" />
             </div>
-
-            <div className="flex flex-col items-center justify-center py-4">
+            <main className="px-3 pt-3">
+              <div
+                className="space-y-2 rounded-lg border border-dashed border-gray-300 p-2 text-right text-sm"
+                dir="rtl"
+              >
+                <p>کاربر عزیز درود !</p>
+                <p>
+                  در نظر داشته باشید که اقامتگاه یا کامنتی که ثبت میکنید، برای
+                  نمایش نیاز به تایید ادمین دارند.
+                </p>
+                <p>
+                  به همین منظور بعد از ثبت اقامتگاه یا کامنت میتونید به پنل
+                  ادمین مراجعه و فرایند ثبت و تایید رو انجام بدید.
+                </p>
+                <p>
+                  برای ورود شماره{" "}
+                  <span
+                    onClick={() => {
+                      navigator.clipboard.writeText("09046417084").then(() => {
+                        toast({
+                          variant: "success",
+                          title: "شماره تلفن با موفقیت کپی شد",
+                        });
+                      });
+                    }}
+                    className="cursor-pointer text-red-600"
+                  >
+                    09046417084
+                  </span>{" "}
+                  رو وارد و با رمز{" "}
+                  <span
+                    onClick={() => {
+                      navigator.clipboard
+                        .writeText("jajigaAdmin2024")
+                        .then(() => {
+                          toast({
+                            variant: "success",
+                            title: "رمز با موفقیت کپی شد",
+                          });
+                        });
+                    }}
+                    className="cursor-pointer text-red-600"
+                  >
+                    jajigaAdmin2024
+                  </span>{" "}
+                  وارد پنل بشید.
+                </p>
+              </div>
+              {/* <div className="flex flex-col items-center justify-center py-4">
               <svg
                 width={120}
                 height={120}
@@ -51,12 +111,13 @@ const Notification = () => {
                 ></path>
               </svg>
               <p className="mt-3">اعلان جدیدی وجود نداره</p>
-            </div>
+            </div> */}
+            </main>
           </div>
           <div
-          className="fixed left-0 top-0 h-screen w-full"
-          onClick={() => setShowNotification(false)}
-        ></div>
+            className="fixed left-0 top-0 h-screen w-full"
+            onClick={() => setShowNotification(false)}
+          ></div>
         </>
       )}
     </div>

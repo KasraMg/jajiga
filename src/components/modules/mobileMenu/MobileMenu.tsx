@@ -10,13 +10,15 @@ const MobileMenu = () => {
   const route = usePathname();
   const [scroll, setScroll] = useState(false);
 
-  const [prevScrollPos, setPrevScrollPos] = useState(window.scrollY);
+  const [prevScrollPos, setPrevScrollPos] = useState(
+    typeof window !== "undefined" ? window.scrollY : null,
+  );
 
   useEffect(() => {
     if (typeof window !== "undefined") {
       const handleScroll = () => {
         const currentScrollPos = window.scrollY;
-        if (currentScrollPos > prevScrollPos) {
+        if (prevScrollPos && currentScrollPos > prevScrollPos) {
           setScroll(true);
         } else {
           setScroll(false);

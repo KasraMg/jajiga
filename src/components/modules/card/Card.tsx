@@ -71,7 +71,7 @@ const Card: FC<CardProps> = ({ data, className, wishes }) => {
           </Link>
           {data.booked !== 0 && (
             <p className="text-xs font-light text-[#939cae]">
-              +{data.booked} رزرو موفق
+              +{data.booked as any} رزرو موفق
             </p>
           )}
         </div>

@@ -1,14 +1,23 @@
 "use client";
+import usePostData from "@/src/hooks/usePostData";
 import { supportSchema } from "@/src/validations/rules";
 import { useFormik } from "formik";
 import React, { useState } from "react";
+import { Button } from "../../shadcn/ui/button";
+import { ButtonLoader } from "../../modules/loader/Loader";
 
 const Form = () => {
-  const [clickHandler, setClickHandler] = useState<boolean>(false);
+  const { mutate: mutation, isPending } = usePostData<{
+    email: string;
+    name: string;
+    message: string;
+  }>("/ticket/send", "تیکت با موفقیت به پشتیبانی فرستاده شد", false);
+
   const formHandler = useFormik({
     initialValues: { name: "", email: "", message: "" },
     onSubmit: (values, { setSubmitting, resetForm }) => {
-      console.log(values);
+      mutation(values);
+      resetForm()
     },
     validationSchema: supportSchema,
   });
@@ -92,13 +101,13 @@ const Form = () => {
           </span>
         </div>
 
-        {/* <Button type='submit' variant={"yellow"} className='mx-auto w-1/3 !rounded-md !block outline-none'>ارسال</Button> */}
-        <button
+        <Button
           type="submit"
-          className="mx-auto !block w-1/3 !rounded-md outline-none"
+          variant={"yellow"}
+          className="mx-auto !block h-9 w-1/3 !rounded-md outline-none"
         >
-          ارسال
-        </button>
+          {isPending ? <ButtonLoader /> : "ارسال"}
+        </Button>
       </form>
     </div>
   );

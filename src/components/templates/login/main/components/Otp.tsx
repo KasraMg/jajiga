@@ -35,14 +35,14 @@ const Otp = ({
     accessToken: string;
   }) => {
     if (data.statusCode === 200) {
-      // Cookies.set("RefreshToken", data.RefreshToken, {
-      //   expires: 9999999,
-      //   path: "",
-      // });
-      // Cookies.set("AccessToken", data.accessToken, {
-      //   expires: 9999999,
-      //   path: "",
-      // });
+      Cookies.set("RefreshToken", data.RefreshToken, {
+        expires: 9999999,
+        path: "",
+      });
+      Cookies.set("AccessToken", data.accessToken, {
+        expires: 9999999,
+        path: "",
+      });
       queryClient.invalidateQueries({ queryKey: ["auth"] });
       toast({
         variant: "success",
@@ -50,7 +50,7 @@ const Otp = ({
           ? "با موفقیت وارد شدید"
           : "با موفقیت ثبت نام شدید",
       });
-      // router.replace("/dashboard");
+      router.replace("/dashboard");
     } else if (data.statusCode === 400) {
       toast({
         variant: "danger",
@@ -93,6 +93,8 @@ const Otp = ({
   const submitHandler = () => {
     if (otpLoginPhoneNumber) {
       const data = { code: otpCode };
+      console.log(data);
+
       mutation(data);
     } else {
       registerUserData.code = otpCode;
@@ -132,8 +134,8 @@ const Otp = ({
             <InputOTPSlot index={3} />
           </InputOTPGroup>
         </InputOTP>
-      </div> 
-      <Timer />   
+      </div>
+      <Timer />
       <Button
         disabled={otpCode.length !== 4 ? true : false}
         className="mt-5 h-[36px] w-full justify-center !rounded-full text-center"

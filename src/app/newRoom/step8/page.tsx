@@ -11,7 +11,7 @@ import useEditVilla from "@/src/hooks/useEditVilla";
 
 interface userObjData {
   rules: {
-    more: any;
+    more?: string;
     music: boolean;
     pet: boolean;
     smoke: boolean;
@@ -51,7 +51,7 @@ const page = () => {
       finished: false,
     };
     mutation(userData);
-    setDisableNextButton(true); 
+    setDisableNextButton(true);
   };
   return (
     <StepLayout stepperActive={8}>
