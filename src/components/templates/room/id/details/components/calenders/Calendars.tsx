@@ -84,8 +84,12 @@ const Calendars = (data: VillaResponse) => {
 
   const isDateInRange = (today: any, from: string, to: string) => {
     const todayDate = jalaali.toGregorian(
-      ...convertNumbers(`${today}`, true).split("/").map(Number) ,
+      ...convertNumbers(`${today}`, true).split("/").map(Number),
     );
+
+    //     const dateArray: [number, number, number] = convertNumbers(`${today}`, true).split("/").map(Number) as [number, number, number];
+    // const todayDate = jalaali.toGregorian(...dateArray);
+
     const startDate = jalaali.toGregorian(...from.split("/").map(Number));
     const endDate = jalaali.toGregorian(...to.split("/").map(Number));
 
@@ -117,7 +121,7 @@ const Calendars = (data: VillaResponse) => {
             isDateInRange(date, reserveData.date.from, reserveData.date.to)
               ? (isYourRange = true)
               : (isYourRange = false);
-          } 
+          }
           data.bookDate.forEach((range) => {
             if (isDateInRange(date, range.date.from, range.date.to)) {
               isInRange = true;
@@ -199,7 +203,7 @@ const Calendars = (data: VillaResponse) => {
               data.villa.isAccepted !== "true",
           };
         }}
-      /> 
+      />
       <div className="mt-4 flex justify-between">
         <Sheet>
           <SheetTrigger asChild>
@@ -302,7 +306,7 @@ const Calendars = (data: VillaResponse) => {
             پاک کردن
           </div>
         )}
-      </div> 
+      </div>
       {reserveData && (
         <p className="mt-2 text-xs text-red-600">
           بیش از 1 رزرو برای ویلا نمیتونید داشته باشید

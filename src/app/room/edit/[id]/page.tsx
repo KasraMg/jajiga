@@ -47,7 +47,7 @@ const Faq = () => {
                 queryKey={["server_step_6_items"]}
                 queryFn={fetchStep6Items}
               >
-                <Facilities />
+                <Facilities /> 
               </Hydrated>
             </TabsContent>
             <TabsContent value="baseInformation">

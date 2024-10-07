@@ -512,8 +512,23 @@ const Reservation = (data: VillaResponse) => {
                 <span className="text-customYellow"> تایید نشده </span> است
               </p>
               <p>
-                برای ورود به پنل ادمین شماره 09046417084 رو وارد و سپس ورود با
-                رمز عبور رو انتخاب کنید
+                برای ورود به پنل ادمین شماره{" "}
+                <span
+                  onClick={() => {
+                    navigator.clipboard
+                      .writeText("09046417084")
+                      .then(() => {
+                        toast({
+                          variant: "success",
+                          title: "شماره تلفن با موفقیت کپی شد",
+                        });
+                      });
+                  }}
+                  className="cursor-pointer text-customYellow"
+                >
+                  09046417084
+                </span>{" "}
+                رو وارد و سپس ورود با رمز عبور رو انتخاب کنید
               </p>
               <p>
                 رمز ورود{" "}

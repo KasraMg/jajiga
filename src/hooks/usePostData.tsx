@@ -12,9 +12,7 @@ const usePostData = <T extends object>(
   queryUpdate?: string,
 ) => {
   const accessToken = Cookies.get("AccessToken");
-  const queryClient = useQueryClient();
-console.log(url);
-
+  const queryClient = useQueryClient(); 
   const { mutate, isSuccess, isPending, isError } = useMutation({
     mutationFn: async (data: T) => {
       const headers: HeadersInit = {

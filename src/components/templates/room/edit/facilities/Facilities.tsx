@@ -15,6 +15,23 @@ interface userObjData {
   finished: true;
 }
 
+type Facility = {
+  engtitle: string;
+  title: string;
+  status: boolean;
+  description: string;
+  placeholder: string;
+};
+
+type FacilityData = {
+  [key: string]:
+    | {
+        status: boolean;
+        description?: string;
+      }
+    | any;
+};
+
 const Facilities = () => {
   const { data, status } = useGetData(["server_step_6_items"], fetchStep6Items);
   const { userData } = authStore((state) => state);
@@ -31,7 +48,7 @@ const Facilities = () => {
 
   useEffect(() => {
     if (data.statusCode === 200 && userData && data) {
-      const newFacilities = data?.facility?.map((item: any) => ({
+      const newFacilities: Facility[] = data?.facility?.map((item: any) => ({
         engtitle: item.engTitle,
         title: item.title,
         status: false,
@@ -40,7 +57,7 @@ const Facilities = () => {
       }));
 
       const villa = userData.villas.find((villa) => villa._id === params.id);
-      const facilityData = villa?.facility?.facility || {};
+      const facilityData: FacilityData = villa?.facility?.facility || {};
 
       const prevFacility = Object.keys(facilityData).map((key) => ({
         title: key,
@@ -117,7 +134,7 @@ const Facilities = () => {
               <div className="flex justify-between" key={index}>
                 <div className="flex items-center gap-3">
                   <input
-                    onClick={(event) => 
+                    onClick={(event) =>
                       handleInputChange(
                         (event.target as HTMLInputElement).checked,
                         facility[index].title,

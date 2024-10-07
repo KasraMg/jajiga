@@ -17,8 +17,22 @@ import {
   getPopularDestinations,
   getFastSearchOptions,
 } from "../utils/fetchs";
+import { baseUrl } from "../utils/utils";
+import { cookies } from "next/headers";
 
 export default async function Home() {
+  
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get("AccessToken");  
+  const res =await fetch(baseUrl,{
+      headers: {
+        Authorization: `Bearer ${accessToken?.value}`,
+      },
+    credentials: "include", 
+  })
+  const data = await res.json()
+  console.log(data);
+  
   return (
     <main>
       <ScrollObserver>
