@@ -2,7 +2,12 @@ import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import Container from "@/src/components/modules/container/Container";
 import { Shape } from "@/src/components/templates/login/shape/shape";
 import Main from "@/src/components/templates/login/main/Main";
-
+//const Shape = dynamic(
+//   () => import("@/src/components/templates/login/shape/shape").then((mod) => mod.Shape),
+//   {
+//     ssr: false,
+//   },
+// );
 const Login = () => {
   return (
     <Container>

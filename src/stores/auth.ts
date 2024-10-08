@@ -1,14 +1,14 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { userObj } from "../types/Auth.types";
+import { UserObj } from "../types/Auth.types";
 
 export type State = {
-  userData: userObj | null;
+  userData: UserObj | null;
   login: boolean;
   isPending: boolean;
 };
 export type Action = {
-  setUserData: (val: userObj | null) => void;
+  setUserData: (val: UserObj | null) => void;
   setLogin: (val: boolean) => void;
   setIsPending: (val: boolean) => void;
 };

@@ -4,7 +4,7 @@ import {
   DialogContent,
   DialogTrigger,
 } from "@/src/components/shadcn/ui/dialog";
-import { book } from "@/src/types/Auth.types";
+import { Book } from "@/src/types/Auth.types";
 import { reserveModalColumns } from "@/src/utils/dataTableColumns";
 import { convertToJalali } from "@/src/utils/utils";
 import { useEffect, useState } from "react";
@@ -13,19 +13,18 @@ import { FaRegTrashCan } from "react-icons/fa6";
 
 
 
-const ReserveModal = ({ booked }: { booked: book[] }) => { 
-  const [data, setData] = useState([]);
-  console.log(booked);
-
+const ReserveModal = ({ booked }: { booked: Book[] }) => { 
+  const [data, setData] = useState([]); 
+  
   useEffect(() => {
     if (booked.length) {
-      const tableData = booked.map((book) => ({
-        reserveBy: book.user.firstName + " " + book.user.lastName,
-        price: Number(book.price).toLocaleString(),
-        from: book.date.from,
-        to: book.date.to,
-        count: book.guestNumber,
-        register: convertToJalali(book.createdAt.slice(0, 10)),
+      const tableData = booked.map((Book) => ({
+        reserveBy: Book.user.firstName + " " + Book.user.lastName,
+        price: Number(Book.price).toLocaleString(),
+        from: Book.date.from,
+        to: Book.date.to,
+        count: Book.guestNumber,
+        register: convertToJalali(Book.createdAt.slice(0, 10)),
       }));
       setData(tableData as any);
     }

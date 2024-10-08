@@ -1,4 +1,3 @@
-import Layout from "@/src/components/layouts/pageLayout/Layout";
 import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import Container from "@/src/components/modules/container/Container";
 const page = () => {
@@ -8,8 +7,11 @@ const page = () => {
         route="قوانین و مقررات"
         description="توصیه می‌شود متن زیر را جهت اطلاع از حقوق و تعهدات قانونی خود مطالعه نمایید"
       />
-      <Layout>
-        <div className="mx-auto max-w-[1120px] pt-2">
+        <main
+      className={`relative bottom-2 z-10 rounded-xl bg-white px-3 sm:!px-5`}
+    >
+      <div className="Container">
+      <div className="mx-auto max-w-[1120px] pt-2">
           <article className="rules-article">
             <h2>قوانین عمومی</h2>
             <p>
@@ -1103,7 +1105,8 @@ const page = () => {
             <h3>پایان</h3>
           </article>
         </div>
-      </Layout>
+        </div>
+    </main> 
     </Container>
   );
 };

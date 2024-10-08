@@ -1,22 +1,22 @@
 "use client";
-import Layout from "@/src/components/layouts/adminLayout/page";
+import AdminLayout from "@/src/layouts/AdminLayout";
 import Loader from "@/src/components/modules/loader/Loader";
 import Box from "@/src/components/templates/adminPanel/dashboard/Box";
 import Chart from "@/src/components/templates/adminPanel/dashboard/Chart";
 import Reserves from "@/src/components/templates/adminPanel/dashboard/Reserves";
 import useGetData from "@/src/hooks/useGetData";
-import { dashboardTypes } from "@/src/types/AdminPanel.types";
+import { DashboardTypes } from "@/src/types/AdminPanel.types";
 import { getDashboardInfoes } from "@/src/utils/fetchs";
 
 const page = () => {
-  const { data, isPending } = useGetData<dashboardTypes>(
+  const { data, isPending } = useGetData<DashboardTypes>(
     ["dashboard"],
     getDashboardInfoes,
-  );
-  console.log(data);
+  ); 
+console.log(data);
 
   return (
-    <Layout>
+    <AdminLayout>
       <section className="mt-7 grid grid-cols-[auto,auto] gap-4 lg:!grid-cols-[auto,auto,auto] xl:!flex xl:justify-between">
         <Box title="مجموع اقامتگاه ها" value={data?.villasCount} />
         <Box title="مجموع کل رزرو ها" value={data?.booksCount} />
@@ -36,7 +36,7 @@ const page = () => {
         {data && <Chart {...data} />}
         {isPending && <Loader />}
       </div>
-    </Layout>
+    </AdminLayout>
   );
 };
 

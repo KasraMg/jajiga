@@ -34,7 +34,7 @@ const Host = () => {
           </div>
           <div className="Container grid grid-cols-[auto] items-start justify-center gap-y-10 px-4 py-10 pt-0 md:flex-row md:gap-x-4 lg:!grid-cols-[auto,auto,auto]">
             {cartData.carts.map((cart) => (
-              <HostCart {...cart} borderColor={cartData.bgColor} />
+              <HostCart key={cart.title} {...cart} borderColor={cartData.bgColor} />
             ))}
           </div>
         </div>

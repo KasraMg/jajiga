@@ -4,8 +4,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { TbHome, TbHomePlus } from "react-icons/tb";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-
+import { useEffect, useState } from "react"; 
 const MobileMenu = () => {
   const route = usePathname();
   const [scroll, setScroll] = useState(false);

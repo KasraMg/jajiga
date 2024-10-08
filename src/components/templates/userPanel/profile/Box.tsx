@@ -10,7 +10,7 @@ import {
 import { MdOutlineEdit } from "react-icons/md";
 import { Button } from "@/src/components/shadcn/ui/button";
 import usePostData from "@/src/hooks/usePostData";
-import { userInfoObj } from "@/src/types/Auth.types";
+import { UserInfoObj } from "@/src/types/Auth.types";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
 import { useQueryClient } from "@tanstack/react-query";
 import { ButtonLoader } from "@/src/components/modules/loader/Loader";
@@ -88,7 +88,7 @@ const Box: FC<BoxProps> = ({
     }
   };
 
-  const { mutate: mutation, isPending } = usePostData<userInfoObj>(
+  const { mutate: mutation, isPending } = usePostData<UserInfoObj>(
     "/user/edit",
     null,
     true,

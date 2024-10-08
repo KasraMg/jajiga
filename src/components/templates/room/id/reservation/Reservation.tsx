@@ -6,7 +6,7 @@ import Link from "next/link";
 import { BsFillInfoCircleFill } from "react-icons/bs";
 import ReservationModal from "./components/ReservationModal";
 import { Button } from "@/src/components/shadcn/ui/button";
-import { VillaResponse, userDateSelectData } from "@/src/types/Villa.types";
+import { VillaResponse, UserDateSelectData } from "@/src/types/Villa.types";
 import { roomStore } from "@/src/stores/room";
 import { useParams } from "next/navigation";
 import { todayVillaPrice } from "@/src/utils/utils";
@@ -14,12 +14,12 @@ import usePostData from "@/src/hooks/usePostData";
 import Loader, { ButtonLoader } from "@/src/components/modules/loader/Loader";
 import ReservationStepper from "./components/ReservationStepper";
 import { authStore } from "@/src/stores/auth";
-import { book } from "@/src/types/Auth.types";
+import { Book } from "@/src/types/Auth.types";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
 import useDeleteData from "@/src/hooks/useDeleteData";
 
 const Reservation = (data: VillaResponse) => {
-  const [reserveData, setReserveData] = useState<null | book>(null);
+  const [reserveData, setReserveData] = useState<null | Book>(null);
   const [countSelectedOption, setCountSelectedOption] = useState<{
     label: string;
     value: string;
@@ -32,8 +32,8 @@ const Reservation = (data: VillaResponse) => {
   const { login, userData } = authStore((state) => state);
   const [disable, setDisable] = useState(true);
   const [userSelectData, setUserSelectData] =
-    useState<userDateSelectData | null>();
-  const successFunc = (data: userDateSelectData) => {
+    useState<UserDateSelectData | null>();
+  const successFunc = (data: UserDateSelectData) => {
     if (data.statusCode === 200) {
       setUserSelectData(data);
     }
@@ -52,7 +52,7 @@ const Reservation = (data: VillaResponse) => {
   }
 
   const { mutate: mutation, isPending } = usePostData<any>(
-    `/villa/book/price/${params.id}`,
+    `/villa/Book/price/${params.id}`,
     null,
     false,
     successFunc,
@@ -515,14 +515,12 @@ const Reservation = (data: VillaResponse) => {
                 برای ورود به پنل ادمین شماره{" "}
                 <span
                   onClick={() => {
-                    navigator.clipboard
-                      .writeText("09046417084")
-                      .then(() => {
-                        toast({
-                          variant: "success",
-                          title: "شماره تلفن با موفقیت کپی شد",
-                        });
+                    navigator.clipboard.writeText("09046417084").then(() => {
+                      toast({
+                        variant: "success",
+                        title: "شماره تلفن با موفقیت کپی شد",
                       });
+                    });
                   }}
                   className="cursor-pointer text-customYellow"
                 >

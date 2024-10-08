@@ -1,11 +1,18 @@
 import useGetData from "@/src/hooks/useGetData";
 import { VillaDetails } from "@/src/types/Villa.types";
-import { fetchStep6Items } from "@/src/utils/clientFetchs";
+import { fetchStep6Items } from "@/src/utils/fetchs"; 
 import { zoneOptions } from "@/src/utils/options";
 import React, { useEffect, useState } from "react";
 import { BsInfoCircleFill } from "react-icons/bs";
 import { FaRegSnowflake } from "react-icons/fa";
 
+interface newFacibilityObj {
+  engtitle: string;
+  title: string;
+  status: boolean;
+  description: string;
+  engTitle: string;
+}
 const Infoes = (data: VillaDetails) => {
   const [facibilityData, setFacilityData] = useState([]);
   const villaZone = zoneOptions.find(
@@ -18,21 +25,23 @@ const Infoes = (data: VillaDetails) => {
 
   useEffect(() => {
     if (facibility && facibility.statusCode === 200) {
-      const newFacilities = facibility?.facility?.map((item: any) => ({
-        engtitle: item.engTitle,
-        title: item.title,
-        status: false,
-        description: "",
-      }));
+      const newFacilities = facibility?.facility?.map(
+        (item: newFacibilityObj) => ({
+          engtitle: item.engTitle,
+          title: item.title,
+          status: false,
+          description: "",
+        }),
+      );
 
-      const facilityData = data.facility.facility;
+      const facilityData: any = data.facility.facility;
 
       const prevFacility = Object.keys(facilityData).map((key) => ({
         title: key,
         ...facilityData[key],
       }));
 
-      const updatedFacilities = newFacilities.map((item: any) => {
+      const updatedFacilities = newFacilities.map((item: newFacibilityObj) => {
         const match = prevFacility.find((pf) => pf.title === item.engtitle);
         return match
           ? {
@@ -48,7 +57,7 @@ const Infoes = (data: VillaDetails) => {
       );
       setFacilityData(checkFcibility);
     }
-  }, [status, data]); 
+  }, [status, data]);
   return (
     <div>
       <h2 className="my-6 mb-4 text-lg text-[#252a31]">درباره اقامتگاه</h2>

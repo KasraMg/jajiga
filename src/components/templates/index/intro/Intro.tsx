@@ -45,7 +45,7 @@ const Intro = () => {
       style={{ transform: `translateY(-${progress * 20}vh)` }}
       ref={refContainer}
       dir="ltr"
-      className={` ${typeof window !== "undefined" && window.pageYOffset > 800 && "invisible"} sticky left-0 top-0 z-0 h-[60vh] w-full bg-[url(https://wallpaperaccess.com/full/1320095.jpg)] bg-cover bg-fixed bg-no-repeat lg:!h-[90vh]`}
+      className={`${typeof window !== "undefined" && window.pageYOffset > 800 && "invisible"} sticky left-0 top-0 z-0 h-[60vh] w-full bg-[url(https://wallpaperaccess.com/full/1320095.jpg)] bg-cover bg-fixed bg-no-repeat lg:!h-[90vh]`}
     >
       <div className="relative z-30 pt-36 text-center text-white lg:!pr-4 lg:!pt-64">
         <p className="text-[1.125rem] lg:!text-[1.7rem]">

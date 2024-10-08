@@ -1,27 +1,33 @@
 "use client";
-import { useRef } from "react";
-import { Canvas, useFrame, useLoader } from "@react-three/fiber";
+import React, { useEffect, useRef, useState } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { Mesh } from "three";
 
-function MeshComponent() {
+const MeshComponent = React.memo(() => {
   const fileUrl = "/golden_heart_lock_sculpted_in_vr.glb";
   const mesh = useRef<Mesh>(null!);
-  const gltf = useLoader(GLTFLoader, fileUrl);
+  const [gltf, setGltf] = useState<any>(null);
 
+  useEffect(() => {
+    const loader = new GLTFLoader();
+    loader.load(fileUrl, (loadedGltf) => {
+      setGltf(loadedGltf);
+    });
+  }, [fileUrl]);
   useFrame(() => {
     if (mesh.current) {
       mesh.current.rotation.y += 0.003;
     }
   });
-
   return (
     <mesh ref={mesh}>
-      <primitive object={gltf.scene} scale={0.1} />
+      {gltf && <primitive object={gltf.scene} scale={0.1} />}
     </mesh>
   );
-}
+});
+
 export function Shape() {
   return (
     <div className="relative h-[150px] w-full md:!h-auto md:!w-[300px] lg:!w-[430px]">

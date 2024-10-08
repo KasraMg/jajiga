@@ -1,5 +1,5 @@
 "use client";
-import Layout from "@/src/components/layouts/adminLayout/page";
+import AdminLayout from "@/src/layouts/AdminLayout";
 import { Button } from "@/src/components/shadcn/ui/button";
 import useGetData from "@/src/hooks/useGetData";
 import { getAllCategories } from "@/src/utils/fetchs";
@@ -11,11 +11,11 @@ import Loader from "@/src/components/modules/loader/Loader";
 import useDeleteData from "@/src/hooks/useDeleteData";
 import AddCategoryModal from "@/src/components/templates/adminPanel/categories/AddCategoryModal";
 import { categoryColumns } from "@/src/utils/dataTableColumns";
-import { categoryResTypes, categoryTypes } from "@/src/types/AdminPanel.types";
+import { CategoryResTypes, categoryTypes } from "@/src/types/AdminPanel.types";
 
 const page = () => {
   const { data: categories, isPending: getCategoriesPending } =
-    useGetData<categoryResTypes>(["allCategories"], getAllCategories);
+    useGetData<CategoryResTypes>(["allCategories"], getAllCategories);
   const [categoryId, setCategoryId] = useState("");
   const [data, setData] = useState<categoryTypes[]>([]);
   const [pending, setPending] = useState(true); 
@@ -62,7 +62,7 @@ const page = () => {
     });
   };
   return (
-    <Layout>
+    <AdminLayout>
       <div className="relative my-10">
         <div className="before:absolute before:inset-0 before:top-4 before:h-[2px] before:w-full before:bg-red-600 before:content-['']">
           <p className="before: relative z-50 w-max bg-white pl-3 text-2xl before:absolute before:right-0 before:top-0 before:h-8 before:w-8 before:rotate-45 before:bg-[#dc26261c] before:content-['']">
@@ -80,7 +80,7 @@ const page = () => {
       />
       {getCategoriesPending && <Loader />}
       {deleteHandlerPending && <Loader />}
-    </Layout>
+    </AdminLayout>
   );
 };
 

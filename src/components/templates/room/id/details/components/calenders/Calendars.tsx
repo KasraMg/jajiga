@@ -17,7 +17,7 @@ import { VillaResponse } from "@/src/types/Villa.types";
 import { roomStore } from "@/src/stores/room";
 import { convertNumbers } from "@/src/utils/utils";
 import { authStore } from "@/src/stores/auth";
-import { book } from "@/src/types/Auth.types";
+import { Book } from "@/src/types/Auth.types";
 import { useParams } from "next/navigation";
 
 const Calendars = (data: VillaResponse) => {
@@ -30,7 +30,9 @@ const Calendars = (data: VillaResponse) => {
 
   useEffect(() => {
     const handleResize = () => {
-      setNumberOfMonths(window.innerWidth >= 1023 ? 2 : 1);
+      setNumberOfMonths(
+        window.innerWidth >= 1023 ? 2 : 1,
+      );
     };
 
     window.addEventListener("resize", handleResize);
@@ -41,7 +43,7 @@ const Calendars = (data: VillaResponse) => {
   const { setStartDate, setEndDate, startDate } = roomStore((state) => state);
   const { userData } = authStore((state) => state);
   const [defaultValue, setDefultValue] = useState([]);
-  const [reserveData, setReserveData] = useState<null | book>(null);
+  const [reserveData, setReserveData] = useState<null | Book>(null);
 
   function handleChange(value: DateObject | DateObject[] | null) {
     setDefultValue(value as any);
@@ -83,15 +85,23 @@ const Calendars = (data: VillaResponse) => {
   }, [userData]);
 
   const isDateInRange = (today: any, from: string, to: string) => {
-    const todayDate = jalaali.toGregorian(
-      ...convertNumbers(`${today}`, true).split("/").map(Number),
-    );
+    // const todayDate = jalaali.toGregorian(
+    //   ...convertNumbers(`${today}`, true).split("/").map(Number),
+    // );
 
-    //     const dateArray: [number, number, number] = convertNumbers(`${today}`, true).split("/").map(Number) as [number, number, number];
-    // const todayDate = jalaali.toGregorian(...dateArray);
+    const dateArray: [number, number, number] = convertNumbers(`${today}`, true)
+      .split("/")
+      .map(Number) as [number, number, number];
+    const todayDate = jalaali.toGregorian(...dateArray);
 
-    const startDate = jalaali.toGregorian(...from.split("/").map(Number));
-    const endDate = jalaali.toGregorian(...to.split("/").map(Number));
+    // const startDate = jalaali.toGregorian(...from.split("/").map(Number));
+    // const endDate = jalaali.toGregorian(...to.split("/").map(Number));
+
+    const [fromYear, fromMonth, fromDay] = from.split("/").map(Number);
+    const [toYear, toMonth, toDay] = to.split("/").map(Number);
+
+    const startDate = jalaali.toGregorian(fromYear, fromMonth, fromDay);
+    const endDate = jalaali.toGregorian(toYear, toMonth, toDay);
 
     const todayObj = new Date(todayDate.gy, todayDate.gm - 1, todayDate.gd);
     const startObj = new Date(startDate.gy, startDate.gm - 1, startDate.gd);
@@ -199,7 +209,7 @@ const Calendars = (data: VillaResponse) => {
             disabled:
               data.villa.isOwner ||
               isInRange ||
-              reserveData ||
+              (reserveData as any) ||
               data.villa.isAccepted !== "true",
           };
         }}

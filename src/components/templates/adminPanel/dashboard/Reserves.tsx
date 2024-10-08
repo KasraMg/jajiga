@@ -1,19 +1,19 @@
 import { Button } from "@/src/components/shadcn/ui/button";
-import { book } from "@/src/types/Auth.types";
+import { Book } from "@/src/types/Auth.types";
 import { reservesColumns } from "@/src/utils/dataTableColumns";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 
-const Reserves = ({ books }: { books: book[] }) => {
-  const [data, setData] = useState<book[]>(books);
+const Reserves = ({ books }: { books: Book[] }) => {
+  const [data, setData] = useState<Book[]>(books);
   
   useEffect(() => {
-    const tableData: unknown = books.map((book: book) => ({
-      userData: book.user.firstName + " " + book.user.lastName,
-      phone: book.user.phone,
+    const tableData: unknown = books.map((Book: Book) => ({
+      userData: Book.user.firstName + " " + Book.user.lastName,
+      phone: Book.user.phone,
       room: (
-        <Link href={`/room/${book.villa}`}>
+        <Link href={`/room/${Book.villa}`}>
           <Button size={"sm"} variant={"main"}>
             مشاهده
           </Button>
@@ -21,13 +21,13 @@ const Reserves = ({ books }: { books: book[] }) => {
       ),
       register: (
         <div>
-          <p>{book.date.from}</p>
-          <p>{book.date.to}</p>
+          <p>{Book.date.from}</p>
+          <p>{Book.date.to}</p>
         </div>
       ),
-      price: book.price,
+      price: Book.price,
     }));
-    setData(tableData as book[]);
+    setData(tableData as Book[]);
   }, [books]);
   return (
     <div className="w-full xl:!w-1/2">

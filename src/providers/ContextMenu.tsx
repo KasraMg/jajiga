@@ -18,13 +18,13 @@ const ContextMenu: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const menuHeight = 240;
     let posX = event.pageX;
     let posY = event.pageY;
-
-    if (posX + menuWidth > window.innerWidth) {
-      posX -= menuWidth;
-    }
-
-    if (posY + menuHeight > window.innerHeight) {
-      posY -= menuHeight;
+    if (typeof window !== "undefined") {
+      if (posX + menuWidth > window.innerWidth) {
+        posX -= menuWidth;
+      } 
+      if (posY + menuHeight > window.innerHeight) {
+        posY -= menuHeight;
+      }
     }
 
     setPosition({ x: posX, y: posY });
@@ -50,14 +50,17 @@ const ContextMenu: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             <>
               <Link
                 href={"/dashboard"}
-                className="!flex border-t border-white flex-row-reverse items-center justify-end gap-2 !pr-0"
+                className="!flex flex-row-reverse items-center justify-end gap-2 border-t border-white !pr-0"
               >
                 {" "}
                 حساب کاربری
                 <FaRegUser className="text-base" />
               </Link>
 
-              <Link className="border-b border-white"  href={"/wishes"}> علاقه مندی </Link>
+              <Link className="border-b border-white" href={"/wishes"}>
+                {" "}
+                علاقه مندی{" "}
+              </Link>
             </>
           )}
           <Link

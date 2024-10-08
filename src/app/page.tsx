@@ -1,4 +1,3 @@
-import Layout from "../components/layouts/pageLayout/Layout";
 import Ads from "../components/templates/index/Ads/Ads";
 import BecomeHost from "../components/templates/index/BecomeHost/BecomeHost";
 import FastSearch from "../components/templates/index/FastSearch/FastSearch";
@@ -17,47 +16,42 @@ import {
   getPopularDestinations,
   getFastSearchOptions,
 } from "../utils/fetchs";
-import { baseUrl } from "../utils/utils";
-import { cookies } from "next/headers";
 
 export default async function Home() {
-  
-  const cookieStore = cookies();
-  const accessToken = cookieStore.get("AccessToken");  
-  const res =await fetch(baseUrl,{
-      headers: {
-        Authorization: `Bearer ${accessToken?.value}`,
-      },
-    credentials: "include", 
-  })
-  const data = await res.json()
-  console.log(data);
-  
   return (
     <main>
       <ScrollObserver>
         <Container>
           <Intro />
-          <Layout className="bg-white">
-            <Hydrated
-              queryKey={["popularDestinations"]}
-              queryFn={getPopularDestinations}
-            >
-              <PopularDestinations />
-            </Hydrated>
 
-            <Hydrated queryKey={["FastSearch"]} queryFn={getFastSearchOptions}>
-              <FastSearch />
-            </Hydrated>
+          <main
+            className={`relative bottom-2 z-10 rounded-xl bg-white px-3 sm:!px-5`}
+          >
+            <div className="Container">
+              <Hydrated
+                queryKey={["popularDestinations"]}
+                queryFn={getPopularDestinations}
+              >
+                <PopularDestinations />
+              </Hydrated>
 
-            <Ads />
-            <Hydrated
-              queryKey={["specialVillas"]}
-              queryFn={getPrivilegedVillas}
-            >
-              <SpecialAccommodations />
-            </Hydrated>
-          </Layout>
+              <Hydrated
+                queryKey={["FastSearch"]}
+                queryFn={getFastSearchOptions}
+              >
+                <FastSearch />
+              </Hydrated>
+
+              <Ads />
+              <Hydrated
+                queryKey={["specialVillas"]}
+                queryFn={getPrivilegedVillas}
+              >
+                <SpecialAccommodations />
+              </Hydrated>
+            </div>
+          </main>
+
           <BecomeHost />
           <Hydrated
             queryKey={["allActivatedVillas"]}

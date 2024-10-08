@@ -8,12 +8,11 @@ import { getAllActivatedVillas } from "@/src/utils/fetchs";
 import { VillaDetails } from "@/src/types/Villa.types";
 import Image from "next/image";
 const Villas = () => {
-  const { data, isLoading } = useGetData<any>(
+  const { data } = useGetData<any>(
     ["allActivatedVillas"],
     getAllActivatedVillas,
-  );
- console.log(data);
- 
+  ); 
+  
   const [status, setStatus] = useState("همه شهرها");
   const [villaData, setVillaData] = useState(data.villas);
    useEffect(() => {

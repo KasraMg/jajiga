@@ -1,4 +1,3 @@
-import Layout from "@/src/components/layouts/pageLayout/Layout";
 import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import Container from "@/src/components/modules/container/Container";
 import {
@@ -24,50 +23,55 @@ const Faq = () => {
         className="!pb-[70px]"
         routes={["اقامتگاه ها", "ویرایش اقامتگاه"]}
       />
-      <Layout className="!z-10">
-        <div className="mx-auto mb-10">
-          <Tabs defaultValue="images" className="w-full" dir="rtl">
-            <TabsList
-              dir="rtl"
-              className="relative bottom-[38px] w-full justify-between overflow-scroll md:!w-[auto] md:!justify-center md:!overflow-hidden"
-            >
-              <TabsTrigger value="images">تصاویر</TabsTrigger>
-              <TabsTrigger value="facilities">امکانات</TabsTrigger>
-              <TabsTrigger value="baseInformation">اطلاعات پایه</TabsTrigger>
-              <TabsTrigger value="capacity">ظرفیت</TabsTrigger>
-              <TabsTrigger value="rules">مقررات</TabsTrigger>
-              <TabsTrigger value="price">نرخ فصلی</TabsTrigger>
-              <TabsTrigger value="disable">غیر فعالسازی</TabsTrigger>
-            </TabsList>
-            <TabsContent value="images">
-              <Images />
-            </TabsContent>
-            <TabsContent value="facilities">
-              <Hydrated
-                queryKey={["server_step_6_items"]}
-                queryFn={fetchStep6Items}
+
+      <main
+        className={`relative bottom-2 !z-10 rounded-xl bg-white px-3 sm:!px-5`}
+      >
+        <div className="Container">
+          <div className="mx-auto mb-10">
+            <Tabs defaultValue="images" className="w-full" dir="rtl">
+              <TabsList
+                dir="rtl"
+                className="relative bottom-[38px] w-full justify-between overflow-scroll md:!w-[auto] md:!justify-center md:!overflow-hidden"
               >
-                <Facilities /> 
-              </Hydrated>
-            </TabsContent>
-            <TabsContent value="baseInformation">
-              <BaseInformation />
-            </TabsContent>
-            <TabsContent value="capacity">
-              <Capacity />
-            </TabsContent>
-            <TabsContent value="rules">
-              <Rules />
-            </TabsContent>
-            <TabsContent value="price">
-              <Price />
-            </TabsContent>
-            <TabsContent value="disable">
-              <Disable />
-            </TabsContent>
-          </Tabs>
+                <TabsTrigger value="images">تصاویر</TabsTrigger>
+                <TabsTrigger value="facilities">امکانات</TabsTrigger>
+                <TabsTrigger value="baseInformation">اطلاعات پایه</TabsTrigger>
+                <TabsTrigger value="capacity">ظرفیت</TabsTrigger>
+                <TabsTrigger value="rules">مقررات</TabsTrigger>
+                <TabsTrigger value="price">نرخ فصلی</TabsTrigger>
+                <TabsTrigger value="disable">غیر فعالسازی</TabsTrigger>
+              </TabsList>
+              <TabsContent value="images">
+                <Images />
+              </TabsContent>
+              <TabsContent value="facilities">
+                <Hydrated
+                  queryKey={["server_step_6_items"]}
+                  queryFn={fetchStep6Items}
+                >
+                  <Facilities />
+                </Hydrated>
+              </TabsContent>
+              <TabsContent value="baseInformation">
+                <BaseInformation />
+              </TabsContent>
+              <TabsContent value="capacity">
+                <Capacity />
+              </TabsContent>
+              <TabsContent value="rules">
+                <Rules />
+              </TabsContent>
+              <TabsContent value="price">
+                <Price />
+              </TabsContent>
+              <TabsContent value="disable">
+                <Disable />
+              </TabsContent>
+            </Tabs>
+          </div>
         </div>
-      </Layout>
+      </main>
     </Container>
   );
 };

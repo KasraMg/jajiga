@@ -1,5 +1,4 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { baseUrl } from "../utils/utils";
+import { useMutation, useQueryClient } from "@tanstack/react-query"; 
 import Cookies from "js-cookie";
 import { toast } from "../components/shadcn/ui/use-toast";
 
@@ -16,13 +15,12 @@ const useDeleteData = (
       const headers: HeadersInit = {
         Authorization: `Bearer ${accessToken}`,
       };
-      return await fetch(`${baseUrl}${url}`, {
+      return await fetch(`${process.env.NEXT_PUBLIC_API_URL}${url}`, {
         method: "DELETE",
         headers,
       }).then((res) => res.json());
     },
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: (data) => { 
       if (successMsg && data.statusCode === 200) {
         toast({
           variant: "success",
@@ -32,8 +30,7 @@ const useDeleteData = (
           queryClient.invalidateQueries({ queryKey: [queryUpdate] });
       }
     },
-    onError: (data) => {
-      console.log(data);
+    onError: (data) => { 
       toast({
         variant: "danger",
         title: "خطایی غیر منتظره رخ داد",

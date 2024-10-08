@@ -10,7 +10,7 @@ import {
   typeOptions,
   zoneOptions,
 } from "@/src/utils/options";
-import StepLayout from "@/src/components/layouts/stepLayout/StepLayout";
+import StepLayout from "@/src/layouts/StepLayout";
 import { getFromLocalStorage } from "@/src/utils/utils";
 import Loader from "@/src/components/modules/loader/Loader";
 import useEditVilla from "@/src/hooks/useEditVilla";

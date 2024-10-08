@@ -2,8 +2,9 @@ import Loader from '@/src/components/modules/loader/Loader'
 
 const loading = () => {
   return (
-    <Loader />
+    <Loader className='!border-black' enableOverlay={true} />
   )
 }
 
 export default loading
+ 

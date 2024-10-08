@@ -1,7 +1,5 @@
-import React from 'react'
-
-const useStateData = () => {
-
+ 
+const useStateData = () => {  
     const stateOptions: {
         label: string,
         value: string[]

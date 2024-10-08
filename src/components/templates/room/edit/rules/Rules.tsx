@@ -29,8 +29,7 @@ const Rules = () => {
   const villa = userData?.villas.find((villa) => villa._id === params.id);
 
   useEffect(() => {
-    if (villa) {
-      console.log(villa);
+    if (villa) { 
       setPet(villa.rules.pet);
       setParty(villa.rules.music);
       setSmoke(villa.rules.smoke);

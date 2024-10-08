@@ -1,9 +1,7 @@
 import { Button } from "@/src/components/shadcn/ui/button";
 import {
   Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
+  DialogContent, 
   DialogTrigger,
 } from "@/src/components/shadcn/ui/dialog";
 import { useEffect, useState } from "react";
@@ -13,7 +11,7 @@ import { SlInfo } from "react-icons/sl";
 import { roomStore } from "@/src/stores/room";
 import { authStore } from "@/src/stores/auth";
 import usePostData from "@/src/hooks/usePostData";
-import { VillaDetails, userDateSelectData } from "@/src/types/Villa.types";
+import { VillaDetails, UserDateSelectData } from "@/src/types/Villa.types";
 import { useParams } from "next/navigation";
 import ReservationStepper from "./ReservationStepper";
 import { ButtonLoader } from "@/src/components/modules/loader/Loader";
@@ -47,17 +45,17 @@ const ReservationModal = ({
   const { login } = authStore((state) => state);
   const [disable, setDisable] = useState(true);
   const [userSelectData, setUserSelectData] =
-    useState<userDateSelectData | null>();
+    useState<UserDateSelectData | null>();
   const params = useParams();
 
-  const successFunc = (data: userDateSelectData) => {
+  const successFunc = (data: UserDateSelectData) => {
     if (data.statusCode === 200) {
       setUserSelectData(data);
     }
   };
 
   const { mutate: mutation, isPending } = usePostData<any>(
-    `/villa/book/price/${params.id}`,
+    `/villa/Book/price/${params.id}`,
     null,
     false,
     successFunc,
@@ -82,7 +80,7 @@ const ReservationModal = ({
   }, [countSelectedOption, startDate, endDate, login]);
 
   useEffect(() => {
-    if (userSelectData) setDisable(false); 
+    if (userSelectData) setDisable(false);
   }, [userSelectData]);
 
   for (let index = 0; index < count; index++) {
@@ -140,7 +138,7 @@ const ReservationModal = ({
             <>
               {userSelectData.firstMonthDays ? (
                 <div
-                  className="mt-6 p-2 sm:px-5 text-[.8rem] font-light text-gray-600"
+                  className="mt-6 p-2 text-[.8rem] font-light text-gray-600 sm:px-5"
                   style={{
                     boxShadow:
                       "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px",
@@ -231,7 +229,7 @@ const ReservationModal = ({
                 </div>
               ) : (
                 <div
-                  className="mt-6 p-2 sm:px-5 text-[.8rem] font-light text-gray-600"
+                  className="mt-6 p-2 text-[.8rem] font-light text-gray-600 sm:px-5"
                   style={{
                     boxShadow:
                       "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px",
@@ -310,7 +308,6 @@ const ReservationModal = ({
               totalPrice={userSelectData?.totalPrice.toLocaleString() as string}
               usersCount={countSelectedOption?.value as any}
               totalDays={userSelectData?.totalDays}
-              setOpenReserveModal={setOpenReserveModal}
             />
           )}
           <Link href={"/faq"}>

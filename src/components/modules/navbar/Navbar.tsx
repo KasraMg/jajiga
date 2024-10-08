@@ -1,4 +1,5 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import Menu from "../menu/Menu";
 import { usePathname } from "next/navigation";
@@ -16,8 +17,8 @@ const Navbar = ({ navbarContainer }: any) => {
   useEffect(() => {
     window?.addEventListener("scroll", () => {
       if (route.length == 1) {
-        const currentScroll = window?.pageYOffset;
-        if (currentScroll > 100) {
+        const currentScroll = typeof window !== "undefined" && window.pageYOffset;
+        if (currentScroll && currentScroll > 100) {
           setIsSticky(true);
         } else {
           setIsSticky(false);

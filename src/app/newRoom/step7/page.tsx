@@ -1,6 +1,6 @@
 "use client";
 import ContentNavigator from "@/src/components/modules/contentNavigator/ContentNavigator";
-import StepLayout from "@/src/components/layouts/stepLayout/StepLayout";
+import StepLayout from "@/src/layouts/StepLayout";
 import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
 import { ChangeEvent, useEffect, useState } from "react";

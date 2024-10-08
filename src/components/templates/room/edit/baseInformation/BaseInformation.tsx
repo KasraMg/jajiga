@@ -1,5 +1,4 @@
-"use client";
-import { Map } from "@/src/components/modules/Map/Map";
+"use client"; 
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
 import Textarea from "@/src/components/modules/textarea/Textarea";
 import { Alert } from "@/src/components/shadcn/ui/alert";
@@ -12,6 +11,14 @@ import { useParams } from "next/navigation";
 import { Button } from "@/src/components/shadcn/ui/button";
 import useEditVilla from "@/src/hooks/useEditVilla";
 import Loader from "@/src/components/modules/loader/Loader";
+import dynamic from "next/dynamic";
+
+const Map = dynamic(
+  () => import("@/src/components/modules/Map/Map").then((mod) => mod.Map),
+  {
+    ssr: false,
+  },
+);
 
 interface userObjData {
   address: {
@@ -65,8 +72,7 @@ const BaseInformation = () => {
       y: `${y}`,
     };
   };
-  const submitHandler = () => {
-    console.log(coordinates);
+  const submitHandler = () => { 
     if (!coordinates) {
       coordinates = { x: villa?.coordinates.x, y: villa?.coordinates.y } as any;
     }
@@ -117,8 +123,7 @@ const BaseInformation = () => {
     setCitySelectedOption([
       { value: villa?.address.city, label: villa?.address.city },
       ...newCity,
-    ] as any);
-    console.log(villa);
+    ] as any); 
   }, [villa]);
 
   useEffect(() => {

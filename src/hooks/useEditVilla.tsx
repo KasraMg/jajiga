@@ -1,9 +1,9 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { baseUrl, saveIntoLocalStorage } from "../utils/utils";
+import { useMutation, useQueryClient } from "@tanstack/react-query"; 
 import Cookies from "js-cookie";
 import { toast } from "../components/shadcn/ui/use-toast";
 import { useRouter } from "next/navigation";
 import { useState } from "react"; 
+import { saveIntoLocalStorage } from "../utils/utils";
 
 const useEditVilla = <T extends object>(
   nextStep: string | null,
@@ -25,7 +25,7 @@ const useEditVilla = <T extends object>(
         headers["Content-Type"] = "application/json";
       }
       return await fetch(
-        `${baseUrl}${!villaId ? "/villa/add" : `/villa/update/${villaId}`}`,
+        `${process.env.NEXT_PUBLIC_API_URL}${!villaId ? "/villa/add" : `/villa/update/${villaId}`}`,
         {
           method: !villaId ? "POST" : "PUT",
           headers,
@@ -34,8 +34,7 @@ const useEditVilla = <T extends object>(
         },
       ).then((res) => res.json());
     },
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: (data) => { 
       if (data.statusCode === 200) {
         !villaId ? saveIntoLocalStorage("villaId", data.villa._id) : null;
         setResponseData(data);

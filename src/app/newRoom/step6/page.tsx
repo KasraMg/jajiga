@@ -1,13 +1,13 @@
 "use client";
 import ContentNavigator from "@/src/components/modules/contentNavigator/ContentNavigator";
-import StepLayout from "@/src/components/layouts/stepLayout/StepLayout";
+import StepLayout from "@/src/layouts/StepLayout";
 import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
 import { getFromLocalStorage } from "@/src/utils/utils";
 import { useEffect, useState } from "react";
 import Loader from "@/src/components/modules/loader/Loader";
 import useGetData from "@/src/hooks/useGetData";
-import { fetchStep6Items } from "@/src/utils/clientFetchs";
+import { fetchStep6Items } from "@/src/utils/fetchs";  
 import useEditVilla from "@/src/hooks/useEditVilla";
 interface userObjData {
   facility: {};

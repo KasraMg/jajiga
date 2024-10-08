@@ -10,7 +10,7 @@ import {
 import { MdOutlineEdit } from "react-icons/md";
 import { Button } from "@/src/components/shadcn/ui/button";
 import usePostData from "@/src/hooks/usePostData";
-import { userInfoObj } from "@/src/types/Auth.types";
+import { UserInfoObj } from "@/src/types/Auth.types";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
 import {
   InputOTP,
@@ -187,7 +187,7 @@ const TwoStepBox: FC<BoxProps> = ({
     }
   };
 
-  const { mutate: mutation, isPending } = usePostData<userInfoObj>(
+  const { mutate: mutation, isPending } = usePostData<UserInfoObj>(
     type == "email"
       ? step === 1
         ? "/user/addEmail"
@@ -200,7 +200,7 @@ const TwoStepBox: FC<BoxProps> = ({
     successFunc,
   );
 
-  const { mutate: resendCode } = usePostData<userInfoObj>(
+  const { mutate: resendCode } = usePostData<UserInfoObj>(
     type == "email" ? "/user/addEmail" : "/user/changeNumber",
     null,
     false,

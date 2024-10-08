@@ -22,8 +22,7 @@ import { authStore } from "@/src/stores/auth";
 import Link from "next/link";
 import { AiOutlineLogout } from "react-icons/ai";
 import { useLogoutHandler } from "@/src/utils/auth";
-import Image from "next/image";
-import { baseUrl } from "@/src/utils/utils";
+import Image from "next/image"; 
 import { usePathname } from "next/navigation";
 import { RiAdminLine } from "react-icons/ri";
 function Menu({ isSticky }: any) {
@@ -115,9 +114,9 @@ function Menu({ isSticky }: any) {
                   alt="avatar"
                   width={1000}
                   height={1000}
-                  onLoadingComplete={() => setSmallAvatarLoading(false)}
+                  onLoad={() => setSmallAvatarLoading(false)}
                   className="h-8 w-8 rounded-full"
-                  src={`${baseUrl}/user/avatars/${userData?.user.avatar}`}
+                  src={`${process.env.NEXT_PUBLIC_API_URL}/user/avatars/${userData?.user.avatar}`}
                 />
               </>
             ) : (
@@ -160,9 +159,9 @@ function Menu({ isSticky }: any) {
                   alt="avatar"
                   width={1000}
                   height={1000}
-                  onLoadingComplete={() => setLargeAvatarLoading(false)}
+                  onLoad={() => setLargeAvatarLoading(false)}
                   className="h-14 w-14 rounded-full"
-                  src={`${baseUrl}/user/avatars/${userData?.user.avatar}`}
+                  src={`${process.env.NEXT_PUBLIC_API_URL}/user/avatars/${userData?.user.avatar}`}
                 />
               </>
             ) : (
@@ -197,6 +196,7 @@ function Menu({ isSticky }: any) {
           <ul>
             {navLinks.map((link) => (
               <Link
+                key={link.path}
                 href={link.path}
                 className={`${pathname === link.path ? "bg-[#f5f5f5]" : null} font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]`}
               >
