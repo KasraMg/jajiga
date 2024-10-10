@@ -1,10 +1,10 @@
 import useGetData from "@/src/hooks/useGetData";
 import { VillaDetails } from "@/src/types/Villa.types";
-import { fetchStep6Items } from "@/src/utils/fetchs"; 
+import { fetchStep6Items } from "@/src/utils/fetchs";
 import { zoneOptions } from "@/src/utils/options";
 import React, { useEffect, useState } from "react";
-import { BsInfoCircleFill } from "react-icons/bs";
-import { FaRegSnowflake } from "react-icons/fa";
+import { BsInfoCircleFill } from "react-icons/bs"; 
+import { GoDotFill } from "react-icons/go";
 
 interface newFacibilityObj {
   engtitle: string;
@@ -67,7 +67,7 @@ const Infoes = (data: VillaDetails) => {
       </div>
       <hr className="mt-4" />
       <div>
-        <h2 className="my-6 mb-4 text-lg text-[#252a31]">درباره اقامتگاه</h2>
+        <h2 className="my-6 mb-4 text-lg text-[#252a31]">فضای اقامتگاه</h2>
         <div className="grid grid-cols-[auto,auto] gap-3 text-sm text-gray-800">
           <p>
             {" "}
@@ -110,7 +110,7 @@ const Infoes = (data: VillaDetails) => {
             facibilityData.map(
               (option: { title: string; description: string }) => (
                 <div key={option.title} className="flex items-center gap-2">
-                  <FaRegSnowflake />
+                  <GoDotFill />
                   <p>{option.title}</p>
                   <div
                     className="relative cursor-pointer text-[#6378f1]"
@@ -119,7 +119,7 @@ const Infoes = (data: VillaDetails) => {
                     {option.description && (
                       <>
                         <BsInfoCircleFill />
-                        <div className="invisible absolute -left-[2.5rem] -top-[2.5rem] whitespace-nowrap rounded-lg bg-black px-4 py-2 text-xs text-white">
+                        <div className="invisible absolute -left-1 -top-[2.5rem] whitespace-nowrap rounded-lg bg-black px-4 py-2 text-xs text-white sm:!-left-[2.5rem]">
                           <span>{option.description}</span>
                         </div>
                       </>

@@ -28,6 +28,7 @@ const Comments = ({
   const [idAnswer, setIdAnswer] = useState("");
   const queryClient = useQueryClient();
   
+  console.log(comments);
   
   const params = useParams();
   const handleClick = (index: number) => {
@@ -63,7 +64,7 @@ const Comments = ({
         variant: "danger",
         title: "مشکلی در ثبت نظر وجود دارد...",
       });
-      // location.reload();
+      location.reload();
     }
   };
   const { mutate: mutation, isPending } = usePostData<any>(

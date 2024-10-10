@@ -30,6 +30,7 @@ const page = () => {
     ["comments"],
     getAllComments,
   ); 
+  console.log(comments);
   
   const [commentStatusChange, setCommentStatusChange] = useState<
     [] | [string, string]
@@ -46,7 +47,7 @@ const page = () => {
 
   useEffect(() => {
     const tableData:unknown = comments?.comment.map((comment:Comment) => ({
-      userData: `${comment.creator.firstName} مشگل کشا`,
+      userData: `${comment.creator.firstName} ${comment.creator.lastName}  `,
       preview: (
         <Button onClick={() => showBodyHandler(comment.body)} variant={"blue"}>
           مشاهده

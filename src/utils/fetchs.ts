@@ -1,12 +1,11 @@
 import Cookies from "js-cookie";
 
-export async function getUser() {
+export async function getUser() { 
   const accessToken = Cookies.get("AccessToken");
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/getMe`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/getMe`,{
+  headers: {
+    Authorization: `Bearer ${accessToken}`,
+  },});
   return res.json();
 }
 

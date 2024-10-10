@@ -7,7 +7,7 @@ export async function getUser() {
     headers: {
       Authorization: `Bearer ${accessToken?.value}`,
     },
-  });
+  });  
   return res.json();
 }
 

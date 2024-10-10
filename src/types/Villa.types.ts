@@ -124,7 +124,7 @@ export interface Comment {
   answer: [];
   body: string;
   createdAt: string;
-  creator: { _id: string; firstName: number; avatar: null };
+  creator: { _id: string; firstName: number; avatar: null,lastName:string };
   date: string;
   haveAnswer: number;
   answerComment: {

@@ -35,6 +35,7 @@ const useEditVilla = <T extends object>(
       ).then((res) => res.json());
     },
     onSuccess: (data) => { 
+      console.log(data); 
       if (data.statusCode === 200) {
         !villaId ? saveIntoLocalStorage("villaId", data.villa._id) : null;
         setResponseData(data);

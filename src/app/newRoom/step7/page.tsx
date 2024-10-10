@@ -59,7 +59,7 @@ const page = () => {
         { title: "آخر هفته", amount: "" },
         { title: "تعطیلات", amount: "" },
       ],
-    },
+    }, 
     {
       id: 4,
       Data: [

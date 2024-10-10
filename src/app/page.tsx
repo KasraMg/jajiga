@@ -22,8 +22,7 @@ export default async function Home() {
     <main>
       <ScrollObserver>
         <Container>
-          <Intro />
-
+          <Intro /> 
           <main
             className={`relative bottom-2 z-10 rounded-xl bg-white px-3 sm:!px-5`}
           >
@@ -50,9 +49,10 @@ export default async function Home() {
                 <SpecialAccommodations />
               </Hydrated>
             </div>
+          <BecomeHost />
+
           </main>
 
-          <BecomeHost />
           <Hydrated
             queryKey={["allActivatedVillas"]}
             queryFn={getAllActivatedVillas}
