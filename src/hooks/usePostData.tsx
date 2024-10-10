@@ -1,5 +1,4 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { baseUrl } from "../utils/utils";
+import { useMutation, useQueryClient } from "@tanstack/react-query"; 
 import Cookies from "js-cookie";
 import { toast } from "../components/shadcn/ui/use-toast";
 
@@ -13,6 +12,7 @@ const usePostData = <T extends object>(
 ) => {
   const accessToken = Cookies.get("AccessToken");
   const queryClient = useQueryClient(); 
+  
   const { mutate, isSuccess, isPending, isError } = useMutation({
     mutationFn: async (data: T) => {
       const headers: HeadersInit = {
@@ -21,7 +21,7 @@ const usePostData = <T extends object>(
       if (!formData) {
         headers["Content-Type"] = "application/json";
       }
-      return await fetch(`${baseUrl}${url}`, {
+      return await fetch(`${process.env.NEXT_PUBLIC_API_URL}${url}`, {
         method: !put ? "POST" : "PUT",
         headers,
         credentials: "include",

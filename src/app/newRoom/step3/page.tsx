@@ -1,6 +1,6 @@
 "use client";
 import ContentNavigator from "@/src/components/modules/contentNavigator/ContentNavigator";
-import StepLayout from "@/src/components/layouts/stepLayout/StepLayout";
+import StepLayout from "@/src/layouts/StepLayout";
 import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
 import { getFromLocalStorage } from "@/src/utils/utils";
@@ -76,8 +76,7 @@ const page = () => {
         reader.onloadend = () => {
           newImagesBaseUrl.push({ path: reader.result, name: img.name });
           if (newImagesBaseUrl.length === images.length) {
-            setImagesBaseUrl(newImagesBaseUrl);
-            console.log(imagesBaseUrl);
+            setImagesBaseUrl(newImagesBaseUrl); 
           }
         };
         reader.readAsDataURL(img);

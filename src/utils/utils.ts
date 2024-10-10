@@ -1,13 +1,15 @@
-export const baseUrl = "https://jajiga-backend.liara.run";
-import Cookies from "js-cookie";
 import jalaali from "jalaali-js";
 
 export const saveIntoLocalStorage = (key: string, value: string | {}) => {
-  return localStorage.setItem(key, JSON.stringify(value));
+  if (typeof window !== "undefined" && localStorage) {
+    return localStorage.setItem(key, JSON.stringify(value));
+  }
 };
 
 export const getFromLocalStorage = (key: string) => {
-  return JSON.parse(localStorage.getItem(key) as string);
+  if (typeof window !== "undefined" && localStorage) {
+    return JSON.parse(localStorage.getItem(key) as string);
+  }
 };
 
 export function convertToJalali(date: string) {
@@ -41,9 +43,13 @@ export function convertToJalali(date: string) {
 }
 
 export function getJalaliDateInfo(jalaliDate: string) {
-  const [year, month, day] = jalaliDate.split('/').map(Number);
+  const [year, month, day] = jalaliDate.split("/").map(Number);
   const gregorianDate = jalaali.toGregorian(year, month, day);
-  const date = new Date(gregorianDate.gy, gregorianDate.gm - 1, gregorianDate.gd);
+  const date = new Date(
+    gregorianDate.gy,
+    gregorianDate.gm - 1,
+    gregorianDate.gd,
+  );
 
   const daysOfWeek = [
     "یکشنبه",
@@ -80,7 +86,6 @@ export function getJalaliDateInfo(jalaliDate: string) {
     year,
   };
 }
- 
 
 export const formatNumber = (num: string) => {
   return num.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -118,20 +123,43 @@ export const todayVillaPrice = (price: {
     return "winter";
   };
 
-  const dayPrice = price[getSeason(jalaaliDate.jm)][priceType]; 
+  const dayPrice = price[getSeason(jalaaliDate.jm)][priceType];
   return new Intl.NumberFormat("fa-IR").format(dayPrice as any);
 };
 
+export function convertNumbers(str: string, toEnglish: boolean) {
+  const persianNumbers = [
+    /۰/g,
+    /۱/g,
+    /۲/g,
+    /۳/g,
+    /۴/g,
+    /۵/g,
+    /۶/g,
+    /۷/g,
+    /۸/g,
+    /۹/g,
+  ];
+  const englishNumbers = [
+    /0/g,
+    /1/g,
+    /2/g,
+    /3/g,
+    /4/g,
+    /5/g,
+    /6/g,
+    /7/g,
+    /8/g,
+    /9/g,
+  ];
 
-export function convertNumbers(str:string, toEnglish:boolean) {
-  const persianNumbers = [/۰/g, /۱/g, /۲/g, /۳/g, /۴/g, /۵/g, /۶/g, /۷/g, /۸/g, /۹/g];
-  const englishNumbers = [/0/g, /1/g, /2/g, /3/g, /4/g, /5/g, /6/g, /7/g, /8/g, /9/g];
-  
   const fromNumbers = toEnglish ? persianNumbers : englishNumbers;
-  const toNumbers = toEnglish ? ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'] : ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+  const toNumbers = toEnglish
+    ? ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    : ["۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "۸", "۹"];
 
   for (let i = 0; i < 10; i++) {
-      str = str.replace(fromNumbers[i], toNumbers[i]);
+    str = str.replace(fromNumbers[i], toNumbers[i]);
   }
 
   return str;

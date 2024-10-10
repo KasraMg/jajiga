@@ -1,6 +1,6 @@
 "use client";
 import ContentNavigator from "@/src/components/modules/contentNavigator/ContentNavigator";
-import StepLayout from "@/src/components/layouts/stepLayout/StepLayout";
+import StepLayout from "@/src/layouts/StepLayout";
 import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
 import Textarea from "@/src/components/modules/textarea/Textarea";
@@ -92,13 +92,7 @@ const page = () => {
     mutation(userData);
     setDisableNextButton(true);
   };
-
-  useEffect(() => {
-  console.log('area',areaSize);
-  console.log('land',landSize);
-  
-  }, [areaSize ,landSize])
-  
+ 
   return (
     <StepLayout stepperActive={5}>
       <div className="flex max-w-[1120px] gap-0 py-8 sm:!gap-5">

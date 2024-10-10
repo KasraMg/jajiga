@@ -5,8 +5,7 @@ import { useEffect, useState } from "react";
 import { GoDotFill } from "react-icons/go";
 import { categoryFilterOptions } from "@/src/utils/options";
 import Card from "../../../modules/card/Card";
-import useGetData from "@/src/hooks/useGetData";
-import { baseUrl } from "@/src/utils/utils";
+import useGetData from "@/src/hooks/useGetData"; 
 import Loader from "@/src/components/modules/loader/Loader";
 import { categoryStore } from "@/src/stores/category";
 import { useSearchParams } from "next/navigation";
@@ -29,7 +28,7 @@ const Posts = () => {
   } = categoryStore((state) => state);
   const accessToken = Cookies.get("AccessToken");
   const getVilla = async () => {
-    let url = `${baseUrl}/villa/s`;
+    let url = `${process.env.NEXT_PUBLIC_API_URL}/villa/s`;
     city ? (url += `?city=${city}`) : (url += `?city=all`);
     if (
       maximumSpace ||

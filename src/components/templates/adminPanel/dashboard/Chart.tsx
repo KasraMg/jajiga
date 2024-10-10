@@ -10,10 +10,10 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/src/components/shadcn/ui/chart";
-import { dashboardTypes } from "@/src/types/AdminPanel.types";
+import { DashboardTypes } from "@/src/types/AdminPanel.types";
 import { useEffect, useState } from "react";
 import { ButtonLoader } from "@/src/components/modules/loader/Loader";
-const Chart = (data: dashboardTypes) => {
+const Chart = (data: DashboardTypes) => {
   const [chartResData, setChartResData] = useState<
     [] | { booksCount: number; month: number; villasCount: number }[]
   >([]);
@@ -34,11 +34,7 @@ const Chart = (data: dashboardTypes) => {
     "دی",
     "بهمن",
     "اسفند",
-  ];
-  console.log(data);
-
-  if (data) {
-  }
+  ];  
 
   useEffect(() => {
     if (data.lastFiveMonthAddedVillasCount) {

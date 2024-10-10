@@ -1,5 +1,5 @@
 import { Button } from "@/src/components/shadcn/ui/button";
-import { book } from "@/src/types/Auth.types";
+import { Book } from "@/src/types/Auth.types";
 import { formatNumber } from "@/src/utils/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,12 +8,12 @@ import { CiStar } from "react-icons/ci";
 import { FiUsers } from "react-icons/fi";
 interface CardProps {
   className?: string;
-  data: book;
+  data: Book;
 }
-const Card: FC<CardProps> = ({ className, data }) => {
+const Card: FC<CardProps> = ({ className, data }) => {  
   return (
     <div className={`mx-auto w-full xl:!w-full ${className} `}>
-      <Link href={`/room/${data._id}`} className="relative w-full">
+      <Link href={`/room/${data.villa._id}`} className="relative w-full">
         <Image
           className="h-52 w-full rounded-xl object-cover"
           alt="avatar"

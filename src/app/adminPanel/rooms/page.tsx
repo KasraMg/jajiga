@@ -1,5 +1,5 @@
 "use client";
-import Layout from "@/src/components/layouts/adminLayout/page";
+import AdminLayout from "@/src/layouts/AdminLayout";
 import { Button } from "@/src/components/shadcn/ui/button";
 import useGetData from "@/src/hooks/useGetData";
 import { VillaDetails } from "@/src/types/Villa.types";
@@ -13,11 +13,11 @@ import usePostData from "@/src/hooks/usePostData";
 import Loader, { ButtonLoader } from "@/src/components/modules/loader/Loader";
 import useDeleteData from "@/src/hooks/useDeleteData";
 import { roomColumns } from "@/src/utils/dataTableColumns";
-import { villaResTypes } from "@/src/types/AdminPanel.types";
+import { VillaResTypes } from "@/src/types/AdminPanel.types";
 
 const page = () => {
   const { data: villas, isPending: getVillasPending } =
-    useGetData<villaResTypes>(["allVillas"], getAllVillas);
+    useGetData<VillaResTypes>(["allVillas"], getAllVillas);
 
   const [villaId, setVillaId] = useState(""); 
   const [data, setData] = useState<VillaDetails[]>([]);
@@ -117,7 +117,7 @@ const page = () => {
     });
   };
   return (
-    <Layout>
+    <AdminLayout>
       <div className="relative my-10">
         <div className="before:absolute before:inset-0 before:top-4 before:h-[2px] before:w-full before:bg-red-600 before:content-['']">
           <p className="before: relative z-50 w-max bg-white pl-3 text-2xl before:absolute before:right-0 before:top-0 before:h-8 before:w-8 before:rotate-45 before:bg-[#dc26261c] before:content-['']">
@@ -134,7 +134,7 @@ const page = () => {
       />
       {getVillasPending && <Loader />}
       {deleteHandlerPending && <Loader />}
-    </Layout>
+    </AdminLayout>
   );
 };
 

@@ -1,6 +1,6 @@
 import { VillaDetails } from "./Villa.types";
 
-export interface userInfoObj {
+export interface UserInfoObj {
   createdAt: string;
   firstName: string;
   lastName: string;
@@ -18,16 +18,16 @@ export interface userInfoObj {
   booked: { id: string[]; number: number };
 }
 
-export interface userObj {
+export interface UserObj {
   message: string;
   statusCode: number;
-  user: userInfoObj;
+  user: UserInfoObj;
   villas: VillaDetails[];
-  booked: book[];
+  booked: Book[];
   wishes: VillaDetails[];
 }
 
-export interface book {
+export interface Book {
   villa: VillaDetails;
   createdAt: string;
   date: {

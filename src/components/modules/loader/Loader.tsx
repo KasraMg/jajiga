@@ -2,8 +2,9 @@ import { FC } from "react";
 
 interface LoaderProps {
   enableOverlay?: boolean;
+  className?:string
 }
-const Loader: FC<LoaderProps> = ({ enableOverlay }) => {
+const Loader: FC<LoaderProps> = ({ enableOverlay,className }) => {
   return (
     <>
       <div
@@ -11,7 +12,7 @@ const Loader: FC<LoaderProps> = ({ enableOverlay }) => {
       >
         <span
           id="loader"
-          className="border-wolid relative mx-auto mt-80 block h-[48px] w-[48px] rounded-[50%] border-[3px] border-white"
+          className={`${className ? className : ""} border-wolid relative mx-auto mt-80 block h-[48px] w-[48px] rounded-[50%] border-[3px] border-white`}
         ></span>
       </div>
     </>

@@ -1,9 +1,9 @@
 "use client";
-import Layout from "@/src/components/layouts/adminLayout/page";
+import AdminLayout from "@/src/layouts/AdminLayout";
 import { Button } from "@/src/components/shadcn/ui/button";
 import useGetData from "@/src/hooks/useGetData";
 import usePostData from "@/src/hooks/usePostData";
-import { userInfoObj, userObj } from "@/src/types/Auth.types";
+import { UserInfoObj } from "@/src/types/Auth.types";
 import { getAllUsers } from "@/src/utils/fetchs";
 import { convertToJalali } from "@/src/utils/utils";
 import { useEffect, useState } from "react";
@@ -18,15 +18,15 @@ import Link from "next/link";
 import Loader, { ButtonLoader } from "@/src/components/modules/loader/Loader";
 import { userColumns } from "@/src/utils/dataTableColumns";
 import UserBanModal from "@/src/components/templates/adminPanel/users/UserBanModal";
-import { userResTypes } from "@/src/types/AdminPanel.types";
+import { UserResTypes } from "@/src/types/AdminPanel.types";
 
 const page = () => {
-  const { data: users, isPending: getUsersPending } = useGetData<userResTypes>(
+  const { data: users, isPending: getUsersPending } = useGetData<UserResTypes>(
     ["users"],
     getAllUsers,
   );
   const [userInfoRoleChange, setUserInfoRoleChange] = useState<any>([]);
-  const [data, setData] = useState<userInfoObj[]>([]);
+  const [data, setData] = useState<UserInfoObj[]>([]);
   const [pending, setPending] = useState(true);
 
   const { mutate: mutation, isPending } = usePostData<any>(
@@ -55,7 +55,7 @@ const page = () => {
   };
 
   useEffect(() => {
-    const tableData: unknown = users?.users.map((user: userInfoObj) => ({
+    const tableData: unknown = users?.users.map((user: UserInfoObj) => ({
       userData: user.firstName + " " + user.lastName,
       phone: user.phone,
       rooms: (
@@ -121,7 +121,7 @@ const page = () => {
       ),
       ban: <UserBanModal userPhone={user.phone} />,
     }));
-    setData(tableData as userInfoObj[]);
+    setData(tableData as UserInfoObj[]);
   }, [users]);
 
   useEffect(() => {
@@ -130,7 +130,7 @@ const page = () => {
     }
   }, [data]);
   return (
-    <Layout>
+    <AdminLayout>
       <div className="relative my-10">
         <div className="before:absolute before:inset-0 before:top-4 before:h-[2px] before:w-full before:bg-red-600 before:content-['']">
           <p className="before: relative z-50 w-max bg-white pl-3 text-2xl before:absolute before:right-0 before:top-0 before:h-8 before:w-8 before:rotate-45 before:bg-[#dc26261c] before:content-['']">
@@ -146,7 +146,7 @@ const page = () => {
         pagination
       />
       {getUsersPending && <Loader />}
-    </Layout>
+    </AdminLayout>
   );
 };
 

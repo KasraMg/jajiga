@@ -4,7 +4,7 @@ import { Button } from "@/src/components/shadcn/ui/button";
 import useGetData from "@/src/hooks/useGetData";
 import useEditVilla from "@/src/hooks/useEditVilla";
 import { authStore } from "@/src/stores/auth";
-import { fetchStep6Items } from "@/src/utils/clientFetchs";
+import { fetchStep6Items } from "@/src/utils/fetchs";  
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Loader from "@/src/components/modules/loader/Loader";

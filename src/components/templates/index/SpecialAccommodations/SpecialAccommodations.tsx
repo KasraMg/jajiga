@@ -1,13 +1,12 @@
 "use client";
 import React from "react";
 import Slider from "@/src/components/modules/slider/Slider";
-import Card from "../../../modules/card/Card";
-import { baseUrl } from "@/src/utils/utils";
+import Card from "../../../modules/card/Card"; 
 import useGetData from "@/src/hooks/useGetData";
 import { getPrivilegedVillas } from "@/src/utils/fetchs";
 
 const SpecialAccommodations = () => {
-  const { data, status, isLoading } = useGetData<any>(
+  const { data } = useGetData<any>(
     ["privilegedVillas"],
     getPrivilegedVillas,
   ); 

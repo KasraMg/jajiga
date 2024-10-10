@@ -38,7 +38,7 @@ const Gallery = (data: VillaDetails) => {
             height={1000}
             className="h-full w-full rounded-xl"
             alt="cover"
-            onLoadingComplete={() => handleImageLoad(0)}
+            onLoad={() => handleImageLoad(0)}
             src={`https://jajiga-backend.liara.run/villa/covers/${data.cover[0]}`}
           />
         </div>
@@ -57,7 +57,7 @@ const Gallery = (data: VillaDetails) => {
                     height={1000}
                     className="h-36 w-full rounded-lg object-cover opacity-50"
                     alt="cover"
-                    onLoadingComplete={() => handleImageLoad(index + 1)}
+                    onLoad={() => handleImageLoad(index + 1)}
                     src={`https://jajiga-backend.liara.run/villa/covers/${cover}`}
                   />
                   <div
@@ -74,7 +74,7 @@ const Gallery = (data: VillaDetails) => {
                   height={1000}
                   className="h-36 w-full rounded-lg object-cover"
                   alt="cover"
-                  onLoadingComplete={() => handleImageLoad(index + 1)}
+                  onLoad={() => handleImageLoad(index + 1)}
                   src={`https://jajiga-backend.liara.run/villa/covers/${cover}`}
                 />
               )}
@@ -115,7 +115,7 @@ const Gallery = (data: VillaDetails) => {
               height={1000}
               className="h-full object-cover"
               alt="cover"
-              onLoadingComplete={() => handleImageLoad(index + 1)}
+              onLoad={() => handleImageLoad(index + 1)}
               src={`https://jajiga-backend.liara.run/villa/covers/${cover}`}
             />
           </SwiperSlide>

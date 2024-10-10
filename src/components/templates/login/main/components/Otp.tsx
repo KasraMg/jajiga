@@ -92,9 +92,7 @@ const Otp = ({
 
   const submitHandler = () => {
     if (otpLoginPhoneNumber) {
-      const data = { code: otpCode };
-      console.log(data);
-
+      const data = { code: otpCode }; 
       mutation(data);
     } else {
       registerUserData.code = otpCode;

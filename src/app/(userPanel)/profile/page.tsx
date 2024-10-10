@@ -10,7 +10,7 @@ import { authStore } from "@/src/stores/auth";
 import TwoStepBox from "@/src/components/templates/userPanel/profile/TwoStepBox";
 import usePostData from "@/src/hooks/usePostData";
 import Loader from "@/src/components/modules/loader/Loader";
-import Layout from "@/src/components/layouts/userLayout/Layout";
+import UserLayout from "@/src/layouts/UserLayout";
 import { useQueryClient } from "@tanstack/react-query";
 import swal from "sweetalert";
 
@@ -88,7 +88,7 @@ const Profile = () => {
   return (
     <Container disableFooter={true}>
       <Breadcrumb className="!pb-[70px]" route={"حساب کاربری"} />
-      <Layout>
+      <UserLayout>
         <div
           className={`relative bottom-2 z-10 flex w-full !min-w-full gap-4 rounded-xl bg-white px-3 sm:!px-5`}
         >
@@ -170,7 +170,7 @@ const Profile = () => {
             </main>
           </div>
         </div>
-      </Layout>
+      </UserLayout>
     </Container>
   );
 };

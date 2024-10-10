@@ -1,12 +1,12 @@
 "use client";
-import Layout from "@/src/components/layouts/adminLayout/page";
+import AdminLayout from "@/src/layouts/AdminLayout";
 import Loader, { ButtonLoader } from "@/src/components/modules/loader/Loader";
 import { Button } from "@/src/components/shadcn/ui/button";
 import useDeleteData from "@/src/hooks/useDeleteData";
 import useGetData from "@/src/hooks/useGetData";
 import usePostData from "@/src/hooks/usePostData";
-import { commentResTypes } from "@/src/types/AdminPanel.types";
-import { comment } from "@/src/types/Villa.types";
+import { CommentResTypes } from "@/src/types/AdminPanel.types";
+import { Comment } from "@/src/types/Villa.types";
 import { commentColumns } from "@/src/utils/dataTableColumns";
 import { getAllComments } from "@/src/utils/fetchs";
 import Link from "next/link";
@@ -23,14 +23,14 @@ const showBodyHandler = (body: string) => {
 
 const page = () => {
   const [commentId, setCommentId] = useState("");
-  const [data, setData] = useState<comment[]>([]);
+  const [data, setData] = useState<Comment[]>([]);
   const [pending, setPending] = useState(true);  
 
-  const { data: comments, isPending: getCommentsPending } = useGetData<commentResTypes>(
+  const { data: comments, isPending: getCommentsPending } = useGetData<CommentResTypes>(
     ["comments"],
     getAllComments,
   ); 
-  console.log(comments);
+  
   const [commentStatusChange, setCommentStatusChange] = useState<
     [] | [string, string]
   >([]);
@@ -45,7 +45,7 @@ const page = () => {
   );
 
   useEffect(() => {
-    const tableData:unknown = comments?.comment.map((comment:comment) => ({
+    const tableData:unknown = comments?.comment.map((comment:Comment) => ({
       userData: `${comment.creator.firstName} مشگل کشا`,
       preview: (
         <Button onClick={() => showBodyHandler(comment.body)} variant={"blue"}>
@@ -100,9 +100,7 @@ const page = () => {
         </Button>
       ),
     }));
-    setData(tableData as comment[])
-    console.log(tableData);
-    console.log(comments);
+    setData(tableData as Comment[])
   }, [comments]);
 
 
@@ -132,7 +130,7 @@ const page = () => {
     });
   };
   return (
-    <Layout>
+    <AdminLayout>
       <div className="relative my-10">
         <div className="before:absolute before:inset-0 before:top-4 before:h-[2px] before:w-full before:bg-red-600 before:content-['']">
           <p className="before: relative z-50 w-max bg-white pl-3 text-2xl before:absolute before:right-0 before:top-0 before:h-8 before:w-8 before:rotate-45 before:bg-[#dc26261c] before:content-['']">
@@ -149,7 +147,7 @@ const page = () => {
       />
       {getCommentsPending && <Loader />}
       {deleteHandlerPending && <Loader />}
-    </Layout>
+    </AdminLayout>
   );
 };
 

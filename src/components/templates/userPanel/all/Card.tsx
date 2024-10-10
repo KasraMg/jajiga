@@ -10,8 +10,7 @@ import Image from "next/image";
 import useDeleteData from "@/src/hooks/useDeleteData";
 import ReserveModal from "./ReserveModal";
 
-const Card = (villa: VillaDetails) => {
-  console.log(villa);
+const Card = (villa: VillaDetails) => { 
   const [villaId, setVillaId] = useState("");
 
   const villaDeleteHandler = (id: string) => {
@@ -27,7 +26,7 @@ const Card = (villa: VillaDetails) => {
     });
   };
 
-  const { mutate: mutation, isPending } = useDeleteData(
+  const { mutate: mutation } = useDeleteData(
     `/villa/delete/${villaId}`,
     "ویلا با موفقیت حذف شد",
     "auth",

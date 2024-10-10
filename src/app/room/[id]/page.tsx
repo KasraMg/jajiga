@@ -1,28 +1,18 @@
-import Container from "@/src/components/modules/container/Container"; 
-import Hydrated from "@/src/providers/Hydrated";
-import { cookies } from "next/headers";
-import { baseUrl } from "@/src/utils/utils";
+import Container from "@/src/components/modules/container/Container";
+import Hydrated from "@/src/providers/Hydrated"; 
 import Main from "@/src/components/templates/room/id/Main";
-const Room = ({ params }:any) => { 
-  async function getVilla() {
-    const cookieStore = cookies();
-    const accessToken = cookieStore.get("AccessToken");
-    const res = await fetch(`${baseUrl}/villa/get/${params.id}`, {
-      headers: {
-        Authorization: `Bearer ${accessToken?.value}`,
-      },
-    });
-    return res.json();
-  }
+import { getVilla } from "@/src/utils/serverFetchs";
+
+const Room = ({ params }: any) => {
+  const villaId = params.id;
 
   return (
-    <Hydrated queryKey={["villa"]} queryFn={getVilla}>
+    <Hydrated queryKey={["villa", villaId]} queryFn={getVilla as any}>
       <Container>
-        <Main/>
+        <Main />
       </Container>
     </Hydrated>
   );
-};  
+};
 
 export default Room;
-  

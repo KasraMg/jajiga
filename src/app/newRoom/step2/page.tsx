@@ -1,7 +1,6 @@
-"use client";
-import { Map } from "@/src/components/modules/Map/Map";
+"use client"; 
 import ContentNavigator from "@/src/components/modules/contentNavigator/ContentNavigator";
-import StepLayout from "@/src/components/layouts/stepLayout/StepLayout";
+import StepLayout from "@/src/layouts/StepLayout";
 import Stepper from "@/src/components/modules/stepper/Stepper";
 import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo"; 
 import { useEffect, useState } from "react"; 
@@ -9,6 +8,7 @@ import { getFromLocalStorage } from "@/src/utils/utils";
 import Alert from "@/src/components/modules/alert/Alert";
 import Loader from "@/src/components/modules/loader/Loader"; 
 import useEditVilla from "@/src/hooks/useEditVilla";
+import dynamic from "next/dynamic";
 
 interface userObjData {
   coordinates: {
@@ -18,7 +18,13 @@ interface userObjData {
   step: 3;
   finished: false;
 }
-
+const Map = dynamic(
+  () => import("@/src/components/modules/Map/Map").then((mod) => mod.Map),
+  {
+    ssr: false,
+  },
+);
+ 
 const page = () => {
   const [disableNextButton, setDisableNextButton] = useState(true);  
   const [change, setChange] = useState(false);
@@ -64,7 +70,7 @@ const page = () => {
         <div className="hidden min-w-[23%] md:!flex lg:!min-w-[21%]">
           <Stepper active={2} />
         </div>
-        <div className="flex w-full flex-col gap-3">
+        <div className="flex w-full flex-col gap-3"> 
           <p>انتخاب موقعیت در نقشه</p>
           <p className="font-vazir text-sm font-light leading-6">
             مکان نما در وسط صفحه ثابت است. نقشه را به گونه ای حرکت دهیه تا مکان

@@ -1,18 +1,18 @@
 "use client";
 import { authStore } from "@/src/stores/auth";
 import { useQueryClient } from "@tanstack/react-query";
-import Cookies from "js-cookie";
 import { useEffect } from "react";
-import { getUser } from "./clientFetchs";
+import { getUser } from "./fetchs";
 import swal from "sweetalert";
 import { useRouter } from "next/navigation";
 import useGetData from "../hooks/useGetData";
-import { userObj } from "../types/Auth.types";
+import { UserObj } from "../types/Auth.types";
 import Loader from "../components/modules/loader/Loader";
+import Cookies from "js-cookie";
 
 const Auth = () => {
-  const { data, status, isLoading } = useGetData<userObj>(["auth"], getUser);
-  const { setUserData, setLogin, setIsPending} = authStore((state) => state);
+  const { data, status, isLoading } = useGetData<UserObj>(["auth"], getUser);
+  const { setUserData, setLogin, setIsPending } = authStore((state) => state);
 
   useEffect(() => {
     if (status === "success" && data?.statusCode === 200) {
@@ -21,12 +21,11 @@ const Auth = () => {
       setIsPending(false);
     } else if (status === "success" && data?.statusCode === 500) {
       setLogin(false);
-      setIsPending(false); 
+      setIsPending(false);
     } else {
       setLogin(false);
       setIsPending(false);
-    }
-    console.log(data);
+    } 
   }, [status, data, setUserData]);
 
   return isLoading ? <Loader /> : null;
@@ -35,7 +34,7 @@ const Auth = () => {
 export default Auth;
 
 export const useLogoutHandler = () => {
-  const { setUserData, setLogin, setIsPending} = authStore((state) => state);
+  const { setUserData, setLogin } = authStore((state) => state);
   const queryClient = useQueryClient();
   const router = useRouter();
 
@@ -46,11 +45,11 @@ export const useLogoutHandler = () => {
       buttons: ["نه", "آره"],
     }).then((res) => {
       if (res) {
-        router.push("/"); 
+        router.push("/");
         Cookies.remove("AccessToken");
         Cookies.remove("RefreshToken");
-        setUserData(null)
-        setLogin(false)
+        setUserData(null);
+        setLogin(false);
         queryClient.invalidateQueries({ queryKey: ["auth"] });
       }
     });

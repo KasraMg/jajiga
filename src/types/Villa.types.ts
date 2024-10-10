@@ -1,6 +1,6 @@
-import { book } from "./Auth.types";
+import { Book } from "./Auth.types";
 
-interface priceDays {
+interface PriceDays {
   midWeek: string;
   holidays: string;
   peakDays: string;
@@ -40,17 +40,33 @@ export interface VillaDetails {
   };
   price: {
     newYear: string;
-    spring: priceDays;
-    summer: priceDays;
-    autumn: priceDays;
-    winter: priceDays;
+    spring: PriceDays;
+    summer: PriceDays;
+    autumn: PriceDays;
+    winter: PriceDays;
   };
   disable: boolean;
   finished: boolean;
-  booked: number | book[];
+  booked: number | Book[];
   averageScore: number;
   comments: number;
-  facility: {
+  facility: facility
+  step: number;
+  updatedAt: string;
+  isAccepted: string;
+  isOwner: boolean;
+  isWishes: boolean;
+  user: {
+    avatar: string;
+    firstName: string;
+    lastName: string;
+    role: string;
+    _id: string;
+  };
+  __v: number;
+  _id: string;
+}
+export interface facility{ 
     facility: {
       coolingSystem: { status: boolean; description?: string };
       diningTable: { status: boolean; description?: string };
@@ -73,32 +89,16 @@ export interface VillaDetails {
       chargingToiletPaper: { status: boolean };
       dishSoap: { status: boolean };
       moreSanitaryFacilities?: string;
-    };
-  };
-  step: number;
-  updatedAt: string;
-  isAccepted: string;
-  isOwner: boolean;
-  isWishes: boolean;
-  user: {
-    avatar: string;
-    firstName: string;
-    lastName: string;
-    role: string;
-    _id: string;
-  };
-  __v: number;
-  _id: string;
+    }; 
 }
-
 export interface VillaResponse {
-  bookDate: book[];
+  bookDate: Book[];
   comments: [];
   statusCode: number;
   villa: VillaDetails;
 }
 
-export interface userDateSelectData {
+export interface UserDateSelectData {
   fridays: number;
   holyDays: number;
   holyDaysTotalPrice: number;
@@ -120,7 +120,7 @@ export interface userDateSelectData {
   secondMonthMidWeekDaysPrice: number;
 }
 
-export interface comment {
+export interface Comment {
   answer: [];
   body: string;
   createdAt: string;

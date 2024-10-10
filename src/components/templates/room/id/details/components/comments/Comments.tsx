@@ -4,7 +4,7 @@ import { Button } from "@/src/components/shadcn/ui/button";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
 import usePostData from "@/src/hooks/usePostData";
 import { authStore } from "@/src/stores/auth";
-import { comment } from "@/src/types/Villa.types";
+import { Comment } from "@/src/types/Villa.types";
 import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import { useParams } from "next/navigation";
@@ -16,7 +16,7 @@ const Comments = ({
   comments,
   userId,
 }: {
-  comments: comment[];
+  comments: Comment[];
   userId: string;
 }) => {
   const [isReserve, setIsReserve] = useState(false);
@@ -27,7 +27,8 @@ const Comments = ({
   const [score, setScore] = useState<number | null>(null);
   const [idAnswer, setIdAnswer] = useState("");
   const queryClient = useQueryClient();
-
+  
+  
   const params = useParams();
   const handleClick = (index: number) => {
     if (score === index + 1) {
@@ -53,7 +54,7 @@ const Comments = ({
         title:
           "نظر شما با موفقیت ثبت و پس از تایید ادمین به سایت اضافه خواهد شد",
       });
-      queryClient.invalidateQueries({ queryKey: ["villa"] });
+      queryClient.invalidateQueries({ queryKey: ["villa",params.id] });
       setIdAnswer("");
       setBody("");
       setScore(null);
@@ -112,7 +113,7 @@ const Comments = ({
               {comments?.map(
                 (comment) =>
                   comment.isAccept === "true" && (
-                    <section className="mb-6 border-b border-solid border-gray-200 pb-4">
+                    <section key={comment._id} className="mb-6 border-b border-solid border-gray-200 pb-4">
                       <div className="flex justify-between">
                         <div className="flex items-center gap-3">
                           <Image
@@ -137,12 +138,12 @@ const Comments = ({
                           {Array(comment.score)
                             .fill(0)
                             .map(() => (
-                              <FaStar className="text-orange-500" />
+                              <FaStar key={comment.score} className="text-orange-500" />
                             ))}
                           {Array(5 - comment.score)
                             .fill(0)
                             .map(() => (
-                              <IoIosStarOutline />
+                              <IoIosStarOutline key={comment.score} />
                             ))}
                         </div>
                       </div>

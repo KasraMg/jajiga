@@ -15,6 +15,7 @@ interface CardProps {
   wishes?: boolean;
 }
 const Card: FC<CardProps> = ({ data, className, wishes }) => { 
+  
   const { mutate: mutation, isPending } = usePostData<any>(
     `/wishes/${data._id}`,
     "اقامتگاه با موفقیت از علاقه مندی های شما حذف شد",

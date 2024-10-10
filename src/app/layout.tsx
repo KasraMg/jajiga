@@ -21,7 +21,7 @@ const fonts = localFont({
     {
       path: "../../public/fonts/vazir/Vazir-Light.woff2",
       weight: "300",
-      style: "normal",
+      style: "normal", 
     },
   ],
   variable: "--font-vazir",

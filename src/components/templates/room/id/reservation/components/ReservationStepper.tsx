@@ -14,9 +14,7 @@ import { VillaDetails } from "@/src/types/Villa.types";
 import { PiWarningCircle } from "react-icons/pi";
 import usePostData from "@/src/hooks/usePostData";
 import { useParams } from "next/navigation";
-import { ButtonLoader } from "@/src/components/modules/loader/Loader";
-
-import { useRouter } from "next/navigation";
+import { ButtonLoader } from "@/src/components/modules/loader/Loader";  
 import { toast } from "@/src/components/shadcn/ui/use-toast";
 import { authStore } from "@/src/stores/auth";
 import { useQueryClient } from "@tanstack/react-query";
@@ -39,15 +37,15 @@ const ReservationStepper: FC<ReservationStepperProps> = ({
   const [open, setOpen] = useState(false); 
   const { login } = authStore((state) => state);
   const queryClient = useQueryClient();
-
-  const successFunc = (data: { statusCode: number }) => {
-    console.log("data", data); 
+  const params = useParams();
+ 
+  const successFunc = (data: { statusCode: number }) => { 
     if (data.statusCode === 200) {
       toast({
         variant: "success",
         title: "ویلا با موفقیت رزرو شد",
       });
-      queryClient.invalidateQueries({ queryKey: ["villa"] });
+      queryClient.invalidateQueries({ queryKey: ["villa",params.id] });
       queryClient.invalidateQueries({ queryKey: ["auth"] });
       setOpen(false);  
     } else if (data.statusCode === 422) {
@@ -66,9 +64,8 @@ const ReservationStepper: FC<ReservationStepperProps> = ({
 
   const [step, setStep] = useState(1);
   const { startDate, endDate } = roomStore((state) => state);
-  const params = useParams();
   const { mutate: mutation, isPending } = usePostData<any>(
-    `/villa/book/${params.id}`,
+    `/villa/Book/${params.id}`,
     null,
     false,
     successFunc,

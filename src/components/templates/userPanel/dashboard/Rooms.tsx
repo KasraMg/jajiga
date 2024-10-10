@@ -46,7 +46,7 @@ const Rooms = () => {
             توجه: اقامتگاه تنها بعد از تکمیل، قابل بررسی و انتشار می‌باشد.
           </span>
           {userData.villas.slice(0, 3).map((villa: VillaDetails) => (
-            <section className="mt-4">
+            <section key={villa._id} className="mt-4">
               <div className="flex flex-wrap items-center justify-between gap-2 shadow-lg sm:!flex-nowrap sm:!justify-between sm:!gap-0 sm:!p-3">
                 <div className="flex items-center gap-2">
                   <div

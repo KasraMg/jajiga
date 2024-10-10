@@ -1,5 +1,5 @@
 "use client";
-import Layout from "@/src/components/layouts/userLayout/Layout";
+import UserLayout from "@/src/layouts/UserLayout";
 import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import Container from "@/src/components/modules/container/Container";
 import Card from "@/src/components/templates/userPanel/reserves/Card";
@@ -18,14 +18,14 @@ const Reserve = () => {
         }
         route={"رزرو ها"}
       />
-      <Layout>
+      <UserLayout>
         <div
           className={`relative bottom-2 z-10 flex w-full !min-w-full gap-4 rounded-xl bg-white px-3 sm:!px-5`}
         >
           <div className="Container">
             <main>
               {userData?.booked.length ? (
-                <div className="mb-5 mt-5 grid gap-6 md:!grid-cols-[1fr,1fr] lg:!grid-cols-[1fr,1fr,1fr]">
+                <div className="mb-5 mt-5 grid grid-cols-[1fr] gap-6 md:!grid-cols-[1fr,1fr] lg:!grid-cols-[1fr,1fr,1fr]">
                   {userData.booked.map((book) => (
                     <Card className="w-full" key={book._id} data={book} />
                   ))}
@@ -70,7 +70,7 @@ const Reserve = () => {
             </main>
           </div>
         </div>
-      </Layout>
+      </UserLayout>
     </Container>
   );
 };

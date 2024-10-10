@@ -22,7 +22,7 @@ const Images = () => {
     null,
     "اطلاعات با موفقیت بروزرسانی شد",
     params.id as any,
-    true,
+    true, 
   );
 
   useEffect(() => {
@@ -34,9 +34,7 @@ const Images = () => {
       }
       })  
         setUserImages(prevCovers); 
-        setFinalyImages(prevCovers);
-    
-      console.log(villa);
+        setFinalyImages(prevCovers); 
     }
   }, [villa]);
 
@@ -59,10 +57,16 @@ const Images = () => {
         icon: "error",
         buttons: [false, "اوکی"],
       });
-    } else {
+    } else { 
       if (event.target.files && event.target.files.length > 0) {
-        let file = event.target.files[0];
-        if (file.type === "image/png" || file.type === "image/jpeg") {
+        let file = event.target.files[0]; 
+        if (
+          file.type === "image/png" ||
+          file.type === "image/jpeg" ||
+          file.type === "image/webp" ||
+          file.type === "image/jpg" ||
+          file.type === "image/jfif"
+        ) {
           setDisableNextButton(false);
           let reader = new FileReader();
           setFinalyImages((prev: any) => [...prev, file]);

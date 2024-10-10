@@ -28,8 +28,7 @@ const Disable = () => {
   );
 
   useEffect(() => {
-    if (villa) {
-      console.log(villa);
+    if (villa) { 
       setDisable(villa.disable);
     }
   }, [villa]);

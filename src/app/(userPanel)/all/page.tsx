@@ -1,12 +1,12 @@
 "use client";
-import Layout from "@/src/components/layouts/userLayout/Layout";
+import UserLayout from "@/src/layouts/UserLayout";
 import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import Container from "@/src/components/modules/container/Container";
 import Card from "@/src/components/templates/userPanel/all/Card";
 import { authStore } from "@/src/stores/auth";
 import { VillaDetails } from "@/src/types/Villa.types";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 const Villas = () => {
   const [showUnComplatePosts, setShowUnComplatePosts] = useState(false);
   const { userData } = authStore((state) => state);
@@ -14,11 +14,11 @@ const Villas = () => {
   return (
     <Container disableFooter={true}>
       <Breadcrumb className="!pb-[80px]" route={"اقامتگاه ها"} />
-      <Layout>
+      <UserLayout>
         <div
           className={`relative bottom-2 z-10 flex w-full !min-w-full gap-4 rounded-xl bg-white px-3 sm:!px-5`}
         >
-          <div className="Container">
+          <div className="Container"> 
             <main>
               <div className="relative bottom-[29px] flex gap-3 text-sm">
                 <p
@@ -130,7 +130,7 @@ const Villas = () => {
             </main>
           </div>
         </div>
-      </Layout>
+      </UserLayout>
     </Container>
   );
 };

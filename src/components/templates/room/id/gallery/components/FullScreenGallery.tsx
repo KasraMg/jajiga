@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -18,8 +18,8 @@ const FullScreenGallery = ({
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   return (
-    <div className="fixed left-0 top-0 z-[999] h-full w-full bg-[#161418] md:!block hidden">
-      <Swiper 
+    <div className="fixed left-0 top-0 z-[999] hidden h-full w-full bg-[#161418] md:!block">
+      <Swiper
         spaceBetween={10}
         dir="rtl"
         navigation={true}

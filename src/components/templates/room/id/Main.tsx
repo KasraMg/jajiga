@@ -4,30 +4,18 @@ import Details from "./details/Details";
 import Gallery from "./gallery/Gallery";
 import Reservation from "./reservation/Reservation";
 import Cookies from "js-cookie";
-import { baseUrl } from "@/src/utils/utils";
 import { useParams, useRouter } from "next/navigation";
 import NotFound from "./NotFound";
 import { useEffect } from "react";
 import { authStore } from "@/src/stores/auth";
+import { getVilla } from "@/src/utils/fetchs";
 const Main = () => {
   const params = useParams();
   const router = useRouter();
   const { userData, isPending } = authStore((state) => state);
 
-  async function getVilla() {
-    const accessToken = Cookies.get("AccessToken"); 
-    const headers = {
-      ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
-    };
-    const res = await fetch(`${baseUrl}/villa/get/${params.id}`, {
-      headers,
-    });
-    return res.json();
-  }
+  const { data } = useGetData<any>(["villa",params.id], () => getVilla(params.id as any));
 
-  const { data } = useGetData<any>(["villa"], getVilla);
- console.log(data);
- 
   useEffect(() => {
     if (
       data.statusCode === 200 &&
@@ -36,12 +24,12 @@ const Main = () => {
       data?.villa.isAccepted !== "true"
     ) {
       router.push("/");
-    } 
+    }
     if (data && data.statusCode === 200 && userData && !isPending) {
       !data.villa.isOwner &&
-      !isPending &&
+        !isPending &&
         data.villa.isAccepted !== "true" &&
-        userData.user.role !== "admin" && 
+        userData.user.role !== "admin" &&
         router.push("/");
     } else {
       data &&
@@ -50,7 +38,7 @@ const Main = () => {
         data.villa.isAccepted !== "true" &&
         router.push("/");
     }
-  }, [isPending]); 
+  }, [isPending]);
 
   return (
     <div className="Container mt-[3.8rem] md:!mt-20">
