@@ -2,6 +2,7 @@
 import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import Container from "@/src/components/modules/container/Container";
 import { getFromLocalStorage } from "@/src/utils/utils";
+import Image from "next/image";
 import Link from "next/link";
 
 const page = () => {
@@ -15,14 +16,14 @@ const page = () => {
       >
         <div className="Container">
           <div className="flex max-w-[1120px] flex-col justify-center gap-5 py-8">
-            <img
-              width="110"
-              height="110"
-              className="mx-auto mt-20"
-              src="https://img.icons8.com/3d-fluency/94/verified-account.png"
+            <Image
+              className="mx-auto mt-20 !h-28 !w-28"
               alt="verified-account"
-            />
-            <p className="mt-3 text-center text-xl sm:!text-xl">
+              src="/images/verify.PNG"
+              width={100}
+              height={100}
+            /> 
+            <p className="mt-3 text-center text-sm sm:!text-xl">
               اقامتگاه شما با موفقیت ثبت شد و پس از تایید ادمین به لیست ویلا ها
               اضافه خواهد شد
             </p>

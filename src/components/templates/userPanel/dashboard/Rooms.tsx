@@ -55,6 +55,7 @@ const Rooms = () => {
                     {villa.cover.length ? (
                       <Image
                         alt="avatar"
+                        className="h-full"
                         width={1000}
                         height={1000}
                         crossOrigin="anonymous"

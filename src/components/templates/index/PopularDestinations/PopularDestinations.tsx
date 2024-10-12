@@ -6,7 +6,8 @@ import Card from "./components/Card/Card";
 import useGetData from "@/src/hooks/useGetData";
 import { getPopularDestinations } from "@/src/utils/fetchs";
 const PopularDestinations = () => {
-  const { data, status, isLoading } = useGetData<any>(
+  
+  const { data } = useGetData<any>(
     ["popularDestinations"],
     getPopularDestinations,
   );

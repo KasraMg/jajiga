@@ -13,6 +13,7 @@ import { useParams } from "next/navigation";
 import useEditVilla from "@/src/hooks/useEditVilla";
 import { authStore } from "@/src/stores/auth";
 import Loader from "@/src/components/modules/loader/Loader";
+import { formatNumber } from "@/src/utils/utils";
 
 interface userObjData {
   price: {};
@@ -94,19 +95,29 @@ const Price = () => {
     },
   ];
 
+  const unformatNumber = (num: string) => {
+    return num.replace(/,/g, "");
+  };
+
   const changeInputHandler = (
     event: ChangeEvent<HTMLInputElement>,
     id: number,
     date: string,
   ) => {
     setDisableNextButton(false);
+
+    const inputValue = event.target.value;
+    const unformattedValue = unformatNumber(inputValue);
+    const formattedValue = formatNumber(unformattedValue);
+
     const updatedSeasonDatas = [...seasonDatas];
     const seasonIndex = id - 1;
     const dataIndex = updatedSeasonDatas[seasonIndex].Data.findIndex(
       (data) => data.title === date,
     );
-    updatedSeasonDatas[seasonIndex].Data[dataIndex].amount = event.target.value;
+    updatedSeasonDatas[seasonIndex].Data[dataIndex].amount = unformattedValue;
     setSeasonDatas(updatedSeasonDatas);
+    event.target.value = formattedValue;
   };
 
   const submitHandler = () => {
@@ -163,6 +174,8 @@ const Price = () => {
     mutation(userData);
     setDisableNextButton(true);
   };
+  console.log(villa);
+
   return (
     <section className="flex w-full max-w-[1120px] justify-between gap-16">
       <div className="font-thin text-gray-700">
@@ -214,11 +227,14 @@ const Price = () => {
                       <p className="text-sm lg:!text-base">وسط هفته</p>
                       <div className="relative w-full lg:!w-[60%]">
                         <input
+                          value={formatNumber(
+                            seasonDatas[data.id - 1].Data[0].amount,
+                          )}
                           onChange={(event) =>
                             changeInputHandler(event, data.id, "وسط هفته")
                           }
+                          type="text"
                           placeholder="نرخ جدید را وارد کنید"
-                          type="number"
                           dir="ltr"
                           className="w-full border-b border-solid border-black p-2 pl-14 placeholder:text-right placeholder:text-xs placeholder:text-gray-600"
                         />
@@ -233,11 +249,14 @@ const Price = () => {
                       </p>
                       <div className="relative w-full lg:!w-[60%]">
                         <input
+                          value={formatNumber(
+                            seasonDatas[data.id - 1].Data[1].amount,
+                          )}
                           onChange={(event) =>
                             changeInputHandler(event, data.id, "آخر هفته")
                           }
+                          type="text"
                           placeholder="نرخ جدید را وارد کنید"
-                          type="number"
                           dir="ltr"
                           className="w-full border-b border-solid border-black p-2 pl-14 placeholder:text-right placeholder:text-xs placeholder:text-gray-600"
                         />
@@ -247,14 +266,17 @@ const Price = () => {
                       </div>
                     </div>
                     <div className="flex flex-col items-start justify-between gap-2 lg:!flex-row lg:!items-center lg:!gap-0">
-                      <p className="text-sm lg:!text-base">ایام پیک</p>
+                      <p className="text-sm lg:!text-base">تعطیلات</p>
                       <div className="relative w-full lg:!w-[60%]">
                         <input
+                          value={formatNumber(
+                            seasonDatas[data.id - 1].Data[2].amount,
+                          )}
                           onChange={(event) =>
                             changeInputHandler(event, data.id, "تعطیلات")
                           }
+                          type="text"
                           placeholder="نرخ جدید را وارد کنید"
-                          type="number"
                           dir="ltr"
                           className="w-full border-b border-solid border-black p-2 pl-14 placeholder:text-right placeholder:text-xs placeholder:text-gray-600"
                         />

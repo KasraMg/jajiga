@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { CiStar } from "react-icons/ci";
 import { Button } from "@/src/components/shadcn/ui/button";
 import { VillaDetails } from "@/src/types/Villa.types";
@@ -7,15 +7,15 @@ import { formatNumber } from "@/src/utils/utils";
 import Link from "next/link";
 import { FaTrash } from "react-icons/fa";
 import usePostData from "@/src/hooks/usePostData";
-import { ButtonLoader } from "../loader/Loader";  
+import { ButtonLoader } from "../loader/Loader";
 
 interface CardProps {
   className?: string;
   data: VillaDetails;
   wishes?: boolean;
 }
-const Card: FC<CardProps> = ({ data, className, wishes }) => { 
-  
+const Card: FC<CardProps> = ({ data, className, wishes }) => {
+  const [isCoverLoading, setIsCoverLoading] = useState(true);
   const { mutate: mutation, isPending } = usePostData<any>(
     `/wishes/${data._id}`,
     "اقامتگاه با موفقیت از علاقه مندی های شما حذف شد",
@@ -32,9 +32,13 @@ const Card: FC<CardProps> = ({ data, className, wishes }) => {
     data && (
       <div className={`mx-auto w-full xl:!w-full ${className} `}>
         <Link href={`/room/${data._id}`} className="relative w-full">
+          {isCoverLoading && (
+            <div className="h-52 w-full animate-pulse rounded-xl bg-shimmer"></div>
+          )}
           <Image
             className="h-52 w-full rounded-xl object-cover"
             alt="avatar"
+            onLoad={() => setIsCoverLoading(false)}
             width={1000}
             height={1000}
             src={`https://jajiga-backend.liara.run/villa/covers/${data.cover[0]}`}

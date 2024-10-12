@@ -13,7 +13,7 @@ interface userObjData {
   capacity: {
     bedRoom: number;
     buildingSize: string;
-    description: string;
+    description?: string;
     fuundationSize: string;
     maxCapacity: number;
     normalCapacity: number;
@@ -23,7 +23,7 @@ interface userObjData {
 }
 
 const page = () => {
-  const [disableNextButton, setDisableNextButton] = useState(true); 
+  const [disableNextButton, setDisableNextButton] = useState(true);
   const [standardSpace, setStandardSpace] = useState<number>(1);
   const [maximumSpace, setMaximumSpace] = useState<number>(1);
   const [landSize, setLandSize] = useState<string>("");
@@ -84,7 +84,7 @@ const page = () => {
         buildingSize: landSize,
         fuundationSize: areaSize,
         bedRoom: roomCount,
-        description: description,
+        ...(description && { description: description }),
       },
       step: 6,
       finished: false,
@@ -92,7 +92,7 @@ const page = () => {
     mutation(userData);
     setDisableNextButton(true);
   };
- 
+
   return (
     <StepLayout stepperActive={5}>
       <div className="flex max-w-[1120px] gap-0 py-8 sm:!gap-5">
@@ -178,7 +178,7 @@ const page = () => {
                   متراژ بنای اقامتگاه نمی‌تواند بزرگتر از متراژ زمین و محوطه
                   باشد
                 </span>
-              ):null}
+              ) : null}
               {landSize < areaSize && (areaSize as any) > 9999 && (
                 <span className="absolute -bottom-[27px] text-xs text-red-600">
                   متراژ زیربنا نمی‌تواند بزرگتر از 9999 متر باشد

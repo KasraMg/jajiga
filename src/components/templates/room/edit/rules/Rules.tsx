@@ -29,7 +29,7 @@ const Rules = () => {
   const villa = userData?.villas.find((villa) => villa._id === params.id);
 
   useEffect(() => {
-    if (villa) { 
+    if (villa) {
       setPet(villa.rules.pet);
       setParty(villa.rules.music);
       setSmoke(villa.rules.smoke);
@@ -49,11 +49,11 @@ const Rules = () => {
         pet: pet === null ? false : pet,
         music: party === null ? false : party,
         smoke: smoke === null ? false : smoke,
-        more: rules,
+        ...(rules ? { more: rules } : {}),
       },
       step: 9,
       finished: true,
-    }; 
+    };
     mutation(data);
     setDisableNextButton(true);
   };

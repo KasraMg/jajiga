@@ -35,7 +35,7 @@ const Capacity = () => {
   const villa = userData?.villas.find((villa) => villa._id === params.id);
 
   useEffect(() => {
-    if (villa) { 
+    if (villa) {
       setStandardSpace(villa.capacity.normalCapacity as number);
       setLandSize(villa.capacity.buildingSize as string);
       setAreaSize(villa.capacity.fuundationSize as string);
@@ -92,7 +92,7 @@ const Capacity = () => {
         buildingSize: landSize,
         fuundationSize: areaSize,
         bedRoom: roomCount,
-        description: description,
+        ...(description && { description: description }),
       },
       step: 9,
       finished: true,
