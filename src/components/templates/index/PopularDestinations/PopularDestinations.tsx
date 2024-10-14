@@ -37,7 +37,7 @@ const PopularDestinations = () => {
         modules={[Grid, Navigation]}
         className="PopularSwiper mx-auto !h-[230px] w-full sm:!h-[260px] sm:!pl-[9px] lg:!h-[365px]"
       >
-        {data?.sortedCities.map(
+        {data?.sortedCities?.map(
           (city: {
             cover: string;
             persianTitle: string;
