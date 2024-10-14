@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect } from "react"; 
+import { useEffect } from "react";
 import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import React from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Container from "@/src/components/modules/container/Container";
 import Image from "next/image";
+import Metadata from "@/src/utils/Metadata";
 const About = () => {
   useEffect(() => {
     AOS.init();
@@ -14,6 +15,7 @@ const About = () => {
   return (
     <Container>
       <Breadcrumb route="درباره ما" />
+      <Metadata seoTitle={"جاجیگا | درباره ما"} seoDescription={"درباره ما"} /> 
       <main
         className={`relative bottom-2 z-10 rounded-xl bg-white px-3 sm:!px-5`}
       >

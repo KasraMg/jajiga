@@ -12,6 +12,7 @@ import useDeleteData from "@/src/hooks/useDeleteData";
 import AddCategoryModal from "@/src/components/templates/adminPanel/categories/AddCategoryModal";
 import { categoryColumns } from "@/src/utils/dataTableColumns";
 import { CategoryResTypes, categoryTypes } from "@/src/types/AdminPanel.types";
+import Metadata from "@/src/utils/Metadata";
 
 const page = () => {
   const { data: categories, isPending: getCategoriesPending } =
@@ -70,6 +71,12 @@ const page = () => {
           </p>
         </div>
       </div>
+      <Metadata
+        seoTitle={"جاجیگا | دسته بندی ها "}
+        seoDescription={
+          "مدیریت دسته بندی ها"
+        }
+      />
       <AddCategoryModal />
       <DataTable
         columns={categoryColumns as any}

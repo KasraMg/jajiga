@@ -2,8 +2,7 @@
 import useGetData from "@/src/hooks/useGetData";
 import Details from "./details/Details";
 import Gallery from "./gallery/Gallery";
-import Reservation from "./reservation/Reservation";
-import Cookies from "js-cookie";
+import Reservation from "./reservation/Reservation"; 
 import { useParams, useRouter } from "next/navigation";
 import NotFound from "./NotFound";
 import { useEffect } from "react";

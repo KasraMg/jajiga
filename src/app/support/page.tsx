@@ -5,10 +5,15 @@ import CallModal from "@/src/components/templates/support/CallModal";
 import ContactUsDetailsModal from "@/src/components/templates/support/ContactUsDetailsModal";
 import Form from "@/src/components/templates/support/Form";
 import { faqOptions } from "@/src/utils/options";
+import { Metadata } from "next";
+ 
+export const metadata: Metadata = { 
+  title: "جاجیگا | پشتیبانی",
+};
 const page = () => {
   return (
     <Container>
-      <Breadcrumb route="پشتیبانی" />
+      <Breadcrumb route="پشتیبانی" /> 
       <main
         className={`relative bottom-2 z-10 rounded-xl bg-white px-3 sm:!px-5`}
       >

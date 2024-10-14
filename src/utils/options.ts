@@ -354,7 +354,7 @@ const footerOptions: {
   { lable: "اجاره اقامتگاه مشهد", href: "/rooms?city=mashhad" },
   { lable: "اجاره اقامتگاه کردان", href: "/rooms?city=kordan" },
   { lable: "اجاره اقامتگاه ماسال", href: "/rooms?city=masal" },
-  { lable: "اجاره اقامتگاه در کیش", href: "/rooms?city=kish" },
+  { lable: "اجاره اقامتگاه کیش", href: "/rooms?city=kish" },
   { lable: "اجاره اقامتگاه  تهران", href: "/rooms?city=tehran" },
   { lable: "اجاره اقامتگاه بوشهر", href: "/rooms?city=bushehr" },
   { lable: "اجاره اقامتگاه قشم", href: "/rooms?city=gheshm" },

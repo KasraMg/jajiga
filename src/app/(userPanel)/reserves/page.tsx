@@ -4,6 +4,7 @@ import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import Container from "@/src/components/modules/container/Container";
 import Card from "@/src/components/templates/userPanel/reserves/Card";
 import { authStore } from "@/src/stores/auth";
+import Metadata from "@/src/utils/Metadata";
 
 const Reserve = () => {
   const { userData } = authStore((state) => state);
@@ -18,6 +19,7 @@ const Reserve = () => {
         }
         route={"رزرو ها"}
       />
+      <Metadata seoTitle={"جاجیگا | رزرو ها"} seoDescription={"مدیریت رزرو ها"} /> 
       <UserLayout>
         <div
           className={`relative bottom-2 z-10 flex w-full !min-w-full gap-4 rounded-xl bg-white px-3 sm:!px-5`}

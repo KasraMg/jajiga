@@ -173,8 +173,7 @@ const Price = () => {
     };
     mutation(userData);
     setDisableNextButton(true);
-  };
-  console.log(villa);
+  }; 
 
   return (
     <section className="flex w-full max-w-[1120px] justify-between gap-16">

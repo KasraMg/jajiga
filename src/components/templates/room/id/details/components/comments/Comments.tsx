@@ -28,8 +28,6 @@ const Comments = ({
   const [idAnswer, setIdAnswer] = useState("");
   const queryClient = useQueryClient();
   
-  console.log(comments);
-  
   const params = useParams();
   const handleClick = (index: number) => {
     if (score === index + 1) {
@@ -161,20 +159,20 @@ const Comments = ({
                               width={1000}
                               height={1000}
                               src={
-                                comment.answerComment.creator.avatar
-                                  ? `https://jajiga-backend.liara.run/user/avatars/${comment.answerComment.creator.avatar}`
+                                comment.answerComment[0].creator.avatar
+                                  ? `https://jajiga-backend.liara.run/user/avatars/${comment.answerComment[0].creator.avatar}`
                                   : "/images/about/about_img6.jpg"
                               }
                             />
                             <div>
                               <p className="text-sm">پاسخ میزبان</p>
                               <span className="text-sm text-gray-500">
-                                {comment.answerComment.date}
+                                {comment.answerComment[0].date}
                               </span>
                             </div>
                           </div>
                           <p className="font-vazir mt-5 text-sm font-light">
-                            {comment.answerComment.body}
+                            {comment.answerComment[0].body}
                           </p>
                         </section>
                       )}

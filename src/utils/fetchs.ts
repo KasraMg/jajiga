@@ -106,8 +106,7 @@ export async function fetchStep6Items() {
 }
 
 
-export async function getVilla(id:string) {
- 
+export async function getVilla(id:string) { 
   const accessToken = Cookies.get("AccessToken");
   const headers = {
     ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
@@ -117,9 +116,6 @@ export async function getVilla(id:string) {
     {
       headers,
     },
-  );
-  const data = await res.json()
-  console.log(data)
-
+  ); 
   return res.json();
 }

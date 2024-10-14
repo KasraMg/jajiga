@@ -13,6 +13,7 @@ import Loader from "@/src/components/modules/loader/Loader";
 import UserLayout from "@/src/layouts/UserLayout";
 import { useQueryClient } from "@tanstack/react-query";
 import swal from "sweetalert";
+import Metadata from "@/src/utils/Metadata";
 
 const Profile = () => {
   const { userData } = authStore((state) => state);
@@ -88,6 +89,7 @@ const Profile = () => {
   return (
     <Container disableFooter={true}>
       <Breadcrumb className="!pb-[70px]" route={"حساب کاربری"} />
+      <Metadata seoTitle={"جاجیگا | حساب کاربری"} seoDescription={"مدیریت پروفایل و حساب کاربری"} /> 
       <UserLayout>
         <div
           className={`relative bottom-2 z-10 flex w-full !min-w-full gap-4 rounded-xl bg-white px-3 sm:!px-5`}

@@ -15,6 +15,11 @@ import Price from "@/src/components/templates/room/edit/price/Price";
 import Rules from "@/src/components/templates/room/edit/rules/Rules";
 import { fetchStep6Items } from "@/src/utils/serverFetchs";
 import Hydrated from "@/src/providers/Hydrated";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "جاجیگا | ویرایش اقامتگاه",
+};
 
 const Faq = () => {
   return (

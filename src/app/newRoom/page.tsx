@@ -5,6 +5,12 @@ import { TbHomePlus } from "react-icons/tb";
 import Container from "@/src/components/modules/container/Container";
 import { Button } from "@/src/components/shadcn/ui/button";
 import Link from "next/link";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "جاجیگا | ثبت اقامتگاه",
+};
+
 const page = () => {
   return (
     <Container>

@@ -1,6 +1,7 @@
 "use client";
 import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import Container from "@/src/components/modules/container/Container";
+import Metadata from "@/src/utils/Metadata";
 import { getFromLocalStorage } from "@/src/utils/utils";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,6 +12,12 @@ const page = () => {
   return (
     <Container disableFooter={true}>
       <Breadcrumb route={"ثبت اقامتگاه"} />
+      <Metadata
+        seoTitle={"جاجیگا | ثبت اقامتگاه "}
+        seoDescription={
+          "چگونه در جاجیگا بتونیم ویلای خودمون رو ثبت و میزبان شویم؟"
+        }
+      />
       <main
         className={`relative bottom-2 z-10 rounded-xl bg-white px-3 sm:!px-5`}
       >
@@ -22,7 +29,7 @@ const page = () => {
               src="/images/verify.PNG"
               width={100}
               height={100}
-            /> 
+            />
             <p className="mt-3 text-center text-sm sm:!text-xl">
               اقامتگاه شما با موفقیت ثبت شد و پس از تایید ادمین به لیست ویلا ها
               اضافه خواهد شد

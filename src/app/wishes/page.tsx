@@ -1,5 +1,5 @@
 "use client";
-import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb"; 
+import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import Card from "@/src/components/modules/card/Card";
 import { FaRegHeart } from "react-icons/fa";
 import { Button } from "@/src/components/shadcn/ui/button";
@@ -10,6 +10,8 @@ import useGetData from "@/src/hooks/useGetData";
 import { fetchWishes } from "@/src/utils/fetchs";
 import { VillaDetails } from "@/src/types/Villa.types";
 import Loader from "@/src/components/modules/loader/Loader";
+import Head from "next/head";
+import Metadata from "@/src/utils/Metadata";
 
 interface wishesProps {
   faveVillas: VillaDetails[];
@@ -19,8 +21,8 @@ const page = () => {
   return (
     <Container disableFooter={true}>
       <Breadcrumb route="علاقه‌مندی‌ها" />
-
-      <main
+      <Metadata seoTitle={"جاجیگا |  علاقه‌مندی‌ها"} seoDescription={"ویلا های مورد علاقتون رو در این صفحه میتونید پیدا کنید"} />
+  <main
         className={`relative bottom-2 z-10 w-full rounded-xl bg-white px-3 sm:!px-5`}
       >
         <div className="Container">
