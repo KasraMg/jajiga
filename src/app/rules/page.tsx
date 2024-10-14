@@ -1,5 +1,11 @@
 import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import Container from "@/src/components/modules/container/Container";
+import { Metadata } from "next";
+
+export const metadata: Metadata = { 
+  title:"قوانین و مقررات",
+};
+
 const page = () => {
   return (
     <Container>

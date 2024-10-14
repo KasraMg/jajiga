@@ -1,6 +1,12 @@
-<div align="center">
+<h1 align="center"> Jajiga  :)) </h1>
+</br>
+<img src="./public/images/jajiga.jpg" width="100%"></img> 
+</br>
 
-# در دست احداث ...
+## 📛📛 Please turn off the Vpn to visit this website
 
-### Run With : nodemon || npm run dev
+<div>
 
+[View Online](https://jajiga.liara.run/)
+
+ </div>

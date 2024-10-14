@@ -142,7 +142,7 @@ export interface Comment {
     mainCommentID:string;
     updatedAt:string;
     villa: { _id: string };
-  };
+  }[];
   isAccept: string;
   isAnswer: number;
   score: number;

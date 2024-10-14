@@ -15,13 +15,16 @@ import { useLogoutHandler } from "@/src/utils/auth";
 import { authStore } from "@/src/stores/auth";
 import UserLayout from "@/src/layouts/UserLayout";
 import { TbHomePlus } from "react-icons/tb";
+import Metadata from "@/src/utils/Metadata";
 
 const Dashboard = () => {
   const logoutHandler = useLogoutHandler();
   const { userData } = authStore((state) => state);
+
   return (
     <Container disableFooter={true}>
       <Breadcrumb className="hidden md:block" route={"پیشخان"} />
+      <Metadata seoTitle={"جاجیگا | پیشخان"} seoDescription={""} />
       <UserLayout>
         <main className="Container !mt-20 flex gap-4 px-4 md:!mt-8 xl:!px-0">
           <aside
@@ -55,7 +58,7 @@ const Dashboard = () => {
             <div className="px-2 pt-4">
               <Link className="flex justify-start gap-2" href={"/profile"}>
                 <RiUpload2Line className="text-2xl" />
-                <p>انتخاب تصویر</p> 
+                <p>انتخاب تصویر</p>
               </Link>
               <Link className="mt-5 flex justify-start gap-2" href={"/"}>
                 <GoHome className="text-2xl" />

@@ -14,6 +14,7 @@ import Loader, { ButtonLoader } from "@/src/components/modules/loader/Loader";
 import useDeleteData from "@/src/hooks/useDeleteData";
 import { roomColumns } from "@/src/utils/dataTableColumns";
 import { VillaResTypes } from "@/src/types/AdminPanel.types";
+import Metadata from "@/src/utils/Metadata";
 
 const page = () => {
   const { data: villas, isPending: getVillasPending } =
@@ -125,6 +126,12 @@ const page = () => {
           </p>
         </div>
       </div>
+      <Metadata
+        seoTitle={"جاجیگا | اقامتگاه ها"}
+        seoDescription={
+          "آمار اقامتگاه ها"
+        }
+      />
       <DataTable
         columns={roomColumns as any}
         data={data}

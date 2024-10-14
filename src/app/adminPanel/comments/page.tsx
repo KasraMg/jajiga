@@ -13,6 +13,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import swal from "sweetalert";
+import Metadata from "@/src/utils/Metadata";
 
 const showBodyHandler = (body: string) => {
   swal({
@@ -29,8 +30,7 @@ const page = () => {
   const { data: comments, isPending: getCommentsPending } = useGetData<CommentResTypes>(
     ["comments"],
     getAllComments,
-  ); 
-  console.log(comments);
+  );  
   
   const [commentStatusChange, setCommentStatusChange] = useState<
     [] | [string, string]
@@ -139,6 +139,12 @@ const page = () => {
           </p>
         </div>
       </div>
+      <Metadata
+        seoTitle={"جاجیگا | نظرات"}
+        seoDescription={
+          "مدیریت نظرات"
+        }
+      />
       <DataTable
         columns={commentColumns as any}
         data={data}

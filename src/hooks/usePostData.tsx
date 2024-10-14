@@ -28,8 +28,7 @@ const usePostData = <T extends object>(
         body: formData ? (data as any) : JSON.stringify(data),
       }).then((res) => res.json());
     },
-    onSuccess: (data) => {
-      console.log(data);
+    onSuccess: (data) => { 
       if (successFunc) {
         successFunc(data);
       }
@@ -44,11 +43,10 @@ const usePostData = <T extends object>(
         });
       }
     },
-    onError: (data) => {
-      console.log(data);
+    onError: (data) => { 
       toast({
         variant: "danger",
-        title: "خطایی غیر منتظره رخ داد",
+        title: "خطایی غیر منتظره رخ داد ( اگه vpn روشن هست لطفا قطعش کنید)",
       });
       // location.reload();
     },

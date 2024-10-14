@@ -19,6 +19,7 @@ import Loader, { ButtonLoader } from "@/src/components/modules/loader/Loader";
 import { userColumns } from "@/src/utils/dataTableColumns";
 import UserBanModal from "@/src/components/templates/adminPanel/users/UserBanModal";
 import { UserResTypes } from "@/src/types/AdminPanel.types";
+import Metadata from "@/src/utils/Metadata";
 
 const page = () => {
   const { data: users, isPending: getUsersPending } = useGetData<UserResTypes>(
@@ -138,6 +139,7 @@ const page = () => {
           </p>
         </div>
       </div>
+      <Metadata seoTitle={"جاجیگا | کاربران"} seoDescription={"آمار کاربران"} />
       <DataTable
         columns={userColumns as any}
         data={data}

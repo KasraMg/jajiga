@@ -1,5 +1,5 @@
 "use client";
-import { FC, useEffect } from "react"; 
+import { FC, useEffect } from "react";
 import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import Container from "@/src/components/modules/container/Container";
 import Stepper from "@/src/components/modules/stepper/Stepper";
@@ -7,6 +7,7 @@ import { getFromLocalStorage } from "@/src/utils/utils";
 import { authStore } from "@/src/stores/auth";
 import { usePathname, useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
+import Metadata from "../utils/Metadata";
 
 interface StepLayoutProps {
   stepperActive: number;
@@ -37,6 +38,11 @@ const StepLayout: FC<StepLayoutProps> = ({ stepperActive, children }) => {
       <Breadcrumb template={true} className="block !py-0 md:hidden">
         <Stepper active={stepperActive} />
       </Breadcrumb>
+      <Metadata
+        seoTitle={"جاجیگا | ثبت اقامتگاه"}
+        seoDescription={"ثبت اقامتگاه"}
+      />
+
       <main
         className={`relative bottom-2 z-10 rounded-xl bg-white px-3 sm:!px-5`}
       >

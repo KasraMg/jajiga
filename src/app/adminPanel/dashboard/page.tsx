@@ -7,13 +7,13 @@ import Reserves from "@/src/components/templates/adminPanel/dashboard/Reserves";
 import useGetData from "@/src/hooks/useGetData";
 import { DashboardTypes } from "@/src/types/AdminPanel.types";
 import { getDashboardInfoes } from "@/src/utils/fetchs";
+import Metadata from "@/src/utils/Metadata";
 
 const page = () => {
   const { data, isPending } = useGetData<DashboardTypes>(
     ["dashboard"],
     getDashboardInfoes,
-  ); 
-console.log(data);
+  );
 
   return (
     <AdminLayout>
@@ -23,7 +23,10 @@ console.log(data);
         <Box title="مجموع کتگوری ها" value={data?.categoriesCount} />
         <Box title="مجموع کاربر های سایت" value={data?.usersCount} />
       </section>
-
+      <Metadata
+        seoTitle={"جاجیگا | پیشخان"}
+        seoDescription={"اطلاعات کلی سایت"}
+      />
       <div className="relative my-10">
         <div className="before:absolute before:inset-0 before:top-4 before:h-[2px] before:w-full before:bg-red-600 before:content-['']">
           <p className="before: relative z-50 w-max bg-white pl-3 text-2xl before:absolute before:right-0 before:top-0 before:h-8 before:w-8 before:rotate-45 before:bg-[#dc26261c] before:content-['']">

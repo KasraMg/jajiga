@@ -5,6 +5,9 @@ import Hydrated from "../providers/Hydrated";
 import { getUser } from "../utils/serverFetchs";
 import Auth from "../utils/auth";
 import { Toaster } from "@/src/components/shadcn/ui/toaster";
+import ContextMenu from "../providers/ContextMenu";
+import InternetStatus from "../utils/InternetStatus";
+import { Metadata } from "next";
 
 const fonts = localFont({
   src: [
@@ -27,8 +30,10 @@ const fonts = localFont({
   variable: "--font-vazir",
 });
 
-import ContextMenu from "../providers/ContextMenu";
-import InternetStatus from "../utils/InternetStatus";
+export const metadata: Metadata = {
+  icons: "/images/logo.png",
+  title: "جاجیگا",
+};
 
 export default function RootLayout({
   children,
@@ -43,32 +48,12 @@ export default function RootLayout({
             <Auth />
           </Hydrated>
           <InternetStatus />
-          {/* <ContextMenu> */}
+          <ContextMenu>
           {children}
-          {/* </ContextMenu>  */}
+          </ContextMenu> 
           <Toaster />
         </QueryWrapper>
       </body>
     </html>
-  );
-
-  /* <Head>
-<title>Parallax Effect with React</title>
-<link rel="icon" href="/favicon.ico" />
-</Head> 
-
-<Suspense
-          fallback={
-            <div className="center bg-white w-screen h-screen fixed top-0 left-0 z-50">
-              <Image
-                className="animate-pulse"
-                src="/images/logo.svg"
-                height={20.63}
-                width={100}
-                alt="لوگوی جاب ویژن"
-              />
-            </div>
-          }
-        >
-*/
+  ); 
 }

@@ -92,7 +92,7 @@ const Otp = ({
 
   const submitHandler = () => {
     if (otpLoginPhoneNumber) {
-      const data = { code: otpCode }; 
+      const data = { code: otpCode };
       mutation(data);
     } else {
       registerUserData.code = otpCode;
@@ -132,7 +132,10 @@ const Otp = ({
             <InputOTPSlot index={3} />
           </InputOTPGroup>
         </InputOTP>
-      </div>
+      </div> 
+      <span className="text-xs text-red-600 text-center mb-3 block">
+        در صورت نیامدن کد، پیامک های spam گوشیتون رو هم چک کنید
+      </span>
       <Timer />
       <Button
         disabled={otpCode.length !== 4 ? true : false}

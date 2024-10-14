@@ -7,6 +7,7 @@ import { authStore } from "@/src/stores/auth";
 import { VillaDetails } from "@/src/types/Villa.types";
 import Image from "next/image";
 import { useState } from "react";
+import Metadata from "@/src/utils/Metadata";
 const Villas = () => {
   const [showUnComplatePosts, setShowUnComplatePosts] = useState(false);
   const { userData } = authStore((state) => state);
@@ -14,6 +15,12 @@ const Villas = () => {
   return (
     <Container disableFooter={true}>
       <Breadcrumb className="!pb-[80px]" route={"اقامتگاه ها"} />
+      <Metadata
+        seoTitle={"جاجیگا | اقامتگاه ها "}
+        seoDescription={
+          "مدیریت اقامتگاه های ثبت شده"
+        }
+      />
       <UserLayout>
         <div
           className={`relative bottom-2 z-10 flex w-full !min-w-full gap-4 rounded-xl bg-white px-3 sm:!px-5`}
