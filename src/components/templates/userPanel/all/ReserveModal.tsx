@@ -2,6 +2,7 @@ import { Button } from "@/src/components/shadcn/ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogTitle,
   DialogTrigger,
 } from "@/src/components/shadcn/ui/dialog";
 import { Book } from "@/src/types/Auth.types";
@@ -42,6 +43,7 @@ const ReserveModal = ({ booked }: { booked: Book[] }) => {
         </Button>
       </DialogTrigger>
       <DialogContent className="w-full max-w-full sm:!max-w-[80%]">
+      <DialogTitle></DialogTitle>
         <DataTable
           columns={reserveModalColumns as any}
           data={data}

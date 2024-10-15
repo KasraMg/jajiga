@@ -680,3 +680,20 @@ select:focus {
   left: 27px !important;
   top: 55%;
 }
+
+
+#room_edit_tablist::-webkit-scrollbar { 
+  border-radius: 10px;
+  height: 7px;
+}
+ 
+/* Handle on hover */
+#room_edit_tablist::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: #979692;
+}
+ 
+#room_edit_tablist::-webkit-scrollbar-thumb {
+  background: rgb(159, 7, 7);
+  border-radius: 10px; 
+}

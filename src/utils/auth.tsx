@@ -17,6 +17,8 @@ const Auth = () => {
   useEffect(() => {
     if (status === "success" && data?.statusCode === 200) {
       setUserData(data);
+      console.log(data);
+      
       setLogin(true);
       setIsPending(false);
     } else if (status === "success" && data?.statusCode === 500) {

@@ -17,8 +17,8 @@ const AdminLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   }, [isPending]);
 
   return (
-    <div className="flex md:!bg-customYellow md:!pl-4">
-      <div className="hidden h-screen w-[250px] bg-customYellow pb-6 pt-6 text-center md:!block">
+    <div className="flex md:!bg-customYellow md:!px-4">
+      <div className="hidden h-screen xl:!min-w-[250px] bg-customYellow pb-6 pt-6 text-center xl:!block">
         <Menu />
       </div>
       <div className="my-4 w-full rounded-lg bg-white">
@@ -26,7 +26,7 @@ const AdminLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
         <div className="mt-4 w-full px-3 pb-4"> {children}</div>
       </div>
     </div>
-  );
+  ); 
 };
-
+ 
 export default AdminLayout;

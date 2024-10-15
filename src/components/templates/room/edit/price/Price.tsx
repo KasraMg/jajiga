@@ -173,8 +173,16 @@ const Price = () => {
     };
     mutation(userData);
     setDisableNextButton(true);
-  }; 
+  };
 
+  const newYearInputChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setDisableNextButton(false); 
+    const inputValue = event.target.value; 
+    const unformattedValue = unformatNumber(inputValue);
+    if (!isNaN(Number(unformattedValue))) {
+      setNewYearPrice(unformattedValue);
+    }
+  };
   return (
     <section className="flex w-full max-w-[1120px] justify-between gap-16">
       <div className="font-thin text-gray-700">
@@ -190,10 +198,10 @@ const Price = () => {
           <p className="text-sm lg:!text-base">نرخ تعطیلات نوروز</p>
           <div className="relative w-1/2 lg:!w-[60%]">
             <input
-              onChange={(event) => setNewYearPrice(event.target.value)}
-              type="number"
+              value={formatNumber(String(newYearPrice))}
+              onChange={newYearInputChangeHandler}
+              type="text"
               dir="ltr"
-              value={newYearPrice}
               className="w-full rounded-md border border-solid border-gray-400 p-2 pl-14"
             />
             <span className="absolute left-2 top-2 text-gray-500">تومان</span>

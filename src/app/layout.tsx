@@ -48,9 +48,9 @@ export default function RootLayout({
             <Auth />
           </Hydrated>
           <InternetStatus />
-          <ContextMenu>
+          {/* <ContextMenu> */}
           {children}
-          </ContextMenu> 
+          {/* </ContextMenu>  */}
           <Toaster />
         </QueryWrapper>
       </body>

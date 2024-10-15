@@ -4,6 +4,7 @@ import { Button } from "@/src/components/shadcn/ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogTitle,
   DialogTrigger,
 } from "@/src/components/shadcn/ui/dialog";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
@@ -77,7 +78,10 @@ const ChangePassword = () => {
       </DialogTrigger>
       <DialogContent className="w-full max-w-full sm:!max-w-[425px]">
         <div>
-          <p>رمز عبور فعلی</p>
+          <DialogTitle>
+            <p>رمز عبور فعلی</p>
+          </DialogTitle>
+
           <input
             className="w-full border-b border-solid py-2"
             type="text"
@@ -145,11 +149,7 @@ const ChangePassword = () => {
           variant={"main"}
           className="mx-auto my-3 block h-9 w-[90px]"
         >
-          {isPending ? (
-           <ButtonLoader />
-          ) : (
-            "ﺗﻐﯿﯿﺮ رمزعبور"
-          )}
+          {isPending ? <ButtonLoader /> : "ﺗﻐﯿﯿﺮ رمزعبور"}
         </Button>
       </DialogContent>
     </Dialog>

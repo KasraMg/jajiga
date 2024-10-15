@@ -2,6 +2,7 @@ import { Button } from "@/src/components/shadcn/ui/button";
 import {
   Dialog,
   DialogContent, 
+  DialogTitle, 
   DialogTrigger,
 } from "@/src/components/shadcn/ui/dialog";
 import { useEffect, useState } from "react";
@@ -98,6 +99,7 @@ const ReservationModal = ({
         </Button>
       </DialogTrigger>
       <DialogContent className="max-h-[440px] w-full max-w-full overflow-y-scroll sm:!max-w-[425px]">
+      <DialogTitle></DialogTitle>
         <div className="rounded-b-2xl py-[14px] sm:px-4">
           <p className="font-vazir mb-2 text-sm font-light text-[#252a31]">
             تاریخ سفر

@@ -4,6 +4,7 @@ import {
   Dialog,
   DialogContent,
   DialogHeader,
+  DialogTitle,
   DialogTrigger,
 } from "@/src/components/shadcn/ui/dialog";
 import React, { useState } from "react";
@@ -52,9 +53,9 @@ const UserBanModal = ({ userPhone }: { userPhone: string }) => {
         <Button variant={"danger"}>بن</Button>
       </DialogTrigger>
       <DialogContent className="max-h-[440px] w-full max-w-full sm:!max-w-[425px]">
-        <DialogHeader>
+      <DialogTitle>
           <p className="text-center">دلیلتون برای بن این کاربر چیه؟</p>
-        </DialogHeader>
+        </DialogTitle>
         <div className="flex items-center gap-2">
           <input
             onClick={(event) =>

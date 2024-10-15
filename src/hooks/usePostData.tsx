@@ -8,7 +8,7 @@ const usePostData = <T extends object>(
   put?: boolean,
   successFunc?: ((data: any) => void) | null,
   formData?: boolean,
-  queryUpdate?: string,
+  queryUpdate?: string | null,
 ) => {
   const accessToken = Cookies.get("AccessToken");
   const queryClient = useQueryClient(); 
@@ -43,10 +43,10 @@ const usePostData = <T extends object>(
         });
       }
     },
-    onError: (data) => { 
+    onError: (data) => {  
       toast({
         variant: "danger",
-        title: "خطایی غیر منتظره رخ داد ( اگه vpn روشن هست لطفا قطعش کنید)",
+        title: "خطایی غیر منتظره رخ داد ( اگه vpn روشن هست لطفا خاموش کنید)",
       });
       // location.reload();
     },
