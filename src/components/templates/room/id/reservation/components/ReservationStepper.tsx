@@ -2,6 +2,7 @@ import { Button } from "@/src/components/shadcn/ui/button";
 import {
   Dialog,
   DialogContent,
+  DialogTitle,
   DialogTrigger,
 } from "@/src/components/shadcn/ui/dialog";
 import { roomStore } from "@/src/stores/room";
@@ -96,6 +97,8 @@ const ReservationStepper: FC<ReservationStepperProps> = ({
         </Button>
       </DialogTrigger>
       <DialogContent className="h-[72%] w-full max-w-full !bg-[#e9edf1] px-0 sm:!max-w-[525px] sm:!p-6">
+      <DialogTitle></DialogTitle>
+
         <div className="mx-auto flex w-[85%] justify-between">
           <div className="stepper-bg relative z-[50] w-full text-center after:absolute after:right-[calc(50%+0.75em)] after:top-[calc(1.3em)] after:z-0 after:h-[2px] after:w-[calc(100%-0.75em)] after:rounded-xl after:content-['']">
             <div

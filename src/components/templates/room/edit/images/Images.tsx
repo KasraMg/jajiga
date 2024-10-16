@@ -4,6 +4,7 @@ import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
 import { Button } from "@/src/components/shadcn/ui/button";
 import useEditVilla from "@/src/hooks/useEditVilla";
 import { authStore } from "@/src/stores/auth";
+import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BsCamera, BsTrash3 } from "react-icons/bs";
@@ -22,19 +23,19 @@ const Images = () => {
     null,
     "اطلاعات با موفقیت بروزرسانی شد",
     params.id as any,
-    true, 
+    true,
   );
 
   useEffect(() => {
     if (villa) {
-    const prevCovers=  villa.cover.map((img) => {
-      return {
-        name: `https://jajiga-backend.liara.run/villa/covers/${img}`,
-        url: `https://jajiga-backend.liara.run/villa/covers/${img}`,
-      }
-      })  
-        setUserImages(prevCovers); 
-        setFinalyImages(prevCovers); 
+      const prevCovers = villa.cover.map((img) => {
+        return {
+          name: `https://jajiga-backend.liara.run/villa/covers/${img}`,
+          url: `https://jajiga-backend.liara.run/villa/covers/${img}`,
+        };
+      });
+      setUserImages(prevCovers);
+      setFinalyImages(prevCovers);
     }
   }, [villa]);
 
@@ -57,9 +58,9 @@ const Images = () => {
         icon: "error",
         buttons: [false, "اوکی"],
       });
-    } else { 
+    } else {
       if (event.target.files && event.target.files.length > 0) {
-        let file = event.target.files[0]; 
+        let file = event.target.files[0];
         if (
           file.type === "image/png" ||
           file.type === "image/jpeg" ||
@@ -74,7 +75,10 @@ const Images = () => {
             let base64String = reader.result;
             setUserImages((prev: string) => [
               ...(prev as any),
-              { url: base64String, name: event.target.files && event.target.files[0].name }
+              {
+                url: base64String,
+                name: event.target.files && event.target.files[0].name,
+              },
             ]);
           };
           reader.readAsDataURL(file);
@@ -95,10 +99,10 @@ const Images = () => {
     const formData = new FormData();
 
     const urls = finalyImages
-      .filter((img: any) => img.url)  
-      .map((img: any) => img.url.slice(46))  
-      .join(";");  
- 
+      .filter((img: any) => img.url)
+      .map((img: any) => img.url.slice(46))
+      .join(";");
+
     if (urls) {
       formData.append("oldPics", urls);
     }
@@ -106,8 +110,8 @@ const Images = () => {
       if (!img.url) {
         formData.append("cover", img);
       }
-    });  
-    formData.append("finished", "true"); 
+    });
+    formData.append("finished", "true");
     mutation(formData);
   };
   return (
@@ -148,11 +152,13 @@ const Images = () => {
                 userimages.map(
                   (img: { name: string; url: string }, index: number) => (
                     <div key={crypto.randomUUID()} className="relative mt-3">
-                      <img
+                      <Image
                         className="h-[200px] w-full rounded-lg border border-dashed border-gray-600 lg:!h-[163px]"
+                        width={1000}
+                        height={1000}
                         crossOrigin="anonymous"
                         src={img.url}
-                        alt=""
+                        alt="cover"
                       />
                       <div className="absolute right-2 top-3 rounded-full bg-white px-2 pt-1 text-center text-sm text-black">
                         <p>{index + 1}</p>

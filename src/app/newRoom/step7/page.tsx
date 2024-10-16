@@ -183,7 +183,7 @@ const page = () => {
     },
   ];
 
-  return (
+  return ( 
     <StepLayout stepperActive={7}>
       <div className="flex max-w-[1120px] gap-0 py-8 sm:!gap-5">
         <div className="hidden min-w-[23%] md:!flex lg:!min-w-[21%]">

@@ -37,15 +37,51 @@ const Faq = () => {
             <Tabs defaultValue="images" className="w-full" dir="rtl">
               <TabsList
                 dir="rtl"
-                className="relative bottom-[38px] w-full justify-between overflow-scroll md:!w-[auto] md:!justify-center md:!overflow-hidden"
+                id="room_edit_tablist"
+                className="relative bottom-[38px] w-full justify-between overflow-y-hidden overflow-x-scroll md:!w-[auto] md:!justify-center md:!overflow-hidden"
               >
-                <TabsTrigger value="images">تصاویر</TabsTrigger>
-                <TabsTrigger value="facilities">امکانات</TabsTrigger>
-                <TabsTrigger value="baseInformation">اطلاعات پایه</TabsTrigger>
-                <TabsTrigger value="capacity">ظرفیت</TabsTrigger>
-                <TabsTrigger value="rules">مقررات</TabsTrigger>
-                <TabsTrigger value="price">نرخ فصلی</TabsTrigger>
-                <TabsTrigger value="disable">غیر فعالسازی</TabsTrigger>
+                <TabsTrigger
+                  className="data-[state=active]:border-transparent sm:data-[state=active]:!border-black"
+                  value="images"
+                >
+                  تصاویر
+                </TabsTrigger>
+                <TabsTrigger
+                  className="data-[state=active]:border-transparent sm:data-[state=active]:!border-black"
+                  value="facilities"
+                >
+                  امکانات
+                </TabsTrigger>
+                <TabsTrigger
+                  className="data-[state=active]:border-transparent sm:data-[state=active]:!border-black"
+                  value="baseInformation"
+                >
+                  اطلاعات پایه
+                </TabsTrigger>
+                <TabsTrigger
+                  className="data-[state=active]:border-transparent sm:data-[state=active]:!border-black"
+                  value="capacity"
+                >
+                  ظرفیت
+                </TabsTrigger>
+                <TabsTrigger
+                  className="data-[state=active]:border-transparent sm:data-[state=active]:!border-black"
+                  value="rules"
+                >
+                  مقررات
+                </TabsTrigger>
+                <TabsTrigger
+                  className="data-[state=active]:border-transparent sm:data-[state=active]:!border-black"
+                  value="price"
+                >
+                  نرخ فصلی
+                </TabsTrigger>
+                <TabsTrigger
+                  className="data-[state=active]:border-transparent sm:data-[state=active]:!border-black"
+                  value="disable"
+                >
+                  غیر فعالسازی
+                </TabsTrigger>
               </TabsList>
               <TabsContent value="images">
                 <Images />

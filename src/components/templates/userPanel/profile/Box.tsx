@@ -77,7 +77,7 @@ const Box: FC<BoxProps> = ({
         setError(true);
       } else {
         setError(false);
-      }  
+      }
       if (values) {
         setHandler(value);
       } else {
@@ -138,6 +138,7 @@ const Box: FC<BoxProps> = ({
                 <div className="flex flex-col items-center justify-between gap-3">
                   {multiple.map((title, index) => (
                     <div
+                      key={index}
                       className={`${type == "radio" ? "gap-0" : "justify-between gap-8"} flex w-full items-center`}
                     >
                       <p

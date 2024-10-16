@@ -12,6 +12,7 @@ import swal from "sweetalert";
 import {
   Dialog,
   DialogContent,
+  DialogTitle,
   DialogTrigger,
 } from "@/src/components/shadcn/ui/dialog";
 import Link from "next/link";
@@ -50,7 +51,7 @@ const page = () => {
           role === "admin" ? "demotion" : "promotion",
           phone,
         ]);
-        mutation(null);
+        mutation({});
       }
     });
   };
@@ -75,8 +76,9 @@ const page = () => {
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="w-full max-w-full text-center sm:!max-w-[425px]">
+                  <DialogTitle></DialogTitle> 
                   {user.villa.id.map((book: string, index: number) => (
-                    <Link href={`/room/${book}`}>
+                    <Link key={index} href={`/room/${book}`}>
                       اقامتگاه شماره {index + 1}
                     </Link>
                   ))}
@@ -102,8 +104,11 @@ const page = () => {
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="w-full max-w-full text-center sm:!max-w-[425px]">
+                <DialogTitle></DialogTitle>  
                   {user.booked.id.map((book: string, index: number) => (
-                    <Link href={`/room/${book}`}>رزرو شماره {index + 1}</Link>
+                    <Link key={index} href={`/room/${book}`}>
+                      رزرو شماره {index + 1}
+                    </Link>
                   ))}
                 </DialogContent>
               </Dialog>
@@ -144,6 +149,7 @@ const page = () => {
         columns={userColumns as any}
         data={data}
         progressPending={pending}
+        responsive
         progressComponent={".... "}
         pagination
       />

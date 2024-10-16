@@ -32,7 +32,7 @@ const Profile = () => {
     "آواتار با موفقیت بروزرسانی شد",
     true,
     null,
-    false,
+    true,
     "auth",
   );
 
@@ -73,7 +73,6 @@ const Profile = () => {
           const formData = new FormData();
           formData.append("avatar", file);
           mutation(formData);
-          queryClient.invalidateQueries({ queryKey: ["auth"] });
         };
         reader.readAsDataURL(file);
       } else {
@@ -89,7 +88,10 @@ const Profile = () => {
   return (
     <Container disableFooter={true}>
       <Breadcrumb className="!pb-[70px]" route={"حساب کاربری"} />
-      <Metadata seoTitle={"جاجیگا | حساب کاربری"} seoDescription={"مدیریت پروفایل و حساب کاربری"} /> 
+      <Metadata
+        seoTitle={"جاجیگا | حساب کاربری"}
+        seoDescription={"مدیریت پروفایل و حساب کاربری"}
+      />
       <UserLayout>
         <div
           className={`relative bottom-2 z-10 flex w-full !min-w-full gap-4 rounded-xl bg-white px-3 sm:!px-5`}

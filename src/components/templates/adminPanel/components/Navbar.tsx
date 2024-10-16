@@ -17,7 +17,7 @@ const Navbar = () => {
     <div className="flex h-12 w-full items-center justify-between bg-white px-3 md:!mt-4">
       <div className="flex items-center gap-3">
         <Sheet>
-          <SheetTrigger className="md:!hidden" asChild>
+          <SheetTrigger className="xl:!hidden" asChild>
             <RxHamburgerMenu className="cursor-pointer text-xl text-black" />
           </SheetTrigger>
           <SheetContent

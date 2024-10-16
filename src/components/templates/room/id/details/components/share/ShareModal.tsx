@@ -1,6 +1,7 @@
 import {
   Dialog,
   DialogContent,
+  DialogTitle,
   DialogTrigger,
 } from "@/src/components/shadcn/ui/dialog";
 import { FaWhatsapp } from "react-icons/fa6";
@@ -21,8 +22,9 @@ const ShareModal = () => {
       </DialogTrigger>
       {typeof window !== "undefined" && (
         <DialogContent className="w-full max-w-full sm:!max-w-[425px]">
+          <DialogTitle>
           <p>برای ارسال این صفحه به دوستانت، کلیک کن</p>
-
+        </DialogTitle>
           <Link
             target="_blank"
             href={`https://api.whatsapp.com/send?text=${window.location}`}
