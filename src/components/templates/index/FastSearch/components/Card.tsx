@@ -13,7 +13,7 @@ const Card = ({
   };
 }) => {
   const { setVillaZone } = categoryStore((state) => state);
-
+ 
   return (
     <Link
       onClick={() => setVillaZone([data.title])}
