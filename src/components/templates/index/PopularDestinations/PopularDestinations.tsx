@@ -10,7 +10,7 @@ const PopularDestinations = () => {
   const { data } = useGetData<any>(
     ["popularDestinations"],
     getPopularDestinations,
-  );
+  ); 
 
   return (
     <section className="py-5 text-right">
