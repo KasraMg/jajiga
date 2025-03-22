@@ -1,6 +1,6 @@
 import Ads from "../components/templates/index/Ads/Ads";
 import BecomeHost from "../components/templates/index/BecomeHost/BecomeHost";
-import FastSearch from "../components/templates/index/FastSearch/FastSearch"; 
+import FastSearch from "../components/templates/index/FastSearch/FastSearch";
 import PopularDestinations from "../components/templates/index/PopularDestinations/PopularDestinations";
 import SpecialAccommodations from "../components/templates/index/SpecialAccommodations/SpecialAccommodations";
 import Villas from "../components/templates/index/Villas/Villas";
@@ -21,7 +21,7 @@ export default async function Home() {
     <main>
       <ScrollObserver>
         <Container>
-          <Intro /> 
+          <Intro />
           <main
             className={`relative bottom-2 z-10 rounded-xl bg-white px-3 sm:!px-5`}
           >
@@ -48,8 +48,7 @@ export default async function Home() {
                 <SpecialAccommodations />
               </Hydrated>
             </div>
-          <BecomeHost />
-
+            <BecomeHost />
           </main>
 
           <Hydrated

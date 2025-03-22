@@ -1,8 +1,8 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query"; 
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Cookies from "js-cookie";
 import { toast } from "../components/shadcn/ui/use-toast";
 import { useRouter } from "next/navigation";
-import { useState } from "react"; 
+import { useState } from "react";
 import { saveIntoLocalStorage } from "../utils/utils";
 
 const useEditVilla = <T extends object>(
@@ -34,7 +34,7 @@ const useEditVilla = <T extends object>(
         },
       ).then((res) => res.json());
     },
-    onSuccess: (data) => {  
+    onSuccess: (data) => {
       if (data.statusCode === 200) {
         !villaId ? saveIntoLocalStorage("villaId", data.villa._id) : null;
         setResponseData(data);
@@ -50,7 +50,7 @@ const useEditVilla = <T extends object>(
       }
     },
   });
- 
+
   return { mutate, responseData, isSuccess, isPending };
 };
 

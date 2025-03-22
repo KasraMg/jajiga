@@ -12,14 +12,14 @@ const Villas = () => {
     ["allActivatedVillas"],
     getAllActivatedVillas,
   ); 
-  
+   
   const [status, setStatus] = useState("همه شهرها");
-  const [villaData, setVillaData] = useState(data.villas);
+  const [villaData, setVillaData] = useState(data?.villas);
    useEffect(() => {
     if (status === "همه شهرها") {
-      setVillaData(data.villas);
+      setVillaData(data?.villas);
     } else {
-      const filtredResult = data.villas.filter(
+      const filtredResult = data?.villas?.filter(
         (villa: VillaDetails) => villa.address.city === status,
       );
       setVillaData(filtredResult);
@@ -35,7 +35,7 @@ const Villas = () => {
           </p>
           <CitiesSelector status={status} setStatus={setStatus} />
         </div>
-        {villaData.length ? (
+        {villaData?.length ? (
           <Slider
             Card={Card}
             navigation={true}
@@ -58,9 +58,9 @@ const Villas = () => {
               alt="notFound"
               width={1000}
               className="mx-auto mt-10 w-[100px]"
-              height={1000}
+              height={1000}  
               src={"/images/notFound.png"}
-            />
+            /> 
             <p className="text-white">اقامتگاهی در این شهر یافت نشد</p>
           </div>
         )}

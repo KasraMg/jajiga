@@ -18,14 +18,14 @@ const Breadcrumb: FC<BreadcrumbProps> = ({ state, city, className }) => {
       </Link>
       <FaAngleLeft />
       <Link
-        href={"/"}
+        href={`/rooms?city=${state}`}
         className="font-vazir relative z-50 font-light text-black"
       >
         {state}
       </Link>
       <FaAngleLeft />
       <Link
-        href={"/"}
+        href={`/rooms?city=${city}`}
         className="font-vazir relative z-50 font-light text-black"
       >
         {city}

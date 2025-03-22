@@ -8,7 +8,7 @@ const CitiesSelector = ({
   setStatus: (data: string) => void;
 }) => {
   const cities = [
-   'همه شهرها',
+    "همه شهرها",
     "رامسر",
     "ماسال",
     "کردان",
@@ -18,12 +18,12 @@ const CitiesSelector = ({
     "کیش",
   ];
   return (
-    <div className="no-scrollbar mt-4 flex w-screen items-center  justify-start sm:!justify-center overflow-x-scroll text-white">
+    <div className="no-scrollbar mt-4 flex w-screen items-center justify-start overflow-x-scroll text-white sm:!justify-center">
       {cities.map((city) => (
         <p
-        key={crypto.randomUUID()}
+          key={crypto.randomUUID()}
           onClick={() => setStatus(city)}
-          className={`${status === city ? "bg-customYellow text-black rounded-full" : null} px-2 cursor-pointer ml-5 sm:!text-base text-sm whitespace-nowrap`}
+          className={`${status === city ? "rounded-full bg-customYellow text-black" : null} ml-5 cursor-pointer whitespace-nowrap px-2 text-sm sm:!text-base`}
         >
           {city}
         </p>

@@ -49,7 +49,7 @@ const Notfound = ({ isFilter }: { isFilter: boolean }) => {
         </div>
       ) : (
         <div>
-          <p>اقامتگاهی در این شهر یافت نشد</p>
+          <p>اقامتگاهی در این مکان یافت نشد</p>
           <Button
             onClick={clearFiltringHandler}
             className="mt-5"

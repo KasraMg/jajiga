@@ -35,9 +35,9 @@ const Details = (data: VillaResponse) => {
           />
           <p>
             اجاره{" "}
-            {data.villa.aboutVilla.villaType.title === "ویلایی"
+            {data.villa.aboutVilla.villaType?.title === "ویلایی"
               ? "منزل ویلایی"
-              : data.villa.aboutVilla.villaType.title}{" "}
+              : data.villa.aboutVilla.villaType?.title}{" "}
             در {data.villa.address.city}
           </p>
           {data.villa.isAccepted === "rejected" ? (
@@ -47,7 +47,7 @@ const Details = (data: VillaResponse) => {
               <Badge bgColor="bg-customYellow">
                 کد: ({data.villa._id.slice(18, 26)})
               </Badge>
-              <Wishes wishesStatus={data.villa.isWishes} />
+              <Wishes data={data} wishesStatus={data.villa.isWishes} />
               <ShareModal />
               {/* <Badge bgColor="bg-[#f1f1f1]">+300 رزرو موفق</Badge> */}
               {/* stars component */}
