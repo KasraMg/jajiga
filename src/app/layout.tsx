@@ -7,7 +7,7 @@ import Auth from "../utils/auth";
 import { Toaster } from "@/src/components/shadcn/ui/toaster";
 import ContextMenu from "../providers/ContextMenu";
 import InternetStatus from "../utils/InternetStatus";
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
 
 const fonts = localFont({
   src: [
@@ -24,7 +24,7 @@ const fonts = localFont({
     {
       path: "../../public/fonts/vazir/Vazir-Light.woff2",
       weight: "300",
-      style: "normal", 
+      style: "normal",
     },
   ],
   variable: "--font-vazir",
@@ -33,6 +33,14 @@ const fonts = localFont({
 export const metadata: Metadata = {
   icons: "/images/logo.png",
   title: "جاجیگا",
+  manifest: "/manifest.json",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#ffffff",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({
@@ -48,12 +56,11 @@ export default function RootLayout({
             <Auth />
           </Hydrated>
           <InternetStatus />
-          {/* <ContextMenu> */}
+          {/* <ContextMenu>{children}</ContextMenu> */}
           {children}
-          {/* </ContextMenu>  */}
           <Toaster />
         </QueryWrapper>
       </body>
     </html>
-  ); 
+  );
 }

@@ -69,9 +69,9 @@ const Card: FC<CardProps> = ({ data, className, wishes }) => {
         <div className="mt-3 flex items-center gap-2">
           <Link href={`/room/${data._id}`} className="text-sm">
             اجاره{" "}
-            {data.aboutVilla.villaType.title === "ویلایی"
+            {data.aboutVilla.villaType?.title === "ویلایی"
               ? "منزل ویلایی"
-              : data.aboutVilla.villaType.title}{" "}
+              : data.aboutVilla.villaType?.title}{" "}
             در {data.address.city}
           </Link>
           {data.booked !== 0 && (

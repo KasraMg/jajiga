@@ -1,0 +1,80 @@
+{
+  "name": "جاجیگا | رزرو اینترنتی ویلا، سوئیت، کلبه و اقامتگاه بومگردی",
+  "short_name": "جاجیگا",
+  "description": "توضیح کوتاهی درباره اپلیکیشن",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#ffffff",
+  "theme_color": "#f0c807",
+  "prefer_related_applications": false,
+  "categories": ["travel", "lifestyle"],
+  "screenshots": [
+    {
+      "src": "/images/screenshots/desktop1.png",
+      "sizes": "1280x800",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "نمای صفحه اصلی جاجیگا"
+    },
+    {
+      "src": "/images/screenshots/mobile1.png",
+      "sizes": "750x1334",
+      "type": "image/jpeg",
+      "label": "نمای موبایل جاجیگا"
+    }
+  ],
+  "icons": [
+    {
+      "src": "icons/icon-48x48.png",
+      "sizes": "48x48",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png" 
+    },
+    {
+      "src": "icons/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png" 
+    }
+  ]
+}
