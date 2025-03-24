@@ -42,7 +42,7 @@ const Infoes = (data: VillaDetails) => {
       }));
 
       const updatedFacilities = newFacilities.map((item: newFacibilityObj) => {
-        const match = prevFacility.find((pf) => pf.title === item.engtitle);
+        const match = prevFacility.find((pf) => pf?.title === item.engtitle);
         return match
           ? {
               ...item,
@@ -88,9 +88,9 @@ const Infoes = (data: VillaDetails) => {
           </p>
           <p>
             <strong className="ml-2 text-black">نوع اقامتگاه:</strong>
-            {data.aboutVilla.villaType.title === "ویلایی"
+            {data.aboutVilla.villaType?.title === "ویلایی"
               ? "ویلا"
-              : data.aboutVilla.villaType.title}
+              : data.aboutVilla.villaType?.title}
           </p>
           <p>
             <strong className="ml-2 text-black">منطقه:</strong>
@@ -109,9 +109,9 @@ const Infoes = (data: VillaDetails) => {
           {facibilityData &&
             facibilityData.map(
               (option: { title: string; description: string }) => (
-                <div key={option.title} className="flex items-center gap-2">
+                <div key={option?.title} className="flex items-center gap-2">
                   <GoDotFill />
-                  <p>{option.title}</p>
+                  <p>{option?.title}</p>
                   <div
                     className="relative cursor-pointer text-[#6378f1]"
                     id="tooltip"

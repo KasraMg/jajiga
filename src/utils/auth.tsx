@@ -22,8 +22,10 @@ const Auth = () => {
     } else if (status === "success" && data?.statusCode === 500) {
       setLogin(false);
       setIsPending(false);
+      setUserData(null)
     } else {
       setLogin(false);
+      setUserData(null)
       setIsPending(false);
     }
   }, [status, data, setUserData]);

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { RiUpload2Line } from "react-icons/ri";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { AiOutlineLogout } from "react-icons/ai";
+
 import { GoHome } from "react-icons/go";
 import { FaChevronLeft } from "react-icons/fa6";
 import Image from "next/image";
@@ -16,10 +17,30 @@ import { authStore } from "@/src/stores/auth";
 import UserLayout from "@/src/layouts/UserLayout";
 import { TbHomePlus } from "react-icons/tb";
 import Metadata from "@/src/utils/Metadata";
+import { useState } from "react";
 
 const Dashboard = () => {
   const logoutHandler = useLogoutHandler();
   const { userData } = authStore((state) => state);
+  const [_permission, setPermission] = useState(
+    typeof window !== "undefined" && "Notification" in window
+      ? Notification.permission
+      : "default",
+  );
+  const requestNotificationPermission = () => {
+    if (!("Notification" in window)) {
+      return;
+    }
+
+    Notification.requestPermission().then((perm) => {
+      setPermission(perm);
+      if (perm === "granted") {
+        new Notification("✅ اجازه داده شد!", {
+          body: "شما اجازه دریافت نوتیفیکیشن را دادید.",
+        });
+      }
+    });
+  };
 
   return (
     <Container disableFooter={true}>
@@ -136,7 +157,10 @@ const Dashboard = () => {
                 </Link>
               </div>
             </div>
-            <div className="relative mt-5 flex items-start gap-2 rounded-r-lg border-r-2 border-solid border-red-600 p-3 pb-4 shadow-lg">
+            <div
+              onClick={requestNotificationPermission}
+              className="relative mt-5 flex cursor-pointer items-start gap-2 rounded-r-lg border-r-2 border-solid border-red-600 p-3 pb-4 shadow-lg"
+            >
               <div className="rounded-full bg-red-200 p-3">
                 <IoNotificationsOutline className="text-2xl text-red-600" />
               </div>

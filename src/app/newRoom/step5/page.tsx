@@ -77,6 +77,7 @@ const page = () => {
   };
 
   const submitHandler = () => {
+    
     const userData: userObjData = {
       capacity: {
         normalCapacity: standardSpace,
@@ -89,9 +90,11 @@ const page = () => {
       step: 6,
       finished: false,
     };
+    console.log(userData);
+
     mutation(userData);
     setDisableNextButton(true);
-  };
+  }; 
 
   return (
     <StepLayout stepperActive={5}>
@@ -200,7 +203,7 @@ const page = () => {
               </p>
               <p
                 onClick={() =>
-                  setRoomCount((prev) => prev == -1 && ((prev - 1) as any))
+                  setRoomCount((prev) => prev == 0 ? 0 : prev - 1)
                 }
                 className={`${roomCount == 0 && "!cursor-not-allowed text-gray-300"} mb-4 cursor-pointer text-2xl hover:text-gray-500`}
               >
@@ -251,5 +254,5 @@ const page = () => {
     </StepLayout>
   );
 };
-
+ 
 export default page;

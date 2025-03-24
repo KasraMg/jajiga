@@ -6,8 +6,11 @@ import { toast } from "@/src/components/shadcn/ui/use-toast";
 import { FaHeart, FaRegHeart } from "react-icons/fa6";
 import Loader from "@/src/components/modules/loader/Loader";
 import { useQueryClient } from "@tanstack/react-query";
+import {  VillaResponse } from "@/src/types/Villa.types";
 
-const Wishes = ({ wishesStatus }: { wishesStatus: boolean }) => {
+const Wishes = ({ wishesStatus,data }: { wishesStatus: boolean,data:VillaResponse }) => {
+  console.log(data);
+  
   const queryClient = useQueryClient();
   const { userData } = authStore((store) => store);
   const [wishes, setWishes] = useState(wishesStatus);
@@ -23,11 +26,11 @@ const Wishes = ({ wishesStatus }: { wishesStatus: boolean }) => {
       queryClient.invalidateQueries({ queryKey: ["auth"] });
       queryClient.invalidateQueries({ queryKey: ["villa", params.id] });
     } else {
-      toast({
+      toast({ 
         variant: "success",
         title: "خطایی غیر منتظره رخ داد",
       });
-      location.reload();
+      // location.reload();
     }
   };
 
@@ -40,10 +43,19 @@ const Wishes = ({ wishesStatus }: { wishesStatus: boolean }) => {
   );
 
   const wishesHandler = () => {
+ 
     if (userData) {
-      const obj: { flag: boolean | null } = { flag: null };
-      wishes ? (obj.flag = false) : (obj.flag = true);
-      mutation(obj);
+      if (data.villa.isAccepted !=='false') {
+        const obj: { flag: boolean | null } = { flag: null };
+        wishes ? (obj.flag = false) : (obj.flag = true);
+        mutation(obj);
+      }else{
+        toast({
+          variant: "danger",
+          title: "این ویلا هنوز توسط ادمین تایید نشده است",
+        });
+      }
+    
     } else {
       toast({
         variant: "danger",

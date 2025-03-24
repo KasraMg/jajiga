@@ -17,7 +17,7 @@ const Form = () => {
     initialValues: { name: "", email: "", message: "" },
     onSubmit: (values, { setSubmitting, resetForm }) => {
       mutation(values);
-      resetForm()
+      resetForm();
     },
     validationSchema: supportSchema,
   });
@@ -32,29 +32,6 @@ const Form = () => {
             " rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px",
         }}
       >
-        <div className="mb-5">
-          <label
-            htmlFor="email"
-            className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-          >
-            ایمیل شما
-          </label>
-          <input
-            name="email"
-            value={formHandler.values.email}
-            onChange={formHandler.handleChange}
-            onBlur={formHandler.handleBlur}
-            type="email"
-            id="email"
-            className="dark:shadow-sm-light block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 shadow-sm focus:border-yellow-300 focus:ring-yellow-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-yellow-300 dark:focus:ring-yellow-300"
-            placeholder="name@gmail.com"
-            required
-          />
-          <span className="mx-auto mt-2 block text-center text-xs text-red-600">
-            {formHandler.errors.email && formHandler.errors.email}
-          </span>
-        </div>
-
         <div className="mb-5">
           <label
             htmlFor="name"
@@ -98,6 +75,29 @@ const Form = () => {
           />
           <span className="mx-auto mt-2 block text-center text-xs text-red-600">
             {formHandler.errors.message && formHandler.errors.message}
+          </span>
+        </div>
+        <div className="mb-5">
+          <label
+            htmlFor="email"
+            className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+          >
+            ایمیل شما
+          </label>
+          <input
+            dir="ltr"
+            name="email"
+            value={formHandler.values.email}
+            onChange={formHandler.handleChange}
+            onBlur={formHandler.handleBlur}
+            type="email"
+            id="email"
+            className="dark:shadow-sm-light block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 shadow-sm focus:border-yellow-300 focus:ring-yellow-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-yellow-300 dark:focus:ring-yellow-300"
+            placeholder="name@gmail.com"
+            required
+          />
+          <span className="mx-auto mt-2 block text-center text-xs text-red-600">
+            {formHandler.errors.email && formHandler.errors.email}
           </span>
         </div>
 
