@@ -9,7 +9,6 @@ import { useQueryClient } from "@tanstack/react-query";
 import {  VillaResponse } from "@/src/types/Villa.types";
 
 const Wishes = ({ wishesStatus,data }: { wishesStatus: boolean,data:VillaResponse }) => {
-  console.log(data);
   
   const queryClient = useQueryClient();
   const { userData } = authStore((store) => store);

@@ -38,7 +38,7 @@ const Notfound = ({ isFilter }: { isFilter: boolean }) => {
       />
       {isFilter ? (
         <div>
-          <p>اقامتگاهی در این شهر یا با این فیلترینگ یافت نشد</p>
+          <p>اقامتگاهی  با این فیلترینگ یافت نشد</p>
           <Button
             onClick={clearFiltringHandler}
             className="mt-5"

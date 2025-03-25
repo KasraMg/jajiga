@@ -26,7 +26,9 @@ const Posts = () => {
     villaZone,
     setOrder,
   } = categoryStore((state) => state);
+
   const accessToken = Cookies.get("AccessToken");
+  
   const getVilla = async () => {
     let url = `${process.env.NEXT_PUBLIC_API_URL}/villa/s`;
     city ? (url += `?city=${city}`) : (url += `?city=all`);

@@ -27,7 +27,7 @@ const UserBanModal = ({ userPhone }: { userPhone: string }) => {
         variant: "danger",
         title: "با عرض پوزش لطفا مجدد امتحان کنید",
       });
-        location.reload();
+      location.reload();
     }
   };
 
@@ -53,7 +53,7 @@ const UserBanModal = ({ userPhone }: { userPhone: string }) => {
         <Button variant={"danger"}>بن</Button>
       </DialogTrigger>
       <DialogContent className="max-h-[440px] w-full max-w-full sm:!max-w-[425px]">
-      <DialogTitle>
+        <DialogTitle>
           <p className="text-center">دلیلتون برای بن این کاربر چیه؟</p>
         </DialogTitle>
         <div className="flex items-center gap-2">

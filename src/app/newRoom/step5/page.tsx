@@ -89,8 +89,7 @@ const page = () => {
       },
       step: 6,
       finished: false,
-    };
-    console.log(userData);
+    }; 
 
     mutation(userData);
     setDisableNextButton(true);

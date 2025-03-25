@@ -134,7 +134,7 @@ const Otp = ({
         </InputOTP>
       </div> 
       <span className="text-xs text-red-600 text-center mb-3 block">
-        در صورت نیامدن کد، پیامک های spam گوشیتون رو هم چک کنید
+      در صورت عدم دریافت کد فعالسازی، لطفاً بخش spam دستگاه خود را برسی کنید
       </span>
       <Timer />
       <Button
