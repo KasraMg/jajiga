@@ -17,7 +17,7 @@ import { toast } from "@/src/components/shadcn/ui/use-toast";
 import Timer from "./Timer";
 
 const Otp = ({
-  setStep,
+  setStep, 
 }: {
   setStep: React.Dispatch<React.SetStateAction<string>>;
 }) => {

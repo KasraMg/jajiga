@@ -1,5 +1,5 @@
 "use client";
-import UserLayout from "@/src/layouts/UserLayout";
+import UserLayout from "@/src/components/templates/userPanel/UserLayout";
 import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
 import Container from "@/src/components/modules/container/Container";
 import Card from "@/src/components/templates/userPanel/all/Card";

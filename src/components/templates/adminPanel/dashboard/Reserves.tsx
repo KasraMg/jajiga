@@ -36,6 +36,7 @@ const Reserves = ({ books }: { books: Book[] }) => {
         data={data}
         progressComponent={".... "}
         pagination
+        noDataComponent="اطلاعاتی یافت نشد"
         paginationPerPage={5}
         paginationRowsPerPageOptions={[5]}
       />

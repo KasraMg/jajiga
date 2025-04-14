@@ -7,7 +7,7 @@ import { getFromLocalStorage } from "@/src/utils/utils";
 import { authStore } from "@/src/stores/auth";
 import { usePathname, useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
-import Metadata from "../utils/Metadata";
+import Metadata from "../../../utils/Metadata";
 
 interface StepLayoutProps {
   stepperActive: number;

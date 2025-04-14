@@ -1,5 +1,4 @@
 "use client";
-import AdminLayout from "@/src/layouts/AdminLayout";
 import { Button } from "@/src/components/shadcn/ui/button";
 import useGetData from "@/src/hooks/useGetData";
 import usePostData from "@/src/hooks/usePostData";
@@ -76,7 +75,7 @@ const page = () => {
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="w-full max-w-full text-center sm:!max-w-[425px]">
-                  <DialogTitle></DialogTitle> 
+                  <DialogTitle></DialogTitle>
                   {user.villa.id.map((book: string, index: number) => (
                     <Link key={index} href={`/room/${book}`}>
                       اقامتگاه شماره {index + 1}
@@ -104,7 +103,7 @@ const page = () => {
                   </Button>
                 </DialogTrigger>
                 <DialogContent className="w-full max-w-full text-center sm:!max-w-[425px]">
-                <DialogTitle></DialogTitle>  
+                  <DialogTitle></DialogTitle>
                   {user.booked.id.map((book: string, index: number) => (
                     <Link key={index} href={`/room/${book}`}>
                       رزرو شماره {index + 1}
@@ -136,7 +135,7 @@ const page = () => {
     }
   }, [data]);
   return (
-    <AdminLayout>
+    <>
       <div className="relative my-10">
         <div className="before:absolute before:inset-0 before:top-4 before:h-[2px] before:w-full before:bg-red-600 before:content-['']">
           <p className="before: relative z-50 w-max bg-white pl-3 text-2xl before:absolute before:right-0 before:top-0 before:h-8 before:w-8 before:rotate-45 before:bg-[#dc26261c] before:content-['']">
@@ -154,7 +153,7 @@ const page = () => {
         pagination
       />
       {getUsersPending && <Loader />}
-    </AdminLayout>
+    </>
   );
 };
 

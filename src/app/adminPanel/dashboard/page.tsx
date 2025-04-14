@@ -1,5 +1,4 @@
 "use client";
-import AdminLayout from "@/src/layouts/AdminLayout";
 import Loader from "@/src/components/modules/loader/Loader";
 import Box from "@/src/components/templates/adminPanel/dashboard/Box";
 import Chart from "@/src/components/templates/adminPanel/dashboard/Chart";
@@ -16,12 +15,12 @@ const page = () => {
   );
 
   return (
-    <AdminLayout>
+    <>
       <section className="mt-7 grid grid-cols-[auto,auto] gap-4 lg:!grid-cols-[auto,auto,auto] xl:!flex xl:justify-between">
         <Box title="مجموع اقامتگاه ها" value={data?.villasCount} />
         <Box title="مجموع کل رزرو ها" value={data?.booksCount} />
-        <Box title="مجموع کتگوری ها" value={data?.categoriesCount} />
-        <Box title="مجموع کاربر های سایت" value={data?.usersCount} />
+        <Box title="مجموع دسته بندی ها" value={data?.categoriesCount} />
+        <Box title="مجموع کاربرهای سایت" value={data?.usersCount} />
       </section>
       <Metadata
         seoTitle={"جاجیگا | پیشخان"}
@@ -39,7 +38,7 @@ const page = () => {
         {data && <Chart {...data} />}
         {isPending && <Loader />}
       </div>
-    </AdminLayout>
+    </>
   );
 };
 
