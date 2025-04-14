@@ -25,7 +25,7 @@ const Card = ({
         alt="img"
         width={1000}
         height={1000}
-        src={`https://jajiga-backend.liara.run/static/zone/${data.cover}`}
+        src={`https://jajiga-backend.liara.run/static/zone/${data?.cover}`}
       />
       <div
         style={{
