@@ -1,5 +1,4 @@
 "use client";
-import AdminLayout from "@/src/layouts/AdminLayout";
 import Loader, { ButtonLoader } from "@/src/components/modules/loader/Loader";
 import { Button } from "@/src/components/shadcn/ui/button";
 import useDeleteData from "@/src/hooks/useDeleteData";
@@ -131,7 +130,7 @@ const page = () => {
     });
   };
   return (
-    <AdminLayout>
+    <>
       <div className="relative my-10">
         <div className="before:absolute before:inset-0 before:top-4 before:h-[2px] before:w-full before:bg-red-600 before:content-['']">
           <p className="before: relative z-50 w-max bg-white pl-3 text-2xl before:absolute before:right-0 before:top-0 before:h-8 before:w-8 before:rotate-45 before:bg-[#dc26261c] before:content-['']">
@@ -151,10 +150,12 @@ const page = () => {
         progressPending={pending}
         progressComponent={".... "}
         pagination
+        noDataComponent="نظری یافت نشد"
+
       />
       {getCommentsPending && <Loader />}
       {deleteHandlerPending && <Loader />}
-    </AdminLayout>
+    </>
   );
 };
 

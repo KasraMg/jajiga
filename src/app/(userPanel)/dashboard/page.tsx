@@ -14,7 +14,7 @@ import { IoNotificationsOutline } from "react-icons/io5";
 import Rooms from "@/src/components/templates/userPanel/dashboard/Rooms";
 import { useLogoutHandler } from "@/src/utils/auth";
 import { authStore } from "@/src/stores/auth";
-import UserLayout from "@/src/layouts/UserLayout";
+import UserLayout from "@/src/components/templates/userPanel/UserLayout";
 import { TbHomePlus } from "react-icons/tb";
 import Metadata from "@/src/utils/Metadata";
 import { useState } from "react";

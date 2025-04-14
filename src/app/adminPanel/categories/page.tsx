@@ -1,5 +1,4 @@
 "use client";
-import AdminLayout from "@/src/layouts/AdminLayout";
 import { Button } from "@/src/components/shadcn/ui/button";
 import useGetData from "@/src/hooks/useGetData";
 import { getAllCategories } from "@/src/utils/fetchs";
@@ -19,10 +18,10 @@ const page = () => {
     useGetData<CategoryResTypes>(["allCategories"], getAllCategories);
   const [categoryId, setCategoryId] = useState("");
   const [data, setData] = useState<categoryTypes[]>([]);
-  const [pending, setPending] = useState(true); 
-  
+  const [pending, setPending] = useState(true);
+
   useEffect(() => {
-    const tableData:unknown = categories?.categories.map((category) => ({
+    const tableData: unknown = categories?.categories?.map((category) => ({
       title: category.title,
       count: category.villas,
       register: convertToJalali(category.createdAt.slice(0, 10)),
@@ -35,11 +34,11 @@ const page = () => {
         </Button>
       ),
     }));
-    setData(tableData as categoryTypes[]) 
+    setData(tableData as categoryTypes[]);
   }, [categories]);
 
   useEffect(() => {
-    if (data) { 
+    if (data) {
       setPending(false);
     }
   }, [data]);
@@ -63,7 +62,7 @@ const page = () => {
     });
   };
   return (
-    <AdminLayout>
+    <>
       <div className="relative my-10">
         <div className="before:absolute before:inset-0 before:top-4 before:h-[2px] before:w-full before:bg-red-600 before:content-['']">
           <p className="before: relative z-50 w-max bg-white pl-3 text-2xl before:absolute before:right-0 before:top-0 before:h-8 before:w-8 before:rotate-45 before:bg-[#dc26261c] before:content-['']">
@@ -73,9 +72,7 @@ const page = () => {
       </div>
       <Metadata
         seoTitle={"جاجیگا | دسته بندی ها "}
-        seoDescription={
-          "مدیریت دسته بندی ها"
-        }
+        seoDescription={"مدیریت دسته بندی ها"}
       />
       <AddCategoryModal />
       <DataTable
@@ -84,10 +81,11 @@ const page = () => {
         progressPending={pending}
         progressComponent={".... "}
         pagination
+        noDataComponent="دسته بندی یافت نشد"
       />
       {getCategoriesPending && <Loader />}
       {deleteHandlerPending && <Loader />}
-    </AdminLayout>
+    </>
   );
 };
 

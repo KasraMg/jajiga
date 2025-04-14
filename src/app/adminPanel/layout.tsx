@@ -1,8 +1,8 @@
 "use client";
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import Navbar from "../components/templates/adminPanel/components/Navbar";
-import Menu from "../components/templates/adminPanel/components/Menu";
+import Navbar from "../../components/templates/adminPanel/components/Navbar";
+import Menu from "../../components/templates/adminPanel/components/Menu";
 import { authStore } from "@/src/stores/auth";
 
 const AdminLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {

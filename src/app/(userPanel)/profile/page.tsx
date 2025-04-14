@@ -10,14 +10,12 @@ import { authStore } from "@/src/stores/auth";
 import TwoStepBox from "@/src/components/templates/userPanel/profile/TwoStepBox";
 import usePostData from "@/src/hooks/usePostData";
 import Loader from "@/src/components/modules/loader/Loader";
-import UserLayout from "@/src/layouts/UserLayout";
-import { useQueryClient } from "@tanstack/react-query";
+import UserLayout from "@/src/components/templates/userPanel/UserLayout";
 import swal from "sweetalert";
 import Metadata from "@/src/utils/Metadata";
 
 const Profile = () => {
-  const { userData } = authStore((state) => state);
-  const queryClient = useQueryClient();
+  const { userData } = authStore((state) => state); 
 
   const [userName, setUserName] = useState("");
   const [userFamily, setUserFamily] = useState("");
