@@ -59,7 +59,7 @@ const Rooms = () => {
                         width={1000}
                         height={1000}
                         crossOrigin="anonymous"
-                        src={`https://jajiga-backend.liara.run/villa/covers/${villa.cover[0]}`}
+                        src={`http://localhost:4001/villa/covers/${villa.cover[0]}`}
                       />
                     ) : (
                       <Image

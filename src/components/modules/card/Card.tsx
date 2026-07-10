@@ -41,7 +41,7 @@ const Card: FC<CardProps> = ({ data, className, wishes }) => {
             onLoad={() => setIsCoverLoading(false)}
             width={1000}
             height={1000}
-            src={`https://jajiga-backend.liara.run/villa/covers/${data.cover[0]}`}
+            src={`http://localhost:4001/villa/covers/${data.cover[0]}`}
           />
           {data.costly && (
             <div className="absolute right-[2px] top-[2px] flex flex-col p-2">

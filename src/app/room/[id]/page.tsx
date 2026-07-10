@@ -19,5 +19,5 @@ const Room = ({ params }: { params: { id: string } }) => {
     </Hydrated>
   );
 };
-
+ 
 export default Room;

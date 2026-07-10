@@ -30,8 +30,8 @@ const Images = () => {
     if (villa) {
       const prevCovers = villa.cover.map((img) => {
         return {
-          name: `https://jajiga-backend.liara.run/villa/covers/${img}`,
-          url: `https://jajiga-backend.liara.run/villa/covers/${img}`,
+          name: `http://localhost:4001/villa/covers/${img}`,
+          url: `http://localhost:4001/villa/covers/${img}`,
         };
       });
       setUserImages(prevCovers);

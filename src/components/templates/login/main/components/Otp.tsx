@@ -76,7 +76,7 @@ const Otp = ({
         variant: "danger",
         title: "با عرض پوزش لطفا مجدد مراحل رو طی کنید",
       });
-      location.reload();
+      // location.reload();
       localStorage.clear();
     }
   };

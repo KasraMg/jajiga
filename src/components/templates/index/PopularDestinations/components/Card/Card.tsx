@@ -25,7 +25,7 @@ const Card = (data: {
         onLoad={() => setIsCoverLoading(false)}
         height={1000}
         crossOrigin="anonymous"
-        src={`https://jajiga-backend.liara.run/static/city/${data.cover}`}
+        src={`http://localhost:4001/static/city/${data.cover}`}
       />
       <div>
         <p className="font-vazir text-[12px] font-light">اجاره ویلا در</p>

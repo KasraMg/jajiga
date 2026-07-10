@@ -50,7 +50,7 @@ const Card = (villa: VillaDetails) => {
             <Image
               crossOrigin="anonymous"
               className="h-[210px] w-full rounded-t-md"
-              src={`https://jajiga-backend.liara.run/villa/covers/${villa.cover[0]}`}
+              src={`http://localhost:4001/villa/covers/${villa.cover[0]}`}
               width={1000}
               height={1000}
               alt="flag"

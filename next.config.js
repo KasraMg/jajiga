@@ -3,7 +3,7 @@ const withPWA = require("@ducanh2912/next-pwa").default({
   aggressiveFrontEndNavCaching: true,
   reloadOnOnline: true,
   swcMinify: true,
-  disable: process.env.NODE_ENV === 'development', 
+  disable: process.env.NODE_ENV === "development",
   workboxOptions: {
     disableDevLogs: true,
   },
@@ -63,17 +63,27 @@ const nextConfig = {
   reactStrictMode: true,
 
   env: {
-    NEXT_PUBLIC_API_URL: 'https://jajiga-backend.liara.run',
+    NEXT_PUBLIC_API_URL: "http://localhost:4001",
   },
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'jajiga-backend.liara.run',
+        protocol: "http",
+        hostname: "localhost",
+        port: "4001",
       },
       {
-        protocol: 'https',
-        hostname: 'www.jajiga.com',
+        protocol: "http",
+        hostname: "localhost",
+        port: "1100",
+      },
+      {
+        protocol: "https",
+        hostname: "jajiga-backend.liara.run",
+      },
+      {
+        protocol: "https",
+        hostname: "www.jajiga.com",
       },
     ],
   },
@@ -84,4 +94,3 @@ const nextConfig = {
 };
 
 module.exports = withPWA(nextConfig);
-

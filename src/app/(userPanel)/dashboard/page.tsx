@@ -59,7 +59,7 @@ const Dashboard = () => {
                 className="absolute -bottom-8 left-0 right-0 mx-auto block h-20 w-20 rounded-full object-cover"
                 src={
                   userData?.user.avatar
-                    ? `https://jajiga-backend.liara.run/user/avatars/${userData?.user.avatar}`
+                    ? `http://localhost:4001/user/avatars/${userData?.user.avatar}`
                     : "/images/profile.jpg"
                 }
                 alt=""

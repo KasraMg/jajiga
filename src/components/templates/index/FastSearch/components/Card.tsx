@@ -13,8 +13,8 @@ const Card = ({
   };
 }) => {
   const { setVillaZone } = categoryStore((state) => state);
- 
-  return (
+
+  return data ? (
     <Link
       onClick={() => setVillaZone([data.title])}
       href={`/rooms`}
@@ -25,7 +25,7 @@ const Card = ({
         alt="img"
         width={1000}
         height={1000}
-        src={`https://jajiga-backend.liara.run/static/zone/${data?.cover}`}
+        src={`http://localhost:4001/static/zone/${data?.cover}`}
       />
       <div
         style={{
@@ -41,6 +41,8 @@ const Card = ({
         </div>
       </div>
     </Link>
+  ) : (
+    ""
   );
 };
 

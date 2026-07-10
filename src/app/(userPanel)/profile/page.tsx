@@ -54,7 +54,7 @@ const Profile = () => {
     );
     setAvatar(
       userData?.user.avatar
-        ? `https://jajiga-backend.liara.run/user/avatars/${userData?.user.avatar}`
+        ? `http://localhost:4001/user/avatars/${userData?.user.avatar}`
         : "",
     );
     setPhoneNumber(userData?.user.phone as string);

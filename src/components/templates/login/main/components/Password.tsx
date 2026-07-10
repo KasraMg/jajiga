@@ -48,7 +48,7 @@ const Password = ({
         title: "با عرض پوزش لطفا مجدد مراحل رو طی کنید",
       });
       localStorage.clear();
-      location.reload();
+      // location.reload();
     }
   };
 

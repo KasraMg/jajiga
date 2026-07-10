@@ -9,7 +9,7 @@ import useGetData from "../hooks/useGetData";
 import { UserObj } from "../types/Auth.types";
 import Loader from "../components/modules/loader/Loader";
 import Cookies from "js-cookie";
-
+ 
 const Auth = () => {
   const { data, status, isLoading } = useGetData<UserObj>(["auth"], getUser);
   const { setUserData, setLogin, setIsPending } = authStore((state) => state);

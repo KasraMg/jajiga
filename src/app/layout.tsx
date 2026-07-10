@@ -53,7 +53,7 @@ export default function RootLayout({
       <body className={`${fonts.variable}`}>
         <QueryWrapper>
           <Hydrated queryKey={["auth"]} queryFn={getUser}>
-            <Auth />
+            <Auth /> 
           </Hydrated>
           <InternetStatus />
           {/* <ContextMenu>{children}</ContextMenu> */}

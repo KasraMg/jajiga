@@ -33,7 +33,7 @@ const FullScreenGallery = ({
               width={1000}
               height={1000}
               alt="cover"
-              src={`https://jajiga-backend.liara.run/villa/covers/${img}`}
+              src={`http://localhost:4001/villa/covers/${img}`}
             />
           </SwiperSlide>
         ))}
@@ -54,7 +54,7 @@ const FullScreenGallery = ({
               width={1000}
               height={1000}
               alt="cover"
-              src={`https://jajiga-backend.liara.run/villa/covers/${img}`}
+              src={`http://localhost:4001/villa/covers/${img}`}
             />
           </SwiperSlide>
         ))}

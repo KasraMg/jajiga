@@ -2,7 +2,7 @@
 import useGetData from "@/src/hooks/useGetData";
 import Details from "./details/Details";
 import Gallery from "./gallery/Gallery";
-import Reservation from "./reservation/Reservation"; 
+import Reservation from "./reservation/Reservation";
 import { useParams, useRouter } from "next/navigation";
 import NotFound from "./NotFound";
 import { useEffect } from "react";
@@ -13,7 +13,9 @@ const Main = () => {
   const router = useRouter();
   const { userData, isPending } = authStore((state) => state);
 
-  const { data } = useGetData<any>(["villa",params.id], () => getVilla(params.id as any));
+  const { data } = useGetData<any>(["villa", params.id], () =>
+    getVilla(params.id as any),
+  );
 
   useEffect(() => {
     if (
@@ -37,6 +39,8 @@ const Main = () => {
         data.villa.isAccepted !== "true" &&
         router.push("/");
     }
+
+    console.log(data);
   }, [isPending]);
 
   return (
