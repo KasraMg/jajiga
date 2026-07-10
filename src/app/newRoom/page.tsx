@@ -1,8 +1,8 @@
-import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
-import HostCart from "@/src/components/modules/hostCart/HostCart";
+import Breadcrumb from "@/src/components/modules/breadcrumb/breadcrumb";
+import HostCart from "@/src/components/modules/host-cart/host-cart";
 import { IoMdCheckmark } from "react-icons/io";
 import { TbHomePlus } from "react-icons/tb";
-import Container from "@/src/components/modules/container/Container";
+import Container from "@/src/components/modules/container/container";
 import { Button } from "@/src/components/shadcn/ui/button";
 import Link from "next/link";
 import { Metadata } from "next";

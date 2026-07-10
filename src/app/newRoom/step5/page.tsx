@@ -1,12 +1,12 @@
 "use client";
-import ContentNavigator from "@/src/components/modules/contentNavigator/ContentNavigator";
-import StepLayout from "@/src/components/modules/newRoomStepper/StepLayout";
-import Stepper from "@/src/components/modules/stepper/Stepper";
-import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo";
-import Textarea from "@/src/components/modules/textarea/Textarea";
+import ContentNavigator from "@/src/components/modules/content-navigator/content-navigator";
+import StepLayout from "@/src/components/modules/new-Room-stepper/step-layout";
+import Stepper from "@/src/components/modules/stepper/stepper";
+import StepperInfo from "@/src/components/modules/stepper-info/stepper-info";
+import Textarea from "@/src/components/modules/textarea/textarea";
 import { useEffect, useState } from "react";
 import { getFromLocalStorage } from "@/src/utils/utils";
-import Loader from "@/src/components/modules/loader/Loader";
+import Loader from "@/src/components/modules/loader/loader";
 import useEditVilla from "@/src/hooks/useEditVilla";
 
 interface userObjData {

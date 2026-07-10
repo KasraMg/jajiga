@@ -1,5 +1,5 @@
-import { Book, UserInfoObj, UserObj } from "./Auth.types";
-import { VillaDetails, Comment } from "./Villa.types";
+import { Book, UserInfoObj, UserObj } from "./auth.types";
+import { VillaDetails, Comment } from "./villa.types";
 
 export interface DashboardTypes {
   booksCount: number;

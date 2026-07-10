@@ -1,4 +1,4 @@
-import { Book } from "./Auth.types";
+import { Book } from "./auth.types";
 
 interface PriceDays {
   midWeek: string;

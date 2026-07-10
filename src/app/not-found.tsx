@@ -1,7 +1,7 @@
 import Image from "next/image";
 import React from "react";
-import Container from "../components/modules/container/Container";
-import Metadata from "../utils/Metadata";
+import Container from "../components/modules/container/container";
+import Metadata from "../components/modules/meta-data";
 import { Button } from "../components/shadcn/ui/button";
 import { GoHome } from "react-icons/go";
 import Link from "next/link";

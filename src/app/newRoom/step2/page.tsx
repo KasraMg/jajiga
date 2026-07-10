@@ -1,12 +1,12 @@
 "use client"; 
-import ContentNavigator from "@/src/components/modules/contentNavigator/ContentNavigator";
-import StepLayout from "@/src/components/modules/newRoomStepper/StepLayout";
-import Stepper from "@/src/components/modules/stepper/Stepper";
-import StepperInfo from "@/src/components/modules/stepperInfo/StepperInfo"; 
+import ContentNavigator from "@/src/components/modules/content-navigator/content-navigator";
+import StepLayout from "@/src/components/modules/new-Room-stepper/step-layout";
+import Stepper from "@/src/components/modules/stepper/stepper";
+import StepperInfo from "@/src/components/modules/stepper-info/stepper-info"; 
 import { useEffect, useState } from "react"; 
 import { getFromLocalStorage } from "@/src/utils/utils"; 
-import Alert from "@/src/components/modules/alert/Alert";
-import Loader from "@/src/components/modules/loader/Loader"; 
+import Alert from "@/src/components/modules/alert/alert";
+import Loader from "@/src/components/modules/loader/loader"; 
 import useEditVilla from "@/src/hooks/useEditVilla";
 import dynamic from "next/dynamic";
 
@@ -19,7 +19,7 @@ interface userObjData {
   finished: false;
 }
 const Map = dynamic(
-  () => import("@/src/components/modules/Map/Map").then((mod) => mod.Map),
+  () => import("@/src/components/modules/map/map").then((mod) => mod.Map),
   {
     ssr: false,
   },

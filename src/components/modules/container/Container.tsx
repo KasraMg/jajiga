@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import Footer from "../Footer/Footer";
-import Navbar from "../navbar/Navbar";
-import MobileMenu from "../mobileMenu/MobileMenu";
+import Footer from "../footer/footer";
+import Navbar from "../navbar/navbar";
+import MobileMenu from "../mobile-menu/mobile-menu";
 
 interface ContainerProps {
   children: React.ReactNode;

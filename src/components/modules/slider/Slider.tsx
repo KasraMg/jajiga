@@ -3,7 +3,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { FC } from "react";
-import { SliderTypes } from "@/src/types/Slider.types";
+import { SliderTypes } from "@/src/types/slider.types";
 import "swiper/css";
 import "swiper/css/grid";
 import "swiper/css/navigation";

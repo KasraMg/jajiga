@@ -1,7 +1,7 @@
 "use client";
-import Breadcrumb from "@/src/components/modules/breadcrumb/Breadcrumb";
-import Container from "@/src/components/modules/container/Container";
-import Metadata from "@/src/utils/Metadata";
+import Breadcrumb from "@/src/components/modules/breadcrumb/breadcrumb";
+import Container from "@/src/components/modules/container/container";
+import Metadata from "@/src/components/modules/meta-data";
 import { getFromLocalStorage } from "@/src/utils/utils";
 import Image from "next/image";
 import Link from "next/link";

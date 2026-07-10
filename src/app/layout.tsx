@@ -1,12 +1,12 @@
 import "./globals.css";
-import QueryWrapper from "../providers/QueryWrapper";
+import QueryWrapper from "../providers/query-wrapper";
 import localFont from "next/font/local";
-import Hydrated from "../providers/Hydrated";
+import Hydrated from "../providers/hydrated";
 import { getUser } from "../utils/serverFetchs";
-import Auth from "../utils/auth";
+import Auth from "../components/modules/auth";
 import { Toaster } from "@/src/components/shadcn/ui/toaster";
-import ContextMenu from "../providers/ContextMenu";
-import InternetStatus from "../utils/InternetStatus";
+import ContextMenu from "../providers/context-menu";
+import InternetStatus from "../components/modules/internet-status";
 import { Metadata, Viewport } from "next";
 
 const fonts = localFont({

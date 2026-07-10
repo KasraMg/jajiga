@@ -21,7 +21,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { authStore } from "@/src/stores/auth";
 import Link from "next/link";
 import { AiOutlineLogout } from "react-icons/ai";
-import { useLogoutHandler } from "@/src/utils/auth";
+import { useLogoutHandler } from "@/src/components/modules/auth";
 import Image from "next/image"; 
 import { usePathname } from "next/navigation";
 import { RiAdminLine } from "react-icons/ri";
@@ -92,7 +92,7 @@ function Menu({ isSticky }: any) {
   if (userData?.villas.length) {
     navLinks.splice(5, 0, {
       name: "اقامتگاه ها",
-      path: "/all",
+      path: "/user-rooms",
       icon: <TbHomePlus className="text-xl" />,
     });
   }

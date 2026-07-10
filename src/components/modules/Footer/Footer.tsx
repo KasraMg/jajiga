@@ -1,9 +1,9 @@
 "use client";
-import MarketLinks from "./components/MarketLinks";
+import MarketLinks from "./components/market-links";
 import Link from "next/link";
 import { LiaInstagram, LiaTelegram } from "react-icons/lia";
 import { FaInstagram } from "react-icons/fa";
-import CitiesList from "./components/CitiesList";
+import CitiesList from "./components/cities-list";
 import { authStore } from "@/src/stores/auth";
 const Footer = () => {
   const { login } = authStore((state) => state);

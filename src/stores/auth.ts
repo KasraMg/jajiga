@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { UserObj } from "../types/Auth.types";
+import { UserObj } from "../types/auth.types";
 
 export type State = {
   userData: UserObj | null;

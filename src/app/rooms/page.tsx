@@ -1,6 +1,5 @@
-import Container from "@/src/components/modules/container/Container";
-import Filters from "@/src/components/templates/rooms/filters/Filters";
-import Posts from "@/src/components/templates/rooms/posts/Posts";
+
+import RoomsScreen from "@/src/components/screens/rooms/rooms-screen";
 import { Metadata } from "next";
 import React from "react";
 
@@ -23,14 +22,7 @@ export async function generateMetadata({
 }
 
 const rooms = (params: RoomsProps) => {
-  return (
-    <Container navbarContainer={true} disableFooter={true}>
-      <main className="mt-[58px]">
-        <Filters />
-        <Posts />
-      </main>
-    </Container>
-  );
+  return <RoomsScreen />;
 };
 
 export default rooms;

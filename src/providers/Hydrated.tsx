@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { QueryClient } from "@tanstack/react-query";
-import { getQueryClient } from "./getQueryClient";
+import { getQueryClient } from "./get-query-client";
 
 interface HydratedProps {
   queryKey: (string | number)[];

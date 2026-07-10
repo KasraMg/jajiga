@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Menu from "../menu/Menu";
+import Menu from "../menu/menu";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { authStore } from "@/src/stores/auth";
-import SearchBox from "./components/SearchBox";
-import Notification from "./components/Notification";
+import SearchBox from "./components/search-box";
+import Notification from "./components/notification";
 
 const Navbar = ({ navbarContainer }: any) => {
   const route = usePathname();

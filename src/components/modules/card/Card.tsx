@@ -1,13 +1,13 @@
 import React, { FC, useState } from "react";
 import { CiStar } from "react-icons/ci";
 import { Button } from "@/src/components/shadcn/ui/button";
-import { VillaDetails } from "@/src/types/Villa.types";
+import { VillaDetails } from "@/src/types/villa.types";
 import Image from "next/image";
 import { formatNumber } from "@/src/utils/utils";
 import Link from "next/link";
 import { FaTrash } from "react-icons/fa";
 import usePostData from "@/src/hooks/usePostData";
-import { ButtonLoader } from "../loader/Loader";
+import { ButtonLoader } from "../loader/loader";
 
 interface CardProps {
   className?: string;

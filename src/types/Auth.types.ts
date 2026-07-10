@@ -1,4 +1,4 @@
-import { VillaDetails } from "./Villa.types";
+import { VillaDetails } from "./villa.types";
 
 export interface UserInfoObj {
   createdAt: string;
