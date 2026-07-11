@@ -1,5 +1,6 @@
 "use client";
 
+import { useUpdateVilla } from "@/src/api/villa";
 import Loader from "@/src/components/modules/loader/loader";
 import StepperInfo from "@/src/components/modules/stepper-info/stepper-info";
 import Textarea from "@/src/components/modules/textarea/textarea";
@@ -37,11 +38,7 @@ const Rules = () => {
     }
   }, [villa]);
 
-  const { mutate: mutation, isPending } = useEditVilla<userObjData>(
-    null,
-    "اطلاعات با موفقیت بروزرسانی شد",
-    params.id as any,
-  );
+  const { mutate: mutation, isPending } = useUpdateVilla(String(params.id));
 
   const submitHandler = () => {
     const data: userObjData = {

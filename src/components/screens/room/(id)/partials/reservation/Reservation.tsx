@@ -1,15 +1,15 @@
 import React from "react";
 import Link from "next/link";
 import { BsFillInfoCircleFill } from "react-icons/bs";
-import ReservationModal from "./components/reservation-modal";
+import ReservationModal from "./partials/reservation-modal";
 import { Button } from "@/src/components/shadcn/ui/button";
 import { VillaResponse } from "@/src/types/villa.types";
 import Loader from "@/src/components/modules/loader/loader";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
 import { useReservation } from "./hook";
 import { todayVillaPrice } from "@/src/utils/utils";
-import OwnerReservation from "./components/owner-reservation";
-import GuestReservation from "./components/guest-reservation";
+import OwnerReservation from "./partials/owner-reservation";
+import GuestReservation from "./partials/guest-reservation";
 
 const Reservation = (data: VillaResponse) => {
   const { userData, deletePending, removeVilla } = useReservation();

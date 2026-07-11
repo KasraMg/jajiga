@@ -4,8 +4,11 @@ import React from "react";
 import { IoHomeOutline, IoPeopleOutline } from "react-icons/io5";
 import { MdOutlineBedroomParent } from "react-icons/md";
 import { TbArrowAutofitHeight } from "react-icons/tb";
-const Summery = (data:VillaDetails) => {
-  const space = spaceOptions.find(option => option.value === data.aboutVilla.villaSpace)
+
+const Summery = (data: VillaDetails) => {
+  const space = spaceOptions.find(
+    (option) => option.value === data.aboutVilla.villaSpace,
+  );
   return (
     <div className="flex w-full items-center justify-between rounded-lg bg-[#f3f3f3] px-4 py-[14px]">
       <div className="flex w-1/4 flex-col items-center justify-center">

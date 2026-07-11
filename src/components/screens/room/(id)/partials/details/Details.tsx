@@ -1,14 +1,14 @@
 import Badge from "@/src/components/modules/badge/badge";
-import Summery from "./components/summery/Summery";
-import Infoes from "./components/infoes/Infoes";
-import Breadcrumb from "./components/breadcrumb/Breadcrumb"; 
-import Rules from "./components/rules/Rules";
-import Comments from "./components/comments/Comments";
+import Summery from "./partials/summery/summery";
+import Infoes from "./partials/infoes/infoes";
+import Breadcrumb from "./partials/breadcrumb/breadcrumb"; 
+import Rules from "./partials/rules/rules";
+import Comments from "./partials/comments/comments";
 import { VillaResponse } from "@/src/types/villa.types";
-import Costly from "./components/costly/Costly";
-import ShareModal from "./components/share/ShareModal";
+import Costly from "./partials/costly/costly";
+import ShareModal from "./partials/share/share-modal";
 import Image from "next/image"; 
-import Wishes from "./components/wishes/Wishes";
+import Wishes from "./partials/wishes/wishes";
 
 import dynamic from "next/dynamic";
 
@@ -20,7 +20,7 @@ const Map = dynamic(
 );
  
 
-const Calendars = dynamic(() => import('./components/calenders/Calendars').then((mod) => mod.default), {
+const Calendars = dynamic(() => import('./partials/calenders/calendars').then((mod) => mod.default), {
   ssr: false,
 });
 const Details = (data: VillaResponse) => {

@@ -1,28 +1,21 @@
 "use client";
 
 import Container from "@/src/components/modules/container/container";
-import Details from "./partials/details/Details";
-import Gallery from "./partials/gallery/Gallery";
+import Details from "./partials/details/details";
+import Gallery from "./partials/gallery/gallery";
 import { useRouter } from "next/navigation";
 import NotFound from "./partials/NotFound";
 import { useEffect } from "react";
 import { authStore } from "@/src/stores/auth";
 import { useVilla } from "@/src/api/villa";
-import Reservation from "./partials/reservation/Reservation";
+import Reservation from "./partials/reservation/reservation";
 
 const RoomScreen = ({ id }: { id: string }) => {
   const router = useRouter();
   const { userData, isPending } = authStore((state) => state);
 
-  const { data, status, fetchStatus, isLoading, isFetching } = useVilla(id);
-  console.log("ROOM QUERY", {
-    id,
-    data,
-    status,
-    fetchStatus,
-    isLoading,
-    isFetching,
-  });
+  const { data } = useVilla(id);
+
   useEffect(() => {
     if (
       data &&

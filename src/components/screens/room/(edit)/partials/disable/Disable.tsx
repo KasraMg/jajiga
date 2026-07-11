@@ -1,12 +1,14 @@
 "use client";
+import { useUpdateVilla } from "@/src/api/villa";
 import Loader from "@/src/components/modules/loader/loader";
 import StepperInfo from "@/src/components/modules/stepper-info/stepper-info";
 import { Button } from "@/src/components/shadcn/ui/button";
-import useEditVilla from "@/src/hooks/useEditVilla";
+import { toast } from "@/src/components/shadcn/ui/use-toast";
 import { authStore } from "@/src/stores/auth";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import swal from "sweetalert";
+
 interface userObjData {
   disable: boolean;
   step: 9;
@@ -19,16 +21,10 @@ const Disable = () => {
 
   const villa = userData?.villas.find((villa) => villa._id === params.id);
 
-  const { mutate: mutation, isPending } = useEditVilla<userObjData>(
-    null,
-    disable
-      ? "اقامتگاه شما با موفقیت فعال شد"
-      : "اقامتگاه شما با موفقیت غیر فعال شد",
-    params.id as any,
-  );
+  const { mutate: mutation, isPending } = useUpdateVilla(String(params.id));
 
   useEffect(() => {
-    if (villa) { 
+    if (villa) {
       setDisable(villa.disable);
     }
   }, [villa]);
@@ -38,13 +34,23 @@ const Disable = () => {
       title: `از ${disable ? "فعال کردن" : "غیر فعال کردن"} اقامتگاه اطمینان دارید؟`,
       icon: "warning",
       buttons: ["نه", "آره"],
-    }).then((res) => {
+    }).then(() => {
       const data: userObjData = {
         disable: !disable,
         step: 9,
         finished: true,
       };
-      mutation(data);
+      mutation(data, {
+        onSuccess() {
+          toast({
+            variant: "success",
+            title: disable
+              ? "اقامتگاه شما با موفقیت فعال شد"
+              : "اقامتگاه شما با موفقیت غیر فعال شد",
+          });
+          setDisable((prev) => !prev);
+        },
+      });
     });
   };
 
@@ -74,7 +80,7 @@ const Disable = () => {
           </Button>
         )}
 
-        <p className="border-t border-t-gray-300 pt-3 text-xl text-black">
+        {/* <p className="border-t border-t-gray-300 pt-3 text-xl text-black">
           حذف اقامتگاه
         </p>
         <p className="text-sm font-thin text-gray-700">
@@ -85,13 +91,13 @@ const Disable = () => {
 
         <Button className="my-4" variant={"danger"}>
           حذف اقامتگاه
-        </Button>
+        </Button> */}
       </div>
       <StepperInfo
         className="w-full max-w-[380px]"
         title="غیرفعال‌سازی"
         text="گاهی به دلایل مختلف اقامتگاه شما برای مدتی شرایط لازم برای رزرو را ندارد. در این مواقع کافیست برای جلوگیری از دریافت «درخواست رزرو»هایی که مجبور به رد آنها خواهید شد و به دنبال آن این کار باعث کاهش امتیاز و رتبه اقامتگاه‌تان خواهد گردید، در این قسمت اقامتگاه را تا زمان مد نظر «غیرفعال» نمایید.
-        بهتر است حتما دلیل غیرفعال‌شدن اقامتگاه را نیز برای اطلاع کارشناسان جاجیگا اعلام کنید."
+        "
       />
       {isPending && <Loader />}
     </section>

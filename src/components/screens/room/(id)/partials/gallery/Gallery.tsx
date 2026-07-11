@@ -6,7 +6,7 @@ import "swiper/css/pagination";
 import Image from "next/image";
 import { VillaDetails } from "@/src/types/villa.types";
 import { IoImageOutline } from "react-icons/io5";
-import FullScreenGallery from "./components/FullScreenGallery";
+import FullScreenGallery from "./full-screen-gallery";
 
 const Gallery = (data: VillaDetails) => { 
   const imageLoadedRef = useRef<boolean[]>(

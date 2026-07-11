@@ -1,9 +1,9 @@
 "use client";
-import Space from "./components/Space";
-import Price from "./components/Price";
-import Type from "./components/Type";
-import Zone from "./components/Zone";
-import Facilities from "./components/Facilities";
+import Space from "./components/space";
+import Price from "./components/price";
+import Type from "./components/type";
+import Zone from "./components/zone";
+import Facilities from "./components/facilities";
 const Filters = () => {
   return (
     <div

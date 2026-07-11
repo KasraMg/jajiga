@@ -1,5 +1,5 @@
 import Link from "next/link";
-import ReservationStepper from "../components/reservation-stepper";
+import ReservationStepper from "./reservation-stepper";
 import Select from "react-select";
 import { ButtonLoader } from "@/src/components/modules/loader/loader";
 import { SlInfo } from "react-icons/sl";

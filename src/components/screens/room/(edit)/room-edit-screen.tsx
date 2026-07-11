@@ -6,13 +6,13 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/src/components/shadcn/ui/tabs";
-import BaseInformation from "@/src/components/screens/room/(edit)/partials/baseInformation/BaseInformation";
-import Capacity from "@/src/components/screens/room/(edit)/partials/capacity/Capacity";
-import Disable from "@/src/components/screens/room/(edit)/partials/disable/Disable";
-import Facilities from "@/src/components/screens/room/(edit)/partials/facilities/Facilities";
-import Images from "@/src/components/screens/room/(edit)/partials/images/Images";
-import Price from "@/src/components/screens/room/(edit)/partials/price/Price";
-import Rules from "@/src/components/screens/room/(edit)/partials/rules/Rules";
+import BaseInformation from "@/src/components/screens/room/(edit)/partials/base-information/base-information";
+import Capacity from "@/src/components/screens/room/(edit)/partials/capacity/capacity";
+import Disable from "@/src/components/screens/room/(edit)/partials/disable/disable";
+import Facilities from "@/src/components/screens/room/(edit)/partials/facilities/facilities";
+import Images from "@/src/components/screens/room/(edit)/partials/images/images";
+import Price from "@/src/components/screens/room/(edit)/partials/price/price";
+import Rules from "@/src/components/screens/room/(edit)/partials/rules/rules";
 import { fetchStep6Items } from "@/src/utils/serverFetchs";
 import Hydrated from "@/src/providers/hydrated";
 

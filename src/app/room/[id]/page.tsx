@@ -9,7 +9,6 @@ export const metadata: Metadata = {
 
 const Room = ({ params }: { params: { id: string } }) => {
   const villaId = params.id;
-console.log(villaId);
 
   return (
     <Hydrated queryKey={["villa", villaId]} queryFn={getVilla as any}>
