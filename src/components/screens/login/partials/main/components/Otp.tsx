@@ -14,7 +14,7 @@ import { REGEXP_ONLY_DIGITS_AND_CHARS } from "input-otp";
 import Cookies from "js-cookie";
 import usePostData from "@/src/hooks/usePostData";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
-import Timer from "./Timer";
+import Timer from "./timer";
 
 const Otp = ({
   setStep, 

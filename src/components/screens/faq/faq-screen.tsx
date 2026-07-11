@@ -1,4 +1,4 @@
-import Accordion from "@/src/components/modules/accordion/cccordion";
+import Accordion from "@/src/components/modules/accordion/accordion";
 import Breadcrumb from "@/src/components/modules/breadcrumb/breadcrumb";
 import Container from "@/src/components/modules/container/container";
 import { faqOptions } from "@/src/utils/options";

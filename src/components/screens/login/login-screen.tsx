@@ -1,7 +1,7 @@
 import Breadcrumb from "@/src/components/modules/breadcrumb/breadcrumb";
 import Container from "@/src/components/modules/container/container";
 import { Shape } from "@/src/components/screens/login/partials/shape/shape";
-import Main from "@/src/components/screens/login/partials/main/Main";
+import Main from "@/src/components/screens/login/partials/main/main";
 
 const LoginScreen = () => {
   return (
