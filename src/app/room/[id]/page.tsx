@@ -1,5 +1,7 @@
 import { Metadata } from "next";
 import RoomScreen from "@/src/components/screens/room/(id)/room-screen";
+import Hydrated from "@/src/providers/hydrated";
+import { getVilla } from "@/src/utils/serverFetchs";
 
 export const metadata: Metadata = {
   title: "جاجیگا | اجاره اقامتگاه",
@@ -7,9 +9,13 @@ export const metadata: Metadata = {
 
 const Room = ({ params }: { params: { id: string } }) => {
   const villaId = params.id;
-  // <Hydrated queryKey={["villa", villaId]} queryFn={getVilla as any}>
+console.log(villaId);
 
-  return <RoomScreen />;
+  return (
+    <Hydrated queryKey={["villa", villaId]} queryFn={getVilla as any}>
+      <RoomScreen id={villaId} />
+    </Hydrated>
+  );
 };
 
 export default Room;

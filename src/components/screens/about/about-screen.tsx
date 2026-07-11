@@ -1,6 +1,5 @@
 import Breadcrumb from "@/src/components/modules/breadcrumb/breadcrumb";
 import React from "react";
-import "aos/dist/aos.css";
 import Container from "@/src/components/modules/container/container";
 import Image from "next/image";
 import Metadata from "@/src/components/modules/meta-data";

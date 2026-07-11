@@ -14,7 +14,7 @@ import { authStore } from "@/src/stores/auth";
 import usePostData from "@/src/hooks/usePostData";
 import { VillaDetails, UserDateSelectData } from "@/src/types/villa.types";
 import { useParams } from "next/navigation";
-import ReservationStepper from "./ReservationStepper";
+import ReservationStepper from "./reservation-stepper";
 import { ButtonLoader } from "@/src/components/modules/loader/loader";
 
 const customStyles = {
