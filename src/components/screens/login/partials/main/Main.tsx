@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
-import Login from "./components/login";
-import Otp from "./components/otp";
-import Register from "./components/register";
-import Password from "./components/password";
+import Login from "./components/login/login";
+import Otp from "./components/otp/otp";
+import Register from "./components/register/register";
+import Password from "./components/password/password";
 import { getFromLocalStorage } from "@/src/utils/utils";
 
 const Main = () => {
