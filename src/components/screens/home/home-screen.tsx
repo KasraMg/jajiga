@@ -1,7 +1,5 @@
 import Ads from "./partials/ads/ads";
 import BecomeHost from "./partials/become-host/become-host";
-import FastSearch from "./partials/fast-search/fast-search";
-import PopularDestinations from "./partials/popular-destinations/popular-destinations";
 import SpecialAccommodations from "./partials/special-accommodations/special-accommodations";
 import Villas from "./partials/villas/villas";
 import Intro from "./partials/intro/Intro";
@@ -15,6 +13,22 @@ import {
   getFastSearchOptions,
 } from "../../../utils/fetchs";
 import Note from "./partials/note/note";
+import dynamic from "next/dynamic";
+import PopularDestinationsSkeleton from "./partials/popular-destinations/popular-destinations-skeleton";
+import FastSearchSkeleton from "./partials/fast-search/fast-search-skeleton";
+
+const PopularDestinations = dynamic(
+  () => import("./partials/popular-destinations/popular-destinations"),
+  {
+    ssr: false,
+    loading: () => <PopularDestinationsSkeleton />,
+  },
+);
+
+const FastSearch = dynamic(() => import("./partials/fast-search/fast-search"), {
+  ssr: false,
+  loading: () => <FastSearchSkeleton />,
+});
 
 const HomeScreen = () => {
   return (
@@ -32,9 +46,8 @@ const HomeScreen = () => {
               >
                 <PopularDestinations />
               </Hydrated>
-
               <Hydrated
-                queryKey={["FastSearch"]}
+                queryKey={["fastSearch"]}
                 queryFn={getFastSearchOptions}
               >
                 <FastSearch />

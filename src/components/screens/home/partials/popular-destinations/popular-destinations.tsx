@@ -6,12 +6,12 @@ import { Grid, Navigation } from "swiper/modules";
 import Card from "./card";
 import useGetData from "@/src/hooks/useGetData";
 import { getPopularDestinations } from "@/src/utils/fetchs";
+
 const PopularDestinations = () => {
-  
   const { data } = useGetData<any>(
     ["popularDestinations"],
     getPopularDestinations,
-  ); 
+  );
 
   return (
     <section className="py-5 text-right">

@@ -15,9 +15,7 @@ const Card = (data: {
       href={`/rooms?city=${data.persianTitle}`}
       className="flex cursor-pointer items-center justify-center gap-2 sm:!justify-start"
     >
-      {isCoverLoading && (
-        <div className="h-[70px] w-[70px] animate-pulse rounded-lg bg-shimmer sm:!h-20 sm:!w-20 lg:!h-36 lg:!w-36"></div>
-      )}
+ 
       <Image
         className="h-[70px] w-[70px] rounded-lg sm:!h-20 sm:!w-20 lg:!h-36 lg:!w-36"
         alt="img"

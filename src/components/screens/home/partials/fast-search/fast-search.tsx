@@ -7,8 +7,8 @@ import { getFastSearchOptions } from "@/src/utils/fetchs";
 
 const FastSearch = () => {
 
-  const { data, status, isLoading } = useGetData<any>(
-    ["FastSearch"],
+  const { data } = useGetData<any>(
+    ["fastSearch"],
     getFastSearchOptions,
   ); 
   
