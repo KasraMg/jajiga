@@ -85,6 +85,40 @@ export const useQueryFilters = () => {
     [searchParams],
   );
 
+  const setMany = useCallback(
+    (values: Record<string, string | number | boolean | string[]>) => {
+      const params = new URLSearchParams(searchParams.toString());
+
+      Object.entries(values).forEach(([key, value]) => {
+        if (Array.isArray(value)) {
+          value.length ? params.set(key, value.join("-")) : params.delete(key);
+        } else if (
+          value === "" ||
+          value === null ||
+          value === undefined ||
+          value === false
+        ) {
+          params.delete(key);
+        } else {
+          params.set(key, String(value));
+        }
+      });
+
+      update(params);
+    },
+    [searchParams, update],
+  );
+
+  const removeMany = useCallback(
+    (keys: string[]) => {
+      const params = new URLSearchParams(searchParams.toString());
+
+      keys.forEach((key) => params.delete(key));
+
+      update(params);
+    },
+    [searchParams, update],
+  );
   return {
     searchParams,
     get,
@@ -93,5 +127,7 @@ export const useQueryFilters = () => {
     remove,
     clear,
     has,
+    setMany,
+    removeMany,
   };
 };

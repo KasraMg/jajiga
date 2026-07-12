@@ -37,7 +37,7 @@ function Menu({ isSticky }: any) {
     { name: "صفحه اصلی", path: "/", icon: <GoHome className="text-xl" /> },
     {
       name: "میزبان شو",
-      path: "/newRoom",
+      path: "/new-room",
       icon: <TbHomePlus className="text-xl" />,
     },
     {

@@ -129,7 +129,7 @@ const Rooms = () => {
                         onClick={() =>
                           saveIntoLocalStorage("villaId", villa._id)
                         }
-                        href={`/newRoom/step${villa.step}`}
+                        href={`/new-room/step${villa.step}`}
                       >
                         <Button
                           className="flex w-full justify-center gap-2 px-4 text-xs sm:!w-auto xl:!px-8"

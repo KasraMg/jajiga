@@ -6,18 +6,13 @@ import { Button } from "@/src/components/shadcn/ui/button";
 import { CiSearch } from "react-icons/ci";
 import Container from "@/src/components/modules/container/container";
 import Link from "next/link";
-import useGetData from "@/src/hooks/useGetData";
-import { fetchWishes } from "@/src/utils/fetchs";
 import Loader from "@/src/components/modules/loader/loader";
-import Head from "next/head";
 import Metadata from "@/src/components/modules/meta-data";
 import { VillaDetails } from "@/src/types/villa.types";
+import { useGetWishes } from "@/src/api/wishes";
 
-interface wishesProps {
-  faveVillas: VillaDetails[];
-}
 const WishesScreen = () => {
-  const { data, isPending } = useGetData<wishesProps>(["wishes"], fetchWishes);
+  const { data, isPending } = useGetWishes();
   return (
     <Container disableFooter={true}>
       <Breadcrumb route="علاقه‌مندی‌ها" />

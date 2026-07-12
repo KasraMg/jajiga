@@ -5,18 +5,24 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import { Button } from "../../../shadcn/ui/button";
 import { ButtonLoader } from "../../../modules/loader/loader";
+import { useSendTicket } from "@/src/api/ticket";
+import { toast } from "@/src/components/shadcn/ui/use-toast";
 
 const Form = () => {
-  const { mutate: mutation, isPending } = usePostData<{
-    email: string;
-    name: string;
-    message: string;
-  }>("/ticket/send", "تیکت با موفقیت به پشتیبانی فرستاده شد", false);
+  const { mutate: sendTicket, isPending } = useSendTicket();
 
   const formHandler = useFormik({
     initialValues: { name: "", email: "", message: "" },
-    onSubmit: (values, { setSubmitting, resetForm }) => {
-      mutation(values);
+    onSubmit: (values, { resetForm }) => {
+      sendTicket(values, {
+        onSuccess: () => {
+          toast({
+            variant: "success",
+            title: "تیکت با موفقیت به پشتیبانی فرستاده شد",
+          });
+        },
+      });
+
       resetForm();
     },
     validationSchema: supportSchema,

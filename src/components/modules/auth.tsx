@@ -1,19 +1,22 @@
 "use client";
 import { authStore } from "@/src/stores/auth";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { getUser } from "../../utils/fetchs";
 import swal from "sweetalert";
 import { useRouter } from "next/navigation";
-import useGetData from "../../hooks/useGetData";
-import { UserObj } from "../../types/auth.types";
 import Loader from "./loader/loader";
 import Cookies from "js-cookie";
- 
-const Auth = () => {
-  const { data, status, isLoading } = useGetData<UserObj>(["auth"], getUser);
-  const { setUserData, setLogin, setIsPending } = authStore((state) => state);
 
+const Auth = () => {
+  const { data, isLoading, status} = useQuery({
+    queryKey: ["auth"],
+    queryFn: getUser,
+    staleTime: Infinity,
+  });
+
+  const { setUserData, setLogin, setIsPending } = authStore((state) => state);
+ 
   useEffect(() => {
     if (status === "success" && data?.statusCode === 200) {
       setUserData(data);
@@ -22,10 +25,10 @@ const Auth = () => {
     } else if (status === "success" && data?.statusCode === 500) {
       setLogin(false);
       setIsPending(false);
-      setUserData(null)
+      setUserData(null);
     } else {
       setLogin(false);
-      setUserData(null)
+      setUserData(null);
       setIsPending(false);
     }
   }, [status, data, setUserData]);
@@ -59,3 +62,6 @@ export const useLogoutHandler = () => {
 
   return logoutHandler;
 };
+
+// const queryClient = useQueryClient();
+// console.log(queryClient.getQueryData(["auth"]));

@@ -1,6 +1,8 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useQuery } from "@tanstack/react-query";
 import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+import { toast } from "../components/shadcn/ui/use-toast";
 
 export const useVilla = (id: string) => {
   async function getVilla(id: string) {
@@ -142,5 +144,122 @@ export const useGetVillas = (
     queryKey: ["villas", searchParams],
     queryFn: getVilla,
     refetchOnWindowFocus: false,
+  });
+};
+
+export const useEditVilla = <T extends object>(
+  options: {
+    villaId?: string;
+    formData?: boolean;
+  } = {},
+) => {
+  const createOrUpdateVilla = async <T>(
+    data: T,
+    options: {
+      villaId?: string;
+      formData?: boolean;
+    },
+  ) => {
+    const accessToken = Cookies.get("AccessToken");
+
+    const headers: HeadersInit = {
+      Authorization: `Bearer ${accessToken}`,
+    };
+
+    if (!options.formData) {
+      headers["Content-Type"] = "application/json";
+    }
+
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}${
+        options.villaId ? `/villa/update/${options.villaId}` : "/villa/add"
+      }`,
+      {
+        method: options.villaId ? "PUT" : "POST",
+        headers,
+        credentials: "include",
+        body: options.formData ? (data as FormData) : JSON.stringify(data),
+      },
+    );
+
+    if (!res.ok) {
+      throw new Error("خطا در ثبت ویلا");
+    }
+
+    return res.json();
+  };
+
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (data: T) => createOrUpdateVilla(data, options),
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["auth"],
+      });
+    },
+  });
+};
+
+export const useUploadVillaImages = (villaId: string) => {
+  const uploadVillaImages = async (villaId: string, formData: FormData) => {
+    const accessToken = Cookies.get("AccessToken");
+
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/villa/update/${villaId}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: formData,
+      },
+    );
+
+    if (!res.ok) {
+      throw new Error("خطا در آپلود تصاویر");
+    }
+
+    return res.json();
+  };
+
+  const router = useRouter();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (formData: FormData) => uploadVillaImages(villaId, formData),
+
+    onSuccess: () => {
+      toast({
+        variant: "success",
+        title: "اطلاعات با موفقیت بروزرسانی شد",
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: ["auth"],
+      });
+
+      router.replace("/new-room/step4");
+    },
+  });
+};
+
+export const useGetStep6Items = () => {
+  const fetchStep6Items = async () => {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/villa/facility`,
+    );
+
+    if (!res.ok) {
+      throw new Error("خطا در دریافت امکانات ویلا");
+    }
+
+    return res.json();
+  };
+
+  return useQuery({
+    queryKey: ["step_6_items"],
+    queryFn: fetchStep6Items,
   });
 };

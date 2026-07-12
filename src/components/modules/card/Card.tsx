@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { CiStar } from "react-icons/ci";
 import { Button } from "@/src/components/shadcn/ui/button";
 import { VillaDetails } from "@/src/types/villa.types";
@@ -6,8 +6,9 @@ import Image from "next/image";
 import { formatNumber } from "@/src/utils/utils";
 import Link from "next/link";
 import { FaTrash } from "react-icons/fa";
-import usePostData from "@/src/hooks/usePostData";
 import { ButtonLoader } from "../loader/loader";
+import { useToggleWish } from "@/src/api/wishes";
+import { toast } from "../../shadcn/ui/use-toast";
 
 interface CardProps {
   className?: string;
@@ -15,17 +16,20 @@ interface CardProps {
   wishes?: boolean;
 }
 const Card: FC<CardProps> = ({ data, className, wishes }) => {
-  const { mutate: mutation, isPending } = usePostData<any>(
-    `/wishes/${data._id}`,
-    "اقامتگاه با موفقیت از علاقه مندی های شما حذف شد",
-    false,
-    null,
-    false,
-    "wishes",
-  );
+  const { mutate: toggleWish, isPending } = useToggleWish();
 
   const deleteFromWishesHandler = () => {
-    mutation({ flag: false });
+    toggleWish(
+      { villaId: data._id, flag: false },
+      {
+        onSuccess: () => {
+          toast({
+            variant: "success",
+            title: "اقامتگاه با موفقیت از علاقه‌مندی‌های شما حذف شد",
+          });
+        },
+      },
+    );
   };
   return (
     data && (
@@ -69,22 +73,18 @@ const Card: FC<CardProps> = ({ data, className, wishes }) => {
               : data.aboutVilla.villaType?.title}{" "}
             در {data.address.city}
           </Link>
-          {data.booked !== 0 && (
+          {data.booked && data.booked !== 0 ? (
             <p className="text-xs font-light text-[#939cae]">
               +{data.booked as any} رزرو موفق
             </p>
-          )}
+          ):''}
         </div>
 
         <div className="mt-1 flex items-center gap-1 text-xs font-light text-[#939cae]">
           <p>{data.capacity.bedRoom} خوابه . </p>
           <p> {data.capacity.fuundationSize} متر . </p>
           <p>تا {data.capacity.maxCapacity} مهمان</p>
-          {/* <div className="flex items-center gap-1">
-          <IoIosStar className="text-sm text-yellow-400" />
-          <p className="pt-1"> 4.9</p>
-        </div> */}
-          <p className="pt-1">({data.comments} نظر)</p>
+          {data.comments ? <p className="pt-1">({data.comments} نظر)</p> : ""}
         </div>
         {wishes && (
           <Button

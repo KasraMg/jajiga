@@ -14,22 +14,22 @@ import { formatNumber } from "@/src/utils/utils";
 import { useQueryFilters } from "../../../../../../hooks/useQueryFilters";
 
 const Price = () => {
-  const { get, set, remove } = useQueryFilters();
+  const { get, setMany, removeMany } = useQueryFilters();
 
   const [defaultMaxPrice, setDefaultMaxPrice] = useState("");
   const [defaultMinPrice, setDefaultMinPrice] = useState("");
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const submitHandler = () => {
-    set("minp", defaultMinPrice.replace(/,/g, ""));
-    set("maxp", defaultMaxPrice.replace(/,/g, ""));
-
+    setMany({
+      minp: defaultMinPrice.replace(/,/g, ""),
+      maxp: defaultMaxPrice.replace(/,/g, ""),
+    });
     setIsPopoverOpen(false);
   };
 
   const deleteFilterHandler = () => {
-    remove("minp");
-    remove("maxp");
+    removeMany(["minp", "maxp"]);
 
     setDefaultMinPrice("");
     setDefaultMaxPrice("");
@@ -75,7 +75,7 @@ const Price = () => {
                       setDefaultMinPrice(e.target.value);
                     }
                   }}
-                  className="w-full rounded-lg border-b outline-none border-gray-300 pb-1 pl-14"
+                  className="w-full rounded-lg border-b border-gray-300 pb-1 pl-14 outline-none"
                 />
 
                 <span className="absolute -top-1 left-3">تومان</span>
@@ -94,7 +94,7 @@ const Price = () => {
                       setDefaultMaxPrice(e.target.value);
                     }
                   }}
-                  className="w-full rounded-lg border-b outline-none border-gray-300 pb-1 pl-14"
+                  className="w-full rounded-lg border-b border-gray-300 pb-1 pl-14 outline-none"
                 />
 
                 <span className="absolute -top-1 left-3">تومان</span>

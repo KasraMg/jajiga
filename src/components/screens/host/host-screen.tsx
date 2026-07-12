@@ -52,7 +52,7 @@ const HostScreen = () => {
       <div className="sticky bottom-2 mx-auto my-4 flex h-16 w-[90%] max-w-[320px] items-center justify-center rounded-lg bg-[#00000099] px-4 sm:!w-80">
         <Link
           className="w-full"
-          href={`${userData ? "/newRoom/step1" : "/login"}`}
+          href={`${userData ? "/new-room/step1" : "/login"}`}
         >
           <Button
             className="flex w-full items-center justify-center rounded-full p-2 text-center text-black duration-300 hover:bg-[#d2b43d]"

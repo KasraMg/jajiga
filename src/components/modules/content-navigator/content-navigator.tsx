@@ -1,20 +1,23 @@
 import React, { FC } from "react";
 import { Button } from "../../shadcn/ui/button";
 import Link from "next/link";
+import { Loader } from "lucide-react";
 
 interface ContentNavigatorProps {
   disablelPrevButton: boolean;
   disableNextButton: boolean;
-  prevLink: string; 
+  prevLink: string;
   className?: string;
   clickHandler?: () => void;
+  isPending: boolean;
 }
 const ContentNavigator: FC<ContentNavigatorProps> = ({
   className,
-  clickHandler, 
+  clickHandler,
   prevLink,
   disableNextButton,
   disablelPrevButton,
+  isPending,
 }) => {
   return (
     <section
@@ -40,10 +43,10 @@ const ContentNavigator: FC<ContentNavigatorProps> = ({
         </Button>
         <Button
           variant="yellow"
-          onClick={clickHandler} 
-          className={`${disableNextButton && "cursor-not-allowed pointer-events-none opacity-40 hover:!opacity-30"} px-[38px] py-[3px] rounded-md transition-colors hover:opacity-75`}
-        >  
-            بعدی 
+          onClick={clickHandler}
+          className={`${disableNextButton && "pointer-events-none cursor-not-allowed opacity-40 hover:!opacity-30"} rounded-md px-[38px] py-[3px] transition-colors hover:opacity-75`}
+        >
+          {isPending ? <Loader className="mx-auto animate-spin" /> : "بعدی"}
         </Button>
       </div>
     </section>

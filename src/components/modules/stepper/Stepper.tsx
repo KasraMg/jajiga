@@ -37,7 +37,7 @@ const Stepper: FC<StepperProps> = ({ active, className }) => {
           data.map((stepper) => (
             <Link
               key={stepper.id}
-              href={`${active >= stepper.id && `/newRoom/step` + stepper.id}`}
+              href={`${active >= stepper.id && `/new-room/step` + stepper.id}`}
               id="stepper_item"
               className={`${active < stepper.id && "pointer-events-none"} relative flex cursor-pointer items-center gap-3`}
             >
@@ -74,7 +74,7 @@ const Stepper: FC<StepperProps> = ({ active, className }) => {
               data.map((stepper) => (
                 <Link
                   key={stepper.id} 
-                  href={`${active >= stepper.id && `/newRoom/step` + stepper.id}`}
+                  href={`${active >= stepper.id && `/new-room/step` + stepper.id}`}
                   id="stepper_item"
                   className={`${active < stepper.id && "pointer-events-none"} relative flex w-max cursor-pointer items-center gap-3`}
                 >

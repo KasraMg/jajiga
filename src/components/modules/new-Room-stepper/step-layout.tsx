@@ -6,7 +6,6 @@ import Stepper from "@/src/components/modules/stepper/stepper";
 import { getFromLocalStorage } from "@/src/utils/utils";
 import { authStore } from "@/src/stores/auth";
 import { usePathname, useRouter } from "next/navigation";
-import { useQueryClient } from "@tanstack/react-query";
 import Metadata from "../meta-data";
 
 interface StepLayoutProps {
@@ -16,8 +15,6 @@ interface StepLayoutProps {
 const StepLayout: FC<StepLayoutProps> = ({ stepperActive, children }) => {
   const villaId = getFromLocalStorage("villaId");
   const params = usePathname();
-  const queryClient = useQueryClient();
-  queryClient.invalidateQueries({ queryKey: ["auth"] });
 
   const { userData, isPending } = authStore((state) => state);
   const route = useRouter();
@@ -28,7 +25,7 @@ const StepLayout: FC<StepLayoutProps> = ({ stepperActive, children }) => {
     const villaParamStep = params.slice(13, 20);
 
     if (villaId && (villa?.step as any) + 1 < villaParamStep) {
-      route.push(`/newRoom/step${villa?.step}`);
+      route.push(`/new-room/step${villa?.step}`);
     }
   }, [userData]);
 

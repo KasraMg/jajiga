@@ -1,10 +1,10 @@
-import Accordion from "@/src/components/modules/accordion/cccordion";
 import Breadcrumb from "@/src/components/modules/breadcrumb/breadcrumb";
 import Container from "@/src/components/modules/container/container";
 import CallModal from "@/src/components/screens/support/partials/call-modal";
 import ContactUsDetailsModal from "@/src/components/screens/support/partials/contact-us-details-modal";
 import Form from "@/src/components/screens/support/partials/form";
 import { faqOptions } from "@/src/utils/options";
+import Accordion from "../../modules/accordion/accordion";
 
 const SupportScreen = () => {
   return (
