@@ -1,6 +1,6 @@
 import { Button } from "@/src/components/shadcn/ui/button";
 import { Book } from "@/src/types/auth.types";
-import { reservesColumns } from "@/src/utils/dataTableColumns";
+import { reservesColumns } from "@/src/utils/data-table-columns";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";

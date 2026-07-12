@@ -16,9 +16,9 @@ import {
 } from "@/src/components/shadcn/ui/dialog";
 import Link from "next/link";
 import Loader, { ButtonLoader } from "@/src/components/modules/loader/loader";
-import { userColumns } from "@/src/utils/dataTableColumns";
+import { userColumns } from "@/src/utils/data-table-columns";
 import UserBanModal from "@/src/components/screens/admin-panel/users/partials/user-ban-modal";
-import { UserResTypes } from "@/src/types/adminPanel.types";
+import { UserResTypes } from "@/src/types/admin-panel.types";
 import Metadata from "@/src/components/modules/meta-data";
 
 const UsersScreen = () => {

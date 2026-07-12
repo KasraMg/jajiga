@@ -4,7 +4,7 @@ import Box from "@/src/components/screens/admin-panel/dashboard/partials/box";
 import Chart from "@/src/components/screens/admin-panel/dashboard/partials/chart";
 import Reserves from "@/src/components/screens/admin-panel/dashboard/partials/reserves";
 import useGetData from "@/src/hooks/useGetData";
-import { DashboardTypes } from "@/src/types/adminPanel.types";
+import { DashboardTypes } from "@/src/types/admin-panel.types";
 import { getDashboardInfoes } from "@/src/utils/fetchs";
 import Metadata from "@/src/components/modules/meta-data";
 

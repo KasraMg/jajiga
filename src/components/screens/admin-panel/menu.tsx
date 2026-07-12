@@ -52,7 +52,7 @@ const Menu = () => {
         <li>
           <Link
             className={`${params.slice(12) === "dashboard" ? "bg-white text-red-600" : null} mr-4 flex flex-row-reverse items-center justify-end gap-2 rounded-r-full py-2 pr-8 transition-colors hover:text-red-600`}
-            href={"/adminPanel/dashboard"}
+            href={"/admin-panel/dashboard"}
           >
             داشبورد <MdOutlineDashboard />{" "}
           </Link>
@@ -60,7 +60,7 @@ const Menu = () => {
         <li>
           <Link
             className={`${params.slice(12) === "rooms" ? "bg-white text-red-600" : null} mr-4 flex flex-row-reverse items-center justify-end gap-2 rounded-r-full py-2 pr-8 transition-colors hover:text-red-600`}
-            href={"/adminPanel/rooms"}
+            href={"/admin-panel/rooms"}
           >
             اقامتگاه ها <MdOutlineHolidayVillage />{" "}
           </Link>
@@ -68,7 +68,7 @@ const Menu = () => {
         <li>
           <Link
             className={`${params.slice(12) === "comments" ? "bg-white text-red-600" : null} mr-4 flex flex-row-reverse items-center justify-end gap-2 rounded-r-full py-2 pr-8 transition-colors hover:text-red-600`}
-            href={"/adminPanel/comments"}
+            href={"/admin-panel/comments"}
           >
             نظرات <FaRegComments />{" "}
           </Link>
@@ -76,7 +76,7 @@ const Menu = () => {
         <li>
           <Link
             className={`${params.slice(12) === "users" ? "bg-white text-red-600" : null} mr-4 flex flex-row-reverse items-center justify-end gap-2 rounded-r-full py-2 pr-8 transition-colors hover:text-red-600`}
-            href={"/adminPanel/users"}
+            href={"/admin-panel/users"}
           >
             کاربران <FiUsers />{" "}
           </Link>
@@ -84,7 +84,7 @@ const Menu = () => {
         <li>
           <Link
             className={`${params.slice(12) === "categories" ? "bg-white text-red-600" : null} mr-4 flex flex-row-reverse items-center justify-end gap-2 rounded-r-full py-2 pr-8 transition-colors hover:text-red-600`}
-            href={"/adminPanel/categories"}
+            href={"/admin-panel/categories"}
           >
             دسته بندی ها <FiUsers />{" "}
           </Link>

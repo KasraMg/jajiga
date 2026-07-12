@@ -11,8 +11,8 @@ import swal from "sweetalert";
 import usePostData from "@/src/hooks/usePostData";
 import Loader, { ButtonLoader } from "@/src/components/modules/loader/loader";
 import useDeleteData from "@/src/hooks/useDeleteData";
-import { roomColumns } from "@/src/utils/dataTableColumns";
-import { VillaResTypes } from "@/src/types/adminPanel.types";
+import { roomColumns } from "@/src/utils/data-table-columns";
+import { VillaResTypes } from "@/src/types/admin-panel.types";
 import Metadata from "@/src/components/modules/meta-data";
 
 const RoomsScreen = () => {

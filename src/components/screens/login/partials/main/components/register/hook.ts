@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
 import { getFromLocalStorage, saveIntoLocalStorage } from "@/src/utils/utils";
 
-import { registerSchema } from "@/src/validations/rules";
+import { registerSchema } from "@/src/schema/rules";
 import { RegisterRequest, useRegisterMutation } from "@/src/api/auth/register";
 
 type Props = {

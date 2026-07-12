@@ -10,7 +10,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/src/components/shadcn/ui/chart";
-import { DashboardTypes } from "@/src/types/adminPanel.types";
+import { DashboardTypes } from "@/src/types/admin-panel.types";
 import { useEffect, useState } from "react";
 import { ButtonLoader } from "@/src/components/modules/loader/loader";
 const Chart = (data: DashboardTypes) => {

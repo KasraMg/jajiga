@@ -9,7 +9,7 @@ import {
 } from "@/src/components/shadcn/ui/dialog";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
 import usePostData from "@/src/hooks/usePostData";
-import { changePasswordSchema } from "@/src/validations/rules";
+import { changePasswordSchema } from "@/src/schema/rules";
 import { useFormik } from "formik";
 import { useState, useEffect } from "react";
 import { LuEye } from "react-icons/lu";

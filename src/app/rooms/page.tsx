@@ -1,7 +1,7 @@
-
 import RoomsScreen from "@/src/components/screens/rooms/rooms-screen";
 import { Metadata } from "next";
-import React from "react";
+import Hydrated from "@/src/providers/hydrated";
+import { getVillas } from "@/src/utils/server-fetchs";
 
 interface RoomsProps {
   params: {
@@ -9,6 +9,13 @@ interface RoomsProps {
   };
   searchParams: {
     city: string;
+    gstnum: string;
+    minp: string;
+    maxp: string;
+    zone: string;
+    feature: string;
+    type: string;
+    order: string;
   };
 }
 
@@ -21,8 +28,17 @@ export async function generateMetadata({
   };
 }
 
-const rooms = (params: RoomsProps) => {
-  return <RoomsScreen />;
+const rooms = ({ searchParams }: RoomsProps) => {
+  const params = new URLSearchParams(searchParams);
+
+  return (
+    <Hydrated
+      queryKey={["villas", params.toString()]}
+      queryFn={() => getVillas(searchParams)}
+    >
+      <RoomsScreen />
+    </Hydrated>
+  );
 };
 
 export default rooms;

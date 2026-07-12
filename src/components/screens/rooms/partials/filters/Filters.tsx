@@ -1,9 +1,10 @@
 "use client";
-import Space from "./components/space";
-import Price from "./components/price";
-import Type from "./components/type";
-import Zone from "./components/zone";
-import Facilities from "./components/facilities";
+import Space from "./partials/space";
+import Price from "./partials/price";
+import Type from "./partials/type";
+import Zone from "./partials/zone";
+import Facilities from "./partials/facilities";
+
 const Filters = () => {
   return (
     <div
@@ -17,11 +18,9 @@ const Filters = () => {
       <Price />
       <Type />
       <Zone />
-      <Facilities/>
+      <Facilities />
     </div>
   );
 };
 
 export default Filters;
-
- 

@@ -6,7 +6,7 @@ import {
   DialogTrigger,
 } from "@/src/components/shadcn/ui/dialog";
 import { Book } from "@/src/types/auth.types";
-import { reserveModalColumns } from "@/src/utils/dataTableColumns";
+import { reserveModalColumns } from "@/src/utils/data-table-columns";
 import { convertToJalali } from "@/src/utils/utils";
 import { useEffect, useState } from "react";
 import DataTable  from "react-data-table-component";

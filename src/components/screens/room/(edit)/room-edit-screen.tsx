@@ -13,7 +13,7 @@ import Facilities from "@/src/components/screens/room/(edit)/partials/facilities
 import Images from "@/src/components/screens/room/(edit)/partials/images/images";
 import Price from "@/src/components/screens/room/(edit)/partials/price/price";
 import Rules from "@/src/components/screens/room/(edit)/partials/rules/rules";
-import { fetchStep6Items } from "@/src/utils/serverFetchs";
+import { fetchStep6Items } from "@/src/utils/server-fetchs";
 import Hydrated from "@/src/providers/hydrated";
 
 const RoomEditScreen = () => {

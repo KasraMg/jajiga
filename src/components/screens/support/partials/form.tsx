@@ -1,6 +1,6 @@
 "use client";
 import usePostData from "@/src/hooks/usePostData";
-import { supportSchema } from "@/src/validations/rules";
+import { supportSchema } from "@/src/schema/rules";
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { Button } from "../../../shadcn/ui/button";

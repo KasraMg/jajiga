@@ -65,7 +65,7 @@ function Menu({ isSticky }: any) {
   if (userData?.user.role === "admin") {
     navLinks.splice(1, 0, {
       name: "داشبورد ادمین",
-      path: "/adminPanel/dashboard",
+      path: "/admin-panel/dashboard",
       icon: <RiAdminLine className="text-xl" />,
     });
   }

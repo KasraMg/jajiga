@@ -2,7 +2,7 @@ import "./globals.css";
 import QueryWrapper from "../providers/query-wrapper";
 import localFont from "next/font/local";
 import Hydrated from "../providers/hydrated";
-import { getUser } from "../utils/serverFetchs";
+import { getUser } from "../utils/server-fetchs";
 import Auth from "../components/modules/auth";
 import { Toaster } from "@/src/components/shadcn/ui/toaster";
 import ContextMenu from "../providers/context-menu";

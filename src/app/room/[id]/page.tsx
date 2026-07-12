@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import RoomScreen from "@/src/components/screens/room/(id)/room-screen";
 import Hydrated from "@/src/providers/hydrated";
-import { getVilla } from "@/src/utils/serverFetchs";
+import { getVilla } from "@/src/utils/server-fetchs";
 
 export const metadata: Metadata = {
   title: "جاجیگا | اجاره اقامتگاه",

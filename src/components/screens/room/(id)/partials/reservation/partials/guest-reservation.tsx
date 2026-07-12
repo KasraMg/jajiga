@@ -297,7 +297,7 @@ const GuestReservation = ({ data }: { data: VillaResponse }) => {
           </p>
           <p>
             به{" "}
-            <Link className="text-blue-600" href={"/adminPanel/rooms"}>
+            <Link className="text-blue-600" href={"/admin-panel/rooms"}>
               داشبورد
             </Link>{" "}
             مراجعه کرده و این اقامتگاه را رد یا تایید کنید.

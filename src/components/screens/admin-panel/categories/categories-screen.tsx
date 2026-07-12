@@ -9,8 +9,8 @@ import swal from "sweetalert";
 import Loader from "@/src/components/modules/loader/loader";
 import useDeleteData from "@/src/hooks/useDeleteData";
 import AddCategoryModal from "@/src/components/screens/admin-panel/categories/partials/add-category-modal";
-import { categoryColumns } from "@/src/utils/dataTableColumns";
-import { CategoryResTypes, categoryTypes } from "@/src/types/adminPanel.types";
+import { categoryColumns } from "@/src/utils/data-table-columns";
+import { CategoryResTypes, categoryTypes } from "@/src/types/admin-panel.types";
 import Metadata from "@/src/components/modules/meta-data";
 
 const CategoriesScreen = () => {
