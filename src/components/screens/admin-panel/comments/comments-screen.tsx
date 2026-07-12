@@ -1,160 +1,98 @@
 "use client";
-import Loader, { ButtonLoader } from "@/src/components/modules/loader/loader";
-import { Button } from "@/src/components/shadcn/ui/button";
-import useDeleteData from "@/src/hooks/useDeleteData";
-import useGetData from "@/src/hooks/useGetData";
-import usePostData from "@/src/hooks/usePostData";
-import { CommentResTypes } from "@/src/types/admin-panel.types";
-import { Comment } from "@/src/types/villa.types";
-import { commentColumns } from "@/src/utils/data-table-columns";
-import { getAllComments } from "@/src/utils/fetchs";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import DataTable from "react-data-table-component";
-import swal from "sweetalert";
-import Metadata from "@/src/components/modules/meta-data";
 
-const showBodyHandler = (body: string) => {
-  swal({
-    title: body,
-    buttons: ["تایید", false],
-  });
-};
+import { useMemo } from "react";
+import Link from "next/link";
+import DataTable from "react-data-table-component";
+import { Button } from "@/src/components/shadcn/ui/button";
+import Loader, { ButtonLoader } from "@/src/components/modules/loader/loader";
+import Metadata from "@/src/components/modules/meta-data";
+import { commentColumns } from "@/src/utils/data-table-columns";
+import { Comment } from "@/src/types/villa.types";
+import useCommentsScreen from "./hook";
 
 const CommentsScreen = () => {
-  const [commentId, setCommentId] = useState("");
-  const [data, setData] = useState<Comment[]>([]);
-  const [pending, setPending] = useState(true);  
+  const {
+    comments,
+    getCommentsPending,
+    changeCommentStatus,
+    changeStatusPending,
+    deleteCommentHandler,
+    deletePending,
+    showBodyHandler,
+  } = useCommentsScreen();
 
-  const { data: comments, isPending: getCommentsPending } = useGetData<CommentResTypes>(
-    ["comments"],
-    getAllComments,
-  );  
-  
-  const [commentStatusChange, setCommentStatusChange] = useState<
-    [] | [string, string]
-  >([]);
+  const tableData = useMemo(() => {
+    return comments.map((comment: Comment) => ({
+      userData: `${comment.creator.firstName} ${comment.creator.lastName}`,
 
-  const { mutate: mutation, isPending } = usePostData<any>(
-    `/comment/${commentStatusChange[0]}/${commentStatusChange[1]}`,
-    `کامنت با موفقیت ${commentStatusChange[0] === "accept" ? "تایید" : "رد"} شد`,
-    true,
-    null,
-    true,
-    "comments",
-  );
-
-  useEffect(() => {
-    const tableData:unknown = comments?.comment.map((comment:Comment) => ({
-      userData: `${comment.creator.firstName} ${comment.creator.lastName}  `,
       preview: (
-        <Button onClick={() => showBodyHandler(comment.body)} variant={"blue"}>
+        <Button variant="blue" onClick={() => showBodyHandler(comment.body)}>
           مشاهده
         </Button>
       ),
+
       room: <Link href={`/room/${comment._id}`}>مشاهده</Link>,
+
       register: comment.date,
+
       status:
         comment.isAccept === "true" ? (
           "تایید شده"
         ) : comment.isAccept === "rejected" ? (
-          <p>رد شده</p>
+          "رد شده"
         ) : (
           <div className="flex gap-1">
             <Button
-              onClick={() => {
-                setCommentStatusChange(["accept", comment._id]);
-                mutation(null);
-              }}
-              className="h-8 w-12 justify-center"
-              variant={"blue"}
+              variant="blue"
+              className="h-8 w-12"
+              onClick={() => changeCommentStatus("accept", comment._id)}
             >
-              {commentStatusChange[0] === "accept" && isPending ? (
-                <ButtonLoader />
-              ) : (
-                "تایید"
-              )}
+              {changeStatusPending ? <ButtonLoader /> : "تایید"}
             </Button>
+
             <Button
-              onClick={() => {
-                setCommentStatusChange(["reject", comment._id]);
-                mutation(null);
-              }}
-              className="h-8 w-12 justify-center"
-              variant={"danger"}
+              variant="danger"
+              className="h-8 w-12"
+              onClick={() => changeCommentStatus("reject", comment._id)}
             >
-              {commentStatusChange[0] === "reject" && isPending ? (
-                <ButtonLoader />
-              ) : (
-                "رد"
-              )}
+              {changeStatusPending ? <ButtonLoader /> : "رد"}
             </Button>
           </div>
         ),
+
       delete: (
         <Button
+          variant="danger"
           onClick={() => deleteCommentHandler(comment._id)}
-          variant={"danger"}
         >
           حذف
         </Button>
       ),
     }));
-    setData(tableData as Comment[])
-  }, [comments]);
+  }, [comments, changeStatusPending]);
 
-
-  useEffect(() => {
-    if (data) { 
-      setPending(false);
-    }
-  }, [data]);
-
-  const { mutate: deleteHandlerMutation, isPending: deleteHandlerPending } =
-    useDeleteData(
-      `/comment/delete/${commentId}`,
-      "نظر با موفقیت حذف شد",
-      "comments",
-    );
-
-  const deleteCommentHandler = (commentId: string) => {
-    swal({
-      title: "آیا از حذف نظر مطمئن هستید؟",
-      icon: "warning",
-      buttons: ["نه", "آره"],
-    }).then((res) => {
-      if (res) {
-        setCommentId(commentId);
-        deleteHandlerMutation();
-      }
-    });
-  };
   return (
     <>
       <div className="relative my-10">
         <div className="before:absolute before:inset-0 before:top-4 before:h-[2px] before:w-full before:bg-red-600 before:content-['']">
-          <p className="before: relative z-50 w-max bg-white pl-3 text-2xl before:absolute before:right-0 before:top-0 before:h-8 before:w-8 before:rotate-45 before:bg-[#dc26261c] before:content-['']">
+          <p className="relative z-50 w-max bg-white pl-3 text-2xl before:absolute before:right-0 before:top-0 before:h-8 before:w-8 before:rotate-45 before:bg-[#dc26261c] before:content-['']">
             نظرات
           </p>
         </div>
       </div>
-      <Metadata
-        seoTitle={"جاجیگا | نظرات"}
-        seoDescription={
-          "مدیریت نظرات"
-        }
-      />
+
+      <Metadata seoTitle="جاجیگا | نظرات" seoDescription="مدیریت نظرات" />
+
       <DataTable
         columns={commentColumns as any}
-        data={data}
-        progressPending={pending}
-        progressComponent={".... "}
+        data={tableData}
+        progressPending={getCommentsPending}
+        progressComponent="..."
         pagination
         noDataComponent="نظری یافت نشد"
-
       />
-      {getCommentsPending && <Loader />}
-      {deleteHandlerPending && <Loader />}
+
+      {(getCommentsPending || deletePending) && <Loader />}
     </>
   );
 };

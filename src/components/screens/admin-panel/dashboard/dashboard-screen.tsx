@@ -3,16 +3,11 @@ import Loader from "@/src/components/modules/loader/loader";
 import Box from "@/src/components/screens/admin-panel/dashboard/partials/box";
 import Chart from "@/src/components/screens/admin-panel/dashboard/partials/chart";
 import Reserves from "@/src/components/screens/admin-panel/dashboard/partials/reserves";
-import useGetData from "@/src/hooks/useGetData";
-import { DashboardTypes } from "@/src/types/admin-panel.types";
-import { getDashboardInfoes } from "@/src/utils/fetchs";
 import Metadata from "@/src/components/modules/meta-data";
+import { useDahsboard } from "@/src/api/admin-panel/api";
 
 const DashboardScreen = () => {
-  const { data, isPending } = useGetData<DashboardTypes>(
-    ["dashboard"],
-    getDashboardInfoes,
-  );
+  const { data, isPending } = useDahsboard();
 
   return (
     <>

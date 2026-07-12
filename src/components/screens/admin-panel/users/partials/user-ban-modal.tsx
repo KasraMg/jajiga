@@ -9,41 +9,31 @@ import {
 import React, { useState } from "react";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
 import { ButtonLoader } from "@/src/components/modules/loader/loader";
+import { useBanUser } from "@/src/api/admin-panel/user";
+
 const UserBanModal = ({ userPhone }: { userPhone: string }) => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [banReason, setBanReason] = useState("");
 
-  const successFunc = (data: { statusCode: number }) => {
-    if (data.statusCode === 200) {
-      toast({
-        variant: "success",
-        title: "کاربر با موفقیت بن شد",
-      });
-      setIsShowModal(false);
-      setBanReason("");
-    } else {
-      toast({
-        variant: "danger",
-        title: "با عرض پوزش لطفا مجدد امتحان کنید",
-      });
-      location.reload();
-    }
-  };
-
-  const { mutate: mutation, isPending } = usePostData(
-    `/ban-user/${userPhone}`,
-    null,
-    false,
-    successFunc,
-    false,
-    "users",
-  );
+  const { mutate, isPending } = useBanUser(userPhone);
 
   const banHandler = () => {
-    const data = {
-      reason: banReason,
-    };
-    mutation(data);
+    mutate(
+      {
+        reason: banReason,
+      },
+      {
+        onSuccess: () => {
+          toast({
+            variant: "success",
+            title: "کاربر با موفقیت بن شد",
+          });
+
+          setIsShowModal(false);
+          setBanReason("");
+        },
+      },
+    );
   };
 
   return (

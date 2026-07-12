@@ -9,10 +9,11 @@ import {
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/src/components/shadcn/ui/chart";
-import { DashboardTypes } from "@/src/types/admin-panel.types";
+} from "@/src/components/shadcn/ui/chart"; 
 import { useEffect, useState } from "react";
 import { ButtonLoader } from "@/src/components/modules/loader/loader";
+import { DashboardTypes } from "@/src/types/adminPanel.types";
+
 const Chart = (data: DashboardTypes) => {
   const [chartResData, setChartResData] = useState<
     [] | { booksCount: number; month: number; villasCount: number }[]

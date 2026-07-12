@@ -1,5 +1,4 @@
 import { Button } from "@/src/components/shadcn/ui/button";
-import usePostData from "@/src/hooks/usePostData";
 import {
   Dialog,
   DialogContent,
@@ -9,38 +8,14 @@ import {
 import React, { useState } from "react";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
 import { ButtonLoader } from "@/src/components/modules/loader/loader";
+import { useCreateCategory } from "@/src/api/admin-panel/category";
 
 const AddCategoryModal = () => {
   const [isShowModal, setIsShowModal] = useState(false);
   const [title, setTitle] = useState("");
   const [href, setHref] = useState("");
 
-  const successFunc = (data: { statusCode: number }) => {
-    if (data.statusCode === 200) {
-      toast({
-        variant: "success",
-        title: "دسته بندی با موفقیت ایجاد شد",
-      });
-      setIsShowModal(false);
-      setTitle("");
-      setHref("");
-    } else {
-      toast({
-        variant: "danger",
-        title: "با عرض پوزش لطفا مجدد مراحل رو طی کنید",
-      });
-      location.reload();
-    }
-  };
-
-  const { mutate: mutation, isPending } = usePostData(
-    `/category/add`,
-    null,
-    false,
-    successFunc,
-    false,
-    "allCategories",
-  );
+  const { mutate: createCategory, isPending } = useCreateCategory();
 
   const createCategoryHandler = () => {
     const engRegex = /[A-Za-z]/;
@@ -54,7 +29,13 @@ const AddCategoryModal = () => {
         title,
         href,
       };
-      mutation(data);
+      createCategory(data, {
+        onSuccess() {
+          setIsShowModal(false);
+          setTitle("")
+          setHref("")
+        },
+      });
     }
   };
   return (
@@ -65,7 +46,7 @@ const AddCategoryModal = () => {
         </Button>
       </DialogTrigger>
       <DialogContent className="max-h-[440px] w-full max-w-full sm:!max-w-[425px]">
-        <DialogTitle></DialogTitle> 
+        <DialogTitle></DialogTitle>
         <div>
           <label className="mb-3 block" htmlFor="">
             نام دسته بندی

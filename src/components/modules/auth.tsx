@@ -53,6 +53,8 @@ export const useLogoutHandler = () => {
         router.push("/");
         Cookies.remove("AccessToken");
         Cookies.remove("RefreshToken");
+        localStorage.removeItem("otpRegisterPhoneNumber")
+        localStorage.removeItem("registerUserData")
         setUserData(null);
         setLogin(false);
         queryClient.invalidateQueries({ queryKey: ["auth"] });
