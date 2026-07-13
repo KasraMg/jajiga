@@ -1,5 +1,6 @@
 "use client";
-import Loader, { ButtonLoader } from "@/src/components/modules/loader/loader";
+import { useChangePassword } from "@/src/api/user";
+import  { ButtonLoader } from "@/src/components/modules/loader/loader";
 import { Button } from "@/src/components/shadcn/ui/button";
 import {
   Dialog,
@@ -7,11 +8,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/src/components/shadcn/ui/dialog";
-import { toast } from "@/src/components/shadcn/ui/use-toast";
-import usePostData from "@/src/hooks/usePostData";
 import { changePasswordSchema } from "@/src/schema/rules";
 import { useFormik } from "formik";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { LuEye } from "react-icons/lu";
 
 interface newPasswordData {
@@ -20,33 +19,8 @@ interface newPasswordData {
   confirmPassword?: string;
 }
 const ChangePassword = () => {
-  const successFunc = (data: { statusCode: number }) => {
-    if (data.statusCode === 200) {
-      formHandler.resetForm();
-      toast({
-        variant: "success",
-        title: "رمز عبور با موفقیت بروزرسانی شد",
-      });
-      setOpen(false);
-    } else if (data.statusCode === 401) {
-      toast({
-        variant: "danger",
-        title: "رمز عبور فعلی شما اشتباه است",
-      });
-    } else if (data.statusCode === 402) {
-      toast({
-        variant: "danger",
-        title: "این رمز قبلا ست شده و نیازه یک رمز جدید وارد کنید",
-      });
-    }
-  };
+  const { mutate: changePasswordMutation, isPending } = useChangePassword();
 
-  const { mutate: mutation, isPending } = usePostData<newPasswordData>(
-    "/user/changePassword",
-    null,
-    true,
-    successFunc,
-  );
   const [showNewPass, setShowNewPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
 
@@ -57,9 +31,11 @@ const ChangePassword = () => {
       confirmPassword: "",
     },
     onSubmit: (values: newPasswordData) => {
-      mutation({
-        currentPassword: values.currentPassword,
-        newPassword: values.newPassword,
+      changePasswordMutation(values, {
+        onSuccess() {
+          formHandler.resetForm();
+          setOpen(false);
+        },
       });
     },
     validationSchema: changePasswordSchema,

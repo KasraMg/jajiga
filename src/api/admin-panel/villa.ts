@@ -63,11 +63,11 @@ export const useGetAllVillas = () => {
   });
 };
 
-export const useDeleteVilla = ({ villaId }: { villaId: string }) => {
+export const useDeleteVilla = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async () => {
+    mutationFn: async (villaId: string) => {
       const accessToken = Cookies.get("AccessToken");
 
       const res = await fetch(

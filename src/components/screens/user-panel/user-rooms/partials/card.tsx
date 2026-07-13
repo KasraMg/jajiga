@@ -1,18 +1,16 @@
 import { Button } from "@/src/components/shadcn/ui/button";
 import { VillaDetails } from "@/src/types/villa.types";
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
 import { SlReload } from "react-icons/sl";
 import swal from "sweetalert";
 import Image from "next/image";
-import useDeleteData from "@/src/hooks/useDeleteData";
 import ReserveModal from "./reserve-modal";
+import { useDeleteVilla } from "@/src/api/admin-panel/villa";
 
-const Card = (villa: VillaDetails) => { 
-  const [villaId, setVillaId] = useState("");
-
+const Card = (villa: VillaDetails) => {
   const villaDeleteHandler = (id: string) => {
     swal({
       title: "آیا از حذف ویلا مطمئن هستید؟",
@@ -20,17 +18,13 @@ const Card = (villa: VillaDetails) => {
       buttons: ["نه", "آره"],
     }).then((res) => {
       if (res) {
-        setVillaId(id);
-        mutation();
+        mutation(id);
       }
     });
   };
 
-  const { mutate: mutation } = useDeleteData(
-    `/villa/delete/${villaId}`,
-    "ویلا با موفقیت حذف شد",
-    "auth",
-  );
+  const { mutate: mutation } = useDeleteVilla();
+
   return (
     <div
       className="w-full xl:!w-[330px]"
@@ -132,7 +126,7 @@ const Card = (villa: VillaDetails) => {
             ))}
         </div>
         {villa.isAccepted === "true" &&
-          (typeof villa.booked !== 'number' &&  villa.booked.length ? (
+          (typeof villa.booked !== "number" && villa.booked.length ? (
             <ReserveModal booked={villa.booked} />
           ) : (
             <p className="mt-5 text-center text-sm">

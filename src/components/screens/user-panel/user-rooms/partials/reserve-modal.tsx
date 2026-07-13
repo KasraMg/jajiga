@@ -9,14 +9,12 @@ import { Book } from "@/src/types/auth.types";
 import { reserveModalColumns } from "@/src/utils/data-table-columns";
 import { convertToJalali } from "@/src/utils/utils";
 import { useEffect, useState } from "react";
-import DataTable  from "react-data-table-component";
+import DataTable from "react-data-table-component";
 import { FaRegTrashCan } from "react-icons/fa6";
 
+const ReserveModal = ({ booked }: { booked: Book[] }) => {
+  const [data, setData] = useState([]);
 
-
-const ReserveModal = ({ booked }: { booked: Book[] }) => { 
-  const [data, setData] = useState([]); 
-  
   useEffect(() => {
     if (booked.length) {
       const tableData = booked.map((Book) => ({
@@ -43,7 +41,7 @@ const ReserveModal = ({ booked }: { booked: Book[] }) => {
         </Button>
       </DialogTrigger>
       <DialogContent className="w-full max-w-full sm:!max-w-[80%]">
-      <DialogTitle></DialogTitle>
+        <DialogTitle></DialogTitle>
         <DataTable
           columns={reserveModalColumns as any}
           data={data}
