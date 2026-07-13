@@ -5,7 +5,6 @@ import Link from "next/link";
 import { RiUpload2Line } from "react-icons/ri";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { AiOutlineLogout } from "react-icons/ai";
-
 import { GoHome } from "react-icons/go";
 import { FaChevronLeft } from "react-icons/fa6";
 import Image from "next/image";
@@ -13,15 +12,15 @@ import { Button } from "@/src/components/shadcn/ui/button";
 import { IoNotificationsOutline } from "react-icons/io5";
 import Rooms from "@/src/components/screens/user-panel/dashboard/partials/rooms";
 import { useLogoutHandler } from "@/src/components/modules/auth";
-import { authStore } from "@/src/stores/auth";
 import UserLayout from "@/src/components/screens/user-panel/UserLayout";
 import { TbHomePlus } from "react-icons/tb";
 import Metadata from "@/src/components/modules/meta-data";
 import { useState } from "react";
+import { useUser } from "@/src/api/user";
 
 const DashboardScreen = () => {
   const logoutHandler = useLogoutHandler();
-  const { userData } = authStore((state) => state);
+  const { data: userData } = useUser();
   const [_permission, setPermission] = useState(
     typeof window !== "undefined" && "Notification" in window
       ? Notification.permission
@@ -46,7 +45,7 @@ const DashboardScreen = () => {
       <Breadcrumb className="hidden md:block" route={"پیشخان"} />
       <Metadata seoTitle={"جاجیگا | پیشخان"} seoDescription={""} />
       <UserLayout>
-        <main className="Container !mt-20 flex gap-4 px-4 md:!mt-8 xl:!px-0">
+        <main className="Container !mt-20 flex gap-4 pb-6 px-4 md:!mt-8 xl:!px-0">
           <aside
             style={{ boxShadow: "rgba(0, 0, 0, 0.16) 0px 1px 6px" }}
             className="hidden h-max w-[40%] rounded-2xl p-2 pb-8 md:!block xl:!w-[25%]"

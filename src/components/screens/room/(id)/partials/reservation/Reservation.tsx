@@ -31,7 +31,7 @@ const Reservation = (data: VillaResponse) => {
           <GuestReservation data={data} />
         )}
       </div>
-      <div className="fixed bottom-16 block w-full px-5 md:!hidden">
+      <div className="fixed bottom-16 z-[500] block w-full px-5 md:!hidden">
         <div className="z-[999] flex w-full items-center justify-between rounded-lg bg-[#000000ba] px-2 py-3 text-white">
           {data.villa.isAccepted === "rejected" ? (
             <div className="text-xs">

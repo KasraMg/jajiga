@@ -1,34 +1,12 @@
 import "./globals.css";
 import QueryWrapper from "../providers/query-wrapper";
-import localFont from "next/font/local";
 import Hydrated from "../providers/hydrated";
 import { getUser } from "../utils/server-fetchs";
 import Auth from "../components/modules/auth";
 import { Toaster } from "@/src/components/shadcn/ui/toaster";
-import ContextMenu from "../providers/context-menu";
 import InternetStatus from "../components/modules/internet-status";
 import { Metadata, Viewport } from "next";
-
-const fonts = localFont({
-  src: [
-    {
-      path: "../../public/fonts/vazir/Vazir-Bold.woff2",
-      weight: "800",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/vazir/Vazir-Medium.woff2",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/vazir/Vazir-Light.woff2",
-      weight: "300",
-      style: "normal",
-    },
-  ],
-  variable: "--font-vazir",
-});
+import { fonts } from "../utils/fonts";
 
 export const metadata: Metadata = {
   icons: "/images/logo.png",
@@ -53,11 +31,11 @@ export default function RootLayout({
       <body className={`${fonts.variable}`}>
         <QueryWrapper>
           <Hydrated queryKey={["auth"]} queryFn={getUser}>
-            <Auth /> 
+            <Auth />
+            <InternetStatus />
+            {children}
           </Hydrated>
-          <InternetStatus />
           {/* <ContextMenu>{children}</ContextMenu> */}
-          {children}
           <Toaster />
         </QueryWrapper>
       </body>

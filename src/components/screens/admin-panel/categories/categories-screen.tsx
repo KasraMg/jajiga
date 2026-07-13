@@ -54,6 +54,7 @@ const CategoriesScreen = () => {
         data={tableData}
         progressPending={getCategoriesPending}
         pagination
+        progressComponent="..."
         noDataComponent="دسته بندی یافت نشد"
       />
 

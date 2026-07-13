@@ -30,7 +30,7 @@ const StepLayout: FC<StepLayoutProps> = ({ stepperActive, children }) => {
   }, [userData]);
 
   return (
-    <Container disableFooter={true}>
+    <Container disableMobileMenu disableFooter>
       <Breadcrumb className="hidden md:block" route={"ثبت اقامتگاه"} />
       <Breadcrumb template={true} className="block !py-0 md:hidden">
         <Stepper active={stepperActive} />

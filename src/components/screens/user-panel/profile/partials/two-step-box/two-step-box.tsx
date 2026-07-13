@@ -123,7 +123,7 @@ const TwoStepBox: FC<BoxProps> = ({
                 inputMode="numeric"
                 pattern={REGEXP_ONLY_DIGITS_AND_CHARS}
               >
-                <InputOTPGroup dir="ltr">
+                <InputOTPGroup className="!mx-auto !w-max" dir="ltr">
                   <InputOTPSlot index={0} />
                   <InputOTPSlot index={1} />
                   <InputOTPSlot index={2} />
@@ -140,7 +140,7 @@ const TwoStepBox: FC<BoxProps> = ({
 
             <Button
               variant="main"
-              className="mt-4 w-full"
+              className="mt-4 flex w-full justify-center"
               onClick={submitHandler}
               disabled={
                 prevValue === data ||

@@ -15,7 +15,7 @@ import Metadata from "@/src/components/modules/meta-data";
 import { useEditProfile } from "@/src/api/user";
 
 const ProfileScreen = () => {
-  const { userData } = authStore((state) => state);
+  const { userData, isPending } = authStore((state) => state);
 
   const [userName, setUserName] = useState("");
   const [userFamily, setUserFamily] = useState("");
@@ -25,7 +25,7 @@ const ProfileScreen = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [avatar, setAvatar] = useState("");
 
-  const { mutate: mutation, isPending } = useEditProfile();
+  const { mutate: mutation, isPending: mutationPending } = useEditProfile();
 
   useEffect(() => {
     setUserName(userData?.user.firstName as string);
@@ -161,7 +161,7 @@ const ProfileScreen = () => {
               >
                 حذف حساب کاربری
               </Button>
-              {isPending && <Loader />}
+              {mutationPending || isPending && <Loader />}
             </main>
           </div>
         </div>

@@ -7,17 +7,22 @@ interface ContainerProps {
   children: React.ReactNode;
   disableFooter?: boolean;
   navbarContainer?: boolean;
+  disableMobileMenu?: boolean;
 }
 const Container: FC<ContainerProps> = ({
   children,
   disableFooter,
   navbarContainer,
+  disableMobileMenu
 }) => {
+  console.log(disableMobileMenu);
+  
   return (
     <>
       <Navbar navbarContainer={navbarContainer} />
       {children}
-      <MobileMenu />
+
+      {!disableMobileMenu && <MobileMenu />}
       {!disableFooter && <Footer />}
     </>
   );

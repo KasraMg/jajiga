@@ -18,18 +18,17 @@ import {
 } from "@/src/components/shadcn/ui/sheet";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { RxHamburgerMenu } from "react-icons/rx";
-import { authStore } from "@/src/stores/auth";
 import Link from "next/link";
 import { AiOutlineLogout } from "react-icons/ai";
 import { useLogoutHandler } from "@/src/components/modules/auth";
-import Image from "next/image"; 
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { RiAdminLine } from "react-icons/ri";
+import { useUser } from "@/src/api/user";
+
 function Menu({ isSticky }: any) {
-  const { userData, login } = authStore((state) => state);
+  const { data: userData } = useUser();
   const logoutHandler = useLogoutHandler();
-  const [smallAvatarLoading, setSmallAvatarLoading] = useState(true);
-  const [largeAvatarLoading, setLargeAvatarLoading] = useState(true);
 
   const pathname = usePathname();
 
@@ -69,7 +68,7 @@ function Menu({ isSticky }: any) {
       icon: <RiAdminLine className="text-xl" />,
     });
   }
-  if (login) {
+  if (userData) {
     navLinks.splice(1, 0, {
       name: "علاقه مندی ها",
       path: "/wishes",
@@ -106,19 +105,13 @@ function Menu({ isSticky }: any) {
             } flex items-center gap-2 rounded-full border-[#0000005c] bg-[#ffffff54] p-1 pl-2 pr-3 text-3xl outline-none focus-visible:border-0`}
           >
             {userData?.user.avatar ? (
-              <>
-                {smallAvatarLoading && (
-                  <div className="h-8 w-8 animate-pulse rounded-full bg-shimmer"></div>
-                )}
-                <Image
-                  alt="avatar"
-                  width={1000}
-                  height={1000}
-                  onLoad={() => setSmallAvatarLoading(false)}
-                  className="h-8 w-8 rounded-full"
-                  src={`${process.env.NEXT_PUBLIC_API_URL}/user/avatars/${userData?.user.avatar}`}
-                />
-              </>
+              <Image
+                alt="avatar"
+                width={1000}
+                height={1000}
+                className="h-8 w-8 rounded-full"
+                src={`${process.env.NEXT_PUBLIC_API_URL}/user/avatars/${userData?.user.avatar}`}
+              />
             ) : (
               <FaRegCircleUser className="text-gray-500" />
             )}
@@ -132,9 +125,9 @@ function Menu({ isSticky }: any) {
       >
         <SheetHeader>
           <div
-            className={`flex items-center ${!login ? "" : ""} justify-end gap-5 px-4`}
+            className={`flex items-center ${!userData ? "" : ""} justify-end gap-5 px-4`}
           >
-            {!userData && !login ? (
+            {!userData ? (
               <Link href={"/login"}>
                 <Button variant={"outlineMain"} size={"sm"}>
                   ورود / ثبت نام
@@ -151,19 +144,13 @@ function Menu({ isSticky }: any) {
               </div>
             )}
             {userData?.user.avatar ? (
-              <>
-                {largeAvatarLoading && (
-                  <div className="h-14 w-14 animate-pulse rounded-full bg-shimmer"></div>
-                )}
-                <Image
-                  alt="avatar"
-                  width={1000}
-                  height={1000}
-                  onLoad={() => setLargeAvatarLoading(false)}
-                  className="h-14 w-14 rounded-full"
-                  src={`${process.env.NEXT_PUBLIC_API_URL}/user/avatars/${userData?.user.avatar}`}
-                />
-              </>
+              <Image
+                alt="avatar"
+                width={1000}
+                height={1000}
+                className="h-14 w-14 rounded-full"
+                src={`${process.env.NEXT_PUBLIC_API_URL}/user/avatars/${userData?.user.avatar}`}
+              />
             ) : (
               <svg
                 width={56}
@@ -204,7 +191,7 @@ function Menu({ isSticky }: any) {
                 <span className="mt-1 text-sm">{link.name}</span>
               </Link>
             ))}
-            {login && (
+            {userData && (
               <li
                 onClick={logoutHandler}
                 className="font-vazir flex cursor-pointer flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]"

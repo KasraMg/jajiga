@@ -3,21 +3,23 @@
 import { useState, useEffect } from "react";
 import Menu from "../menu/menu";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
-import { authStore } from "@/src/stores/auth";
+import Link from "next/link"; 
 import SearchBox from "./components/search-box";
 import Notification from "./components/notification";
+import { useUser } from "@/src/api/user";
 
 const Navbar = ({ navbarContainer }: any) => {
   const route = usePathname();
   const [isSticky, setIsSticky] = useState<boolean>(
     route.length > 2 ? true : false,
   );
-  const { login } = authStore((state) => state);
+  const { data: login } = useUser();
+
   useEffect(() => {
     window?.addEventListener("scroll", () => {
       if (route.length == 1) {
-        const currentScroll = typeof window !== "undefined" && window.pageYOffset;
+        const currentScroll =
+          typeof window !== "undefined" && window.pageYOffset;
         if (currentScroll && currentScroll > 100) {
           setIsSticky(true);
         } else {

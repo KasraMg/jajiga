@@ -52,7 +52,7 @@ const Step9Screen = () => {
             </p>
           </section>
 
-          <div className="flex items-center gap-2">
+          <div className="flex pb-20 items-center gap-2">
             <input
               onClick={() => setAcceptRules((prev) => !prev)}
               className="h-4 w-4"
@@ -67,7 +67,7 @@ const Step9Screen = () => {
             disablelPrevButton={false}
             disableNextButton={disableNextButton}
             isPending={isPending}
-            prevLink={"new-room/step9"}
+            prevLink={"new-room/step8"}
           />
         </div>
         <div className="max-w-[243px]">

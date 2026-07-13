@@ -1,21 +1,19 @@
 "use client";
 import { Button } from "@/src/components/shadcn/ui/button";
-import { authStore } from "@/src/stores/auth";
 import { VillaDetails } from "@/src/types/villa.types";
 import { convertToJalali, saveIntoLocalStorage } from "@/src/utils/utils";
 import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaRegTrashCan } from "react-icons/fa6";
-import swal from "sweetalert"; 
+import swal from "sweetalert";
 import Loader from "@/src/components/modules/loader/loader";
 import Image from "next/image";
-import useDeleteData from "@/src/hooks/useDeleteData";
-import { useState } from "react";
+import { useDeleteVilla } from "@/src/api/admin-panel/villa";
+import { useUser } from "@/src/api/user";
 
 const Rooms = () => {
-  const { userData } = authStore((state) => state);
-  const [villaId, setVillaId] = useState(""); 
+  const { data: userData } = useUser();
   const queryClient = useQueryClient();
   queryClient.invalidateQueries({ queryKey: ["auth"] });
 
@@ -26,17 +24,13 @@ const Rooms = () => {
       buttons: ["نه", "آره"],
     }).then((res) => {
       if (res) {
-        setVillaId(id);
-        mutation();
+        mutation(id);
       }
     });
   };
 
-  const { mutate: mutation, isPending } = useDeleteData(
-    `/villa/delete/${villaId}`,
-    "ویلا با موفقیت حذف شد",
-    "auth",
-  );
+  const { mutate: mutation, isPending: mutationPending } = useDeleteVilla();
+
   return (
     <>
       {userData?.villas.length ? (
@@ -47,7 +41,7 @@ const Rooms = () => {
           </span>
           {userData.villas.slice(0, 3).map((villa: VillaDetails) => (
             <section key={villa._id} className="mt-4">
-              <div className="flex flex-wrap items-center justify-between gap-2 shadow-lg sm:!flex-nowrap sm:!justify-between sm:!gap-0 sm:!p-3">
+              <div className="flex flex-wrap items-center justify-between gap-2 gap-y-3 sm:!flex-nowrap sm:!justify-between sm:!p-3 sm:!shadow-lg md:!flex-wrap">
                 <div className="flex items-center gap-2">
                   <div
                     className={`relative ml-1 flex h-[60px] w-[92px] items-center justify-center overflow-hidden rounded-lg p-1`}
@@ -80,13 +74,11 @@ const Rooms = () => {
                     <>
                       <Link
                         href={`/room/${villa._id}`}
-                        className="hidden xl:block"
+                        className="hidden xl:!block"
                       >
                         ({villa._id.slice(18, 26)})
                       </Link>
-                      <p className="text-xs text-green-500 sm:!hidden">
-                        تایید شده
-                      </p>
+                      <p className="text-xs text-green-500">تایید شده</p>
                     </>
                   ) : (
                     <p className="text-xs text-red-600 sm:!text-base">
@@ -98,7 +90,9 @@ const Rooms = () => {
                   )}
                 </div>
                 <div>
-                  <p className="xl:!hidden">({villa._id.slice(18, 26)})</p>
+                  <p className="text-center xl:!hidden">
+                    ({villa._id.slice(18, 26)})
+                  </p>
                   <p className="text-xs font-thin lg:!text-sm">
                     به‌روزرسانی: {convertToJalali(villa.updatedAt)}
                   </p>
@@ -115,7 +109,10 @@ const Rooms = () => {
                   </Button>
                   {villa.isAccepted !== "rejected" &&
                     (villa.finished ? (
-                      <Link href={`/room/edit/${villa._id}`}>
+                      <Link
+                        className="block w-full sm:!w-auto"
+                        href={`/room/edit/${villa._id}`}
+                      >
                         <Button
                           className="flex w-full justify-center gap-2 px-4 text-xs sm:!w-auto xl:!px-8"
                           variant={"blue"}
@@ -130,6 +127,7 @@ const Rooms = () => {
                           saveIntoLocalStorage("villaId", villa._id)
                         }
                         href={`/new-room/step${villa.step}`}
+                        className="block w-full sm:!w-auto"
                       >
                         <Button
                           className="flex w-full justify-center gap-2 px-4 text-xs sm:!w-auto xl:!px-8"
@@ -158,7 +156,7 @@ const Rooms = () => {
           <p>آگهی ای موجود نیست</p>
         </div>
       )}
-      {isPending && <Loader />}
+      {mutationPending && <Loader />}
     </>
   );
 };

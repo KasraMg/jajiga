@@ -9,9 +9,10 @@ import {
 } from "@/src/components/shadcn/ui/sheet";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { authStore } from "@/src/stores/auth";
+import { Skeleton } from "../../shadcn/ui/skeleton";
 
 const Navbar = () => {
-  const { userData } = authStore((state) => state);
+  const { userData, isPending } = authStore((state) => state);
   const logout = useLogoutHandler();
   return (
     <div className="flex h-12 w-full items-center justify-between bg-white px-3 md:!mt-4">
@@ -40,9 +41,14 @@ const Navbar = () => {
             className="hidden h-10 w-10 rounded-full sm:!block"
           />
           <div>
-            <p className="mb-0 text-sm font-thin sm:!text-base">
-              {userData?.user.firstName} {userData?.user.lastName}{" "}
-            </p>
+            {isPending ? (
+              <Skeleton className="w-28 h-5 mb-1" />
+            ) : (
+              <p className="mb-0 text-sm font-thin sm:!text-base">
+                {userData?.user.firstName} {userData?.user.lastName}{" "}
+              </p>
+            )}
+
             <span className="relative bottom-1 text-xs text-red-600">
               ادمین
             </span>

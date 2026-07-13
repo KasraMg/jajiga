@@ -97,6 +97,9 @@ export const useDeleteVilla = () => {
       queryClient.invalidateQueries({
         queryKey: ["allVillas"],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["auth"],
+      });
     },
   });
 };

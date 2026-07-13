@@ -2,12 +2,12 @@
 import UserLayout from "@/src/components/screens/user-panel/UserLayout";
 import Breadcrumb from "@/src/components/modules/breadcrumb/breadcrumb";
 import Container from "@/src/components/modules/container/container";
-import Card from "@/src/components/screens/user-panel/reserves/partials/card";
-import { authStore } from "@/src/stores/auth";
+import Card from "@/src/components/screens/user-panel/reserves/partials/card"; 
 import Metadata from "@/src/components/modules/meta-data";
+import { useUser } from "@/src/api/user";
 
 const ReservesScreen = () => {
-  const { userData } = authStore((state) => state);
+  const { data: userData } = useUser();
   return (
     <Container disableFooter={true}>
       <Breadcrumb
@@ -28,7 +28,7 @@ const ReservesScreen = () => {
             <main>
               {userData?.booked.length ? (
                 <div className="mb-5 mt-5 grid grid-cols-[1fr] gap-6 md:!grid-cols-[1fr,1fr] lg:!grid-cols-[1fr,1fr,1fr]">
-                  {userData.booked.map((book) => (
+                  {userData.booked.map((book:any) => (
                     <Card className="w-full" key={book._id} data={book} />
                   ))}
                 </div>

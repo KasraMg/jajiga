@@ -1,22 +1,18 @@
 "use client";
 import { authStore } from "@/src/stores/auth";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { getUser } from "../../utils/fetchs";
 import swal from "sweetalert";
 import { useRouter } from "next/navigation";
 import Loader from "./loader/loader";
 import Cookies from "js-cookie";
+import { useUser } from "@/src/api/user";
 
 const Auth = () => {
-  const { data, isLoading, status} = useQuery({
-    queryKey: ["auth"],
-    queryFn: getUser,
-    staleTime: Infinity,
-  });
+  const { data, isLoading, status } = useUser();
 
   const { setUserData, setLogin, setIsPending } = authStore((state) => state);
- 
+
   useEffect(() => {
     if (status === "success" && data?.statusCode === 200) {
       setUserData(data);
@@ -53,8 +49,8 @@ export const useLogoutHandler = () => {
         router.push("/");
         Cookies.remove("AccessToken");
         Cookies.remove("RefreshToken");
-        localStorage.removeItem("otpRegisterPhoneNumber")
-        localStorage.removeItem("registerUserData")
+        localStorage.removeItem("otpRegisterPhoneNumber");
+        localStorage.removeItem("registerUserData");
         setUserData(null);
         setLogin(false);
         queryClient.invalidateQueries({ queryKey: ["auth"] });

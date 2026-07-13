@@ -1,6 +1,6 @@
 "use client";
 
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Cookies from "js-cookie";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
 
@@ -175,5 +175,22 @@ export const useTwoStepMutation = ({
         title: "خطایی غیر منتظره رخ داد",
       });
     },
+  });
+};
+
+export const useUser = () => {
+  const getUser = async () => {
+    const accessToken = Cookies.get("AccessToken");
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/getMe`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    return res.json();
+  };
+  return useQuery({
+    queryKey: ["auth"],
+    queryFn: getUser,
+    staleTime: Infinity,
   });
 };

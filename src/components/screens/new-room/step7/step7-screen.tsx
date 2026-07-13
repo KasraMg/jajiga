@@ -135,7 +135,7 @@ const Step7Screen = () => {
             disablelPrevButton={false}
             disableNextButton={disableNextButton}
             isPending={isPending}
-            prevLink={"new-room/step7"}
+            prevLink={"new-room/step6"}
           />
         </div>
         <div className="max-w-[243px]">

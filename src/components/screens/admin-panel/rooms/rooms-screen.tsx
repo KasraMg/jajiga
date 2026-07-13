@@ -2,9 +2,7 @@
 
 import { Button } from "@/src/components/shadcn/ui/button";
 import Metadata from "@/src/components/modules/meta-data";
-import Loader, {
-  ButtonLoader,
-} from "@/src/components/modules/loader/loader";
+import Loader, { ButtonLoader } from "@/src/components/modules/loader/loader";
 import DataTable from "react-data-table-component";
 import Link from "next/link";
 import { useMemo } from "react";
@@ -110,7 +108,7 @@ const RoomsScreen = () => {
         noDataComponent="اقامتگاهی یافت نشد"
       />
 
-      {deleteHandlerPending && <Loader />}
+      {(deleteHandlerPending || getVillasPending) && <Loader />}
     </>
   );
 };

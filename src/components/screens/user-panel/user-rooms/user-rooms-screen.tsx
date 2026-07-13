@@ -2,16 +2,16 @@
 import UserLayout from "@/src/components/screens/user-panel/UserLayout";
 import Breadcrumb from "@/src/components/modules/breadcrumb/breadcrumb";
 import Container from "@/src/components/modules/container/container";
-import Card from "@/src/components/screens/user-panel/user-rooms/partials/card";
-import { authStore } from "@/src/stores/auth";
+import Card from "@/src/components/screens/user-panel/user-rooms/partials/card"; 
 import { VillaDetails } from "@/src/types/villa.types";
 import Image from "next/image";
 import { useState } from "react";
 import Metadata from "@/src/components/modules/meta-data";
+import { useUser } from "@/src/api/user";
 
 const UserRoomsScreen = () => {
   const [showUnComplatePosts, setShowUnComplatePosts] = useState(false);
-  const { userData } = authStore((state) => state);
+  const { data: userData } = useUser();
 
   return (
     <Container disableFooter={true}>

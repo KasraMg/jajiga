@@ -23,9 +23,7 @@ export const useRooms = () => {
   });
 
   const { mutate: deleteMutation, isPending: deleteHandlerPending } =
-    useDeleteVilla({
-      villaId,
-    });
+    useDeleteVilla();
 
   const approveVilla = (id: string) => {
     setRoomStatusChange(["accept", id]);
@@ -49,7 +47,7 @@ export const useRooms = () => {
 
       setVillaId(id);
 
-      deleteMutation();
+      deleteMutation(villaId);
     });
   };
 
