@@ -8,7 +8,7 @@ const Loader: FC<LoaderProps> = ({ enableOverlay,className }) => {
   return (
     <>
       <div
-        className={`fixed left-0 top-0 z-[99999] h-full w-full ${!enableOverlay ? "!bg-[#000000b5]" : ""} `}
+        className={`fixed left-0 top-0 z-[99999] h-full w-full ${!enableOverlay ? "!bg-[#000000b5]" : ""}`}
       >
         <span
           id="loader"
