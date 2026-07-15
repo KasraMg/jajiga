@@ -49,11 +49,11 @@ const HomeScreen = () => {
                 <PopularDestinations />
                 <FastSearch />
                 <Ads />
-                <SpecialAccommodations />
+                <Villas />
               </div>
               <BecomeHost />
             </div>
-            <Villas />
+            <SpecialAccommodations />
           </main>
           <Note />
         </Container>

@@ -11,6 +11,7 @@ const Villas = () => {
   const { data } = useAllActivatedVillas();
   const [status, setStatus] = useState("همه شهرها");
   const [villaData, setVillaData] = useState(data?.villas);
+  
   useEffect(() => {
     if (status === "همه شهرها") {
       setVillaData(data?.villas);

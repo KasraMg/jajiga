@@ -6,7 +6,8 @@ import { usePrivilegedVillas } from "@/src/api/public";
 
 const SpecialAccommodations = () => {
   const { data } = usePrivilegedVillas();
-  return (
+  
+  return data && data?.villas?.length > 0 ? (
     <div>
       <p className="text-xl">اقامتگاه های ممتاز</p>
       <span className="mb-1 text-sm text-[#666]">
@@ -31,6 +32,8 @@ const SpecialAccommodations = () => {
         />
       )}
     </div>
+  ) : (
+    ""
   );
 };
 
