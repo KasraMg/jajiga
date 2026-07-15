@@ -132,7 +132,7 @@ const ProfileScreen = () => {
                 regex={/((0?9)|(\+?989))\d{2}\W?\d{3}\W?\d{4}/}
                 errorText="شماره موبایل نامعتبر است"
               />
-              <TwoStepBox
+              {/* <TwoStepBox
                 setValue={setEmail}
                 value={email}
                 type="email"
@@ -140,7 +140,7 @@ const ProfileScreen = () => {
                 requestBody="email"
                 regex={/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/}
                 errorText="ایمیل نامعتبر است"
-              />
+              /> */}
               <Box
                 setValue={setGender}
                 value={gender}

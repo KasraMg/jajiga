@@ -74,17 +74,17 @@ const Card: FC<CardProps> = ({ data, className, wishes }) => {
             در {data.address.city}
           </Link>
           {data.booked && data.booked !== 0 ? (
-            <p className="text-xs font-light text-[#939cae]">
+            <span className="text-xs font-light text-[#939cae]">
               +{data.booked as any} رزرو موفق
-            </p>
+            </span>
           ):''}
         </div>
 
         <div className="mt-1 flex items-center gap-1 text-xs font-light text-[#939cae]">
-          <p>{data.capacity.bedRoom} خوابه . </p>
-          <p> {data.capacity.fuundationSize} متر . </p>
-          <p>تا {data.capacity.maxCapacity} مهمان</p>
-          {data.comments ? <p className="pt-1">({data.comments} نظر)</p> : ""}
+          <span>{data.capacity.bedRoom} خوابه . </span>
+          <span> {data.capacity.fuundationSize} متر . </span>
+          <span>تا {data.capacity.maxCapacity} مهمان</span>
+          {data.comments ? <span className="pt-1">({data.comments} نظر)</span> : ""}
         </div>
         {wishes && (
           <Button

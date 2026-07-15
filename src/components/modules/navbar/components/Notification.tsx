@@ -61,7 +61,7 @@ const Notification = () => {
                   <span
                     onClick={() => {
                       navigator.clipboard
-                        .writeText("jajigaAdmin2024")
+                        .writeText("jajigaAdmin2026")
                         .then(() => {
                           toast({
                             variant: "success",
@@ -71,7 +71,7 @@ const Notification = () => {
                     }}
                     className="cursor-pointer text-red-600"
                   >
-                    jajigaAdmin2024
+                    jajigaAdmin2026
                   </span>{" "}
                   وارد پنل بشید.
                 </p>

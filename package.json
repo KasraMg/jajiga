@@ -23,7 +23,6 @@
     "@tanstack/react-query-devtools": "^5.40.1",
     "@types/leaflet": "^1.9.8",
     "@types/three": "^0.164.0",
-    "aos": "^3.0.0-beta.6",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "formik": "^2.2.9",

@@ -9,7 +9,6 @@ import {
   useLoginOtpMutation,
   useRegisterOtpMutation,
 } from "@/src/api/auth/otp";
-import { getUser } from "@/src/utils/fetchs";
 
 type Props = {
   setStep: React.Dispatch<React.SetStateAction<string>>;

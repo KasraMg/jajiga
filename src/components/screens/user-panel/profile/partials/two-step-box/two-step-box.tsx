@@ -149,7 +149,7 @@ const TwoStepBox: FC<BoxProps> = ({
                 (step === 2 && otpCode.length !== 4)
               }
             >
-              {isPending ? <ButtonLoader /> : step === 1 ? "ذخیره" : "ارسال"}
+              {isPending ? <ButtonLoader className="h-[20px]" /> : step === 1 ? "ذخیره" : "ارسال"}
             </Button>
           </DialogContent>
         </Dialog>

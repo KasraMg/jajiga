@@ -25,13 +25,13 @@ const Calendars = (data: VillaResponse) => {
   const params = useParams();
 
   const [numberOfMonths, setNumberOfMonths] = useState(
-    window.innerWidth >= 1023 ? 2 : 1,
+    window.innerWidth >= 1280 ? 2 : 1,
   );
 
   useEffect(() => {
     const handleResize = () => {
       setNumberOfMonths(
-        window.innerWidth >= 1023 ? 2 : 1,
+        window.innerWidth >= 1280 ? 2 : 1,
       );
     };
 

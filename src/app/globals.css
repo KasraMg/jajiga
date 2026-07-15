@@ -4,7 +4,6 @@
 
 @layer base {
   :root {
-  
   }
 }
 
@@ -657,19 +656,21 @@ select:focus {
   top: 55%;
 }
 
-
-#room_edit_tablist::-webkit-scrollbar { 
+#room_edit_tablist::-webkit-scrollbar {
   border-radius: 10px;
   height: 7px;
 }
- 
+
 /* Handle on hover */
 #room_edit_tablist::-webkit-scrollbar-track {
   border-radius: 10px;
   background: #979692;
 }
- 
+
 #room_edit_tablist::-webkit-scrollbar-thumb {
   background: rgb(159, 7, 7);
-  border-radius: 10px; 
+  border-radius: 10px;
+}
+.superOfferSlider span {
+  color: white !important;
 }

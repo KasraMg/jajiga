@@ -1,11 +1,8 @@
 import Ads from "./partials/ads/ads";
 import BecomeHost from "./partials/become-host/become-host";
-import SpecialAccommodations from "./partials/special-accommodations/special-accommodations";
 import Intro from "./partials/intro/Intro";
 import ScrollObserver from "../../../providers/scroll-observer";
 import Container from "../../modules/container/container";
-import Hydrated from "../../../providers/hydrated";
-import { getPrivilegedVillas } from "../../../utils/fetchs";
 import Note from "./partials/note/note";
 import dynamic from "next/dynamic";
 import PopularDestinationsSkeleton from "./partials/popular-destinations/popular-destinations-skeleton";
@@ -25,10 +22,20 @@ const FastSearch = dynamic(() => import("./partials/fast-search/fast-search"), {
   loading: () => <FastSearchSkeleton />,
 });
 
-const Villas = dynamic(() => import("./partials/villas/villas"), {
-  ssr: false,
-  loading: () => <VillasSkeleton />,
-});
+const Villas = dynamic(
+  () => import("./partials/special-accommodations/special-accommodations"),
+  {
+    ssr: false,
+    loading: () => <VillasSkeleton />,
+  },
+);
+const SpecialAccommodations = dynamic(
+  () => import("./partials/villas/villas"),
+  {
+    ssr: false,
+    loading: () => <VillasSkeleton />,
+  },
+);
 
 const HomeScreen = () => {
   return (
@@ -42,12 +49,7 @@ const HomeScreen = () => {
                 <PopularDestinations />
                 <FastSearch />
                 <Ads />
-                <Hydrated
-                  queryKey={["specialVillas"]}
-                  queryFn={getPrivilegedVillas}
-                >
-                  <SpecialAccommodations />
-                </Hydrated>
+                <SpecialAccommodations />
               </div>
               <BecomeHost />
             </div>

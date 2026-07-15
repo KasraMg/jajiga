@@ -62,7 +62,7 @@ const OwnerReservation = ({
         رمز ورود{" "}
         <span
           onClick={() => {
-            navigator.clipboard.writeText("jajigaAdmin2024").then(() => {
+            navigator.clipboard.writeText("jajigaAdmin2026").then(() => {
               toast({
                 variant: "success",
                 title: "رمز با موفقیت کپی شد",
@@ -71,7 +71,7 @@ const OwnerReservation = ({
           }}
           className="cursor-pointer text-red-600"
         >
-          jajigaAdmin2024
+          jajigaAdmin2026
         </span>{" "}
         است و سپس اقامتگاه خودتان را تایید کنید.
       </p>

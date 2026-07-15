@@ -36,7 +36,7 @@ const Villas = () => {
             Card={Card}
             navigation={true}
             data={villaData}
-            className="mySwiper mx-auto w-full text-white sm:!pl-6"
+            className="mySwiper superOfferSlider mx-auto w-full text-white sm:!pl-6"
             breakPoints={{
               600: {
                 slidesPerView: 2,

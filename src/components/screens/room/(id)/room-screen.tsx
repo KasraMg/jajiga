@@ -40,8 +40,6 @@ const RoomScreen = ({ id }: { id: string }) => {
         router.push("/");
     }
 
-console.log(data);
-
   }, [isPending]);
 
   return (
@@ -50,7 +48,7 @@ console.log(data);
         {data?.statusCode === 200 ? (
           <div>
             <Gallery {...data.villa} />
-            <div className="flex items-start gap-8 px-0 md:mt-9 md:px-4 xl:px-0">
+            <div className="flex items-start gap-8 px-0 md:mt-9 md:px-4 xl:px-0 pb-10">
               <Details {...data} />
               <Reservation {...data} />
             </div>

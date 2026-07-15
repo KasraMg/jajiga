@@ -103,7 +103,7 @@ const Reservation = (data: VillaResponse) => {
                 <span
                   onClick={() => {
                     navigator.clipboard
-                      .writeText("jajigaAdmin2024")
+                      .writeText("jajigaAdmin2026")
                       .then(() => {
                         toast({
                           variant: "success",
@@ -113,7 +113,7 @@ const Reservation = (data: VillaResponse) => {
                   }}
                   className="cursor-pointer text-customYellow"
                 >
-                  jajigaAdmin2024
+                  jajigaAdmin2026
                 </span>{" "}
                 است و سپس اقامتگاه خودتان را تایید کنید.
               </p>
