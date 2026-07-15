@@ -33,7 +33,7 @@ const FullScreenGallery = ({
               width={1000}
               height={1000}
               alt="cover"
-              src={`http://localhost:4001/villa/covers/${img}`}
+              src={`${process.env.NEXT_PUBLIC_API_URL}/villa/covers/${img}`}
             />
           </SwiperSlide>
         ))}
@@ -54,7 +54,7 @@ const FullScreenGallery = ({
               width={1000}
               height={1000}
               alt="cover"
-              src={`http://localhost:4001/villa/covers/${img}`}
+              src={`${process.env.NEXT_PUBLIC_API_URL}/villa/covers/${img}`}
             />
           </SwiperSlide>
         ))}

@@ -23,7 +23,7 @@ const Card = (data: {
         onLoad={() => setIsCoverLoading(false)}
         height={1000}
         crossOrigin="anonymous"
-        src={`http://localhost:4001/static/city/${data.cover}`}
+        src={`${process.env.NEXT_PUBLIC_API_URL}/static/city/${data.cover}`}
       />
       <div>
         <p className="font-vazir text-[12px] font-light">اجاره ویلا در</p>

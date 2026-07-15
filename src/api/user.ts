@@ -179,8 +179,8 @@ export const useTwoStepMutation = ({
 };
 
 export const useUser = () => {
+  const accessToken = Cookies.get("AccessToken");
   const getUser = async () => {
-    const accessToken = Cookies.get("AccessToken");
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/getMe`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -190,6 +190,7 @@ export const useUser = () => {
   };
   return useQuery({
     queryKey: ["auth"],
+    enabled: !!accessToken,
     queryFn: getUser,
     staleTime: Infinity,
   });

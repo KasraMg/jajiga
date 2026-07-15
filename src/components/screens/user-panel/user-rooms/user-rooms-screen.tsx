@@ -1,5 +1,4 @@
-"use client";
-import UserLayout from "@/src/components/screens/user-panel/UserLayout";
+"use client"; 
 import Breadcrumb from "@/src/components/modules/breadcrumb/breadcrumb";
 import Container from "@/src/components/modules/container/container";
 import Card from "@/src/components/screens/user-panel/user-rooms/partials/card"; 
@@ -19,8 +18,7 @@ const UserRoomsScreen = () => {
       <Metadata
         seoTitle={"جاجیگا | اقامتگاه ها "}
         seoDescription={"مدیریت اقامتگاه های ثبت شده"}
-      />
-      <UserLayout>
+      /> 
         <div
           className={`relative bottom-2 z-10 flex w-full !min-w-full gap-4 rounded-xl bg-white px-3 sm:!px-5`}
         >
@@ -135,8 +133,7 @@ const UserRoomsScreen = () => {
               )}
             </main>
           </div>
-        </div>
-      </UserLayout>
+        </div>  
     </Container>
   );
 };

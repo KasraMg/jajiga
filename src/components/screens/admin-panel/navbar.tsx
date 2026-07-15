@@ -31,8 +31,8 @@ const Navbar = () => {
         <div className="flex items-start gap-2">
           <Image
             src={
-              userData?.user.avatar
-                ? `http://localhost:4001/user/avatars/${userData?.user.avatar}`
+              userData?.user?.avatar
+                ? `${process.env.NEXT_PUBLIC_API_URL}/user/avatars/${userData?.user.avatar}`
                 : "/images/profile.jpg"
             }
             alt=""
@@ -45,7 +45,7 @@ const Navbar = () => {
               <Skeleton className="w-28 h-5 mb-1" />
             ) : (
               <p className="mb-0 text-sm font-thin sm:!text-base">
-                {userData?.user.firstName} {userData?.user.lastName}{" "}
+                {userData?.user?.firstName} {userData?.user?.lastName}{" "}
               </p>
             )}
 

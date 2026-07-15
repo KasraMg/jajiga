@@ -122,7 +122,7 @@ const Comments = ({
                             height={1000}
                             src={
                               comment?.creator?.avatar
-                                ? `http://localhost:4001/user/avatars/${comment.creator.avatar}`
+                                ? `${process.env.NEXT_PUBLIC_API_URL}/user/avatars/${comment.creator.avatar}`
                                 : `/images/profile.jpg`
                             }
                           />
@@ -160,7 +160,7 @@ const Comments = ({
                               height={1000}
                               src={
                                 comment.answerComment[0].creator.avatar
-                                  ? `http://localhost:4001/user/avatars/${comment.answerComment[0].creator.avatar}`
+                                  ? `${process.env.NEXT_PUBLIC_API_URL}/user/avatars/${comment.answerComment[0].creator.avatar}`
                                   : "/images/about/about_img6.jpg"
                               }
                             />

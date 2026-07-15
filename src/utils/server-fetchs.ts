@@ -3,6 +3,10 @@ import { cookies } from "next/headers";
 export async function getUser() {
   const cookieStore = cookies();
   const accessToken = cookieStore.get("AccessToken");
+  if (!accessToken?.value) {
+    return null;
+  }
+
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/getMe`, {
     headers: {
       Authorization: `Bearer ${accessToken?.value}`,
@@ -21,7 +25,7 @@ export async function getWishes() {
   });
   return res.json();
 }
- 
+
 export async function fetchStep6Items() {
   const cookieStore = cookies();
   const accessToken = cookieStore.get("AccessToken");

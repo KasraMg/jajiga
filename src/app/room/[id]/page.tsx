@@ -13,7 +13,7 @@ const Room = ({ params }: { params: { id: string } }) => {
   return (
     <Hydrated queryKey={["villa", villaId]} queryFn={getVilla as any}>
       <RoomScreen id={villaId} />
-    </Hydrated>
+    </Hydrated> 
   );
 };
 

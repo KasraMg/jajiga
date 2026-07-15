@@ -39,6 +39,9 @@ const RoomScreen = ({ id }: { id: string }) => {
         data.villa.isAccepted !== "true" &&
         router.push("/");
     }
+
+console.log(data);
+
   }, [isPending]);
 
   return (

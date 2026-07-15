@@ -40,6 +40,11 @@ function Menu({ isSticky }: any) {
       icon: <TbHomePlus className="text-xl" />,
     },
     {
+      name: "اقامتگاه ها",
+      path: "/rooms",
+      icon: <TbHomePlus className="text-xl" />,
+    },
+    {
       name: "پشتیبانی",
       path: "/support",
       icon: <BiSupport className="text-xl" />,
@@ -61,7 +66,7 @@ function Menu({ isSticky }: any) {
     },
   ];
 
-  if (userData?.user.role === "admin") {
+  if (userData?.user?.role === "admin") {
     navLinks.splice(1, 0, {
       name: "داشبورد ادمین",
       path: "/admin-panel/dashboard",
@@ -80,20 +85,12 @@ function Menu({ isSticky }: any) {
       icon: <FaRegUser className="text-xl" />,
     });
   }
-  if (userData?.booked.length) {
+  if (userData?.booked?.length) {
     navLinks.splice(4, 0, {
       name: "رزرو ها",
       path: "/reserves",
       icon: <TbHomePlus className="text-xl" />,
-    });
-  }
-
-  if (userData?.villas.length) {
-    navLinks.splice(5, 0, {
-      name: "اقامتگاه ها",
-      path: "/user-rooms",
-      icon: <TbHomePlus className="text-xl" />,
-    });
+    }); 
   }
   return (
     <Sheet>
@@ -104,7 +101,7 @@ function Menu({ isSticky }: any) {
               isSticky && "border border-solid"
             } flex items-center gap-2 rounded-full border-[#0000005c] bg-[#ffffff54] p-1 pl-2 pr-3 text-3xl outline-none focus-visible:border-0`}
           >
-            {userData?.user.avatar ? (
+            {userData?.user?.avatar ? (
               <Image
                 alt="avatar"
                 width={1000}
@@ -136,20 +133,20 @@ function Menu({ isSticky }: any) {
             ) : (
               <div className="flex flex-col gap-[5px] text-right text-sm font-thin">
                 <p>
-                  {userData?.user.firstName} {userData?.user.lastName}
+                  {userData?.user?.firstName} {userData?.user?.lastName}
                 </p>
                 <Link className="text-[10px]" href={"/profile"}>
                   ویرایش حساب کاربری
                 </Link>
               </div>
             )}
-            {userData?.user.avatar ? (
+            {userData?.user?.avatar ? (
               <Image
                 alt="avatar"
                 width={1000}
                 height={1000}
                 className="h-14 w-14 rounded-full"
-                src={`${process.env.NEXT_PUBLIC_API_URL}/user/avatars/${userData?.user.avatar}`}
+                src={`${process.env.NEXT_PUBLIC_API_URL}/user/avatars/${userData?.user?.avatar}`}
               />
             ) : (
               <svg

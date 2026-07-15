@@ -40,7 +40,7 @@ const Card: FC<CardProps> = ({ data, className, wishes }) => {
             alt="avatar"
             width={1000}
             height={1000}
-            src={`http://localhost:4001/villa/covers/${data.cover[0]}`}
+            src={`${process.env.NEXT_PUBLIC_API_URL}/villa/covers/${data.cover[0]}`}
           />
           {data.costly && (
             <div className="absolute right-[2px] top-[2px] flex flex-col p-2">

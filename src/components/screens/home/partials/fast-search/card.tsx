@@ -25,7 +25,7 @@ const Card = ({
         alt="img"
         width={1000}
         height={1000}
-        src={`http://localhost:4001/static/zone/${data?.cover}`}
+        src={`${process.env.NEXT_PUBLIC_API_URL}/static/zone/${data?.cover}`}
       />
       <div
         style={{

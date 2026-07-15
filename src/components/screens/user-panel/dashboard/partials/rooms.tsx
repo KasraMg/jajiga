@@ -53,7 +53,7 @@ const Rooms = () => {
                         width={1000}
                         height={1000}
                         crossOrigin="anonymous"
-                        src={`http://localhost:4001/villa/covers/${villa.cover[0]}`}
+                        src={`${process.env.NEXT_PUBLIC_API_URL}/villa/covers/${villa.cover[0]}`}
                       />
                     ) : (
                       <Image
