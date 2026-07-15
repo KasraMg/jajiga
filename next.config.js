@@ -3,7 +3,9 @@ const withPWA = require("@ducanh2912/next-pwa").default({
   aggressiveFrontEndNavCaching: true,
   reloadOnOnline: true,
   swcMinify: true,
-  disable: process.env.NODE_ENV === "development",
+  // disable: process.env.NODE_ENV === "development",
+  disable: false,
+
   workboxOptions: {
     disableDevLogs: true,
   },
@@ -61,11 +63,11 @@ const withPWA = require("@ducanh2912/next-pwa").default({
 
 const nextConfig = {
   reactStrictMode: true,
-
   env: {
     NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL,
   },
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "http",
