@@ -40,6 +40,7 @@ const Card: FC<CardProps> = ({ data, className, wishes }) => {
             alt="avatar"
             width={1000}
             height={1000}
+            unoptimized
             src={`${process.env.NEXT_PUBLIC_API_URL}/villa/covers/${data.cover[0]}`}
           />
           {data.costly && (
