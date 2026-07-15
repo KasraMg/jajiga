@@ -263,3 +263,174 @@ export const useGetStep6Items = () => {
     queryFn: fetchStep6Items,
   });
 };
+
+export const useBookVilla = (villaId: string) => {
+  const bookVilla = async (villaId: string, data: unknown) => {
+    const accessToken = Cookies.get("AccessToken");
+
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/villa/Book/${villaId}`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      },
+    );
+
+    return res.json();
+  };
+
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (data: unknown) => bookVilla(villaId, data),
+
+    onSuccess: (data: { statusCode: number }) => {
+      if (data.statusCode === 200) {
+        toast({
+          variant: "success",
+          title: "ویلا با موفقیت رزرو شد",
+        });
+
+        queryClient.invalidateQueries({
+          queryKey: ["villa", villaId],
+        });
+
+        queryClient.invalidateQueries({
+          queryKey: ["auth"],
+        });
+
+        return;
+      }
+
+      if (data.statusCode === 422) {
+        toast({
+          variant: "danger",
+          title: "شما در حال حاضر یک رزرو فعال برای این ویلا دارید",
+        });
+
+        return;
+      }
+
+      toast({
+        variant: "danger",
+        title: "فرایند رزرو موفقیت‌آمیز نبود",
+      });
+
+      location.reload();
+    },
+  });
+};
+
+const getBookPrice = async (villaId: string, data: any) => {
+  const accessToken = Cookies.get("AccessToken");
+
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/villa/Book/price/${villaId}`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(data),
+    },
+  );
+
+  const result = await res.json();
+
+  if (!res.ok) {
+    throw new Error(result.message);
+  }
+
+  return result;
+};
+
+export const useBookPrice = (villaId: string) => {
+  return useMutation({
+    mutationFn: (data: any) => getBookPrice(villaId, data),
+
+    onError: () => {
+      toast({
+        variant: "danger",
+        title: "خطایی غیرمنتظره رخ داد",
+      });
+    },
+  });
+};
+
+interface AddCommentData {
+  body: string;
+  score?: number;
+  villa?: string;
+}
+
+const addComment = async ({
+  url,
+  data,
+}: {
+  url: string;
+  data: AddCommentData;
+}) => {
+  const accessToken = Cookies.get("AccessToken");
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}${url}`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+
+  return res.json();
+};
+
+export const useAddComment = (
+  villaId: string,
+  isAnswer: boolean,
+  mainCommentID?: string,
+  onSuccess?: () => void,
+) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (data: AddCommentData) =>
+      addComment({
+        url: isAnswer ? `/comment/answer/${mainCommentID}` : "/comment/create",
+        data,
+      }),
+
+    onSuccess: (data) => {
+      if (data.statusCode === 200) {
+        toast({
+          variant: "success",
+          title:
+            "نظر شما با موفقیت ثبت و پس از تایید ادمین به سایت اضافه خواهد شد",
+        });
+
+        queryClient.invalidateQueries({
+          queryKey: ["villa", villaId],
+        });
+
+        onSuccess?.();
+      } else {
+        toast({
+          variant: "danger",
+          title: "مشکلی در ثبت نظر وجود دارد...",
+        });
+      }
+    },
+
+    onError: () => {
+      toast({
+        variant: "danger",
+        title: "خطایی غیر منتظره رخ داد (اگه VPN روشن هست لطفا خاموش کنید)",
+      });
+    },
+  });
+};

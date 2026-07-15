@@ -15,8 +15,6 @@ const Container: FC<ContainerProps> = ({
   navbarContainer,
   disableMobileMenu
 }) => {
-  console.log(disableMobileMenu);
-  
   return (
     <>
       <Navbar navbarContainer={navbarContainer} />

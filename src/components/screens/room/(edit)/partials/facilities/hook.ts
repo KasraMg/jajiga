@@ -2,11 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-
 import { authStore } from "@/src/stores/auth";
-import useGetData from "@/src/hooks/useGetData";
-import { fetchStep6Items } from "@/src/utils/fetchs";
 import { useUpdateVilla } from "@/src/api/villa";
+import { useStep6Items } from "@/src/api/public";
 
 interface Facility {
   engtitle: string;
@@ -18,8 +16,7 @@ interface Facility {
 
 export const useFacilities = () => {
   const params = useParams();
-
-  const { data } = useGetData(["server_step_6_items"], fetchStep6Items);
+  const { data } = useStep6Items();
 
   const { userData } = authStore();
 
@@ -44,7 +41,7 @@ export const useFacilities = () => {
       placeholder: item.placeHolder,
     }));
 
-    const prevFacility:any = villa.facility.facility || {};
+    const prevFacility: any = villa.facility.facility || {};
 
     const updatedFacilities = newFacilities.map((item: Facility) => {
       const current = prevFacility[item.engtitle];

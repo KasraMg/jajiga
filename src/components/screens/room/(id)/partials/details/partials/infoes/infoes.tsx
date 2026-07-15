@@ -1,9 +1,8 @@
-import useGetData from "@/src/hooks/useGetData";
+import { useStep6Items } from "@/src/api/public";
 import { VillaDetails } from "@/src/types/villa.types";
-import { fetchStep6Items } from "@/src/utils/fetchs";
 import { zoneOptions } from "@/src/utils/options";
 import React, { useEffect, useState } from "react";
-import { BsInfoCircleFill } from "react-icons/bs"; 
+import { BsInfoCircleFill } from "react-icons/bs";
 import { GoDotFill } from "react-icons/go";
 
 interface newFacibilityObj {
@@ -18,10 +17,8 @@ const Infoes = (data: VillaDetails) => {
   const villaZone = zoneOptions.find(
     (zone) => zone.value === data.aboutVilla.villaZone,
   );
-  const { data: facibility, status } = useGetData(
-    ["server_step_6_items"],
-    fetchStep6Items,
-  );
+ 
+  const { data: facibility, status } = useStep6Items();
 
   useEffect(() => {
     if (facibility && facibility.statusCode === 200) {

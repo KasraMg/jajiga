@@ -46,15 +46,18 @@ export const useLogoutHandler = () => {
       buttons: ["نه", "آره"],
     }).then((res) => {
       if (res) {
-        router.push("/");
         Cookies.remove("AccessToken");
         Cookies.remove("RefreshToken");
+        queryClient.setQueryData(["auth"], null);
+        queryClient.removeQueries({
+          queryKey: ["auth"],
+        });
         localStorage.removeItem("otpRegisterPhoneNumber");
         localStorage.removeItem("registerUserData");
         localStorage.removeItem("otpLoginPhoneNumber");
         setUserData(null);
         setLogin(false);
-        queryClient.invalidateQueries({ queryKey: ["auth"] });
+        router.push("/");
       }
     });
   };

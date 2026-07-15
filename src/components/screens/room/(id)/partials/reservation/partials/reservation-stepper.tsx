@@ -13,65 +13,34 @@ import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { getJalaliDateInfo } from "@/src/utils/utils";
 import { VillaDetails } from "@/src/types/villa.types";
 import { PiWarningCircle } from "react-icons/pi";
-import usePostData from "@/src/hooks/usePostData";
 import { useParams } from "next/navigation";
-import { ButtonLoader } from "@/src/components/modules/loader/loader";  
-import { toast } from "@/src/components/shadcn/ui/use-toast";
+import { ButtonLoader } from "@/src/components/modules/loader/loader";
 import { authStore } from "@/src/stores/auth";
-import { useQueryClient } from "@tanstack/react-query";
+import { useBookVilla } from "@/src/api/villa";
 
 interface ReservationStepperProps {
   disable: boolean;
   totalDays: number | undefined;
   usersCount: string | undefined;
   totalPrice: string | undefined;
-  data: VillaDetails; 
-} 
+  data: VillaDetails;
+}
 
 const ReservationStepper: FC<ReservationStepperProps> = ({
   disable,
   totalDays,
   usersCount,
   totalPrice,
-  data, 
+  data,
 }) => {
-  const [open, setOpen] = useState(false); 
+  const [open, setOpen] = useState(false);
   const { login } = authStore((state) => state);
-  const queryClient = useQueryClient();
   const params = useParams();
- 
-  const successFunc = (data: { statusCode: number }) => { 
-    if (data.statusCode === 200) {
-      toast({
-        variant: "success",
-        title: "ویلا با موفقیت رزرو شد",
-      });
-      queryClient.invalidateQueries({ queryKey: ["villa",params.id] });
-      queryClient.invalidateQueries({ queryKey: ["auth"] });
-      setOpen(false);  
-    } else if (data.statusCode === 422) {
-      toast({
-        variant: "danger",
-        title: "شما در حال حاضر یک رزرو فعال برای این ویلا دارید",
-      });
-    } else {
-      toast({
-        variant: "danger",
-        title: "فرایند  رزرو موفقیت آمیز نبود ",
-      });
-      location.reload();
-    }
-  };
+
+  const { mutate: bookVilla, isPending } = useBookVilla(String(params.id));
 
   const [step, setStep] = useState(1);
   const { startDate, endDate } = roomStore((state) => state);
-  const { mutate: mutation, isPending } = usePostData<any>(
-    `/villa/Book/${params.id}`,
-    null,
-    false,
-    successFunc,
-  );
-
   const reserveHandler = () => {
     const reserveData = {
       date: {
@@ -80,7 +49,11 @@ const ReservationStepper: FC<ReservationStepperProps> = ({
       },
       guestNumber: Number(usersCount?.slice(0, 1)),
     };
-    mutation(reserveData);
+    bookVilla(reserveData, {
+      onSuccess: (data) => {
+        setOpen(false);
+      },
+    });
   };
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -96,8 +69,8 @@ const ReservationStepper: FC<ReservationStepperProps> = ({
           </div>
         </Button>
       </DialogTrigger>
-      <DialogContent className="h-[72%] w-full max-w-full !bg-[#e9edf1] px-0 sm:!max-w-[525px] sm:!p-6">
-      <DialogTitle></DialogTitle>
+      <DialogContent className="h-[75%] w-full max-w-full overflow-y-auto !bg-[#e9edf1] px-0 sm:!max-w-[525px] sm:!p-6">
+        <DialogTitle></DialogTitle>
 
         <div className="mx-auto flex w-[85%] justify-between">
           <div className="stepper-bg relative z-[50] w-full text-center after:absolute after:right-[calc(50%+0.75em)] after:top-[calc(1.3em)] after:z-0 after:h-[2px] after:w-[calc(100%-0.75em)] after:rounded-xl after:content-['']">

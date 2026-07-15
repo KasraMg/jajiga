@@ -7,16 +7,25 @@ import { toast } from "@/src/components/shadcn/ui/use-toast";
 const editProfile = async (formData: FormData) => {
   const accessToken = Cookies.get("AccessToken");
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/edit`, {
-    method: "PUT",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/user/edit`,
+    {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      credentials: "include",
+      body: formData,
     },
-    credentials: "include",
-    body: formData,
-  });
+  );
 
-  return res.json();
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.message);
+  }
+
+  return data;
 };
 
 export const useEditProfile = () => {
@@ -26,12 +35,7 @@ export const useEditProfile = () => {
     mutationFn: editProfile,
 
     onSuccess: (data) => {
-      if (data.statusCode === 200) {
-        toast({
-          variant: "success",
-          title: "آواتار با موفقیت بروزرسانی شد",
-        });
-
+      if (data.statusCode === 200) {  
         queryClient.invalidateQueries({
           queryKey: ["auth"],
         });
@@ -179,8 +183,8 @@ export const useTwoStepMutation = ({
 };
 
 export const useUser = () => {
-  const accessToken = Cookies.get("AccessToken");
   const getUser = async () => {
+    const accessToken = Cookies.get("AccessToken");
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/getMe`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -190,8 +194,8 @@ export const useUser = () => {
   };
   return useQuery({
     queryKey: ["auth"],
-    enabled: !!accessToken,
     queryFn: getUser,
+    enabled: !!Cookies.get("AccessToken"),
     staleTime: Infinity,
   });
 };

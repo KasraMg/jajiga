@@ -1,11 +1,10 @@
+import { useAddComment } from "@/src/api/villa";
 import { ButtonLoader } from "@/src/components/modules/loader/loader";
 import Textarea from "@/src/components/modules/textarea/textarea";
 import { Button } from "@/src/components/shadcn/ui/button";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
-import usePostData from "@/src/hooks/usePostData";
 import { authStore } from "@/src/stores/auth";
 import { Comment } from "@/src/types/villa.types";
-import { useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -26,8 +25,7 @@ const Comments = ({
   const [mainCommentID, setMainCommentID] = useState("");
   const [score, setScore] = useState<number | null>(null);
   const [idAnswer, setIdAnswer] = useState("");
-  const queryClient = useQueryClient();
-  
+
   const params = useParams();
   const handleClick = (index: number) => {
     if (score === index + 1) {
@@ -40,47 +38,31 @@ const Comments = ({
   useEffect(() => {
     if (userData) {
       const reserve = userData.booked.some(
-        (book) => book.villa._id === params.id, 
+        (book) => book.villa._id === params.id,
       );
       setIsReserve(reserve);
     }
   }, [userData]);
 
-  const successFunc = (data: { statusCode: number }) => {
-    if (data.statusCode === 200) {
-      toast({
-        variant: "success",
-        title:
-          "نظر شما با موفقیت ثبت و پس از تایید ادمین به سایت اضافه خواهد شد",
-      });
-      queryClient.invalidateQueries({ queryKey: ["villa",params.id] });
+  const { mutate: mutation, isPending } = useAddComment(
+    params.id as string,
+    !!idAnswer,
+    mainCommentID,
+    () => {
       setIdAnswer("");
       setBody("");
+      setAnswerBody("");
       setScore(null);
-    } else {
-      toast({
-        variant: "danger",
-        title: "مشکلی در ثبت نظر وجود دارد...",
-      });
-      location.reload();
-    }
-  };
-  const { mutate: mutation, isPending } = usePostData<any>(
-    idAnswer ? `/comment/answer/${mainCommentID}` : `/comment/create`,
-    null,
-    false,
-    successFunc,
+    },
   );
-
   const addCommentHandler = () => {
     setIdAnswer("");
     if (score && body) {
-      const data = {
+      mutation({
         body,
         score,
-        villa: params.id,
-      };
-      mutation(data);
+        villa: String(params.id),
+      });
     } else
       toast({
         variant: "danger",
@@ -112,7 +94,10 @@ const Comments = ({
               {comments?.map(
                 (comment) =>
                   comment.isAccept === "true" && (
-                    <section key={comment._id} className="mb-6 border-b border-solid border-gray-200 pb-4">
+                    <section
+                      key={comment._id}
+                      className="mb-6 border-b border-solid border-gray-200 pb-4"
+                    >
                       <div className="flex justify-between">
                         <div className="flex items-center gap-3">
                           <Image
@@ -137,7 +122,10 @@ const Comments = ({
                           {Array(comment.score)
                             .fill(0)
                             .map(() => (
-                              <FaStar key={comment.score} className="text-orange-500" />
+                              <FaStar
+                                key={comment.score}
+                                className="text-orange-500"
+                              />
                             ))}
                           {Array(5 - comment.score)
                             .fill(0)

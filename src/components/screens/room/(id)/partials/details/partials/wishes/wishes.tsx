@@ -1,60 +1,62 @@
 import React, { useState } from "react";
 import { useParams } from "next/navigation";
-import usePostData from "@/src/hooks/usePostData";
 import { authStore } from "@/src/stores/auth";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
 import { FaHeart, FaRegHeart } from "react-icons/fa6";
 import Loader from "@/src/components/modules/loader/loader";
 import { useQueryClient } from "@tanstack/react-query";
-import {  VillaResponse } from "@/src/types/villa.types";
+import { VillaResponse } from "@/src/types/villa.types";
+import { useToggleWish } from "@/src/api/wishes";
 
-const Wishes = ({ wishesStatus,data }: { wishesStatus: boolean,data:VillaResponse }) => {
-  
+const Wishes = ({
+  wishesStatus,
+  data,
+}: {
+  wishesStatus: boolean;
+  data: VillaResponse;
+}) => {
   const queryClient = useQueryClient();
   const { userData } = authStore((store) => store);
   const [wishes, setWishes] = useState(wishesStatus);
-  const successFunc = (resdata: { statusCode: number }) => {
-    if (resdata.statusCode === 200) {
-      toast({
-        variant: "success",
-        title: !wishes
-          ? "اقامتگاه با موفقیت به علاقه مندی های شما اضافه شد"
-          : "اقامتگاه با موفقیت از علاقه مندی های شما حذف شد",
-      });
-      setWishes((prev) => !prev);
-      queryClient.invalidateQueries({ queryKey: ["auth"] });
-      queryClient.invalidateQueries({ queryKey: ["villa", params.id] });
-    } else {
-      toast({ 
-        variant: "success",
-        title: "خطایی غیر منتظره رخ داد",
-      });
-      // location.reload();
-    }
-  };
 
   const params = useParams();
-  const { mutate: mutation, isPending } = usePostData<any>(
-    `/wishes/${params?.id}`,
-    null,
-    false,
-    successFunc,
-  );
+  const { mutate: mutation, isPending } = useToggleWish();
 
   const wishesHandler = () => {
- 
     if (userData) {
-      if (data.villa.isAccepted !=='false') {
-        const obj: { flag: boolean | null } = { flag: null };
+      if (data.villa.isAccepted !== "false") {
+        const obj: { flag: boolean; villaId: string } = {
+          flag: false,
+          villaId: data.villa._id,
+        };
         wishes ? (obj.flag = false) : (obj.flag = true);
-        mutation(obj);
-      }else{
+
+        mutation(obj, {
+          onSuccess(data) {
+            if (data.statusCode === 200) {
+              toast({
+                variant: "success",
+                title: !wishes
+                  ? "اقامتگاه با موفقیت به علاقه مندی های شما اضافه شد"
+                  : "اقامتگاه با موفقیت از علاقه مندی های شما حذف شد",
+              });
+              setWishes((prev) => !prev);
+              queryClient.invalidateQueries({ queryKey: ["auth"] });
+              queryClient.invalidateQueries({ queryKey: ["villa", params.id] });
+            } else {
+              toast({
+                variant: "success",
+                title: "خطایی غیر منتظره رخ داد",
+              });
+            }
+          },
+        });
+      } else {
         toast({
           variant: "danger",
           title: "این ویلا هنوز توسط ادمین تایید نشده است",
         });
       }
-    
     } else {
       toast({
         variant: "danger",

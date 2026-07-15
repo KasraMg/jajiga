@@ -9,7 +9,7 @@ const Footer = () => {
   const { login } = authStore((state) => state);
 
   return (
-    <div className="mt-10 rounded-2xl bg-[#f1f1f1] pt-8">
+    <div className="pt-10 rounded-2xl bg-[#f1f1f1] z-50 relative">
       <div className="Container mx-auto px-3 sm:!px-5">
         <div className="flex flex-col justify-between gap-8 md:flex-row">
           <div className="mb-5 flex w-full flex-col lg:mb-0">

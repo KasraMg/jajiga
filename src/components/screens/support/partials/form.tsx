@@ -1,5 +1,4 @@
-"use client";
-import usePostData from "@/src/hooks/usePostData";
+"use client"; 
 import { supportSchema } from "@/src/schema/rules";
 import { useFormik } from "formik";
 import React, { useState } from "react";

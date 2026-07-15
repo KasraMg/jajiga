@@ -1,15 +1,11 @@
 "use client";
 import React from "react";
 import Slider from "@/src/components/modules/slider/slider";
-import Card from "../../../../modules/card/card"; 
-import useGetData from "@/src/hooks/useGetData";
-import { getPrivilegedVillas } from "@/src/utils/fetchs";
+import Card from "../../../../modules/card/card";
+import { usePrivilegedVillas } from "@/src/api/public";
 
 const SpecialAccommodations = () => {
-  const { data } = useGetData<any>(
-    ["privilegedVillas"],
-    getPrivilegedVillas,
-  ); 
+  const { data } = usePrivilegedVillas();
   return (
     <div>
       <p className="text-xl">اقامتگاه های ممتاز</p>
@@ -22,7 +18,7 @@ const SpecialAccommodations = () => {
           navigation={true}
           className="mb-12 mt-4 sm:!pl-6"
           data={data.villas}
-          breakPoints={{ 
+          breakPoints={{
             600: {
               slidesPerView: 2,
               spaceBetween: 15,

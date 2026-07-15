@@ -1,8 +1,8 @@
 import { Button } from "@/src/components/shadcn/ui/button";
 import {
   Dialog,
-  DialogContent, 
-  DialogTitle, 
+  DialogContent,
+  DialogTitle,
   DialogTrigger,
 } from "@/src/components/shadcn/ui/dialog";
 import { useEffect, useState } from "react";
@@ -11,11 +11,11 @@ import Link from "next/link";
 import { SlInfo } from "react-icons/sl";
 import { roomStore } from "@/src/stores/room";
 import { authStore } from "@/src/stores/auth";
-import usePostData from "@/src/hooks/usePostData";
 import { VillaDetails, UserDateSelectData } from "@/src/types/villa.types";
 import { useParams } from "next/navigation";
 import ReservationStepper from "./reservation-stepper";
 import { ButtonLoader } from "@/src/components/modules/loader/loader";
+import { useBookPrice } from "@/src/api/villa";
 
 const customStyles = {
   menu: (provided: any) => ({
@@ -49,18 +49,7 @@ const ReservationModal = ({
     useState<UserDateSelectData | null>();
   const params = useParams();
 
-  const successFunc = (data: UserDateSelectData) => {
-    if (data.statusCode === 200) {
-      setUserSelectData(data);
-    }
-  };
-
-  const { mutate: mutation, isPending } = usePostData<any>(
-    `/villa/Book/price/${params.id}`,
-    null,
-    false,
-    successFunc,
-  );
+  const { mutate: mutation, isPending } = useBookPrice(String(params.id));
 
   const userCountOptions: {
     label: string;
@@ -76,7 +65,13 @@ const ReservationModal = ({
           to: endDate,
         },
       };
-      mutation(data);
+      mutation(data, {
+        onSuccess: (data: UserDateSelectData) => {
+          if (data.statusCode === 200) {
+            setUserSelectData(data);
+          }
+        },
+      });
     }
   }, [countSelectedOption, startDate, endDate, login]);
 
@@ -99,7 +94,7 @@ const ReservationModal = ({
         </Button>
       </DialogTrigger>
       <DialogContent className="max-h-[440px] w-full max-w-full overflow-y-scroll sm:!max-w-[425px]">
-      <DialogTitle></DialogTitle>
+        <DialogTitle></DialogTitle>
         <div className="rounded-b-2xl py-[14px] sm:px-4">
           <p className="font-vazir mb-2 text-sm font-light text-[#252a31]">
             تاریخ سفر

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Menu from "../menu/menu";
 import { usePathname } from "next/navigation";
-import Link from "next/link"; 
+import Link from "next/link";
 import SearchBox from "./components/search-box";
 import Notification from "./components/notification";
 import { useUser } from "@/src/api/user";
@@ -13,7 +13,7 @@ const Navbar = ({ navbarContainer }: any) => {
   const [isSticky, setIsSticky] = useState<boolean>(
     route.length > 2 ? true : false,
   );
-  const { data: login } = useUser();
+  const { data } = useUser();
 
   useEffect(() => {
     window?.addEventListener("scroll", () => {
@@ -165,14 +165,15 @@ const Navbar = ({ navbarContainer }: any) => {
                   isSticky ? "text-black" : "text-white"
                 } font-vazir hidden flex-row-reverse gap-8 font-medium md:!flex`}
               >
-                {!login ? (
-                  <Link href={"/login"}>ورود / ثبت نام</Link>
-                ) : (
+                
+                {data?.user ? (
                   <Notification />
+                ) : (
+                  <Link href={"/login"}>ورود / ثبت نام</Link>
                 )}
 
                 <Link href={"/host"}>میزبان شوید</Link>
-                <Link href={"/wishes"}>علاقه مندی ها</Link>
+                <Link href={"/rooms"}>اقامتگاه ها</Link>
               </ul>
               <Menu isSticky={isSticky} />
             </section>

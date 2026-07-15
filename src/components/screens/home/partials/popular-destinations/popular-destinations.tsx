@@ -2,16 +2,11 @@
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Grid, Navigation } from "swiper/modules";
-
 import Card from "./card";
-import useGetData from "@/src/hooks/useGetData";
-import { getPopularDestinations } from "@/src/utils/fetchs";
+import { usePopularDestinations } from "@/src/api/public";
 
 const PopularDestinations = () => {
-  const { data } = useGetData<any>(
-    ["popularDestinations"],
-    getPopularDestinations,
-  );
+  const { data } = usePopularDestinations();
 
   return (
     <section className="py-5 text-right">

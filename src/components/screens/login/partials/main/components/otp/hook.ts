@@ -5,7 +5,11 @@ import { useQueryClient } from "@tanstack/react-query";
 
 import { toast } from "@/src/components/shadcn/ui/use-toast";
 import { getFromLocalStorage } from "@/src/utils/utils";
-import { useLoginOtpMutation, useRegisterOtpMutation } from "@/src/api/auth/otp";
+import {
+  useLoginOtpMutation,
+  useRegisterOtpMutation,
+} from "@/src/api/auth/otp";
+import { getUser } from "@/src/utils/fetchs";
 
 type Props = {
   setStep: React.Dispatch<React.SetStateAction<string>>;
@@ -33,7 +37,7 @@ export const useOtp = ({ setStep }: Props) => {
   const loginMutation = useLoginOtpMutation();
   const registerMutation = useRegisterOtpMutation();
 
-  const handleSuccess = (data: OtpResponse) => {
+  const handleSuccess = async (data: OtpResponse) => {
     if (data.statusCode === 200) {
       Cookies.set("RefreshToken", data.RefreshToken, {
         expires: 9999999,
@@ -43,7 +47,7 @@ export const useOtp = ({ setStep }: Props) => {
         expires: 9999999,
       });
 
-      queryClient.invalidateQueries({
+      await queryClient.refetchQueries({
         queryKey: ["auth"],
       });
 

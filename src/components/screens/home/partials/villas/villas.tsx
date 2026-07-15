@@ -1,21 +1,17 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import CitiesSelector from "./components/cities-selector";
+import CitiesSelector from "./cities-selector";
 import Slider from "@/src/components/modules/slider/slider";
 import Card from "../../../../modules/card/card";
-import useGetData from "@/src/hooks/useGetData";
-import { getAllActivatedVillas } from "@/src/utils/fetchs";
 import { VillaDetails } from "@/src/types/villa.types";
 import Image from "next/image";
+import { useAllActivatedVillas } from "@/src/api/public";
+
 const Villas = () => {
-  const { data } = useGetData<any>(
-    ["allActivatedVillas"],
-    getAllActivatedVillas,
-  ); 
-   
+  const { data } = useAllActivatedVillas();
   const [status, setStatus] = useState("همه شهرها");
   const [villaData, setVillaData] = useState(data?.villas);
-   useEffect(() => {
+  useEffect(() => {
     if (status === "همه شهرها") {
       setVillaData(data?.villas);
     } else {
@@ -24,7 +20,7 @@ const Villas = () => {
       );
       setVillaData(filtredResult);
     }
-  }, [status]);
+  }, [status, data]);
 
   return (
     <div className="superOfferBg relative z-20 overflow-hidden rounded-t-xl py-6">
@@ -58,9 +54,9 @@ const Villas = () => {
               alt="notFound"
               width={1000}
               className="mx-auto mt-10 w-[100px]"
-              height={1000}  
+              height={1000}
               src={"/images/notFound.png"}
-            /> 
+            />
             <p className="text-white">اقامتگاهی در این شهر یافت نشد</p>
           </div>
         )}

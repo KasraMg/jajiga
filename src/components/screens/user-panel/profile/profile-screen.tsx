@@ -12,6 +12,7 @@ import Loader from "@/src/components/modules/loader/loader";
 import swal from "sweetalert";
 import Metadata from "@/src/components/modules/meta-data";
 import { useEditProfile } from "@/src/api/user";
+import { toast } from "@/src/components/shadcn/ui/use-toast";
 
 const ProfileScreen = () => {
   const { userData, isPending } = authStore((state) => state);
@@ -62,7 +63,14 @@ const ProfileScreen = () => {
           setAvatar(base64String as string);
           const formData = new FormData();
           formData.append("avatar", file);
-          mutation(formData);
+          mutation(formData, {
+            onSuccess() {
+              toast({
+                variant: "success",
+                title: "آواتار با موفقیت بروزرسانی شد",
+              });
+            },
+          });
         };
         reader.readAsDataURL(file);
       } else {

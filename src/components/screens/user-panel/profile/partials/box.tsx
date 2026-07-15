@@ -9,11 +9,11 @@ import {
 } from "@/src/components/shadcn/ui/dialog";
 import { MdOutlineEdit } from "react-icons/md";
 import { Button } from "@/src/components/shadcn/ui/button";
-import usePostData from "@/src/hooks/usePostData";
 import { UserInfoObj } from "@/src/types/auth.types";
 import { toast } from "@/src/components/shadcn/ui/use-toast";
 import { useQueryClient } from "@tanstack/react-query";
 import { ButtonLoader } from "@/src/components/modules/loader/loader";
+import { useEditProfile } from "@/src/api/user";
 
 interface BoxProps {
   type: string;
@@ -59,17 +59,6 @@ const Box: FC<BoxProps> = ({
     }
   }, [value, values]);
 
-  const successFunc = (data: { statusCode: number }) => {
-    if (data.statusCode === 200) {
-      toast({
-        variant: "success",
-        title: "اطلاعات با موفقیت بروزرسانی شد",
-      });
-      setOpen(false);
-      queryClient.invalidateQueries({ queryKey: ["auth"] });
-    }
-  };
-
   const inputChangeHandler = (value: string, setHandler: any) => {
     setdisabled(false);
     if (type !== "radio") {
@@ -88,12 +77,7 @@ const Box: FC<BoxProps> = ({
     }
   };
 
-  const { mutate: mutation, isPending } = usePostData<UserInfoObj>(
-    "/user/edit",
-    null,
-    true,
-    successFunc,
-  );
+  const { mutate: mutation, isPending } = useEditProfile();
 
   const submitHandler = () => {
     if (values) {
@@ -112,7 +96,18 @@ const Box: FC<BoxProps> = ({
         const newData = {
           [requestBody]: data,
         };
-        mutation(newData as any);
+        mutation(newData as any, {
+          onSuccess(data) {
+            if (data.statusCode === 200) {
+              toast({
+                variant: "success",
+                title: "اطلاعات با موفقیت بروزرسانی شد",
+              });
+              setOpen(false);
+              queryClient.invalidateQueries({ queryKey: ["auth"] });
+            }
+          },
+        });
       }
     }
   };
