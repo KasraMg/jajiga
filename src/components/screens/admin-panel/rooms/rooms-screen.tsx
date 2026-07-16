@@ -26,7 +26,7 @@ const RoomsScreen = () => {
   const tableData = useMemo(() => {
     return (
       villas?.villas.map((villa: VillaDetails) => ({
-        userData: `${villa.user.firstName} ${villa.user.lastName}`,
+        userData: `${villa?.user?.firstName || 'ناشناس'} ${villa?.user?.lastName || ""}`,
         preview: <Link href={`/room/${villa._id}`}>مشاهده</Link>,
         address: `${villa.address.state}،${villa.address.city}`,
         reserves: villa.booked,
@@ -41,12 +41,9 @@ const RoomsScreen = () => {
                 variant="blue"
                 className="h-8 w-12 justify-center"
                 onClick={() => approveVilla(villa._id)}
-              >
-                {roomStatusChange[0] === "accept" && isPending ? (
-                  <ButtonLoader />
-                ) : (
-                  "تایید"
-                )}
+              > 
+                تایید
+                
               </Button>
 
               <Button
@@ -54,11 +51,7 @@ const RoomsScreen = () => {
                 className="h-8 w-12 justify-center"
                 onClick={() => rejectVilla(villa._id)}
               >
-                {roomStatusChange[0] === "reject" && isPending ? (
-                  <ButtonLoader />
-                ) : (
-                  "رد"
-                )}
+              رد
               </Button>
             </div>
           ),
@@ -108,7 +101,7 @@ const RoomsScreen = () => {
         noDataComponent="اقامتگاهی یافت نشد"
       />
 
-      {(deleteHandlerPending || getVillasPending) && <Loader />}
+      {(deleteHandlerPending || getVillasPending || isPending) && <Loader />}
     </>
   );
 };

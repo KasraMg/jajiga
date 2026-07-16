@@ -3,6 +3,7 @@ import Breadcrumb from "@/src/components/modules/breadcrumb/breadcrumb";
 import Container from "@/src/components/modules/container/container";
 import Metadata from "@/src/components/modules/meta-data";
 import { getFromLocalStorage } from "@/src/utils/utils";
+import { Check, CheckCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -23,19 +24,13 @@ const SuccessfullScreen = () => {
       >
         <div className="Container">
           <div className="flex max-w-[1120px] flex-col justify-center gap-5 py-8">
-            <Image
-              className="mx-auto mt-20 !h-28 !w-28"
-              alt="verified-account"
-              src="/images/verify.PNG"
-              width={100}
-              height={100}
-            />
-            <p className="mt-3 text-center text-sm sm:!text-xl">
+            <CheckCircle size={120} className="mx-auto mt-20 stroke-green-600"/>
+            <p className="mt-3 text-center sm:!text-xl">
               اقامتگاه شما با موفقیت ثبت شد و پس از تایید ادمین به لیست ویلا ها
               اضافه خواهد شد
             </p>
             <Link
-              className="text-sx text-center text-blue-600"
+              className="text-sx text-center text-green-600"
               href={`/room/${villaId}`}
             >
               مشاهده اقامتگاه

@@ -10,8 +10,8 @@ const Reserves = ({ books }: { books: Book[] }) => {
   
   useEffect(() => {
     const tableData: unknown = books.map((Book: Book) => ({
-      userData: Book.user.firstName + " " + Book.user.lastName,
-      phone: Book.user.phone,
+      userData: Book?.user?.firstName || 'ناشناس' + " " + Book?.user?.lastName || "",
+      phone: Book?.user?.phone,
       room: (
         <Link href={`/room/${Book.villa}`}>
           <Button size={"sm"} variant={"main"}>

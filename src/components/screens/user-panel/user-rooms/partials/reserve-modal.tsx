@@ -18,7 +18,7 @@ const ReserveModal = ({ booked }: { booked: Book[] }) => {
   useEffect(() => {
     if (booked.length) {
       const tableData = booked.map((Book) => ({
-        reserveBy: Book.user.firstName + " " + Book.user.lastName,
+        reserveBy: Book?.user?.firstName || 'ناشناس' + " " + Book?.user?.lastName || "",
         price: Number(Book.price).toLocaleString(),
         from: Book.date.from,
         to: Book.date.to,
