@@ -23,6 +23,7 @@ export const useVilla = (id: string) => {
     queryKey: ["villa", id],
     queryFn: () => getVilla(id),
     enabled: !!id,
+    staleTime: 1000 * 60 * 5,
   });
 };
 

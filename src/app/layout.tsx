@@ -4,7 +4,7 @@ import Hydrated from "../providers/hydrated";
 import { getUser } from "../utils/server-fetchs";
 import Auth from "../components/modules/auth";
 import { Toaster } from "@/src/components/shadcn/ui/toaster";
-import InternetStatus from "../components/modules/internet-status";
+// import InternetStatus from "../components/modules/internet-status";
 import { Metadata, Viewport } from "next";
 import { fonts } from "../utils/fonts";
 
@@ -32,7 +32,6 @@ export default function RootLayout({
         <QueryWrapper>
           <Hydrated queryKey={["auth"]} queryFn={getUser}>
             <Auth />
-            <InternetStatus />
             {children}
           </Hydrated>
           {/* <ContextMenu>{children}</ContextMenu> */}
