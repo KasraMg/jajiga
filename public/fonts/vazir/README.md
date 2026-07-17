@@ -98,7 +98,7 @@ You can install the font on macOS machines by tapping the caskroom/fonts repo:
 
 ```shell
 brew tap caskroom/fonts
-brew install font-vazir
+brew install 
 ```
 
 #### Arch Linux

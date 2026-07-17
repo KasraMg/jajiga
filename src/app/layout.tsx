@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${fonts.variable}`}>
+      <body className={fonts.className}>
         <QueryWrapper>
           <Hydrated queryKey={["auth"]} queryFn={getUser}>
             <Auth />

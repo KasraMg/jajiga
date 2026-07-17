@@ -56,9 +56,9 @@ const Price = () => {
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent className="w-96">
+      <PopoverContent className="sm:!w-96 w-[96%]">
         <div className="relative z-50 bg-white p-3 py-5 before:absolute before:right-0 before:top-4 before:block before:h-8 before:w-2 before:rounded-l-lg before:bg-customYellow before:content-['']">
-          <p className="font-vazir text-base font-normal sm:text-lg">
+          <p className="text-base font-normal sm:text-lg">
             محدوده اجاره‌بها
           </p>
 

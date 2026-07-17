@@ -57,7 +57,7 @@ const Zone = () => {
 
       <PopoverContent>
         <div className="relative z-50 bg-white p-3 py-5 before:absolute before:right-0 before:top-4 before:block before:h-8 before:w-2 before:rounded-l-lg before:bg-customYellow">
-          <p className="font-vazir text-base font-normal sm:!text-lg">
+          <p className="text-base font-normal sm:!text-lg">
             منطقه اقامتگاه
           </p>
 
@@ -70,11 +70,14 @@ const Zone = () => {
                   key={zone.value}
                   className="flex justify-between border-b border-gray-200 px-3 pb-2"
                 >
-                  <p className="text-xs sm:!text-base">{zone.label}</p>
+                  <label htmlFor={zone.value} className="text-xs sm:!text-base">
+                    {zone.label}
+                  </label>
 
                   <input
                     className="rounded-md border-gray-300"
                     type="checkbox"
+                    id={zone.value}
                     checked={isCheck}
                     onChange={(e) =>
                       inputChangeHandler(e.target.checked, zone.value)

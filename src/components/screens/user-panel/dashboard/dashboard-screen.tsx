@@ -62,7 +62,7 @@ const DashboardScreen = () => {
             />
           </div>
           <div className="flex items-center justify-center gap-2">
-            <p className="font-vazir text-sm font-thin">
+            <p className=" text-sm font-thin">
               {userData?.user.firstName} {userData?.user.lastName}
             </p>
             <Link

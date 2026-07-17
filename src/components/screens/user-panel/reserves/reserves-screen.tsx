@@ -28,7 +28,7 @@ const ReservesScreen = () => {
         <div className="Container">
           <main>
             {userData?.booked?.length ? (
-              <div className="mb-5 mt-5 grid grid-cols-[1fr] gap-6 md:!grid-cols-[1fr,1fr] lg:!grid-cols-[1fr,1fr,1fr]">
+              <div className="mb-5 mt-5 grid grid-cols-[1fr] gap-y-8 gap-6 md:!grid-cols-[1fr,1fr] lg:!grid-cols-[1fr,1fr,1fr]">
                 {userData.booked.map((book: any) => (
                   <Card className="w-full" key={book._id} data={book} />
                 ))}

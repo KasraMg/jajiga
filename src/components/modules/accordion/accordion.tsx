@@ -21,10 +21,10 @@ const Accordion: FC<AccordionProps> = ({ className, title, text, id }) => {
       collapsible
     >
       <AccordionItem value={`item-${id}`}>
-        <AccordionTrigger className="font-vazir text-sm !font-normal hover:no-underline">
+        <AccordionTrigger className=" text-sm !font-normal hover:no-underline">
           {title}
         </AccordionTrigger>
-        <AccordionContent className="font-vazir text-sm font-light leading-6 text-[#404040]">
+        <AccordionContent className=" text-sm font-light leading-6 text-[#404040]">
           {text}
         </AccordionContent>
       </AccordionItem>

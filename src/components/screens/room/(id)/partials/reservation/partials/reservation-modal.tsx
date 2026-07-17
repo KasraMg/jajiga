@@ -93,10 +93,10 @@ const ReservationModal = ({
           <span>درخواست رزرو</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-h-[440px] w-full max-w-full overflow-y-scroll sm:!max-w-[425px]">
+      <DialogContent className="max-h-full w-full max-w-full overflow-y-scroll sm:!max-w-[425px]">
         <DialogTitle></DialogTitle>
         <div className="rounded-b-2xl py-[14px] sm:px-4">
-          <p className="font-vazir mb-2 text-sm font-light text-[#252a31]">
+          <p className=" mb-2 text-sm font-light text-[#252a31]">
             تاریخ سفر
           </p>
           <Link
@@ -116,7 +116,7 @@ const ReservationModal = ({
               {endDate ? <p className="text-black">{endDate}</p> : "تاریخ خروج"}{" "}
             </div>
           </Link>
-          <p className="font-vazir mb-2 mt-8 text-sm font-light text-[#252a31]">
+          <p className=" mb-2 mt-8 text-sm font-light text-[#252a31]">
             تعداد نفرات
           </p>
           <Select
@@ -302,6 +302,7 @@ const ReservationModal = ({
             <ReservationStepper
               disable={disable}
               data={data}
+              setOpenReserveModal={setOpenReserveModal}
               totalPrice={userSelectData?.totalPrice.toLocaleString() as string}
               usersCount={countSelectedOption?.value as any}
               totalDays={userSelectData?.totalDays}

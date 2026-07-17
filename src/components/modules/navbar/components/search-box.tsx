@@ -53,7 +53,7 @@ const SearchBox = () => {
             boxShadow:
               "rgba(37, 42, 49, 0.16) 0px 4px 8px 0px, rgba(37, 42, 49, 0.24) 0px 8px 24px 0px",
           }}
-          className="absolute top-[110%] z-[9999] flex w-full items-center justify-center gap-4 rounded-md bg-white py-5 transition-transform"
+          className="absolute top-[110%] z-[9999] flex w-full lg:!flex-row flex-col-reverse items-center justify-center gap-4 rounded-md bg-white py-5 transition-transform"
         >
           <div className="flex gap-2 [&>*]:rounded-full [&>*]:bg-customYellow [&>*]:p-1 [&>*]:px-2 [&>*]:text-xs [&>*]:font-light">
             <Link

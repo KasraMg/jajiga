@@ -75,17 +75,12 @@ const WishesScreen = () => {
                         fill="#9B9B9B"
                       ></path>
                     </svg>
-                    <p className="!font-vazir font-extrabold text-[#404040]">
+                    <p className="font-extrabold text-[#404040]">
                       هنوز اقامتگاهی رو اضافه نکردی
                     </p>
-                    <div className="flex items-center justify-center text-[#404040]">
-                      <span className="!font-vazir text-sm font-light">
-                        هر اقامتگاهی که ازش خوشت میاد رو با کلیک بر
-                      </span>
-                      <FaRegHeart className="mx-1 text-[#cc0001]" />
-                      <span className="!font-vazir text-sm font-light">
-                        به این لیست اضافه کن، تا وقتی تخفیف میخوره خبرت کنیم
-                      </span>
+                    <div className="pb-4 flex items-center justify-center text-sm font-light text-[#404040]">
+                      هر اقامتگاهی که ازش خوشت میاد رو با کلیک بر قلب به این
+                      لیست اضافه کن، تا وقتی تخفیف میخوره خبرت کنیم
                     </div>
                     <Link href={"/rooms"}>
                       <Button
@@ -93,7 +88,7 @@ const WishesScreen = () => {
                         className="cursor-pointer !rounded-lg px-3 duration-300 hover:bg-[#d2b43d]"
                       >
                         <CiSearch className="ml-2 text-xl" />
-                        <p className="font-vazir text-base font-light">جستجو</p>
+                        <p className=" text-base font-light">جستجو</p>
                       </Button>
                     </Link>
                   </div>

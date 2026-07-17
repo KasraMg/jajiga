@@ -24,18 +24,18 @@ const Images = () => {
         <div className="w-full">
           <p>تصاویر اقامتگاه را آپلود کنید</p>
 
-          <p className="font-vazir mt-3 text-sm font-light">
+          <p className=" mt-3 text-sm font-light">
             ارائه تصاویر زیبا و واقعی از اقامتگاه شما می‌تواند نقش بسیار مهمی در
             جلب نظر میهمانان ایفا نماید. لذا:
           </p>
 
           <ul className="mr-4 mt-4 list-disc text-sm">
-            <li className="font-vazir font-light">
+            <li className=" font-light">
               حداقل 3 عکسِ باکیفیت، از پذیرایی، اتاق خواب‌ها، آشپزخانه، سرویس
               بهداشتی، حیاط و نمای ساختمان آپلود کنید.
             </li>
 
-            <li className="font-vazir mt-2 font-light">
+            <li className=" mt-2 font-light">
               ترجیحاً از تصاویر افقی (Landscape) استفاده کنید.
             </li>
           </ul>
@@ -52,7 +52,7 @@ const Images = () => {
               <BsCamera />
             </div>
 
-            <p className="font-vazir mt-3 text-sm font-light">انتخاب تصویر +</p>
+            <p className=" mt-3 text-sm font-light">انتخاب تصویر +</p>
           </div>
 
           <div className="mb-20 mt-5 grid grid-cols-[1fr,1fr] gap-4 rounded-lg">

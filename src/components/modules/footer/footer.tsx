@@ -20,14 +20,14 @@ const Footer = () => {
                   <div className="flex flex-col space-y-2">
                     {!login ? (
                       <Link
-                        className="font-vazir text-sm font-light text-blue-700"
+                        className=" text-sm font-light text-blue-700"
                         href={"/login"}
                       >
                         ورود/ثبت نام
                       </Link>
                     ) : (
                       <Link
-                        className="font-vazir text-sm font-light text-blue-700"
+                        className=" text-sm font-light text-blue-700"
                         href={"/dashboard"}
                       >
                         حساب کاربری
@@ -35,19 +35,19 @@ const Footer = () => {
                     )}
 
                     <Link
-                      className="font-vazir text-sm font-light text-blue-700"
+                      className=" text-sm font-light text-blue-700"
                       href={"/"}
                     >
                       صفحه اصلی
                     </Link>
                     <Link
-                      className="font-vazir text-sm font-light text-blue-700"
+                      className=" text-sm font-light text-blue-700"
                       href={"/rooms"}
                     >
                       همه اقامتگاه ها
                     </Link>
                     <Link
-                      className="font-vazir text-sm font-light text-blue-700"
+                      className=" text-sm font-light text-blue-700"
                       href={"/host"}
                     >
                       میزبان شو
@@ -55,26 +55,26 @@ const Footer = () => {
                   </div>
                   <div className="flex flex-col space-y-2">
                     <Link
-                      className="font-vazir text-sm font-light text-blue-700"
+                      className=" text-sm font-light text-blue-700"
                       href={"/rules"}
                     >
                       قوانین وبسایت
                     </Link>
                     <Link
-                      className="font-vazir text-sm font-light text-blue-700"
+                      className=" text-sm font-light text-blue-700"
                       href={"/faq"}
                     >
                       سوالات متداول
                     </Link>
                     <Link
-                      className="font-vazir text-sm font-light text-blue-700"
+                      className=" text-sm font-light text-blue-700"
                       href={"/support"}
                     >
                       پشتیبانی
                     </Link>
 
                     <Link
-                      className="font-vazir text-sm font-light text-blue-700"
+                      className=" text-sm font-light text-blue-700"
                       href={"/about"}
                     >
                       درباره ما

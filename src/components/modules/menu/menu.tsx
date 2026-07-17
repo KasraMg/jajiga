@@ -55,11 +55,6 @@ function Menu({ isSticky }: any) {
       icon: <TbMessage2Question className="text-xl" />,
     },
     {
-      name: "قوانین وبسایت",
-      path: "/rules",
-      icon: <GrNotes className="text-xl" />,
-    },
-    {
       name: "درباره ما",
       path: "/about",
       icon: <TbInfoCircle className="text-xl" />,
@@ -84,13 +79,18 @@ function Menu({ isSticky }: any) {
       path: "/dashboard",
       icon: <FaRegUser className="text-xl" />,
     });
+    navLinks.splice(2, 0, {
+      name: "اقامتگاه های من ",
+      path: "/user-rooms",
+      icon: <TbHomePlus className="text-xl" />,
+    });
   }
   if (userData?.booked?.length) {
     navLinks.splice(4, 0, {
       name: "رزرو ها",
       path: "/reserves",
       icon: <TbHomePlus className="text-xl" />,
-    }); 
+    });
   }
   return (
     <Sheet>
@@ -118,7 +118,7 @@ function Menu({ isSticky }: any) {
       </SheetTrigger>
       <SheetContent
         dir="ltr"
-        className={`fixed right-0 top-0 z-[9999] h-screen w-72 overflow-y-auto rounded-l-2xl border-r bg-white py-7 transition-transform dark:bg-gray-800`}
+        className={`fixed right-0 top-0 z-[9999] h-screen w-72 overflow-y-auto rounded-l-2xl border-r bg-white py-7 !pb-0 transition-transform dark:bg-gray-800`}
       >
         <SheetHeader>
           <div
@@ -182,7 +182,7 @@ function Menu({ isSticky }: any) {
               <Link
                 key={link.path}
                 href={link.path}
-                className={`${pathname === link.path ? "bg-[#f5f5f5]" : null} font-vazir flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]`}
+                className={`${pathname === link.path ? "bg-[#f5f5f5]" : null} flex flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]`}
               >
                 {link.icon}
                 <span className="mt-1 text-sm">{link.name}</span>
@@ -191,24 +191,13 @@ function Menu({ isSticky }: any) {
             {userData && (
               <li
                 onClick={logoutHandler}
-                className="font-vazir flex cursor-pointer flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]"
+                className="flex cursor-pointer flex-row-reverse items-center gap-2 rounded-r-3xl py-2 pb-3 pl-6 pr-2 font-light text-[#666666] hover:bg-[#f5f5f5]"
               >
                 <AiOutlineLogout className="text-xl" />
                 <span className="mt-1 text-sm">خروج</span>
               </li>
             )}
           </ul>
-        </div>
-        <div className="absolute bottom-0 left-0 flex w-full flex-row-reverse justify-around rounded-t-3xl bg-[#c1c1c175] px-2 py-3 text-xl">
-          <a href="https://t.me/MrShahiin">
-            <PiTelegramLogoLight />
-          </a>
-          <a href="https://github.com/KasraMg">
-            <PiInstagramLogo />
-          </a>
-          <a href="https://github.com/KasraMg">
-            <PiGithubLogo />
-          </a>
         </div>
       </SheetContent>
     </Sheet>

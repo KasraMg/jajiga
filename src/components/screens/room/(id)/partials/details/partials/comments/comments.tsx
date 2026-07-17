@@ -134,7 +134,7 @@ const Comments = ({
                             ))}
                         </div>
                       </div>
-                      <p className="font-vazir mt-5 text-sm font-light">
+                      <p className=" mt-5 text-sm font-light">
                         {comment.body}
                       </p>
 
@@ -159,7 +159,7 @@ const Comments = ({
                               </span>
                             </div>
                           </div>
-                          <p className="font-vazir mt-5 text-sm font-light">
+                          <p className=" mt-5 text-sm font-light">
                             {comment.answerComment[0].body}
                           </p>
                         </section>

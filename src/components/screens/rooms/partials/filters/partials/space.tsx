@@ -60,10 +60,10 @@ const Space = () => {
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent>
+      <PopoverContent className="mr-3">
         <div className="relative z-50 bg-white p-3">
           <div className="flex items-center justify-between text-sm">
-            <p className="font-vazir font-extrabold">تعداد نفرات</p>
+            <p className="font-extrabold">تعداد نفرات</p>
 
             <div className="flex items-center justify-between pl-1">
               <div>

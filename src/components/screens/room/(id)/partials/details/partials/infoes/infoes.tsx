@@ -17,7 +17,7 @@ const Infoes = (data: VillaDetails) => {
   const villaZone = zoneOptions.find(
     (zone) => zone.value === data.aboutVilla.villaZone,
   );
- 
+
   const { data: facibility, status } = useStep6Items();
 
   useEffect(() => {
@@ -59,7 +59,7 @@ const Infoes = (data: VillaDetails) => {
     <div>
       <h2 className="my-6 mb-4 text-lg text-[#252a31]">درباره اقامتگاه</h2>
       <p className="text-[#404040]">اجاره اقامتگاه در {data.address.city}</p>
-      <div className="font-vazir text-sm font-light leading-6 text-[#404040]">
+      <div className="text-sm font-light leading-6 text-[#404040]">
         {data.aboutVilla.aboutVilla}
       </div>
       <hr className="mt-4" />

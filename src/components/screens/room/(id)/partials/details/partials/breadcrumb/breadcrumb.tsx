@@ -12,21 +12,21 @@ const Breadcrumb: FC<BreadcrumbProps> = ({ state, city, className }) => {
     <div className={`${className && className} flex items-center gap-1`}>
       <Link
         href={"/"}
-        className="font-vazir relative z-50 font-light text-black"
+        className=" relative z-50 font-light text-black"
       >
         جاجیگا
       </Link>
       <FaAngleLeft />
       <Link
         href={`/rooms?city=${state}`}
-        className="font-vazir relative z-50 font-light text-black"
+        className=" relative z-50 font-light text-black"
       >
         {state}
       </Link>
       <FaAngleLeft />
       <Link
         href={`/rooms?city=${city}`}
-        className="font-vazir relative z-50 font-light text-black"
+        className=" relative z-50 font-light text-black"
       >
         {city}
       </Link>

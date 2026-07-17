@@ -133,7 +133,7 @@ const BaseInformation = () => {
             <div>
               <p>موقعیت مکانی (لوکیشن) را به دقت مشخص کنید.</p>
 
-              <p className="font-vazir my-2 font-light leading-6">
+              <p className=" my-2 font-light leading-6">
                 لوکیشن ثبت شده برای مسیریابی به مهمانان ارسال می‌شود.
               </p>
             </div>
@@ -151,7 +151,7 @@ const BaseInformation = () => {
             />
           )}
 
-          <p className="font-vazir text-sm font-light leading-6">
+          <p className=" text-sm font-light leading-6">
             مکان نما در وسط صفحه ثابت است. نقشه را به گونه ای حرکت دهید تا مکان
             نما بر روی مکان اقامتگاه شما قرار گیرد.
           </p>

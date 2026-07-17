@@ -14,7 +14,7 @@ const Card: FC<CardProps> = ({data}:CardProps) => {
       {data.svg}
       <div>
         <p>{data.title}</p>
-        <span className="font-vazir font-light  text-xs">{data.text}</span>
+        <span className=" font-light  text-xs">{data.text}</span>
       </div>
     </section>
   );

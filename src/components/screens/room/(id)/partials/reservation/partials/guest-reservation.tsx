@@ -34,7 +34,7 @@ const GuestReservation = ({ data }: { data: VillaResponse }) => {
 
   return data.villa.isAccepted === "true" ? (
     <div className="rounded-b-2xl px-4 py-[14px] shadow-lg">
-      <p className="font-vazir mb-2 text-sm font-light text-[#252a31]">
+      <p className="mb-2 text-sm font-light text-[#252a31]">
         {reserveData ? "تاریخ رزرو شما" : " تاریخ سفر"}
       </p>
       <div className="flex items-center justify-evenly rounded-lg border border-[#d6d6d6] px-5 py-2">
@@ -63,7 +63,7 @@ const GuestReservation = ({ data }: { data: VillaResponse }) => {
           </Link>
         </div>
       </div>
-      <p className="font-vazir mb-2 mt-8 text-sm font-light text-[#252a31]">
+      <p className="mb-2 mt-8 text-sm font-light text-[#252a31]">
         تعداد نفرات
       </p>
       <Select
@@ -73,7 +73,7 @@ const GuestReservation = ({ data }: { data: VillaResponse }) => {
         className="w-full"
         isRtl={true}
         isDisabled={!login || reserveData ? true : false}
-        isSearchable={true}
+        isSearchable={false}
         options={userCountOptions as any}
         placeholder={
           reserveData ? reserveData.guestNumber : "تعداد نفرات را مشخص کنید"

@@ -25,13 +25,13 @@ const Step2Screen = () => {
         </div>
         <div className="flex w-full flex-col gap-3">
           <p>انتخاب موقعیت در نقشه</p>
-          <p className="font-vazir text-sm font-light leading-6">
+          <p className=" text-sm font-light leading-6">
             مکان نما در وسط صفحه ثابت است. نقشه را به گونه ای حرکت دهیه تا مکان
             نما بر روی مکان اقامتگاه شما قرار گیرد. با استفاده از کلید + بر روی
             نقشه زوم کنید.
           </p>
           <Alert title="موقعیت مکانی (لوکیشن) را به دقت مشخص کنید.">
-            <p className="font-vazir my-2 font-light leading-6">
+            <p className=" my-2 font-light leading-6">
               لوکیشن ثبت شده برای مسیریابی به مهمانان ارسال می‌شود. طبق ضمانت
               تحویل جاجیگا، هرگونه مغایرت می‌تواند باعث لغو رزرو و عودت وجه به
               مهمان شود.

@@ -57,7 +57,7 @@ const Price = () => {
           <div key={item.id} className="py-2 pb-3">
             <AccordionParent type="single" collapsible>
               <AccordionItem value={`item-${item.id}`}>
-                <AccordionTrigger className="font-vazir text-sm !font-normal hover:no-underline">
+                <AccordionTrigger className=" text-sm !font-normal hover:no-underline">
                   <div>
                     <div className="flex items-center gap-3">
                       <img
@@ -66,7 +66,7 @@ const Price = () => {
                         alt={item.title}
                       />
 
-                      <p className="font-vazir font-extrabold">{item.title}</p>
+                      <p className=" font-extrabold">{item.title}</p>
                     </div>
 
                     <p className="mb-3 mt-2 text-sm">
@@ -75,7 +75,7 @@ const Price = () => {
                   </div>
                 </AccordionTrigger>
 
-                <AccordionContent className="font-vazir text-sm font-light leading-6 text-[#404040]">
+                <AccordionContent className=" text-sm font-light leading-6 text-[#404040]">
                   {seasonDatas[item.id - 1].Data.map((price, index) => (
                     <div
                       key={price.title}

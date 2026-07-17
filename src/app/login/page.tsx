@@ -6,6 +6,7 @@ export const metadata: Metadata = {
 };
 
 const Login = () => {
+  
   return <LoginScreen />;
 };
 

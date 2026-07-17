@@ -31,14 +31,14 @@ const Step4Screen = () => {
         </div>
         <div className="w-full space-y-4">
           <div className="flex flex-col items-start justify-between gap-2 md:flex-row md:!items-center md:!gap-0">
-            <p className="font-vazir min-w-[120px] text-sm font-light">
+            <p className=" min-w-[120px] text-sm font-light">
               فضای اقامتگاه
             </p>
             <Select
               defaultValue={spaceSelectedOption}
               onChange={setSpaceSelectedOption as any}
               isClearable={true}
-              className="font-vazir w-full font-light md:w-[200px] lg:!w-full"
+              className=" w-full font-light md:w-[200px] lg:!w-full"
               isRtl={true}
               isSearchable={true}
               options={spaceOptions}
@@ -46,14 +46,14 @@ const Step4Screen = () => {
             />
           </div>
           <div className="flex flex-col items-start justify-between gap-2 md:flex-row md:!items-center md:!gap-0">
-            <p className="font-vazir min-w-[120px] text-sm font-light">
+            <p className=" min-w-[120px] text-sm font-light">
               نوع اقامتگاه
             </p>
             <Select
               defaultValue={typeSelectedOption}
               onChange={setTypeSelectedOption as any}
               isClearable={true}
-              className="font-vazir w-full font-light md:w-[200px] lg:!w-full"
+              className=" w-full font-light md:w-[200px] lg:!w-full"
               isRtl={true}
               isSearchable={true}
               options={typeOptions}
@@ -61,14 +61,14 @@ const Step4Screen = () => {
             />
           </div>
           <div className="flex flex-col items-start justify-between gap-2 md:flex-row md:!items-center md:!gap-0">
-            <p className="font-vazir min-w-[120px] text-sm font-light">
+            <p className=" min-w-[120px] text-sm font-light">
               منطقه اقامتگاه
             </p>
             <Select
               defaultValue={areaSelectedOption}
               onChange={setAreaSelectedOption as any}
               isClearable={true}
-              className="font-vazir w-full font-light md:w-[200px] lg:!w-full"
+              className=" w-full font-light md:w-[200px] lg:!w-full"
               isRtl={true}
               isSearchable={true}
               options={zoneOptions}

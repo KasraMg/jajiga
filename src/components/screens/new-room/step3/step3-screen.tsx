@@ -33,16 +33,16 @@ const Step3Screen = () => {
         </div>
         <div className="w-full">
           <p>تصاویر اقامتگاه را آپلود کنید</p>
-          <p className="font-vazir mt-3 text-sm font-light">
+          <p className=" mt-3 text-sm font-light">
             ارائه تصاویر زیبا و واقعی از اقامتگاه شما می تواند نقش بسیار مهمی در
             جلب نظر میهمانان ایفا نماید. لذا:
           </p>
           <ul className="mr-4 mt-4 list-disc text-sm">
-            <li className="font-vazir font-light">
+            <li className=" font-light">
               حداقل 3 عکسِ باکیفیت، از پذیرایی، اتاق خواب ها، آشپزخانه، سرویس
               بهداشتی، حیاط و نمای ساختمان آپلود کنید.
             </li>
-            <li className="font-vazir mt-2 font-light">
+            <li className=" mt-2 font-light">
               ترجیحاً از تصاویر افقی (Landscape) استفاده کنید.
             </li>
           </ul>
@@ -58,7 +58,7 @@ const Step3Screen = () => {
             <div className="mx-auto block w-max rounded-full bg-gray-200 p-[10px] text-3xl text-gray-700">
               <BsCamera />
             </div>
-            <p className="font-vazir mt-3 text-sm font-light">انتخاب تصویر +</p>
+            <p className=" mt-3 text-sm font-light">انتخاب تصویر +</p>
           </div>
 
           <div

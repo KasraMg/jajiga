@@ -37,7 +37,7 @@ const HostCart: FC<HostCartProps> = ({
       </div>
       <div className="flex h-[-webkit-fill-available] flex-col items-center py-4">
         <h3 className="my-4 text-center font-medium">{title}</h3>
-        <p className="text-textGray font-vazir text-justify text-sm font-light leading-6">
+        <p className="text-textGray  text-justify text-sm font-light leading-6">
           {readMore && !readMoreStatus ? (
             <>
               <>

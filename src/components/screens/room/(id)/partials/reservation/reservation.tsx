@@ -59,7 +59,7 @@ const Reservation = (data: VillaResponse) => {
                   راهنمای رزرو <BsFillInfoCircleFill />{" "}
                 </Link>
               </div>
-              {data.villa.user._id === userData?.user._id ? (
+              {data.villa.isOwner ? (
                 <Link href={`/room/edit/${data.villa._id}`}>
                   <Button
                     variant={"yellow"}

@@ -16,7 +16,7 @@ const Posts = () => {
 
   return (
     <div className="px-4 pb-5 sm:!px-8">
-      <div className="mt-5 flex items-center gap-1">
+      <div className="mt-5 hidden items-center gap-1 sm:!flex">
         <GoDotFill className="text-customYellow" />
         <p className="text-xs font-light">
           برای مشاهده نتایج دقیق‌تر، <strong>تاریخ سفر</strong> و{" "}
@@ -24,10 +24,12 @@ const Posts = () => {
         </p>
       </div>
 
-      <div className="mt-12">
-        <div className="flex flex-col items-center justify-between sm:!flex-row">
+      <div className="pt-6 sm:!pt-12">
+        <div className="flex flex-row items-center justify-between gap-3">
           <p className="text-sm">
-            <strong>{data?.villas?.length} اقامتگاه </strong>
+            <strong className="whitespace-nowrap">
+              {data?.villas?.length} اقامتگاه{" "}
+            </strong>
           </p>
           <Select
             value={spaceSelectedOption}
@@ -37,12 +39,13 @@ const Posts = () => {
               }
             }}
             isClearable={false}
-            className="font-vazir mt-3 w-full text-sm font-light sm:!mt-0 sm:!w-[160px]"
+            className=" w-[160px] text-sm font-light sm:!mt-0"
             isRtl
+            isSearchable={false}
             options={categoryFilterOptions}
           />
         </div>
-        <main className="mt-6 grid justify-evenly gap-3 sm:!grid-cols-[1fr,1fr] lg:!grid-cols-[1fr,1fr,1fr] xl:!grid-cols-[1fr,1fr,1fr,1fr]">
+        <main className="mt-6 grid grid-cols-1 justify-evenly gap-3 sm:!grid-cols-[1fr,1fr] lg:!grid-cols-[1fr,1fr,1fr] xl:!grid-cols-[1fr,1fr,1fr,1fr]">
           {data &&
             data?.villas?.map((villa: VillaDetails) => <Card data={villa} />)}
         </main>

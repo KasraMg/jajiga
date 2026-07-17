@@ -58,7 +58,7 @@ const UserRoomsScreen = () => {
                       {userData?.villas?.filter(
                         (villa: VillaDetails) => !villa.finished,
                       ).length ? (
-                        <div className="grid !grid-cols-[auto] gap-4 md:!grid-cols-[auto,auto] xl:!grid-cols-[auto,auto,auto]">
+                        <div className="grid !grid-cols-[auto] gap-4 gap-y-6 md:!grid-cols-[auto,auto] xl:!grid-cols-[auto,auto,auto]">
                           {userData.villas?.map((villa: VillaDetails) =>
                             !villa.finished ? (
                               <Card key={villa._id} {...villa} />

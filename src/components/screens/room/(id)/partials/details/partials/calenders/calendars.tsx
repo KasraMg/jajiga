@@ -30,9 +30,7 @@ const Calendars = (data: VillaResponse) => {
 
   useEffect(() => {
     const handleResize = () => {
-      setNumberOfMonths(
-        window.innerWidth >= 1280 ? 2 : 1,
-      );
+      setNumberOfMonths(window.innerWidth >= 1280 ? 2 : 1);
     };
 
     window.addEventListener("resize", handleResize);
@@ -152,6 +150,15 @@ const Calendars = (data: VillaResponse) => {
           const season = getSeason(date.month.index);
           const priceType = isWeekend ? "holidays" : "midWeek";
           const dayPrice = data.villa.price[season][priceType];
+
+          const isSelected =
+            Array.isArray(defaultValue) &&
+            defaultValue.some(
+              (item: any) =>
+                item.year === date.year &&
+                item.month.index === date.month.index &&
+                item.day === date.day,
+            );
           return {
             children: isYourRange ? (
               <span
@@ -191,10 +198,14 @@ const Calendars = (data: VillaResponse) => {
                       color: isWeekend
                         ? isPast
                           ? "cccbcb"
-                          : "#ff0000"
+                          : isSelected
+                            ? "#fff"
+                            : "#ff0000"
                         : isPast
                           ? "cccbcb"
-                          : "#555",
+                          : isSelected
+                            ? "#fff"
+                            : "#555",
                       letterSpacing: "-1px",
                     }}
                   >
@@ -238,7 +249,7 @@ const Calendars = (data: VillaResponse) => {
               </div>
               <div className="text-right">
                 <p className="">امروز</p>
-                <p className="font-vazir text-xs font-light sm:!text-sm">
+                <p className="text-xs font-light sm:!text-sm">
                   نشان دهنده تاریخ امروز در تقویم
                 </p>
               </div>
@@ -250,7 +261,7 @@ const Calendars = (data: VillaResponse) => {
               </div>
               <div className="text-right">
                 <p className="">تاریخ های رزرو</p>
-                <p className="font-vazir text-xs font-light sm:!text-sm">
+                <p className="text-xs font-light sm:!text-sm">
                   نشان دهنده تاریخ شروع و خاتمه رزرو
                 </p>
               </div>
@@ -263,7 +274,7 @@ const Calendars = (data: VillaResponse) => {
 
               <div className="text-right">
                 <p className="">تعطیلات</p>
-                <p className="font-vazir text-xs font-light sm:!text-sm">
+                <p className="text-xs font-light sm:!text-sm">
                   {" "}
                   روزهای آخر هفته و تعطیلات
                 </p>
@@ -283,7 +294,7 @@ const Calendars = (data: VillaResponse) => {
 
               <div className="text-right">
                 <p className="">روزهای پر شده</p>
-                <p className="font-vazir text-xs font-light sm:!text-sm">
+                <p className="text-xs font-light sm:!text-sm">
                   روزهایی که قبلا رزرو شده اند
                 </p>
               </div>
@@ -296,7 +307,7 @@ const Calendars = (data: VillaResponse) => {
 
               <div className="text-right">
                 <p className=""> روزهای گذشته</p>
-                <p className="font-vazir text-xs font-light sm:!text-sm">
+                <p className="text-xs font-light sm:!text-sm">
                   روزهایی سپری شده در تقویم
                 </p>
               </div>

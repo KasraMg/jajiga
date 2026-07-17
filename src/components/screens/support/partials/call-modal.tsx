@@ -78,7 +78,7 @@ const CallModal = () => {
             تماس با پشتیبانی
           </DialogTitle>
         </DialogHeader>
-        <p className="font-vazir text-center text-sm font-light leading-7 text-[#404040]">
+        <p className=" text-center text-sm font-light leading-7 text-[#404040]">
           ساعات کار پشتیبانی تلفنی از<strong> 8 صبح</strong> الی{" "}
           <strong>12 شب</strong> می‌باشد. شماره تماس:{" "}
         </p>

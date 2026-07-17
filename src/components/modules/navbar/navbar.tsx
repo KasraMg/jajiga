@@ -163,7 +163,7 @@ const Navbar = ({ navbarContainer }: any) => {
               <ul
                 className={`${
                   isSticky ? "text-black" : "text-white"
-                } font-vazir hidden flex-row-reverse gap-8 font-medium md:!flex`}
+                }  hidden flex-row-reverse gap-8 font-medium md:!flex`}
               >
                 
                 {data?.user ? (

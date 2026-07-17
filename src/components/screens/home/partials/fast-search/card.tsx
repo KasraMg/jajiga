@@ -35,7 +35,7 @@ const Card = ({
       >
         <p className="mb-2">{data.persianTitle}</p>
         <div className="flex items-center justify-center gap-2">
-          <span className="font-vazir text-[12px] font-light">
+          <span className=" text-[12px] font-light">
             {data.count} اقامتگاه
           </span>
         </div>

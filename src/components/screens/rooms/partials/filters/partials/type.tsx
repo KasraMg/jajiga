@@ -56,9 +56,9 @@ const Type = () => {
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent className="w-96">
+      <PopoverContent className="sm:!w-96">
         <div className="relative z-50 bg-white p-3 py-5 before:absolute before:bottom-0 before:right-0 before:top-4 before:block before:h-8 before:w-2 before:rounded-l-lg before:bg-customYellow before:content-['']">
-          <p className="font-vazir text-base font-normal sm:text-lg">
+          <p className="text-base font-normal sm:text-lg">
             نوع اقامتگاه
           </p>
 
@@ -71,11 +71,14 @@ const Type = () => {
                   key={type.href}
                   className="flex justify-between border-b border-solid border-gray-200 px-3 pb-2"
                 >
-                  <p className="text-xs sm:text-base">{type.label}</p>
+                  <label htmlFor={type.href} className="text-xs sm:text-base">
+                    {type.label}
+                  </label>
 
                   <input
                     className="rounded-md border-gray-300"
                     type="checkbox"
+                    id={type.href}
                     checked={isCheck}
                     onChange={(event) =>
                       inputChangeHandler(event.target.checked, type.href)

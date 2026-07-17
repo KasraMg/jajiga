@@ -26,9 +26,9 @@ const Card = (data: {
         src={`${process.env.NEXT_PUBLIC_API_URL}/static/city/${data.cover}`}
       />
       <div>
-        <p className="font-vazir text-[12px] font-light">اجاره ویلا در</p>
+        <p className=" text-[12px] font-light">اجاره ویلا در</p>
         <span>{data.persianTitle}</span>
-        <p className="font-vazir text-[12px] font-light">{data.count} ویلا</p>
+        <p className=" text-[12px] font-light">{data.count} ویلا</p>
       </div>
     </Link>
   );

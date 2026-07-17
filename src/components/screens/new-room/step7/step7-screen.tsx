@@ -49,7 +49,7 @@ const Step7Screen = () => {
               <div className="py-2 pb-3" key={data.id}>
                 <AccordionParent className={``} type="single" collapsible>
                   <AccordionItem value={`item-${data.id}`}>
-                    <AccordionTrigger className="font-vazir text-sm !font-normal hover:no-underline">
+                    <AccordionTrigger className=" text-sm !font-normal hover:no-underline">
                       <div>
                         <div className="flex items-center gap-3">
                           <img
@@ -57,7 +57,7 @@ const Step7Screen = () => {
                             src={data.avatar}
                             alt=""
                           />
-                          <p className="font-vazir font-extrabold">
+                          <p className=" font-extrabold">
                             {data.title}
                           </p>
                         </div>
@@ -66,7 +66,7 @@ const Step7Screen = () => {
                         </p>
                       </div>
                     </AccordionTrigger>
-                    <AccordionContent className="font-vazir text-sm font-light leading-6 text-[#404040]">
+                    <AccordionContent className=" text-sm font-light leading-6 text-[#404040]">
                       <div className="mb-5 flex flex-col items-start justify-between gap-2 lg:!mb-3 lg:!flex-row lg:!items-center lg:!gap-0">
                         <p className="text-sm lg:!text-base">وسط هفته</p>
                         <div className="relative w-full lg:!w-[60%]">

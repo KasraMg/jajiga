@@ -33,20 +33,20 @@ const Breadcrumb: FC<BreadcrumbProps> = ({
         ) : (
           <>
             {title ? (
-              <p className="font-vazir relative z-50 text-2xl font-extrabold text-black">
+              <p className=" relative z-50 text-2xl font-extrabold text-black">
                 {title}
               </p>
             ) : (
               <div className="flex items-center gap-1">
                 <Link
                   href={"/"}
-                  className="font-vazir relative z-50 font-light text-black"
+                  className=" relative z-50 font-light text-black"
                 >
                   جاجیگا
                 </Link>
                 <FaAngleLeft />
                 {route && (
-                  <span className="font-vazir z-50 text-xl font-extrabold text-black">
+                  <span className=" z-50 text-xl font-extrabold text-black">
                     {route}
                   </span>
                 )}

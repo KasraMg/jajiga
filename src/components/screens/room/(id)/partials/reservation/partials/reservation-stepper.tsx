@@ -24,6 +24,7 @@ interface ReservationStepperProps {
   usersCount: string | undefined;
   totalPrice: string | undefined;
   data: VillaDetails;
+  setOpenReserveModal?: (val: boolean) => void;
 }
 
 const ReservationStepper: FC<ReservationStepperProps> = ({
@@ -32,6 +33,7 @@ const ReservationStepper: FC<ReservationStepperProps> = ({
   usersCount,
   totalPrice,
   data,
+  setOpenReserveModal,
 }) => {
   const [open, setOpen] = useState(false);
   const { login } = authStore((state) => state);
@@ -52,6 +54,7 @@ const ReservationStepper: FC<ReservationStepperProps> = ({
     bookVilla(reserveData, {
       onSuccess: (data) => {
         setOpen(false);
+        setOpenReserveModal?.(false);
       },
     });
   };
@@ -69,7 +72,7 @@ const ReservationStepper: FC<ReservationStepperProps> = ({
           </div>
         </Button>
       </DialogTrigger>
-      <DialogContent className="h-[75%] w-full max-w-full overflow-y-auto !bg-[#e9edf1] px-0 sm:!max-w-[525px] sm:!p-6">
+      <DialogContent className="h-[100%] w-full max-w-full overflow-y-auto !bg-[#e9edf1] px-0 sm:!max-w-[525px] sm:!p-6">
         <DialogTitle></DialogTitle>
 
         <div className="mx-auto flex w-[85%] justify-between">

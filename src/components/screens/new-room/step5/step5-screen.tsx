@@ -81,7 +81,7 @@ const Step5Screen = () => {
           </div>
 
           <div className="flex flex-col items-start justify-between gap-2 lg:flex-row lg:items-center">
-            <p className="font-vazir text-sm font-light">
+            <p className=" text-sm font-light">
               متراژ زمین و محوطه اقامتگاه
             </p>
 
@@ -107,7 +107,7 @@ const Step5Screen = () => {
           </div>
 
           <div className="!mt-10 flex flex-col items-start justify-between gap-2 !pb-4 lg:flex-row lg:items-center">
-            <p className="font-vazir text-sm font-light">
+            <p className=" text-sm font-light">
               متراژ زیربنای اقامتگاه
             </p>
 

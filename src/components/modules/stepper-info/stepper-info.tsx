@@ -13,7 +13,7 @@ const StepperInfo: FC<StepperInfoProps> = ({ title, text, className }) => {
       <p className="mb-3 text-right text-lg leading-7 text-[#252a31]">
         {title}
       </p>
-      <span className="font-vazir text-justify text-sm font-light leading-6 text-[#404040]">
+      <span className=" text-justify text-sm font-light leading-6 text-[#404040]">
         {text}
       </span>
     </div>

@@ -34,7 +34,7 @@ const HostScreen = () => {
           <div className="flex flex-col items-center justify-center space-y-2 rounded-t-xl text-center">
             <h2 className="mt-2 text-lg font-medium">{cartData.mainTitle}</h2>
             <div className="h-1 w-36 rounded-lg bg-yellow-300"></div>
-            <p className="text-textGray font-vazir px-3 text-sm font-light leading-6 sm:!px-0">
+            <p className="text-textGray  px-3 text-sm font-light leading-6 sm:!px-0">
               {cartData.secondaryTitle}
             </p>
           </div>

@@ -55,9 +55,7 @@ const Facilities = () => {
     if (checked) {
       setSelectedFacilities((prev) => [...prev, value]);
     } else {
-      setSelectedFacilities((prev) =>
-        prev.filter((item) => item !== value),
-      );
+      setSelectedFacilities((prev) => prev.filter((item) => item !== value));
     }
   };
 
@@ -84,9 +82,9 @@ const Facilities = () => {
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent className="w-96">
+      <PopoverContent className="w-[96%] sm:!w-96">
         <div className="relative z-50 bg-white p-3 py-5 before:absolute before:right-0 before:top-4 before:block before:h-8 before:w-2 before:rounded-l-lg before:bg-customYellow before:content-['']">
-          <p className="font-vazir text-base font-normal sm:text-lg">
+          <p className="text-base font-normal sm:text-lg">
             امکانات اقامتگاه
           </p>
 
@@ -99,11 +97,15 @@ const Facilities = () => {
                   key={option.value}
                   className="flex justify-between border-b border-gray-200 px-3 pb-2"
                 >
-                  <p className="text-xs sm:text-base">
+                  <label
+                    htmlFor={option.value}
+                    className="text-xs sm:text-base"
+                  >
                     {option.label}
-                  </p>
+                  </label>
 
                   <input
+                    id={option.value}
                     type="checkbox"
                     checked={checked}
                     className="rounded-md border-gray-300"
