@@ -52,7 +52,7 @@ const Step9Screen = () => {
             </p>
           </section>
 
-          <div className="flex pb-20 items-center gap-2">
+          <div className="flex pb-12 items-center gap-2">
             <input
               onClick={() => setAcceptRules((prev) => !prev)}
               className="h-4 w-4"

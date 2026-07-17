@@ -128,7 +128,7 @@ const UserRoomsScreen = () => {
                       fillRule="evenodd"
                     ></path>
                   </svg>
-                  <p className="mt-4">در حال حاضر رزروی ندارید</p>
+                  <p className="mt-4">در حال حاضر اقامتگاهی ندارید</p>
                 </div>
               )}
             </main>
