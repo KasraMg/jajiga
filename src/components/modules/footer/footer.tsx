@@ -1,7 +1,7 @@
 "use client";
 import MarketLinks from "./components/market-links";
 import Link from "next/link";
-import { LiaInstagram, LiaTelegram } from "react-icons/lia";
+import { LiaTelegram } from "react-icons/lia";
 import { FaInstagram } from "react-icons/fa";
 import CitiesList from "./components/cities-list";
 import { authStore } from "@/src/stores/auth";
@@ -9,7 +9,7 @@ const Footer = () => {
   const { login } = authStore((state) => state);
 
   return (
-    <div className="pt-10 rounded-2xl bg-[#f1f1f1] z-50 relative">
+    <div className="relative z-50 rounded-2xl bg-[#f1f1f1] pt-10">
       <div className="Container mx-auto px-3 sm:!px-5">
         <div className="flex flex-col justify-between gap-8 md:flex-row">
           <div className="mb-5 flex w-full flex-col lg:mb-0">
@@ -87,9 +87,18 @@ const Footer = () => {
                   نصب اپلیکیشن جاجیگا
                 </p>
                 <div className="mx-auto grid w-full grid-cols-2 gap-x-4 gap-y-2 sm:!grid-cols-1 md:!w-[unset] md:!grid-cols-2">
-                  <MarketLinks href="https://cafebazaar.ir/app/com.jajiga.app" src="/images/markets/Bazzar.png" />
-                  <MarketLinks href="https://myket.ir/app/com.jajiga.app" src="/images/markets/Myket.png" />
-                  <MarketLinks href="https://play.google.com/store/apps/details?id=com.jajiga.app" src="/images/markets/PlayStore.png" />
+                  <MarketLinks
+                    href="https://cafebazaar.ir/app/com.jajiga.app"
+                    src="/images/markets/Bazzar.png"
+                  />
+                  <MarketLinks
+                    href="https://myket.ir/app/com.jajiga.app"
+                    src="/images/markets/Myket.png"
+                  />
+                  <MarketLinks
+                    href="https://play.google.com/store/apps/details?id=com.jajiga.app"
+                    src="/images/markets/PlayStore.png"
+                  />
                   <MarketLinks href="" src="/images/markets/WebApp.png" />
                 </div>
               </div>

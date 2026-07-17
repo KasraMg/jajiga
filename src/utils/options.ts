@@ -349,21 +349,21 @@ const footerOptions: {
   lable: string;
   href: string;
 }[] = [
-  { lable: " اجاره اقامتگاه گیلان", href: "/rooms?city=gilan" },
-  { lable: "اجاره اقامتگاه رامسر", href: "/rooms?city=ramsar" },
-  { lable: "اجاره اقامتگاه مشهد", href: "/rooms?city=mashhad" },
-  { lable: "اجاره اقامتگاه کردان", href: "/rooms?city=kordan" },
-  { lable: "اجاره اقامتگاه ماسال", href: "/rooms?city=masal" },
-  { lable: "اجاره اقامتگاه کیش", href: "/rooms?city=kish" },
-  { lable: "اجاره اقامتگاه  تهران", href: "/rooms?city=tehran" },
-  { lable: "اجاره اقامتگاه بوشهر", href: "/rooms?city=bushehr" },
-  { lable: "اجاره اقامتگاه قشم", href: "/rooms?city=gheshm" },
-  { lable: "اجاره اقامتگاه آستارا", href: "/rooms?city=astara" },
-  { lable: "اجاره اقامتگاه چالوس", href: "/rooms?city=chaloos" },
-  { lable: "اجاره اقامتگاه شیراز", href: "/rooms?city=shiraz" },
-  { lable: "اجاره اقامتگاه تبریز", href: "/rooms?city=tabriz" },
-  { lable: "اجاره اقامتگاه آبادان", href: "/rooms?city=abadan" },
-  { lable: "اجاره اقامتگاه اهواز", href: "/rooms?city=ahvaz" },
+  { lable: " اجاره اقامتگاه گیلان", href: "/rooms?city=گیلان" },
+  { lable: "اجاره اقامتگاه رامسر", href: "/rooms?city=رامسر" },
+  { lable: "اجاره اقامتگاه مشهد", href: "/rooms?city=مشهد" },
+  { lable: "اجاره اقامتگاه کردان", href: "/rooms?city=کردان" },
+  { lable: "اجاره اقامتگاه ماسال", href: "/rooms?city=ماسال" },
+  { lable: "اجاره اقامتگاه کیش", href: "/rooms?city=کیش" },
+  { lable: "اجاره اقامتگاه  تهران", href: "/rooms?city=تهران" },
+  { lable: "اجاره اقامتگاه بوشهر", href: "/rooms?city=بوشهر" },
+  { lable: "اجاره اقامتگاه قشم", href: "/rooms?city=قشم" },
+  { lable: "اجاره اقامتگاه آستارا", href: "/rooms?city=آستارا" },
+  { lable: "اجاره اقامتگاه چالوس", href: "/rooms?city=چالوس" },
+  { lable: "اجاره اقامتگاه شیراز", href: "/rooms?city=شیراز" },
+  { lable: "اجاره اقامتگاه تبریز", href: "/rooms?city=تبریز" },
+  { lable: "اجاره اقامتگاه آبادان", href: "/rooms?city=آبادان" },
+  { lable: "اجاره اقامتگاه اهواز", href: "/rooms?city=اهواز" },
 ];
 
 const faqOptions: {

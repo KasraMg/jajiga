@@ -7,15 +7,18 @@ const SearchBox = () => {
   const [isShowSearchBox, setIsShowSearchBox] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const router = useRouter();
+  const normalize = (str: string) =>
+    str.replace(/ي/g, "ی").replace(/ك/g, "ک").trim();
+
   const inputChangeHandler = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.keyCode === 13 && searchValue.length) {
-      router.push(`/rooms?city=${searchValue}`);
+      router.push(`/rooms?city=${normalize(searchValue)}`);
       setIsShowSearchBox(false);
     }
   };
   const iconClickHandler = () => {
     if (searchValue.length) {
-      router.push(`/rooms?city=${searchValue}`);
+      router.push(`/rooms?city=${normalize(searchValue)}`);
       setIsShowSearchBox(false);
     }
   };
@@ -55,9 +58,9 @@ const SearchBox = () => {
           <div className="flex gap-2 [&>*]:rounded-full [&>*]:bg-customYellow [&>*]:p-1 [&>*]:px-2 [&>*]:text-xs [&>*]:font-light">
             <Link
               onClick={() => setIsShowSearchBox(false)}
-              href={"/rooms?city=رامسر"}
+              href={"/rooms?city=رشت"}
             >
-              رامسر
+              رشت
             </Link>
             <Link
               onClick={() => setIsShowSearchBox(false)}
