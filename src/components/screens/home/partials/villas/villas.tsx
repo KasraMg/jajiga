@@ -6,12 +6,13 @@ import Card from "../../../../modules/card/card";
 import { VillaDetails } from "@/src/types/villa.types";
 import Image from "next/image";
 import { useAllActivatedVillas } from "@/src/api/public";
+import VillasSkeleton from "./villas-skeleton";
 
 const Villas = () => {
-  const { data } = useAllActivatedVillas();
+  const { data, isPending } = useAllActivatedVillas();
   const [status, setStatus] = useState("همه شهرها");
   const [villaData, setVillaData] = useState(data?.villas);
-  
+
   useEffect(() => {
     if (status === "همه شهرها") {
       setVillaData(data?.villas);
@@ -23,16 +24,16 @@ const Villas = () => {
     }
   }, [status, data]);
 
-  return (
-    <div className="superOfferBg relative z-20 overflow-hidden rounded-t-xl py-6">
-      <div className="Container mx-auto px-3 sm:!px-4 xl:!px-0">
-        <div className="mb-6 flex flex-col items-baseline justify-center lg:flex-row lg:justify-between">
-          <p className="w-full text-2xl font-thin text-white">
-            اقامتگاه های ویلایی
-          </p>
-          <CitiesSelector status={status} setStatus={setStatus} />
-        </div>
-        {villaData?.length ? (
+  return !isPending ? (
+    villaData?.length ? (
+      <div className="superOfferBg relative z-20 overflow-hidden rounded-t-xl py-6">
+        <div className="Container mx-auto px-3 sm:!px-4 xl:!px-0">
+          <div className="mb-6 flex flex-col items-baseline justify-center lg:flex-row lg:justify-between">
+            <p className="w-full text-2xl font-thin text-white">
+              اقامتگاه های ویلایی
+            </p>
+            <CitiesSelector status={status} setStatus={setStatus} />
+          </div>
           <Slider
             Card={Card}
             navigation={true}
@@ -49,20 +50,22 @@ const Villas = () => {
               },
             }}
           />
-        ) : (
-          <div className="flex h-[263px] flex-col items-center gap-5 text-center">
-            <Image
-              alt="notFound"
-              width={1000}
-              className="mx-auto mt-10 w-[100px]"
-              height={1000}
-              src={"/images/notFound.png"}
-            />
-            <p className="text-white">اقامتگاهی در این شهر یافت نشد</p>
-          </div>
-        )}
+        </div>
       </div>
-    </div>
+    ) : (
+      <div className="flex h-[263px] flex-col items-center gap-5 text-center">
+        <Image
+          alt="notFound"
+          width={1000}
+          className="mx-auto mt-10 w-[100px]"
+          height={1000}
+          src={"/images/notFound.png"}
+        />
+        <p className="text-white">اقامتگاهی در این شهر یافت نشد</p>
+      </div>
+    )
+  ) : (
+    <VillasSkeleton />
   );
 };
 
