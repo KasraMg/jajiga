@@ -19,7 +19,7 @@ const Gallery = (data: VillaDetails) => {
             height={1000}
             className="h-full w-full rounded-xl"
             alt="cover"
-            src={`${process.env.NEXT_PUBLIC_API_URL}/villa/covers/${data.cover[0]}`}
+            src={data.cover[0]}
           />
         </div>
         <div className="grid w-1/2 grid-cols-2 gap-3">
@@ -32,7 +32,7 @@ const Gallery = (data: VillaDetails) => {
                     height={1000}
                     className="h-36 w-full rounded-lg object-cover opacity-50"
                     alt="cover"
-                    src={`${process.env.NEXT_PUBLIC_API_URL}/villa/covers/${cover}`}
+                    src={cover}
                   />
                   <div
                     onClick={() => setShowFullScreenGallery(true)}
@@ -48,7 +48,7 @@ const Gallery = (data: VillaDetails) => {
                   height={1000}
                   className="h-36 w-full rounded-lg object-cover"
                   alt="cover"
-                  src={`${process.env.NEXT_PUBLIC_API_URL}/villa/covers/${cover}`}
+                  src={cover}
                 />
               )}
             </div>
@@ -83,7 +83,7 @@ const Gallery = (data: VillaDetails) => {
               height={1000}
               className="h-full object-cover"
               alt="cover"
-              src={`${process.env.NEXT_PUBLIC_API_URL}/villa/covers/${cover}`}
+              src={cover}
             />
           </SwiperSlide>
         ))}

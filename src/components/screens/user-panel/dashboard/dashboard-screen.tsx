@@ -55,14 +55,14 @@ const DashboardScreen = () => {
               className="absolute -bottom-8 left-0 right-0 mx-auto block h-20 w-20 rounded-full object-cover"
               src={
                 userData?.user.avatar
-                  ? `${process.env.NEXT_PUBLIC_API_URL}/user/avatars/${userData?.user.avatar}`
+                  ? userData?.user.avatar
                   : "/images/profile.jpg"
               }
               alt=""
             />
           </div>
           <div className="flex items-center justify-center gap-2">
-            <p className=" text-sm font-thin">
+            <p className="text-sm font-thin">
               {userData?.user.firstName} {userData?.user.lastName}
             </p>
             <Link

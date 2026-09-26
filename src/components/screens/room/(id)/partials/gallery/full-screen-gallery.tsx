@@ -29,12 +29,7 @@ const FullScreenGallery = ({
       >
         {images.map((img) => (
           <SwiperSlide>
-            <Image
-              width={1000}
-              height={1000}
-              alt="cover"
-              src={`${process.env.NEXT_PUBLIC_API_URL}/villa/covers/${img}`}
-            />
+            <Image width={1000} height={1000} alt="cover" src={img} />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -50,12 +45,7 @@ const FullScreenGallery = ({
       >
         {images.map((img) => (
           <SwiperSlide>
-            <Image
-              width={1000}
-              height={1000}
-              alt="cover"
-              src={`${process.env.NEXT_PUBLIC_API_URL}/villa/covers/${img}`}
-            />
+            <Image width={1000} height={1000} alt="cover" src={img} />
           </SwiperSlide>
         ))}
       </Swiper>

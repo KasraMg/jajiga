@@ -107,7 +107,7 @@ function Menu({ isSticky }: any) {
                 width={1000}
                 height={1000}
                 className="h-8 w-8 rounded-full"
-                src={`${process.env.NEXT_PUBLIC_API_URL}/user/avatars/${userData?.user.avatar}`}
+                src={userData?.user.avatar}
               />
             ) : (
               <FaRegCircleUser className="text-gray-500" />
@@ -146,7 +146,7 @@ function Menu({ isSticky }: any) {
                 width={1000}
                 height={1000}
                 className="h-14 w-14 rounded-full"
-                src={`${process.env.NEXT_PUBLIC_API_URL}/user/avatars/${userData?.user?.avatar}`}
+                src={userData?.user?.avatar}
               />
             ) : (
               <svg

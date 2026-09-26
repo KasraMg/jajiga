@@ -72,10 +72,10 @@ const Details = (data: VillaResponse) => {
               width={1000}
               height={1000}
               className="h-full w-full rounded-full"
-              src={`${process.env.NEXT_PUBLIC_API_URL}/user/avatars/${data.villa.user.avatar}`}
+              src={data.villa.user.avatar}
             />
           ) : (
-            <FaRegCircleUser className="text-gray-500 size-[70px]" />
+            <FaRegCircleUser className="size-[70px] text-gray-500" />
           )}
         </div>
       </div>

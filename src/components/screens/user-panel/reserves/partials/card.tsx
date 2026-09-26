@@ -10,7 +10,7 @@ interface CardProps {
   className?: string;
   data: Book;
 }
-const Card: FC<CardProps> = ({ className, data }) => {  
+const Card: FC<CardProps> = ({ className, data }) => {
   return (
     <div className={`mx-auto w-full xl:!w-full ${className} `}>
       <Link href={`/room/${data.villa._id}`} className="relative w-full">
@@ -19,7 +19,7 @@ const Card: FC<CardProps> = ({ className, data }) => {
           alt="avatar"
           width={1000}
           height={1000}
-          src={`${process.env.NEXT_PUBLIC_API_URL}/villa/covers/${data.villa.cover[0]}`}
+          src={data.villa.cover[0]}
         />
         {data.villa.costly && (
           <div className="absolute right-[2px] top-[2px] flex flex-col p-2">

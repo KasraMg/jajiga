@@ -44,7 +44,7 @@ const Card = (villa: VillaDetails) => {
             <Image
               crossOrigin="anonymous"
               className="h-[210px] w-full rounded-t-md"
-              src={`${process.env.NEXT_PUBLIC_API_URL}/villa/covers/${villa.cover[0]}`}
+              src={villa.cover[0]}
               width={1000}
               height={1000}
               alt="flag"

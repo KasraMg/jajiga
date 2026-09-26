@@ -45,11 +45,7 @@ const ProfileScreen = () => {
         ? userData?.user.aboutMe
         : "این فیلد تکمیل نشده است",
     );
-    setAvatar(
-      userData?.user.avatar
-        ? `${process.env.NEXT_PUBLIC_API_URL}/user/avatars/${userData?.user.avatar}`
-        : "",
-    );
+    setAvatar(userData?.user.avatar ? userData?.user.avatar : "");
     setPhoneNumber(userData?.user.phone as string);
   }, [userData]);
 

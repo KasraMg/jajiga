@@ -32,7 +32,7 @@ const Navbar = () => {
           <Image
             src={
               userData?.user?.avatar
-                ? `${process.env.NEXT_PUBLIC_API_URL}/user/avatars/${userData?.user.avatar}`
+                ? userData?.user.avatar
                 : "/images/profile.jpg"
             }
             alt=""
@@ -42,7 +42,7 @@ const Navbar = () => {
           />
           <div>
             {isPending ? (
-              <Skeleton className="w-28 h-5 mb-1" />
+              <Skeleton className="mb-1 h-5 w-28" />
             ) : (
               <p className="mb-0 text-sm font-thin sm:!text-base">
                 {userData?.user?.firstName} {userData?.user?.lastName}{" "}
